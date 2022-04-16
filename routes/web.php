@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\front\HomeController;
+
+use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\admin\AdminController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +18,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// front section
+Route::get('/', [HomeController::class, 'index'])->name('index');
+
+// admin section
+Route::prefix('admin')->name('admin.')->group(function(){
+	
+	Route::middleware('isLogin')->group(function(){
+		// login
+		Route::get('/', [AuthController::class, 'index'])->name('index');
+		Route::post('/', [AuthController::class, 'postIndex'])->name('postIndex');
+	});
+
+	Route::middleware('notLogin')->group(function(){
+		// dashboard
+		Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+		Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+		// profile
+		Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+	});    
 });

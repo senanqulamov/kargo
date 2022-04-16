@@ -1,0 +1,1 @@
+burasi front hisse olacaq
