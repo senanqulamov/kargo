@@ -47,6 +47,10 @@ class AuthController extends Controller
 
         $user=auth()->user();
 
+        $status=User::where('id', Auth::id())->first();
+        $status->status='1';
+        $status->save();
+
         $token = $user->createToken('token')->plainTextToken;
 
         return response([
@@ -57,6 +61,10 @@ class AuthController extends Controller
     }
 
     public function logout(){
+        $status=User::where('id', Auth::id())->first();
+        $status->status=NULL;
+        $status->save();
+
         request()->user()->currentAccessToken()->delete();
 
         return response([

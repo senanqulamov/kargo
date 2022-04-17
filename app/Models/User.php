@@ -67,4 +67,20 @@ class User extends Authenticatable
                 break;
         }
     }
+
+    public function getUserStatusAttribute(){
+        switch ($this->status) {
+            case '1':
+                return 'Active';
+                break;
+            
+            default:
+                return 'Deactive';
+                break;
+        }
+    }
+
+    public function getAddress(){
+        return $this->hasOne(UserAddress::class, 'userID', 'id');
+    }
 }

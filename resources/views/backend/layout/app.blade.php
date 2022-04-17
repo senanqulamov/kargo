@@ -111,27 +111,26 @@
                                     <p> Users </p>
                                 </a>
                             </li>
-                            <!--
-                            <li class="nav-item menu-open">
-                                <a href="#" class="nav-link active">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>User Manager <i class="right fas fa-angle-left"></i></p>
+                            <li class="nav-item @if(Request::segment(2) == 'orders') menu-open @endif">
+                                <a href="#" class="nav-link @if(Request::segment(2) == 'manuel') active @endif">
+                                    <i class="nav-icon fas fa-truck"></i>
+                                    <p>Orders Manager <i class="right fas fa-angle-left"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="./index.html" class="nav-link active">
+                                        <a href="{{route('admin.orders.manuel')}}" class="nav-link @if(Request::segment(3) == 'manuel') active @endif">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Mail</p>
+                                            <p>Manuel Order</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="./index2.html" class="nav-link">
+                                        <a href="{{route('admin.orders.bulk')}}" class="nav-link @if(Request::segment(3) == 'bulk') active @endif">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Configuration</p>
+                                            <p>Bulk Order</p>
                                         </a>
                                     </li>
                                 </ul>
-                            </li> -->
+                            </li> 
                             <li class="nav-header text-uppercase">Configurations</li>                                                                            
                         </ul>
                     </nav>

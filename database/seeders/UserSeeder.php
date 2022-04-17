@@ -20,10 +20,9 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Rashad Alakbarov',   
                 'email' => 'rashadalakbarov@gmail.com',             
-                'password' => Hash::make('qasimov24123'),
+                'password' => Hash::make('123456'),
                 'phone' => '994558215673',
                 'sex' => 1,
-                'city' => 'azerbaijan',
                 'store' => 'own',
                 'referer' => 'google'
             ],

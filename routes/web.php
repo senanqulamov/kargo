@@ -41,5 +41,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// users
 		Route::get('/users', [UserController::class, 'index'])->name('users');
+		Route::get('/users/{id}', [UserController::class, 'details'])->name('users.details');
+
+		// order
+		Route::prefix('orders/')->name('orders.')->group(function(){
+			Route::get('/manuel', [UserController::class, 'index'])->name('manuel');
+			Route::get('/bulk', [UserController::class, 'index'])->name('bulk');
+		});		
 	});    
 });

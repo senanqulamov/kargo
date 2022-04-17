@@ -14,4 +14,10 @@ class UserController extends Controller
         
         return view('backend.users', compact('users'));
     }
+
+    public function details($id){
+        $user=User::where('id', $id)->first();
+        
+        return view('backend.user-detail', compact('user'));
+    }
 }
