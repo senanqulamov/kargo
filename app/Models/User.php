@@ -43,4 +43,28 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function getUserSexAttribute(){
+        switch ($this->sex) {
+            case '1':
+                return 'Man';
+                break;
+            
+            default:
+                return 'Woman';
+                break;
+        }
+    }
+
+    public function getUserStoreAttribute(){
+        switch ($this->store) {
+            case 'own':
+                return 'Own Store';
+                break;
+            
+            default:
+                return 'None';
+                break;
+        }
+    }
 }

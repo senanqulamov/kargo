@@ -6,6 +6,7 @@ use App\Http\Controllers\front\HomeController;
 
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// profile
 		Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+
+		// users
+		Route::get('/users', [UserController::class, 'index'])->name('users');
 	});    
 });

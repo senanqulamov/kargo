@@ -16,9 +16,9 @@
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.css">
         <!-- Toastr -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/fontawesome-free/css/all.min.css">
-        <!-- Theme style -->
-        <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/adminlte.min.css">
         @yield('css')
+        <!-- Theme style -->
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/adminlte.min.css">        
 
         <style>
             .form-control.is-invalid, .was-validated .form-control:invalid{
@@ -87,7 +87,7 @@
                     <!-- Sidebar user (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img class="img-circle elevation-2" src="{{asset('/')}}backend/assets/img/{{ Auth::guard('employee')->user()->image == NULL ? 'icon/user.png' : 'users/'.Auth::guard('employee')->user()->image }}" alt="user profile picture">
+                            <img class="img-circle elevation-2" src="{{asset('/')}}backend/assets/img/{{ Auth::guard('employee')->user()->image == NULL ? 'icons/user.png' : 'employees/'.Auth::guard('employee')->user()->image }}" alt="user profile picture">
                         </div>
                         <div class="info">
                             <a href="{{route('admin.profile')}}" class="d-block text-capitalize">{{Auth::guard('employee')->user()->name}}</a>
@@ -105,29 +105,17 @@
                                     <p> Dashboard </p>
                                 </a>
                             </li>
-                            <li class="nav-header text-uppercase">Configurations</li>  
                             <li class="nav-item">
-                                <a href="" class="nav-link @if(Request::segment(2) == 'users') active @endif">
+                                <a href="{{route('admin.users')}}" class="nav-link @if(Request::segment(2) == 'users') active @endif">                                    
                                     <i class="nav-icon fas fa-users"></i>
                                     <p> Users </p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link @if(Request::segment(2) == 'users') active @endif">
-                                    <i class="nav-icon fas fa-tasks"></i>
-                                    <p> Roles </p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="" class="nav-link @if(Request::segment(2) == 'users') active @endif">
-                                    <i class="nav-icon fas fa-user-check"></i>
-                                    <p> Permissions </p>
-                                </a>
-                            </li>
+                            <!--
                             <li class="nav-item menu-open">
                                 <a href="#" class="nav-link active">
-                                    <i class="nav-icon fas fa-cogs"></i>
-                                    <p>Settings <i class="right fas fa-angle-left"></i></p>
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>User Manager <i class="right fas fa-angle-left"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
@@ -143,7 +131,8 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>                                                       
+                            </li> -->
+                            <li class="nav-header text-uppercase">Configurations</li>                                                                            
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -187,11 +176,11 @@
         <script src="{{asset('/')}}backend/assets/plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Toastr -->
         <script src="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.js"></script>
+        @yield('js')
         <!-- AdminLTE App -->
         <script src="{{asset('/')}}backend/assets/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="{{asset('/')}}backend/assets/js/demo.js"></script>
-        @yield('js')
+        <script src="{{asset('/')}}backend/assets/js/demo.js"></script>        
         
         @toastr_js
         @toastr_render
