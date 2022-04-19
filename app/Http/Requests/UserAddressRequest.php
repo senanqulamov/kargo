@@ -32,6 +32,9 @@ class UserAddressRequest extends FormRequest
             'city' => 'required',
             'address' => 'required',
             'zipcode' => 'required',
+            'name' => 'required|min:2|max:255|string',
+            'phone' => 'required|min:9',
+            'email' => 'required|email',
         ];
     }
 

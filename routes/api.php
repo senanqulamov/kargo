@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserAddressController;
+use App\Http\Controllers\api\ProductController;
+use App\Http\Controllers\api\PackageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,12 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::get('/manuel', [UserController::class, 'index'])->name('manuel');
         Route::get('/bulk', [UserController::class, 'index'])->name('bulk');
     });	
+
+    // manuel order
+    Route::resources([
+        'package' => PackageController::class,
+        'products' => ProductController::class,
+    ]);
 });
 
 

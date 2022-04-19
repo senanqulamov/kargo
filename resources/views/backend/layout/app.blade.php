@@ -6,6 +6,8 @@
 
         @php ($user = DB::table('users')->where('id', session()->get('Profile'))->first() )
 
+        @php ($message = DB::table('messages')->where('status', '1')->get() )
+
         <title>Cargo | @yield('title')</title>
         <link rel="icon" type="image/x-icon" href="{{asset('/')}}backend/assets/img/favicon.png">
         @toastr_css
@@ -45,10 +47,21 @@
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
+                        <a class="nav-link" href="#" role="button" data-toggle="dropdown" >
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">15</span>
+                            <span class="badge badge-warning navbar-badge">{{count($message)}}</span>
                         </a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <span class="dropdown-item dropdown-header">{{count($message)}} Notifications</span>
+                            <div class="dropdown-divider"></div>
+
+                            @if( count($message) > 0)
+                            <a href="{{route('admin.messages.inbox')}}" class="dropdown-item">
+                                <i class="fas fa-envelope mr-2"></i> {{count($message)}} new messages
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            @endif
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">
@@ -58,11 +71,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button">
                             <i class="far fa-question-circle"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
-                            <i class="fas fa-globe"></i>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -111,8 +119,14 @@
                                     <p> Users </p>
                                 </a>
                             </li>
+							<li class="nav-item">
+                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p> Warehouses </p>
+                                </a>
+                            </li>
                             <li class="nav-item @if(Request::segment(2) == 'orders') menu-open @endif">
-                                <a href="#" class="nav-link @if(Request::segment(2) == 'manuel') active @endif">
+                                <a href="#" class="nav-link @if(Request::segment(2) == 'orders') active @endif">
                                     <i class="nav-icon fas fa-truck"></i>
                                     <p>Orders Manager <i class="right fas fa-angle-left"></i></p>
                                 </a>
@@ -130,8 +144,47 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li> 
-                            <li class="nav-header text-uppercase">Configurations</li>                                                                            
+                            </li>
+							<li class="nav-item @if(Request::segment(2) == 'messages') menu-open @endif">
+								<a href="#" class="nav-link  @if(Request::segment(2) == 'messages') active @endif">
+									<i class="nav-icon far fa-envelope"></i>
+									<p>
+										Mailbox
+										<i class="fas fa-angle-left right"></i>
+                                        <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="{{route('admin.messages.inbox')}}" class="nav-link @if(Request::segment(3) == 'inbox') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Inbox</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+                            <li class="nav-header text-uppercase">Configurations</li>    
+							
+                            <li class="nav-header text-uppercase">Site Settings</li>    
+							<li class="nav-item">
+                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p> FAQS </p>
+                                </a>
+                            </li>
+							<li class="nav-item">
+                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p> Branches </p>
+                                </a>
+                            </li>
+							<li class="nav-item">
+                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p> Site Usage </p>
+                                </a>
+                            </li>							
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
@@ -175,15 +228,16 @@
         <script src="{{asset('/')}}backend/assets/plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Toastr -->
         <script src="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.js"></script>
-        @yield('js')
-        <!-- AdminLTE App -->
-        <script src="{{asset('/')}}backend/assets/js/adminlte.min.js"></script>
-        <!-- AdminLTE for demo purposes -->
-        <script src="{{asset('/')}}backend/assets/js/demo.js"></script>        
+        @yield('js')              
         
         @toastr_js
         @toastr_render
 
         @livewireScripts
+
+        <!-- AdminLTE App -->
+        <script src="{{asset('/')}}backend/assets/js/adminlte.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="{{asset('/')}}backend/assets/js/demo.js"></script> 
     </body>
 </html>

@@ -19,7 +19,7 @@ class AuthController extends Controller
 			return redirect()->route('admin.dashboard');
 		}
 		
-    toastr()->error('I do not think that word means what you think it means.', 'Ooops!');
+    toastr()->error('Password or email is not entered correctly', 'Ooops!');
 		return redirect()->route('admin.index');
     }
 

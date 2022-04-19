@@ -24,9 +24,9 @@ class CreateUsersTable extends Migration
             $table->timestamp('phone_verified_at')->nullable();  
             $table->integer('sex')->comment('1 => man, 2 => woman'); 
             $table->integer('status')->comment('1 => active, NULL => passive')->nullable(); 
-            $table->text('promotion')->nullable(); 
-            $table->text('store'); 
-            $table->text('referer');    
+            $table->string('promotion')->nullable(); 
+            $table->string('store')->nullable(); 
+            $table->string('referer')->nullable();    
             $table->integer('shipment')->nullable(); 
             $table->rememberToken();
             $table->softDeletes();

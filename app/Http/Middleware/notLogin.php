@@ -19,6 +19,7 @@ class notLogin
     public function handle(Request $request, Closure $next)
     {
         if(!Auth::guard('employee')->check()){
+            toastr()->error('You must fill in your information to log in to the account', 'Ooops!');
 			return redirect()->route('admin.index');
 		}
         

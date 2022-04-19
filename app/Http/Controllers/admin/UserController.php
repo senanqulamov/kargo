@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
+use App\Models\UserAddress;
 
 class UserController extends Controller
 {
@@ -17,7 +18,14 @@ class UserController extends Controller
 
     public function details($id){
         $user=User::where('id', $id)->first();
-        
-        return view('backend.user-detail', compact('user'));
+
+        $userAddress=UserAddress::where('userID', $user->id)->get();
+
+        if(count($userAddress) > 0){            
+            return view('backend.user-detail', compact('user', 'userAddress'));
+        } else {
+            toastr()->error('The shipping address for this account is not included', 'Ooops!');
+            return redirect()->route('admin.users');
+        }
     }
 }

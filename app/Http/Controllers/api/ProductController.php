@@ -5,12 +5,9 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\UserAddress;
-use App\Http\Requests\UserAddressRequest;
+use App\Models\Product;
 
-use Illuminate\Support\Facades\Auth;
-
-class UserAddressController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -38,23 +35,19 @@ class UserAddressController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserAddressRequest $request)
+    public function store(Request $request)
     {
+        $product=new Product();
+        $product->SKU=$request->SKU;
+        $product->product=$request->product;
+        $product->count=$request->count;
+        $product->weight=$request->weight;
+        $product->price=$request->price;
+        $product->GTIP=$request->GTIP;
+        $product->packageID=$request->packageID;
+        $product->save();
 
-        $address=new UserAddress();
-        $address->userID=Auth::id();
-        $address->country=$request->country;
-        $address->state=$request->state;
-        $address->city=$request->city;
-        $address->address=$request->address;
-        $address->zipcode=$request->zipcode;
-        $address->name=$request->name;
-        $address->phone='994'.$request->phone;
-        $address->email=$request->email;
-        
-        $address->save();
-
-        return response()->json(['status' => 1, 'address' => $address], 200);
+        return response()->json(['status' => 1, 'product' => $product], 200);
     }
 
     /**

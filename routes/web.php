@@ -4,9 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\front\HomeController;
 
-use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\admin\{
+	AuthController
+};
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\UserController;
+use App\Http\Controllers\admin\ManuelOrderController;
+
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,8 +50,18 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// order
 		Route::prefix('orders/')->name('orders.')->group(function(){
-			Route::get('/manuel', [UserController::class, 'index'])->name('manuel');
+			Route::get('/manuel', [ManuelOrderController::class, 'index'])->name('manuel');
 			Route::get('/bulk', [UserController::class, 'index'])->name('bulk');
 		});		
+		
+		// settings
+		Route::get('/warehouses', [AdminController::class, 'warehouses'])->name('warehouses');
+		
+		// messages
+		Route::prefix('messages/')->name('messages.')->group(function(){
+			Route::get('/inbox', [MessageController::class, 'inbox'])->name('inbox');
+			Route::get('/read/{id}', [MessageController::class, 'read'])->name('read');
+			Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('delete');
+		});	
 	});    
 });
