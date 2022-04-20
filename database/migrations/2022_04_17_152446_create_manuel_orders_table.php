@@ -22,10 +22,10 @@ class CreateManuelOrdersTable extends Migration
             $table->string('storage');            
             $table->integer('packageID');
             $table->integer('storageID');
-            $table->integer('cargoID');
+            $table->json('cargoID');
             $table->integer('additional_serviceID');
             $table->integer('product_content');
-            $table->integer('document_fileID');
+            $table->string('document_file');
             $table->integer('status')->comment('0 => waiting')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

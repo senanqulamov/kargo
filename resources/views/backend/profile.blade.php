@@ -24,7 +24,13 @@
 
                     <ul class="list-group list-group-unbordered mb-0">
                         <li class="list-group-item">
+                            <b>ID</b> <a class="float-right">{{$user->id}}</a>
+                        </li>
+						<li class="list-group-item">
                             <b>Email</b> <a class="float-right">{{$user->email}}</a>
+                        </li>
+						<li class="list-group-item">
+                            <b>Phone</b> <a class="float-right">{{$user->phone}}</a>
                         </li>
                     </ul>
                 </div>
@@ -35,9 +41,9 @@
             <div class="card">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
-                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">General Data</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Profile Image</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Password Change</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">General Information</a></li>
+						<li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Profile Image</a></li>
+						<li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Change Password</a></li>
                     </ul>
                 </div>
                 <div class="card-body">
@@ -66,27 +72,49 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="timeline">
-                            <form class="form-horizontal" method="post" action="">
-                                <div class="form-group">
-                                    <label for="inputEmail">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email"/>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </div>
-                            </form>
+                            <form>
+								<div class="form-group">
+									<label for="fileProfileImage">Profile Image</label>
+									<div class="col-sm-6">
+										<div class="input-group">
+											<div class="custom-file">
+												<input type="file" class="custom-file-input" id="fileProfileImage">
+												<label class="custom-file-label" for="fileProfileImage">Choose file</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<button type="submit" class="btn btn-success">Update</button>
+								</div>
+							</form>
                         </div>
 
                         <div class="tab-pane" id="settings">
-                            <form class="form-horizontal" method="post" action="">
-                                <div class="form-group">
-                                    <label for="inputEmail">Email</label>
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email"/>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                </div>
-                            </form>
+                            <form>
+								<div class="form-group">
+									<label for="inputOldPassword" class="col-sm-2 col-form-label">Old Password</label>
+									<div class="col-sm-6">
+										<input type="password" class="form-control" id="inputOldPassword" placeholder="Enter Your Old Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputNewPassword" class="col-sm-2 col-form-label">New Password</label>
+									<div class="col-sm-6">
+										<input type="password" class="form-control" id="inputNewPassword" placeholder="Enter Your New Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="inputConfirmPassword" class="col-sm-2 col-form-label">Confirm Password</label>
+									<div class="col-sm-6">
+										<input type="password" class="form-control" id="inputConfirmPassword" placeholder="Enter Confirm Password">
+									</div>
+								</div>
+								<div class="form-group">
+									<button type="submit" class="btn btn-success">Update</button>
+								</div>
+							</form>
                         </div>
                     </div>
                     <!-- /.tab-content -->

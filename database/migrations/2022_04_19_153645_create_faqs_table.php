@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateShippingDocumentsTable extends Migration
+class CreateFaqsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreateShippingDocumentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('shipping_documents', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('category');
+            $table->text('question');
+            $table->text('answer');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
@@ -26,6 +30,6 @@ class CreateShippingDocumentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('shipping_documents');
+        Schema::dropIfExists('faqs');
     }
 }

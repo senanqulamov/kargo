@@ -5,11 +5,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\front\HomeController;
 
 use App\Http\Controllers\admin\{
-	AuthController
+	AuthController,
+	AdminController,
+	UserController,
+	ManuelOrderController,
+	FaqsController,
+	BranchController,
+	CargoController,
+	WarehouseController,
 };
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\UserController;
-use App\Http\Controllers\admin\ManuelOrderController;
 
 use App\Http\Controllers\MessageController;
 
@@ -52,10 +56,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		Route::prefix('orders/')->name('orders.')->group(function(){
 			Route::get('/manuel', [ManuelOrderController::class, 'index'])->name('manuel');
 			Route::get('/bulk', [UserController::class, 'index'])->name('bulk');
-		});		
-		
-		// settings
-		Route::get('/warehouses', [AdminController::class, 'warehouses'])->name('warehouses');
+		});
 		
 		// messages
 		Route::prefix('messages/')->name('messages.')->group(function(){
@@ -63,5 +64,38 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/read/{id}', [MessageController::class, 'read'])->name('read');
 			Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('delete');
 		});	
+
+		//faqs
+		Route::prefix('faqs')->name('faqs.')->group(function(){
+			Route::get('/', [FaqsController::class, 'index'])->name('index');
+			Route::post('/create', [FaqsController::class, 'create'])->name('create');
+			Route::get('/edit/{id}', [FaqsController::class, 'edit']);
+			Route::put('/update', [FaqsController::class, 'update'])->name('update');
+			Route::get('/delete/{id}', [FaqsController::class, 'delete'])->name('delete');
+		});
+
+		// cargo
+		Route::prefix('cargos/')->name('cargos.')->group(function(){
+			Route::get('/company', [CargoController::class, 'company'])->name('company');
+			Route::get('/company/delete/{id}', [CargoController::class, 'delete'])->name('company.delete');
+
+			Route::get('/domestic', [CargoController::class, 'domestic'])->name('domestic');
+			Route::get('/domestic/delete/{id}', [CargoController::class, 'delete'])->name('domestic.delete');
+		});	
+
+		// branch
+		Route::prefix('branches/')->name('branches.')->group(function(){
+			Route::get('/', [BranchController::class, 'index'])->name('index');
+			Route::post('/create', [BranchController::class, 'create'])->name('create');
+			Route::get('/edit/{id}', [BranchController::class, 'edit']);
+			Route::put('/update', [BranchController::class, 'update'])->name('update');
+			Route::get('/delete/{id}', [BranchController::class, 'delete'])->name('delete');
+		});	
+
+		// warehouses
+		Route::prefix('warehouses/')->name('warehouses.')->group(function(){
+			Route::get('/', [WarehouseController::class, 'index'])->name('index');
+			Route::get('/delete/{id}', [WarehouseController::class, 'delete'])->name('delete');
+		});
 	});    
 });

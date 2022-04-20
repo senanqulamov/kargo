@@ -15,10 +15,13 @@ class CreateCargosTable extends Migration
     {
         Schema::create('cargos', function (Blueprint $table) {
             $table->id();
+            $table->string('type')->comment('1 => domestic, 2 => cargo');
             $table->string('name');
             $table->string('logo');
-            $table->string('customer_code');
-            $table->string('entegrations');
+            $table->string('customer_code')->nullable();
+            $table->string('zone')->nullable();
+            $table->string('price')->nullable();
+            $table->string('entegrations')->nullable();
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@
         <div class="card-body login-card-body">
             <p class="login-box-msg mb-0">Sign in to start your session</p>
 
-            <form action="{{route('admin.postIndex')}}" method="post">
+            <form action="{{route('admin.postIndex')}}" method="post" autocomplete="off">
                 @csrf
                 <!-- Email input -->
                 <div class="form-group mb-3">

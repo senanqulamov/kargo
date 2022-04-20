@@ -17,8 +17,11 @@ class DatabaseSeeder extends Seeder
             EmployeeSeeder::class,
             UserSeeder::class,
             RolePermissionSeeder::class,
-            StorageSeeder::class,
             MessageSeeder::class,
+            BranchSeeder::class,
+            CargoSeeder::class,
+            FaqsSeeder::class,
+            WarehousesSeeder::class,
         ]);
     }
 }

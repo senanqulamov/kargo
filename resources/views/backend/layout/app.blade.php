@@ -119,15 +119,35 @@
                                     <p> Users </p>
                                 </a>
                             </li>
-							<li class="nav-item">
-                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
-                                    <i class="nav-icon fas fa-users"></i>
+                            <li class="nav-item">
+                                <a href="{{route('admin.warehouses.index')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                    <i class="nav-icon fas fa-warehouse"></i>
                                     <p> Warehouses </p>
                                 </a>
                             </li>
+                            <li class="nav-item @if(Request::segment(2) == 'cargos') menu-open @endif">
+                                <a href="#" class="nav-link @if(Request::segment(2) == 'cargos') active @endif">
+                                    <i class="nav-icon fas fa-truck-moving"></i>
+                                    <p>Cargo Manager <i class="right fas fa-angle-left"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.cargos.company')}}" class="nav-link @if(Request::segment(3) == 'company') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Cargo Company</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.cargos.domestic')}}" class="nav-link @if(Request::segment(3) == 'domestic') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Domestic Cargo</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                             <li class="nav-item @if(Request::segment(2) == 'orders') menu-open @endif">
                                 <a href="#" class="nav-link @if(Request::segment(2) == 'orders') active @endif">
-                                    <i class="nav-icon fas fa-truck"></i>
+                                    <i class="nav-icon fas fa-file-alt"></i>
                                     <p>Orders Manager <i class="right fas fa-angle-left"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
@@ -168,23 +188,17 @@
 							
                             <li class="nav-header text-uppercase">Site Settings</li>    
 							<li class="nav-item">
-                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
-                                    <i class="nav-icon fas fa-users"></i>
+                                <a href="{{route('admin.faqs.index')}}" class="nav-link @if(Request::segment(2) == 'faqs') active @endif">                                    
+                                    <i class="nav-icon fas fa-question"></i>
                                     <p> FAQS </p>
                                 </a>
                             </li>
 							<li class="nav-item">
-                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
-                                    <i class="nav-icon fas fa-users"></i>
+                                <a href="{{route('admin.branches.index')}}" class="nav-link @if(Request::segment(2) == 'branches') active @endif">                                    
+                                    <i class="nav-icon fas fa-university"></i>
                                     <p> Branches </p>
                                 </a>
-                            </li>
-							<li class="nav-item">
-                                <a href="{{route('admin.warehouses')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p> Site Usage </p>
-                                </a>
-                            </li>							
+                            </li>						
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

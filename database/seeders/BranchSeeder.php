@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Storage;
 
-class StorageSeeder extends Seeder
+class BranchSeeder extends Seeder
 {
     /**
      * Run the database seeds.
