@@ -16,6 +16,7 @@ use App\Http\Controllers\admin\{
 };
 
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\TestController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ use App\Http\Controllers\MessageController;
 
 // front section
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/test', [TestController::class, 'index']);
 
 // admin section
 Route::prefix('admin')->name('admin.')->group(function(){
