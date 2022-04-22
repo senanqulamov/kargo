@@ -158,6 +158,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+		'selectCountry' => 'Country',
+		'selectCountry2' => 'Country',
+		'inputTitle' => 'Title',
+		'inputTitle2' => 'Title',
+		'inputLongitude' => 'Longitude',
+		'inputLongitude2' => 'Longitude',
+		'inputLatitude' => 'Latitude',
+		'inputLatitude2' => 'Latitude',
+		'textareaAddress' => 'Address',
+		'textareaAddress2' => 'Address',
+		'selectCategory' => 'Category',
+		'selectCategory2' => 'Category',
+		'inputQuestion' => 'Question',
+		'inputQuestion2' => 'Question',
+		'textareaAnswer' => 'Answer',
+		'textareaAnswer2' => 'Answer',
+        'inputCategory' => 'Category',
+        'inputCategory2' => 'Category',
+	],
 
 ];

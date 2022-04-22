@@ -166,6 +166,25 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+		'selectCountry' => 'Ülke',
+		'selectCountry2' => 'Ülke',
+		'inputTitle' => 'Başlık',
+		'inputTitle2' => 'Başlık',
+		'inputLongitude' => 'Boylam',
+		'inputLongitude2' => 'Boylam',
+		'inputLatitude' => 'Enlem',
+		'inputLatitude2' => 'Enlem',
+		'textareaAddress' => 'Adres',
+		'textareaAddress2' => 'Adres',
+		'selectCategory' => 'Kateqori',
+		'selectCategory2' => 'Kateqori',
+		'inputQuestion' => 'Soru',
+		'inputQuestion2' => 'Soru',
+		'textareaAnswer' => 'Cevap',
+		'textareaAnswer2' => 'Cevap',
+        'inputCategory' => 'Kateqori',
+        'inputCategory2' => 'Kateqori',
+	],
 
 ];

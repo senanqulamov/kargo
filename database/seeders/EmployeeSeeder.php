@@ -16,7 +16,7 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-        $users = [
+        $admins = [
             [
                 'name' => 'administrator',   
                 'email' => 'admin@cargo.com',             
@@ -24,8 +24,8 @@ class EmployeeSeeder extends Seeder
             ],
         ];
 
-        foreach ($users as $user) {
-            Employee::create($user);
+        foreach ($admins as $admin) {
+            Employee::create($admin);
         }
     }
 }

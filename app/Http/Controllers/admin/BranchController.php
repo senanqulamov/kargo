@@ -6,13 +6,17 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Branch;
+use App\Models\Country;
+
+use Validator;
 
 class BranchController extends Controller
 {
     public function index(){		
-		$branches=Branch::orderBy('created_at','desc')->get();
+		$branches=Branch::orderBy('created_at','asc')->get();
+		$countries=Country::orderBy('name','asc')->get();
 
-        return view('backend.branch', compact('branches'));
+        return view('backend.branch', compact('branches', 'countries'));
     }
 	
 	public function create(Request $request){
@@ -36,36 +40,39 @@ class BranchController extends Controller
         return redirect()->route('admin.branches.index');  
     }
 
-    public function edit($id)
+    public function edit(Request $request)
     {
-        $faqs=Branch::find($id);
+        $branch=Branch::find($request->id);
         return response()->json([
             'status' => 200,
-            'data' => $faqs
+            'data' => $branch
         ]);
     }
 	
 	public function update(Request $request){
-        $request->validate([
-            'inputTitle' => 'required|min:3|max:225',
-            'inputLongitude' => 'required|min:3|max:225',
-            'inputLatitude' => 'required|min:3|max:225',
-            'textareaAddress' => 'required|min:3|max:225',
-            'selectCountry' => 'required'
+        $validator = Validator::make($request->all(),[
+            'inputTitle2' => 'required|min:3|max:225',
+            'inputLongitude2' => 'required|min:3|max:225',
+            'inputLatitude2' => 'required|min:3|max:225',
+            'textareaAddress2' => 'required|min:3|max:225',
+            'selectCountry2' => 'required'
         ]);
+		
+		if(!$validator->passes()){
+            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
+        } else {
+			$branch_id=$request->input('hiddenID');
 
-        $branch_id=$request->input('hiddenID');
+			$branch=Branch::find($branch_id);
+			$branch->title=$request->inputTitle2;
+			$branch->longitude=$request->inputLongitude2;
+			$branch->latitude=$request->inputLatitude2;
+			$branch->address=$request->textareaAddress2;
+			$branch->country=$request->selectCountry2;
+			$branch->save();
 
-        $branch=Branch::find($branch_id);
-        $branch->title=$request->inputTitle;
-        $branch->longitude=$request->inputLongitude;
-        $branch->latitude=$request->inputLatitude;
-        $branch->address=$request->textareaAddress;
-        $branch->country=$request->selectCountry;
-        $branch->save();
-
-        toastr()->success('branch has been successfully updated', 'Congratulations!!');
-        return redirect()->route('admin.branches.index');  
+			return response()->json(['status'=>1, 'msg'=>'Branch has been successfully updated', 'state'=>'Congratulations!']);			
+		}
     }
 	
 	public function delete($id){

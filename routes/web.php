@@ -31,7 +31,7 @@ use App\Http\Controllers\TestController;
 
 // front section
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/test', [TestController::class, 'index']);
+Route::post('/test', [TestController::class, 'index']);
 
 // admin section
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -68,12 +68,20 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		});	
 
 		//faqs
-		Route::prefix('faqs')->name('faqs.')->group(function(){
+		Route::prefix('faqs/')->name('faqs.')->group(function(){
 			Route::get('/', [FaqsController::class, 'index'])->name('index');
 			Route::post('/create', [FaqsController::class, 'create'])->name('create');
-			Route::get('/edit/{id}', [FaqsController::class, 'edit']);
+			Route::get('/edit', [FaqsController::class, 'edit'])->name('edit');
 			Route::put('/update', [FaqsController::class, 'update'])->name('update');
 			Route::get('/delete/{id}', [FaqsController::class, 'delete'])->name('delete');
+			
+			Route::prefix('categories/')->name('categories.')->group(function(){
+				Route::get('/', [FaqsController::class, 'categories'])->name('index');
+				Route::post('/create', [FaqsController::class, 'createCategory'])->name('create');
+				Route::get('/edit', [FaqsController::class, 'editCategory'])->name('edit');
+				Route::put('/update', [FaqsController::class, 'updateCategory'])->name('update');
+				Route::get('/delete/{id}', [FaqsController::class, 'deleteCategory'])->name('delete');
+			});
 		});
 
 		// cargo
@@ -89,7 +97,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		Route::prefix('branches/')->name('branches.')->group(function(){
 			Route::get('/', [BranchController::class, 'index'])->name('index');
 			Route::post('/create', [BranchController::class, 'create'])->name('create');
-			Route::get('/edit/{id}', [BranchController::class, 'edit']);
+			Route::get('/edit', [BranchController::class, 'edit'])->name('edit');
 			Route::put('/update', [BranchController::class, 'update'])->name('update');
 			Route::get('/delete/{id}', [BranchController::class, 'delete'])->name('delete');
 		});	

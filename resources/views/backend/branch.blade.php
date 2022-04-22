@@ -9,7 +9,7 @@
 @section('content')
 <div class="row">
     <!-- left column -->
-    <div class="col-md-5">
+    <div class="col-lg-6">
         <!-- general form elements -->
         <div class="card card-primary">
             <div class="card-header">
@@ -23,12 +23,11 @@
                     <!-- select -->
                     <div class="form-group">
                         <label for="selectCountry">Country</label>
-                        <select class="form-control" name="selectCountry" id="selectCountry" value="{{old('selectCountry')}}">
+                        <select class="form-control" name="selectCountry" id="selectCountry">
                             <option value="">Choose Country</option>
-                            <option value="1">option 2</option>
-                            <option value="2">option 3</option>
-                            <option value="3">option 4</option>
-                            <option value="4">option 5</option>
+							@foreach($countries as $country)
+                            <option value="{{$country->code}}" {{ old('selectCountry') == $country->code ? "selected" : "" }}>{{$country->name}}</option>
+							@endforeach
                         </select>
                         <span class="text-danger">@error('selectCountry') {{ $message }} @enderror</span>
                     </div>
@@ -84,7 +83,8 @@
                     <tbody>
                         @foreach($branches as $branch)
                         <tr>
-                            <td>{{$branch->country}}</td>
+							@php $country_title=DB::table('countries')->where('code', $branch->country)->first() @endphp
+                            <td>{{$country_title->name}}</td>
                             <td>{{$branch->title}}</td>
                             <td>{{$branch->longitude}}</td>
                             <td>{{$branch->latitude}}</td>
@@ -114,40 +114,39 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{route('admin.branches.update')}}" method="post" autocomplete="off">
+				<form action="{{route('admin.branches.update')}}" method="post" autocomplete="off" id="updateBranch">
 					@csrf
                     @method('PUT')
 					<!-- select -->
                     <div class="form-group">
                         <label for="selectCountry2">Country</label>
-                        <select class="form-control" name="selectCountry" id="selectCountry2">
-                            <option value="">Choose Country</option>
-                            <option value="1">option 2</option>
-                            <option value="2">option 3</option>
-                            <option value="3">option 4</option>
-                            <option value="4">option 5</option>
+                        <select class="form-control" name="selectCountry2" id="selectCountry2">
+							@foreach($countries as $country)
+                            <option value="{{$country->code}}">{{$country->name}}</option>
+							@endforeach
                         </select>
+						<span class="text-danger error-text selectCountry2_error"></span>
                     </div>
                     <div class="form-group">
                         <label for="inputTitle2">Title</label>
-                        <input type="text" class="form-control" id="inputTitle2" placeholder="Enter branch title" name="inputTitle">
-						<span class="text-danger">@error('inputTitle') {{ $message }} @enderror</span>
+                        <input type="text" class="form-control" id="inputTitle2" placeholder="Enter branch title" name="inputTitle2">
+						<span class="text-danger error-text inputTitle2_error"></span>
                     </div>
 					<div class="form-group">
                         <label for="inputLongitude2">Longitude</label>
-                        <input type="text" class="form-control" id="inputLongitude2" placeholder="Enter branch longitude" name="inputLongitude">
-						<span class="text-danger">@error('inputLongitude') {{ $message }} @enderror</span>
+                        <input type="text" class="form-control" id="inputLongitude2" placeholder="Enter branch longitude" name="inputLongitude2">
+						<span class="text-danger error-text inputLongitude2_error"></span>
                     </div>
 					<div class="form-group">
                         <label for="inputLatitude2">Latitude</label>
-                        <input type="text" class="form-control" id="inputLatitude2" placeholder="Enter branch latitude" name="inputLatitude">
-						<span class="text-danger">@error('inputLatitude') {{ $message }} @enderror</span>
+                        <input type="text" class="form-control" id="inputLatitude2" placeholder="Enter branch latitude" name="inputLatitude2">
+						<span class="text-danger error-text inputLatitude2_error"></span>
                     </div>
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="textareaAddress2">Address</label>
-                        <textarea class="form-control" rows="7" placeholder="Enter branch address..." name="textareaAddress" id="textareaAddress2"></textarea>
-						<span class="text-danger">@error('textareaAddress') {{ $message }} @enderror</span>
+                        <textarea class="form-control" rows="7" placeholder="Enter branch address..." name="textareaAddress2" id="textareaAddress2"></textarea>
+						<span class="text-danger error-text textareaAddress2_error"></span>
                     </div>
 
                     <input type="hidden" name="hiddenID" id="hiddenID">
@@ -173,7 +172,8 @@
 
             $.ajax({
                 type:"GET",
-                url:"/admin/branches/edit/"+id_data,
+                data:{id:id_data},
+                url:"{{route('admin.branches.edit')}}",
                 success:function(response){
                     $("#selectCountry2").val(response.data.country);
                     $("#inputTitle2").val(response.data.title);
@@ -184,6 +184,36 @@
                 }
             });
         });
+		
+		$("#updateBranch").on('submit', function(e){
+			e.preventDefault();
+		
+			$.ajax({
+				url:$(this).attr('action'),
+				method:$(this).attr('method'),
+				data:new FormData(this),
+				processData:false,
+				dataType:'json',
+				contentType:false,
+				beforeSend:function(){
+					$(document).find('span.error-text').text('');
+				},
+				success:function(data){
+					if(data.status == 0){
+						$.each(data.error, function(prefix, val){
+							$('span.'+prefix+'_error').text(val[0]);
+						});
+					} else{
+						// $('#formOptionalCompany')[0].reset();
+						toastr.success(data.msg, data.state);
+						$("#editModal").modal().hide();
+						setTimeout(function () {
+							location.reload();
+						}, 3000);
+					}
+				}
+			});
+		});
 	})
 </script>
 @endsection
