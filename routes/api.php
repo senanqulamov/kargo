@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\UserAddressController;
 
+use App\Http\Controllers\api\ManuelOrderController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -20,8 +22,11 @@ use App\Http\Controllers\api\UserAddressController;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+// manuel order
+Route::get('/manuel-order', [ManuelOrderController::class, 'index']);
+
 Route::middleware('auth:sanctum')->group(function(){
     Route::get('/logout', [AuthController::class, 'logout']);
 
-    Route::resource('/address', UserAddressController::class);
+    Route::resource('/address', UserAddressController::class);    
 });
