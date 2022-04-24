@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User;
-use App\Models\UserAddress;
+use Validator;
+
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -19,13 +21,42 @@ class UserController extends Controller
     public function details($id){
         $user=User::where('id', $id)->first();
 
-        $userAddress=UserAddress::where('userID', $user->id)->get();
+        return view('backend.user-detail', compact('user'));
+    }
 
-        if(count($userAddress) > 0){            
-            return view('backend.user-detail', compact('user', 'userAddress'));
+    public function updateUserGeneral(Request $request, $id){
+        $validator = Validator::make($request->all(),[
+            'username' => 'required|min:3|max:225',
+            'email' => 'required|min:3|max:225',
+            'phone' => 'required|min:3|max:225'
+        ]);
+
+        if(!$validator->passes()){
+            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
-            toastr()->error('The shipping address for this account is not included', 'Ooops!');
-            return redirect()->route('admin.users');
+            $user=User::find($id);
+            $user->name=$request->username;
+            $user->email=$request->email;            
+            $user->phone=$request->phone;
+            $user->update();
+
+            return response()->json(['status'=>1, 'msg'=>'User data has been successfully updated', 'state'=>'Congratulations!']);
+        }
+    }
+
+    public function updateUserPassword(Request $request, $id){
+        $validator = Validator::make($request->all(),[
+            'inputPassword' => 'required|min:3|max:225',
+        ]);
+
+        if(!$validator->passes()){
+            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
+        } else {
+            $user=User::find($id);
+            $user->password=Hash::make($request->inputPassword);
+            $user->update();
+
+            return response()->json(['status'=>1, 'msg'=>'User data has been successfully updated', 'state'=>'Congratulations!']);
         }
     }
 }

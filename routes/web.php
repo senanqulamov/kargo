@@ -70,10 +70,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// profile
 		Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
+		Route::post('/profile', [AdminController::class, 'postProfile'])->name('profile.post');
 
 		// users
 		Route::get('/users', [UserController::class, 'index'])->name('users');
 		Route::get('/users/{id}', [UserController::class, 'details'])->name('users.details');
+		Route::post('/users/update/general/{id}', [UserController::class, 'updateUserGeneral'])->name('users.general.update');
+		Route::post('/users/update/password/{id}', [UserController::class, 'updateUserPassword'])->name('users.password.update');
 
 		// order
 		Route::prefix('orders/')->name('orders.')->group(function(){
