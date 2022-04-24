@@ -1,0 +1,397 @@
+@media only screen and (max-width:992px) {
+    #Login .loginForm {
+        width: 100% !important;
+        height: 100%;
+        margin: auto;
+        text-align: center;
+        margin-top: 3rem !important;
+    }
+    #First .first {
+        flex-direction: column-reverse;
+    }
+    #First-FBA .first {
+        flex-direction: column-reverse;
+    }
+    #Second .left-second {
+        margin: 10px 0;
+    }
+    #Second .left-second img {
+        width: 100% !important;
+    }
+    #Second .right-second {
+        text-align: start !important;
+        padding: 0 !important;
+    }
+    #Thirds .third {
+        flex-direction: column-reverse !important;
+    }
+    #Thirds .left-thirds {
+        text-align: start !important;
+        padding: 0 !important;
+    }
+    #Thirds .right-thirds {
+        margin: 10px 0;
+    }
+    #Thirds .right-thirds img {
+        width: 100% !important;
+    }
+    #Boxes .left-box img {
+        width: 100% !important;
+        margin: 15px 0;
+        box-shadow: 0px 4px 16px 0px #00000026;
+        border-radius: 5px;
+    }
+    #First-FBA .first .left-content {
+        margin: 20px 0;
+    }
+    .w-m {
+        margin: 0 !important;
+    }
+    .w-m .WhatFba {
+        margin: 20px 0 !important;
+    }
+    .fba-content-right {
+        margin: 20px 0;
+    }
+    .f-m {
+        flex-direction: column-reverse;
+    }
+    #FbaServices .Total-Price {
+        text-align: center;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0 !important;
+    }
+    #ContactForms .map-contact {
+        display: flex;
+        justify-content: center !important;
+        margin: 10px 0;
+    }
+    #ContactForms .map-contact iframe {
+        width: 100% !important;
+    }
+    .contactSection {
+        text-align: center !important;
+        margin: 15px 0 !important;
+    }
+    .contactSection .col-lg-3 {
+        display: flex;
+        align-items: center;
+        justify-content: center !important;
+    }
+    #ContactForms form input,
+    select,
+    textarea {
+        width: 100%;
+        padding: 15px;
+        margin: 10px 0 !important;
+        background: #fff;
+        border: 1px solid #0003;
+        border-radius: 7px;
+    }
+    #OurLocation .mapLocation {
+        width: 100% !important;
+        margin: auto;
+    }
+    #OurLocation .showBoxes {
+        width: 100% !important;
+        margin: auto;
+    }
+    .getQuoteForm .pm input {
+        height: 45px;
+        width: 70% !important;
+        text-align: center;
+        font-size: 26px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .getQuoteForm .form__group {
+        display: flex;
+        align-self: center;
+        flex-direction: column !important;
+        margin: 20px 0;
+    }
+    .getQuoteForm .form__group .form__radio-group {
+        margin: 10px 0;
+    }
+    .mFee {
+        flex-direction: column-reverse !important;
+    }
+    #Free {
+        background-image: url(../img/background.png);
+        background-repeat: no-repeat;
+        background-position: inherit !important;
+        background-size: cover;
+        width: 100%;
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 5rem 0;
+    }
+    #What .what-content {
+        width: 100% !important;
+        margin: 10px 0 !important;
+        text-align: center;
+    }
+    #ServicesFeeTitle .right-bar .bar-card {
+        box-shadow: 0px 4px 15px 0px #0000001a;
+        padding: 20px;
+        width: 100% !important;
+        border: 1px solid #00000026;
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 20px;
+    }
+    #Free .right-free {
+        text-align: center;
+        margin: 20px 0 !important;
+    }
+    #KargoTrack .Progr {
+        width: 100% !important;
+        margin: auto;
+    }
+    /* ul.SteppedProgress.Vertical {
+        display: block;
+        overflow: auto !important;
+    } */
+    .SteppedProgress .complete:before {
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 400;
+        content: "\f00c";
+        /* font-size: 30px; */
+        padding: 5px 12px !important;
+        /* width: 49px; */
+        line-height: 35px !important;
+        /* height: 60px; */
+        color: #fff;
+        background: #C8E1F2;
+        border-radius: 50%;
+        /* margin: 0 auto 10px; */
+        position: relative;
+        z-index: 1;
+    }
+    .SteppedProgress li:before {
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 400;
+        content: "\f00c";
+        /* font-size: 30px; */
+        padding: 5px 12px !important;
+        /* width: 49px; */
+        line-height: 35px !important;
+        /* height: 60px; */
+        color: #fff;
+        background: #C8E1F2;
+        border-radius: 50%;
+        /* margin: 0 auto 10px; */
+        position: relative;
+        z-index: 1;
+    }
+    .SteppedProgress.Vertical li:after {
+        content: "";
+        width: 2px;
+        height: 100%;
+        position: absolute;
+        left: 22px !important;
+        top: -50%;
+        z-index: -1;
+    }
+    #Career .socialJobs .footer-social a {
+        background-color: #2386FF8C;
+        text-align: center;
+        padding: 5px 10px !important;
+        margin: 10px 5px !important;
+        border-radius: 100%;
+        transition: .4s ease;
+    }
+    #Career .socialJobs .footer-social {
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+        /* padding: 0 40px; */
+    }
+    #Career .tagsJobs {
+        display: flex;
+        flex-direction: column;
+    }
+    #Career .tags {
+        display: flex;
+        flex-direction: column;
+    }
+    #Career .tagsJobs button {
+        border: none;
+        background-color: #2386FF8C;
+        box-shadow: 0px 4px 10px 0px #0000000d;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 500;
+        margin: 5px 5px !important;
+    }
+    #Career .tags button {
+        border: none;
+        background-color: #2386FF8C;
+        box-shadow: 0px 4px 10px 0px #0000000d;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 500;
+        margin: 5px 5px !important;
+    }
+    #Career .filter {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #83B9FC8C !important;
+        border-right: none !important;
+        margin-bottom: 30px;
+    }
+    .p-c-m {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    .s-t-m {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+    .l-m {
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+    }
+}
+
+@media only screen and (max-width:425px) {
+    .table .table-title span {
+        font-weight: 600;
+        font-size: 14px !important;
+    }
+    .t {
+        width: 100%;
+        overflow-y: scroll;
+    }
+    #ServicesFeeTitle .servicesContent .nav li {
+        box-shadow: 0px 4px 15px 0px #0000001a;
+        height: 200px;
+        width: 100% !important;
+        margin: 10px 0;
+        /* margin: 0 10px; */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
+    }
+    #Blog .blogCard {
+        box-shadow: 0px 4px 15px 0px #0000001a;
+        width: 100% !important;
+        margin: auto;
+        height: auto;
+        border-radius: 20px;
+    }
+    #KargoTrackTitle .searchBtn input[type="search"] {
+        -webkit-appearance: none !important;
+        background-clip: padding-box;
+        background-color: white;
+        vertical-align: middle;
+        border-radius: 0.25rem;
+        border: none;
+        box-shadow: 0px 4px 12px 0px #00000026;
+        font-size: 1rem;
+        width: 165px !important;
+        line-height: 2;
+        padding: 0.375rem 1.25rem;
+        -webkit-transition: border-color 0.2s;
+        -moz-transition: border-color 0.2s;
+        transition: border-color 0.2s;
+    }
+    #Career .socialJobs .footer-social a {
+        background-color: #2386FF8C;
+        text-align: center;
+        padding: 5px 10px !important;
+        margin: 10px 5px !important;
+        border-radius: 100%;
+        transition: .4s ease;
+    }
+    #Career .socialJobs .footer-social {
+        display: flex;
+        justify-content: center !important;
+        align-items: center;
+        /* padding: 0 40px; */
+    }
+    #Career .tagsJobs {
+        display: flex;
+        flex-direction: column;
+    }
+    #Career .tags {
+        display: flex;
+        flex-direction: column;
+    }
+    #Career .tagsJobs button {
+        border: none;
+        background-color: #2386FF8C;
+        box-shadow: 0px 4px 10px 0px #0000000d;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 500;
+        margin: 5px 5px !important;
+    }
+    #Career .tags button {
+        border: none;
+        background-color: #2386FF8C;
+        box-shadow: 0px 4px 10px 0px #0000000d;
+        padding: 10px;
+        border-radius: 10px;
+        color: #fff;
+        font-weight: 500;
+        margin: 5px 5px !important;
+    }
+    #Career .Jobs label {
+        flex-grow: 1;
+        flex-shrink: 0;
+        width: 185px !important;
+        flex-basis: auto;
+        align-self: center;
+        margin-bottom: 0;
+    }
+    #Career .filter {
+        padding-bottom: 10px;
+        border-bottom: 1px solid #83B9FC8C !important;
+        border-right: none !important;
+        margin-bottom: 30px;
+    }
+    #Anket .anket {
+        width: auto !important;
+        height: auto;
+        padding: 20px 0;
+        background-color: #F4F4F4;
+    }
+    #Anket .formsAnket {
+        width: 100% !important;
+        height: auto;
+        margin: auto;
+        background-color: #fff;
+        box-shadow: 4px 4px 10px 0px #0000001a;
+    }
+    #Anket .formsAnket form {
+        display: flex;
+        flex-direction: column;
+        padding: 10px !important;
+    }
+    .memberShipCard .cardTitle .img-member {
+        display: flex;
+        justify-content: end !important;
+    }
+    #KargoTrackTitle .searchBtn label {
+        flex-grow: 0 !important;
+        flex-shrink: 0;
+        flex-basis: auto;
+        align-self: center;
+        margin-bottom: 0;
+    }
+}

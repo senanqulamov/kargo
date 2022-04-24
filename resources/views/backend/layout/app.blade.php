@@ -26,6 +26,9 @@
             .form-control.is-invalid, .was-validated .form-control:invalid{
                 background:none
             }
+            tr, td{
+                vertical-align:middle !important
+            }
         </style>
         @livewireStyles
     </head>
@@ -118,33 +121,7 @@
                                     <i class="nav-icon fas fa-users"></i>
                                     <p> Users </p>
                                 </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('admin.warehouses.index')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
-                                    <i class="nav-icon fas fa-warehouse"></i>
-                                    <p> Warehouses </p>
-                                </a>
-                            </li>
-                            <li class="nav-item @if(Request::segment(2) == 'cargos') menu-open @endif">
-                                <a href="#" class="nav-link @if(Request::segment(2) == 'cargos') active @endif">
-                                    <i class="nav-icon fas fa-truck-moving"></i>
-                                    <p>Cargo Manager <i class="right fas fa-angle-left"></i></p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.cargos.company')}}" class="nav-link @if(Request::segment(3) == 'company') active @endif">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Cargo Company</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.cargos.domestic')}}" class="nav-link @if(Request::segment(3) == 'domestic') active @endif">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Domestic Cargo</p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
+                            </li>                                                       
                             <li class="nav-item @if(Request::segment(2) == 'orders') menu-open @endif">
                                 <a href="#" class="nav-link @if(Request::segment(2) == 'orders') active @endif">
                                     <i class="nav-icon fas fa-file-alt"></i>
@@ -185,8 +162,42 @@
 								</ul>
 							</li>
                             <li class="nav-header text-uppercase">Configurations</li>    
+
+                            <li class="nav-item @if(Request::segment(3) == 'cargo' || Request::segment(3) == 'domestic') menu-open @endif">
+                                <a href="#" class="nav-link @if(Request::segment(3) == 'cargo' || Request::segment(3) == 'domestic') active @endif">
+                                    <i class="nav-icon fas fa-truck-moving"></i>
+                                    <p>Cargo Manager <i class="right fas fa-angle-left"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.companies.cargo')}}" class="nav-link @if(Request::segment(3) == 'cargo') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Cargo Company</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.companies.domestic')}}" class="nav-link @if(Request::segment(3) == 'domestic') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Domestic Cargo</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>                            
+                            <li class="nav-item">
+                                <a href="{{route('admin.warehouses.index')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                    <i class="nav-icon fas fa-warehouse"></i>
+                                    <p> Warehouses </p>
+                                </a>
+                            </li> 
+                            <li class="nav-item">
+                                <a href="{{route('admin.services.index')}}" class="nav-link @if(Request::segment(2) == 'services') active @endif">                                    
+                                    <i class="nav-icon fab fa-servicestack"></i>
+                                    <p> Additional Services </p>
+                                </a>
+                            </li>
 							
-                            <li class="nav-header text-uppercase">Site Settings</li>    
+                            <li class="nav-header text-uppercase">Site Settings</li> 
+
 							<li class="nav-item">
                                 <a href="{{route('admin.faqs.index')}}" class="nav-link @if(Request::segment(2) == 'faqs') active @endif">                                    
                                     <i class="nav-icon fas fa-question"></i>

@@ -2,8 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 
+// home
 use App\Http\Controllers\front\HomeController;
 
+// backend
 use App\Http\Controllers\admin\{
 	AuthController,
 	AdminController,
@@ -11,10 +13,11 @@ use App\Http\Controllers\admin\{
 	ManuelOrderController,
 	FaqsController,
 	BranchController,
-	CargoController,
+	CargoCompanyController,
+	DomesticCompanyController,
 	WarehouseController,
+	AdditionalServiceController,
 };
-
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TestController;
 
@@ -31,6 +34,9 @@ use App\Http\Controllers\TestController;
 
 // front section
 Route::get('/', [HomeController::class, 'index'])->name('index');
+Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+
 Route::post('/test', [TestController::class, 'index']);
 
 // admin section
@@ -85,12 +91,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		});
 
 		// cargo
-		Route::prefix('cargos/')->name('cargos.')->group(function(){
-			Route::get('/company', [CargoController::class, 'company'])->name('company');
-			Route::get('/company/delete/{id}', [CargoController::class, 'delete'])->name('company.delete');
+		Route::prefix('companies/')->name('companies.')->group(function(){
+			Route::get('/cargo', [CargoCompanyController::class, 'index'])->name('cargo');
+			Route::post('/cargo/create', [CargoCompanyController::class, 'create'])->name('cargo.create');
+			Route::get('/cargo/edit', [CargoCompanyController::class, 'edit'])->name('cargo.edit');
+			Route::put('/cargo/update', [CargoCompanyController::class, 'update'])->name('cargo.update');
+			Route::get('/cargo/delete/{id}', [CargoCompanyController::class, 'delete'])->name('cargo.delete');
+			Route::post('/cargo/upload', [CargoCompanyController::class, 'upload'])->name('cargo.upload');
 
-			Route::get('/domestic', [CargoController::class, 'domestic'])->name('domestic');
-			Route::get('/domestic/delete/{id}', [CargoController::class, 'delete'])->name('domestic.delete');
+			Route::get('/domestic', [DomesticCompanyController::class, 'index'])->name('domestic');
+			Route::get('/domestic/delete/{id}', [DomesticCompanyController::class, 'delete'])->name('domestic.delete');
 		});	
 
 		// branch
@@ -106,6 +116,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		Route::prefix('warehouses/')->name('warehouses.')->group(function(){
 			Route::get('/', [WarehouseController::class, 'index'])->name('index');
 			Route::get('/delete/{id}', [WarehouseController::class, 'delete'])->name('delete');
+		});
+
+		// additional service
+		Route::prefix('services/')->name('services.')->group(function(){
+			Route::get('/', [AdditionalServiceController::class, 'index'])->name('index');
+			Route::get('/delete/{id}', [AdditionalServiceController::class, 'delete'])->name('delete');
 		});
 	});    
 });

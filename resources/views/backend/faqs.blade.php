@@ -80,14 +80,12 @@
 					<div class="form-group">
 						<label for="inputQuestion">Question</label>
 						<input type="text" class="form-control" id="inputQuestion" placeholder="Enter your question" name="inputQuestion" value="{{old('inputQuestion')}}">
-						<span class="text-danger">@error('inputQuestion') {{ $message }} @enderror</span>
 						<span class="text-danger error-text inputQuestion_error"></span>
 					</div>
 					<!-- textarea -->
 					<div class="form-group">
 						<label for="textareaAnswer">Answer</label>
 						<textarea class="form-control" rows="7" placeholder="Enter your answer..." name="textareaAnswer" id="textareaAnswer">{{old('textareaAnswer')}}</textarea>
-						<span class="text-danger">@error('textareaAnswer') {{ $message }} @enderror</span>
 						<span class="text-danger error-text textareaAnswer_error"></span>
 					</div>
 

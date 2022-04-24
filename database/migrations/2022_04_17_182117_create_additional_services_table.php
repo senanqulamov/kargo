@@ -15,7 +15,15 @@ class CreateAdditionalServicesTable extends Migration
     {
         Schema::create('additional_services', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title');
+            $table->string('slug');
+            $table->integer('type')->comment('1 => des, 2 => box, 3 => product');
+            $table->string('price_default');
+            $table->string('price_standart');
+            $table->string('price_static');
+            $table->json('show');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 
