@@ -27,7 +27,10 @@
                 background:none
             }
             tr, td{
-                vertical-align:middle !important
+                vertical-align:middle !important;
+            }
+            th{
+                text-align:center
             }
         </style>
         @livewireStyles

@@ -9,7 +9,7 @@
 @section('content')
 <div class="row">
 	<div class="col-12 mb-4">
-		<button type="button" class="btn btn-success"  style="float:left" data-toggle="modal" data-target="#faqsModal"><i class="fas fa-plus"></i> New Company</button>								
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#domesticModal"><i class="fas fa-plus"></i> New Company</button>							
 	</div>
 	
     <div class="col-12">
@@ -22,19 +22,27 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Category</th>
-                            <th>Questions</th>
-                            <th>Answers</th>
-                            <th style="width:150px"></th>
+                            <th style="width:100px">Image</th>
+                            <th>Company Name</th>
+                            <th>Customer Code</th>
+                            <th style="width:280px"></th>
                         </tr>
                     </thead>
                     <tbody>
 					@foreach($domestics as $domestic)
 					<tr>
-						<td>{{$domestic->title}}</td>
+						<td>
+							@if($domestic->logo != '')
+								<img src="{{asset('/')}}backend/assets/img/companies/domestic/{{$domestic->logo}}" alt="logo" width="60" height="60" class="mx-auto d-block">
+							@else
+								<img src="{{asset('/')}}backend/assets/img/icons/company.png" alt="logo" width="60" class="mx-auto d-block">
+							@endif
+						</td>
+						<td>{{$domestic->name}}</td>
+						<td>{{$domestic->customer_code}}</td>
 						<td class="text-center">
 							<button type="button" class="btn btn-primary edit_btn" value="{{$domestic->id}}"><i class="fas fa-edit"></i></button>
-							<a href="{{route('admin.domestic.delete', $domestic->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							<a href="{{route('admin.companies.domestic.delete', $domestic->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
 						</td>
 					</tr>
 					@endforeach
@@ -47,37 +55,34 @@
     </div>
 </div>
 
-<div class="modal fade" id="faqsModal">
+<div class="modal fade" id="domesticModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Add FAQS</h4>
+				<h4 class="modal-title">Add Company</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{route('admin.faqs.create')}}" method="post" autocomplete="off" id="insertFaqs">
+				<form action="{{route('admin.companies.domestic.create')}}" method="post" autocomplete="off" id="insertDomestic" enctype="multipart/from-data">
 					@csrf
-					<!-- select -->
 					<div class="form-group">
-						<label for="selectCategory">Category</label>
-						<select class="form-control" name="selectCategory" id="selectCategory">
-							<option value="">Choose Category</option>
-							<option value="">Title</option>
-						</select>
-						<span class="text-danger error-text selectCategory_error"></span>
+						<label for="inputName">Name</label>
+						<input type="text" class="form-control" id="inputName" placeholder="Enter company name" name="inputName" value="{{old('inputName')}}">
+						<span class="text-danger error-text inputName_error"></span>
 					</div>
+					
 					<div class="form-group">
-						<label for="inputQuestion">Question</label>
-						<input type="text" class="form-control" id="inputQuestion" placeholder="Enter your question" name="inputQuestion" value="{{old('inputQuestion')}}">
-						<span class="text-danger error-text inputQuestion_error"></span>
+						<label for="inputCustomerCode">Customer Code</label>
+						<input type="text" class="form-control" id="inputCustomerCode" placeholder="Enter your customer code" name="inputCustomerCode" value="{{old('inputCustomerCode')}}">
+						<span class="text-danger error-text inputCustomerCode_error"></span>
 					</div>
-					<!-- textarea -->
+					
 					<div class="form-group">
-						<label for="textareaAnswer">Answer</label>
-						<textarea class="form-control" rows="7" placeholder="Enter your answer..." name="textareaAnswer" id="textareaAnswer">{{old('textareaAnswer')}}</textarea>
-						<span class="text-danger error-text textareaAnswer_error"></span>
+						<label for="fileLogo">Logo</label>
+						<input type="file" class="form-control" id="fileLogo" name="fileLogo">
+						<span class="text-danger error-text fileLogo_error"></span>
 					</div>
 
 					<button type="submit" class="btn btn-primary">Create</button>
@@ -95,34 +100,32 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Update FAQS</h4>
+				<h4 class="modal-title">Update Company</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{route('admin.faqs.update')}}" method="post" autocomplete="off" id="updateFaqs">
+				<form action="{{route('admin.companies.domestic.update')}}" method="post" autocomplete="off" id="updateDomestic" enctype="multipart/from-data">
 					@csrf
                     @method('PUT')
-					<!-- select -->
-                    <div class="form-group">
-                        <label for="selectCategory2">Category</label>
-                        <select class="form-control" name="selectCategory2" id="selectCategory2">
-						<option value="">Title</option>
-                        </select>
-						<span class="text-danger error-text selectCategory2_error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputQuestion2">Question</label>
-                        <input type="text" class="form-control" id="inputQuestion2" placeholder="Enter your question" name="inputQuestion2">
-						<span class="text-danger error-text inputQuestion2_error"></span>
-                    </div>
-                    <!-- textarea -->
-                    <div class="form-group">
-                        <label for="textareaAnswer2">Answer</label>
-                        <textarea class="form-control" rows="7" placeholder="Enter your answer..." name="textareaAnswer2" id="textareaAnswer2"></textarea>
-						<span class="text-danger error-text textareaAnswer2_error"></span>
-                    </div>
+					<div class="form-group">
+						<label for="inputName2">Name</label>
+						<input type="text" class="form-control" id="inputName2" placeholder="Enter company name" name="inputName2" value="{{old('inputName2')}}">
+						<span class="text-danger error-text inputName2_error"></span>
+					</div>
+					
+					<div class="form-group">
+						<label for="inputCustomerCode2">Customer Code</label>
+						<input type="text" class="form-control" id="inputCustomerCode2" placeholder="Enter your customer code" name="inputCustomerCode2" value="{{old('inputCustomerCode2')}}">
+						<span class="text-danger error-text inputCustomerCode2_error"></span>
+					</div>
+					
+					<div class="form-group">
+						<label for="fileLogo2">Logo</label>
+						<input type="file" class="form-control" id="fileLogo2" name="fileLogo2">
+						<span class="text-danger error-text fileLogo2_error"></span>
+					</div>
 
                     <input type="hidden" name="hiddenID" id="hiddenID">
 
@@ -141,7 +144,7 @@
 @section('js')
 <script>
 	$(function(){
-		$("#insertFaqs").on('submit', function(e){
+		$("#insertDomestic").on('submit', function(e){
 			e.preventDefault();
 		
 			$.ajax({
@@ -162,7 +165,7 @@
 					} else{
 						// $('#formOptionalCompany')[0].reset();
 						toastr.success(data.msg, data.state);
-						$("#faqsModal").modal().hide();
+						$("#domesticModal").modal().hide();
 						setTimeout(function () {
 							location.reload();
 						}, 3000);
@@ -178,17 +181,16 @@
             $.ajax({
                 type:"GET",
 				data:{id:id_data},
-				url:"{{route('admin.faqs.edit')}}",
+				url:"{{route('admin.companies.domestic.edit')}}",
                 success:function(response){
-                    $("#selectCategory2").val(response.data.category);
-                    $("#inputQuestion2").val(response.data.question);
-                    $("#textareaAnswer2").val(response.data.answer);
+                    $("#inputName2").val(response.data.name);
+                    $("#inputCustomerCode2").val(response.data.customer_code);
                     $("#hiddenID").val(response.data.id);
                 }
             });
         });
 
-		$("#updateFaqs").on('submit', function(e){
+		$("#updateDomestic").on('submit', function(e){
 			e.preventDefault();
 		
 			$.ajax({
@@ -217,7 +219,36 @@
 				}
 			});
 		});
+
+		$("#uploadExcel").on('submit', function(e){
+			e.preventDefault();
+		
+			$.ajax({
+				url:$(this).attr('action'),
+				method:$(this).attr('method'),
+				data:new FormData(this),
+				processData:false,
+				dataType:'json',
+				contentType:false,
+				beforeSend:function(){
+					$(document).find('span.error-text').text('');
+				},
+				success:function(data){
+					if(data.status == 0){
+						$.each(data.error, function(prefix, val){
+							$('span.'+prefix+'_error').text(val[0]);
+						});
+					} else{
+						// $('#formOptionalCompany')[0].reset();
+						toastr.success(data.msg, data.state);
+						$("#modalExcel").modal().hide();
+						setTimeout(function () {
+							location.reload();
+						}, 3000);
+					}
+				}
+			});
+		});
 	})
 </script>
 @endsection
-

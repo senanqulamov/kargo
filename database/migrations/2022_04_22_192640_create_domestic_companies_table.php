@@ -16,7 +16,8 @@ class CreateDomesticCompaniesTable extends Migration
         Schema::create('domestic_companies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('logo');
+            $table->string('slug'); 
+            $table->string('logo')->nullable();
             $table->string('customer_code')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();

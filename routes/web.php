@@ -115,6 +115,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::post('/cargo/upload', [CargoCompanyController::class, 'upload'])->name('cargo.upload');
 
 			Route::get('/domestic', [DomesticCompanyController::class, 'index'])->name('domestic');
+			Route::post('/domestic/create', [DomesticCompanyController::class, 'create'])->name('domestic.create');
+			Route::get('/domestic/edit', [DomesticCompanyController::class, 'edit'])->name('domestic.edit');
+			Route::put('/domestic/update', [DomesticCompanyController::class, 'update'])->name('domestic.update');
 			Route::get('/domestic/delete/{id}', [DomesticCompanyController::class, 'delete'])->name('domestic.delete');
 		});	
 
