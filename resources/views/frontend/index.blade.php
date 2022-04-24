@@ -1,5 +1,7 @@
 @extends('frontend.layout.app')
 
+@section('title', 'Home')
+
 @section('content')
 <!-- First Section Start -->
 <section id="First">
@@ -16,7 +18,7 @@
             </div>
             <div class="col-lg-6">
                 <div class="right-content">
-                    <img src="./img/animation.gif" alt="">
+                    <img src="{{asset('/')}}frontend/img/animation.gif" alt="">
                 </div>
             </div>
         </div>
@@ -87,11 +89,11 @@
                     </div>
                     <div class="packing-content">
                         <ul>
-                            <li> <img src="./img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Aynı gün gösterim</li>
-                            <li> <img src="./img/tic.svg" alt=""> Takip Numarası</li>
-                            <li> <img src="./img/tic.svg" alt=""> E-posta - Chat desteği</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Aynı gün gösterim</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Takip Numarası</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> E-posta - Chat desteği</li>
                         </ul>
                     </div>
                     <div class="packing-number">
@@ -107,11 +109,11 @@
                     </div>
                     <div class="packing-content">
                         <ul>
-                            <li> <img src="./img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Aynı gün gösterim</li>
-                            <li> <img src="./img/tic.svg" alt=""> Takip Numarası</li>
-                            <li> <img src="./img/tic.svg" alt=""> E-posta - Chat desteği</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Aynı gün gösterim</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Takip Numarası</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> E-posta - Chat desteği</li>
                         </ul>
                     </div>
                     <div class="packing-number">
@@ -127,11 +129,11 @@
                     </div>
                     <div class="packing-content">
                         <ul>
-                            <li> <img src="./img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Aynı gün gösterim</li>
-                            <li> <img src="./img/tic.svg" alt=""> Takip Numarası</li>
-                            <li> <img src="./img/tic.svg" alt=""> E-posta - Chat desteği</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Aynı gün gösterim</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Takip Numarası</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> E-posta - Chat desteği</li>
                         </ul>
                     </div>
                     <div class="packing-number">
@@ -147,11 +149,11 @@
                     </div>
                     <div class="packing-content">
                         <ul>
-                            <li> <img src="./img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
-                            <li> <img src="./img/tic.svg" alt=""> Aynı gün gösterim</li>
-                            <li> <img src="./img/tic.svg" alt=""> Takip Numarası</li>
-                            <li> <img src="./img/tic.svg" alt=""> E-posta - Chat desteği</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Detaylı hasar incelemesi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Ücretsiz Fotoğraf bildirimi</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Aynı gün gösterim</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> Takip Numarası</li>
+                            <li> <img src="{{asset('/')}}frontend/img/tic.svg" alt=""> E-posta - Chat desteği</li>
                         </ul>
                     </div>
                     <div class="packing-number">
@@ -181,7 +183,7 @@
             <div class="col-lg-4">
                 <div class="services-content">
                     <div class="icon">
-                        <img src="./img/ecommerce.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/ecommerce.svg" alt="">
                     </div>
                     <div class="services-text">
                         <h4>E-Commerce Logistics</h4>
@@ -199,7 +201,7 @@
             <div class="col-lg-4">
                 <div class="services-content">
                     <div class="icon">
-                        <img src="./img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
                     </div>
                     <div class="services-text">
                         <h4>Amazon FBA</h4>
@@ -217,7 +219,7 @@
             <div class="col-lg-4">
                 <div class="services-content">
                     <div class="icon">
-                        <img src="./img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
                     </div>
                     <div class="services-text">
                         <h4>Marketplace Integration</h4>
@@ -237,7 +239,7 @@
             <div class="col-lg-4">
                 <div class="services-content">
                     <div class="icon">
-                        <img src="./img/ecommerce.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/ecommerce.svg" alt="">
                     </div>
                     <div class="services-text">
                         <h4>E-Commerce Logistics</h4>
@@ -255,7 +257,7 @@
             <div class="col-lg-4">
                 <div class="services-content">
                     <div class="icon">
-                        <img src="./img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
                     </div>
                     <div class="services-text">
                         <h4>Amazon FBA</h4>
@@ -289,7 +291,7 @@
             <div class="col-lg-4">
                 <div class="storage-card">
                     <div class="storage-img">
-                        <img src="./img/box 1.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/box 1.svg" alt="">
                     </div>
                     <div class="storage-desc">
                         <h4>Kutu</h4>
@@ -303,7 +305,7 @@
             <div class="col-lg-4">
                 <div class="storage-card">
                     <div class="storage-img">
-                        <img src="./img/store 1.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/store 1.svg" alt="">
                     </div>
                     <div class="storage-desc">
                         <h4>Raf</h4>
@@ -317,7 +319,7 @@
             <div class="col-lg-4">
                 <div class="storage-card">
                     <div class="storage-img">
-                        <img src="./img/packages 1.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/packages 1.svg" alt="">
                     </div>
                     <div class="storage-desc">
                         <h4>Palet</h4>
@@ -386,7 +388,7 @@
             <div class="col-lg-6">
                 <div class="left-global">
                     <h3>Global Logistcs</h3>
-                    <img src="./img/global.png" alt="">
+                    <img src="{{asset('/')}}frontend/img/global.png" alt="">
                 </div>
             </div>
             <div class="col-lg-6">
@@ -473,7 +475,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/car.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/car.svg" alt="">
                         <div class="count">
                             <h3 class="counter">1000000</h3><span>+</span>
                         </div>
@@ -486,7 +488,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/planet.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/planet.svg" alt="">
                         <div class="count">
                             <h3 class="counter">150</h3><span>+</span>
                         </div>
@@ -499,7 +501,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/person.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/person.svg" alt="">
                         <div class="count">
                             <h3 class="counter">50000</h3> <span>+</span>
                         </div>
@@ -512,7 +514,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/location.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/location.svg" alt="">
                         <div class="count">
                             <h3 class="counter">10</h3><span>+</span>
                         </div>
@@ -525,7 +527,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/cupa.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/cupa.svg" alt="">
                         <div class="count">
                             <h3 class="counter">99.8</h3> <span>%</span>
                         </div>
@@ -538,7 +540,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/hi.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/hi.svg" alt="">
                         <div class="count">
                             <h3 class="counter">10</h3> <span>+</span>
                         </div>
@@ -551,7 +553,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/home.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/home.svg" alt="">
                         <div class="count">
                             <h3 class="counter">20</h3> <span>+</span>
                         </div>
@@ -564,7 +566,7 @@
             <div class="col-lg-3">
                 <div class="statics-card">
                     <div class="statics-img">
-                        <img src="./img/down.svg" alt="">
+                        <img src="{{asset('/')}}frontend/img/down.svg" alt="">
                         <div class="count">
                             <h3 class="counter">70</h3> <span>%</span>
                         </div>

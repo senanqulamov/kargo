@@ -36,6 +36,21 @@ use App\Http\Controllers\TestController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/inquiry', [HomeController::class, 'inquiry'])->name('inquiry');
+Route::get('/e-commerce', [HomeController::class, 'ecommerce'])->name('e-commerce');
+Route::get('/fba', [HomeController::class, 'fba'])->name('fba');
+Route::get('/marketplace', [HomeController::class, 'marketplace'])->name('marketplace');
+Route::get('/export', [HomeController::class, 'export'])->name('export');
+Route::get('/servicesFee', [HomeController::class, 'servicesFee'])->name('servicesFee');
+Route::get('/pricecalculator', [HomeController::class, 'pricecalculator'])->name('pricecalculator');
+Route::get('/getquote', [HomeController::class, 'getquote'])->name('getquote');
+Route::get('/servcice', [HomeController::class, 'servcice'])->name('servcice');
+Route::get('/membershifee', [HomeController::class, 'membershifee'])->name('membershifee');
+Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('/track', [HomeController::class, 'track'])->name('track');
+Route::get('/career', [HomeController::class, 'career'])->name('career');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::get('/register', [HomeController::class, 'register'])->name('register');
 
 Route::post('/test', [TestController::class, 'index']);
 

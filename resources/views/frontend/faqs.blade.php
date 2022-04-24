@@ -1,5 +1,7 @@
 @extends('frontend.layout.app')
 
+@section('title', 'FAQS')
+
 @section('content')
 <!-- Blogs Section Start -->
 <section id="FAQ">

@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/responsive.css">
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/style.css">
 
-        <title>Homepage | Ship Lounge</title>
+        <title>@yield('title') | Ship Lounge</title>
         <link rel="icon" type="image/x-icon" href="{{asset('/')}}frontend/img/Shiplounge 1.ico">
     </head>
 
@@ -17,7 +17,7 @@
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="container">
-                <a class="navbar-brand" href="index.html"><img src="{{asset('/')}}frontend/img/logo.svg" alt=""></a>
+                <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('/')}}frontend/img/logo.svg" alt=""></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -28,12 +28,11 @@
                                 Services
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="e-commerce.html">E-Commerce Logistics</a></li>
-                                <li><a class="dropdown-item" href="FBA.html">Amazon FBA</a></li>
-                                <li><a class="dropdown-item" href="marketplace.html">Marketplace Integration</a></li>
-                                <li><a class="dropdown-item" href="e-export.html">Fullfilment</a></li>
-                                <li><a class="dropdown-item" href="servicesFee.html">Purchasing Service</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="{{route('e-commerce')}}">E-Commerce Logistics</a></li>
+                                <li><a class="dropdown-item" href="{{route('fba')}}">Amazon FBA</a></li>
+                                <li><a class="dropdown-item" href="{{route('marketplace')}}">Marketplace Integration</a></li>
+                                <li><a class="dropdown-item" href="{{route('export')}}">Fullfilment</a></li>
+                                <li><a class="dropdown-item" href="{{route('servicesFee')}}">Purchasing Service</a></li>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
@@ -41,27 +40,26 @@
                                 Pricing
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="pricecalculator.html">Price Calculation</a></li>
-                                <li><a class="dropdown-item" href="getquote.html">Get a Quote</a></li>
-                                <li><a class="dropdown-item" href="servicesFee.html">Service Fees</a></li>
-                                <li><a class="dropdown-item" href="membershiFee.html">Membership Plans</a></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                <li><a class="dropdown-item" href="{{route('pricecalculator')}}">Price Calculation</a></li>
+                                <li><a class="dropdown-item" href="{{route('getquote')}}">Get a Quote</a></li>
+                                <li><a class="dropdown-item" href="{{route('servcice')}}">Service Fees</a></li>
+                                <li><a class="dropdown-item" href="{{route('membershifee')}}">Membership Plans</a></li>
                             </ul>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page" href="{{route('contact')}}">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="blogs.html">Blog</a>
+                            <a class="nav-link" href="{{route('blog')}}">Blog</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('faqs')}}">FAQ</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="kargoTrack.html">Cargo Track</a>
+                            <a class="nav-link" href="{{route('track')}}">Cargo Track</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="career.html">Career</a>
+                            <a class="nav-link" href="{{route('career')}}">Career</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -69,8 +67,8 @@
                             <option>EN</option>
                             <option>TR</option>
                         </select>
-                        <button class="login-nav"><a href="login.html">Login</a></button>
-                        <button class="register-nav"><a href="register.html">Register</a></button>
+                        <button class="login-nav"><a href="{{route('login')}}">Login</a></button>
+                        <button class="register-nav"><a href="{{route('register')}}">Register</a></button>
                     </form>
                 </div>
             </div>

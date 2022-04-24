@@ -1,5 +1,7 @@
 @extends('frontend.layout.app')
 
+@section('title', 'Contact')
+
 @section('content')
 <!-- Contact Us Start -->
 <section id="Contact-us">
