@@ -19,7 +19,7 @@ use App\Http\Controllers\admin\{
 	AdditionalServiceController,
 };
 use App\Http\Controllers\MessageController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\CareerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,6 @@ use App\Http\Controllers\TestController;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
-Route::get('/inquiry', [HomeController::class, 'inquiry'])->name('inquiry');
 Route::get('/e-commerce', [HomeController::class, 'ecommerce'])->name('e-commerce');
 Route::get('/fba', [HomeController::class, 'fba'])->name('fba');
 Route::get('/marketplace', [HomeController::class, 'marketplace'])->name('marketplace');
@@ -44,15 +43,24 @@ Route::get('/export', [HomeController::class, 'export'])->name('export');
 Route::get('/servicesFee', [HomeController::class, 'servicesFee'])->name('servicesFee');
 Route::get('/pricecalculator', [HomeController::class, 'pricecalculator'])->name('pricecalculator');
 Route::get('/getquote', [HomeController::class, 'getquote'])->name('getquote');
-Route::get('/servcice', [HomeController::class, 'servcice'])->name('servcice');
+Route::get('/service', [HomeController::class, 'servcice'])->name('servcice');
 Route::get('/membershifee', [HomeController::class, 'membershifee'])->name('membershifee');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/track', [HomeController::class, 'track'])->name('track');
-Route::get('/career', [HomeController::class, 'career'])->name('career');
 Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/register', [HomeController::class, 'register'])->name('register');
 
-Route::post('/test', [TestController::class, 'index']);
+Route::prefix('careers')->name('careers.')->group(function(){
+	Route::get('/', [CareerController::class, 'index'])->name('index');
+	Route::get('/fetch', [CareerController::class, 'fetch'])->name('fetch');
+	Route::get('/apply/{id}', [CareerController::class, 'apply'])->name('apply');
+	Route::post('/apply/{id}', [CareerController::class, 'postApply'])->name('postApply');
+});
+
+Route::get('generate', function (){
+    \Illuminate\Support\Facades\Artisan::call('storage:link');
+    echo 'ok';
+});
 
 // admin section
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -80,8 +88,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// order
 		Route::prefix('orders/')->name('orders.')->group(function(){
-			Route::get('/manuel', [ManuelOrderController::class, 'index'])->name('manuel');
-			Route::get('/bulk', [UserController::class, 'index'])->name('bulk');
+			Route::get('/', [ManuelOrderController::class, 'index'])->name('index');
 		});
 		
 		// messages
@@ -136,13 +143,29 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		// warehouses
 		Route::prefix('warehouses/')->name('warehouses.')->group(function(){
 			Route::get('/', [WarehouseController::class, 'index'])->name('index');
-			Route::get('/delete/{id}', [WarehouseController::class, 'delete'])->name('delete');
-		});
+			Route::post('/warehouses/create', [WarehouseController::class, 'create'])->name('warehouses.create');
+			Route::get('/warehouses/edit', [WarehouseController::class, 'edit'])->name('warehouses.edit');
+			Route::put('/warehouses/update', [WarehouseController::class, 'update'])->name('warehouses.update');
+			Route::get('/warehouses/delete/{id}', [WarehouseController::class, 'delete'])->name('warehouses.delete');
+		});	
 
 		// additional service
 		Route::prefix('services/')->name('services.')->group(function(){
 			Route::get('/', [AdditionalServiceController::class, 'index'])->name('index');
-			Route::get('/delete/{id}', [AdditionalServiceController::class, 'delete'])->name('delete');
-		});
+			Route::post('/services/create', [AdditionalServiceController::class, 'create'])->name('services.create');
+			Route::get('/services/edit', [AdditionalServiceController::class, 'edit'])->name('services.edit');
+			Route::put('/services/update', [AdditionalServiceController::class, 'update'])->name('services.update');
+			Route::get('/services/delete/{id}', [AdditionalServiceController::class, 'delete'])->name('services.delete');
+		});	
+		
+		// careers
+		Route::prefix('human')->name('human.')->group(function(){
+			Route::prefix('careers')->name('careers.')->group(function(){
+				Route::get('/', [CareerController::class, 'indexAdmin'])->name('index');
+				Route::get('/show/{id}', [CareerController::class, 'showAdmin'])->name('show');
+				Route::get('/download/{filename}', [CareerController::class, 'downloadAdmin'])->name('download');
+				Route::post('/create', [CareerController::class, 'createAdmin'])->name('create');
+			});
+		});		
 	});    
 });

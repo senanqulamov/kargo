@@ -73,17 +73,20 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
+                        @if(count($careers) > 0)
+						@foreach($careers as $career)
                         <div class="jobs-card">
                             <div class="row  align-items-center">
                                 <div class="col-lg-8">
                                     <div class="nameJobs">
-                                        <h3><i class="fas fa-briefcase"></i> Software Developing Expert</h2>
-                                            <span><i class="fas fa-map-marker-alt"></i> Istanbul</span>
+                                        <h3><i class="fas fa-briefcase"></i> {{$career->title}}</h2>
+                                        @php ($location = DB::table('countries')->where('id', $career->location)->first() )
+                                        <span><i class="fas fa-map-marker-alt"></i> {{$location->name}}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="applyBtn">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#Apply">Apply Now</button>
+                                        <button type="button" data-id="{{$career->id}}" class="edit_btn">Apply Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -91,96 +94,15 @@
                             <div class="row my-3">
                                 <div class="col-lg-6">
                                     <div class="tagsJobs">
-                                        <button>Full Time</button>
-                                        <button>Min, 1 Year</button>
-                                        <button>22/04/2022</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="socialJobs">
-                                        <div class="footer-social">
-                                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                                            <a href=""><i class="fab fa-instagram"></i></a>
-                                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                            <a href=""><i class="fab fa-twitter"></i></a>
-                                            <a href=""><i class="fab fa-youtube"></i></a>
-                                        </div>
+                                        <button>{{$career->getTypeAttribute()}}</button>
+                                        <button>Min, {{$career->experience}}</button>                                        
+                                        <button>{{ date('d/m/Y', strtotime($career->finish_time)) }}</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="jobs-card">
-                            <div class="row  align-items-center">
-                                <div class="col-lg-8">
-                                    <div class="nameJobs">
-                                        <h3><i class="fas fa-briefcase"></i> Software Developing Expert</h2>
-                                            <span><i class="fas fa-map-marker-alt"></i> Istanbul</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="applyBtn">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#Apply">Apply Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row my-3">
-                                <div class="col-lg-6">
-                                    <div class="tagsJobs">
-                                        <button>Full Time</button>
-                                        <button>Min, 1 Year</button>
-                                        <button>22/04/2022</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="socialJobs">
-                                        <div class="footer-social">
-                                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                                            <a href=""><i class="fab fa-instagram"></i></a>
-                                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                            <a href=""><i class="fab fa-twitter"></i></a>
-                                            <a href=""><i class="fab fa-youtube"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="jobs-card">
-                            <div class="row  align-items-center">
-                                <div class="col-lg-8">
-                                    <div class="nameJobs">
-                                        <h3><i class="fas fa-briefcase"></i> Software Developing Expert</h2>
-                                            <span><i class="fas fa-map-marker-alt"></i> Istanbul</span>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="applyBtn">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#Apply">Apply Now</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row my-3">
-                                <div class="col-lg-6">
-                                    <div class="tagsJobs">
-                                        <button>Full Time</button>
-                                        <button>Min, 1 Year</button>
-                                        <button>22/04/2022</button>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="socialJobs">
-                                        <div class="footer-social">
-                                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                                            <a href=""><i class="fab fa-instagram"></i></a>
-                                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                                            <a href=""><i class="fab fa-twitter"></i></a>
-                                            <a href=""><i class="fab fa-youtube"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+						@endforeach
+                        @endif
                     </div>
                 </div>
             </div>
@@ -191,38 +113,45 @@
 
 
 <!-- Modal Apply  Start -->
-<!-- Modal -->
+@if(count($careers) > 0)
 <div class="modal fade" id="Apply" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Software Developing Expert</h5>
+                <h5 class="modal-title titleClass" id="exampleModalLabel"></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="vacancyContent">
-                    <ul>
-                        <li>Proficient in PHP language</li>
-                        <li>Experienced in MySQL database management and optimization</li>
-                        <li>Developed a project using the Vue Javascript framework or has knowledge in this field</li>
-                        <li>Experienced in MySQL database management and optimization</li>
-                        <li>Experienced in MySQL database management and optimization</li>
-                        <li>Experienced in MySQL database management and optimization</li>
-                        <li>Experienced in MySQL database management and optimization</li>
-                    </ul>
-                    <ul>
-                        <span>Job Description</span>
-                        <li>Taking an active role in ongoing and newly developed projects</li>
-                        <li>Taking an active role in ongoing and newly developed projects</li>
-                        <li>Taking an active role in ongoing and newly developed projects</li>
-                    </ul>
-                </div>
+                <div class="vacancyContent"></div>
             </div>
             <div class="modal-footer">
-                <a href="anket.html"><button type="button" data-bs-dismiss="modal">Apply Now</button></a>
+                <a href="#" class="urlCareer"><button type="button" data-bs-dismiss="modal">Apply Now</button></a>
             </div>
         </div>
     </div>
 </div>
 <!-- Modal Apply  End -->
+@endif
+@endsection
+
+@section('js')
+<script>
+	$(function(){
+		$(".edit_btn").click(function(){
+            var id_data=$(this).attr('data-id');
+            $("#Apply").modal('show');
+
+            $.ajax({
+                type:"GET",
+				data:{id:id_data},
+				url:"{{route('careers.fetch')}}",
+                success:function(response){
+                    $(".vacancyContent").html(response.data.description);
+                    $(".titleClass").html(response.data.title);
+                    $(".urlCareer").attr("href", "{{route('careers.apply', '')}}"+"/"+response.data.id);
+                }
+            });
+        });
+	});
+</script>
 @endsection

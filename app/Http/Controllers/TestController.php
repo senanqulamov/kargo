@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class TestController extends Controller
 {
     public function index(Request $request){
-       dd($request->all());
+       return response()->json(['status' => 1, 'data'=> $request->all()], 200);
     }
 }

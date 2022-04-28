@@ -22,7 +22,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Category</th>
+                            <th>Title</th>
                             <th>Questions</th>
                             <th>Answers</th>
                             <th style="width:150px"></th>
@@ -31,7 +31,7 @@
                     <tbody>
 					@foreach($warehouses as $warehouse)
 					<tr>
-						<td>{{$warehouse->question}}</td>
+						<td>{{$warehouse->title}}</td>
 						<td class="text-center">
 							<button type="button" class="btn btn-primary edit_btn" value="{{$warehouse->id}}"><i class="fas fa-edit"></i></button>
 							<a href="{{route('admin.warehouse.delete', $warehouse->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>

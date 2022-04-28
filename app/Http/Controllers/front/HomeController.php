@@ -19,10 +19,6 @@ class HomeController extends Controller
         return view('frontend.contact');
     }
 
-    public function inquiry(){
-        return view('frontend.inquiry');
-    }
-
     public function ecommerce(){
         return view('frontend.e-commerce');
     }
@@ -65,10 +61,6 @@ class HomeController extends Controller
 
     public function track(){
         return view('frontend.track');
-    }
-
-    public function career(){
-        return view('frontend.career');
     }
 
     public function login(){

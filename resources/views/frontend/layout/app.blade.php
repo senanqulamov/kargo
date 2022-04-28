@@ -4,6 +4,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/responsive.css">
@@ -11,6 +12,8 @@
 
         <title>@yield('title') | Ship Lounge</title>
         <link rel="icon" type="image/x-icon" href="{{asset('/')}}frontend/img/Shiplounge 1.ico">
+		
+		@yield('css')
     </head>
 
     <body>
@@ -59,7 +62,7 @@
                             <a class="nav-link" href="{{route('track')}}">Cargo Track</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('career')}}">Career</a>
+                            <a class="nav-link" href="{{route('careers.index')}}">Career</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -147,7 +150,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.counterup/1.0/jquery.counterup.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/jquery.counterup/1.0/jquery.counterup.min.js"></script>        
         <script src="{{asset('/')}}frontend/resources/app.js"></script>
+		
+		@yield('js')
     </body>
 </html>

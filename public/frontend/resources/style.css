@@ -2801,6 +2801,42 @@
             border: 1px solid #FF8D47;
         }
         /* Anket End */
+        /* 404 start */
+        
+        #Error .error {
+            margin: auto;
+            width: 50%;
+        }
+        
+        #Error .error img {
+            width: 60%;
+        }
+        
+        #Error .errorMessage {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-radius: 20px;
+            padding: 10px;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        #Error .errorMessage {
+            color: #324970;
+            box-shadow: 0px 4px 10px 0px #00000026;
+        }
+        
+        #Error .errorMessage h1 {
+            font-weight: 700;
+            font-size: 64px;
+        }
+        
+        #Error .errorMessage h2 {
+            font-weight: 500;
+            font-size: 44px;
+        }
+        /* 404 end */
         /* Footer Start */
         
         footer {

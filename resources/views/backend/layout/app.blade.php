@@ -7,6 +7,7 @@
         @php ($user = DB::table('users')->where('id', session()->get('Profile'))->first() )
 
         @php ($message = DB::table('messages')->where('status', '1')->get() )
+        @php ($career_applies = DB::table('career_applies')->where('status', '2')->get() )
 
         <title>Cargo | @yield('title')</title>
         <link rel="icon" type="image/x-icon" href="{{asset('/')}}backend/assets/img/favicon.png">
@@ -14,9 +15,9 @@
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.css">
         <!-- Toastr -->
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.css">        
+        <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/fontawesome-free/css/all.min.css">
         @yield('css')
         <!-- Theme style -->
@@ -55,15 +56,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown" >
                             <i class="far fa-bell"></i>
-                            <span class="badge badge-warning navbar-badge">{{count($message)}}</span>
+                            <span class="badge badge-warning navbar-badge">{{count($message)+count($career_applies)}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <span class="dropdown-item dropdown-header">{{count($message)}} Notifications</span>
+                            <span class="dropdown-item dropdown-header">{{count($message)+count($career_applies)}} Notifications</span>
                             <div class="dropdown-divider"></div>
 
                             @if( count($message) > 0)
                             <a href="{{route('admin.messages.inbox')}}" class="dropdown-item">
                                 <i class="fas fa-envelope mr-2"></i> {{count($message)}} new messages
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            @endif
+
+                            @if( count($career_applies) > 0)
+                            <a href="{{route('admin.human.careers.index')}}" class="dropdown-item">
+                                <i class="fas fa-envelope mr-2"></i> {{count($career_applies)}} new cv
                             </a>
                             <div class="dropdown-divider"></div>
                             @endif
@@ -124,27 +132,32 @@
                                     <i class="nav-icon fas fa-users"></i>
                                     <p> Users </p>
                                 </a>
-                            </li>                                                       
-                            <li class="nav-item @if(Request::segment(2) == 'orders') menu-open @endif">
-                                <a href="#" class="nav-link @if(Request::segment(2) == 'orders') active @endif">
-                                    <i class="nav-icon fas fa-file-alt"></i>
-                                    <p>Orders Manager <i class="right fas fa-angle-left"></i></p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.orders.manuel')}}" class="nav-link @if(Request::segment(3) == 'manuel') active @endif">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Manuel Order</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="{{route('admin.orders.bulk')}}" class="nav-link @if(Request::segment(3) == 'bulk') active @endif">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Bulk Order</p>
-                                        </a>
-                                    </li>
-                                </ul>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.orders.index')}}" class="nav-link @if(Request::segment(2) == 'orders') active @endif">                                    
+                                    <i class="nav-icon fas fa-file-alt"></i>
+                                    <p> Orders Manager</p>
+                                </a>
+                            </li>
+                            <li class="nav-item @if(Request::segment(2) == 'human') menu-open @endif">
+								<a href="#" class="nav-link  @if(Request::segment(2) == 'human') active @endif">
+                                <i class="nav-icon fas fa-user-shield"></i>
+									<p>
+                                        Human Resources
+										<i class="fas fa-angle-left right"></i>
+                                        <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
+									</p>
+								</a> 
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="{{route('admin.human.careers.index')}}" class="nav-link @if(Request::segment(3) == 'careers') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Careers</p>
+                                            <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
+										</a>
+									</li>
+								</ul>
+							</li>
 							<li class="nav-item @if(Request::segment(2) == 'messages') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'messages') active @endif">
 									<i class="nav-icon far fa-envelope"></i>
