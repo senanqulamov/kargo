@@ -14,210 +14,23 @@
             </div>
         </div>
         <div class="row my-5">
+            @foreach($blogs as $blog)
             <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
+                <a href="{{route('blogs.detail', Str::slug($blog->title, '-'))}}">
                     <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog1.png" alt="">
+                        <img src="{{asset('/')}}frontend/img/blog/{{$blog->img}}" alt="">
                         <div class="text-blog">
-                            <h4>Choose your description!</h4>
+                            <h4>{{$blog->title}}</h4>
                             <div class="dateTime">
                                 <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
+                                <span>{{ date('d.m.Y H:i', strtotime($blog->created_at)) }}</span>
                             </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
+                            {!! Str::limit($blog->description, 250, ' ...') !!}
                         </div>
                     </div>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog2.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog3.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog4.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog5.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog6.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog1.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog2.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog3.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog4.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog5.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
-                <a href="blog.html">
-                    <div class="blog-card">
-                        <img src="{{asset('/')}}frontend/img/blog6.png" alt="">
-                        <div class="text-blog">
-                            <h4>Choose your description!</h4>
-                            <div class="dateTime">
-                                <i class="fal fa-calendar-alt"></i>
-                                <span>02.12.2021</span>
-                                <span>16:34</span>
-                            </div>
-                            <p>Packages of customers who choose the delivery tariff to the address will be delivered directly from the external warehouse to the address specified by the customer. That is, our customers who regularly use our courier service
-                                will be able to receive ...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>

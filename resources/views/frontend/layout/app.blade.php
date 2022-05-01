@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+    @php ($data = DB::table('companies')->where('status', 1)->first() )    
 
     <head>
         <meta charset="utf-8">
@@ -10,8 +11,9 @@
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/responsive.css">
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/style.css">
 
-        <title>@yield('title') | Ship Lounge</title>
-        <link rel="icon" type="image/x-icon" href="{{asset('/')}}frontend/img/Shiplounge 1.ico">
+        <title>@yield('title') | {{$data->title}}</title>
+        @php ($favico = DB::table('configs')->where('key', 'favicon')->first() )
+        <link rel="icon" type="image/x-icon" href="{{asset('/')}}frontend/img/{{$favico->value}}">
 		
 		@yield('css')
     </head>
@@ -20,7 +22,8 @@
         <!-- Navbar Start -->
         <nav class="navbar navbar-expand-lg navbar-light ">
             <div class="container">
-                <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('/')}}frontend/img/logo.svg" alt=""></a>
+                @php ($logo = DB::table('configs')->where('key', 'logo')->first() )
+                <a class="navbar-brand" href="{{route('index')}}"><img src="{{asset('/')}}frontend/img/{{$logo->value}}" alt="{{$data->title}}"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -50,19 +53,19 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{{route('contact')}}">Contact</a>
+                            <a class="nav-link @if(Request::segment(1) == 'contact') active @endif" aria-current="page" href="{{route('contact')}}">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('blog')}}">Blog</a>
+                            <a class="nav-link @if(Request::segment(1) == 'blogs') active @endif" href="{{route('blogs.index')}}">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('faqs')}}">FAQ</a>
+                            <a class="nav-link @if(Request::segment(1) == 'faqs') active @endif" href="{{route('faqs')}}">FAQ</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{route('track')}}">Cargo Track</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{route('careers.index')}}">Career</a>
+                            <a class="nav-link @if(Request::segment(1) == 'careers') active @endif" href="{{route('careers.index')}}">Career</a>
                         </li>
                     </ul>
                     <form class="d-flex">
@@ -88,7 +91,7 @@
                         <div class="footer-content">
                             <ul>
                                 About Us
-                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad magna aliqua. Ut enim ad</li>
+                                <li>{{$data->description}}</li>
                             </ul>
                         </div>
                     </div>
@@ -105,7 +108,8 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="footer-logo">
-                            <img src="{{asset('/')}}frontend/img/footerLogo.svg" alt="">
+                            @php ($footer_logo = DB::table('configs')->where('key', 'footer_logo')->first() ) 
+                            <img src="{{asset('/')}}frontend/img/{{$footer_logo->value}}" alt="">
                             <div class="footer-social">
                                 <a href=""><i class="fab fa-facebook-f"></i></a>
                                 <a href=""><i class="fab fa-instagram"></i></a>

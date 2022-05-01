@@ -1,6 +1,13 @@
 @extends('frontend.layout.app')
 
+@php ($data = DB::table('companies')->where('status', 1)->first() ) 
+
 @section('title', 'Contact')
+
+@section('css')
+<!-- Toastr -->
+<link rel="stylesheet" href="{{asset('/')}}frontend/plugin/toastr/toastr.min.css"> 
+@endsection
 
 @section('content')
 <!-- Contact Us Start -->
@@ -15,7 +22,7 @@
             </div>
         </div>
         <div class="row contact-box align-items-center">
-            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
                 <div class="row contactSection">
                     <div class="col-lg-3">
                         <div class="contac-div">
@@ -26,13 +33,13 @@
                         <div class="contact-text">
                             <div class="contact-text">
                                 <h5>Our Address:</h5>
-                                <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</span>
+                                <span>{{$data->address}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
                 <div class="row contactSection">
                     <div class="col-lg-3">
                         <div class="contac-div">
@@ -42,12 +49,12 @@
                     <div class="col-lg-9">
                         <div class="contact-text">
                             <h5>E-mail:</h5>
-                            <span>support@shiplounge.co </span>
+                            <span>{{$data->email}}</span>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+            <div class="col-lg-4 col-md-6 col-sm-12 col-12">
                 <div class="row contactSection">
                     <div class="col-lg-3">
                         <div class="contac-div">
@@ -57,24 +64,7 @@
                     <div class="col-lg-9">
                         <div class="contact-text">
                             <h5>Phone:</h5>
-                            <span>+908508404182</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-                <div class="row contactSection">
-                    <div class="col-lg-3">
-                        <div class="contac-div">
-                            <i class="fal fa-clock"></i>
-                        </div>
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="contact-text">
-                            <h5>Hours:</h5>
-                            <span>Monday-Friday: 9:00 - 18:00</span>
-                            <span>Saturday: 9:00 - 14:30</span>
-                            <span>Sunday: Closed</span>
+                            <span>{{$data->phone}}</span>
                         </div>
                     </div>
                 </div>
@@ -98,41 +88,51 @@
         </div>
         <div class="row my-5 ">
             <div class="col-lg-6">
-                <form action="">
+                <form action="{{route('contactPost')}}" method="POST" autocomplete="off" id="formApply">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="text" name="" id="" placeholder="Name">
+                            <input type="text" name="name" placeholder="Name" value="{{ old('name') }}">
+                            <span class="text-danger error-text name_error"></span>
                         </div>
                         <div class="col-lg-6">
-                            <input type="text" name="" id="" placeholder="Surname">
+                            <input type="text" name="surname" placeholder="Surname" value="{{ old('surname') }}">
+                            <span class="text-danger error-text surname_error"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <input type="email" name="" id="" placeholder="Email">
+                            <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                            <span class="text-danger error-text email_error"></span>
                         </div>
                         <div class="col-lg-6">
-                            <input type="number" name="" id="" placeholder="Phone">
+                            <input type="number" name="phone" placeholder="Phone" value="{{ old('phone') }}">
+                            <span class="text-danger error-text phone_error"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
-                            <select name="" id="">
+                            <select name="service">
                                 <option value="">Choose a service</option>
-                                <option value=""></option>
+                                @foreach($services as $service)
+                                <option value="{{$service->id}}">{{$service->title}}</option>
+                                @endforeach
                             </select>
+                            <span class="text-danger error-text service_error"></span>
                         </div>
                         <div class="col-lg-6">
-                            <input type="text" name="" id="" placeholder="Subject heading">
+                            <input type="text" name="subject" placeholder="Subject heading">
+                            <span class="text-danger error-text subject_error"></span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <textarea name="" id="" cols="30" rows="10" placeholder="Your message"></textarea>
+                            <textarea name="message" cols="30" rows="10" placeholder="Your message"></textarea>
+                            <span class="text-danger error-text message_error"></span>
                         </div>
                         <div class="col-lg-12">
                             <div class="forms-send-button">
-                                <button>Send</button>
+                                <button type="submit">Send</button>
                             </div>
                         </div>
                     </div>
@@ -149,98 +149,7 @@
 </section>
 <!-- Contact Forms End -->
 
-<!-- FAQ Start -->
-<section id="Faq">
-    <div class="container">
-        <div class="row my-5" style="text-align: center;">
-            <div class="col-lg-12">
-                <div class="faq-title">
-                    <h2>Frequently Asked Questions (FAQ)</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </button>
-                        </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just
-                                filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </button>
-                        </h2>
-                        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </button>
-                        </h2>
-                        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
-                        </div>
-                    </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        </button>
-                        </h2>
-                        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the third item's accordion body. Nothing more exciting happening here in terms of content, but just
-                                filling up the space to make it look, at least at first glance, a bit more representative of how this would look in a real-world application.</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row my-3">
-            <div class="col-lg-12">
-                <div class="more">
-                    <a href="">More</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- FAQ End -->
+@include('frontend.partials.faqs')
 
 <!-- Our Location Start -->
 <section id="OurLocation">
@@ -347,4 +256,41 @@
     </div>
 </section>
 <!-- Our Location End -->
+@endsection
+
+@section('js')
+<!-- Toastr -->
+<script src="{{asset('/')}}frontend/plugin/toastr/toastr.min.js"></script>
+
+<script>
+	$(function(){		
+		$("#formApply").on('submit', function(e){
+			e.preventDefault();
+		
+			$.ajax({
+				url:$(this).attr('action'),
+				method:$(this).attr('method'),
+				data:new FormData(this),
+				processData:false,
+				dataType:'json',
+				contentType:false,
+				beforeSend:function(){
+					$(document).find('span.error-text').text('');
+				},
+				success:function(data){
+					if(data.status == 0){
+						$.each(data.error, function(prefix, val){
+							$('span.'+prefix+'_error').text(val[0]);
+						});
+					} else{
+                        toastr.success(data.msg, data.state);
+						setTimeout(function () {
+							location.reload();
+						}, 3000);
+					}
+				}
+			});
+		});
+	});
+</script>
 @endsection

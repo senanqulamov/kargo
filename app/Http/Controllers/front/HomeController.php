@@ -11,14 +11,6 @@ class HomeController extends Controller
         return view('frontend.index');
     }
 
-    public function faqs(){
-        return view('frontend.faqs');
-    }
-
-    public function contact(){
-        return view('frontend.contact');
-    }
-
     public function ecommerce(){
         return view('frontend.e-commerce');
     }
@@ -47,16 +39,12 @@ class HomeController extends Controller
         return view('frontend.getquote');
     }
 
-    public function servcice(){
-        return view('frontend.servcice-fee');
+    public function service(){
+        return view('frontend.services-fee');
     }
 
     public function membershifee(){
         return view('frontend.membershifee');
-    }
-
-    public function blog(){
-        return view('frontend.blog');
     }
 
     public function track(){

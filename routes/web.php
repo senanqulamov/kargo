@@ -20,6 +20,7 @@ use App\Http\Controllers\admin\{
 };
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,8 +35,9 @@ use App\Http\Controllers\CareerController;
 
 // front section
 Route::get('/', [HomeController::class, 'index'])->name('index');
-Route::get('/faqs', [HomeController::class, 'faqs'])->name('faqs');
-Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/faqs', [FaqsController::class, 'indexFront'])->name('faqs');
+Route::get('/contact', [MessageController::class, 'indexFront'])->name('contact');
+Route::post('/contact', [MessageController::class, 'indexFrontPost'])->name('contactPost');
 Route::get('/e-commerce', [HomeController::class, 'ecommerce'])->name('e-commerce');
 Route::get('/fba', [HomeController::class, 'fba'])->name('fba');
 Route::get('/marketplace', [HomeController::class, 'marketplace'])->name('marketplace');
@@ -55,6 +57,11 @@ Route::prefix('careers')->name('careers.')->group(function(){
 	Route::get('/fetch', [CareerController::class, 'fetch'])->name('fetch');
 	Route::get('/apply/{id}', [CareerController::class, 'apply'])->name('apply');
 	Route::post('/apply/{id}', [CareerController::class, 'postApply'])->name('postApply');
+});
+
+Route::prefix('blogs')->name('blogs.')->group(function(){
+	Route::get('/', [BlogController::class, 'index'])->name('index');
+	Route::get('/{slug}', [BlogController::class, 'detail'])->name('detail');
 });
 
 Route::get('generate', function (){
@@ -166,6 +173,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
 				Route::get('/download/{filename}', [CareerController::class, 'downloadAdmin'])->name('download');
 				Route::post('/create', [CareerController::class, 'createAdmin'])->name('create');
 			});
-		});		
+		});	 
 	});    
 });

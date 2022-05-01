@@ -140,4 +140,9 @@ class FaqsController extends Controller
 			return redirect()->route('admin.faqs.categories.index');
 		}        
     }
+
+    public function indexFront()
+    {
+        return view('frontend.faqs');
+    }
 }
