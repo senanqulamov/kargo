@@ -34,7 +34,7 @@
                     <tbody>
 					@foreach($faqs as $faq)
 					<tr>
-						@php $faqs_title=DB::table('faqs_categories')->where('id', $faq->category)->first() @endphp
+						@php $faqs_title=DB::table('faqs_categories')->where('id', $faq->categoryID)->first() @endphp
 						<td>{{$faqs_title->title}}</td>
 						<td>{{$faq->question}}</td>
 						<td>{{$faq->answer}}</td>
@@ -81,6 +81,16 @@
 						<label for="inputQuestion">Question</label>
 						<input type="text" class="form-control" id="inputQuestion" placeholder="Enter your question" name="inputQuestion" value="{{old('inputQuestion')}}">
 						<span class="text-danger error-text inputQuestion_error"></span>
+					</div>
+					<!-- select -->
+					<div class="form-group">
+						<label for="selectLocation">Location</label>
+						<select class="form-control" name="selectLocation" id="selectLocation">
+							<option value="">Choose Location</option>
+							<option value="left" {{ old("selectLocation") == "left" ? "selected" : "" }} >Left</option>
+							<option value="right" {{ old("selectLocation") == "right" ? "selected" : "" }} >Right</option>
+						</select>
+						<span class="text-danger error-text selectLocation_error"></span>
 					</div>
 					<!-- textarea -->
 					<div class="form-group">
@@ -129,6 +139,16 @@
                         <input type="text" class="form-control" id="inputQuestion2" placeholder="Enter your question" name="inputQuestion2">
 						<span class="text-danger error-text inputQuestion2_error"></span>
                     </div>
+					<!-- select -->
+					<div class="form-group">
+						<label for="selectLocation2">Location</label>
+						<select class="form-control" name="selectLocation2" id="selectLocation2">
+							<option value="">Choose Location</option>
+							<option value="left" {{ old("selectLocation2") == "left" ? "selected" : "" }} >Left</option>
+							<option value="right" {{ old("selectLocation2") == "right" ? "selected" : "" }} >Right</option>
+						</select>
+						<span class="text-danger error-text selectLocation2_error"></span>
+					</div>
                     <!-- textarea -->
                     <div class="form-group">
                         <label for="textareaAnswer2">Answer</label>
@@ -192,9 +212,10 @@
 				data:{id:id_data},
 				url:"{{route('admin.faqs.edit')}}",
                 success:function(response){
-                    $("#selectCategory2").val(response.data.category);
+                    $("#selectCategory2").val(response.data.categoryID);
                     $("#inputQuestion2").val(response.data.question);
                     $("#textareaAnswer2").val(response.data.answer);
+					$("#selectLocation2").val(response.data.location);
                     $("#hiddenID").val(response.data.id);
                 }
             });

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 use App\Models\AdditionalService;
 
+use Validator;
+use Illuminate\Support\Str;
+
 class AdditionalServiceController extends Controller
 {
     public function index(){
@@ -17,24 +20,19 @@ class AdditionalServiceController extends Controller
 	public function create(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'inputName' => 'required|min:3|max:225',
-            'inputCustomerCode' => 'required|min:3|max:225',
-            'fileLogo' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:10000'
+            'inputTitle' => 'required|min:3|max:225',
+            'selectType' => 'required',
+            'inputPrice' => 'required|max:1500|numeric'
         ]);
 
         if(!$validator->passes()){
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
             $services=new AdditionalService;
-            $services->name=$request->inputName;
-            $services->slug=Str::slug($request->inputName, '-');
-            $services->customer_code=$request->inputCustomerCode;
-
-            if($request->hasFile('fileLogo')){
-                $image = time().'.'.$request->fileLogo->extension();
-                $request->fileLogo->move(public_path('backend/assets/img/companies/domestic'), $image);
-                $services->logo=$image;
-            }
+            $services->title=$request->inputTitle;
+            $services->slug=Str::slug($request->inputTitle, '-');
+            $services->status=$request->selectType;
+            $services->price=$request->inputPrice;
             
             $services->save();
 
@@ -55,28 +53,22 @@ class AdditionalServiceController extends Controller
     public function update(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'inputName2' => 'required|min:3|max:225',
-            'inputCustomerCode2' => 'required|min:3|max:225',
-            'fileLogo2' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:10000'
+            'inputTitle2' => 'required|min:3|max:225',
+            'selectType2' => 'required',
+            'inputPrice2' => 'required|max:1500|numeric'
         ]);
 
         if(!$validator->passes()){
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
 
-            $faqs_id=$request->input('hiddenID');
+            $id=$request->input('hiddenID');
 
-            $services=AdditionalService::find($faqs_id);
-            $services->name=$request->inputName2;
-            $services->slug=Str::slug($request->inputName2, '-');
-
-            if($request->hasFile('fileLogo2')){
-                $image = time().'.'.$request->fileLogo2->extension();
-                $request->fileLogo2->move(public_path('backend/assets/img/companies/cargo'), $image);
-                $cargo->logo=$image;
-            }
-            
-            $services->customer_code=$request->inputCustomerCode2;
+            $services=AdditionalService::find($id);
+            $services->title=$request->inputTitle2;
+            $services->slug=Str::slug($request->inputTitle2, '-');
+            $services->status=$request->selectType2;
+            $services->price=$request->inputPrice2;
             $services->update();
 
             return response()->json(['status'=>1, 'msg'=>'Services company has been successfully updated', 'state'=>'Congratulations!']);
@@ -84,17 +76,8 @@ class AdditionalServiceController extends Controller
     }
 
     public function delete($id){
-
-        $image = AdditionalService::findOrFail($id);
-        $file= $image->image;
-
-        $filename = public_path('backend/assets/img/companies/cargo').$file;
-        if(file_exists($filename)){
-            @unlink($filename);
-        }     
-
         AdditionalService::where('id', $id)->delete();
         toastr()->success('Services company was successfully deleted', 'Congratulations!');
-        return redirect()->route('admin.companies.services');
+        return redirect()->route('admin.services.index');
     }
 }

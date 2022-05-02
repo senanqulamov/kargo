@@ -19,7 +19,6 @@ class CreateBlogsTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->string('img');
-            $table->integer('status')->comment('1 => active, 2 => passive')->default(2);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

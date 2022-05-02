@@ -139,25 +139,7 @@
                                     <p> Orders Manager</p>
                                 </a>
                             </li>
-                            <li class="nav-item @if(Request::segment(2) == 'human') menu-open @endif">
-								<a href="#" class="nav-link  @if(Request::segment(2) == 'human') active @endif">
-                                <i class="nav-icon fas fa-user-shield"></i>
-									<p>
-                                        Human Resources
-										<i class="fas fa-angle-left right"></i>
-                                        <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
-									</p>
-								</a> 
-								<ul class="nav nav-treeview">
-									<li class="nav-item">
-										<a href="{{route('admin.human.careers.index')}}" class="nav-link @if(Request::segment(3) == 'careers') active @endif">
-											<i class="far fa-circle nav-icon"></i>
-											<p>Careers</p>
-                                            <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
-										</a>
-									</li>
-								</ul>
-							</li>
+                            
 							<li class="nav-item @if(Request::segment(2) == 'messages') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'messages') active @endif">
 									<i class="nav-icon far fa-envelope"></i>
@@ -173,6 +155,12 @@
 											<i class="far fa-circle nav-icon"></i>
 											<p>Inbox</p>
                                             <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+                                    <li class="nav-item">
+										<a href="{{route('admin.messages.settings.index')}}" class="nav-link @if(Request::segment(3) == 'settings') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Settings</p>
 										</a>
 									</li>
 								</ul>
@@ -225,7 +213,32 @@
                                     <i class="nav-icon fas fa-university"></i>
                                     <p> Branches </p>
                                 </a>
-                            </li>						
+                            </li>
+                            <li class="nav-item @if(Request::segment(2) == 'human') menu-open @endif">
+								<a href="#" class="nav-link  @if(Request::segment(2) == 'human') active @endif">
+                                <i class="nav-icon fas fa-user-shield"></i>
+									<p>
+                                        Human Resources
+										<i class="fas fa-angle-left right"></i>
+                                        <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
+									</p>
+								</a> 
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="{{route('admin.human.careers.index')}}" class="nav-link @if(Request::segment(3) == 'careers') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Careers</p>
+                                            <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.blogs.index')}}" class="nav-link @if(Request::segment(2) == 'blogs') active @endif">                                    
+                                    <i class="nav-icon fas fa-blog"></i>
+                                    <p> Blogs </p>
+                                </a>
+                            </li>					
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->

@@ -24,6 +24,7 @@ class FaqsController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'selectCategory' => 'required',
+            'selectLocation' => 'required',
             'inputQuestion' => 'required|min:3|max:225',
             'textareaAnswer' => 'required|min:3|max:225'
         ]);
@@ -32,9 +33,10 @@ class FaqsController extends Controller
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
             $faqs=new Faqs;
-            $faqs->category=$request->selectCategory;
+            $faqs->categoryID=$request->selectCategory;
             $faqs->question=$request->inputQuestion;
             $faqs->answer=$request->textareaAnswer;
+            $faqs->location=$request->selectLocation;
             $faqs->save();
 
             return response()->json(['status'=>1, 'msg'=>'FAQS was successfully registered', 'state'=>'Congratulations!']);
@@ -54,6 +56,7 @@ class FaqsController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'selectCategory2' => 'required',
+            'selectLocation2' => 'required',
             'inputQuestion2' => 'required|min:3|max:225',
             'textareaAnswer2' => 'required|min:3|max:225'
         ]);
@@ -64,9 +67,10 @@ class FaqsController extends Controller
             $faqs_id=$request->input('hiddenID');
 
             $faqs=Faqs::find($faqs_id);
-            $faqs->category=$request->selectCategory2;
+            $faqs->categoryID=$request->selectCategory2;
             $faqs->question=$request->inputQuestion2;
             $faqs->answer=$request->textareaAnswer2;
+            $faqs->location=$request->selectLocation2;
             $faqs->update();
 
             return response()->json(['status'=>1, 'msg'=>'FAQS has been successfully updated', 'state'=>'Congratulations!']);
@@ -129,7 +133,7 @@ class FaqsController extends Controller
 	
 	public function deleteCategory($id)
     {
-		$check=Faqs::where('category', $id)->count();
+		$check=Faqs::where('categoryID', $id)->count();
 		
 		if($check > 0){
 			toastr()->error('This category is used in the FAQS section', 'Ooops!');

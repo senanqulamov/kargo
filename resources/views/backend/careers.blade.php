@@ -61,7 +61,7 @@
 							<th>Finish Time</th>
 							<th>Applies</th>
 							<th>Status</th>
-							<th style="width:200px"></th>
+							<th style="width:300px"></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -74,8 +74,9 @@
 						<td class="text-center"><span class="text-{{$career->status == 1 ? 'success' : 'danger'}}">{{$career->status == 1 ? 'Active' : 'Deactive'}}</span></td>
 						<td class="text-center">
 							<a href="{{route('admin.human.careers.show', $career->id)}}" class="btn btn-secondary"><i class="fas fa-eye"></i></a>
-							<a href="" class="btn btn-primary"><i class="fas fa-pen"></i></a>
-							<a href="" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							<button type="button" class="btn btn-primary edit_btn" value="{{$career->id}}"><i class="fas fa-pen"></i></button>
+							<a href="{{route('admin.human.careers.delete', $career->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+							<a href="{{route('admin.human.careers.activate', $career->id)}}" class="btn btn-{{$career->status == 1 ? 'dark' : 'success'}}">{{$career->status == 1 ? 'Deactive' : 'Activate'}}</a>
 						</td>
 					</tr>
 					@endforeach
@@ -167,6 +168,89 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
+<div class="modal fade" id="editModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Update Company</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form action="{{route('admin.human.careers.update')}}" method="post" autocomplete="off" id="updateCareer">
+					@csrf
+                    @method('PUT')
+					<div class="form-group">
+						<label for="inputTitle2">Title</label>
+						<input type="text" class="form-control" id="inputTitle2" placeholder="Enter vacancy title" name="inputTitle2" value="{{old('inputTitle2')}}">
+						<span class="text-danger error-text inputTitle2_error"></span>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="selectLocation2">Location</label>
+								<select class="form-control" name="selectLocation2" id="selectLocation2">
+									<option value="">Choose location</option>
+									@foreach($countries as $country)
+									<option value="{{$country->id}}">{{$country->name}}</option>
+									@endforeach
+								</select>
+								<span class="text-danger error-text selectLocation2_error"></span>
+                      		</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="selectWorkTime2">Worktime</label>
+								<select class="form-control" name="selectWorkTime2" id="selectWorkTime2">
+									<option value="">Choose worktime</option>
+									<option value="fulltime">Full Time</option>
+									<option value="remote">Remote</option>
+									<option value="parttime">Part Time</option>
+									<option value="internship">Internship</option>
+								</select>
+								<span class="text-danger error-text selectWorkTime2_error"></span>
+                      		</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inputExperience2">Experience</label>
+								<input type="text" class="form-control" id="inputExperience2" placeholder="Enter vacancy experience" name="inputExperience2" value="{{old('inputExperience2')}}">
+								<span class="text-danger error-text inputExperience2_error"></span>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="inputFinishTime2">Finish Time</label>
+								<input type="datetime-local" class="form-control" id="inputFinishTime2" placeholder="Enter vacancy finish time" name="inputFinishTime2" value="{{old('inputFinishTime2')}}">
+								<span class="text-danger error-text inputFinishTime2_error"></span>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label for="desc2">Description</label>
+						<textarea id="summernote2" row="10" name="desc2"></textarea>
+						<span class="text-danger error-text desc2_error"></span>
+					</div>
+
+                    <input type="hidden" name="hiddenID" id="hiddenID">
+
+					<button type="submit" class="btn btn-primary">Update</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 @endsection
 
 @section('js')
@@ -176,7 +260,8 @@
 <script>
 	$(function(){
 		// Summernote
-		$('#summernote').summernote()
+		$('#summernote').summernote();
+		$('#summernote2').summernote();
 
 		$("#insertCareer").on('submit', function(e){
 			e.preventDefault();
@@ -215,17 +300,20 @@
             $.ajax({
                 type:"GET",
 				data:{id:id_data},
-				url:"{{route('admin.faqs.edit')}}",
+				url:"{{route('admin.human.careers.edit')}}",
                 success:function(response){
-                    $("#selectCategory2").val(response.data.category);
-                    $("#inputQuestion2").val(response.data.question);
-                    $("#textareaAnswer2").val(response.data.answer);
+                    $("#inputTitle2").val(response.data.title);
+                    $("#selectLocation2").val(response.data.location);
+                    $("#selectWorkTime2").val(response.data.worktime);
+					$("#inputExperience2").val(response.data.experience);
+					$("#inputFinishTime2").val(response.data.finish_time);
+					$("#summernote2").val(response.data.description);
                     $("#hiddenID").val(response.data.id);
                 }
             });
         });
 
-		$("#updateFaqs").on('submit', function(e){
+		$("#updateCareer").on('submit', function(e){
 			e.preventDefault();
 		
 			$.ajax({

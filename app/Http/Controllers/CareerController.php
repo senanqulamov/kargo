@@ -41,7 +41,7 @@ class CareerController extends Controller
             'surname' => 'required|min:3|max:225',
             'email' => 'required|min:3|max:225',
             'message' => 'min:3|max:225',
-            'cvFile'=> 'required|mimes:doc,docs,pdf'
+            'cvFile'=> 'required|mimes:doc,docs,pdf,docx'
         ]);
 
         if(!$validator->passes()){
@@ -54,7 +54,6 @@ class CareerController extends Controller
 			$apply->message=$request->message;
 
             $file_name = time().'.'.$request->cvFile->extension();
-            $path = $request->file('cvFile')->storeAs('uploads/cv/', $file_name, 'public');
             $request->cvFile->move(public_path('backend/career'), $file_name);
             $apply->cvFile=$file_name;
 
@@ -80,7 +79,7 @@ class CareerController extends Controller
         $apply->status=1;
         $apply->save();
 
-        $path = storage_path('app/public/uploads/cv/' . $filename);
+        $path = public_path('backend/career/' . $filename);
         return response()->download($path);
     }
 
@@ -111,5 +110,68 @@ class CareerController extends Controller
 
             return response()->json(['status'=>1, 'msg'=>'Career was successfully registered', 'state'=>'Congratulations!']);
         }         
+    }
+
+    public function activate($id)
+    {
+        $career=Career::where('id', $id)->first();
+        
+        if($career->status == 2){
+            $career->status=1;
+            toastr()->success('Career was activated', 'Congratulations!');
+        } else {
+            $career->status=2;
+            toastr()->success('Career was deactivated', 'Congratulations!');
+        }
+        $career->save();
+        
+        return redirect()->route('admin.human.careers.index');
+    }
+
+    public function edit(Request $request)
+    {
+        $career=Career::find($request->id);
+        return response()->json([
+            'status' => 200,
+            'data' => $career
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'inputTitle2' => 'required|min:3|max:225',
+            'selectLocation2' => 'required',
+            'selectWorkTime2' => 'required',
+            'inputExperience2' => 'max:225',
+            'inputFinishTime2'=> 'required',
+            'desc2'=> 'required|min:3|max:225',
+        ]);
+
+        if(!$validator->passes()){
+            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
+        } else {
+            $id=$request->input('hiddenID');
+
+            $career=Career::find($id);
+            $career->title=$request->inputTitle2;
+			$career->slug=Str::slug($request->inputTitle2, '-');
+			$career->location=$request->selectLocation2;
+            $career->experience=$request->inputExperience2;
+            $career->worktime=$request->selectWorkTime2;
+            $career->finish_time=$request->inputFinishTime2;
+            $career->description=$request->desc2;
+
+            $career->save();
+
+            return response()->json(['status'=>1, 'msg'=>'Career was successfully updated', 'state'=>'Congratulations!']);
+        }         
+    }
+
+    public function delete($id)
+    {
+        Career::where('id', $id)->delete();
+        toastr()->success('Career was successfully deleted', 'Congratulations!');
+        return redirect()->route('admin.human.careers.index');
     }
 }

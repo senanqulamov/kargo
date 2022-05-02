@@ -103,6 +103,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/inbox', [MessageController::class, 'inbox'])->name('inbox');
 			Route::get('/read/{id}', [MessageController::class, 'read'])->name('read');
 			Route::get('/delete/{id}', [MessageController::class, 'delete'])->name('delete');
+			
+			Route::prefix('/settings')->name('settings.')->group(function(){
+				Route::get('/', [MessageController::class, 'settings'])->name('index');
+				Route::post('/create', [MessageController::class, 'createCategory'])->name('create');
+				Route::get('/edit', [MessageController::class, 'editCategory'])->name('edit');
+				Route::put('/update', [MessageController::class, 'updateCategory'])->name('update');
+				Route::get('/delete/{id}', [MessageController::class, 'deleteCategory'])->name('delete');
+			});
 		});	
 
 		//faqs
@@ -155,15 +163,6 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::put('/warehouses/update', [WarehouseController::class, 'update'])->name('warehouses.update');
 			Route::get('/warehouses/delete/{id}', [WarehouseController::class, 'delete'])->name('warehouses.delete');
 		});	
-
-		// additional service
-		Route::prefix('services/')->name('services.')->group(function(){
-			Route::get('/', [AdditionalServiceController::class, 'index'])->name('index');
-			Route::post('/services/create', [AdditionalServiceController::class, 'create'])->name('services.create');
-			Route::get('/services/edit', [AdditionalServiceController::class, 'edit'])->name('services.edit');
-			Route::put('/services/update', [AdditionalServiceController::class, 'update'])->name('services.update');
-			Route::get('/services/delete/{id}', [AdditionalServiceController::class, 'delete'])->name('services.delete');
-		});	
 		
 		// careers
 		Route::prefix('human')->name('human.')->group(function(){
@@ -172,7 +171,29 @@ Route::prefix('admin')->name('admin.')->group(function(){
 				Route::get('/show/{id}', [CareerController::class, 'showAdmin'])->name('show');
 				Route::get('/download/{filename}', [CareerController::class, 'downloadAdmin'])->name('download');
 				Route::post('/create', [CareerController::class, 'createAdmin'])->name('create');
+				Route::get('/activate/{id}', [CareerController::class, 'activate'])->name('activate');
+				Route::get('/edit', [CareerController::class, 'edit'])->name('edit');
+				Route::put('/update', [CareerController::class, 'update'])->name('update');
+				Route::get('delete/{id}', [CareerController::class, 'delete'])->name('delete');
 			});
 		});	 
+
+		// blogs
+		Route::prefix('blogs/')->name('blogs.')->group(function(){
+			Route::get('/', [BlogController::class, 'indexAdmin'])->name('index');
+			Route::post('/create', [BlogController::class, 'createAdmin'])->name('create');
+			Route::get('/edit', [BlogController::class, 'editAdmin'])->name('edit');
+			Route::put('/update', [BlogController::class, 'updateAdmin'])->name('update');
+			Route::get('/delete/{id}', [BlogController::class, 'deleteAdmin'])->name('delete');
+		});	
+
+		// additional service
+		Route::prefix('services/')->name('services.')->group(function(){
+			Route::get('/', [AdditionalServiceController::class, 'index'])->name('index');
+			Route::post('/create', [AdditionalServiceController::class, 'create'])->name('create');
+			Route::get('/edit', [AdditionalServiceController::class, 'edit'])->name('edit');
+			Route::put('/update', [AdditionalServiceController::class, 'update'])->name('update');
+			Route::get('/delete/{id}', [AdditionalServiceController::class, 'delete'])->name('delete');
+		});
 	});    
 });
