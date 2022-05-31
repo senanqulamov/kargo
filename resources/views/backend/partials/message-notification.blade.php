@@ -13,11 +13,16 @@
     <div class="card-body p-0">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item active">
-                <a href="#" class="nav-link">
+                <a href="{{route('admin.messages.inbox')}}" class="nav-link">
                     <i class="fas fa-inbox"></i> Inbox
                     <span class="badge bg-primary float-right">{{count($message)}}</span>
                 </a>
             </li>
+			<li class="nav-item">
+				<a href="{{route('admin.messages.sent')}}" class="nav-link">
+					<i class="far fa-envelope"></i> Sent
+				</a>
+			</li>
         </ul>
     </div>
     <!-- /.card-body -->

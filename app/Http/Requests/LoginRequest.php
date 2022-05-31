@@ -45,10 +45,4 @@ class LoginRequest extends FormRequest
             'email' => Str::lower($this->email),
         ]);
     }
-
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $response = new Response(['validation' => $validator->errors()], 422);
-        throw new ValidationException($validator, $response);
-    }
 }

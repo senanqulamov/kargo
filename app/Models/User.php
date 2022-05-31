@@ -14,73 +14,23 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
+    public $timestamps = true;
+
     protected $fillable = [
         'name',
         'email',
+        'phone',
         'password',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
         'password',
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = bcrypt($password);
+    // }
 
-    public function getUserSexAttribute(){
-        switch ($this->sex) {
-            case '1':
-                return 'Man';
-                break;
-            
-            default:
-                return 'Woman';
-                break;
-        }
-    }
-
-    public function getUserStoreAttribute(){
-        switch ($this->store) {
-            case 'own':
-                return 'Own Store';
-                break;
-            
-            default:
-                return 'None';
-                break;
-        }
-    }
-
-    public function getUserStatusAttribute(){
-        switch ($this->status) {
-            case '1':
-                return 'Active';
-                break;
-            
-            default:
-                return 'Deactive';
-                break;
-        }
-    }
-
-    public function getAddress(){
-        return $this->hasOne(UserAddress::class, 'userID', 'id');
-    }
 }

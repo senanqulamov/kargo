@@ -2,13 +2,6 @@
 
 @section('title', 'Users')
 
-@section('css')
-<!-- DataTables -->
-<link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-bs4/css/dataTables.bootstrap4.min.css">
-<link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-responsive/css/responsive.bootstrap4.min.css">
-<link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-buttons/css/buttons.bootstrap4.min.css">
-@endsection
-
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
 @endsection
@@ -33,7 +26,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <table id="example1" class="table table-hover">
+                    <table id="example1" class="table table-hover table-bordered ">
                         <thead>
                             <tr>
                                 <th style="width:40px">Image</th>
@@ -71,29 +64,4 @@
             <!-- /.card -->
         </div>
     </div>
-@endsection
-
-@section('js')
-<!-- DataTables  & Plugins -->
-<script src="{{asset('/')}}backend/assets/plugin/datatables/jquery.dataTables.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/jszip/jszip.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/pdfmake/pdfmake.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/pdfmake/vfs_fonts.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.colVis.min.js"></script>
-
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "excel", "pdf", "print"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-    });
-</script>
 @endsection

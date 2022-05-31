@@ -2,6 +2,23 @@
 
 @section('title', 'Home')
 
+@section('css')
+<style>
+    #First .left-content a{
+        border: 1px solid #EE591F;
+        color: #EE591F;
+        padding: 10px 50px;
+        background-color: transparent;
+        border-radius: 10px;
+        transition: .4s ease;
+    }
+    #First .left-content a:hover {
+            background-color: #EE591F;
+            color: #fff;
+        }
+</style>
+@endsection
+
 @section('content')
 <!-- First Section Start -->
 <section id="First">
@@ -13,7 +30,7 @@
                     <p>ShipLounge üyeliğiniz ile Türkiye ve ABD'deki herhangi bir pazar yerinden istediğiniz ürünü yazılımımız üzerinden satın alabilirsiniz ve ister kendi adresinize, isterseniz Dropshipping siparişlerinizi müşterilerinizin adresine
                         kargolayın.
                     </p>
-                    <button>Start now</button>
+                    <a href="{{route('login')}}">Start now</a>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -29,42 +46,69 @@
 <!-- Calculate section start -->
 <section id="Calculate">
     <div class="container">
-        <div class="row my-3 calculateBox align-items-center">
-            <div class="calculate-title">
-                <h4>Country</h4>
-            </div>
-            <div class="col-lg-3">
-                <div class="calculate-content">
-                    <select name="" id="">
-                        <option value="">Turkey</option>
-                        <option value="">Amerika</option>
-                    </select>
+        <form action="{{route('index.calculate')}}" method="post" id="price_calc">
+            @csrf
+            <div class="row my-3 calculateBox align-items-center">            
+                <div class="calculate-title">
+                    <h4>Country</h4>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="calculate-content">
-                    <input type="number" placeholder="Weight">
+                <div class="col-lg-4">
+                    <div class="calculate-content">
+                        <select name="selectCountry">
+                            <option value="">Select Country</option>
+                            @foreach($countries as $country)
+                            <option value="{{$country->code}}" {{ old("selectCountry") == $country->code ? "selected" : "" }}>{{$country->name}}</option>
+                            @endforeach
+                        </select>
+                        <span class="text-danger error-text selectCountry_error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="calculate-content">
-                    <input type="number" placeholder="Length">
+                <div class="col-lg-2">
+                    <div class="calculate-content">
+                        <input type="text" placeholder="Weight" name="inputWeight" value="{{old('inputWeight')}}">
+                        <span class="text-danger error-text inputWeight_error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="calculate-content">
-                    <input type="number" placeholder="Height">
+                <div class="col-lg-2">
+                    <div class="calculate-content">
+                        <input type="text" placeholder="Length" name="inputLength" value="{{old('inputLength')}}">
+                        <span class="text-danger error-text inputLength_error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="calculate-content">
-                    <button>Calculate</button>
+                <div class="col-lg-2">
+                    <div class="calculate-content">
+                        <input type="text" placeholder="Height" name="inputHeight" value="{{old('inputHeight')}}">
+                        <span class="text-danger error-text inputHeight_error"></span>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-1">
-                <div class="calculate-content">
-                    <span>$ 0.00</span>
+                <div class="col-lg-2">
+                    <div class="calculate-content">
+                        <input type="text" placeholder="Width" name="inputWidth" value="{{old('inputWidth')}}">
+                        <span class="text-danger error-text inputWidth_error"></span>
+                    </div>
                 </div>
+                <div class="col-lg-2 mt-2">
+                    <div class="calculate-content">
+                        <button type="submit">Calculate</button>
+                    </div>
+                </div>          
+            </div>
+        </form>
+    </div>
+</section>
+<section class="my-4 d-none" id="table_section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr class="table-dark">
+                            <th>Cargo Company</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableCompany"></tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -194,7 +238,7 @@
                             FBA Logistcs 's competitive prices.</span>
                     </div>
                     <div class="services-details">
-                        <a href="">Details...</a>
+                        <a href="{{route('e-commerce')}}">Details...</a>
                     </div>
                 </div>
             </div>
@@ -212,7 +256,7 @@
                             FBA Logistcs 's competitive prices.</span>
                     </div>
                     <div class="services-details">
-                        <a href="">Details...</a>
+                        <a href="{{route('fba')}}">Details...</a>
                     </div>
                 </div>
             </div>
@@ -230,45 +274,7 @@
                             FBA Logistcs 's competitive prices.</span>
                     </div>
                     <div class="services-details">
-                        <a href="">Details...</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-5 align-items-center justify-content-center">
-            <div class="col-lg-4">
-                <div class="services-content">
-                    <div class="icon">
-                        <img src="{{asset('/')}}frontend/img/ecommerce.svg" alt="">
-                    </div>
-                    <div class="services-text">
-                        <h4>E-Commerce Logistics</h4>
-                        <span>You can manage all your 
-                            processes from order 
-                            management to logistics 
-                            planning  faster and easier with 
-                            FBA Logistcs 's competitive prices.</span>
-                    </div>
-                    <div class="services-details">
-                        <a href="">Details...</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="services-content">
-                    <div class="icon">
-                        <img src="{{asset('/')}}frontend/img/delivery-packaging-box-svgrepo-com 1.svg" alt="">
-                    </div>
-                    <div class="services-text">
-                        <h4>Amazon FBA</h4>
-                        <span>You can manage all your 
-                            processes from order 
-                            management to logistics 
-                            planning  faster and easier with 
-                            FBA Logistcs 's competitive prices.</span>
-                    </div>
-                    <div class="services-details">
-                        <a href="">Details...</a>
+                        <a href="{{route('marketplace')}}">Details...</a>
                     </div>
                 </div>
             </div>
@@ -601,4 +607,44 @@
     </div>
 </section>
 <!-- Loaction End -->
+@endsection
+
+@section('js')
+<script>
+	$(function(){
+		$("#price_calc").on('submit', function(e){
+			e.preventDefault();
+		
+			$.ajax({
+				url:$(this).attr('action'),
+				method:$(this).attr('method'),
+				data:new FormData(this),
+				processData:false,
+				dataType:'json',
+				contentType:false,
+				beforeSend:function(){
+					$(document).find('span.error-text').text('');
+				},
+				success:function(data){
+					if(data.status == 0){
+						$.each(data.error, function(prefix, val){
+							$('span.'+prefix+'_error').text(val[0]);
+						});
+					} else{
+                        if ($("#table_section").hasClass("d-none")) {
+                            $("#table_section").removeClass("d-none");
+                        }
+
+                        $('#tableCompany').text(' ');
+                        var trHTML = '';
+                        for (let i = 0; i < data.company.length; i++) {
+                            trHTML += '<tr><td>' + data.company[i] + '</td><td>' + data.price[i] + '</td></tr>';                          
+                        }
+                        $('#tableCompany').append(trHTML);
+					}
+				}
+			});
+		});
+	})
+</script>
 @endsection

@@ -20,6 +20,7 @@ class CreateBranchesTable extends Migration
             $table->string('latitude');
             $table->text('address');
             $table->string('country');
+            $table->integer('status')->nullable()->comment('1 => default');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

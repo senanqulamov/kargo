@@ -12,8 +12,10 @@
 @endsection
 
 @section('content')
+@include('backend.partials.card-message')
 <div class="row">
     <div class="col-md-3">
+        <a href="{{route('admin.messages.compose')}}" class="btn btn-primary btn-block mb-3">Compose</a>
         @include('backend.partials.message-notification')
         </div>
         <!-- /.col -->

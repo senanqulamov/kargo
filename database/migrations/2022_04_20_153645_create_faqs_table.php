@@ -18,7 +18,6 @@ class CreateFaqsTable extends Migration
             $table->bigInteger('categoryID')->unsigned();
             $table->text('question');
             $table->text('answer');
-            $table->string('location')->comment('left, right');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
 

@@ -49,11 +49,4 @@ class RegisterRequest extends FormRequest
             'email' => Str::lower($this->email),
         ]);
     }
-
-    protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
-    {
-        $key = Request::ajax() ? 'errors' : 'validation';
-        $response = new Response([$key => $validator->errors()], 422);
-        throw new ValidationException($validator, $response);
-    }
 }

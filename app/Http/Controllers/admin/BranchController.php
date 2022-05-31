@@ -16,10 +16,17 @@ class BranchController extends Controller
 		$branches=Branch::orderBy('created_at','asc')->get();
 		$countries=Country::orderBy('name','asc')->get();
 
+        return view('backend.branch-list', compact('branches', 'countries'));
+    }
+
+    public function create(){		
+		$branches=Branch::orderBy('created_at','asc')->get();
+		$countries=Country::orderBy('name','asc')->get();
+
         return view('backend.branch', compact('branches', 'countries'));
     }
 	
-	public function create(Request $request){
+	public function createPost(Request $request){
         $request->validate([
             'inputTitle' => 'required|min:3|max:225',
             'inputLongitude' => 'required|min:3|max:225',
@@ -79,5 +86,19 @@ class BranchController extends Controller
         Branch::where('id', $id)->delete();
         toastr()->success('Branch was successfully deleted', 'Congratulations!');
         return redirect()->route('admin.branches.index');
+    }
+
+    public function change($id)
+    {
+        $branch=Branch::where('status', 1)->first();
+        $branch->status=NULL;
+        $branch->save();
+        
+        $head=Branch::find($id);
+        $head->status=1;
+        $head->save();
+
+        toastr()->success('Branch was successfully Head Office', 'Congratulations!!');
+        return redirect()->route('admin.branches.index');  
     }
 }

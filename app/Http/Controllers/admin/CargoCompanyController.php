@@ -6,11 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\CargoCompany;
+use App\Models\CargoCountry;
+use App\Models\CargoZone;
 use Illuminate\Support\Str;
 
 use File;
 
 use Validator;
+
+use Shuchkin\SimpleXLSX;
 
 class CargoCompanyController extends Controller
 {
@@ -84,6 +88,8 @@ class CargoCompanyController extends Controller
             $cargo->name=$request->inputName2;
             $cargo->slug=Str::slug($request->inputName2, '-');
 
+            File::delete('backend/assets/img/companies/cargo/'.$cargo->logo);
+
             if($request->hasFile('fileLogo2')){
                 $image = time().'.'.$request->fileLogo2->extension();
                 $request->fileLogo2->move(public_path('backend/assets/img/companies/cargo'), $image);
@@ -100,12 +106,7 @@ class CargoCompanyController extends Controller
     public function delete($id){
 
         $image = CargoCompany::findOrFail($id);
-        $file= $image->image;
-
-        $filename = public_path('backend/assets/img/companies/cargo').$file;
-        if(file_exists($filename)){
-            @unlink($filename);
-        }     
+        File::delete('backend/assets/img/companies/cargo/'.$image->logo);
 
         CargoCompany::where('id', $id)->delete();
         toastr()->success('Cargo company was successfully deleted', 'Congratulations!');
@@ -114,17 +115,75 @@ class CargoCompanyController extends Controller
 
     public function upload(Request $request)
     {
+        $count_country=array();        
+
         $validator = Validator::make($request->all(),[
-            'fileExcel' => 'required|max:50000|mimes:xlsx',
+            'fileExcel' => 'required|max:50000|mimes:xlsx,xls',
+            'fileZone' => 'required|max:50000|mimes:xlsx,xls',
         ]);
 
         if(!$validator->passes()){
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
-            $excel = time().'.'.$request->fileExcel->extension();
-            $request->fileExcel->move(public_path('backend/document/cargo'), $excel);            
+            if($request->hasFile('fileExcel')){
+                $excel = time().'.'.$request->fileExcel->extension();
+                $pathExcel=$request->fileExcel->move(public_path('backend/document/cargo'), $excel); 
+                
+                if ( $xlsxExcel = SimpleXLSX::parse($pathExcel) ) {
+                    for ($i=1; $i < count($xlsxExcel->rows()); $i++) {
+                        array_push($count_country, $xlsxExcel->rows()[$i][1]);
+                        
+                        $cargo_country=new CargoCountry;
+                        $cargo_country->companyID=$request->inputHiddenExcel;
+                        $cargo_country->country=$xlsxExcel->rows()[$i][0];
+                        $cargo_country->zone=$xlsxExcel->rows()[$i][1];
+                        $cargo_country->save();
+                    }   
+                } else {
+                    echo SimpleXLSX::parseError();
+                }
+            }
+    
+            $max_zone=max($count_country)+1;
+            
+            if($request->hasFile('fileZone')){
+                $zone = time().'.'.$request->fileZone->extension();
+                $pathZone=$request->fileZone->move(public_path('backend/document/cargo'), $zone);  
+    
+                if ( $xlsxZone = SimpleXLSX::parse($pathZone) ) {
+                    for ($i=1; $i < count($xlsxZone->rows()); $i++) {
+    
+                        ini_set('max_execution_time', 0);
 
-            return response()->json(['status'=>1, 'msg'=>'Cargo company  was successfully registered', 'state'=>'Congratulations!']);
-        }         
+                        $cargo_zone=new CargoZone;
+                        $cargo_zone->companyID=$request->inputHiddenExcel;
+                        $cargo_zone->desi=$xlsxZone->rows()[$i][0];
+
+                        $zoneArray=array();
+                        for ($z=1; $z < $max_zone; $z++) {                            
+                            array_push($zoneArray, $xlsxZone->rows()[$i][$z]);
+                        }   
+                        $cargo_zone->zone=json_encode($zoneArray);
+                        unset($zoneArray);                   
+                        
+                        $cargo_zone->save();
+                    }       
+                } else {
+                    echo SimpleXLSX::parseError();
+                }                
+            }
+    
+            return response()->json(['status'=>1, 'msg'=>'Cargo datas was successfully inserted', 'state'=>'Congratulations!']);	
+        }
+    }
+	
+	public function downloadList(){
+        $path = public_path('backend/document/template/liste.xlsx');
+        return response()->download($path);
+    }
+	
+	public function downloadZone(){
+        $path = public_path('backend/document/template/zone.xlsx');
+        return response()->download($path);
     }
 }

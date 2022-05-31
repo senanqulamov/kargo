@@ -24,9 +24,8 @@ class FaqsController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'selectCategory' => 'required',
-            'selectLocation' => 'required',
             'inputQuestion' => 'required|min:3|max:225',
-            'textareaAnswer' => 'required|min:3|max:225'
+            'textareaAnswer' => 'required|min:3'
         ]);
 
         if(!$validator->passes()){
@@ -36,7 +35,6 @@ class FaqsController extends Controller
             $faqs->categoryID=$request->selectCategory;
             $faqs->question=$request->inputQuestion;
             $faqs->answer=$request->textareaAnswer;
-            $faqs->location=$request->selectLocation;
             $faqs->save();
 
             return response()->json(['status'=>1, 'msg'=>'FAQS was successfully registered', 'state'=>'Congratulations!']);
@@ -56,9 +54,8 @@ class FaqsController extends Controller
     {
         $validator = Validator::make($request->all(),[
             'selectCategory2' => 'required',
-            'selectLocation2' => 'required',
             'inputQuestion2' => 'required|min:3|max:225',
-            'textareaAnswer2' => 'required|min:3|max:225'
+            'textareaAnswer2' => 'required|min:3'
         ]);
 
         if(!$validator->passes()){
@@ -70,7 +67,6 @@ class FaqsController extends Controller
             $faqs->categoryID=$request->selectCategory2;
             $faqs->question=$request->inputQuestion2;
             $faqs->answer=$request->textareaAnswer2;
-            $faqs->location=$request->selectLocation2;
             $faqs->update();
 
             return response()->json(['status'=>1, 'msg'=>'FAQS has been successfully updated', 'state'=>'Congratulations!']);

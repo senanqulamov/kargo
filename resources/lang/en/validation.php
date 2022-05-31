@@ -177,6 +177,12 @@ return [
 		'textareaAnswer2' => 'Answer',
         'inputCategory' => 'Category',
         'inputCategory2' => 'Category',
+        'inputCount' => 'Count',
+        'selectType' => 'Type',
+        'inputLength' => 'Length',
+        'inputWidth' => 'Width',
+        'inputHeight' => 'Height',
+        'inputWeight' => 'Weight',
 	],
 
 ];

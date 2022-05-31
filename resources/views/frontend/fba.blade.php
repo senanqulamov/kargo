@@ -2,6 +2,23 @@
 
 @section('title', 'FBA')
 
+@section('css')
+<style>
+    #First-FBA .left-content a{
+        border: 1px solid #EE591F;
+        color: #EE591F;
+        padding: 10px 50px;
+        background-color: transparent;
+        border-radius: 10px;
+        transition: .4s ease;
+    }
+    #First-FBA .left-content a:hover {
+            background-color: #EE591F;
+            color: #fff;
+        }
+</style>
+@endsection
+
 @section('content')
 <!-- First Section Start -->
 <section id="First-FBA">
@@ -11,7 +28,7 @@
                 <div class="left-content">
                     <h1><strong>Shiplounge.co</strong> <br> Amazon FBA Service</h1>
                     <p>You Just Focus On Your Sales. Your Packing and Shipping Processes are Entrusted to Us!</p>
-                    <button>Start now</button>
+                    <a href="{{route('login')}}">Start now</a>
                 </div>
             </div>
             <div class="col-lg-6">

@@ -1,9 +1,10 @@
 @extends('backend.layout.app')
 
-@section('title', 'Contact Settings')
+@section('title', 'Service Category')
 
 @section('breadcrumb')
 <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
+<li class="breadcrumb-item"><a href="{{route('admin.messages.inbox')}}">Inbox</a></li>
 @endsection
 
 @section('content')

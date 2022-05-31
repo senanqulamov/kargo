@@ -5,10 +5,15 @@ namespace App\Http\Controllers\front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Country;
+use App\Models\User as UserModel;
+
 class HomeController extends Controller
 {
+    // index section
     public function index(){
-        return view('frontend.index');
+        $countries=Country::orderBy('name','asc')->get();
+        return view('frontend.index', compact('countries'));
     }
 
     public function ecommerce(){
@@ -29,10 +34,6 @@ class HomeController extends Controller
 
     public function servicesFee(){
         return view('frontend.services-fee');
-    }
-
-    public function pricecalculator(){
-        return view('frontend.pricecalculator');
     }
 
     public function getquote(){
@@ -56,6 +57,8 @@ class HomeController extends Controller
     }
 
     public function register(){
-        return view('frontend.register');
+        $users = UserModel::all();
+
+        return view('frontend.register')->with('users' , $users);
     }
 }

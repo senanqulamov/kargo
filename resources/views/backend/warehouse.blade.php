@@ -8,80 +8,67 @@
 
 @section('content')
 <div class="row">
-	<div class="col-12 mb-4">
-		<button type="button" class="btn btn-success"  style="float:left" data-toggle="modal" data-target="#faqsModal"><i class="fas fa-plus"></i> New Warehouse</button>							
+	<div class="col-12">
+		<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#modalBarcode">Scan Barcode</button>
 	</div>
-	
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">List of Warehouses</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                        <tr>
-                            <th>Title</th>
-                            <th>Questions</th>
-                            <th>Answers</th>
-                            <th style="width:150px"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-					@foreach($warehouses as $warehouse)
-					<tr>
-						<td>{{$warehouse->title}}</td>
-						<td class="text-center">
-							<button type="button" class="btn btn-primary edit_btn" value="{{$warehouse->id}}"><i class="fas fa-edit"></i></button>
-							<a href="{{route('admin.warehouse.delete', $warehouse->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-						</td>
-					</tr>
-					@endforeach
-                    </tbody>
-                </table>
-            </div>
-            <!-- /.card-body -->
-        </div>
-        <!-- /.card -->
-    </div>
+</div>						
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<!-- /.card-header -->
+			<div class="card-body">
+				<table id="example1" class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>Width, Height, Weight, Lenght</th>
+							<th>Barcode</th>
+							<th>Status</th>
+							<th>Operation</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach($packages as $package)
+						<tr>
+							<td>Width: {{$package->width}}, Length: {{$package->length}}, Weight: {{$package->weight}}, Height: {{$package->height}}</td>
+							<td>{{$package->barcode}}</td>
+							<td><span class="text-success">Approve</span></td>
+							<td>
+								<button type="button" class="btn btn-primary mb-4 edit_btn" id="{{$package->id}}"><i class="fas fa-edit"></i></button>
+								<button type="button" class="btn btn-default mb-4" data-toggle="modal" data-target="#modalSort"><i class="fas fa-sort"></i></button>
+							</td>
+						</tr>
+						@endforeach
+					</tbody>
+				</table>
+			</div>
+			<!-- /.card-body -->
+		</div>
+	</div>
+	<!-- /.col -->
 </div>
-
-<div class="modal fade" id="faqsModal">
+<div class="modal fade" id="modalBarcode">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Add FAQS</h4>
+				<h4 class="modal-title">Barcode Scan</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{route('admin.faqs.create')}}" method="post" autocomplete="off" id="insertFaqs">
+				<form method="post" action="{{route('admin.warehouses.create')}}" autocomplete="off" id="insertWareHouse">
 					@csrf
-					<!-- select -->
 					<div class="form-group">
-						<label for="selectCategory">Category</label>
-						<select class="form-control" name="selectCategory" id="selectCategory">
-							<option value="">Choose Category</option>
-							<option value="">Title</option>
-						</select>
-						<span class="text-danger error-text selectCategory_error"></span>
+						<label for="inputBarcode">Barcode</label>
+						<input type="text" class="form-control" id="inputBarcode" placeholder="Enter package barcode" name="inputBarcode">
+						<span class="text-danger error-text inputBarcode_error"></span>
 					</div>
-					<div class="form-group">
-						<label for="inputQuestion">Question</label>
-						<input type="text" class="form-control" id="inputQuestion" placeholder="Enter your question" name="inputQuestion" value="{{old('inputQuestion')}}">
-						<span class="text-danger error-text inputQuestion_error"></span>
+					<div class="d-none" id="table_section">
+						<table class="table mb-0" id="tableCompany"></table>
+					</div>					
+					<div class="form-group mt-4">
+						<button type="submit" class="btn btn-primary">Place</button>
 					</div>
-					<!-- textarea -->
-					<div class="form-group">
-						<label for="textareaAnswer">Answer</label>
-						<textarea class="form-control" rows="7" placeholder="Enter your answer..." name="textareaAnswer" id="textareaAnswer">{{old('textareaAnswer')}}</textarea>
-						<span class="text-danger error-text textareaAnswer_error"></span>
-					</div>
-
-					<button type="submit" class="btn btn-primary">Create</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 				</form>
 			</div>
 		</div>
@@ -90,44 +77,81 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 <div class="modal fade" id="editModal">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4 class="modal-title">Update FAQS</h4>
+				<h4 class="modal-title">Order Edit</h4>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{route('admin.faqs.update')}}" method="post" autocomplete="off" id="updateFaqs">
+				<form action="{{route('admin.warehouses.update')}}" method="post" id="formUpdate" autocomplete="off">
 					@csrf
-                    @method('PUT')
-					<!-- select -->
-                    <div class="form-group">
-                        <label for="selectCategory2">Category</label>
-                        <select class="form-control" name="selectCategory2" id="selectCategory2">
-						<option value="">Title</option>
-                        </select>
-						<span class="text-danger error-text selectCategory2_error"></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputQuestion2">Question</label>
-                        <input type="text" class="form-control" id="inputQuestion2" placeholder="Enter your question" name="inputQuestion2">
-						<span class="text-danger error-text inputQuestion2_error"></span>
-                    </div>
-                    <!-- textarea -->
-                    <div class="form-group">
-                        <label for="textareaAnswer2">Answer</label>
-                        <textarea class="form-control" rows="7" placeholder="Enter your answer..." name="textareaAnswer2" id="textareaAnswer2"></textarea>
-						<span class="text-danger error-text textareaAnswer2_error"></span>
-                    </div>
-
-                    <input type="hidden" name="hiddenID" id="hiddenID">
-
-					<button type="submit" class="btn btn-primary">Update</button>
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					@method('PUT')
+					<div class="form-group">
+						<label for="inputWeight">Weight</label>
+						<input type="text" class="form-control" id="inputWeight" placeholder="Enter package weight" name="inputWeight">
+						<span class="text-danger error-text inputWeight_error"></span>
+					</div>
+					<div class="form-group">
+						<label for="inputHeight">Height</label>
+						<input type="text" class="form-control" id="inputHeight" placeholder="Enter package height" name="inputHeight">
+						<span class="text-danger error-text inputHeight_error"></span>
+					</div>
+					<div class="form-group">
+						<label for="inputWidth">Width</label>
+						<input type="text" class="form-control" id="inputWidth" placeholder="Enter package width" name="inputWidth">
+						<span class="text-danger error-text inputWidth_error"></span>
+					</div>
+					<div class="form-group">
+						<label for="inputLength">Length</label>
+						<input type="text" class="form-control" id="inputLength" placeholder="Enter package length" name="inputLength">
+						<span class="text-danger error-text inputLength_error"></span>
+					</div>
+					<input type="hidden" name="hiddenID" id="hiddenID">
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Update</button>
+					</div>
+				</form>
+			</div>
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+<div class="modal fade" id="modalSort">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Order Sort</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="form-group">
+						<label for="inputPassword3">Weight</label>
+						<input type="text" class="form-control" id="inputPassword3" placeholder="Password" value="125.5">
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3">Height</label>
+						<input type="text" class="form-control" id="inputPassword3" placeholder="Password" value="185.5">
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3">Width</label>
+						<input type="text" class="form-control" id="inputPassword3" placeholder="Password" value="25.5">
+					</div>
+					<div class="form-group">
+						<label for="inputPassword3">Length</label>
+						<input type="text" class="form-control" id="inputPassword3" placeholder="Password" value="12.5">
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Place</button>
+					</div>
 				</form>
 			</div>
 		</div>
@@ -141,7 +165,33 @@
 @section('js')
 <script>
 	$(function(){
-		$("#insertFaqs").on('submit', function(e){
+		$("#inputBarcode").change(function(){
+			var id_data=$(this).val();
+
+			$.ajax({
+                type:"GET",
+				data:{id:id_data},
+				url:"{{route('admin.warehouses.search')}}",
+                success:function(response){
+					if(response.data == null){
+						$("#table_section").addClass("d-none");
+					} else {
+						$("#table_section").removeClass("d-none");
+						
+						$('#tableCompany').text(' ');
+						var trHTML = '';
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Barcode:</b></td><td class="border-top-0 border-bottom">'+response.data.barcode+'</td></tr>';
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Length:</b></td><td class="border-top-0 border-bottom">'+response.data.length+'</td></tr>';			
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Weight:</b></td><td class="border-top-0 border-bottom">'+response.data.weight+'</td></tr>';			
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Width:</b></td><td class="border-top-0 border-bottom">'+response.data.width+'</td></tr>';		
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Height:</b></td><td class="border-top-0 border-bottom">'+response.data.height+'</td></tr>';
+						$('#tableCompany').append(trHTML);
+					}
+                }
+            });
+		});
+		
+		$("#insertWareHouse").on('submit', function(e){
 			e.preventDefault();
 		
 			$.ajax({
@@ -159,10 +209,9 @@
 						$.each(data.error, function(prefix, val){
 							$('span.'+prefix+'_error').text(val[0]);
 						});
-					} else{
-						// $('#formOptionalCompany')[0].reset();
+					} else {
 						toastr.success(data.msg, data.state);
-						$("#faqsModal").modal().hide();
+						$("#modalBarcode").modal().hide();
 						setTimeout(function () {
 							location.reload();
 						}, 3000);
@@ -170,25 +219,26 @@
 				}
 			});
 		});
-
+		
 		$(".edit_btn").click(function(){
-            var id_data=$(this).val();
+            var id_data=$(this).attr('id');
             $("#editModal").modal('show');
 
             $.ajax({
                 type:"GET",
 				data:{id:id_data},
-				url:"{{route('admin.faqs.edit')}}",
+				url:"{{route('admin.warehouses.edit')}}",
                 success:function(response){
-                    $("#selectCategory2").val(response.data.category);
-                    $("#inputQuestion2").val(response.data.question);
-                    $("#textareaAnswer2").val(response.data.answer);
+                    $("#inputWeight").val(response.data.weight);
+                    $("#inputHeight").val(response.data.height);
+                    $("#inputWidth").val(response.data.width);
+                    $("#inputLength").val(response.data.length);
                     $("#hiddenID").val(response.data.id);
                 }
             });
         });
-
-		$("#updateFaqs").on('submit', function(e){
+		
+		$("#formUpdate").on('submit', function(e){
 			e.preventDefault();
 		
 			$.ajax({
@@ -207,7 +257,6 @@
 							$('span.'+prefix+'_error').text(val[0]);
 						});
 					} else{
-						// $('#formOptionalCompany')[0].reset();
 						toastr.success(data.msg, data.state);
 						$("#editModal").modal().hide();
 						setTimeout(function () {
@@ -217,7 +266,7 @@
 				}
 			});
 		});
-	})
+	});
 </script>
 @endsection
 

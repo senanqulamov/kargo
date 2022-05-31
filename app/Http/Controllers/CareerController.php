@@ -99,7 +99,7 @@ class CareerController extends Controller
         } else {
             $career=new Career;
             $career->title=$request->inputTitle;
-			$career->slug=Str::slug($request->inputTitle, '-');;
+			$career->slug=Str::slug($request->inputTitle, '-');
 			$career->location=$request->selectLocation;
             $career->experience=$request->inputExperience;
             $career->worktime=$request->selectWorkTime;

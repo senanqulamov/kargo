@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Models\Message;
 use App\Models\ContactService;
+use App\Models\Branch;
 
 use Validator;
 
@@ -32,9 +33,15 @@ class MessageController extends Controller
         return redirect()->route('admin.messages.inbox');
     }
 
+    public function compose(){
+        return view('backend.compose');
+    }
+
     public function indexFront(){
         $services=ContactService::orderBy('created_at','desc')->get();
-        return view('frontend.contact', compact('services'));
+        $branches=Branch::orderBy('created_at','desc')->get();
+        $headOffice=Branch::where('status',1)->first();
+        return view('frontend.contact', compact('services', 'branches', 'headOffice'));
     }
 
     public function indexFrontPost(Request $request)
@@ -123,5 +130,14 @@ class MessageController extends Controller
 			toastr()->success('Category was successfully deleted', 'Congratulations!');
 			return redirect()->route('admin.messages.settings.index');
 		}        
+    }
+
+    public function location(Request $request)
+    {
+        $branch=Branch::find($request->id);
+        return response()->json([
+            'status' => 200,
+            'data' => $branch
+        ]);
     }
 }

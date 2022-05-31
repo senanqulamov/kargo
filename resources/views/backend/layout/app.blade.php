@@ -15,8 +15,14 @@
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+        <!-- Ionicons -->
+        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Toastr -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.css">        
+        <!-- DataTables -->
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-bs4/css/dataTables.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-responsive/css/responsive.bootstrap4.min.css">
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-buttons/css/buttons.bootstrap4.min.css">
         <!-- Font Awesome -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/fontawesome-free/css/all.min.css">
         @yield('css')
@@ -46,13 +52,13 @@
                     <li class="nav-item">
                         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                     </li>
-                    <li class="nav-item d-none d-sm-inline-block">
-                        <a href="{{route('admin.dashboard')}}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-success text-white text-uppercase" href="{{route('index')}}" role="button"> <i class="fas fa-globe" style="margin-right:7px"></i> Go to Website</a>
                     </li>
                 </ul>
 
                 <!-- Right navbar links -->
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">                    
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown" >
                             <i class="far fa-bell"></i>
@@ -76,17 +82,7 @@
                             <div class="dropdown-divider"></div>
                             @endif
                         </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
-                            <i class="fas fa-cog"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#" role="button">
-                            <i class="far fa-question-circle"></i>
-                        </a>
-                    </li>
+                    </li>                    
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.logout')}}" role="button">
                             <i class="fas fa-sign-out-alt"></i>
@@ -151,16 +147,10 @@
 								</a>
 								<ul class="nav nav-treeview">
 									<li class="nav-item">
-										<a href="{{route('admin.messages.inbox')}}" class="nav-link @if(Request::segment(3) == 'inbox') active @endif">
+										<a href="{{route('admin.messages.inbox')}}" class="nav-link @if(Request::segment(3) == 'inbox' || Request::segment(3) == 'settings') active @endif">
 											<i class="far fa-circle nav-icon"></i>
 											<p>Inbox</p>
                                             <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
-										</a>
-									</li>
-                                    <li class="nav-item">
-										<a href="{{route('admin.messages.settings.index')}}" class="nav-link @if(Request::segment(3) == 'settings') active @endif">
-											<i class="far fa-circle nav-icon"></i>
-											<p>Settings</p>
 										</a>
 									</li>
 								</ul>
@@ -186,11 +176,37 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>                            
+                            </li>
+							<li class="nav-item @if(Request::segment(2) == 'wardrobes') menu-open @endif">
+                                <a href="#" class="nav-link @if(Request::segment(2) == 'wardrobes') active @endif">
+                                    <i class="nav-icon fas fa-swatchbook"></i>
+                                    <p>Wardrobes / Shelves<i class="right fas fa-angle-left"></i></p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.wardrobes.index')}}" class="nav-link @if(Request::segment(3) == 'index') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Wardrobes</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.wardrobes.shelves.index')}}" class="nav-link @if(Request::segment(3) == 'shelves') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Shelves</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>							
                             <li class="nav-item">
                                 <a href="{{route('admin.warehouses.index')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
                                     <i class="nav-icon fas fa-warehouse"></i>
                                     <p> Warehouses </p>
+                                </a>
+                            </li> 
+							<li class="nav-item">
+                                <a href="{{route('admin.balance.index')}}" class="nav-link @if(Request::segment(2) == 'balance') active @endif">
+									<i class="nav-icon fas fa-credit-card"></i>
+                                    <p> Balance </p>
                                 </a>
                             </li> 
                             <li class="nav-item">
@@ -208,12 +224,29 @@
                                     <p> FAQS </p>
                                 </a>
                             </li>
-							<li class="nav-item">
-                                <a href="{{route('admin.branches.index')}}" class="nav-link @if(Request::segment(2) == 'branches') active @endif">                                    
-                                    <i class="nav-icon fas fa-university"></i>
-                                    <p> Branches </p>
-                                </a>
-                            </li>
+                            <li class="nav-item @if(Request::segment(2) == 'branches') menu-open @endif">
+								<a href="#" class="nav-link  @if(Request::segment(2) == 'branches') active @endif">
+									<i class="nav-icon fas fa-university"></i>
+									<p>
+                                        Branches
+										<i class="fas fa-angle-left right"></i>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+									<li class="nav-item">
+										<a href="{{route('admin.branches.index')}}" class="nav-link @if(Request::segment(3) == 'index') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>List Branch</p>
+										</a>
+									</li>
+                                    <li class="nav-item">
+										<a href="{{route('admin.branches.create')}}" class="nav-link @if(Request::segment(3) == 'create') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Add Branch</p>
+										</a>
+									</li>
+								</ul>
+							</li>
                             <li class="nav-item @if(Request::segment(2) == 'human') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'human') active @endif">
                                 <i class="nav-icon fas fa-user-shield"></i>
@@ -282,6 +315,27 @@
         <script src="{{asset('/')}}backend/assets/plugin/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Toastr -->
         <script src="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.js"></script>
+        <!-- DataTables  & Plugins -->
+        <script src="{{asset('/')}}backend/assets/plugin/datatables/jquery.dataTables.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-responsive/js/dataTables.responsive.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/jszip/jszip.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/pdfmake/pdfmake.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/pdfmake/vfs_fonts.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.html5.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.print.min.js"></script>
+        <script src="{{asset('/')}}backend/assets/plugin/datatables-buttons/js/buttons.colVis.min.js"></script>
+
+        <script>
+            $(function () {
+                $("#example1").DataTable({
+                    "responsive": true, "lengthChange": false, "autoWidth": true
+                }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            });
+        </script>
         @yield('js')              
         
         @toastr_js
@@ -292,6 +346,5 @@
         <!-- AdminLTE App -->
         <script src="{{asset('/')}}backend/assets/js/adminlte.min.js"></script>
         <!-- AdminLTE for demo purposes -->
-        <script src="{{asset('/')}}backend/assets/js/demo.js"></script> 
     </body>
 </html>

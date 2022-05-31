@@ -27,7 +27,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>Image</th>
+                            <th style="width:50px" >Image</th>
                             <th>Title</th>
                             <th>Description</th>
                             <th style="width:150px"></th>
@@ -36,7 +36,7 @@
                     <tbody>
 					@foreach($blogs as $blog)
 					<tr>
-						<td><img src="{{asset('/')}}frontend/img/blog/{{$blog->img}}" alt="{{$blog->slug}}" width="50" height="50"></td>
+						<td><img src="{{asset('/')}}frontend/img/blog/{{$blog->img}}" alt="{{$blog->slug}}" width="50"></td>
 						<td>{{$blog->title}}</td>
 						<td>{!! $blog->description !!}</td>
 						<td class="text-center">

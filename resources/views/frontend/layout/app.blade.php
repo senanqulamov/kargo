@@ -1,20 +1,21 @@
 <!doctype html>
 <html lang="en">
-    @php ($data = DB::table('companies')->where('status', 1)->first() )    
+    @php ($data = DB::table('companies')->where('status', 1)->first() )
 
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        
+
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/responsive.css">
         <link rel="stylesheet" href="{{asset('/')}}frontend/resources/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
 
         <title>@yield('title') | {{$data->title}}</title>
         @php ($favico = DB::table('configs')->where('key', 'favicon')->first() )
         <link rel="icon" type="image/x-icon" href="{{asset('/')}}frontend/img/{{$favico->value}}">
-		
+
 		@yield('css')
     </head>
 
@@ -84,7 +85,7 @@
         @yield('content')
 
         <!-- Footer Start -->
-        <footer>
+        <footer class="mt-5">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
@@ -108,7 +109,7 @@
                     </div>
                     <div class="col-lg-4">
                         <div class="footer-logo">
-                            @php ($footer_logo = DB::table('configs')->where('key', 'footer_logo')->first() ) 
+                            @php ($footer_logo = DB::table('configs')->where('key', 'footer_logo')->first() )
                             <img src="{{asset('/')}}frontend/img/{{$footer_logo->value}}" alt="">
                             <div class="footer-social">
                                 <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -154,9 +155,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/jquery.counterup/1.0/jquery.counterup.min.js"></script>        
+        <script src="https://cdn.jsdelivr.net/jquery.counterup/1.0/jquery.counterup.min.js"></script>
         <script src="{{asset('/')}}frontend/resources/app.js"></script>
-		
 		@yield('js')
     </body>
 </html>

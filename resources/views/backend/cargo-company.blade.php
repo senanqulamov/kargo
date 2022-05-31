@@ -9,7 +9,9 @@
 @section('content')
 <div class="row">
 	<div class="col-12 mb-4">
-		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#cargoModal"><i class="fas fa-plus"></i> New Company</button>							
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#cargoModal"><i class="fas fa-plus"></i> New Company</button>						
+		<a href="{{route('admin.companies.cargo.download.list')}}" class="btn btn-default"><i class="fas fa-file-download"></i> List Country</a>							
+		<a href="{{route('admin.companies.cargo.download.zone')}}" class="btn btn-default"><i class="fas fa-file-download"></i> List Zone</a>							
 	</div>
 	
     <div class="col-12">
@@ -33,7 +35,7 @@
 					<tr>
 						<td>
 							@if($cargo->logo != '')
-								<img src="{{asset('/')}}backend/assets/img/companies/cargo/{{$cargo->logo}}" alt="logo" width="60" height="60" class="mx-auto d-block">
+								<img src="{{asset('/')}}backend/assets/img/companies/cargo/{{$cargo->logo}}" alt="logo" width="60" class="mx-auto d-block">
 							@else
 								<img src="{{asset('/')}}backend/assets/img/icons/company.png" alt="logo" width="60" class="mx-auto d-block">
 							@endif
@@ -47,7 +49,7 @@
 						<td class="text-center">
 							<button type="button" class="btn btn-primary edit_btn" value="{{$cargo->id}}"><i class="fas fa-edit"></i></button>
 							<a href="{{route('admin.companies.cargo.delete', $cargo->id)}}" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-							<button class="btn btn-success" data-toggle="modal" data-target="#modalExcel"><i class="fas fa-download mr-1"></i> Download Excel</button>
+							<button class="btn btn-success btnDownload" data-id="{{$cargo->id}}"><i class="fas fa-download mr-1"></i> Download Excel</button>
 						</td>
 					</tr>
 					@endforeach
@@ -177,7 +179,7 @@
 				</button>
 			</div>
 			<div class="modal-body">
-				<form action="{{route('admin.companies.cargo.upload')}}" method="post" id="uploadExcel">
+				<form action="{{route('admin.companies.cargo.upload')}}" method="post" enctype="multipart/form-data" id="uploadExcel">
 					@csrf
 					<div class="form-group">
 						<label for="fileExcel">Excel</label>
@@ -185,7 +187,14 @@
 						<span class="text-danger error-text fileExcel_error"></span>
 					</div>
 
-					<button type="submit" class="btn btn-primary" id="uploadExcel">Upload</button>
+					<div class="form-group">
+						<label for="fileZone">Zone</label>
+						<input type="file" class="form-control" id="fileZone" name="fileZone">
+						<span class="text-danger error-text fileZone_error"></span>
+					</div>
+					<input type="hidden" name="inputHiddenExcel" id="inputHiddenExcel">
+
+					<button type="submit" class="btn btn-primary">Upload</button>
 				</form>
 			</div>
 		</div>
@@ -276,6 +285,13 @@
 					}
 				}
 			});
+		});
+
+		$(".btnDownload").click(function(){
+			$id=$(this).attr('data-id');
+			$("#modalExcel").modal('show');
+
+			$("#inputHiddenExcel").val($id);
 		});
 
 		$("#uploadExcel").on('submit', function(e){
