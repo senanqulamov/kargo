@@ -1,0 +1,135 @@
+* {
+  margin: 0px;
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+html {
+  font-size: 62.5%;
+}
+body {
+  font-size: 1.6rem;
+}
+section {
+  width: 100%;
+}
+
+.variable h2,
+h5,
+h6,
+.h6,
+label,
+i {
+  color: #405982;
+}
+.variable a{
+  text-decoration: none;
+}
+
+
+.variable ::placeholder {
+  color: rgba(64, 89, 130, 0.55);
+}
+.variable select {
+  color: rgba(64, 89, 130, 0.55);
+}
+/* 38 Page css  */
+.variable-container-inputs-button38 {
+  background-color: #21e7c3 !important;
+  border: none;
+  color: white;
+}
+.fa-location-pin {
+  color: #ffb406;
+}
+.fa-magnifying-glass-chart {
+  color: #00d2ff;
+}
+.fa-lock {
+  color: #d60000;
+}
+.fa-sack-dollar {
+  color: #ff912c;
+}
+
+/*  End 38 Page css   */
+/* 41 Page css */
+.variable-container-inputs-quantity {
+  text-align: center;
+}
+.variable-container-inputs-button {
+  color: white !important;
+}
+#custom-button {
+  background-color: #68d7fa;
+  border: none;
+}
+.variable-footer-text {
+  font-size: 1rem;
+  color: grey;
+  margin-bottom: 0 !important;
+}
+/* End 41 Page css */
+/* 42 Page css */
+
+/* End 42 Page css */
+/* profil 2 */
+.fa-phone {
+  color: #00ffb2;
+}
+/* End profil 2 */
+  
+
+
+  /*page-4*/
+
+.login__table{
+  height: 100vh; 
+  background-color: white;
+}
+
+.login__debet{
+  
+  padding: 2rem 2.5rem 1rem 2.5rem;
+  display: flex;
+}
+
+
+.login__table .login__debet  span{
+  display: inline-block;
+  font-weight: bolder;
+  font-size: 17px;
+  line-height: 25px;
+  width: 100%;
+/* identical to box height */
+  color: #405982;
+  margin: 2px 10px;
+}
+
+  .login__lebel{
+    margin: 30px 30px 30px 30px;
+
+  }
+
+  .login__table-input input{
+    font-size: 1.5rem;
+  }
+
+
+
+
+@media screen and (max-width: 992px) {
+  #table__plugin{
+    overflow: hidden;
+    overflow-y: inherit;
+    overflow-x: scroll;
+    width: 100%;
+  }
+}
+
+
+
+
+
+
+  /* page-style */

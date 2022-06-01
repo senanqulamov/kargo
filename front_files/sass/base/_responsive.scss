@@ -1,0 +1,166 @@
+@media screen and(max-width: 992px) {
+
+    html {
+        font-size: 58%;
+    }
+
+    .page__packed {
+        p {
+            font-size: 1.3rem;
+        }
+    }
+
+    header {
+        display: none;
+    }
+
+    .navigation__left {
+        display: none;
+    }
+
+    .structure>.row {
+
+        padding-left: 2rem !important;
+    }
+
+
+    .page__row-2 {
+        margin-top: 3rem;
+    }
+
+    .drop__box {
+        right: 36% !important;
+        padding: 1rem 0 !important;
+    }
+
+
+    .page__2 {
+        margin-top: 6rem !important;
+    }
+
+
+    .color__box {
+        display: flex;
+        justify-content: center;
+
+        .offset-1 {
+            margin-left: 0;
+        }
+    }
+
+    .page__progress {
+        margin-top: 2rem;
+        margin-left: 1rem !important;
+    }
+
+
+}
+
+@media screen and(max-width: 767px) {
+
+    html {
+        font-size: 54%;
+    }
+
+    html {
+        font-size: 58%;
+    }
+
+
+    .page__box {
+        padding: 1.5rem 1.5rem;
+    }
+
+    .page__calc-box--1 {
+        width: none;
+        margin-left: 0;
+    }
+
+
+    .page__charts {
+        padding-bottom: 2rem !important;
+    }
+
+    .drop__box {
+        width: 40%;
+    }
+
+    .structure>.row {
+        width: 96%;
+        padding-left: 5rem;
+    }
+
+    .header__input-search {
+        width: 100% !important;
+    }
+
+}
+
+@media screen and(max-width: 576px) {
+
+    html {
+        font-size: 50%;
+    }
+
+    .page__packed {
+        p {
+            font-size: 1.2rem;
+        }
+    }
+
+    .page__charts {
+        padding-bottom: 0 !important;
+    }
+
+
+    .page__1 {
+        display: none;
+    }
+
+    .page {
+        padding: 1rem !important;
+    }
+
+
+    .structure>.row {
+        .structure>.row {
+            width: 100%;
+            // padding-left: 1.4rem !important;
+        }
+    }
+
+
+    .drop__box {
+        width: 44% !important;
+    }
+
+    .fnav .header__input {
+        margin-left: 24% !important;
+    }
+
+    .header__input-search {
+        width: 80% !important;
+    }
+
+    .burger__menu {
+        width: calc(100% - 35%) !important;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////
