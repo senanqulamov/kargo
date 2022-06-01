@@ -259,6 +259,7 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
     Route::middleware('userpanellogin')->group(function(){
         Route::get('/', [UserPanelController::class, 'index'])->name('index');
         Route::post('/updateuser', [UserPanelController::class, 'updateuser'])->name('updateuser');
+        Route::post('/deleteuseraddress/{address_id}', [UserPanelController::class, 'deleteuseraddress'])->name('delete_user_address');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});
