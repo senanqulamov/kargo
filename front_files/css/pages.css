@@ -1,29 +1,45 @@
-* {
+/* * {
   margin: 0px;
   padding: 0px;
   font-family: "Roboto", sans-serif;
   box-sizing: border-box;
-}
-html {
+} */
+/* html {
   font-size: 62.5%;
 }
 body {
   font-size: 1.6rem;
-}
-section {
+} */
+#profil {
   width: 100%;
+  font-size: 1.8rem;
+}
+
+.profil__input{
+  height: 80vh;
 }
 
 .variable h2,
 h5,
 h6,
 .h6,
-label,
-i {
+label {
   color: #405982;
 }
 .variable a{
   text-decoration: none;
+}
+
+
+.variable h2, h5, h6, .h6, label {
+  font-size: 1.3rem;
+}
+.variable .form-control {
+  font-size: 1.5rem;
+}
+
+.variable .btn{
+  font-size: 1.5rem;
 }
 
 
