@@ -1,0 +1,136 @@
+header {
+    background: linear-gradient(88.78deg, rgba(106, 137, 231, 0.9) -4.73%, rgba(102, 171, 231, 0.9) 109.52%);
+    border-radius: 0px 0px 5px 0px;
+    padding: 1rem 0rem;
+    padding-bottom: 4rem;
+}
+
+
+.hidden{
+    display: none;
+}
+.visible{
+    display: block;
+}
+
+
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+
+    &__input-search {
+        font-size: 1.5rem;
+        background-color: transparent;
+        padding: 0.5rem;
+        outline: none;
+        // border: none;
+        position: relative;
+        border: none;
+        padding: 0 2.5rem;
+        width: 50%;
+        color: #fff;
+    }
+
+
+    &__input {
+        margin-left: calc(100% - 60%);
+    }
+
+    &__input-icon {
+        color: var(--color-white-thin);
+        font-size: 1.8rem;
+        position: absolute;
+        margin: .5rem 0;
+        display: inline-block;
+
+
+    }
+
+
+
+    &__input-search::placeholder {
+        color: var(--color-white-thin);
+
+        font-size: 1.4rem;
+    }
+
+
+
+    &__item {
+        display: flex;
+        justify-content: flex-end;
+        margin-left: auto;
+        align-items: center;
+    }
+
+    &__item-list {
+        list-style-type: none;
+        padding: 0 1.4rem;
+
+    }
+
+    &__item-link {
+        font-size: 1.4rem;
+        text-decoration: none;
+        color: #fff;
+    }
+
+
+    &__item-link:hover {
+        color: var(--color-white-thin);
+    }
+
+    &__item-icon {
+        font-size: 1.7rem;
+    }
+
+
+
+    &__account {
+        color: #fff;
+    }
+
+
+    &__account-guest {
+        color: #fff;
+    }
+
+    &__account-icon {
+        padding: 0 .8rem;
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////

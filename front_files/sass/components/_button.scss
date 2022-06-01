@@ -1,0 +1,77 @@
+.price__calcutaor {
+    padding: .5rem .8rem;
+    color: #fff;
+    font-size: 1.2rem;
+    background: var(--color-main-button);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+}
+
+
+
+.hr {
+    margin: 3rem 0;
+}
+
+
+
+.drop__box {
+
+    background: #FFFFFF;
+    box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.03);
+    border-radius: 5px;
+    padding: 2rem 0;
+    width: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 14%;
+    right: 25%;
+
+    &-img {
+        width: 4rem;
+        height: 4rem;
+        background: linear-gradient(to right top, #18BDF6, #00D2FF);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+
+        img {
+            width: 50%;
+        }
+    }
+
+
+    h4 {
+        margin-bottom: 0;
+        font-weight: 500;
+
+        font-size: 1.7rem;
+        line-height: 25px;
+        color: #405982;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///
