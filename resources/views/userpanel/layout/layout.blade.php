@@ -182,7 +182,7 @@
                 {{ Auth::user()->name }}
                 <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
                 <a href="{{ route('userpanel.logout_user') }}">
-                    <i class="fa-solid fa-sign-out header__item-icon header__account-icon"></i>
+                    <i class="fa-solid fa-right-from-bracket"></i>
                 </a>
             </li>
           </ul>
