@@ -39,8 +39,6 @@ class UserAuth extends Controller
 
     public function login(Request $request){
 
-        // dd($request->all());
-
         $rules = array(
             'email' => 'required|email',
             'password' => 'required|alphaNum|min:3'
@@ -49,19 +47,26 @@ class UserAuth extends Controller
         $validator = Validator::make($request->all() , $rules);
 
         if($validator->fails()){
-            $error = "Wrong auth parameters";
+            $error = "Something happened";
             return redirect()->back()->withErrors($error)
             ->withInput($request->except('password'));
         }else{
+            if(!UserModel::where('email' , $request->email)->first()){
+                $error = "This email is not registered";
+                return redirect()->back()->withErrors($error)
+                ->withInput($request->except('password'));
+            }
             $user = array(
                 'email' => $request->email ,
                 'password' => $request->password
             );
 
             if(Auth::attempt($user)){
-                return redirect()->route('marketplace');
+                $username = UserModel::where('email' , $request->email)->first();
+                $username = $username->name;
+                return redirect()->route('userpanel.index')->with('log_in_message' , 'Logged in as '.$username.' !');
             }else{
-                $error = "Wrong auth parameters";
+                $error = "Wrong password";
                 return redirect()->back()->withErrors($error)
                 ->withInput($request->except('password'));
             }
@@ -73,6 +78,6 @@ class UserAuth extends Controller
 
         Auth::logout();
 
-        return redirect()->route('login');
+        return redirect()->route('login')->with('message' , 'Logged out successfully');
     }
 }

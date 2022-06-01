@@ -28,6 +28,9 @@ use App\Http\Controllers\PriceCalculationController;
 use App\Http\Controllers\CalculateController;
 use App\Http\Controllers\BalanceController;
 
+
+use App\Http\Controllers\userpanel\UserPanelController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,11 +58,7 @@ Route::get('/service', [HomeController::class, 'servcice'])->name('servcice');
 Route::get('/membershifee', [HomeController::class, 'membershifee'])->name('membershifee');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/track', [HomeController::class, 'track'])->name('track');
-Route::get('/login', [HomeController::class, 'login'])->name('login');
-Route::get('/register', [HomeController::class, 'register'])->name('register');
-Route::post('/createuser', [UserAuth::class, 'create'])->name('create_user');
-Route::post('/loginuser', [UserAuth::class, 'login'])->name('login_user');
-Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
+
 
 Route::get('/pricecalculator', [PriceCalculationController::class, 'index'])->name('pricecalculator');
 Route::post('/pricecalculator', [PriceCalculationController::class, 'calculation'])->name('pricecalculator.calculation');
@@ -241,5 +240,26 @@ Route::prefix('admin')->name('admin.')->group(function(){
 				Route::get('/activate/{id}', [ShelfController::class, 'activate'])->name('activate');
 			});
 		});
+	});
+
+
+});
+
+
+
+
+//------------------------User Panel------------------------//
+Route::get('/login', [HomeController::class, 'login'])->name('login');
+Route::get('/register', [HomeController::class, 'register'])->name('register');
+
+Route::prefix('userpanel')->name('userpanel.')->group(function(){
+    Route::post('/createuser', [UserAuth::class, 'create'])->name('create_user');
+    Route::post('/loginuser', [UserAuth::class, 'login'])->name('login_user');
+
+    Route::middleware('userpanellogin')->group(function(){
+        Route::get('/', [UserPanelController::class, 'index'])->name('index');
+        Route::post('/updateuser', [UserPanelController::class, 'updateuser'])->name('updateuser');
+
+        Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});
 });

@@ -8,21 +8,29 @@
 @if($errors->any())
     <script>
         Swal.fire({
+            position: 'top-end',
             icon: 'error',
-            title: 'Error',
-            text: '{{ implode('', $errors->all(':message')) }}'
+            title: '{{ implode('', $errors->all(':message')) }}',
+            timer: 1500
         })
     </script>
 @endif
 
-@if (Auth::user())
-    {{ Auth::user()->name}}
+@if (session()->has('message'))
+    <script>
+        Swal.fire({
+            position: 'top-end',
+            icon: 'info',
+            title: '{{ session()->get('message') }}',
+            timer: 3500
+        })
+    </script>
 @endif
 
 <section id="Login">
     <div class="container">
         <div class="row mt-6 loginForm">
-            <form action="{{ route('login_user') }}" method="post">
+            <form action="{{ route('userpanel.login_user') }}" method="post">
                 @csrf
                 <div class="col-lg-12">
                     <div class="row">

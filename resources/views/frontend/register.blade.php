@@ -7,7 +7,7 @@
     <div class="container">
         <div class="row mt-6 loginForm">
             <div class="col-lg-12">
-                <form method="post" action="{{ route('create_user') }}">
+                <form method="post" action="{{ route('userpanel.create_user') }}">
                     @csrf
                     <div class="row">
                         <div class="col-lg-12">
