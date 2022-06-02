@@ -41,6 +41,14 @@ class UserPanelController extends Controller
         return Redirect::back()->with('message', 'Profile successfully updated');
     }
 
+    public function updateuseraddress(Request $request){
+
+        DB::table('user_addresses')->where('id' , $request->id)->update($request->all());
+
+        $msg = "This address succesfully updated";
+        return response()->json(array('msg' => $msg), 200);
+    }
+
     public function deleteuseraddress($address_id)
     {
 
@@ -48,5 +56,23 @@ class UserPanelController extends Controller
 
         $msg = "This address succesfully deleted";
         return response()->json(array('msg' => $msg), 200);
+    }
+
+    public function updatemyprofile(Request $request){
+
+        $request->request->remove('_token');
+        $input = collect(request()->all())->filter(function($value) {
+            return null !== $value;
+        })->toArray();
+
+        UserModel::where('id', Auth::user()->id)->update($input);
+
+        if($request->filled('address' , 'city' , 'country' , 'postcode')){
+            UserModel::where('id', Auth::user()->id)->update(array('status' => '1'));
+        }else{
+            UserModel::where('id', Auth::user()->id)->update(array('status' => '0'));
+        }
+
+        return Redirect::back()->with('message', 'Profile successfully updated');
     }
 }

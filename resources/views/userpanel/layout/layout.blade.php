@@ -328,8 +328,8 @@
 
     <script src="{{ asset('/') }}frontend/userpanel/js/chart.js"></script>
     <!-- JavaScript-->
-    <script src="{{ asset('/') }}frontend/userpanel/js/index.js"></script>
-    <script src="{{ asset('/') }}frontend/userpanel/js/d3.js"></script>
+    {{-- <script src="{{ asset('/') }}frontend/userpanel/js/index.js"></script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/d3.js"></script> --}}
     <script src="{{ asset('/') }}frontend/userpanel/js/nav.js"></script>
 </body>
 
