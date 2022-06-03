@@ -3,11 +3,24 @@
 @section('title', 'Dashboard')
 
 @section('css')
-<!-- Ionicons -->
-<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 @endsection
 
 @section('content')
+
+    @if (session()->has('log_in_message'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'info',
+                title: '{{ session()->get('log_in_message') }}',
+                showConfirmButton: false,
+                backdrop: false,
+                timer: 2000
+            })
+        </script>
+    @endif
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -20,7 +33,8 @@
                 <div class="icon">
                     <i class="ion ion-person-add"></i>
                 </div>
-                <a href="{{route('admin.users')}}" class="small-box-footer" style="color:white !important">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ route('admin.users') }}" class="small-box-footer" style="color:white !important">More info <i
+                        class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
         <!-- ./col -->

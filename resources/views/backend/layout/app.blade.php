@@ -18,7 +18,7 @@
         <!-- Ionicons -->
         <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
         <!-- Toastr -->
-        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.css">        
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/toastr/toastr.min.css">
         <!-- DataTables -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-bs4/css/dataTables.bootstrap4.min.css">
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-responsive/css/responsive.bootstrap4.min.css">
@@ -27,7 +27,8 @@
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/fontawesome-free/css/all.min.css">
         @yield('css')
         <!-- Theme style -->
-        <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/adminlte.min.css">        
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/adminlte.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
 
         <style>
             .form-control.is-invalid, .was-validated .form-control:invalid{
@@ -58,7 +59,7 @@
                 </ul>
 
                 <!-- Right navbar links -->
-                <ul class="navbar-nav ml-auto">                    
+                <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#" role="button" data-toggle="dropdown" >
                             <i class="far fa-bell"></i>
@@ -82,7 +83,7 @@
                             <div class="dropdown-divider"></div>
                             @endif
                         </div>
-                    </li>                    
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{route('admin.logout')}}" role="button">
                             <i class="fas fa-sign-out-alt"></i>
@@ -105,10 +106,10 @@
                     <!-- Sidebar user (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img class="img-circle elevation-2" src="{{asset('/')}}backend/assets/img/{{ Auth::guard('employee')->user()->image == NULL ? 'icons/user.png' : 'employees/'.Auth::guard('employee')->user()->image }}" alt="user profile picture">
+                            <img class="img-circle elevation-2" src="{{asset('/')}}backend/assets/img/{{ Auth::user()->image == NULL ? 'icons/user.png' : 'employees/'.Auth::user()->user()->image }}" alt="user profile picture">
                         </div>
                         <div class="info">
-                            <a href="{{route('admin.profile')}}" class="d-block text-capitalize">{{Auth::guard('employee')->user()->name}}</a>
+                            <a href="{{route('admin.profile')}}" class="d-block text-capitalize">{{Auth::user()->name}}</a>
                         </div>
                     </div>
 
@@ -118,24 +119,24 @@
                             <!-- Add icons to the links using the .nav-icon class
                                 with font-awesome or any other icon font library -->
                             <li class="nav-item">
-                                <a href="{{route('admin.dashboard')}}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">                                    
+                                <a href="{{route('admin.dashboard')}}" class="nav-link @if(Request::segment(2) == 'dashboard') active @endif">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p> Dashboard </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.users')}}" class="nav-link @if(Request::segment(2) == 'users') active @endif">                                    
+                                <a href="{{route('admin.users')}}" class="nav-link @if(Request::segment(2) == 'users') active @endif">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p> Users </p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.orders.index')}}" class="nav-link @if(Request::segment(2) == 'orders') active @endif">                                    
+                                <a href="{{route('admin.orders.index')}}" class="nav-link @if(Request::segment(2) == 'orders') active @endif">
                                     <i class="nav-icon fas fa-file-alt"></i>
                                     <p> Orders Manager</p>
                                 </a>
                             </li>
-                            
+
 							<li class="nav-item @if(Request::segment(2) == 'messages') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'messages') active @endif">
 									<i class="nav-icon far fa-envelope"></i>
@@ -155,7 +156,7 @@
 									</li>
 								</ul>
 							</li>
-                            <li class="nav-header text-uppercase">Configurations</li>    
+                            <li class="nav-header text-uppercase">Configurations</li>
 
                             <li class="nav-item @if(Request::segment(3) == 'cargo' || Request::segment(3) == 'domestic') menu-open @endif">
                                 <a href="#" class="nav-link @if(Request::segment(3) == 'cargo' || Request::segment(3) == 'domestic') active @endif">
@@ -196,30 +197,30 @@
                                         </a>
                                     </li>
                                 </ul>
-                            </li>							
+                            </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.warehouses.index')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">                                    
+                                <a href="{{route('admin.warehouses.index')}}" class="nav-link @if(Request::segment(2) == 'warehouses') active @endif">
                                     <i class="nav-icon fas fa-warehouse"></i>
                                     <p> Warehouses </p>
                                 </a>
-                            </li> 
+                            </li>
 							<li class="nav-item">
                                 <a href="{{route('admin.balance.index')}}" class="nav-link @if(Request::segment(2) == 'balance') active @endif">
 									<i class="nav-icon fas fa-credit-card"></i>
                                     <p> Balance </p>
                                 </a>
-                            </li> 
+                            </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.services.index')}}" class="nav-link @if(Request::segment(2) == 'services') active @endif">                                    
+                                <a href="{{route('admin.services.index')}}" class="nav-link @if(Request::segment(2) == 'services') active @endif">
                                     <i class="nav-icon fab fa-servicestack"></i>
                                     <p> Additional Services </p>
                                 </a>
                             </li>
-							
-                            <li class="nav-header text-uppercase">Site Settings</li> 
+
+                            <li class="nav-header text-uppercase">Site Settings</li>
 
 							<li class="nav-item">
-                                <a href="{{route('admin.faqs.index')}}" class="nav-link @if(Request::segment(2) == 'faqs') active @endif">                                    
+                                <a href="{{route('admin.faqs.index')}}" class="nav-link @if(Request::segment(2) == 'faqs') active @endif">
                                     <i class="nav-icon fas fa-question"></i>
                                     <p> FAQS </p>
                                 </a>
@@ -255,7 +256,7 @@
 										<i class="fas fa-angle-left right"></i>
                                         <span class="badge badge-info right">{{count($career_applies) > 0 ? count($career_applies) : ''}}</span>
 									</p>
-								</a> 
+								</a>
 								<ul class="nav nav-treeview">
 									<li class="nav-item">
 										<a href="{{route('admin.human.careers.index')}}" class="nav-link @if(Request::segment(3) == 'careers') active @endif">
@@ -267,18 +268,18 @@
 								</ul>
 							</li>
                             <li class="nav-item">
-                                <a href="{{route('admin.blogs.index')}}" class="nav-link @if(Request::segment(2) == 'blogs') active @endif">                                    
+                                <a href="{{route('admin.blogs.index')}}" class="nav-link @if(Request::segment(2) == 'blogs') active @endif">
                                     <i class="nav-icon fas fa-blog"></i>
                                     <p> Blogs </p>
                                 </a>
-                            </li>					
+                            </li>
                         </ul>
                     </nav>
                     <!-- /.sidebar-menu -->
                 </div>
                 <!-- /.sidebar -->
-            </aside>           
-            
+            </aside>
+
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
@@ -300,7 +301,7 @@
                 <section class="content">
                     <div class="container-fluid">
                         @yield('content')
-                    </div>                    
+                    </div>
                 </section>
             </div>
             <footer class="main-footer">
@@ -336,8 +337,8 @@
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             });
         </script>
-        @yield('js')              
-        
+        @yield('js')
+
         @toastr_js
         @toastr_render
 

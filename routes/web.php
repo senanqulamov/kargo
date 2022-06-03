@@ -87,13 +87,10 @@ Route::get('generate', function (){
 // admin section
 Route::prefix('admin')->name('admin.')->group(function(){
 
-	Route::middleware('isLogin')->group(function(){
-		// login
-		Route::get('/', [AuthController::class, 'index'])->name('index');
-		Route::post('/', [AuthController::class, 'postIndex'])->name('postIndex');
-	});
+    Route::get('/', [AuthController::class, 'index'])->name('index');
+    Route::post('/', [AuthController::class, 'login'])->name('login');
 
-	Route::middleware('notLogin')->group(function(){
+	Route::middleware('AdminLogin')->group(function(){
 		// dashboard
 		Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 		Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

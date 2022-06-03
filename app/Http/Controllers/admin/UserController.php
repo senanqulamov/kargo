@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use App\Models\User;
+use App\Models\User as UserModel;
 use Validator;
 
 use Illuminate\Support\Facades\Hash;
@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     public function index(){
-        $users=User::all();
-        
+        $users=UserModel::all();
+
         return view('backend.users', compact('users'));
     }
 
     public function details($id){
-        $user=User::where('id', $id)->first();
+        $user=UserModel::where('id', $id)->first();
 
         return view('backend.user-detail', compact('user'));
     }
@@ -34,9 +34,9 @@ class UserController extends Controller
         if(!$validator->passes()){
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
-            $user=User::find($id);
+            $user=UserModel::find($id);
             $user->name=$request->username;
-            $user->email=$request->email;            
+            $user->email=$request->email;
             $user->phone=$request->phone;
             $user->update();
 
@@ -52,7 +52,7 @@ class UserController extends Controller
         if(!$validator->passes()){
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
-            $user=User::find($id);
+            $user=UserModel::find($id);
             $user->password=Hash::make($request->inputPassword);
             $user->update();
 
