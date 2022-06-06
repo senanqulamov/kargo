@@ -14,7 +14,7 @@
         <div class="card card-primary card-outline">
             <div class="card-body box-profile">
                 <div class="text-center">
-                    <img src="{{asset('/')}}backend/assets/img/{{ $user->image == NULL ? 'icons/user.png' : 'users/'.$user->image }}" alt="user profile picture" class="profile-user-img img-fluid img-circle">
+                    <img src="{{asset('/')}}images/{{ $user->image == NULL ? 'user.png' : $user->image }}" alt="user profile picture" class="profile-user-img img-fluid img-circle">
                 </div>
 
                 <h3 class="profile-username text-center">{{$user->name}}</h3>
@@ -28,7 +28,7 @@
                     </li>
                     <li class="list-group-item">
                         <b>Phone</b> <a class="float-right">{{$user->phone}}</a>
-                    </li>                  
+                    </li>
                 </ul>
             </div>
             <!-- /.card-body -->
@@ -95,7 +95,7 @@
     $(function(){
         $("#editGeneralProfile").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),
@@ -123,7 +123,7 @@
 
         $("#editGeneralPassword").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),

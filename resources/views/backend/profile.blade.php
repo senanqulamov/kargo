@@ -28,7 +28,7 @@
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle"
-                            src="{{ asset('/') }}backend/assets/img/{{ Auth::user()->image == null ? 'icons/user.png' : 'users/' . Auth::user()->image }}"
+                            src="{{ asset('/') }}images/{{ Auth::user()->image == null ? 'icons/user.png' : Auth::user()->image }}"
                             alt="user profile picture">
                     </div>
 
@@ -66,13 +66,13 @@
                 <div class="card-body">
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
-                            <form class="form-horizontal" method="post" action=""
+                            <form class="form-horizontal" method="post" action="{{ route('admin.profile.update') }}"
                                 id="editGeneralProfile">
                                 @csrf
                                 <div class="form-group">
                                     <label for="inputUsername">Username</label>
                                     <input type="text" class="form-control @error('username') is-invalid @enderror"
-                                        id="inputUsername" placeholder="Username" name="username"
+                                        id="inputUsername" placeholder="Username" name="name"
                                         value="{{ Auth::user()->name }}" />
                                     <span class="text-danger error-text username_error"></span>
                                 </div>
@@ -95,13 +95,14 @@
                             </form>
                         </div>
                         <div class="tab-pane" id="timeline">
-                            <form>
+                            <form method="POST" action="{{ route('admin.image.update') }}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-group">
                                     <label for="fileProfileImage">Profile Image</label>
                                     <div class="col-sm-6">
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="fileProfileImage">
+                                                <input type="file" name="image" class="custom-file-input" id="fileProfileImage">
                                                 <label class="custom-file-label" for="fileProfileImage">Choose file</label>
                                             </div>
                                         </div>
@@ -150,36 +151,4 @@
             <!-- /.card -->
         </div>
     </div>
-@endsection
-
-@section('js')
-    <script>
-        $(function() {
-            $("#editGeneralProfile").submit(function(e) {
-                e.preventDefault();
-
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: $(this).attr('method'),
-                    data: new FormData(this),
-                    processData: false,
-                    dataType: 'json',
-                    contentType: false,
-                    beforeSend: function() {
-                        $(document).find('span.error-text').text('');
-                    },
-                    success: function(data) {
-                        if (data.status == false) {
-                            $.each(data.error, function(prefix, val) {
-                                $('span.' + prefix + '_error').text(val[0]);
-                            });
-                        } else {
-                            //toastr.success();
-                            toastr.success(data.msg, 'Congratulations!')
-                        }
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

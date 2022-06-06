@@ -40,7 +40,11 @@
                         <tbody>
                             @foreach($users as $user)
                             <tr>
-                                <td><img src="asset('/')}}backend/assets/img/{{ $user->image }}" alt=""></td>
+                                <td>
+                                    <img class="profile-user-img img-fluid img-circle"
+                                    src="{{ asset('/') }}images/{{ $user->image == null ? 'user.png' : $user->image }}"
+                                    alt="user profile picture">
+                                </td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->phone }}</td>

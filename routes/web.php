@@ -97,7 +97,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// profile
 		Route::get('/profile', [AdminController::class, 'profile'])->name('profile');
-		Route::post('/profile', [AdminController::class, 'postProfile'])->name('profile.post');
+		Route::post('/updateprofile', [AdminController::class, 'updateprofile'])->name('profile.update');
+		Route::post('/updateimage', [AdminController::class, 'updateimage'])->name('image.update');
 
 		// users
 		Route::get('/users', [UserController::class, 'index'])->name('users');

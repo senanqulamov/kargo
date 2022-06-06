@@ -106,7 +106,7 @@
                     <!-- Sidebar user (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img class="img-circle elevation-2" src="{{asset('/')}}backend/assets/img/{{ Auth::user()->image == NULL ? 'icons/user.png' : 'employees/'.Auth::user()->user()->image }}" alt="user profile picture">
+                            <img class="img-circle elevation-2" src="{{asset('/')}}images/{{ Auth::user()->image == NULL ? 'icons/user.png' : Auth::user()->image }}" alt="user profile picture">
                         </div>
                         <div class="info">
                             <a href="{{route('admin.profile')}}" class="d-block text-capitalize">{{Auth::user()->name}}</a>
