@@ -91,6 +91,20 @@ nav {
     color: #fff;
     font-size: 1.3rem;
   }
+
+
+  &__image{
+    display: flex;
+    justify-content: flex-end;
+
+    img{
+      width: 25%;
+    }
+
+
+  }
+
+
 }
 
 .color {
