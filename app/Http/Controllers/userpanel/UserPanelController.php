@@ -75,4 +75,20 @@ class UserPanelController extends Controller
 
         return Redirect::back()->with('message', 'Profile successfully updated');
     }
+
+
+    public function manualorder(){
+
+        $countries = DB::table('countries')->select('name' , 'code' , 'id')->get();
+
+        // dd($countries);
+
+        return view('userpanel.frontend.manualorder')->with('countries' , $countries);
+    }
+
+    public function postManualorder(Request $request){
+        dd($request->all());
+
+
+    }
 }

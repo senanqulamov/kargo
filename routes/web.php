@@ -262,6 +262,11 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::post('/updatemyprofile', [UserPanelController::class, 'updatemyprofile'])->name('updatemyprofile');
         Route::post('/updateuseraddress', [UserPanelController::class, 'updateuseraddress'])->name('updateuseraddress');
 
+
+        Route::get('/manualorder', [UserPanelController::class, 'manualorder'])->name('manualorder');
+        Route::post('/postManualorder', [UserPanelController::class, 'postManualorder'])->name('post.manualorder');
+
+
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});
 });
