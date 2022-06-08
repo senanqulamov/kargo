@@ -32,7 +32,7 @@
                             <ul class="list-group list-group-flush">
                                 <h4><i class="fa-solid fa-info headerIcon"></i> Customer</h4>
                                 <li class="list-group-item pb-4">
-                                    <select class="form-select border-primary" aria-label="Default select example" required>
+                                    <select class="form-select border-primary" name="customer" required>
                                         <option class="optionText" selected>
                                             Open this select menu
                                         </option>
@@ -47,7 +47,7 @@
                                             <h5>Address Information</h5>
                                             <h6>Country<span class="red">*</span></h6>
                                             <select class="form-select mb-3" name="country">
-                                                <option value="" selected disabled>Select</option>
+                                                <option value="null" selected disabled>Select</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->id }}">{{ $country->name }}</option>
                                                 @endforeach
@@ -146,18 +146,25 @@
                                         + Add another package
                                     </button>
                                     <!-- JS paket kodu -->
-                                    <ul class="list-group list-group-flush border rounded mb-3 p-2">
+                                    {{-- <ul class="list-group list-group-flush border rounded mb-3 p-2">
                                         <h4><i class="fa-solid fa-box commonIcon"></i> Package</h4>
                                         <li class="list-group-item">
+                                            <input
+                                                class="form-control default_package"
+                                                type="hidden"
+                                                name="package_id[]"
+                                                id="uniq_package_id"
+                                                value=""
+                                            />
                                             <div class="row">
                                                 <div class="col-6 col-md">
                                                     <h6>Count:<span class="red">*</span></h6>
                                                     <input class="form-control boxCount" type="text" placeholder="1"
-                                                        aria-label="default input example" name="count"/>
+                                                        aria-label="default input example" name="package_count[0]"/>
                                                 </div>
                                                 <div class="col-6 col-md mb-3">
                                                     <h6>Type:<span class="red">*</span></h6>
-                                                    <select class="form-select" aria-label="Default select example">
+                                                    <select class="form-select" name="package_type[0]">
                                                         <option selected>box</option>
                                                         <option value="1">One</option>
                                                         <option value="2">Two</option>
@@ -168,7 +175,7 @@
                                                     <h6>Length:<span class="red">*</span></h6>
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control boxVolume" placeholder="15"
-                                                            aria-label="Username" aria-describedby="basic-addon1" name="length"/>
+                                                        name="package_length[0]"/>
                                                         <span class="input-group-text" id="basic-addon1">sm</span>
                                                     </div>
                                                 </div>
@@ -176,7 +183,7 @@
                                                     <h6>Width:<span class="red">*</span></h6>
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control boxVolume" placeholder="15"
-                                                            aria-label="Username" aria-describedby="basic-addon1" />
+                                                        name="package_width[0]" />
                                                         <span class="input-group-text" id="basic-addon1">sm</span>
                                                     </div>
                                                 </div>
@@ -184,7 +191,7 @@
                                                     <h6>Height:<span class="red">*</span></h6>
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control boxVolume" placeholder="15"
-                                                            aria-label="Username" aria-describedby="basic-addon1" />
+                                                        name="package_height[0]" />
                                                         <span class="input-group-text" id="basic-addon1">sm</span>
                                                     </div>
                                                 </div>
@@ -192,7 +199,7 @@
                                                     <h6>Weight:<span class="red">*</span></h6>
                                                     <div class="input-group mb-3">
                                                         <input type="text" class="form-control boxWeight" placeholder="2"
-                                                            aria-label="Username" aria-describedby="basic-addon1" />
+                                                            name="package_weight[0]" />
                                                         <span class="input-group-text" id="basic-addon1">kq</span>
                                                     </div>
                                                 </div>
@@ -213,22 +220,28 @@
                                                 </button>
                                             </h4>
                                             <div class="row">
+                                                <input
+                                                    class="form-control"
+                                                    type="hidden"
+                                                    name="product_id[]"
+                                                    value="0"
+                                                />
                                                 <div class="col-6 col-md mb-3">
                                                     <h6>SKU Code</h6>
                                                     <input class="form-control" type="text" placeholder="12345"
-                                                        aria-label="default input example" name="sku_code/0"/>
+                                                        aria-label="default input example" name="sku_code[0]"/>
                                                 </div>
                                                 <div class="col-6 col-md mb-3">
                                                     <h6>Product<span class="red">*</span></h6>
                                                     <input class="form-control" type="text" placeholder="Clock"
-                                                        aria-label="default input example" name="product/0"/>
+                                                        aria-label="default input example" name="product[0]"/>
                                                 </div>
                                                 <div class="col-6 col-md mb-3">
                                                     <h6>Count<span class="red">*</span></h6>
                                                     <div class="input-group">
                                                         <input class="form-control" type="text"
                                                             placeholder="1 (Storage 3)"
-                                                            aria-label="default input example" name="count/0"/>
+                                                            aria-label="default input example" name="count[0]"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-6 col-md mb-3">
@@ -236,7 +249,7 @@
                                                     <div class="input-group">
                                                         <input type="text" class="form-control" placeholder="2"
                                                             aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="weight/0"/>
+                                                            name="weight[0]"/>
                                                         <span class="input-group-text" id="basic-addon1">kq</span>
                                                     </div>
                                                 </div>
@@ -244,13 +257,13 @@
                                                     <h6>Unit Price<span class="red">*</span></h6>
                                                     <input class="form-control" type="text" placeholder="200"
                                                         aria-label="default input example"
-                                                        name="price/0"/>
+                                                        name="price[0]"/>
                                                 </div>
                                                 <div class="col-6 col-md mb-3">
                                                     <h6>GTIP Code</h6>
                                                     <input class="form-control" type="text" placeholder="12345"
                                                         aria-label="default input example"
-                                                        name="gtip_code/0"/>
+                                                        name="gtip_code[0]"/>
                                                 </div>
                                                 <div class="col d-flex align-items-center">
                                                     <button type="button" class="btn btn-danger" onclick="silProduct(this)">
@@ -260,6 +273,7 @@
                                             </div>
                                         </li>
                                     </ul>
+                                    <hr> --}}
 
                                     <!-- 2ci paket -->
                                 </li>
@@ -455,16 +469,16 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked />
-                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="battery"
+                                                id="battery_yes" checked />
+                                            <label class="form-check-label" for="battery_yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1" />
-                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="battery"
+                                                id="battery_no" />
+                                            <label class="form-check-label" for="battery_no">
                                                 No
                                             </label>
                                         </div>
