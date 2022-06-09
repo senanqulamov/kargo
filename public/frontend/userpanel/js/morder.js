@@ -3,12 +3,13 @@ let yeniPaketYarat = document.querySelector(".paketYaradilanYer");
 var product_id = 1;
 var uniq_package_id = Math.random().toString(36).substr(2, 9);
 
-var default_package_hidden = document.querySelector('.default_package');
-default_package_hidden.setAttribute('value' , uniq_package_id);
+var default_package_hidden = document.querySelector(".default_package");
+default_package_hidden.setAttribute("value", uniq_package_id);
 
 function yeniPaketElaveEt() {
     uniq_package_id = Math.random().toString(36).substr(2, 9);
-    let yeniPaket = ` <ul
+    let yeniPaket =
+        ` <ul
                     class="list-group list-group-flush border rounded mb-3 p-2"
                   >
                     <h4><i class="fa-solid fa-box commonIcon"></i> Package</h4>
@@ -18,7 +19,9 @@ function yeniPaketElaveEt() {
                             type="hidden"
                             name="package_id[]"
                             id="uniq_package_id"
-                            value="`+uniq_package_id+`"
+                            value="` +
+        uniq_package_id +
+        `"
                           />
                       <div class="row">
                         <div class="col-6 col-md">
@@ -27,14 +30,18 @@ function yeniPaketElaveEt() {
                             class="form-control boxCount"
                             type="text"
                             placeholder="1"
-                            name="package_count[`+uniq_package_id+`]"
+                            name="package_count[` +
+        uniq_package_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
                           <h6>Type:<span class="red">*</span></h6>
                           <select
                             class="form-select"
-                            name="package_type[`+uniq_package_id+`]"
+                            name="package_type[` +
+        uniq_package_id +
+        `]"
                           >
                             <option selected>box</option>
                             <option value="1">One</option>
@@ -49,7 +56,9 @@ function yeniPaketElaveEt() {
                               type="text"
                               class="form-control"
                               placeholder="15"
-                              name="package_length[`+uniq_package_id+`]"
+                              name="package_length[` +
+        uniq_package_id +
+        `]"
                             />
                             <span class="input-group-text" id="basic-addon1"
                               >sm</span
@@ -63,7 +72,9 @@ function yeniPaketElaveEt() {
                               type="text"
                               class="form-control"
                               placeholder="15"
-                              name="package_width[`+uniq_package_id+`]"
+                              name="package_width[` +
+        uniq_package_id +
+        `]"
                             />
                             <span class="input-group-text" id="basic-addon1"
                               >sm</span
@@ -77,7 +88,9 @@ function yeniPaketElaveEt() {
                               type="text"
                               class="form-control"
                               placeholder="15"
-                              name="package_height[`+uniq_package_id+`]"
+                              name="package_height[` +
+        uniq_package_id +
+        `]"
                             />
                             <span class="input-group-text" id="basic-addon1"
                               >sm</span
@@ -91,7 +104,9 @@ function yeniPaketElaveEt() {
                               type="text"
                               class="form-control"
                               placeholder="2"
-                              name="package_weight[`+uniq_package_id+`]"
+                              name="package_weight[` +
+        uniq_package_id +
+        `]"
                             />
                             <span class="input-group-text" id="basic-addon1"
                               >kq</span
@@ -127,8 +142,12 @@ function yeniPaketElaveEt() {
                         <input
                             class="form-control"
                             type="hidden"
-                            name="product_id[`+uniq_package_id+`][]"
-                            value="`+product_id+`"
+                            name="product_id[` +
+        uniq_package_id +
+        `][]"
+                            value="` +
+        product_id +
+        `"
                           />
                         <div class="col-6 col-md mb-3">
                           <h6>SKU Code</h6>
@@ -136,7 +155,11 @@ function yeniPaketElaveEt() {
                             class="form-control"
                             type="text"
                             placeholder="12345"
-                            name="sku_code[`+uniq_package_id+`][`+product_id+`]"
+                            name="sku_code[` +
+        uniq_package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
@@ -145,7 +168,11 @@ function yeniPaketElaveEt() {
                             class="form-control"
                             type="text"
                             placeholder="Clock"
-                            name="product[`+uniq_package_id+`][`+product_id+`]"
+                            name="product[` +
+        uniq_package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
@@ -155,7 +182,11 @@ function yeniPaketElaveEt() {
                               class="form-control"
                               type="text"
                               placeholder="1 (Storage 3)"
-                              name="count[`+uniq_package_id+`][`+product_id+`]"
+                              name="count[` +
+        uniq_package_id +
+        `][` +
+        product_id +
+        `]"
                             />
                           </div>
                         </div>
@@ -166,7 +197,11 @@ function yeniPaketElaveEt() {
                               type="text"
                               class="form-control"
                               placeholder="2"
-                              name="weight[`+uniq_package_id+`][`+product_id+`]"
+                              name="weight[` +
+        uniq_package_id +
+        `][` +
+        product_id +
+        `]"
                             />
                             <span class="input-group-text" id="basic-addon1"
                               >kq</span
@@ -179,7 +214,11 @@ function yeniPaketElaveEt() {
                             class="form-control"
                             type="text"
                             placeholder="200"
-                            name="price[`+uniq_package_id+`][`+product_id+`]"
+                            name="price[` +
+        uniq_package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
@@ -188,7 +227,11 @@ function yeniPaketElaveEt() {
                             class="form-control"
                             type="text"
                             placeholder="12345"
-                            name="gtip_code[`+uniq_package_id+`][`+product_id+`]"
+                            name="gtip_code[` +
+        uniq_package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col d-flex align-items-center">
@@ -212,16 +255,21 @@ function yeniPaketElaveEt() {
 // Yeni product yaratmaq
 function yeniProductElaveEt(e) {
     var package = e.parentElement.parentElement.parentElement;
-    uniq_package = package.querySelector('#uniq_package_id');
+    uniq_package = package.querySelector("#uniq_package_id");
     package_id = uniq_package.value;
     console.log(uniq_package.value);
 
-    let yeniProduct = `<div class="row ">
+    let yeniProduct =
+        `<div class="row ">
                         <input
                             class="form-control"
                             type="hidden"
-                            name="product_id[`+package_id+`][]"
-                            value="`+product_id+`"
+                            name="product_id[` +
+        package_id +
+        `][]"
+                            value="` +
+        product_id +
+        `"
                           />
                         <div class="col-6 col-md mb-3">
                           <h6>SKU Code</h6>
@@ -230,7 +278,11 @@ function yeniProductElaveEt(e) {
                             type="text"
                             placeholder="12345"
                             aria-label="default input example"
-                            name="sku_code[`+package_id+`][`+product_id+`]"
+                            name="sku_code[` +
+        package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
@@ -240,7 +292,11 @@ function yeniProductElaveEt(e) {
                             type="text"
                             placeholder="Clock"
                             aria-label="default input example"
-                            name="product[`+package_id+`][`+product_id+`]"
+                            name="product[` +
+        package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
@@ -251,7 +307,11 @@ function yeniProductElaveEt(e) {
                               type="text"
                               placeholder="1 (Storage 3)"
                               aria-label="default input example"
-                              name="count[`+package_id+`][`+product_id+`]"
+                              name="count[` +
+        package_id +
+        `][` +
+        product_id +
+        `]"
                             />
                           </div>
                         </div>
@@ -264,7 +324,11 @@ function yeniProductElaveEt(e) {
                               placeholder="2"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
-                              name="weight[`+package_id+`][`+product_id+`]"
+                              name="weight[` +
+        package_id +
+        `][` +
+        product_id +
+        `]"
                             />
                             <span class="input-group-text" id="basic-addon1"
                               >kq</span
@@ -278,7 +342,11 @@ function yeniProductElaveEt(e) {
                             type="text"
                             placeholder="200"
                             aria-label="default input example"
-                            name="price[`+package_id+`][`+product_id+`]"
+                            name="price[` +
+        package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col-6 col-md mb-3">
@@ -288,7 +356,11 @@ function yeniProductElaveEt(e) {
                             type="text"
                             placeholder="12345"
                             aria-label="default input example"
-                            name="gtip_code[`+package_id+`][`+product_id+`]"
+                            name="gtip_code[` +
+        package_id +
+        `][` +
+        product_id +
+        `]"
                           />
                         </div>
                         <div class="col d-flex align-items-center">
@@ -307,7 +379,6 @@ function yeniProductElaveEt(e) {
     yeniProductYarat.insertAdjacentHTML("beforeend", yeniProduct);
     product_id++;
 }
-
 
 // paket silmek
 

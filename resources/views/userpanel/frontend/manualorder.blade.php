@@ -13,6 +13,51 @@
             })
         </script>
     @endif
+    @if (session()->has('error'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'error',
+                title: '{{ session()->get('error') }}',
+                showConfirmButton: false,
+                backdrop: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
+    <style>
+        .custom-file-upload {
+            border: 1px solid transparent;
+            border-radius: 5px;
+            display: inline-block;
+            padding: 6px 12px;
+            cursor: pointer;
+            background: #68D7FA;
+            color: white;
+            box-shadow: 0px 4px 10px 0px #00000026;
+        }
+
+        .custom-file-upload-div {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cont-for-file-input {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .remove_button_file_upld {
+            all: unset;
+        }
+    </style>
 
     <div class="drop__box">
         <div class="drop__box-img">
@@ -23,7 +68,7 @@
 
     <section id="manual-order">
         <div class="variable variableManualOrder container py-4 row mx-auto">
-            <form action="{{ route('userpanel.post.manualorder') }}" method="POST">
+            <form action="{{ route('userpanel.post.manualorder') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-12">
                     <!-- Customer -->
@@ -32,13 +77,22 @@
                             <ul class="list-group list-group-flush">
                                 <h4><i class="fa-solid fa-info headerIcon"></i> Customer</h4>
                                 <li class="list-group-item pb-4">
-                                    <select class="form-select border-primary" name="customer" required>
-                                        <option class="optionText" selected>
+                                    <select class="form-select border-primary" onchange="changeUserAddress(this)" required>
+                                        <option class="optionText" selected disabled>
                                             Open this select menu
                                         </option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
+                                        @foreach ($user_addresses as $address)
+                                            <option>
+                                                {{ $address->country }}<-->
+                                                {{ $address->city }}<-->
+                                                {{ $address->state }}<-->
+                                                {{ $address->address }}<-->
+                                                {{ $address->zipcode }}<-->
+                                                {{ $address->name }}<-->
+                                                {{ $address->phone }}<-->
+                                                {{ $address->email }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </li>
                                 <li class="list-group-item mt-3">
@@ -49,7 +103,7 @@
                                             <select class="form-select mb-3" name="country">
                                                 <option value="null" selected disabled>Select</option>
                                                 @foreach ($countries as $country)
-                                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                    <option value="{{ $country->name }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             <h6>City<span class="red">*</span></h6>
@@ -78,7 +132,7 @@
                                                 aria-label="default input example" name="email" />
                                             <div class="form-check defaultCheckbox">
                                                 <input class="form-check-input" type="checkbox" id="save_address"
-                                                    name="save_address" />
+                                                    name="save_address">
                                                 <label class="form-check-label" for="save_address">
                                                     Save to address book
                                                 </label>
@@ -102,12 +156,12 @@
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6>IOSS Number<span class="red">*</span></h6>
                                             <input class="form-control" type="text" placeholder="498980948"
-                                                aria-label="default input example" name="ioss_number"/>
+                                                aria-label="default input example" name="ioss_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6>Vat Number<span class="red">*</span></h6>
                                             <input class="form-control" type="text" placeholder="498980948"
-                                                aria-label="default input example" name="vat_number"/>
+                                                aria-label="default input example" name="vat_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6>Currency unit<span class="red">*</span></h6>
@@ -136,14 +190,14 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <input class="form-control" type="text" placeholder="Clock, Book"
-                                                aria-label="default input example" name="order_info"/>
+                                                aria-label="default input example" name="order_info" />
                                         </div>
                                     </div>
                                 </li>
                                 <!-- Package -->
                                 <li class="list-group-item paketYaradilanYer">
                                     <button type="button" class="btn btn-warning my-3" onclick="yeniPaketElaveEt()">
-                                        + Add another package
+                                        + Add package
                                     </button>
                                     <!-- JS paket kodu -->
                                     {{-- <ul class="list-group list-group-flush border rounded mb-3 p-2">
@@ -281,40 +335,35 @@
                                 <li class="list-group-item mt-3">
                                     <div class="row">
                                         <div class="col-12 row">
-                                            <div
-                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-hand-holding-dollar commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total amount</h5>
                                                     <span class="totalText totalAmount"></span>
                                                 </div>
                                             </div>
-                                            <div
-                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-cube commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total volume</h5>
                                                     <span class="totalText totalVolume"></span>
                                                 </div>
                                             </div>
-                                            <div
-                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-scale-balanced commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total weight</h5>
                                                     <span class="totalText totalWeight"></span>
                                                 </div>
                                             </div>
-                                            <div
-                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-p headerIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
                                                     <span class="totalText totalPricing">0.003</span>
                                                 </div>
                                             </div>
-                                            <div
-                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-sack-dollar commonIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
@@ -352,8 +401,8 @@
                                                 <li class="list-group-item d-flex">
                                                     <span class="me-2">69$ </span>
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1" />
+                                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                            id="flexRadioDefault1" />
                                                     </div>
                                                 </li>
                                             </ul>
@@ -469,15 +518,15 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="battery"
-                                                id="battery_yes" checked />
+                                            <input class="form-check-input" type="radio" name="battery" id="battery_yes"
+                                                value="yes" />
                                             <label class="form-check-label" for="battery_yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="battery"
-                                                id="battery_no" />
+                                            <input class="form-check-input" type="radio" name="battery" id="battery_no"
+                                                value="no" checked />
                                             <label class="form-check-label" for="battery_no">
                                                 No
                                             </label>
@@ -584,28 +633,88 @@
                                     Attachment of documents
                                 </h4>
                                 <li class="list-group-item">
-                                    <div class="col-lg-6">
+                                    <div>
                                         <p class="variable-footer-text">(PDF, Maks. 5.0. MB)</p>
-                                        <input type="file" id="real-file" hidden="hidden" />
-                                        <div class="d-flex align-items-center">
-                                            <button type="button" id="custom-button" class="btn btn-primary">
-                                                CHOOSE A FILE
-                                            </button>
-                                            <h6 class="ms-2">No file chosen, yet.</h6>
+                                        <div class="cont-for-file-input">
+                                            <div class="custom-file-upload-div">
+                                                <label for="CustomFileUpload"
+                                                    class="custom-file-upload label-for-hidden-input">
+                                                    <input type="file" name="document[]" id="CustomFileUpload" hidden />
+                                                    Custom Upload
+                                                </label>
+                                                <h6 class="ms-2" id="CustomFileUploadText">No file chosen, yet.
+                                                </h6>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>
                                 <!-- Elave olunan fayllar li teqinin icinde olacaq -->
-                                <li class="list-group-item"></li>
+                                <li class="list-group-item added-files-after-upload">
+                                </li>
                             </ul>
                         </li>
                     </ul>
                 </div>
 
-                <button type="submit">asasds</button>
+                <button class="btn btn-primary" type="submit">Submit order</button>
             </form>
         </div>
     </section>
 
+    <script>
+        setTimeout(() => {
+            console.clear();
+        }, 1000);
+        $('#CustomFileUpload').change(function(e) {
+            var fileName = e.target.files[0].name;
+            $('#CustomFileUploadText').html(fileName);
+        });
+    </script>
+    <script>
+        $("#CustomFileUpload").change(function() {
+
+            var input_value = this.value;
+            var file_name = this.files[0].name;
+
+            var $element = $(`
+                <div class="custom-file-upload-div"">
+                    <label class="label-for-hidden-input">
+                        ${file_name}
+                    </label>
+                    <button type="button" class="remove_button_file_upld" onclick="removeFileLabel(this)">
+                        <i class="fa-solid fa-remove commonIcon"></i>
+                    </button>
+                </div>
+            `).append($(this).clone());
+
+            $('.added-files-after-upload').append($element);
+        });
+
+        function removeFileLabel(remove_button) {
+            remove_button.parentNode.remove();
+        }
+    </script>
+    <script>
+        function changeUserAddress(select){
+            console.log($(select).val());
+            select = $(select).val();
+            address_array = select.split("<-->");
+            console.table(address_array);
+            document.querySelector('select[name="country"]').value = address_array[0];
+            document.querySelector('input[name="state"]').value = address_array[1];
+            document.querySelector('input[name="city"]').value = address_array[2];
+            document.querySelector('input[name="address"]').value = address_array[3];
+            document.querySelector('input[name="zipcode"]').value = address_array[4];
+            document.querySelector('input[name="name"]').value = address_array[5];
+            document.querySelector('input[name="phone"]').value = address_array[6];
+            document.querySelector('input[name="email"]').value = address_array[7];
+
+            if(document.querySelector('#save_address').checked == true){
+                document.querySelector('#save_address').checked = false;
+            }
+
+            console.log(document.querySelector('#save_address'));
+        }
+    </script>
     <script src="{{ asset('/') }}frontend/userpanel/js/morder.js"></script>
 @endsection

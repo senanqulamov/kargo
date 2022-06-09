@@ -13,7 +13,7 @@ class Cargo_request extends Model
 
     protected $fillable = [
         'id',
-        'customer',
+        // 'customer',
         'fullname',
         'country',
         'state',

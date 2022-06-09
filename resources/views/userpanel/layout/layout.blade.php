@@ -186,7 +186,7 @@
                                 <i class="fa-solid fa-globe header__item-icon"></i></a>
                         </li>
                         <li class="header__item-list">
-                            <a href="" class="header__item-link header__account-guest">
+                            <a href="{{route('userpanel.index')}}" class="header__item-link header__account-guest">
                                 {{ Auth::user()->name }}
                                 <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
                             <a href="{{ route('userpanel.logout_user') }}">
@@ -237,7 +237,7 @@
                                 </div>
                                 <div class="navigation__box">
                                     <li class="navigation__item">
-                                        <a href="#" class="navigation__link"><i
+                                        <a href="{{route('userpanel.manualorder')}}" class="navigation__link"><i
                                                 class="fa-solid fa-cart-shopping navigation__icon"></i>
                                             <span class="navigation__span">Orders</span></a>
                                     </li>
