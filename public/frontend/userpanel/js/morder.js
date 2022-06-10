@@ -10,7 +10,7 @@ function yeniPaketElaveEt() {
     uniq_package_id = Math.random().toString(36).substr(2, 9);
     let yeniPaket =
         ` <ul
-                    class="list-group list-group-flush border rounded mb-3 p-2"
+                    class="list-group list-group-flush border rounded mb-3 p-2 package-cont-hm"
                   >
                     <h4><i class="fa-solid fa-box commonIcon"></i> Package</h4>
                     <li class="list-group-item">
@@ -23,7 +23,7 @@ function yeniPaketElaveEt() {
         uniq_package_id +
         `"
                           />
-                      <div class="row">
+                      <div class="row package-inputs-cont-hm">
                         <div class="col-6 col-md">
                           <h6>Count:<span class="red">*</span></h6>
                           <input
@@ -54,7 +54,7 @@ function yeniPaketElaveEt() {
                           <div class="input-group mb-3">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control package-length-hm"
                               placeholder="15"
                               name="package_length[` +
         uniq_package_id +
@@ -70,7 +70,7 @@ function yeniPaketElaveEt() {
                           <div class="input-group mb-3">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control package-width-hm"
                               placeholder="15"
                               name="package_width[` +
         uniq_package_id +
@@ -86,7 +86,7 @@ function yeniPaketElaveEt() {
                           <div class="input-group mb-3">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control package-height-hm"
                               placeholder="15"
                               name="package_height[` +
         uniq_package_id +
@@ -102,7 +102,7 @@ function yeniPaketElaveEt() {
                           <div class="input-group mb-3">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control package-weight-cnt"
                               placeholder="2"
                               name="package_weight[` +
         uniq_package_id +
@@ -138,7 +138,7 @@ function yeniPaketElaveEt() {
                           + Add another products
                         </button>
                       </h4>
-                      <div class="row">
+                      <div class="row product-inputs-cont-hm">
                         <input
                             class="form-control"
                             type="hidden"
@@ -165,7 +165,8 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md mb-3">
                           <h6>Product<span class="red">*</span></h6>
                           <input
-                            class="form-control"
+                            onchange="ChangeOrderInfo(this)"
+                            class="form-control product-info-hm"
                             type="text"
                             placeholder="Clock"
                             name="product[` +
@@ -179,7 +180,7 @@ function yeniPaketElaveEt() {
                           <h6>Count<span class="red">*</span></h6>
                           <div class="input-group">
                             <input
-                              class="form-control"
+                              class="form-control boxCount"
                               type="text"
                               placeholder="1 (Storage 3)"
                               name="count[` +
@@ -195,7 +196,7 @@ function yeniPaketElaveEt() {
                           <div class="input-group">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control weight-cnt"
                               placeholder="2"
                               name="weight[` +
         uniq_package_id +
@@ -211,7 +212,7 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md mb-3">
                           <h6>Unit Price<span class="red">*</span></h6>
                           <input
-                            class="form-control"
+                            class="form-control product-price-hm"
                             type="text"
                             placeholder="200"
                             name="price[` +
@@ -260,7 +261,7 @@ function yeniProductElaveEt(e) {
     console.log(uniq_package.value);
 
     let yeniProduct =
-        `<div class="row ">
+        `<div class="row product-inputs-cont-hm">
                         <input
                             class="form-control"
                             type="hidden"
@@ -288,7 +289,8 @@ function yeniProductElaveEt(e) {
                         <div class="col-6 col-md mb-3">
                           <h6>Product<span class="red">*</span></h6>
                           <input
-                            class="form-control"
+                            onchange="ChangeOrderInfo(this)"
+                            class="form-control product-info-hm"
                             type="text"
                             placeholder="Clock"
                             aria-label="default input example"
@@ -303,7 +305,7 @@ function yeniProductElaveEt(e) {
                           <h6>Count<span class="red">*</span></h6>
                           <div class="input-group">
                             <input
-                              class="form-control"
+                              class="form-control boxCount"
                               type="text"
                               placeholder="1 (Storage 3)"
                               aria-label="default input example"
@@ -320,7 +322,7 @@ function yeniProductElaveEt(e) {
                           <div class="input-group">
                             <input
                               type="text"
-                              class="form-control"
+                              class="form-control weight-cnt"
                               placeholder="2"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
@@ -338,7 +340,7 @@ function yeniProductElaveEt(e) {
                         <div class="col-6 col-md mb-3">
                           <h6>Unit Price<span class="red">*</span></h6>
                           <input
-                            class="form-control"
+                            class="form-control product-price-hm"
                             type="text"
                             placeholder="200"
                             aria-label="default input example"
@@ -392,38 +394,101 @@ function silProduct(e) {
     e.parentElement.parentElement.remove();
 }
 
-// total amount function
-let box = document.querySelectorAll(".boxCount");
-let totalAmount = document.querySelector(".totalAmount");
-let boxVolume = document.querySelectorAll(".boxVolume");
-let totalVolume = document.querySelector(".totalVolume");
-let boxWeight = document.querySelectorAll(".boxWeight");
-let totalWeight = document.querySelector(".totalWeight");
-let totalPricing = document.querySelector(".totalPricing");
-//console.log(box);
+
 function yekunHesabla() {
-    let cem = 0;
-    let volume = 1;
-    let weight = 1;
-    for (let qutu of box) {
-        cem += Number(`${qutu.value}`);
-    }
-    totalAmount.innerHTML = `${cem} box`;
+    var packages = document.querySelectorAll(".package-cont-hm");
 
-    for (let vol of boxVolume) {
-        volume = volume * (Number(`${vol.value}`) / 100);
-    }
-    totalVolume.innerHTML = `${volume.toFixed(3)} m`;
+    // all calculations inside packages
+    if (packages) {
+        var total_weight = 0;
+        var total_count = 0;
+        var total_volume = 0;
+        var total_deci = 0;
+        var total_worth = 0;
+        packages.forEach((package) => {
+            var package_weight = parseInt(
+                package.querySelector(".package-weight-cnt").value
+            );
+            var products = package.querySelectorAll(".product-inputs-cont-hm");
 
-    for (let kq of boxWeight) {
-        weight = weight * Number(`${kq.value}`);
-        console.loge;
-    }
-    totalWeight.innerHTML = `${weight} kq`;
+            var package_count = parseInt(
+                package.querySelector(".package-inputs-cont-hm .boxCount").value
+            );
 
-    if (weight > volume.toFixed(3) / 500) {
-        totalPricing.innerHTML = `${weight} kq`;
-    } else {
-        totalPricing.innerHTML = `${volume.toFixed(3)} m`;
+            // Calculating total weight of packages and products
+            var product_weight_package_total = 0;
+            var product_count_package_total = 0;
+            var total_product_price = 0;
+            products.forEach((product) => {
+                var product_weight = parseInt(
+                    product.querySelector(".weight-cnt").value
+                );
+                var product_count = parseInt(
+                    product.querySelector(".boxCount").value
+                );
+                if(product_weight){
+                    product_weight_package_total += product_weight * product_count;
+                }else{
+                    product_weight_package_total = 0;
+                }
+                if(product_count){
+                    product_count_package_total += product_count;
+                }else{
+                    product_count_package_total = 0;
+                }
+
+                var product_price = parseInt(
+                    product.querySelector('.product-price-hm').value
+                ) * product_count;
+
+                if(product_price){
+                    total_product_price += product_price;
+                }
+            });
+            var package_total_weight = 0;
+            if(package_count){
+                product_weight_package_total += package_weight;
+                package_total_weight = product_weight_package_total * package_count;
+                total_weight += package_total_weight;
+
+                total_count = package_count*product_count_package_total;
+                total_worth += total_product_price*package_count;
+            }
+
+
+            // Calculating total volume
+            var package_inputs = package.querySelector('.package-inputs-cont-hm');
+            var length = parseInt(package_inputs.querySelector('.package-length-hm').value);
+            var width = parseInt(package_inputs.querySelector('.package-width-hm').value);
+            var height = parseInt(package_inputs.querySelector('.package-height-hm').value);
+            var count = parseInt(package_inputs.querySelector('.boxCount').value);
+            var package_volume = length*width*height*count;
+            if(package_volume){
+                total_volume += package_volume;
+                // Calculating deci for package
+                var deci = Math.max(package_volume/5000 , package_total_weight);
+                var package_deci_total = deci*count;
+                total_deci += package_deci_total;
+            }
+        });
+        document.querySelector(".totalWeight").innerHTML = total_weight;
+        document.querySelector(".totalAmount").innerHTML = total_count;
+        document.querySelector(".totalPricing").innerHTML = total_deci;
+        document.querySelector(".totalVolume").innerHTML = total_volume;
+        document.querySelector(".totalWorth").innerHTML = total_worth;
+
+        if(total_deci > 0){
+            console.log('asda');
+        }
     }
+}
+
+function ChangeOrderInfo(input){
+    var product_names = document.querySelectorAll('.product-info-hm');
+    document.querySelector('input[name="order_info"]').value = "";
+
+    product_names.forEach(element => {
+        document.querySelector('input[name="order_info"]').value += element.value + " , ";
+    });
+
 }

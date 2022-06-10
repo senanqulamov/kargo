@@ -21,5 +21,8 @@ class UserAddress extends Model
         'address',
         'zipcode',
         'userID',
+        'name',
+        'email',
+        'phone',
     ];
 }

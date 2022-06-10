@@ -84,13 +84,13 @@
                                         @foreach ($user_addresses as $address)
                                             <option>
                                                 {{ $address->country }}<-->
-                                                {{ $address->city }}<-->
-                                                {{ $address->state }}<-->
-                                                {{ $address->address }}<-->
-                                                {{ $address->zipcode }}<-->
-                                                {{ $address->name }}<-->
-                                                {{ $address->phone }}<-->
-                                                {{ $address->email }}
+                                                    {{ $address->city }}<-->
+                                                        {{ $address->state }}<-->
+                                                            {{ $address->address }}<-->
+                                                                {{ $address->zipcode }}<-->
+                                                                    {{ $address->name }}<-->
+                                                                        {{ $address->phone }}<-->
+                                                                            {{ $address->email }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -189,8 +189,8 @@
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-12">
-                                            <input class="form-control" type="text" placeholder="Clock, Book"
-                                                aria-label="default input example" name="order_info" />
+                                            <input class="form-control" type="text" aria-label="default input example"
+                                                name="order_info" readonly />
                                         </div>
                                     </div>
                                 </li>
@@ -367,7 +367,7 @@
                                                 <i class="fa-solid fa-sack-dollar commonIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
-                                                    <span class="totalText">0.003 $</span>
+                                                    <span class="totalText totalWorth">0.003 $</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -392,66 +392,23 @@
                                 <li class="list-group-item">
                                     <h5>Select the cargo</h5>
                                     <div class="row">
-                                        <div class="col-12 col-sm-6 mb-3">
-                                            <ul class="list-group list-group-horizontal">
-                                                <li class="list-group-item w-25 text-center">
-                                                    <img src="img/FedexLogo.png" alt="" />
-                                                </li>
-                                                <li class="list-group-item w-50 text-left">Deirvlon</li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                            id="flexRadioDefault1" />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-12 col-sm-6 mb-3">
-                                            <ul class="list-group list-group-horizontal">
-                                                <li class="list-group-item w-25 text-center">
-                                                    <i class="fa-brands fa-ups"></i>
-                                                </li>
-                                                <li class="list-group-item w-50 text-left">Deirvlon</li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1" />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-12 col-sm-6 mb-3">
-                                            <ul class="list-group list-group-horizontal">
-                                                <li class="list-group-item w-25 text-center">
-                                                    <img src="img/ExpressLogo.png" alt="" />
-                                                </li>
-                                                <li class="list-group-item w-50 text-left">Deirvlon</li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1" />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-12 col-sm-6">
-                                            <ul class="list-group list-group-horizontal">
-                                                <li class="list-group-item w-25 text-center">
-                                                    <img src="img/TntLogo.png" alt="" />
-                                                </li>
-                                                <li class="list-group-item w-50 text-left">Deirvlon</li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="radio"
-                                                            name="flexRadioDefault" id="flexRadioDefault1" />
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        @foreach ($cargo_companies as $company)
+                                            <div class="col-12 col-sm-6 mb-3">
+                                                <ul class="list-group list-group-horizontal">
+                                                    <li class="list-group-item w-25 text-center">
+                                                        <img style="width:100%;height:100%;" src="{{asset('/')}}images/{{ $company->logo == NULL ? 'user.png' : $company->logo }}" />
+                                                    </li>
+                                                    <li class="list-group-item w-50 text-left">{{ $company->name }}</li>
+                                                    <li class="list-group-item d-flex">
+                                                        <span class="me-2">unknwon</span>
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="cargo_company" value="1" id="cargo_company_{{ $company->id }}" />
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </li>
                                 <!-- Footer -->
@@ -462,13 +419,13 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault" />
+                                                        <input class="form-check-input" type="checkbox" name="insure_order"
+                                                            id="insure_my_order" />
                                                     </div>
-                                                    Deirvlon
+                                                    İnsure my order
                                                 </li>
                                                 <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
+                                                    <span class="me-2">15$</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -476,13 +433,13 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault" />
+                                                        <input class="form-check-input" type="checkbox" name="extra_bubble"
+                                                            id="extra_bubble" />
                                                     </div>
-                                                    Deirvlon
+                                                    Extra bubble
                                                 </li>
                                                 <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
+                                                    <span class="me-2">1$</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -490,13 +447,13 @@
                                             <ul class="list-group list-group-horizontal">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="flexCheckDefault" />
+                                                        <input class="form-check-input" type="checkbox"
+                                                            name="other_additional" id="other_additional" />
                                                     </div>
-                                                    Deirvlon
+                                                    Other Additional
                                                 </li>
                                                 <li class="list-group-item d-flex">
-                                                    <span class="me-2">69$ </span>
+                                                    <span class="me-2">1$</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -535,20 +492,21 @@
                                 </div>
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5>Does the product contain a battery?</h5>
+                                        <h5>Does the product contain
+                                            cosmetics/liquids?</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked />
-                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="liquid" id="liquid_yes"
+                                                value="yes" />
+                                            <label class="form-check-label" for="liquid_yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1" />
-                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="liquid" id="liquid_no"
+                                                value="no" checked />
+                                            <label class="form-check-label" for="liquid_no">
                                                 No
                                             </label>
                                         </div>
@@ -556,20 +514,20 @@
                                 </div>
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5>Does the product contain a battery?</h5>
+                                        <h5>Does the product contain food?</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked />
-                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="food" id="food_yes"
+                                                value="yes" />
+                                            <label class="form-check-label" for="food_yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1" />
-                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="food" id="food_no" checked
+                                                value="no" />
+                                            <label class="form-check-label" for="food_no">
                                                 No
                                             </label>
                                         </div>
@@ -577,20 +535,20 @@
                                 </div>
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5>Does the product contain a battery?</h5>
+                                        <h5>Does the product contain dangerous substances?</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault2" checked />
-                                            <label class="form-check-label" for="flexRadioDefault2">
+                                            <input class="form-check-input" type="radio" name="dangerous"
+                                                id="dangerous_yes" value="yes" />
+                                            <label class="form-check-label" for="dangerous_yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1" />
-                                            <label class="form-check-label" for="flexRadioDefault1">
+                                            <input class="form-check-input" type="radio" name="dangerous" id="dangerous_no"
+                                                value="no" checked />
+                                            <label class="form-check-label" for="dangerous_no">
                                                 No
                                             </label>
                                         </div>
@@ -675,19 +633,31 @@
 
             var input_value = this.value;
             var file_name = this.files[0].name;
+            var file_id = Math.random().toString(36).substr(2, 9);
 
             var $element = $(`
-                <div class="custom-file-upload-div"">
-                    <label class="label-for-hidden-input">
+                <div class="custom-file-upload-div" id="file-upload-div-` + file_id + `">
+                    <label class="label-for-hidden-input new_input_for_file">
                         ${file_name}
                     </label>
+                    <select style="width:25%;" class="form-select" name="file_type[` + file_id + `]">
+                        <option value="FDA">FDA</option>
+                        <option value="MSDS">MSDS</option>
+                        <option value="other">other</option>
+                    </select>
                     <button type="button" class="remove_button_file_upld" onclick="removeFileLabel(this)">
                         <i class="fa-solid fa-remove commonIcon"></i>
                     </button>
                 </div>
+                <br>
             `).append($(this).clone());
 
             $('.added-files-after-upload').append($element);
+
+            var div = document.querySelector('#file-upload-div-' + file_id + '');
+            var new_file_input_hidden = div.querySelector('#CustomFileUpload');
+            new_file_input_hidden.setAttribute('name', 'document[' + file_id + ']');
+            // console.log(div , new_file_input_hidden);
         });
 
         function removeFileLabel(remove_button) {
@@ -695,11 +665,11 @@
         }
     </script>
     <script>
-        function changeUserAddress(select){
-            console.log($(select).val());
+        function changeUserAddress(select) {
+            // console.log($(select).val());
             select = $(select).val();
             address_array = select.split("<-->");
-            console.table(address_array);
+            // console.table(address_array);
             document.querySelector('select[name="country"]').value = address_array[0];
             document.querySelector('input[name="state"]').value = address_array[1];
             document.querySelector('input[name="city"]').value = address_array[2];
@@ -709,11 +679,11 @@
             document.querySelector('input[name="phone"]').value = address_array[6];
             document.querySelector('input[name="email"]').value = address_array[7];
 
-            if(document.querySelector('#save_address').checked == true){
+            if (document.querySelector('#save_address').checked == true) {
                 document.querySelector('#save_address').checked = false;
             }
 
-            console.log(document.querySelector('#save_address'));
+            // console.log(document.querySelector('#save_address'));
         }
     </script>
     <script src="{{ asset('/') }}frontend/userpanel/js/morder.js"></script>

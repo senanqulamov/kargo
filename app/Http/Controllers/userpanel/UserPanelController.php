@@ -4,9 +4,11 @@ namespace App\Http\Controllers\userpanel;
 
 use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
+use App\Models\Cargo_document;
 use App\Models\Cargo_request;
 use App\Models\Package;
 use App\Models\Product;
+use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -87,9 +89,14 @@ class UserPanelController extends Controller
     {
 
         $countries = DB::table('countries')->select('name', 'code', 'id')->get();
-        $user_addresses = DB::table('user_addresses')->where('userID' , Auth::user()->id)->get();
+        $cargo_companies = DB::table('cargo_companies')->get();
+        $user_addresses = DB::table('user_addresses')->where('userID', Auth::user()->id)->get();
 
-        return view('userpanel.frontend.manualorder')->with(['countries' => $countries , 'user_addresses'=>$user_addresses]);
+        return view('userpanel.frontend.manualorder')->with([
+            'countries' => $countries,
+            'user_addresses' => $user_addresses,
+            'cargo_companies' => $cargo_companies
+        ]);
     }
 
     public function postManualorder(Request $request)
@@ -97,7 +104,39 @@ class UserPanelController extends Controller
 
         $cargo_id = uniqid(15);
 
-        // dd($request->all());
+        dd($request->all());
+
+        if($request->file_type){
+            $file_idS = array_keys($request->file_type);
+
+            foreach ($file_idS as $key => $file_id) {
+                $document = $request->document[$file_id];
+                $file_name = $document->getClientOriginalName();
+                $file_type = $request->file_type[$file_id];
+                $cargo_document = array(
+                    'doc_id' => $file_id,
+                    'cargo_id' => $cargo_id,
+                    'document' => $file_name,
+                    'type' => $file_type
+                );
+                Cargo_document::create($cargo_document);
+            }
+        }
+
+        if ($request->save_address && $request->country) {
+            $new_user_address = array(
+                'name' => $request->name,
+                'city' => $request->city,
+                'country' => $request->country,
+                'state' => $request->state,
+                'address' => $request->address,
+                'zipcode' => $request->zipcode,
+                'phone' => $request->phone,
+                'email' => $request->email,
+                'userID' => Auth::user()->id,
+            );
+            UserAddress::create($new_user_address);
+        }
 
         if ($request->hasfile('document')) {
 
@@ -109,7 +148,7 @@ class UserPanelController extends Controller
             $data = array_unique($data);
         }
 
-        if($request->package_id){
+        if ($request->package_id) {
             foreach ($request->package_id as $package_id) {
                 $packages[] = $package_id;
             }
@@ -118,7 +157,7 @@ class UserPanelController extends Controller
             $order_request = array(
                 'id' => $cargo_id,
                 // 'customer' => $request->customer,
-                'fullname' => $request->name,
+                'name' => $request->name,
                 'country' => $request->country,
                 'state' => $request->state,
                 'address' => $request->address,
@@ -129,10 +168,15 @@ class UserPanelController extends Controller
                 'vat_number' => $request->vat_number,
                 'currency' => $request->currency_unit,
                 'order_info' => $request->order_info,
-                'packages'=> json_encode($packages),
+                'packages' => json_encode($packages),
                 // 'cargo_company'=> $request->cargo_company,
-                // 'additional'=> $request->customer,
+                'insure_order'=> $request->insure_order,
+                'extra_bubble'=> $request->extra_bubble,
+                'other_additional'=> $request->other_additional,
                 'battery' => $request->battery,
+                'liquid' => $request->liquid,
+                'food' => $request->food,
+                'dangerous' => $request->dangerous,
                 'document' => json_encode($data)
             );
 
@@ -175,10 +219,9 @@ class UserPanelController extends Controller
                     Product::create($productsS);
                 }
             }
-            return Redirect::back()->with('message' , 'Cargo order successfully sent');
-        }else{
-            return Redirect::back()->with('error' , 'Invalid arguments');
+            return Redirect::back()->with('message', 'Cargo order successfully sent');
+        } else {
+            return Redirect::back()->with('error', 'Invalid arguments');
         }
-
     }
 }

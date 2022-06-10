@@ -14,7 +14,7 @@ class Cargo_request extends Model
     protected $fillable = [
         'id',
         // 'customer',
-        'fullname',
+        'name',
         'country',
         'state',
         'address',
@@ -27,8 +27,13 @@ class Cargo_request extends Model
         'order_info',
         'packages',
         'cargo_company',
-        'additional',
+        'extra_bubble',
+        'insure_order',
+        'other_additional',
         'battery',
+        'liquid',
+        'food',
+        'dangerous',
         'document',
     ];
 }
