@@ -19,13 +19,7 @@ body {
   height: 80vh;
 }
 
-.variable h2,
-h5,
-h6,
-.h6,
-label {
-  color: #405982;
-}
+
 .variable a{
   text-decoration: none;
 }
@@ -154,15 +148,7 @@ label {
 .variable {
   background-color: white;
 }
-.variable h2,
-h4,
-h5,
-h6,
-.h6,
-label,
-i {
-  color: #405982;
-}
+
 
 .variable ::placeholder {
   color: rgba(64, 89, 130, 0.55);

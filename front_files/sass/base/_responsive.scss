@@ -1,7 +1,7 @@
 @media screen and(max-width: 992px) {
 
-    html {
-        font-size: 58%;
+    .burger__menu {
+        width: 50% !important;
     }
 
     .page__packed {
@@ -18,35 +18,19 @@
         display: none;
     }
 
-    .structure>.row {
-
-        padding-left: 2rem !important;
-    }
-
-
     .page__row-2 {
         margin-top: 3rem;
     }
 
+
     .drop__box {
-        right: 36% !important;
-        padding: 1rem 0 !important;
+        top: 13% !important;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -5%);
+        text-align: center;
     }
 
-
-    .page__2 {
-        margin-top: 6rem !important;
-    }
-
-
-    .color__box {
-        display: flex;
-        justify-content: center;
-
-        .offset-1 {
-            margin-left: 0;
-        }
-    }
 
     .page__progress {
         margin-top: 2rem;
@@ -54,15 +38,20 @@
     }
 
 
+    .page {
+        position: absolute;
+        left: 3%;
+        right: 3%;
+    }
+
 }
 
 @media screen and(max-width: 767px) {
+    // html {
+    //     font-size: 58%;
+    // }
 
-   
 
-    html {
-        font-size: 58%;
-    }
 
 
     .page__box {
@@ -80,13 +69,11 @@
     }
 
     .drop__box {
-        width: 40%;
+        width: 25%;
+        top: 15% !important;
     }
 
-    .structure>.row {
-        width: 96%;
-        padding-left: 5rem;
-    }
+
 
     .header__input-search {
         width: 100% !important;
@@ -97,7 +84,7 @@
 @media screen and(max-width: 576px) {
 
     html {
-        font-size: 56%;
+        font-size: 55%;
     }
 
     .page__packed {
@@ -129,7 +116,14 @@
 
 
     .drop__box {
-        width: 44% !important;
+        top: 13% !important;
+        min-width: 35% !important;
+        transform: translate(-53%, 15%);
+
+        h4 {
+            margin-left: .2rem;
+            font-size: 1.4rem !important;
+        }
     }
 
     .fnav .header__input {
@@ -140,14 +134,47 @@
         width: 80% !important;
     }
 
-    .burger__menu {
-        width: calc(100% - 35%) !important;
+
+    .drop__box-img {
+        width: 3.5rem !important;
+        height: 3.5rem !important;
     }
 
 
 }
 
+@media screen and(max-width:500px) {
 
+    .burger__menu {
+        width: 60% !important;
+    }
+
+    .fnav__box {
+        padding-bottom: 3rem;
+    }
+
+    .drop__box {
+        top: 16% !important;
+    }
+
+    .fnav__input {
+        width: 61% !important;
+        position: absolute;
+        top: 14%;
+        left: 50%;
+        transform: translate(-34%, -70%);
+
+    }
+
+    .header__item-list {
+        padding: 0 .6rem;
+    }
+
+    .header__icons {
+        margin-top: .5rem;
+    }
+
+}
 
 
 

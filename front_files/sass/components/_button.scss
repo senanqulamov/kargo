@@ -1,7 +1,7 @@
 .price__calcutaor {
     padding: .5rem .8rem;
     color: #fff;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     background: var(--color-main-button);
     border: 1px solid rgba(0, 0, 0, 0.04);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
@@ -21,14 +21,14 @@
     background: #FFFFFF;
     box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.03);
     border-radius: 5px;
-    padding: 2rem 0;
-    width: 25%;
+    padding: 1rem 0;
+    min-width: 18%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 14%;
-    right: 25%;
+    top: 9%;
+    right: 28%;
 
     &-img {
         width: 4rem;
@@ -56,7 +56,67 @@
 
 
 
+.overlay__active {
+    position: fixed;
+    /* Sit on top of the page content */
+    display: none;
+    /* Hidden by default */
+    width: 100%;
+    /* Full width (cover the whole page) */
+    height: 100%;
+    /* Full height (cover the whole page) */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    // // background-color: rgba(0, 0, 0, 0.5);
+    // filter: blur(1.5rem);
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    /* Black background with opacity */
+    z-index: 250;
+    /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer;
+}
 
+
+.visible {
+    display: block;
+}
+
+.overflowY {
+    overflow-y: hidden;
+}
+
+
+.isActive {
+    background: var(--color-burger-btn);
+}
+
+.navigation__box{
+    outline: none;
+    border: none;
+    background-color: transparent;
+}
+
+.navigation__box:hover {
+    border-radius: 3px;
+    background: var(--color-burger-btn);
+}
+
+
+
+.burger__menu {
+    .navigation__box {
+        width: 50%;
+    }
+
+    @media screen and(max-width:767px) {
+        .navigation__box {
+            width: 100%;
+        }
+    }
+}
 
 
 

@@ -27,9 +27,10 @@
   <!--Jquery-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 
+
   <link rel="stylesheet" href="css/style.css" />
 
-
+  <link rel="stylesheet" href="css/pages.css" />
 
   <title>Document</title>
 </head>
@@ -38,540 +39,619 @@
   <!-- Test commit -->
 
 
-  <nav class="fnav">
-    <div class="fnav__box">
-      <div class="fnav__burger">
-        <span class="fnav__line  fnav__top">
 
-        </span>
-        <span class="fnav__line  fnav__center">
 
-        </span>
-        <span class="fnav__line  fnav__bottom">
+   
+  <div class="overlay overlay__active">
+  </div>
 
-        </span>
+
+  <nav class=" burger__menu">
+
+      <div class="navigation container">
+          <div class="navigation__data">
+
+              <div class="navigation__cancel d-flex justify-content-end">
+                  <span class="navigation__cancel-span">
+                      <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                  </span>
+              </div>
+
+              <div class="navigation__image">
+                  <img src="img/png/logo.png" alt="">
+              </div>
+
+              <ul class="navigation__items">
+                  <button class="navigation__box isActive ">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-house navigation__icon"></i>
+                              <span class="navigation__span ">Main Menu</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-network-wired navigation__icon"></i>
+                              <span class="navigation__span">Balance System</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-cart-shopping navigation__icon"></i>
+                              <span class="navigation__span">Orders</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-headset navigation__icon"></i>
+                              <span class="navigation__span">Courier Request</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                              <span class="navigation__span">Stock</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-address-card navigation__icon"></i>
+                              <span class="navigation__span">Site Usage</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-bag-shopping navigation__icon"></i>
+                              <span class="navigation__span">Buy for me</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                              <span class="navigation__span">Share and Earn</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                              <span class="navigation__span">Inventory</span></a>
+                      </li>
+                  </button>
+                  <button class="navigation__box">
+                      <li class="navigation__item">
+                          <a href="#" class="navigation__link"><i
+                                  class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                              <span class="navigation__span">Cargo Companies</span></a>
+                      </li>
+                  </button>
+              </ul>
+          </div>
       </div>
 
-      <div class="header__input">
-        <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
-        <input class="header__input-search" type="text" placeholder="Axtar..." />
-      </div>
 
-
-      <div class="navigation__logo text-center">
-        <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
-      </div>
-
-    </div>
   </nav>
 
 
-  <nav class=" burger__menu navigation__left">
 
-    <div class="navigation container">
-      <div class="navigation__data">
-        <ul class="navigation__items">
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
-                <span class="navigation__span">Main Menu</span></a>
-            </li>
+  <nav class="fnav">
+      <div class="fnav__box">
+          <div class="fnav__burger">
+              <span class="fnav__line  fnav__top">
+
+              </span>
+              <span class="fnav__line  fnav__center">
+
+              </span>
+              <span class="fnav__line  fnav__bottom">
+
+              </span>
           </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
-                <span class="navigation__span">Balance System</span></a>
-            </li>
+
+          <div class="fnav__input">
+              <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+              <input class="header__input-search" type="text" placeholder="Axtar..." />
           </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-cart-shopping navigation__icon"></i>
-                <span class="navigation__span">Orders</span></a>
-            </li>
+
+
+          <div class="header__icons">
+              <ul class="header__item">
+                  <li class="header__item-list">
+                      <a href="" class="header__item-link">
+                          <i class="fa-solid fa-bell header__item-icon"></i></a>
+                  </li>
+                  <li class="header__item-list">
+                      <a href="" class="header__item-link">
+                          <i class="fa-solid fa-gear header__item-icon"></i></a>
+                  </li>
+                  <li class="header__item-list">
+                      <a href="" class="header__item-link">
+                          <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                  </li>
+                  <li class="header__item-list">
+                      <a href="" class="header__item-link">
+                          <i class="fa-solid fa-globe header__item-icon"></i></a>
+                  </li>
+                  <li class="header__item-list">
+                      <a href="" class="header__item-link header__account-guest">
+                          Dervilon
+                          <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                  </li>
+                  <li class="header__item-list">
+                      <a href="" class="header__item-link header__account-guest"><i
+                              class="fa-solid fa-right-from-bracket"></i></a>
+                  </li>
+
+
+
+              </ul>
           </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
-                <span class="navigation__span">Courier Request</span></a>
-            </li>
-          </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-boxes-stacked navigation__icon"></i>
-                <span class="navigation__span">Stock</span></a>
-            </li>
-          </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-address-card navigation__icon"></i>
-                <span class="navigation__span">Site Usage</span></a>
-            </li>
-          </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-bag-shopping navigation__icon"></i>
-                <span class="navigation__span">Buy for me</span></a>
-            </li>
-          </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-square-share-nodes navigation__icon"></i>
-                <span class="navigation__span">Share and Earn</span></a>
-            </li>
-          </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-cart-flatbed navigation__icon"></i>
-                <span class="navigation__span">Inventory</span></a>
-            </li>
-          </div>
-          <div class="navigation__box">
-            <li class="navigation__item">
-              <a href="#" class="navigation__link"><i class="fa-solid fa-truck-ramp-box navigation__icon"></i>
-                <span class="navigation__span">Cargo Companies</span></a>
-            </li>
-          </div>
-        </ul>
+
       </div>
-    </div>
-
-
   </nav>
 
 
   <header>
-    <div class="container header">
-      <div class="col-md-6">
-        <div class="header__input">
-          <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
-          <input class="header__input-search" type="text" placeholder="Axtar..." />
-        </div>
-      </div>
+      <div class="container header">
+          <div class="col-md-6">
+              <div class="header__input">
+                  <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                  <input class="header__input-search" type="text" placeholder="Axtar..." />
+              </div>
+          </div>
 
-      <div class="col-md-6">
-        <div>
-          <ul class="header__item">
-            <li class="header__item-list">
-              <a href="" class="header__item-link">
-                Balance <br />
-                <span class="header__item-balance">35 E</span>
-              </a>
-            </li>
-            <li class="header__item-list">
-              <a href="" class="header__item-link">
-                <i class="fa-solid fa-bell header__item-icon"></i></a>
-            </li>
-            <li class="header__item-list">
-              <a href="" class="header__item-link">
-                <i class="fa-solid fa-bell header__item-icon"></i></a>
-            </li>
-            <li class="header__item-list">
-              <a href="" class="header__item-link">
-                <i class="fa-solid fa-gear header__item-icon"></i></a>
-            </li>
-            <li class="header__item-list">
-              <a href="" class="header__item-link">
-                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
-            </li>
-            <li class="header__item-list">
-              <a href="" class="header__item-link">
-                <i class="fa-solid fa-globe header__item-icon"></i></a>
-            </li>
-            <li class="header__item-list">
-              <a href="" class="header__item-link header__account-guest">
-                Dervilon
-                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
-            </li>
-          </ul>
-        </div>
+          <div class="col-md-6">
+              <div>
+                  <ul class="header__item">
+                      <li class="header__item-list">
+                          <a href="" class="header__item-link">
+                              <i class="fa-solid fa-bell header__item-icon"></i></a>
+                      </li>
+                      <li class="header__item-list">
+                          <a href="" class="header__item-link">
+                              <i class="fa-solid fa-gear header__item-icon"></i></a>
+                      </li>
+                      <li class="header__item-list">
+                          <a href="" class="header__item-link">
+                              <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                      </li>
+                      <li class="header__item-list">
+                          <a href="" class="header__item-link">
+                              <i class="fa-solid fa-globe header__item-icon"></i></a>
+                      </li>
+                      <li class="header__item-list">
+                          <a href="" class="header__item-link header__account-guest">
+                              Dervilon
+                              <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                      </li>
+                      <li class="header__item-list">
+                          <a href="" class="header__item-link header__account-guest"><i
+                                  class="fa-solid fa-right-from-bracket"></i></a>
+                      </li>
+
+
+
+                  </ul>
+              </div>
+          </div>
       </div>
-    </div>
   </header>
 
 
-
-
   <section id="Sturcture" class="structure">
-    <div class="row w-100">
-      <div class="col-lg-3   page__1">
-        <nav class="navigation__left">
+      <div class="row w-100">
+          <div class="col-lg-3   page__1">
+              <nav class="navigation__left">
 
-          <div class="navigation container">
-            <div class="navigation__cancel">
+                  <div class="navigation container">
 
-              <span class="navigation__cancel-span"><i class="fa-solid fa-xmark navigation__cancel-icon"></i></span>
-            </div>
 
-            <div class="navigation__logo text-center">
-              <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
-            </div>
+                      <div class="navigation__logo text-center">
+                          <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
+                      </div>
 
-            <div class="navigation__data">
-              <ul class="navigation__items">
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
-                      <span class="navigation__span">Main Menu</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
-                      <span class="navigation__span">Balance System</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-cart-shopping navigation__icon"></i>
-                      <span class="navigation__span">Orders</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
-                      <span class="navigation__span">Courier Request</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-boxes-stacked navigation__icon"></i>
-                      <span class="navigation__span">Stock</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-address-card navigation__icon"></i>
-                      <span class="navigation__span">Site Usage</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-bag-shopping navigation__icon"></i>
-                      <span class="navigation__span">Buy for me</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-square-share-nodes navigation__icon"></i>
-                      <span class="navigation__span">Share and Earn</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-cart-flatbed navigation__icon"></i>
-                      <span class="navigation__span">Inventory</span></a>
-                  </li>
-                </div>
-                <div class="navigation__box">
-                  <li class="navigation__item">
-                    <a href="#" class="navigation__link"><i class="fa-solid fa-truck-ramp-box navigation__icon"></i>
-                      <span class="navigation__span">Cargo Companies</span></a>
-                  </li>
-                </div>
-              </ul>
-            </div>
+                      <div class="navigation__data">
+                          <ul class="navigation__items">
+                              <button class="navigation__box isActive ">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-house navigation__icon"></i>
+                                          <span class="navigation__span ">Main Menu</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box"">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-network-wired navigation__icon"></i>
+                                          <span class="navigation__span">Balance System</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                          <span class="navigation__span">Orders</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-headset navigation__icon"></i>
+                                          <span class="navigation__span">Courier Request</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                          <span class="navigation__span">Stock</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-address-card navigation__icon"></i>
+                                          <span class="navigation__span">Site Usage</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                          <span class="navigation__span">Buy for me</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                          <span class="navigation__span">Share and Earn</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                          <span class="navigation__span">Inventory</span></a>
+                                  </li>
+                              </button>
+                              <button class="navigation__box">
+                                  <li class="navigation__item">
+                                      <a href="#" class="navigation__link"><i
+                                              class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                          <span class="navigation__span">Cargo Companies</span></a>
+                                  </li>
+                              </button>
+                          </ul>
+                      </div>
+                  </div>
+              </nav>
           </div>
-        </nav>
+          <div class="col-lg-9 col-md-11 col-sm-12 col-12 page__2">
+
+              <div class="drop__box">
+                  <div class="drop__box-img">
+                      <img src="img/svg/Vector (13).svg" alt="">
+                  </div>
+                  <h4 class="ms-2">Main menu</h4>
+              </div>
+
+
+              <section class="calculator" id="calculator">
+
+
+                <div class="page__calc">
+                  <div class="container">
+            
+            
+                    <div class="row">
+            
+                      <div class="page__not page__not--1 col-12 mb-4">
+                        <div class="page__not-box me-3">
+                          <img src="img/svg/Group.svg" alt="">
+                        </div>
+            
+                        <h2>Notifications</h2>
+            
+                      </div>
+            
+            
+            
+                      <div class="col-md-4 mt-4 mb-5">
+                        <p>Country:</p>
+                        <div class="input-group mb-3">
+                          <select class="form-select" id="inputGroupSelect02">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                            <option value="4">Four</option>
+                            <option value="5">Five</option>
+                          </select>
+            
+                        </div>
+                      </div>
+            
+            
+                    </div>
+            
+            
+                    <div class="row">
+            
+            
+                      <div class="col-lg-2  col-md-4 col-sm-6  mt-4">
+                        <!--1ci input-->
+                        <p>Country:</p>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                        </div>
+            
+                      </div>
+                      <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
+                        <!--1ci input-->
+                        <p>Type:</p>
+            
+                        <div class="input-group mb-3">
+                          <select class="form-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+            
+            
+                      </div>
+                      <div class="col-lg-2 col-md-4 mt-4 col-sm-6">
+                        <!--3ci input-->
+                        <p>Length:</p>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                          <span class="input-group-text" id="basic-addon1">cm</span>
+                        </div>
+            
+                      </div>
+                      <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
+                        <!--4ci input-->
+                        <p>Width:</p>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                          <span class="input-group-text" id="basic-addon1">cm</span>
+                        </div>
+            
+                      </div>
+                      <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
+                        <!--5ci input-->
+                        <p>Height:</p>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                          <span class="input-group-text" id="basic-addon1">cm</span>
+                        </div>
+            
+                      </div>
+                      <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
+                        <!--6ci input-->
+                        <p>Weight:</p>
+                        <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                          <span class="input-group-text" id="basic-addon1">kq</span>
+                        </div>
+            
+                      </div>
+            
+            
+                    </div>
+            
+            
+                    <div class="conteiner">
+            
+            
+                      <div class="color__box  row mt-4">
+                        <div class="col-lg-2 col-sm-12  page__calc-box page__calc-box--1  offset-1">
+                          <div class="page__not page__not--1 col-12 mb-4">
+                            <div class="page__not-box me-3">
+                              <img src="img/svg/P (2).svg" alt="">
+                            </div>
+            
+                            <div class="page__cacl-icon ">
+                              <p class="h5 total">Total amount:</p>
+                              <p class="h5">1box</p>
+                            </div>
+            
+                          </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12  page__calc-box">
+                          <div class="page__not page__not--1 col-12 mb-4">
+                            <div class="page__not-box me-3">
+                              <img src="img/svg/Group (4).svg" alt="">
+                            </div>
+            
+                            <div class="page__cacl-icon ">
+                              <p class="h5">Total valume:</p>
+                              <p class="h5">0.003m</p>
+                            </div>
+            
+                          </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12  page__calc-box">
+                          <div class="page__not page__not--1 col-12 mb-4">
+                            <div class="page__not-box me-3">
+                              <img src="img/svg/Group (6).svg" alt="">
+                            </div>
+            
+                            <div class="page__cacl-icon ">
+                              <p class="h5">Total weight:</p>
+                              <p class="h5">0.003kq</p>
+                            </div>
+            
+                          </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12  page__calc-box">
+                          <div class="page__not page__not--1 col-12 mb-4">
+                            <div class="page__not-box me-3">
+                              <img src="img/svg/P (2).svg" alt="">
+                            </div>
+            
+                            <div class="page__cacl-icon ">
+                              <p class="h5">Pricing weight:</p>
+                              <p class="h5">0.003</p>
+                            </div>
+            
+                          </div>
+                        </div>
+                        <div class="col-lg-2 col-md-12  page__calc-box">
+                          <div class="page__not page__not--1 col-12 mb-4">
+                            <div class="page__not-box me-3">
+                              <img src="img/svg/Group (5).svg" alt="">
+                            </div>
+            
+                            <div class="page__cacl-icon ">
+                              <p class="h5">Total worth:</p>
+                              <p class="h5">0.003$</p>
+                            </div>
+            
+                          </div>
+                        </div>
+            
+            
+                      </div>
+            
+                    </div>
+            
+            
+            
+                    <hr class="hr">
+            
+                    <div class="calculator__cargo ">
+            
+                      <div class="page__not page__not--1 col-12 mb-4">
+                        <div class="page__not-box me-3">
+                          <img src="img/svg/Vector (14).svg" alt="">
+                        </div>
+            
+                        <h2>Select the Cargo</h2>
+            
+                      </div>
+            
+            
+                      <div class="calculaator__sponsor">
+            
+                        <div class="row">
+            
+                          <div class="col-md-6 ">
+            
+                            <div class="calculator__box">
+                              <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
+            
+                              <p class="w-50">Deirvilon</p>
+            
+                              <span>69$</span>
+            
+                              <input class="form-check-input salam" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1" />
+                            </div>
+            
+            
+                          </div>
+                          <div class="col-md-6 ">
+            
+                            <div class="calculator__box">
+                              <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
+            
+                              <p class="w-50">Deirvilon</p>
+            
+                              <span>69$</span>
+            
+                              <input class="form-check-input salam" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1" />
+                            </div>
+            
+            
+                          </div>
+                          <div class="col-md-6">
+            
+                            <div class="calculator__box">
+                              <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
+            
+                              <p class="w-50">Deirvilon</p>
+            
+                              <span>69$</span>
+            
+                              <input class="form-check-input salam" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1" />
+                            </div>
+            
+            
+                          </div>
+                          <div class="col-md-6 ">
+            
+                            <div class="calculator__box">
+                              <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
+            
+                              <p class="w-50">Deirvilon</p>
+            
+                              <span>69$</span>
+            
+                              <input class="form-check-input salam" type="radio" name="flexRadioDefault"
+                                id="flexRadioDefault1" />
+                            </div>
+            
+            
+                          </div>
+            
+                        </div>
+            
+            
+                      </div>
+            
+            
+            
+            
+            
+            
+            
+            
+                    </div>
+            
+            
+            
+                  </div>
+                </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+              </section>
+            
+
+
+          </div>
       </div>
-      <div class="col-lg-9 col-md-11 col-sm-12 col-12 page__2">
+  </section>
+ 
 
-        <section class="calculator" id="calculator">
 
 
-          <div class="page__calc">
-            <div class="container">
 
-
-              <div class="row">
-
-                <div class="page__not page__not--1 col-12 mb-4">
-                  <div class="page__not-box me-3">
-                    <img src="img/svg/Group.svg" alt="">
-                  </div>
-
-                  <h2>Notifications</h2>
-
-                </div>
-
-
-
-                <div class="col-md-4 mt-4 mb-5">
-                  <p>Country:</p>
-                  <div class="input-group mb-3">
-                    <select class="form-select" id="inputGroupSelect02">
-                      <option selected>Choose...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="4">Four</option>
-                      <option value="5">Five</option>
-                    </select>
-
-                  </div>
-                </div>
-
-
-              </div>
-
-
-              <div class="row">
-
-
-                <div class="col-lg-2  col-md-4 col-sm-6  mt-4">
-                  <!--1ci input-->
-                  <p>Country:</p>
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                  </div>
-
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
-                  <!--1ci input-->
-                  <p>Type:</p>
-
-                  <div class="input-group mb-3">
-                    <select class="form-select" id="inputGroupSelect01">
-                      <option selected>Choose...</option>
-                      <option value="1">One</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                    </select>
-                  </div>
-
-
-                </div>
-                <div class="col-lg-2 col-md-4 mt-4 col-sm-6">
-                  <!--3ci input-->
-                  <p>Length:</p>
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                    <span class="input-group-text" id="basic-addon1">cm</span>
-                  </div>
-
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
-                  <!--4ci input-->
-                  <p>Width:</p>
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                    <span class="input-group-text" id="basic-addon1">cm</span>
-                  </div>
-
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
-                  <!--5ci input-->
-                  <p>Height:</p>
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                    <span class="input-group-text" id="basic-addon1">cm</span>
-                  </div>
-
-                </div>
-                <div class="col-lg-2 col-md-4 col-sm-6  mt-4">
-                  <!--6ci input-->
-                  <p>Weight:</p>
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Username" aria-label="Username"
-                      aria-describedby="basic-addon1">
-                    <span class="input-group-text" id="basic-addon1">kq</span>
-                  </div>
-
-                </div>
-
-
-              </div>
-
-
-              <div class="conteiner">
-
-
-                <div class="color__box  row mt-4">
-                  <div class="col-lg-2 col-sm-12  page__calc-box page__calc-box--1  offset-1">
-                    <div class="page__not page__not--1 col-12 mb-4">
-                      <div class="page__not-box me-3">
-                        <img src="img/svg/P (2).svg" alt="">
-                      </div>
-
-                      <div class="page__cacl-icon ">
-                        <p class="h5 total">Total amount:</p>
-                        <p class="h5">1box</p>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-12  page__calc-box">
-                    <div class="page__not page__not--1 col-12 mb-4">
-                      <div class="page__not-box me-3">
-                        <img src="img/svg/Group (4).svg" alt="">
-                      </div>
-
-                      <div class="page__cacl-icon ">
-                        <p class="h5">Total valume:</p>
-                        <p class="h5">0.003m</p>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-12  page__calc-box">
-                    <div class="page__not page__not--1 col-12 mb-4">
-                      <div class="page__not-box me-3">
-                        <img src="img/svg/Group (6).svg" alt="">
-                      </div>
-
-                      <div class="page__cacl-icon ">
-                        <p class="h5">Total weight:</p>
-                        <p class="h5">0.003kq</p>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-12  page__calc-box">
-                    <div class="page__not page__not--1 col-12 mb-4">
-                      <div class="page__not-box me-3">
-                        <img src="img/svg/P (2).svg" alt="">
-                      </div>
-
-                      <div class="page__cacl-icon ">
-                        <p class="h5">Pricing weight:</p>
-                        <p class="h5">0.003</p>
-                      </div>
-
-                    </div>
-                  </div>
-                  <div class="col-lg-2 col-md-12  page__calc-box">
-                    <div class="page__not page__not--1 col-12 mb-4">
-                      <div class="page__not-box me-3">
-                        <img src="img/svg/Group (5).svg" alt="">
-                      </div>
-
-                      <div class="page__cacl-icon ">
-                        <p class="h5">Total worth:</p>
-                        <p class="h5">0.003$</p>
-                      </div>
-
-                    </div>
-                  </div>
-
-
-                </div>
-
-              </div>
-
-
-
-              <hr class="hr">
-
-              <div class="calculator__cargo ">
-
-                <div class="page__not page__not--1 col-12 mb-4">
-                  <div class="page__not-box me-3">
-                    <img src="img/svg/Vector (14).svg" alt="">
-                  </div>
-
-                  <h2>Select the Cargo</h2>
-
-                </div>
-
-
-                <div class="calculaator__sponsor">
-
-                  <div class="row">
-
-                    <div class="col-md-6 ">
-
-                      <div class="calculator__box">
-                        <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
-
-                        <p class="w-50">Deirvilon</p>
-
-                        <span>69$</span>
-
-                        <input class="form-check-input salam" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault1" />
-                      </div>
-
-
-                    </div>
-                    <div class="col-md-6 ">
-
-                      <div class="calculator__box">
-                        <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
-
-                        <p class="w-50">Deirvilon</p>
-
-                        <span>69$</span>
-
-                        <input class="form-check-input salam" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault1" />
-                      </div>
-
-
-                    </div>
-                    <div class="col-md-6">
-
-                      <div class="calculator__box">
-                        <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
-
-                        <p class="w-50">Deirvilon</p>
-
-                        <span>69$</span>
-
-                        <input class="form-check-input salam" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault1" />
-                      </div>
-
-
-                    </div>
-                    <div class="col-md-6 ">
-
-                      <div class="calculator__box">
-                        <img src="img/svg/logoexpress-removebg-preview 1.svg" alt="">
-
-                        <p class="w-50">Deirvilon</p>
-
-                        <span>69$</span>
-
-                        <input class="form-check-input salam" type="radio" name="flexRadioDefault"
-                          id="flexRadioDefault1" />
-                      </div>
-
-
-                    </div>
-
-                  </div>
-
-
-                </div>
-
-
-
-
-
-
-
-
-              </div>
-
-
-
-            </div>
-          </div>
-
-
-
-
-
-
-
-
-
-
-
-        </section>
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 

@@ -23,17 +23,12 @@
         integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
 
     <!--Jquery-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
 
     <link rel="stylesheet" href="css/style.css" />
 
-    <link rel="stylesheet" href="css/pages.css">
-
-    <link rel="stylesheet" href="css/main.css" />
 
 
     <title>Document</title>
@@ -41,6 +36,105 @@
 
 <body>
     <!-- Test commit -->
+
+
+
+    <div class="overlay overlay__active">
+    </div>
+
+
+    <nav class=" burger__menu">
+
+        <div class="navigation container">
+            <div class="navigation__data">
+
+                <div class="navigation__cancel d-flex justify-content-end">
+                    <span class="navigation__cancel-span">
+                        <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                    </span>
+                </div>
+
+                <div class="navigation__image">
+                    <img src="img/png/logo.png" alt="">
+                </div>
+
+                <ul class="navigation__items">
+                    <button class="navigation__box isActive ">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-house navigation__icon"></i>
+                                <span class="navigation__span ">Main Menu</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-network-wired navigation__icon"></i>
+                                <span class="navigation__span">Balance System</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                <span class="navigation__span">Orders</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-headset navigation__icon"></i>
+                                <span class="navigation__span">Courier Request</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                <span class="navigation__span">Stock</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-address-card navigation__icon"></i>
+                                <span class="navigation__span">Site Usage</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                <span class="navigation__span">Buy for me</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                <span class="navigation__span">Share and Earn</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                <span class="navigation__span">Inventory</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                <span class="navigation__span">Cargo Companies</span></a>
+                        </li>
+                    </button>
+                </ul>
+            </div>
+        </div>
+
+
+    </nav>
 
 
     <nav class="fnav">
@@ -100,92 +194,6 @@
     </nav>
 
 
-    <nav class=" burger__menu navigation__left">
-
-        <div class="navigation container">
-            <div class="navigation__data">
-
-                <div class="navigation__image">
-                    <img src="img/png/logo.png" alt="">
-                </div>
-
-                <ul class="navigation__items">
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
-                                <span class="navigation__span">Main Menu</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-network-wired navigation__icon"></i>
-                                <span class="navigation__span">Balance System</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                <span class="navigation__span">Orders</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
-                                <span class="navigation__span">Courier Request</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
-                                <span class="navigation__span">Stock</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-address-card navigation__icon"></i>
-                                <span class="navigation__span">Site Usage</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
-                                <span class="navigation__span">Buy for me</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
-                                <span class="navigation__span">Share and Earn</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
-                                <span class="navigation__span">Inventory</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
-                                <span class="navigation__span">Cargo Companies</span></a>
-                        </li>
-                    </div>
-                </ul>
-            </div>
-        </div>
-
-
-    </nav>
-
-
     <header>
         <div class="container header">
             <div class="col-md-6">
@@ -233,20 +241,13 @@
     </header>
 
 
-
-
-
     <section id="Sturcture" class="structure">
         <div class="row w-100">
             <div class="col-lg-3   page__1">
                 <nav class="navigation__left">
 
                     <div class="navigation container">
-                        <div class="navigation__cancel">
 
-                            <span class="navigation__cancel-span"><i
-                                    class="fa-solid fa-xmark navigation__cancel-icon"></i></span>
-                        </div>
 
                         <div class="navigation__logo text-center">
                             <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
@@ -254,76 +255,76 @@
 
                         <div class="navigation__data">
                             <ul class="navigation__items">
-                                <div class="navigation__box">
+                                <button class="navigation__box isActive ">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-house navigation__icon"></i>
-                                            <span class="navigation__span">Main Menu</span></a>
+                                            <span class="navigation__span ">Main Menu</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box"">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-network-wired navigation__icon"></i>
                                             <span class="navigation__span">Balance System</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-cart-shopping navigation__icon"></i>
                                             <span class="navigation__span">Orders</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-headset navigation__icon"></i>
                                             <span class="navigation__span">Courier Request</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-boxes-stacked navigation__icon"></i>
                                             <span class="navigation__span">Stock</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-address-card navigation__icon"></i>
                                             <span class="navigation__span">Site Usage</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-bag-shopping navigation__icon"></i>
                                             <span class="navigation__span">Buy for me</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-square-share-nodes navigation__icon"></i>
                                             <span class="navigation__span">Share and Earn</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-cart-flatbed navigation__icon"></i>
                                             <span class="navigation__span">Inventory</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-truck-ramp-box navigation__icon"></i>
                                             <span class="navigation__span">Cargo Companies</span></a>
                                     </li>
-                                </div>
+                                </button>
                             </ul>
                         </div>
                     </div>
@@ -338,140 +339,44 @@
                     <h4 class="ms-2">Main menu</h4>
                 </div>
 
-                <section id="profil">
-                    <div class="variable variableChangePassword container py-4 row mx-auto">
-                        <div class="col-12 col-sm-5 col-md-4 col-lg-3 col-xl-3 col-xxl-3 mb-3">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item pt-5 ps-5">
-                                    <i class="fa-solid fa-user"></i> My Profile
-                                </a>
-                                <a href="#" class="list-group-item ps-5">
-                                    <i class="fa-solid fa-location-pin"></i> My Adress:
-                                </a>
-                                <a href="#" class="list-group-item ps-5">
-                                    <i class="fa-solid fa-magnifying-glass-chart"></i> Customer
-                                    Adress:
-                                </a>
-                                <a href="#" class="list-group-item ps-5">
-                                    <i class="fa-solid fa-lock"></i> Change Password
-                                </a>
-                                <a href="#" class="list-group-item ps-5">
-                                    <i class="fa-solid fa-sack-dollar"></i> Amount of debt
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-7 col-md-7 col-lg-9 col-xl-9 col-xxl-9">
+                <section class="page" id="balance" class="balance">
 
-                            <div class="login__table">
+                   <div class="container">
+                       <div class="row">
+                             <div class="col-4">
+                                
+                                <div class="balance__box">
+                                     <div class="balance__box-img">
+                                         
+                                     </div>
+                                     <div class="balance__box-text">
 
-                                <div class="login__debet">
-                                    <div><img src="img/svg/Vector (17).svg" alt=""></div>
-                                    <span>My Adress</span>
-                                </div>
-
-                                <hr>
-
-
-                                <div class="container ">
-
-                                    <div class="login__table-input">
-
-                                        <div class="input-group flex-nowrap">
-                                            <input type="text" class="form-control" placeholder="Search"
-                                                aria-label="Username" aria-describedby="addon-wrapping" />
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-sm-12 mt-5">
-                                        <div id="table__plugin">
-                                            <table id="example" class="table table-striped table-bordered mt-4"
-                                                style="width:100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Company </th>
-                                                        <th>Location</th>
-                                                        <th>Adress</th>
-                                                        <th>Customer Name</th>
-
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-
-                                                    </tr>
-
-
-                                                    <tr>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-                                                        <td>Deirvlon</td>
-
-                                                    </tr>
-                                                </tbody>
-                                                <!-- <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                                <th></th>
-                       
-                            </tr>
-                        </tfoot>
-                     </table> -->
-
-                                        </div>
-                                    </div>
-
+                                     </div>
 
                                 </div>
 
+                             </div>
 
 
 
 
+                             <div class="col-4"></div>
+                             <div class="col-4"></div>
+                       </div>
+                   </div>
 
 
+        
 
-                            </div>
-
-
-
-
-
-
-                        </div>
-                    </div>
                 </section>
 
 
 
             </div>
         </div>
-
-
-
-
-
-
-
-
-
-        </div>
-        </div>
     </section>
+
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 

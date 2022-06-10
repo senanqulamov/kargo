@@ -1,19 +1,18 @@
 .burger__menu {
     position: absolute;
-    top: 20%;
+    top: 16%;
     left: 0;
-    display: none;
     width: calc(100% - 65%);
     transform: translateX(-100%);
     z-index: 500;
-    transition: all 6s;
-    height: auto;
+    height: 100%;
+    transition: ease .5s;
 }
 
 
-.visible {
-    display: block;
-}
+// .visible {
+//     display: block;
+// }
 
 .burger__menu-visible {
     transform: translateX(0%);
@@ -38,6 +37,9 @@
 }
 
 
+
+////header --2
+
 .fnav {
     padding: 5rem 1rem;
     background: linear-gradient(88.78deg, rgba(106, 137, 231, 0.9) -4.73%, rgba(102, 171, 231, 0.9) 109.52%);
@@ -45,11 +47,58 @@
     transition: ease-in-out 3s;
 
 
-    @media screen and(max-width:992px) {
-        display: block;
+    &__box {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 2rem;
     }
 
 
+    &__input {
+        width: 20%;
+    }
+
+
+    @media screen and(max-width:992px) {
+        display: block;
+
+        .fnav__input {
+            width: 40%;
+
+            .header__input-search {
+                width: 100%;
+            }
+        }
+    }
+
+
+    @media screen and(max-width:767px) {
+
+        .fnav__input {
+            width: 20%;
+
+            .header__input-search {
+                width: 100%;
+            }
+        }
+
+        .header__item-list {
+            padding: 0 1rem;
+            margin-top: .8rem;
+        }
+    }
+
+    @media screen and(max-width:500px) {
+        .fnav__box {
+            padding-bottom: 2rem;
+            
+        }
+
+        .drop__box {
+            top: 14% !important;
+        }
+
+    }
 
     &__box {
         display: flex;
@@ -67,46 +116,34 @@
 
     }
 
-    .navigation__logo {
-
-
-        img {
-            margin-top: 1rem;
-        }
-    }
-
-    .header__input {
-        margin-left: 5%;
-    }
-
-
-
-
-
-    &__line {
-        position: absolute;
-        height: 1px;
-        width: 20px;
-        background-color: #fff;
-        display: inline-block;
-        transition: all 1s;
-    }
-
-    &__top {
-        top: 3px;
-    }
-
-
-    &__center {
-        top: 1rem;
-    }
-
-    &__bottom {
-        bottom: 2px;
-    }
-
 
 }
+
+.header__input {
+    margin-left: 5%;
+}
+
+.fnav__line {
+    position: absolute;
+    height: 1px;
+    width: 20px;
+    background-color: #fff;
+    display: inline-block;
+    transition: all 1s;
+}
+
+.fnav__top {
+    top: 2px;
+}
+
+.fnav__center {
+    top: 1rem;
+}
+
+.fnav__bottom {
+    bottom: 2px;
+}
+
 
 
 
