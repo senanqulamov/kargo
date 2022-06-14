@@ -110,6 +110,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		Route::prefix('orders/')->name('orders.')->group(function(){
 			Route::get('/', [ManuelOrderController::class, 'index'])->name('index');
 		});
+        Route::prefix('cargo-requests/')->name('cargo-requests.')->group(function(){
+			Route::get('/', [ManuelOrderController::class, 'cargoRequests'])->name('index');
+		});
 
 		// messages
 		Route::prefix('messages/')->name('messages.')->group(function(){
@@ -265,6 +268,7 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
 
         Route::get('/manualorder', [UserPanelController::class, 'manualorder'])->name('manualorder');
         Route::post('/postManualorder', [UserPanelController::class, 'postManualorder'])->name('post.manualorder');
+        Route::post('/getquotemanualorder', [UserPanelController::class, 'getquotemanualorder'])->name('getquote.manualorder');
 
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');

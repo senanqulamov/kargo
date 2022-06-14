@@ -394,7 +394,6 @@ function silProduct(e) {
     e.parentElement.parentElement.remove();
 }
 
-
 function yekunHesabla() {
     var packages = document.querySelectorAll(".package-cont-hm");
 
@@ -426,48 +425,62 @@ function yekunHesabla() {
                 var product_count = parseInt(
                     product.querySelector(".boxCount").value
                 );
-                if(product_weight){
-                    product_weight_package_total += product_weight * product_count;
-                }else{
+                if (product_weight) {
+                    product_weight_package_total +=
+                        product_weight * product_count;
+                } else {
                     product_weight_package_total = 0;
                 }
-                if(product_count){
+                if (product_count) {
                     product_count_package_total += product_count;
-                }else{
+                } else {
                     product_count_package_total = 0;
                 }
 
-                var product_price = parseInt(
-                    product.querySelector('.product-price-hm').value
-                ) * product_count;
+                var product_price =
+                    parseInt(product.querySelector(".product-price-hm").value) *
+                    product_count;
 
-                if(product_price){
+                if (product_price) {
                     total_product_price += product_price;
                 }
             });
             var package_total_weight = 0;
-            if(package_count){
+            if (package_count) {
                 product_weight_package_total += package_weight;
-                package_total_weight = product_weight_package_total * package_count;
+                package_total_weight =
+                    product_weight_package_total * package_count;
                 total_weight += package_total_weight;
 
-                total_count = package_count*product_count_package_total;
-                total_worth += total_product_price*package_count;
+                total_count = package_count * product_count_package_total;
+                total_worth += total_product_price * package_count;
             }
 
-
             // Calculating total volume
-            var package_inputs = package.querySelector('.package-inputs-cont-hm');
-            var length = parseInt(package_inputs.querySelector('.package-length-hm').value);
-            var width = parseInt(package_inputs.querySelector('.package-width-hm').value);
-            var height = parseInt(package_inputs.querySelector('.package-height-hm').value);
-            var count = parseInt(package_inputs.querySelector('.boxCount').value);
-            var package_volume = length*width*height*count;
-            if(package_volume){
+            var package_inputs = package.querySelector(
+                ".package-inputs-cont-hm"
+            );
+            var length = parseInt(
+                package_inputs.querySelector(".package-length-hm").value
+            );
+            var width = parseInt(
+                package_inputs.querySelector(".package-width-hm").value
+            );
+            var height = parseInt(
+                package_inputs.querySelector(".package-height-hm").value
+            );
+            var count = parseInt(
+                package_inputs.querySelector(".boxCount").value
+            );
+            var package_volume = length * width * height * count;
+            if (package_volume) {
                 total_volume += package_volume;
                 // Calculating deci for package
-                var deci = Math.max(package_volume/5000 , package_total_weight);
-                var package_deci_total = deci*count;
+                var deci = Math.max(
+                    package_volume / 5000,
+                    package_total_weight
+                );
+                var package_deci_total = deci * count;
                 total_deci += package_deci_total;
             }
         });
@@ -476,19 +489,65 @@ function yekunHesabla() {
         document.querySelector(".totalPricing").innerHTML = total_deci;
         document.querySelector(".totalVolume").innerHTML = total_volume;
         document.querySelector(".totalWorth").innerHTML = total_worth;
+        document.querySelector("#total_cargo_price").value = total_worth;
 
-        if(total_deci > 0){
-            console.log('asda');
+        var country = document.querySelector(
+            'select[name="country"]'
+        ).value;
+
+        if (total_deci > 0 && country) {
+            $.ajax({
+                type: "POST",
+                url: "/userpanel/getquotemanualorder",
+                headers: {
+                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+                        "content"
+                    ),
+                },
+                data: {
+                    total_worth: total_worth,
+                    total_count: total_count,
+                    total_weight: total_weight,
+                    total_volume: total_volume,
+                    total_deci: total_deci,
+                    country: country,
+                },
+                success: function (data) {
+                    console.log(data);
+                    var companies = Object.keys(data);
+                    companies.forEach(element => {
+                        document.querySelector('#cargo_company_' + element).innerHTML = data[element] + " $ ";
+                        document.querySelector('#cargo_company_input_' + element).setAttribute('data-price' , data[element]);
+                    });
+                    Swal.fire({
+                        position: 'top-start',
+                        icon: 'success',
+                        title: 'Cargo company values calculated. See in Shipment definition',
+                        showConfirmButton: false,
+                        backdrop: true,
+                        timer: 3000
+                    })
+                },
+            });
+        }else{
+            Swal.fire({
+                position: 'top-start',
+                icon: 'error',
+                title: 'Please enter country information and cargo details to calculate total price',
+                showConfirmButton: false,
+                backdrop: true,
+                timer: 3000
+            })
         }
     }
 }
 
-function ChangeOrderInfo(input){
-    var product_names = document.querySelectorAll('.product-info-hm');
+function ChangeOrderInfo(input) {
+    var product_names = document.querySelectorAll(".product-info-hm");
     document.querySelector('input[name="order_info"]').value = "";
 
-    product_names.forEach(element => {
-        document.querySelector('input[name="order_info"]').value += element.value + " , ";
+    product_names.forEach((element) => {
+        document.querySelector('input[name="order_info"]').value +=
+            element.value + " , ";
     });
-
 }

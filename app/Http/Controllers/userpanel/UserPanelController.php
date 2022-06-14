@@ -99,54 +99,39 @@ class UserPanelController extends Controller
         ]);
     }
 
+    public function getquotemanualorder(Request $request){
+        // dd($request->all());
+
+        $deci = DB::table('cargo_zones')->select('companyID','zone')->where('desi' , $request->total_deci)->get();
+        $zone = DB::table('cargo_countries')->where('country' , $request->country)->get()->first();
+
+        $result_array = array();
+        foreach ($deci as $deci) {
+            $deci_zone_values =  json_decode($deci->zone);
+            $deci_company = $deci->companyID;
+            $deci_zone_value = $deci_zone_values[$zone->zone-1];
+            $company = DB::table('cargo_companies')->where('id' , $deci_company)->get()->first();
+
+            $psh = ($deci_zone_value*$company->PSH)/100;
+            $jet = ($deci_zone_value*$company->jet_price)/100;
+            $emergency = ($deci_zone_value*$company->emergency)/100;
+            $kar_marj = ($deci_zone_value*$company->kar_marj)/100;
+            $deci_zone_value = $deci_zone_value + $psh + $jet + $emergency + $kar_marj;
+
+            $result = array($deci->companyID => $deci_zone_value);
+            $result_array += $result;
+        }
+
+        // dd($result_array);
+        return response()->json($result_array , 200);
+    }
+
     public function postManualorder(Request $request)
     {
 
         $cargo_id = uniqid(15);
 
-        dd($request->all());
-
-        if($request->file_type){
-            $file_idS = array_keys($request->file_type);
-
-            foreach ($file_idS as $key => $file_id) {
-                $document = $request->document[$file_id];
-                $file_name = $document->getClientOriginalName();
-                $file_type = $request->file_type[$file_id];
-                $cargo_document = array(
-                    'doc_id' => $file_id,
-                    'cargo_id' => $cargo_id,
-                    'document' => $file_name,
-                    'type' => $file_type
-                );
-                Cargo_document::create($cargo_document);
-            }
-        }
-
-        if ($request->save_address && $request->country) {
-            $new_user_address = array(
-                'name' => $request->name,
-                'city' => $request->city,
-                'country' => $request->country,
-                'state' => $request->state,
-                'address' => $request->address,
-                'zipcode' => $request->zipcode,
-                'phone' => $request->phone,
-                'email' => $request->email,
-                'userID' => Auth::user()->id,
-            );
-            UserAddress::create($new_user_address);
-        }
-
-        if ($request->hasfile('document')) {
-
-            foreach ($request->file('document') as $file) {
-                $name = $file->getClientOriginalName();
-                $file->move(public_path() . '/files/', $name);
-                $data[] = $name;
-            }
-            $data = array_unique($data);
-        }
+        // dd($request->all());
 
         if ($request->package_id) {
             foreach ($request->package_id as $package_id) {
@@ -154,11 +139,22 @@ class UserPanelController extends Controller
             }
             $packages = array_unique($packages);
 
+            if ($request->hasfile('document')) {
+
+                foreach ($request->file('document') as $file) {
+                    $name = $file->getClientOriginalName();
+                    $file->move(public_path() . '/files/', $name);
+                    $data[] = $name;
+                }
+                $data = array_unique($data);
+            }
+
             $order_request = array(
                 'id' => $cargo_id,
                 // 'customer' => $request->customer,
                 'name' => $request->name,
                 'country' => $request->country,
+                'city' => $request->city,
                 'state' => $request->state,
                 'address' => $request->address,
                 'zipcode' => $request->zipcode,
@@ -219,6 +215,39 @@ class UserPanelController extends Controller
                     Product::create($productsS);
                 }
             }
+
+            if($request->file_type){
+                $file_idS = array_keys($request->file_type);
+
+                foreach ($file_idS as $key => $file_id) {
+                    $document = $request->document[$file_id];
+                    $file_name = $document->getClientOriginalName();
+                    $file_type = $request->file_type[$file_id];
+                    $cargo_document = array(
+                        'doc_id' => $file_id,
+                        'cargo_id' => $cargo_id,
+                        'document' => $file_name,
+                        'type' => $file_type
+                    );
+                    Cargo_document::create($cargo_document);
+                }
+            }
+
+            if ($request->save_address && $request->country) {
+                $new_user_address = array(
+                    'name' => $request->name,
+                    'city' => $request->city,
+                    'country' => $request->country,
+                    'state' => $request->state,
+                    'address' => $request->address,
+                    'zipcode' => $request->zipcode,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'userID' => Auth::user()->id,
+                );
+                UserAddress::create($new_user_address);
+            }
+
             return Redirect::back()->with('message', 'Cargo order successfully sent');
         } else {
             return Redirect::back()->with('error', 'Invalid arguments');

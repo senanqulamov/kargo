@@ -11,7 +11,7 @@
 	<div class="col-12">
 		<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#modalBarcode">Scan Barcode</button>
 	</div>
-</div>						
+</div>
 <div class="row">
 	<div class="col-12">
 		<div class="card">
@@ -29,7 +29,7 @@
 					<tbody>
 						@foreach($packages as $package)
 						<tr>
-							<td>Width: {{$package->width}}, Length: {{$package->length}}, Weight: {{$package->weight}}, Height: {{$package->height}}</td>
+							<td>Width: {{$package->package_width}}, Length: {{$package->package_length}}, Weight: {{$package->package_weight}}, Height: {{$package->package_height}}</td>
 							<td>{{$package->barcode}}</td>
 							<td><span class="text-success">Approve</span></td>
 							<td>
@@ -65,7 +65,7 @@
 					</div>
 					<div class="d-none" id="table_section">
 						<table class="table mb-0" id="tableCompany"></table>
-					</div>					
+					</div>
 					<div class="form-group mt-4">
 						<button type="submit" class="btn btn-primary">Place</button>
 					</div>
@@ -177,23 +177,23 @@
 						$("#table_section").addClass("d-none");
 					} else {
 						$("#table_section").removeClass("d-none");
-						
+
 						$('#tableCompany').text(' ');
 						var trHTML = '';
 						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Barcode:</b></td><td class="border-top-0 border-bottom">'+response.data.barcode+'</td></tr>';
-						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Length:</b></td><td class="border-top-0 border-bottom">'+response.data.length+'</td></tr>';			
-						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Weight:</b></td><td class="border-top-0 border-bottom">'+response.data.weight+'</td></tr>';			
-						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Width:</b></td><td class="border-top-0 border-bottom">'+response.data.width+'</td></tr>';		
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Length:</b></td><td class="border-top-0 border-bottom">'+response.data.length+'</td></tr>';
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Weight:</b></td><td class="border-top-0 border-bottom">'+response.data.weight+'</td></tr>';
+						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Width:</b></td><td class="border-top-0 border-bottom">'+response.data.width+'</td></tr>';
 						trHTML += '<tr><td class="border-top-0 border-bottom"><b>Height:</b></td><td class="border-top-0 border-bottom">'+response.data.height+'</td></tr>';
 						$('#tableCompany').append(trHTML);
 					}
                 }
             });
 		});
-		
+
 		$("#insertWareHouse").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),
@@ -219,7 +219,7 @@
 				}
 			});
 		});
-		
+
 		$(".edit_btn").click(function(){
             var id_data=$(this).attr('id');
             $("#editModal").modal('show');
@@ -237,10 +237,10 @@
                 }
             });
         });
-		
+
 		$("#formUpdate").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),

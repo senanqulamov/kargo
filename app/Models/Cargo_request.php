@@ -17,6 +17,7 @@ class Cargo_request extends Model
         'name',
         'country',
         'state',
+        'city',
         'address',
         'zipcode',
         'phone',

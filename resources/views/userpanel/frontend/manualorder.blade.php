@@ -57,7 +57,121 @@
         .remove_button_file_upld {
             all: unset;
         }
+
+        .total_cargo_price {
+            position: fixed;
+            bottom: 10%;
+            right: 5%;
+            width: auto;
+            height: 3vw;
+            /* display: none; */
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            grid-template-columns: 32% 22% 7%;
+            border: 1px solid transparent;
+            border-radius: 14px;
+            background: #FFA555;
+            justify-items: center;
+        }
+
+        .total_cargo_price input {
+            all: unset;
+            border: none;
+            background: transparent;
+            text-align: center;
+            font-weight: bold;
+            color: white;
+            font-size: 15px;
+            width: 100%;
+        }
+
+        .total_cargo_price p {
+            all: unset;
+            color: white;
+            font-size: 15px;
+        }
     </style>
+
+    <script>
+        "use strict";
+
+        function initMap() {
+            const CONFIGURATION = {
+                "ctaTitle": "",
+                "mapOptions": {
+                    "center": {
+                        "lat": 37.4221,
+                        "lng": -122.0841
+                    },
+                    "fullscreenControl": true,
+                    "mapTypeControl": false,
+                    "streetViewControl": true,
+                    "zoom": 11,
+                    "zoomControl": true,
+                    "maxZoom": 22
+                },
+                "mapsApiKey": "AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE",
+                "capabilities": {
+                    "addressAutocompleteControl": true,
+                    "mapDisplayControl": false,
+                    "ctaControl": true
+                }
+            };
+            const componentForm = [
+                'location',
+                'locality',
+                'administrative_area_level_1',
+                'country',
+                'postal_code',
+            ];
+
+            const getFormInputElement = (component) => document.getElementById(component + '-input');
+            const autocompleteInput = getFormInputElement('location');
+            const autocomplete = new google.maps.places.Autocomplete(autocompleteInput, {
+                fields: ["address_components", "geometry", "name"],
+                types: ["address"],
+            });
+            autocomplete.addListener('place_changed', function() {
+                const place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert('No details available for input: \'' + place.name + '\'');
+                    return;
+                }
+                fillInAddress(place);
+            });
+
+            function fillInAddress(place) { // optional parameter
+                const addressNameFormat = {
+                    'street_number': 'short_name',
+                    'route': 'long_name',
+                    'locality': 'long_name',
+                    'administrative_area_level_1': 'short_name',
+                    'country': 'long_name',
+                    'postal_code': 'short_name',
+                };
+                const getAddressComp = function(type) {
+                    for (const component of place.address_components) {
+                        if (component.types[0] === type) {
+                            return component[addressNameFormat[type]];
+                        }
+                    }
+                    return '';
+                };
+                getFormInputElement('location').value = getAddressComp('street_number') + ' ' +
+                    getAddressComp('route');
+                for (const component of componentForm) {
+                    // Location field is handled separately above as it has different logic.
+                    if (component !== 'location') {
+                        getFormInputElement(component).value = getAddressComp(component);
+                    }
+                }
+            }
+        }
+    </script>
 
     <div class="drop__box">
         <div class="drop__box-img">
@@ -100,24 +214,26 @@
                                         <div class="col-12 col-sm-6">
                                             <h5>Address Information</h5>
                                             <h6>Country<span class="red">*</span></h6>
+                                            {{-- <input type="text" placeholder="Country" id="country-input" /> --}}
                                             <select class="form-select mb-3" name="country">
-                                                <option value="null" selected disabled>Select</option>
+                                                <option value="0" selected disabled>Select</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->name }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             <h6>City<span class="red">*</span></h6>
                                             <input class="form-control mb-3" type="text" placeholder="New York"
-                                                aria-label="default input example" name="city" />
+                                                aria-label="default input example" name="city" id="locality-input" />
                                             <h6>State</h6>
                                             <input class="form-control mb-3" type="text" placeholder="California"
-                                                aria-label="default input example" name="state" />
+                                                aria-label="default input example" name="state"
+                                                id="administrative_area_level_1-input" />
                                             <h6>Adress<span class="red">*</span></h6>
                                             <input class="form-control mb-3" type="text" placeholder="Bergen street 57"
-                                                aria-label="default input example" name="address" />
+                                                aria-label="default input example" name="address" id="location-input" />
                                             <h6>ZIP Code<span class="red">*</span></h6>
                                             <input class="form-control mb-3" type="text" placeholder="745844"
-                                                aria-label="default input example" name="zipcode" />
+                                                aria-label="default input example" name="zipcode" id="postal_code-input" />
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <h5>Contact Info</h5>
@@ -360,14 +476,14 @@
                                                 <i class="fa-solid fa-p headerIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
-                                                    <span class="totalText totalPricing">0.003</span>
+                                                    <span class="totalText totalPricing"></span>
                                                 </div>
                                             </div>
                                             <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-sack-dollar commonIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
-                                                    <span class="totalText totalWorth">0.003 $</span>
+                                                    <span class="totalText totalWorth"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -396,14 +512,18 @@
                                             <div class="col-12 col-sm-6 mb-3">
                                                 <ul class="list-group list-group-horizontal">
                                                     <li class="list-group-item w-25 text-center">
-                                                        <img style="width:100%;height:100%;" src="{{asset('/')}}images/{{ $company->logo == NULL ? 'user.png' : $company->logo }}" />
+                                                        <img style="width:100%;height:100%;"
+                                                            src="{{ asset('/') }}images/{{ $company->logo == null ? 'user.png' : $company->logo }}" />
                                                     </li>
                                                     <li class="list-group-item w-50 text-left">{{ $company->name }}</li>
                                                     <li class="list-group-item d-flex">
-                                                        <span class="me-2">unknwon</span>
+                                                        <span class="me-2"
+                                                            id="cargo_company_{{ $company->id }}">unknwon</span>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="cargo_company" value="1" id="cargo_company_{{ $company->id }}" />
+                                                            <input class="form-check-input cargo_price_input" type="radio"
+                                                                name="cargo_company"
+                                                                id="cargo_company_input_{{ $company->id }}"
+                                                                data-price="0" value="{{ $company->id }}" />
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -419,8 +539,8 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="insure_order"
-                                                            id="insure_my_order" />
+                                                        <input class="form-check-input cargo_price_input" type="checkbox" data-price="15"
+                                                            name="insure_order" id="insure_my_order" />
                                                     </div>
                                                     İnsure my order
                                                 </li>
@@ -433,8 +553,8 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="extra_bubble"
-                                                            id="extra_bubble" />
+                                                        <input class="form-check-input cargo_price_input" type="checkbox" data-price="1"
+                                                            name="extra_bubble" id="extra_bubble" />
                                                     </div>
                                                     Extra bubble
                                                 </li>
@@ -447,7 +567,7 @@
                                             <ul class="list-group list-group-horizontal">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox"
+                                                        <input class="form-check-input cargo_price_input" type="checkbox"
                                                             name="other_additional" id="other_additional" />
                                                     </div>
                                                     Other Additional
@@ -613,12 +733,20 @@
                         </li>
                     </ul>
                 </div>
+                <div class="total_cargo_price">
+                    <p>Total price: </p>
+                    <input type="number" name="total_cargo_price" id="total_cargo_price" value="0" readonly>
+                    <p>$</p>
+                </div>
 
                 <button class="btn btn-primary" type="submit">Submit order</button>
             </form>
         </div>
     </section>
 
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC"
+        async defer></script>
     <script>
         setTimeout(() => {
             console.clear();
@@ -685,6 +813,35 @@
 
             // console.log(document.querySelector('#save_address'));
         }
+
+        var cargo_price_inputs = document.querySelectorAll('.cargo_price_input');
+
+        cargo_price_inputs.forEach(element => {
+            element.addEventListener('change', function() {
+                var cargo_company_price = parseInt(
+                    document.querySelector('input[name="cargo_company"]:checked').getAttribute(
+                        'data-price'));
+
+                var total_cargo_price = cargo_company_price;
+
+                if (document.querySelector('input[name="insure_order"]:checked')) {
+                    var insure_order_price = parseInt(
+                        document.querySelector('input[name="insure_order"]').getAttribute('data-price'));
+                    total_cargo_price += insure_order_price;
+                }
+                if (document.querySelector('input[name="extra_bubble"]:checked')) {
+                    var extra_bubble_price = parseInt(
+                        document.querySelector('input[name="extra_bubble"]').getAttribute('data-price'));
+                    total_cargo_price += extra_bubble_price;
+                }
+
+                total_cargo_price += parseInt(document.querySelector('.totalWorth').innerHTML);
+
+                console.log(cargo_company_price + ";;;;;" + insure_order_price + ";;;;;" +
+                    extra_bubble_price + ";;;;" + total_cargo_price);
+                document.querySelector('#total_cargo_price').value = total_cargo_price;
+            });
+        });
     </script>
     <script src="{{ asset('/') }}frontend/userpanel/js/morder.js"></script>
 @endsection

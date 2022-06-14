@@ -136,6 +136,12 @@
                                     <p> Orders Manager</p>
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.cargo-requests.index')}}" class="nav-link @if(Request::segment(2) == 'cargo-requests') active @endif">
+                                    <i class="nav-icon fas fa-file-alt"></i>
+                                    <p> Cargo Requests</p>
+                                </a>
+                            </li>
 
 							<li class="nav-item @if(Request::segment(2) == 'messages') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'messages') active @endif">
