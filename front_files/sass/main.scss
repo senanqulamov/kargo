@@ -1,10 +1,11 @@
 ///base
 @import "base/base";
 @import "base/responsive";
+@import "base/sections";
 
 //components
 @import "components/button";
-@import "components/classes";
+@import "components/progress";
 
 //layout
 @import "layout/header";

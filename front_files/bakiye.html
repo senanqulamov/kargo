@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fontfamily -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato&family=Prosto+One&family=Roboto:wght@100&family=Source+Serif+Pro:wght@200&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!--Jquery-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Test commit -->
+
+
+
+    <div class="overlay overlay__active">
+    </div>
+
+
+    <nav class=" burger__menu">
+
+        <div class="navigation container">
+            <div class="navigation__data">
+
+                <div class="navigation__cancel d-flex justify-content-end">
+                    <span class="navigation__cancel-span">
+                        <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                    </span>
+                </div>
+
+                <div class="navigation__image">
+                    <img src="img/png/logo.png" alt="">
+                </div>
+
+                <ul class="navigation__items">
+                    <button class="navigation__box isActive ">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
+                                <span class="navigation__span ">Main Menu</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-network-wired navigation__icon"></i>
+                                <span class="navigation__span">Balance System</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                <span class="navigation__span">Orders</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
+                                <span class="navigation__span">Courier Request</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                <span class="navigation__span">Stock</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-address-card navigation__icon"></i>
+                                <span class="navigation__span">Site Usage</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                <span class="navigation__span">Buy for me</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                <span class="navigation__span">Share and Earn</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                <span class="navigation__span">Inventory</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                <span class="navigation__span">Cargo Companies</span></a>
+                        </li>
+                    </button>
+                </ul>
+            </div>
+        </div>
+
+
+    </nav>
+
+
+    <nav class="fnav">
+        <div class="fnav__box">
+            <div class="fnav__burger">
+                <span class="fnav__line  fnav__top">
+
+                </span>
+                <span class="fnav__line  fnav__center">
+
+                </span>
+                <span class="fnav__line  fnav__bottom">
+
+                </span>
+            </div>
+
+            <div class="fnav__input">
+                <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                <input class="header__input-search" type="text" placeholder="Axtar..." />
+            </div>
+
+
+            <div class="header__icons">
+                <ul class="header__item">
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-bell header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-gear header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-globe header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest">
+                            Dervilon
+                            <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest"><i
+                                class="fa-solid fa-right-from-bracket"></i></a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <header>
+        <div class="container header">
+            <div class="col-md-6">
+                <div class="header__input">
+                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                    <input class="header__input-search" type="text" placeholder="Axtar..." />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <ul class="header__item">
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-bell header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-gear header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-globe header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest">
+                                Dervilon
+                                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest"><i
+                                    class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="sturcture" class="structure">
+        <div class="row w-100">
+
+            <div class="drop__box">
+                <div class="drop__box-img">
+                    <img src="img/svg/Group (16).svg" alt="">
+                </div>
+                <h4 class="ms-2">Bakiye sistemi</h4>
+            </div> 
+
+            <div class="col-lg-3   page__1">
+                <nav class="navigation__left">
+
+                    <div class="navigation container">
+
+
+                        <div class="navigation__logo text-center">
+                            <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
+                        </div>
+
+                        <div class="navigation__data">
+                            <ul class="navigation__items">
+                                <button class="navigation__box isActive ">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-house navigation__icon"></i>
+                                            <span class="navigation__span ">Main Menu</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box"">
+                                    <li class=" navigation__item">
+                                    <a href="#" class="navigation__link"><i
+                                            class="fa-solid fa-network-wired navigation__icon"></i>
+                                        <span class="navigation__span">Balance System</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Orders</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-headset navigation__icon"></i>
+                                            <span class="navigation__span">Courier Request</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                            <span class="navigation__span">Stock</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-address-card navigation__icon"></i>
+                                            <span class="navigation__span">Site Usage</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Buy for me</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                            <span class="navigation__span">Share and Earn</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                            <span class="navigation__span">Inventory</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                            <span class="navigation__span">Cargo Companies</span></a>
+                                    </li>
+                                </button>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9 col-md-11 col-sm-12 col-12 page__2">
+                      
+                <section id="balance" class="balance">
+ 
+                    <div class="container" id="balance__container">
+                        <div class="container" id="balance__tabs">
+                            <div class="row">
+                                <div class="col-4">
+
+                                    <button class="balance__box d-flex align-items-center ">
+                                        <div class="balance__box-img balance__box-img--1 ">
+                                            <img src="img/svg/Group (10).svg" alt="">
+                                        </div>
+                                        <div class="balance__box-text  ms-4">
+                                            <p>Bakiye yukle</p>
+                                        </div>
+
+                                    </button>
+
+                                </div>
+
+                                <div class="col-4">
+                                    <button class="balance__box d-flex align-items-center ">
+                                        <div class="balance__box-img balance__box-img--2 ">
+                                            <img src="img/svg/Group (11).svg" alt="">
+                                        </div>
+                                        <div class="balance__box-text  ms-4">
+                                            <p>Yukleme kecmisi</p>
+                                        </div>
+
+                                    </button>
+
+                                </div>
+
+                                <div class="col-4">
+                                    <button class="balance__box d-flex align-items-center ">
+                                        <div class="balance__box-img balance__box-img--3 ">
+                                            <img src="img/svg/Vector (18).svg" alt="">
+                                        </div>
+                                        <div class="balance__box-text  ms-4">
+                                            <p>Yukleme kecmisi</p>
+                                        </div>
+
+                                    </button>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <section id="balance__download-btn-1">
+
+                            <div class="balance__download mt-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <h6 class="balance__download-text--1">Bakiye yukle</h6>
+                                        </div>
+                                        <div class="col-6">
+                                            <h6 class="balance__download-text--2">Euro Selling Rate 15.54</h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="balance__download-info mt-5">
+                                        <div class="row balance__download-info-row">
+                                            <div class="col-4">
+                                                <button class="balance__download-buttons">
+                                                    <div class="btn btn-light"><i class="far fa-plus plus"></i><i
+                                                            class="far fa-minus minus hide"></i></div>
+                                                    <span>Banka hesab bilgileri </span>
+
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="balance__download-buttons">
+                                                    <div class="btn btn-light"><i class="far fa-plus plus"></i><i
+                                                            class="far fa-minus minus hide"></i></div>
+                                                    <span>Balans hesabina odeme </sp>
+                                                </button>
+                                            </div>
+                                            <div class="col-4">
+                                                <button class="balance__download-buttons">
+                                                    <div class="btn btn-light me-2"><i class="far fa-plus plus"></i><i
+                                                            class="far fa-minus minus hide"></i></div>
+                                                    <span>Online odeme </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="balance__account customer__info-1 close ">
+
+                                <div class="balance__transfer mt-5">
+                                    <p>Bank hesabina odeme</p>
+                                </div>
+                                <div class="balance__rate mt-5">
+                                    <p>Kur farklılıklarından etkilenmemek için lütfen ödeme yaptığınız vakitte dekont
+                                        yükleyiniz.</p>
+                                </div>
+
+                                <div class='balance__customer-data'>
+
+                                    <div class="balance__customer-data--card">
+                                        <p>SHIP LOUNGE LOJİSTİK VE YAZILIM SİSTEMLERİ SAN. TİC. LTD. ŞT. - İş Bankası
+                                        </p>
+                                        <p>Türk Lirası Hesabı: TR880006400000114420078614 </p>
+                                        <p>Amerikan Doları Hesabı: TR230006400000214420034771</p>
+                                    </div>
+
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="balance__account  customer__info-2 close ">
+
+                                <div class="balance__transfer mt-5">
+                                    <p>Bank hesabina odeme</p>
+                                </div>
+                                <div class="balance__rate mt-5">
+                                    <p>Kur farklılıklarından etkilenmemek için lütfen ödeme yaptığınız vakitte dekont
+                                        yükleyiniz.</p>
+                                </div>
+
+                                <div class="balance__line ">
+
+                                    <ol class="steps">
+                                        <li class=" step is-active" data-step="1">
+                                            <span class="payment__list">Odeme Karti</span>
+                                        </li>
+                                        <li class="text step" data-step="2">
+                                            <span class="payment__list">Odeme detaylari</span>
+                                        </li>
+                                        <li class="text step" data-step="3">
+                                           <span class="payment__list"> Odeme tamamla</span>
+                                        </li>
+                                    </ol>
+
+                                </div>
+
+                                <div class="balance__customer-num mt-4">
+                                    <h4>Müşteri Numaranız: EB1Z</h4>
+                                </div>
+
+
+
+                                <div class="balance__cards mt-5">
+                                    <div class="container">
+                                        <div class="row">
+
+                                            <div class="col-sm-4">
+
+                                                <div class="balance__cards-box balance__cards-box--1">
+                                                    <div class="form-check form-check-inline  mt-4">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio1" value="option1">
+
+                                                    </div>
+
+                                                    <div class="balance__card-imgs">
+                                                        <img src="img/svg/Group (13).svg" style=" width:25%;" alt="">
+                                                    </div>
+
+                                                    <div class="balance__card-text">
+                                                        <h4 class="mt-5">BANKA HEVALE / EFT</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                                <div class="balance__cards-box balance__cards-box--2">
+                                                    <div class="form-check form-check-inline  mt-4">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio1" value="option2">
+
+                                                    </div>
+
+                                                    <div class="balance__card-imgs">
+                                                        <img src="img/svg/paypal-svgrepo-com 1.svg" style=" width:26%;"
+                                                            alt="">
+                                                    </div>
+
+                                                    <div class="balance__card-text">
+                                                        <h4 class="mb-4">Pay Pal</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+
+                                                <div class="balance__cards-box balance__cards-box--3">
+                                                    <div class="form-check form-check-inline mt-4">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="inlineRadioOptions" id="inlineRadio1" value="option3">
+
+                                                    </div>
+
+                                                    <div class="balance__card-imgs">
+                                                        <img src="img/svg/Vector (19).svg" style=" width:25%;" alt="">
+                                                    </div>
+
+                                                    <div class="balance__card-text">
+                                                        <h4 class="mt-4">PAYONEER</h4>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="balance__label row mt-5">
+                                    <div class="col-4">
+
+                                        <div class="balance__load">
+                                            <h4>Yuklenen tutar</h4>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+
+                                        <div class="balance__load">
+                                            <h4>Para birimi</h4>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-4">
+
+                                        <div class="balance__load">
+                                            <h4>Komission Hesablamar</h4>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="balance__input  row ">
+                                    <div class="col-sm-4">
+
+                                        <div class="balance__input-file">
+                                            <input type="text" class="form-control" placeholder="First name"
+                                                aria-label="First name">
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="balance__input-file">
+                                            <select class="form-select" aria-label="Default select example">
+                                                <option selected>Turk lirasi</option>
+                                                <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option>
+                                            </select>
+                                        </div>
+
+
+
+
+                                    </div>
+                                    <div class="col-sm-4">
+
+                                        <div class="balance__input-file">
+                                            <input type="text" class="form-control" placeholder="First name"
+                                                aria-label="First name">
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="balance__selectFiles">
+
+                                    <fieldset>
+                                        <input type="file" id="upload" class="custom-file-input">
+
+
+                                    </fieldset>
+
+                                </div>
+
+
+
+                                <div class="balance__textArea">
+                                    <div class="container">
+                                        <p>Aciklama</p>
+
+                                        <div class="form-floating mt-3 mb-3">
+                                            <textarea class="form-control" placeholder="Leave a comment here"
+                                                id="floatingTextarea2" style="height: 126px"></textarea>
+                                            <label for="floatingTextarea2">Orn: Not</label>
+                                        </div>
+
+                                        <div class="balance__textArea-btn">
+                                            <button class="btn btn-danger">İlərlə</button>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </section>
+
+
+                        <section id="balance__download-btn-2">
+
+                            <div class="balance__download  mt-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h6 class="balance__download-text--1">Yukleme kecmisi</h6>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="balance__box-rate">
+                                                <p class="balance__box-rate-p">Bakiyeniz <span>0.00</span>€ </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="balance__download-text--2">Euro Selling Rate 15.54</h6>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="table__datas">
+                                <table id="example" class="table table-striped table-bordered mt-4" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th class='th'>Id </th>
+                                            <th class='th'>Amount</th>
+                                            <th class='th'>Type of operation</th>
+                                            <th class='th'>Access type</th>
+                                            <th class='th'>Note</th>
+                                            <th class='th'>Approval status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class='td'>12131515</td>
+                                            <td class='td'>125</td>
+                                            <td class='td text-center'> <button class="btn income">Income</button> </td>
+                                            <td class='td'>Card</td>
+                                            <td class='td'>Lorem ipsum</td>
+                                            <td class='td text-center'> <button class="btn status">Income </button>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class='td'>12131515</td>
+                                            <td class='td'>125</td>
+                                            <td class='td text-center'> <button class="btn income">Income</button> </td>
+                                            <td class='td'>Card</td>
+                                            <td class='td'>Lorem ipsum</td>
+                                            <td class='td text-center'> </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td class='td'>12131515</td>
+                                            <td class='td'>125</td>
+                                            <td class='td text-center'> <button class="btn income">Income</button> </td>
+                                            <td class='td'>Card</td>
+                                            <td class='td'>Lorem ipsum</td>
+                                            <td class='td text-center'> </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td class='td'>12131515</td>
+                                            <td class='td'>125</td>
+                                            <td class='td text-center'> <button class="btn income">Income</button> </td>
+                                            <td class='td'>Card</td>
+                                            <td class='td'>Lorem ipsum</td>
+                                            <td class='td text-center'> </td>
+
+                                        </tr>
+
+
+
+                                    </tbody>
+               
+                                 </table>
+
+                            </div>
+
+
+
+                        </section>
+
+
+                        <section id="balance__download-btn-3">
+
+                            <div class="balance__download  mt-5">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <h6 class="balance__download-text--1">Yukleme kecmisi</h6>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="balance__box-rate">
+                                                <p class="balance__box-rate-p">Bakiyeniz <span>0.00</span>€ </p>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <h6 class="balance__download-text--2">Euro Selling Rate 15.54</h6>
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+
+
+                                </div>
+
+                            </div>
+
+                            <div class="balance__address">
+                                <div class="container">
+                                    <div class="balance__iban">
+                                        <div class="row">
+                                            <div class="col-md-6 col-12">
+                                                <div class="balance__iban-input  balance__iban-input--1">
+                                                    <h6>Hesab Sahibinin adi ve nomresi</h6>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="balance__iban-input  balance__iban-input--1">
+                                                    <h6>Iban nomresi</h6>
+                                                    <input type="text">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="balance__address-save">
+                                                    <button class="balance__address-save--btn">Kaydet</button>
+
+                                                     <div class="balance__address-refund">
+                                                    <button class="balance__address-refund--btn">Para Iade telebi olusdur</button>
+                                                </div>
+                                                </div>
+
+                                               
+                                            </div>
+                                         
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </section>
+
+
+
+                        
+
+
+                        
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+
+   
+
+
+    <!-- bootstrap  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <!--d3js-->
+    <!-- Load d3.js -->
+    <script src="js/chart.js"></script>
+    <script src="js/jquery.js"></script>
+    <!-- JavaScript-->
+    <script src="js/tabbtn.js"></script>
+    <script src="input.js"></script>
+    <script src="js/customer.js"></script>
+    <script defer src="js/index.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/nav.js"></script>
+</body>
+
+</html>

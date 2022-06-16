@@ -1,0 +1,14 @@
+.income{
+    background: #5ACEFF;
+    border-radius: 5px; 
+    color: #fff;
+    padding: 0.4rem 1.5rem;
+}
+
+
+.status{
+    background: #E85AFF;
+    border-radius: 5px;
+    padding: .4rem .8rem;
+    color: #fff;
+}

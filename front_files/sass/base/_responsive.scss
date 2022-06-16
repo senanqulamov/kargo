@@ -24,12 +24,11 @@
 
 
     .drop__box {
+        width: 30% !important;
         top: 13% !important;
-        position: absolute;
-        left: 50%;
-        transform: translate(-50%, -5%);
-        text-align: center;
+        right: 38% !important;
     }
+    
 
 
     .page__progress {
@@ -44,14 +43,29 @@
         right: 3%;
     }
 
+    #balance__container {
+        max-width: 871px;
+    }
+
+    .w-100 {
+        width: 110% !important;
+    }
+
 }
 
-@media screen and(max-width: 767px) {
+@media screen and(max-width:790px) {
+    .table__datas {
+        overflow: hidden;
+        width: 100%;
+        overflow-x: inherit;
+        overflow-y: scroll;
+    }
+}
+
+@media screen and(max-width: 768px) {
     // html {
     //     font-size: 58%;
     // }
-
-
 
 
     .page__box {
@@ -68,16 +82,51 @@
         padding-bottom: 2rem !important;
     }
 
-    .drop__box {
-        width: 25%;
-        top: 15% !important;
-    }
+    // .drop__box {
+    //     width: 35%;
+    // }
 
 
 
     .header__input-search {
         width: 100% !important;
     }
+
+    .page__2 {
+        width: 93%;
+        margin-top: 5rem;
+    }
+
+    #balance__tabs {
+        max-width: 720px;
+    }
+
+    .balance__cards-box {
+        min-height: 15rem;
+        padding: 0;
+        width: 100%;
+    }
+
+    .balance__box-text {
+        margin-left: .8rem !important;
+    }
+
+
+
+    img {
+        width: 55%;
+    }
+
+    .balance__box-text p {
+        font-size: 1.5rem;
+    }
+
+    .balance__box {
+        width: 100%;
+    }
+
+
+
 
 }
 
@@ -116,9 +165,9 @@
 
 
     .drop__box {
-        top: 13% !important;
-        min-width: 35% !important;
-        transform: translate(-53%, 15%);
+        // top: 13% !important;
+        // min-width: 35% !important;
+        // transform: translate(-53%, 15%);
 
         h4 {
             margin-left: .2rem;
@@ -140,6 +189,31 @@
         height: 3.5rem !important;
     }
 
+    .drop__box {
+        // top: 20% !important;
+        // min-width: 50% !important;
+    }
+
+
+    #balance__tabs>.row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .col-4 {
+            width: 80%;
+        }
+
+        .balance__box {
+            margin-top: 1rem;
+        }
+    }
+
+    .balance__box-text p {
+        font-size: 1.9rem;
+    }
+
+
 
 }
 
@@ -153,16 +227,17 @@
         padding-bottom: 3rem;
     }
 
-    .drop__box {
-        top: 16% !important;
-    }
+
+    // .drop__box {
+    //     top: 18% !important;
+    // }
+
 
     .fnav__input {
         width: 61% !important;
         position: absolute;
-        top: 14%;
-        left: 50%;
-        transform: translate(-34%, -70%);
+        top: 11%;
+        left: 32%;
 
     }
 
@@ -174,7 +249,24 @@
         margin-top: .5rem;
     }
 
+    .drop__box {
+        margin-top: 3rem;
+        width: 40% !important;
+    }
+
 }
+
+@media screen and(max-width:450px) {
+    .step{
+        font-size: 1.2rem !important;
+    }
+
+    // .balance__download-info-row{
+    //     align-items: flex-start;
+    // }
+}
+
+
 
 
 
