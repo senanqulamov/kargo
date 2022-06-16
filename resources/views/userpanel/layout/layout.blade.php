@@ -13,7 +13,8 @@
         rel="stylesheet" />
 
     <!-- bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <!--icon-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
@@ -21,7 +22,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!--Jquery-->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-    crossorigin="anonymous"></script>
+        crossorigin="anonymous"></script>
 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.css" />
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.12.1/datatables.min.js"></script>
@@ -30,7 +31,18 @@
     <link rel="stylesheet" href="{{ asset('/') }}frontend/userpanel/css/style.css" />
     <link rel="stylesheet" href="{{ asset('/') }}frontend/userpanel/css/pages.css">
     <link rel="stylesheet" href="{{ asset('/') }}frontend/userpanel/css/main.css">
+    <link rel="stylesheet"
+        href="http://kargo.test/backend/assets/plugin/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="http://kargo.test/backend/assets/plugin/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <link rel="stylesheet"
+        href="http://kargo.test/backend/assets/plugin/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
     <title>Document</title>
 </head>
 
@@ -66,87 +78,6 @@
     </nav>
 
 
-    <nav class=" burger__menu navigation__left">
-
-        <div class="navigation container">
-            <div class="navigation__data">
-                <ul class="navigation__items">
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
-                                <span class="navigation__span">Main Menu</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-network-wired navigation__icon"></i>
-                                <span class="navigation__span">Balance System</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                <span class="navigation__span">Orders</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
-                                <span class="navigation__span">Courier Request</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
-                                <span class="navigation__span">Stock</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-address-card navigation__icon"></i>
-                                <span class="navigation__span">Site Usage</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
-                                <span class="navigation__span">Buy for me</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
-                                <span class="navigation__span">Share and Earn</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
-                                <span class="navigation__span">Inventory</span></a>
-                        </li>
-                    </div>
-                    <div class="navigation__box">
-                        <li class="navigation__item">
-                            <a href="#" class="navigation__link"><i
-                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
-                                <span class="navigation__span">Cargo Companies</span></a>
-                        </li>
-                    </div>
-                </ul>
-            </div>
-        </div>
-
-
-    </nav>
-
-
     <header>
         <div class="container header">
             <div class="col-md-6">
@@ -171,10 +102,6 @@
                         </li>
                         <li class="header__item-list">
                             <a href="" class="header__item-link">
-                                <i class="fa-solid fa-bell header__item-icon"></i></a>
-                        </li>
-                        <li class="header__item-list">
-                            <a href="" class="header__item-link">
                                 <i class="fa-solid fa-gear header__item-icon"></i></a>
                         </li>
                         <li class="header__item-list">
@@ -186,7 +113,7 @@
                                 <i class="fa-solid fa-globe header__item-icon"></i></a>
                         </li>
                         <li class="header__item-list">
-                            <a href="{{route('userpanel.index')}}" class="header__item-link header__account-guest">
+                            <a href="{{ route('userpanel.index') }}" class="header__item-link header__account-guest">
                                 {{ Auth::user()->name }}
                                 <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
                             <a href="{{ route('userpanel.logout_user') }}">
@@ -209,11 +136,6 @@
                 <nav class="navigation__left">
 
                     <div class="navigation container">
-                        <div class="navigation__cancel">
-
-                            <span class="navigation__cancel-span"><i
-                                    class="fa-solid fa-xmark navigation__cancel-icon"></i></span>
-                        </div>
 
                         <div class="navigation__logo text-center">
                             <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
@@ -230,16 +152,23 @@
                                 </div>
                                 <div class="navigation__box">
                                     <li class="navigation__item">
-                                        <a href="#" class="navigation__link"><i
+                                        <a href="{{ route('userpanel.balance') }}" class="navigation__link"><i
                                                 class="fa-solid fa-network-wired navigation__icon"></i>
                                             <span class="navigation__span">Balance System</span></a>
                                     </li>
                                 </div>
                                 <div class="navigation__box">
                                     <li class="navigation__item">
-                                        <a href="{{route('userpanel.manualorder')}}" class="navigation__link"><i
+                                        <a href="{{ route('userpanel.cargorequests') }}" class="navigation__link"><i
                                                 class="fa-solid fa-cart-shopping navigation__icon"></i>
                                             <span class="navigation__span">Orders</span></a>
+                                    </li>
+                                </div>
+                                <div class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="{{ route('userpanel.manualorder') }}" class="navigation__link"><i
+                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Manual Order</span></a>
                                     </li>
                                 </div>
                                 <div class="navigation__box">
@@ -311,18 +240,33 @@
 
 
     <!-- bootstrap  -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     <!--d3js-->
     <!-- Load d3.js -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
-    <script src="{{ asset('/') }}frontend/userpanel/js/chart.js"></script>
     <!-- JavaScript-->
-    {{-- <script src="{{ asset('/') }}frontend/userpanel/js/index.js"></script>
-    <script src="{{ asset('/') }}frontend/userpanel/js/d3.js"></script> --}}
     <script src="{{ asset('/') }}frontend/userpanel/js/nav.js"></script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/tabttn.js"></script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/customer.js"></script>
+    <script src="{{ asset('/') }}backend/assets/plugin/datatables/jquery.dataTables.min.js"></script>
+    <script src="{{ asset('/') }}backend/assets/plugin/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="{{ asset('/') }}backend/assets/plugin/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="{{ asset('/') }}backend/assets/plugin/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": true
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 </body>
 
 </html>

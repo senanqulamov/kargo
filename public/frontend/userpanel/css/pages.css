@@ -1,6 +1,5 @@
 #profil{width:100%;font-size:1.8rem}
 .profil__input{height:80vh}
-.h6,.variable h2,h5,h6,label{color:#405982}
 .variable a{text-decoration:none}
 .h6,.variable h2,h5,h6,label{font-size:1.3rem}
 .variable .form-control{font-size:1.5rem}
@@ -25,9 +24,8 @@
 @media screen and (max-width:992px){
 #table__plugin{overflow:hidden;overflow-y:inherit;overflow-x:scroll;width:100%}
 }
-#manual-order{background-color:#e5e5e5;width:100%}
-.variable{background-color:#fff}
-.h6,.variable h2,h4,h5,h6,i,label{color:#405982}
+#manual-order{width:100%}
+.list-group{font-size:1.4rem}
 .variable ::placeholder{color:rgba(64,89,130,.55)}
 .variable select{color:rgba(64,89,130,.55)}
 .variable-container-inputs-button38{background-color:#21e7c3!important;border:none;color:#fff}

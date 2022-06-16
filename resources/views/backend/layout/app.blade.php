@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-responsive/css/responsive.bootstrap4.min.css">
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/datatables-buttons/css/buttons.bootstrap4.min.css">
         <!-- Font Awesome -->
-        <link rel="stylesheet" href="{{asset('/')}}backend/assets/plugin/fontawesome-free/css/all.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         @yield('css')
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/adminlte.min.css">
@@ -137,9 +137,15 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{route('admin.cargo-requests.index')}}" class="nav-link @if(Request::segment(2) == 'cargo-requests') active @endif">
-                                    <i class="nav-icon fas fa-file-alt"></i>
+                                <a href="{{route('admin.cargo-requests.index')}}" class="nav-link @if(Request::segment(3) == 'cargo-request-index') active @endif">
+                                    <i class="nav-icon fas fa-code-pull-request"></i>
                                     <p> Cargo Requests</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{route('admin.cargo-requests.packages')}}" class="nav-link @if(Request::segment(3) == 'packages') active @endif">
+                                    <i class="nav-icon fas fa-box"></i>
+                                    <p> Packages </p>
                                 </a>
                             </li>
 

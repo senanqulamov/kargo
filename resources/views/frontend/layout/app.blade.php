@@ -74,8 +74,8 @@
                             <option>EN</option>
                             <option>TR</option>
                         </select>
-                        <button class="login-nav"><a href="{{route('login')}}">Login</a></button>
-                        <button class="register-nav"><a href="{{route('register')}}">Register</a></button>
+                        <button class="login-nav"><a href="{{ route('login') }}">Login</a></button>
+                        <button class="register-nav"><a href="{{ route('register') }}">Register</a></button>
                     </form>
                 </div>
             </div>

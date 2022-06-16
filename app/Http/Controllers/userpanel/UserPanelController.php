@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use Illuminate\Support\Str;
+use Picqer\Barcode;
+use Picqer\Barcode\BarcodeGeneratorPNG;
 
 class UserPanelController extends Controller
 {
@@ -99,23 +101,24 @@ class UserPanelController extends Controller
         ]);
     }
 
-    public function getquotemanualorder(Request $request){
+    public function getquotemanualorder(Request $request)
+    {
         // dd($request->all());
 
-        $deci = DB::table('cargo_zones')->select('companyID','zone')->where('desi' , $request->total_deci)->get();
-        $zone = DB::table('cargo_countries')->where('country' , $request->country)->get()->first();
+        $deci = DB::table('cargo_zones')->select('companyID', 'zone')->where('desi', $request->total_deci)->get();
+        $zone = DB::table('cargo_countries')->where('country', $request->country)->get()->first();
 
         $result_array = array();
         foreach ($deci as $deci) {
             $deci_zone_values =  json_decode($deci->zone);
             $deci_company = $deci->companyID;
-            $deci_zone_value = $deci_zone_values[$zone->zone-1];
-            $company = DB::table('cargo_companies')->where('id' , $deci_company)->get()->first();
+            $deci_zone_value = $deci_zone_values[$zone->zone - 1];
+            $company = DB::table('cargo_companies')->where('id', $deci_company)->get()->first();
 
-            $psh = ($deci_zone_value*$company->PSH)/100;
-            $jet = ($deci_zone_value*$company->jet_price)/100;
-            $emergency = ($deci_zone_value*$company->emergency)/100;
-            $kar_marj = ($deci_zone_value*$company->kar_marj)/100;
+            $psh = ($deci_zone_value * $company->PSH) / 100;
+            $jet = ($deci_zone_value * $company->jet_price) / 100;
+            $emergency = ($deci_zone_value * $company->emergency) / 100;
+            $kar_marj = ($deci_zone_value * $company->kar_marj) / 100;
             $deci_zone_value = $deci_zone_value + $psh + $jet + $emergency + $kar_marj;
 
             $result = array($deci->companyID => $deci_zone_value);
@@ -123,7 +126,7 @@ class UserPanelController extends Controller
         }
 
         // dd($result_array);
-        return response()->json($result_array , 200);
+        return response()->json($result_array, 200);
     }
 
     public function postManualorder(Request $request)
@@ -151,6 +154,7 @@ class UserPanelController extends Controller
 
             $order_request = array(
                 'id' => $cargo_id,
+                'user_id' => Auth::user()->id,
                 // 'customer' => $request->customer,
                 'name' => $request->name,
                 'country' => $request->country,
@@ -165,10 +169,10 @@ class UserPanelController extends Controller
                 'currency' => $request->currency_unit,
                 'order_info' => $request->order_info,
                 'packages' => json_encode($packages),
-                // 'cargo_company'=> $request->cargo_company,
-                'insure_order'=> $request->insure_order,
-                'extra_bubble'=> $request->extra_bubble,
-                'other_additional'=> $request->other_additional,
+                'cargo_company'=> $request->cargo_company,
+                'insure_order' => $request->insure_order,
+                'extra_bubble' => $request->extra_bubble,
+                'other_additional' => $request->other_additional,
                 'battery' => $request->battery,
                 'liquid' => $request->liquid,
                 'food' => $request->food,
@@ -179,6 +183,7 @@ class UserPanelController extends Controller
             Cargo_request::create($order_request);
 
             foreach ($request->package_id as $key => $value) {
+
                 $packagesS = array(
                     'id' => $value,
                     'cargo_id' => $cargo_id,
@@ -187,7 +192,8 @@ class UserPanelController extends Controller
                     'package_length' => $request->package_length[$value],
                     'package_width' => $request->package_width[$value],
                     'package_height' => $request->package_height[$value],
-                    'package_weight' => $request->package_weight[$value]
+                    'package_weight' => $request->package_weight[$value],
+                    'barcode' => $request->barcode[$value]
                 );
                 Package::create($packagesS);
             }
@@ -216,7 +222,7 @@ class UserPanelController extends Controller
                 }
             }
 
-            if($request->file_type){
+            if ($request->file_type) {
                 $file_idS = array_keys($request->file_type);
 
                 foreach ($file_idS as $key => $file_id) {
@@ -252,5 +258,51 @@ class UserPanelController extends Controller
         } else {
             return Redirect::back()->with('error', 'Invalid arguments');
         }
+    }
+
+    public function cargorequests()
+    {
+        $cargo_requests = DB::table('cargo_requests')
+        ->where('user_id', Auth::user()->id)
+        ->orderBy('created_at', 'DESC')
+        ->get();
+
+        $packages = DB::table('packages')->get();
+
+        return view('userpanel.frontend.cargo_requests')
+            ->with(
+                [
+                    'cargo_requests' => $cargo_requests,
+                    'packages' => $packages
+                ]
+            );
+    }
+
+    public function editcargorequest($cargo_request_id){
+
+        $cargo_request = DB::table('cargo_requests')->where('id' , $cargo_request_id)->get()->first();
+
+        return view('userpanel.frontend.edit_cargo_request')
+        ->with('cargo' , $cargo_request);
+    }
+
+    public function updatecargo(Request $request){
+
+        $cargo_id = $request->cargo_id;
+
+        $request->request->remove('_token');
+        $request->request->remove('cargo_id');
+        $data = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+
+        Cargo_request::where('id', $cargo_id)->update($data);
+
+        return Redirect::back()->with('message' , 'Succesfully updated cargo details');
+    }
+
+    public function balance(){
+
+        return view('userpanel.frontend.balance');
     }
 }

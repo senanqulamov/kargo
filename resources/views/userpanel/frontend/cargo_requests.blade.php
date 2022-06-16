@@ -1,12 +1,11 @@
-@extends('backend.layout.app')
-
-@section('title', 'Cargo Requests')
-
-@section('breadcrumb')
-    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-@endsection
+@extends('userpanel.layout.layout')
 
 @section('content')
+    <style>
+        #example1 * {
+            font-size: 15px;
+        }
+    </style>
     <div class="row">
 
         <div class="col-12">
@@ -24,6 +23,8 @@
                                 <th>Country/State/City/Address/Zipcode</th>
                                 <th>Phone</th>
                                 <th>Email</th>
+                                <th>Date</th>
+                                <th>Edit</th>
                                 <th>Packages (IDs)</th>
                                 <th>Currency</th>
                                 <th>IOSS number: </th>
@@ -32,7 +33,7 @@
                                 <th>Shipment definition: </th>
                                 <th>Product content: </th>
                                 <th>Documents: </th>
-                                <th>Barcode: </th>
+                                <th>Barcodes</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,21 +50,28 @@
                                     </td>
                                     <td>{{ $cargo->phone ? $cargo->phone : '---' }}</td>
                                     <td>{{ $cargo->email ? $cargo->email : '---' }}</td>
+                                    <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
+                                    <td>
+                                        <a href="{{ route('userpanel.editcargorequest' , ['id' => $cargo->id]) }}">
+                                            <i class="fa-solid fa-edit navigation__icon"></i>
+                                        </a>
+                                    </td>
                                     <td>{{ $cargo->packages ? $cargo->packages : '---' }}</td>
                                     <td>{{ $cargo->currency ? $cargo->currency : '---' }}</td>
                                     <td>{{ $cargo->ioss_number ? $cargo->ioss_number : '---' }}</td>
                                     <td>{{ $cargo->vat_number ? $cargo->vat_number : '---' }}</td>
                                     <td>{{ $cargo->order_info ? $cargo->order_info : '---' }}</td>
                                     <td>
-                                        Extra bubble: <u><b>{{ ($cargo->extra_bubble == 'on') ? 'Yes' : 'No' }}</b></u> /
-                                        Insure order: <u><b>{{ ($cargo->insure_order == 'on') ? 'Yes' : 'No' }}</b></u> /
-                                        Other additional: <u><b>{{ ($cargo->other_additional == 'on') ? 'Yes' : 'No' }}</b></u>
+                                        Extra bubble: <u><b>{{ $cargo->extra_bubble == 'on' ? 'Yes' : 'No' }}</b></u> /
+                                        Insure order: <u><b>{{ $cargo->insure_order == 'on' ? 'Yes' : 'No' }}</b></u> /
+                                        Other additional:
+                                        <u><b>{{ $cargo->other_additional == 'on' ? 'Yes' : 'No' }}</b></u>
                                     </td>
                                     <td>
-                                        Battery: <u><b>{{ ($cargo->battery == 'yes') ? 'Yes' : 'No' }}</b></u> /
-                                        Liquid: <u><b>{{ ($cargo->liquid == 'yes') ? 'Yes' : 'No' }}</b></u> /
-                                        Food: <u><b>{{ ($cargo->food == 'yes') ? 'Yes' : 'No' }}</b></u> /
-                                        Dangerous items: <u><b>{{ ($cargo->dangerous == 'yes') ? 'Yes' : 'No' }}</b></u>
+                                        Battery: <u><b>{{ $cargo->battery == 'yes' ? 'Yes' : 'No' }}</b></u> /
+                                        Liquid: <u><b>{{ $cargo->liquid == 'yes' ? 'Yes' : 'No' }}</b></u> /
+                                        Food: <u><b>{{ $cargo->food == 'yes' ? 'Yes' : 'No' }}</b></u> /
+                                        Dangerous items: <u><b>{{ $cargo->dangerous == 'yes' ? 'Yes' : 'No' }}</b></u>
                                     </td>
                                     <td>{{ $cargo->document }}</td>
                                     <td>
@@ -86,8 +94,4 @@
             <!-- /.card -->
         </div>
     </div>
-@endsection
-
-@section('js')
-    <script></script>
 @endsection

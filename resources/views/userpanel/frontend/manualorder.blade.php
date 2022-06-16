@@ -94,6 +94,7 @@
         }
     </style>
 
+    <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
     <script>
         "use strict";
 
@@ -282,10 +283,7 @@
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6>Currency unit<span class="red">*</span></h6>
                                             <select class="form-select" name="currency_unit" required>
-                                                <option class="optionText" selected>USD</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                                <option class="optionText" selected>EURO</option>
                                             </select>
                                         </div>
                                     </div>
@@ -315,136 +313,6 @@
                                     <button type="button" class="btn btn-warning my-3" onclick="yeniPaketElaveEt()">
                                         + Add package
                                     </button>
-                                    <!-- JS paket kodu -->
-                                    {{-- <ul class="list-group list-group-flush border rounded mb-3 p-2">
-                                        <h4><i class="fa-solid fa-box commonIcon"></i> Package</h4>
-                                        <li class="list-group-item">
-                                            <input
-                                                class="form-control default_package"
-                                                type="hidden"
-                                                name="package_id[]"
-                                                id="uniq_package_id"
-                                                value=""
-                                            />
-                                            <div class="row">
-                                                <div class="col-6 col-md">
-                                                    <h6>Count:<span class="red">*</span></h6>
-                                                    <input class="form-control boxCount" type="text" placeholder="1"
-                                                        aria-label="default input example" name="package_count[0]"/>
-                                                </div>
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>Type:<span class="red">*</span></h6>
-                                                    <select class="form-select" name="package_type[0]">
-                                                        <option selected>box</option>
-                                                        <option value="1">One</option>
-                                                        <option value="2">Two</option>
-                                                        <option value="3">Three</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-6 col-md">
-                                                    <h6>Length:<span class="red">*</span></h6>
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control boxVolume" placeholder="15"
-                                                        name="package_length[0]"/>
-                                                        <span class="input-group-text" id="basic-addon1">sm</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md">
-                                                    <h6>Width:<span class="red">*</span></h6>
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control boxVolume" placeholder="15"
-                                                        name="package_width[0]" />
-                                                        <span class="input-group-text" id="basic-addon1">sm</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md">
-                                                    <h6>Height:<span class="red">*</span></h6>
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control boxVolume" placeholder="15"
-                                                        name="package_height[0]" />
-                                                        <span class="input-group-text" id="basic-addon1">sm</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md">
-                                                    <h6>Weight:<span class="red">*</span></h6>
-                                                    <div class="input-group mb-3">
-                                                        <input type="text" class="form-control boxWeight" placeholder="2"
-                                                            name="package_weight[0]" />
-                                                        <span class="input-group-text" id="basic-addon1">kq</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-1 d-flex align-items-center justify-content-center">
-                                                    <button type="button" class="btn btn-danger" onclick="silPaket(this)">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <!-- product -->
-                                        <li class="list-group-item ms-3 row productYaradilanYer">
-                                            <h4>
-                                                <i class="fa-solid fa-box commonIcon"></i> Products
-                                                <button type="button" class="btn btn-primary my-3 mx-3"
-                                                    onclick="yeniProductElaveEt(this)">
-                                                    + Add another products
-                                                </button>
-                                            </h4>
-                                            <div class="row">
-                                                <input
-                                                    class="form-control"
-                                                    type="hidden"
-                                                    name="product_id[]"
-                                                    value="0"
-                                                />
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>SKU Code</h6>
-                                                    <input class="form-control" type="text" placeholder="12345"
-                                                        aria-label="default input example" name="sku_code[0]"/>
-                                                </div>
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>Product<span class="red">*</span></h6>
-                                                    <input class="form-control" type="text" placeholder="Clock"
-                                                        aria-label="default input example" name="product[0]"/>
-                                                </div>
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>Count<span class="red">*</span></h6>
-                                                    <div class="input-group">
-                                                        <input class="form-control" type="text"
-                                                            placeholder="1 (Storage 3)"
-                                                            aria-label="default input example" name="count[0]"/>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>Unit Weight<span class="red">*</span></h6>
-                                                    <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="2"
-                                                            aria-label="Username" aria-describedby="basic-addon1"
-                                                            name="weight[0]"/>
-                                                        <span class="input-group-text" id="basic-addon1">kq</span>
-                                                    </div>
-                                                </div>
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>Unit Price<span class="red">*</span></h6>
-                                                    <input class="form-control" type="text" placeholder="200"
-                                                        aria-label="default input example"
-                                                        name="price[0]"/>
-                                                </div>
-                                                <div class="col-6 col-md mb-3">
-                                                    <h6>GTIP Code</h6>
-                                                    <input class="form-control" type="text" placeholder="12345"
-                                                        aria-label="default input example"
-                                                        name="gtip_code[0]"/>
-                                                </div>
-                                                <div class="col d-flex align-items-center">
-                                                    <button type="button" class="btn btn-danger" onclick="silProduct(this)">
-                                                        <i class="fa-solid fa-trash-can"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <hr> --}}
-
                                     <!-- 2ci paket -->
                                 </li>
                                 <!-- Yekunlar Burada -->
@@ -539,8 +407,8 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input cargo_price_input" type="checkbox" data-price="15"
-                                                            name="insure_order" id="insure_my_order" />
+                                                        <input class="form-check-input cargo_price_input" type="checkbox"
+                                                            data-price="15" name="insure_order" id="insure_my_order" />
                                                     </div>
                                                     İnsure my order
                                                 </li>
@@ -553,8 +421,8 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input class="form-check-input cargo_price_input" type="checkbox" data-price="1"
-                                                            name="extra_bubble" id="extra_bubble" />
+                                                        <input class="form-check-input cargo_price_input" type="checkbox"
+                                                            data-price="1" name="extra_bubble" id="extra_bubble" />
                                                     </div>
                                                     Extra bubble
                                                 </li>
@@ -743,6 +611,7 @@
             </form>
         </div>
     </section>
+
 
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC"

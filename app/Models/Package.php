@@ -20,5 +20,6 @@ class Package extends Model
         'package_width',
         'package_height',
         'package_weight',
+        'barcode',
     ];
 }

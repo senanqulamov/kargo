@@ -111,7 +111,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/', [ManuelOrderController::class, 'index'])->name('index');
 		});
         Route::prefix('cargo-requests/')->name('cargo-requests.')->group(function(){
-			Route::get('/', [ManuelOrderController::class, 'cargoRequests'])->name('index');
+			Route::get('/cargo-request-index', [ManuelOrderController::class, 'cargoRequests'])->name('index');
+			Route::get('/packages', [ManuelOrderController::class, 'packages'])->name('packages');
 		});
 
 		// messages
@@ -270,6 +271,12 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::post('/postManualorder', [UserPanelController::class, 'postManualorder'])->name('post.manualorder');
         Route::post('/getquotemanualorder', [UserPanelController::class, 'getquotemanualorder'])->name('getquote.manualorder');
 
+        Route::get('/cargorequests', [UserPanelController::class, 'cargorequests'])->name('cargorequests');
+        Route::get('/edit-cargo/{id}', [UserPanelController::class, 'editcargorequest'])->name('editcargorequest');
+        Route::post('/update-cargo', [UserPanelController::class, 'updatecargo'])->name('updatecargo');
+
+
+        Route::get('/balance', [UserPanelController::class, 'balance'])->name('balance');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

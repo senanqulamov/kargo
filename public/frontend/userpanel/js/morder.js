@@ -15,7 +15,7 @@ function yeniPaketElaveEt() {
                     <h4><i class="fa-solid fa-box commonIcon"></i> Package</h4>
                     <li class="list-group-item">
                         <input
-                            class="form-control"
+                            class="form-control uniq_package_id"
                             type="hidden"
                             name="package_id[]"
                             id="uniq_package_id"
@@ -23,6 +23,13 @@ function yeniPaketElaveEt() {
         uniq_package_id +
         `"
                           />
+                    <img id="barcode_`+ uniq_package_id +`_hm" width="150px" height="50px">
+                    <input
+                    class="form-control barcode_input"
+                    type="hidden"
+                    name="barcode[`+ uniq_package_id +`]"
+                    value=""
+                    />
                       <div class="row package-inputs-cont-hm">
                         <div class="col-6 col-md">
                           <h6>Count:<span class="red">*</span></h6>
@@ -44,9 +51,7 @@ function yeniPaketElaveEt() {
         `]"
                           >
                             <option selected>box</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                            <option value="1">envelop</option>
                           </select>
                         </div>
                         <div class="col-6 col-md">
@@ -250,6 +255,7 @@ function yeniPaketElaveEt() {
 
     yeniPaketYarat.insertAdjacentHTML("beforeend", yeniPaket);
     product_id++;
+    generateBarcode(uniq_package_id);
     uniq_package_id = Math.random().toString(36).substr(2, 9);
 }
 
@@ -491,9 +497,7 @@ function yekunHesabla() {
         document.querySelector(".totalWorth").innerHTML = total_worth;
         document.querySelector("#total_cargo_price").value = total_worth;
 
-        var country = document.querySelector(
-            'select[name="country"]'
-        ).value;
+        var country = document.querySelector('select[name="country"]').value;
 
         if (total_deci > 0 && country) {
             $.ajax({
@@ -515,29 +519,33 @@ function yekunHesabla() {
                 success: function (data) {
                     console.log(data);
                     var companies = Object.keys(data);
-                    companies.forEach(element => {
-                        document.querySelector('#cargo_company_' + element).innerHTML = data[element] + " $ ";
-                        document.querySelector('#cargo_company_input_' + element).setAttribute('data-price' , data[element]);
+                    companies.forEach((element) => {
+                        document.querySelector(
+                            "#cargo_company_" + element
+                        ).innerHTML = data[element] + " $ ";
+                        document
+                            .querySelector("#cargo_company_input_" + element)
+                            .setAttribute("data-price", data[element]);
                     });
                     Swal.fire({
-                        position: 'top-start',
-                        icon: 'success',
-                        title: 'Cargo company values calculated. See in Shipment definition',
+                        position: "top-start",
+                        icon: "success",
+                        title: "Cargo company values calculated. See in Shipment definition",
                         showConfirmButton: false,
                         backdrop: true,
-                        timer: 3000
-                    })
+                        timer: 3000,
+                    });
                 },
             });
-        }else{
+        } else {
             Swal.fire({
-                position: 'top-start',
-                icon: 'error',
-                title: 'Please enter country information and cargo details to calculate total price',
+                position: "top-start",
+                icon: "error",
+                title: "Please enter country information and cargo details to calculate total price",
                 showConfirmButton: false,
                 backdrop: true,
-                timer: 3000
-            })
+                timer: 3000,
+            });
         }
     }
 }
@@ -550,4 +558,14 @@ function ChangeOrderInfo(input) {
         document.querySelector('input[name="order_info"]').value +=
             element.value + " , ";
     });
+}
+
+function generateBarcode(uniq_package_id){
+    JsBarcode("#barcode_"+uniq_package_id+"_hm", uniq_package_id);
+    document.querySelector("#barcode_"+uniq_package_id+"_hm").setAttribute('width' , '150px');
+    document.querySelector("#barcode_"+uniq_package_id+"_hm").setAttribute('height' , '70px');
+
+    var image_src = document.querySelector("#barcode_"+uniq_package_id+"_hm").getAttribute('src');
+
+    document.querySelector("input[name='barcode["+uniq_package_id+"]']").value = image_src;
 }
