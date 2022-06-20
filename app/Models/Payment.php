@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     use HasFactory;
+
+    public $timestamps = true;
+
+    protected $fillable = [
+        'userID',
+        'method',
+        'money_type',
+        'amount',
+        'comission',
+        'document',
+        'payment_comment',
+    ];
 }

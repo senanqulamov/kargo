@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
 
         @php ($user = DB::table('users')->where('id', session()->get('Profile'))->first() )
 
@@ -216,12 +217,33 @@
                                     <p> Warehouses </p>
                                 </a>
                             </li>
-							<li class="nav-item">
-                                <a href="{{route('admin.balance.index')}}" class="nav-link @if(Request::segment(2) == 'balance') active @endif">
-									<i class="nav-icon fas fa-credit-card"></i>
-                                    <p> Balance </p>
+                            <li class="nav-item @if(Request::segment(2) == 'payments') menu-open @endif">
+                                <a href="#" class="nav-link @if(Request::segment(2) == 'payments') active @endif">
+                                    <i class="nav-icon fas fa-credit-card"></i>
+                                    <p>Payments<i class="right fas fa-angle-left"></i></p>
                                 </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.payments.payments')}}" class="nav-link @if(Request::segment(3) == 'payments') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Payments</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.payments.comissions')}}" class="nav-link @if(Request::segment(3) == 'comissions') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Comissions</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.payments.balance')}}" class="nav-link @if(Request::segment(3) == 'balance') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Balance</p>
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
+
                             <li class="nav-item">
                                 <a href="{{route('admin.services.index')}}" class="nav-link @if(Request::segment(2) == 'services') active @endif">
                                     <i class="nav-icon fab fa-servicestack"></i>

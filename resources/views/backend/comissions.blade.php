@@ -14,20 +14,22 @@
 				<table id="example1" class="table table-bordered table-hover">
 					<thead>
 						<tr>
-							<th>Customer</th>
-							<th>Balance</th>
-							<th width="130">Deny/Accept</th>
+							<th>ID</th>
+							<th>Payment</th>
+							<th>Comission</th>
+							<th width="130"></th>
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($balances as $balance)
+						@foreach($comissions as $comission)
 						<tr>
-							@php $user=DB::table('users')->where('id', $balance->userID)->first() @endphp
-							<td>{{$user->name}}</td>
-							<td>{{$balance->balance}} &euro;</td>
+							<td>{{$comission->id}}</td>
+							<td>{{$comission->payment}}</td>
+							<td>{{$comission->comission}} &euro;</td>
 							<td>
-
-                            </td>
+								<a href="#" class="btn btn-dark" data-toggle="modal" data-target="#modal-refund"><i class="fas fa-sync"></i></a>
+								<a href="#" class="btn btn-success cardcredit" data-id=""><i class="fas fa-credit-card"></i></a>
+							</td>
 						</tr>
 						@endforeach
 					</tbody>
@@ -106,27 +108,4 @@
 	<!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-@endsection
-
-@section('js')
-{{-- <script>
-	$(function(){
-		$(".cardcredit").click(function(){
-            var id_data=$(this).attr("data-id");
-            $("#modalCard").modal('show');
-
-            $.ajax({
-                type:"GET",
-				data:{id:id_data},
-				url:"{{route('admin.balance.cards')}}",
-                success:function(response){
-                    $("#number").text(response.data.cardnumber);
-                    $("#expired").text(response.data.expired);
-                    $("#cvv").text(response.data.cvv);
-                    $("#holder").text(response.data.holder);
-                }
-            });
-        });
-	})
-</script> --}}
 @endsection

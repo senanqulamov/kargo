@@ -220,13 +220,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		});
 
 		// balance
-		Route::prefix('payments/')->name('payments.')->group(function(){
-			Route::get('/balance', [BalanceController::class, 'balance'])->name('balance');
-			Route::get('/payments', [BalanceController::class, 'payments'])->name('payments');
-			Route::get('/comissions', [BalanceController::class, 'comissions'])->name('comissions');
-
-			Route::post('/denyPayment', [BalanceController::class, 'denyPayment'])->name('denyPayment');
-			Route::post('/approvePayment', [BalanceController::class, 'approvePayment'])->name('approvePayment');
+		Route::prefix('balance/')->name('balance.')->group(function(){
+			Route::get('/index', [BalanceController::class, 'index'])->name('index');
+			Route::get('/cards', [BalanceController::class, 'cards'])->name('cards');
 		});
 
 		//wardrobe
@@ -281,8 +277,6 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
 
 
         Route::get('/balance', [UserPanelController::class, 'balance'])->name('balance');
-        Route::post('/update-balance', [UserPanelController::class, 'updateBalance'])->name('update_balance');
-        Route::post('/check-comission', [UserPanelController::class, 'checkcomission'])->name('checkcomission');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

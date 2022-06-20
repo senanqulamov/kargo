@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
 use App\Models\Package;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
@@ -303,6 +304,41 @@ class UserPanelController extends Controller
 
     public function balance(){
 
-        return view('userpanel.frontend.balance');
+        $payments=DB::table('payments')->orderBy('created_at','desc')->get();
+        return view('userpanel.frontend.balance',compact('payments'));
+    }
+
+    public function checkcomission(Request $request){
+        $comission = DB::table('comissions')->where('payment', '=', $request->method)->get()->first();
+        $comission = $comission->comission;
+
+        // $value = $request->balance + ($request->balance * $comission) / 100;
+        $value = $comission / 100;
+
+        return response()->json(array('comission' => $value), 200);
+    }
+
+    public function updateBalance(Request $request){
+
+        // dd($request->all());
+
+        if ($request->document) {
+            $file = $request->document;
+            $name = $file->getClientOriginalName();
+            $file->move(public_path() . '/files/payments/', $name);
+        }
+        $credentials = array(
+            'userID' => Auth::user()->id,
+            'method' => $request->payment,
+            'amount' => $request->balance,
+            'comission' => $request->comission,
+            'money_type' => $request->money_type,
+            'payment_comment' => json_encode($request->payment_comment),
+            'document' => $name
+        );
+
+        Payment::create($credentials);
+
+        return Redirect::back()->with('message' , 'payment succesfully uploaded');
     }
 }
