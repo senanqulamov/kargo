@@ -25,7 +25,9 @@ class ManuelOrderController extends Controller
     public function cargoRequests()
     {
 
-        $cargo_requests = DB::table('cargo_requests')->get();
+        $cargo_requests = DB::table('cargo_requests')->orderBy('created_at','desc')->get();
+
+        // dd($cargo_requests);
         $packages = DB::table('packages')->get();
 
         return view('backend.cargo-requests')->with(
@@ -37,7 +39,7 @@ class ManuelOrderController extends Controller
     }
 
     public function packages(){
-        $packages = DB::table('packages')->get();
+        $packages = DB::table('packages')->orderBy('created_at','desc')->get();
 
         return view('backend.cargo-packages')->with(
             [

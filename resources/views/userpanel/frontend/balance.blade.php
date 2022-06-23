@@ -183,65 +183,27 @@
                             <div class="container">
                                 <div class="row">
 
-                                    <div class="col-sm-4">
+                                    @foreach ($comissions as $comission)
+                                        <div class="col-sm-4">
 
-                                        <div class="balance__cards-box balance__cards-box--1">
-                                            <div class="form-check form-check-inline  mt-4">
-                                                <input class="form-check-input payment-radio" type="radio" name="payment"
-                                                    id="payment1" value="banka_hevale">
+                                            <div class="balance__cards-box {{ $comission->css_class }}">
+                                                <div class="form-check form-check-inline  mt-4">
+                                                    <input class="form-check-input payment-radio" type="radio"
+                                                        name="payment" id="payment1" value="{{ $comission->payment }}">
+
+                                                </div>
+
+                                                <div class="balance__card-imgs">
+                                                    <img src="img/svg/Group (13).svg" style=" width:25%;" alt="">
+                                                </div>
+
+                                                <div class="balance__card-text">
+                                                    <h4 class="mb-4">{{ $comission->show_name }}</h4>
+                                                </div>
 
                                             </div>
-
-                                            <div class="balance__card-imgs">
-                                                <img src="img/svg/Group (13).svg" style=" width:25%;" alt="">
-                                            </div>
-
-                                            <div class="balance__card-text">
-                                                <h4 class="mt-5">BANKA HEVALE / EFT</h4>
-                                            </div>
-
                                         </div>
-                                    </div>
-                                    <div class="col-sm-4">
-
-                                        <div class="balance__cards-box balance__cards-box--2">
-                                            <div class="form-check form-check-inline  mt-4">
-                                                <input class="form-check-input payment-radio" type="radio" name="payment"
-                                                    id="payment2" value="paypal">
-
-                                            </div>
-
-                                            <div class="balance__card-imgs">
-                                                <img src="img/svg/paypal-svgrepo-com 1.svg" style=" width:26%;"
-                                                    alt="">
-                                            </div>
-
-                                            <div class="balance__card-text">
-                                                <h4 class="mb-4">Pay Pal</h4>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-4">
-
-                                        <div class="balance__cards-box balance__cards-box--3">
-                                            <div class="form-check form-check-inline mt-4">
-                                                <input class="form-check-input payment-radio" type="radio"
-                                                    name="payment" id="payment3" value="payoneer">
-
-                                            </div>
-
-                                            <div class="balance__card-imgs">
-                                                <img src="img/svg/Vector (19).svg" style=" width:25%;" alt="">
-                                            </div>
-
-                                            <div class="balance__card-text">
-                                                <h4 class="mt-4">PAYONEER</h4>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -310,7 +272,9 @@
                         <div class="balance__selectFiles">
 
                             <fieldset>
-                                <input type="file" name="document" id="upload" class="custom-file-input">
+                                <input type="file" name="document" id="upload" onchange="changeFileName(this)"
+                                    class="custom-file-input">
+                                <label for="document" id="file_input_label"></label>
                             </fieldset>
 
                         </div>
@@ -351,7 +315,8 @@
                             </div>
                             <div class="col-4">
                                 <div class="balance__box-rate">
-                                    <p class="balance__box-rate-p">Bakiyeniz <span>{{ Auth::user()->balance }}</span>€ </p>
+                                    <p class="balance__box-rate-p">Bakiyeniz <span>{{ Auth::user()->balance }}</span>€
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -406,7 +371,8 @@
                                     <td class="td">{{ $payment->comission }}</td>
                                     <td class="td">
                                         <a href="/files/payments/{{ $payment->document }}" target="_blank">
-                                            <button class="btn status" type="button"><i class="fa-solid fa-eye"></i></button>
+                                            <button class="btn status" type="button"><i
+                                                    class="fa-solid fa-eye"></i></button>
                                             {{-- <img src="/files/payments/{{ $payment->document }}" class="img-fluid"
                                                 width="60" height="60" alt=""> --}}
                                         </a>
@@ -415,17 +381,6 @@
                                     <td class="td">{{ $payment->created_at }}</td>
                                 </tr>
                             @endforeach
-                            {{-- <tr>
-                                <td class='td'>12131515</td>
-                                <td class='td'>125</td>
-                                <td class='td text-center'> <button class="btn income">Income</button>
-                                </td>
-                                <td class='td'>Card</td>
-                                <td class='td'>Lorem ipsum</td>
-                                <td class='td text-center'> <button class="btn status">Income </button>
-                                </td>
-
-                            </tr> --}}
                         </tbody>
 
                     </table>
@@ -447,7 +402,8 @@
                             </div>
                             <div class="col-4">
                                 <div class="balance__box-rate">
-                                    <p class="balance__box-rate-p">Bakiyeniz <span>{{ Auth::user()->balance }}</span>€ </p>
+                                    <p class="balance__box-rate-p">Bakiyeniz <span>{{ Auth::user()->balance }}</span>€
+                                    </p>
                                 </div>
                             </div>
                             <div class="col-4">
@@ -469,46 +425,41 @@
                 <div class="balance__address">
                     <div class="container">
                         <div class="balance__iban">
-                            <div class="row">
-                                <div class="col-md-6 col-12">
-                                    <div class="balance__iban-input  balance__iban-input--1">
-                                        <h6>Hesab Sahibinin adi ve nomresi</h6>
-                                        <input type="text">
+                            <form action="{{ route('userpanel.updateUserBalanceInfo') }}" method="POST">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="balance__iban-input  balance__iban-input--1">
+                                            <h6>Hesab Sahibinin adi ve nomresi</h6>
+                                            <input type="text" name="user_name">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-12">
-                                    <div class="balance__iban-input  balance__iban-input--1">
-                                        <h6>Iban nomresi</h6>
-                                        <input type="text">
-                                    </div>
-                                </div>
-
-                                <div class="col-md-12">
-                                    <div class="balance__address-save">
-                                        <button class="balance__address-save--btn">Kaydet</button>
-
-                                        <div class="balance__address-refund">
-                                            <button class="balance__address-refund--btn">Para Iade telebi
-                                                olusdur</button>
+                                    <div class="col-md-6 col-12">
+                                        <div class="balance__iban-input  balance__iban-input--1">
+                                            <h6>Iban nomresi</h6>
+                                            <input type="text" name="Iban" placeholder="enter your IBAN number">
                                         </div>
                                     </div>
 
+                                    <div class="col-md-12">
+                                        <div class="balance__address-save">
+                                            <button type="submit" class="balance__address-save--btn">Kaydet</button>
 
+                                            <div class="balance__address-refund">
+                                                <button type="button" onclick="PostMoneyBackRequest()"
+                                                    class="balance__address-refund--btn">Para Iade
+                                                    telebi
+                                                    olusdur</button>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
 
             </section>
-
-
-
-
-
-
-
         </div>
     </section>
 
@@ -543,6 +494,42 @@
                 },
                 success: function(data) {
                     document.querySelector("input[name=comission]").value = data.comission;
+                }
+            });
+        }
+    </script>
+    <script>
+        function changeFileName(input) {
+            var input_value = input.value;
+            var file_name = input.files[0].name;
+            console.log(file_name);
+            document.querySelector('#file_input_label').innerHTML = file_name;
+        }
+
+        function PostMoneyBackRequest() {
+
+            var Iban = document.querySelector("input[name=Iban]").value;
+            var user_name = document.querySelector("input[name=user_name]").value;
+
+            $.ajax({
+                type: 'POST',
+                url: '/userpanel/postMoneyBackRequest',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                data: {
+                    Iban: Iban,
+                    user_name: user_name
+                },
+                success: function(data) {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: data.message,
+                        showConfirmButton: false,
+                        backdrop: false,
+                        timer: 2000
+                    })
                 }
             });
         }

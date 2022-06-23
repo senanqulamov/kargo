@@ -110,6 +110,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		Route::prefix('orders/')->name('orders.')->group(function(){
 			Route::get('/', [ManuelOrderController::class, 'index'])->name('index');
 		});
+
         Route::prefix('cargo-requests/')->name('cargo-requests.')->group(function(){
 			Route::get('/cargo-request-index', [ManuelOrderController::class, 'cargoRequests'])->name('index');
 			Route::get('/packages', [ManuelOrderController::class, 'packages'])->name('packages');
@@ -224,9 +225,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/balance', [BalanceController::class, 'balance'])->name('balance');
 			Route::get('/payments', [BalanceController::class, 'payments'])->name('payments');
 			Route::get('/comissions', [BalanceController::class, 'comissions'])->name('comissions');
+            Route::get('/moneyBackRequests', [BalanceController::class, 'moneyBackRequests'])->name('moneyBackRequests');
 
 			Route::post('/denyPayment', [BalanceController::class, 'denyPayment'])->name('denyPayment');
 			Route::post('/approvePayment', [BalanceController::class, 'approvePayment'])->name('approvePayment');
+
+			Route::post('/updatePayment', [BalanceController::class, 'updatePayment'])->name('updatePayment');
+			Route::post('/updateComission', [BalanceController::class, 'updateComission'])->name('updateComission');
 		});
 
 		//wardrobe
@@ -283,6 +288,8 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::get('/balance', [UserPanelController::class, 'balance'])->name('balance');
         Route::post('/update-balance', [UserPanelController::class, 'updateBalance'])->name('update_balance');
         Route::post('/check-comission', [UserPanelController::class, 'checkcomission'])->name('checkcomission');
+        Route::post('/updateUserBalanceInfo', [UserPanelController::class, 'updateUserBalanceInfo'])->name('updateUserBalanceInfo');
+        Route::post('/postMoneyBackRequest', [UserPanelController::class, 'postMoneyBackRequest'])->name('postMoneyBackRequest');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

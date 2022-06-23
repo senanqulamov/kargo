@@ -20,11 +20,10 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($balances as $balance)
+						@foreach($users as $user)
 						<tr>
-							@php $user=DB::table('users')->where('id', $balance->userID)->first() @endphp
 							<td>{{$user->name}}</td>
-							<td>{{$balance->balance}} &euro;</td>
+							<td>{{$user->balance}} &euro;</td>
 							<td>
 
                             </td>

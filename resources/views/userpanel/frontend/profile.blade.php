@@ -89,6 +89,13 @@
                                         name="password" placeholder="Your password" />
                                 </div>
                             </div>
+                            <div class="col-12 col-md-6 mb-3">
+                                <h6>IBAN</h6>
+                                <div class="input-group flex-nowrap">
+                                    <input class="form-control" type="text" aria-describedby="addon-wrapping"
+                                        name="Iban" placeholder="Your IBAN number" value="{{ Auth::user()->Iban }}"/>
+                                </div>
+                            </div>
                             <div class="col-12 col-md-12 d-flex align-items-center">
                                 <button type="submit" class="btn btn-warning ms-auto variable-container-inputs-button38">
                                     Confirm

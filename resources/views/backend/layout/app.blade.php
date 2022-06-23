@@ -241,6 +241,12 @@
                                             <p>Balance</p>
                                         </a>
                                     </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.payments.moneyBackRequests')}}" class="nav-link @if(Request::segment(3) == 'moneyBackRequests') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Money-Back requests</p>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
 
@@ -367,7 +373,13 @@
         <script>
             $(function () {
                 $("#example1").DataTable({
-                    "responsive": true, "lengthChange": false, "autoWidth": true
+                    "responsive": false,
+                    "lengthChange": false,
+                    "autoWidth": true,
+                    scrollY: '50vh',
+                    scrollCollapse: true,
+                    paging: false,
+                    scrollX: true,
                 }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             });
         </script>

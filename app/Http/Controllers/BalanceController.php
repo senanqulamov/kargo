@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Balance;
+use App\Models\Comission;
 use App\Models\CreditCard;
+use App\Models\MoneyBackRequest;
 use App\Models\Payment;
 use App\Models\User;
 use DB;
+use Illuminate\Support\Facades\Redirect;
 
 class BalanceController extends Controller
 {
     public function balance(){
-        $balances=Balance::orderBy('created_at','desc')->get();
-        return view('backend.balance',compact('balances'));
+        $users=User::orderBy('balance','desc')->get();
+        return view('backend.balance',compact('users'));
     }
 
     public function payments(){
@@ -65,5 +68,40 @@ class BalanceController extends Controller
 
         $comissions=DB::table('comissions')->get();
         return view('backend.comissions',compact('comissions'));
+    }
+
+    public function updatePayment(Request $request){
+
+        $data = array(
+            'method' => $request->method,
+            'comission' => $request->comission,
+            'amount' => $request->amount,
+            'money_type' => $request->money_type
+        );
+
+        Payment::where('id' , $request->payment_id)->update($data);
+
+        return Redirect::back()->with('message' , 'Payment method Comission updated succesfully');
+    }
+
+    public function updateComission(Request $request){
+
+        $data = array(
+            'payment' => $request->payment,
+            'comission' => $request->comission,
+            'css_class' => $request->css_class,
+            'show_name' => $request->show_name
+        );
+
+        Comission::where('id' , $request->comission_id)->update($data);
+
+        return Redirect::back()->with('message' , 'Payment method Comission updated succesfully');
+    }
+
+    public function moneyBackRequests(){
+
+        $moneyback_requests = MoneyBackRequest::get();
+
+        return view('backend.moneyback')->with('requests' , $moneyback_requests);
     }
 }

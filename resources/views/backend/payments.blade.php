@@ -7,6 +7,19 @@
 @endsection
 
 @section('content')
+    @if (session()->has('message'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ session()->get('message') }}',
+                showConfirmButton: false,
+                backdrop: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -23,7 +36,8 @@
                                 <th>Document</th>
                                 <th>Payment Comment</th>
                                 <th>Created at</th>
-                                <th width="130">Deny/Accept</th>
+                                <th width="100">Edit</th>
+                                <th>Deny/Accept</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,6 +75,10 @@
                                     <td>{{ $payment->payment_comment }}</td>
                                     <td>{{ $payment->created_at }}</td>
                                     <td>
+                                        <a href="#" class="btn btn-dark" data-toggle="modal"
+                                            data-target="#modal-edit-{{ $payment->id }}"><i class="fas fa-edit"></i></a>
+                                    </td>
+                                    <td>
                                         <a href="#" onclick="denyPayment(this)" class="btn btn-danger"
                                             data-payment-id="{{ $payment->id }}"><i
                                                 class="fa-solid fa-square-xmark"></i></a>
@@ -68,6 +86,64 @@
                                             data-payment-id="{{ $payment->id }}"><i
                                                 class="fa-solid fa-check-to-slot"></i></a>
                                     </td>
+
+                                    <div class="modal fade" id="modal-edit-{{ $payment->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">
+                                                        Edit <b>{{ $user->name }}</b>'s Payment
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{ route('admin.payments.updatePayment') }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <input type="hidden" name="payment_id"
+                                                            value="{{ $payment->id }}">
+                                                        <div class="row">
+                                                            <div class="form-group col">
+                                                                <label for="exampleInputEmail1">Payment method</label>
+                                                                <input type="text" class="form-control" name="method"
+                                                                    value="{{ $payment->method }}">
+                                                            </div>
+                                                            <div class="form-group col">
+                                                                <label for="exampleInputEmail1">Amount</label>
+                                                                <input type="number" class="form-control" name="amount"
+                                                                    value="{{ $payment->amount }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="form-group col">
+                                                                <label for="exampleInputEmail1">Comission</label>
+                                                                <input type="number" class="form-control" name="comission"
+                                                                    value="{{ $payment->comission }}">
+                                                            </div>
+                                                            <div class="form-group col">
+                                                                <label for="exampleInputEmail1">Money type
+                                                                    ({{ $payment->money_type }}) </label>
+                                                                <select name="money_type" class="form-control">
+                                                                    <option value="tl">tl</option>
+                                                                    <option value="euro">Euro</option>
+                                                                    <option value="usd">USD</option>
+                                                                </select>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="text-right">
+                                                            <button type="submit" class="btn btn-primary">Update</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
                                 </tr>
                             @endforeach
                         </tbody>

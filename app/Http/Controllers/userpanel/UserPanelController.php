@@ -6,6 +6,7 @@ use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
+use App\Models\MoneyBackRequest;
 use App\Models\Package;
 use App\Models\Payment;
 use App\Models\Product;
@@ -42,7 +43,8 @@ class UserPanelController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
-            'password' => $password
+            'password' => $password,
+            'Iban' => $request->Iban
         );
 
         UserModel::where('id', Auth::user()->id)->update($update_data);
@@ -94,11 +96,13 @@ class UserPanelController extends Controller
         $countries = DB::table('countries')->select('name', 'code', 'id')->get();
         $cargo_companies = DB::table('cargo_companies')->get();
         $user_addresses = DB::table('user_addresses')->where('userID', Auth::user()->id)->get();
+        $additional_services = DB::table('additional_services')->get();
 
         return view('userpanel.frontend.manualorder')->with([
             'countries' => $countries,
             'user_addresses' => $user_addresses,
-            'cargo_companies' => $cargo_companies
+            'cargo_companies' => $cargo_companies,
+            'additional_services' => $additional_services
         ]);
     }
 
@@ -135,7 +139,7 @@ class UserPanelController extends Controller
 
         $cargo_id = uniqid(15);
 
-        // dd($request->all());
+        dd($request->all());
 
         if ($request->package_id) {
             foreach ($request->package_id as $package_id) {
@@ -304,16 +308,18 @@ class UserPanelController extends Controller
 
     public function balance(){
 
+        $comissions = DB::table('comissions')->get();
+
         $payments=DB::table('payments')->orderBy('created_at','desc')->get();
-        return view('userpanel.frontend.balance',compact('payments'));
+        return view('userpanel.frontend.balance',compact('payments' , 'comissions'));
     }
 
     public function checkcomission(Request $request){
         $comission = DB::table('comissions')->where('payment', '=', $request->method)->get()->first();
         $comission = $comission->comission;
 
-        // $value = $request->balance + ($request->balance * $comission) / 100;
-        $value = $comission / 100;
+        $value = $request->balance - ($request->balance * $comission) / 100;
+        // $value = $comission / 100;
 
         return response()->json(array('comission' => $value), 200);
     }
@@ -340,5 +346,30 @@ class UserPanelController extends Controller
         Payment::create($credentials);
 
         return Redirect::back()->with('message' , 'payment succesfully uploaded');
+    }
+
+    public function updateUserBalanceInfo(Request $request){
+        $request->request->remove('_token');
+        $request->request->remove('user_name');
+        $keynput = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+
+        UserModel::where('id', Auth::user()->id)->update($keynput);
+
+        return Redirect::back()->with('message' , 'Iban changed succesfully');
+    }
+
+    public function postMoneyBackRequest(Request $request){
+
+        $data = array(
+            'user_id' => Auth::user()->id,
+            'user' => $request->user_name,
+            'Iban' => $request->Iban
+        );
+
+        MoneyBackRequest::create($data);
+
+        return response()->json(array('message' => 'Money Back request sent'), 200);
     }
 }

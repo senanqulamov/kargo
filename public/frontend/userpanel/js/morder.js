@@ -10,7 +10,7 @@ function yeniPaketElaveEt() {
     uniq_package_id = Math.random().toString(36).substr(2, 9);
     let yeniPaket =
         ` <ul
-                    class="list-group list-group-flush border rounded mb-3 p-2 package-cont-hm"
+                    class="list-group list-group-flush border rounded mb-3 p-2 package-cont-`+uniq_package_id+`"
                   >
                     <h4><i class="fa-solid fa-box commonIcon"></i> Package</h4>
                     <li class="list-group-item">
@@ -33,8 +33,8 @@ function yeniPaketElaveEt() {
                       <div class="row package-inputs-cont-hm">
                         <div class="col-6 col-md">
                           <h6>Count:<span class="red">*</span></h6>
-                          <input
-                            class="form-control boxCount"
+                          <input onchange="MultiplyPackageCount(\'`+uniq_package_id+`\')"
+                            class="form-control boxCount package-count-`+uniq_package_id+`"
                             type="text"
                             placeholder="1"
                             name="package_count[` +
@@ -57,9 +57,9 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md">
                           <h6>Length:<span class="red">*</span></h6>
                           <div class="input-group mb-3">
-                            <input
+                            <input onchange="CalculateVolume(\'`+uniq_package_id+`\')"
                               type="text"
-                              class="form-control package-length-hm"
+                              class="form-control package-length"
                               placeholder="15"
                               name="package_length[` +
         uniq_package_id +
@@ -73,9 +73,9 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md">
                           <h6>Width:<span class="red">*</span></h6>
                           <div class="input-group mb-3">
-                            <input
+                            <input onchange="CalculateVolume(\'`+uniq_package_id+`\')"
                               type="text"
-                              class="form-control package-width-hm"
+                              class="form-control package-width"
                               placeholder="15"
                               name="package_width[` +
         uniq_package_id +
@@ -89,9 +89,9 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md">
                           <h6>Height:<span class="red">*</span></h6>
                           <div class="input-group mb-3">
-                            <input
+                            <input onchange="CalculateVolume(\'`+uniq_package_id+`\')"
                               type="text"
-                              class="form-control package-height-hm"
+                              class="form-control package-height"
                               placeholder="15"
                               name="package_height[` +
         uniq_package_id +
@@ -105,9 +105,9 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md">
                           <h6>Weight:<span class="red">*</span></h6>
                           <div class="input-group mb-3">
-                            <input
+                            <input onchange="CalculateWeight(\'`+uniq_package_id+`\')"
                               type="text"
-                              class="form-control package-weight-cnt"
+                              class="form-control package_weight_`+uniq_package_id+`"
                               placeholder="2"
                               name="package_weight[` +
         uniq_package_id +
@@ -140,7 +140,7 @@ function yeniPaketElaveEt() {
                           onclick="yeniProductElaveEt(this)"
                           type="button"
                         >
-                          + Add another products
+                          + Add another product
                         </button>
                       </h4>
                       <div class="row product-inputs-cont-hm">
@@ -184,8 +184,8 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md mb-3">
                           <h6>Count<span class="red">*</span></h6>
                           <div class="input-group">
-                            <input
-                              class="form-control boxCount"
+                            <input onchange="CalculateCount(\'`+uniq_package_id+`\')"
+                              class="form-control product-count "
                               type="text"
                               placeholder="1 (Storage 3)"
                               name="count[` +
@@ -199,9 +199,9 @@ function yeniPaketElaveEt() {
                         <div class="col-6 col-md mb-3">
                           <h6>Unit Weight<span class="red">*</span></h6>
                           <div class="input-group">
-                            <input
+                            <input onchange="CalculateWeight(\'`+uniq_package_id+`\')"
                               type="text"
-                              class="form-control weight-cnt"
+                              class="form-control product-weight "
                               placeholder="2"
                               name="weight[` +
         uniq_package_id +
@@ -216,8 +216,8 @@ function yeniPaketElaveEt() {
                         </div>
                         <div class="col-6 col-md mb-3">
                           <h6>Unit Price<span class="red">*</span></h6>
-                          <input
-                            class="form-control product-price-hm"
+                          <input onchange="CalculateWorth(\'`+uniq_package_id+`\')"
+                            class="form-control product-price"
                             type="text"
                             placeholder="200"
                             name="price[` +
@@ -257,6 +257,7 @@ function yeniPaketElaveEt() {
     product_id++;
     generateBarcode(uniq_package_id);
     uniq_package_id = Math.random().toString(36).substr(2, 9);
+
 }
 
 // Yeni product yaratmaq
@@ -310,8 +311,8 @@ function yeniProductElaveEt(e) {
                         <div class="col-6 col-md mb-3">
                           <h6>Count<span class="red">*</span></h6>
                           <div class="input-group">
-                            <input
-                              class="form-control boxCount"
+                            <input onchange="CalculateCount(\'`+package_id+`\')"
+                              class="form-control product-count "
                               type="text"
                               placeholder="1 (Storage 3)"
                               aria-label="default input example"
@@ -326,9 +327,9 @@ function yeniProductElaveEt(e) {
                         <div class="col-6 col-md mb-3">
                           <h6>Unit Weight<span class="red">*</span></h6>
                           <div class="input-group">
-                            <input
+                            <input onchange="CalculateWeight(\'`+package_id+`\')"
                               type="text"
-                              class="form-control weight-cnt"
+                              class="form-control product-weight "
                               placeholder="2"
                               aria-label="Username"
                               aria-describedby="basic-addon1"
@@ -345,8 +346,8 @@ function yeniProductElaveEt(e) {
                         </div>
                         <div class="col-6 col-md mb-3">
                           <h6>Unit Price<span class="red">*</span></h6>
-                          <input
-                            class="form-control product-price-hm"
+                          <input onchange="CalculateWorth(\'`+package_id+`\')"
+                            class="form-control product-price"
                             type="text"
                             placeholder="200"
                             aria-label="default input example"
@@ -400,155 +401,155 @@ function silProduct(e) {
     e.parentElement.parentElement.remove();
 }
 
-function yekunHesabla() {
-    var packages = document.querySelectorAll(".package-cont-hm");
+// function yekunHesabla() {
+//     var packages = document.querySelectorAll(".package-cont-hm");
 
-    // all calculations inside packages
-    if (packages) {
-        var total_weight = 0;
-        var total_count = 0;
-        var total_volume = 0;
-        var total_deci = 0;
-        var total_worth = 0;
-        packages.forEach((package) => {
-            var package_weight = parseInt(
-                package.querySelector(".package-weight-cnt").value
-            );
-            var products = package.querySelectorAll(".product-inputs-cont-hm");
+//     // all calculations inside packages
+//     if (packages) {
+//         var total_weight = 0;
+//         var total_count = 0;
+//         var total_volume = 0;
+//         var total_deci = 0;
+//         var total_worth = 0;
+//         packages.forEach((package) => {
+//             var package_weight = parseInt(
+//                 package.querySelector(".package-weight-cnt").value
+//             );
+//             var products = package.querySelectorAll(".product-inputs-cont-hm");
 
-            var package_count = parseInt(
-                package.querySelector(".package-inputs-cont-hm .boxCount").value
-            );
+//             var package_count = parseInt(
+//                 package.querySelector(".package-inputs-cont-hm .boxCount").value
+//             );
 
-            // Calculating total weight of packages and products
-            var product_weight_package_total = 0;
-            var product_count_package_total = 0;
-            var total_product_price = 0;
-            products.forEach((product) => {
-                var product_weight = parseInt(
-                    product.querySelector(".weight-cnt").value
-                );
-                var product_count = parseInt(
-                    product.querySelector(".boxCount").value
-                );
-                if (product_weight) {
-                    product_weight_package_total +=
-                        product_weight * product_count;
-                } else {
-                    product_weight_package_total = 0;
-                }
-                if (product_count) {
-                    product_count_package_total += product_count;
-                } else {
-                    product_count_package_total = 0;
-                }
+//             // Calculating total weight of packages and products
+//             var product_weight_package_total = 0;
+//             var product_count_package_total = 0;
+//             var total_product_price = 0;
+//             products.forEach((product) => {
+//                 var product_weight = parseInt(
+//                     product.querySelector(".weight-cnt").value
+//                 );
+//                 var product_count = parseInt(
+//                     product.querySelector(".boxCount").value
+//                 );
+//                 if (product_weight) {
+//                     product_weight_package_total +=
+//                         product_weight * product_count;
+//                 } else {
+//                     product_weight_package_total = 0;
+//                 }
+//                 if (product_count) {
+//                     product_count_package_total += product_count;
+//                 } else {
+//                     product_count_package_total = 0;
+//                 }
 
-                var product_price =
-                    parseInt(product.querySelector(".product-price-hm").value) *
-                    product_count;
+//                 var product_price =
+//                     parseInt(product.querySelector(".product-price-hm").value) *
+//                     product_count;
 
-                if (product_price) {
-                    total_product_price += product_price;
-                }
-            });
-            var package_total_weight = 0;
-            if (package_count) {
-                product_weight_package_total += package_weight;
-                package_total_weight =
-                    product_weight_package_total * package_count;
-                total_weight += package_total_weight;
+//                 if (product_price) {
+//                     total_product_price += product_price;
+//                 }
+//             });
+//             var package_total_weight = 0;
+//             if (package_count) {
+//                 product_weight_package_total += package_weight;
+//                 package_total_weight =
+//                     product_weight_package_total * package_count;
+//                 total_weight += package_total_weight;
 
-                total_count = package_count * product_count_package_total;
-                total_worth += total_product_price * package_count;
-            }
+//                 total_count = package_count * product_count_package_total;
+//                 total_worth += total_product_price * package_count;
+//             }
 
-            // Calculating total volume
-            var package_inputs = package.querySelector(
-                ".package-inputs-cont-hm"
-            );
-            var length = parseInt(
-                package_inputs.querySelector(".package-length-hm").value
-            );
-            var width = parseInt(
-                package_inputs.querySelector(".package-width-hm").value
-            );
-            var height = parseInt(
-                package_inputs.querySelector(".package-height-hm").value
-            );
-            var count = parseInt(
-                package_inputs.querySelector(".boxCount").value
-            );
-            var package_volume = length * width * height * count;
-            if (package_volume) {
-                total_volume += package_volume;
-                // Calculating deci for package
-                var deci = Math.max(
-                    package_volume / 5000,
-                    package_total_weight
-                );
-                var package_deci_total = deci * count;
-                total_deci += package_deci_total;
-            }
-        });
-        document.querySelector(".totalWeight").innerHTML = total_weight;
-        document.querySelector(".totalAmount").innerHTML = total_count;
-        document.querySelector(".totalPricing").innerHTML = total_deci;
-        document.querySelector(".totalVolume").innerHTML = total_volume;
-        document.querySelector(".totalWorth").innerHTML = total_worth;
-        document.querySelector("#total_cargo_price").value = total_worth;
+//             // Calculating total volume
+//             var package_inputs = package.querySelector(
+//                 ".package-inputs-cont-hm"
+//             );
+//             var length = parseInt(
+//                 package_inputs.querySelector(".package-length-hm").value
+//             );
+//             var width = parseInt(
+//                 package_inputs.querySelector(".package-width-hm").value
+//             );
+//             var height = parseInt(
+//                 package_inputs.querySelector(".package-height-hm").value
+//             );
+//             var count = parseInt(
+//                 package_inputs.querySelector(".boxCount").value
+//             );
+//             var package_volume = length * width * height * count;
+//             if (package_volume) {
+//                 total_volume += package_volume;
+//                 // Calculating deci for package
+//                 var deci = Math.max(
+//                     package_volume / 5000,
+//                     package_total_weight
+//                 );
+//                 var package_deci_total = deci * count;
+//                 total_deci += package_deci_total;
+//             }
+//         });
+//         document.querySelector(".totalWeight").innerHTML = total_weight;
+//         document.querySelector(".totalAmount").innerHTML = total_count;
+//         document.querySelector(".totalPricing").innerHTML = total_deci;
+//         document.querySelector(".totalVolume").innerHTML = total_volume;
+//         document.querySelector(".totalWorth").innerHTML = total_worth;
+//         document.querySelector("#total_cargo_price").value = total_worth;
 
-        var country = document.querySelector('select[name="country"]').value;
+//         var country = document.querySelector('select[name="country"]').value;
 
-        if (total_deci > 0 && country) {
-            $.ajax({
-                type: "POST",
-                url: "/userpanel/getquotemanualorder",
-                headers: {
-                    "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
-                        "content"
-                    ),
-                },
-                data: {
-                    total_worth: total_worth,
-                    total_count: total_count,
-                    total_weight: total_weight,
-                    total_volume: total_volume,
-                    total_deci: total_deci,
-                    country: country,
-                },
-                success: function (data) {
-                    console.log(data);
-                    var companies = Object.keys(data);
-                    companies.forEach((element) => {
-                        document.querySelector(
-                            "#cargo_company_" + element
-                        ).innerHTML = data[element] + " $ ";
-                        document
-                            .querySelector("#cargo_company_input_" + element)
-                            .setAttribute("data-price", data[element]);
-                    });
-                    Swal.fire({
-                        position: "top-start",
-                        icon: "success",
-                        title: "Cargo company values calculated. See in Shipment definition",
-                        showConfirmButton: false,
-                        backdrop: true,
-                        timer: 3000,
-                    });
-                },
-            });
-        } else {
-            Swal.fire({
-                position: "top-start",
-                icon: "error",
-                title: "Please enter country information and cargo details to calculate total price",
-                showConfirmButton: false,
-                backdrop: true,
-                timer: 3000,
-            });
-        }
-    }
-}
+//         if (total_deci > 0 && country) {
+//             $.ajax({
+//                 type: "POST",
+//                 url: "/userpanel/getquotemanualorder",
+//                 headers: {
+//                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr(
+//                         "content"
+//                     ),
+//                 },
+//                 data: {
+//                     total_worth: total_worth,
+//                     total_count: total_count,
+//                     total_weight: total_weight,
+//                     total_volume: total_volume,
+//                     total_deci: total_deci,
+//                     country: country,
+//                 },
+//                 success: function (data) {
+//                     console.log(data);
+//                     var companies = Object.keys(data);
+//                     companies.forEach((element) => {
+//                         document.querySelector(
+//                             "#cargo_company_" + element
+//                         ).innerHTML = data[element] + " $ ";
+//                         document
+//                             .querySelector("#cargo_company_input_" + element)
+//                             .setAttribute("data-price", data[element]);
+//                     });
+//                     Swal.fire({
+//                         position: "top-start",
+//                         icon: "success",
+//                         title: "Cargo company values calculated. See in Shipment definition",
+//                         showConfirmButton: false,
+//                         backdrop: true,
+//                         timer: 3000,
+//                     });
+//                 },
+//             });
+//         } else {
+//             Swal.fire({
+//                 position: "top-start",
+//                 icon: "error",
+//                 title: "Please enter country information and cargo details to calculate total price",
+//                 showConfirmButton: false,
+//                 backdrop: true,
+//                 timer: 3000,
+//             });
+//         }
+//     }
+// }
 
 function ChangeOrderInfo(input) {
     var product_names = document.querySelectorAll(".product-info-hm");
@@ -569,3 +570,6 @@ function generateBarcode(uniq_package_id){
 
     document.querySelector("input[name='barcode["+uniq_package_id+"]']").value = image_src;
 }
+
+
+

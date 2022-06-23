@@ -95,7 +95,7 @@
     </style>
 
     <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
-    <script>
+    {{-- <script>
         "use strict";
 
         function initMap() {
@@ -172,7 +172,7 @@
                 }
             }
         }
-    </script>
+    </script> --}}
 
     <div class="drop__box">
         <div class="drop__box-img">
@@ -319,39 +319,44 @@
                                 <li class="list-group-item mt-3">
                                     <div class="row">
                                         <div class="col-12 row">
-                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div
+                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-hand-holding-dollar commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total amount</h5>
-                                                    <span class="totalText totalAmount"></span>
+                                                    <span class="totalText totalAmount">0</span>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div
+                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-cube commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total volume</h5>
-                                                    <span class="totalText totalVolume"></span>
+                                                    <span class="totalText totalVolume">0</span>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div
+                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-scale-balanced commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total weight</h5>
-                                                    <span class="totalText totalWeight"></span>
+                                                    <span class="totalText totalWeight">0</span>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div
+                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-p headerIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
-                                                    <span class="totalText totalPricing"></span>
+                                                    <span class="totalText totalPricing">0</span>
                                                 </div>
                                             </div>
-                                            <div class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
+                                            <div
+                                                class="mb-3 col-6 col-md d-flex justify-content-center align-items-center">
                                                 <i class="fa-solid fa-sack-dollar commonIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
-                                                    <span class="totalText totalWorth"></span>
+                                                    <span class="totalText totalWorth">0</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -380,16 +385,16 @@
                                             <div class="col-12 col-sm-6 mb-3">
                                                 <ul class="list-group list-group-horizontal">
                                                     <li class="list-group-item w-25 text-center">
-                                                        <img style="width:100%;height:100%;"
-                                                            src="{{ asset('/') }}images/{{ $company->logo == null ? 'user.png' : $company->logo }}" />
+                                                        <img style="width:60px;height:60px;"
+                                                            src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $company->logo == null ? 'user.png' : $company->logo }}" />
                                                     </li>
                                                     <li class="list-group-item w-50 text-left">{{ $company->name }}</li>
                                                     <li class="list-group-item d-flex">
                                                         <span class="me-2"
                                                             id="cargo_company_{{ $company->id }}">unknwon</span>
                                                         <div class="form-check">
-                                                            <input class="form-check-input cargo_price_input" type="radio"
-                                                                name="cargo_company"
+                                                            <input class="form-check-input cargo_price_input"
+                                                                type="radio" name="cargo_company"
                                                                 id="cargo_company_input_{{ $company->id }}"
                                                                 data-price="0" value="{{ $company->id }}" />
                                                         </div>
@@ -403,48 +408,23 @@
                                 <li class="list-group-item">
                                     <h5>Additional Services</h5>
                                     <div class="row">
-                                        <div class="col-12 col-md-4">
-                                            <ul class="list-group list-group-horizontal mb-2">
-                                                <li class="list-group-item w-75 d-flex text-left">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input cargo_price_input" type="checkbox"
-                                                            data-price="15" name="insure_order" id="insure_my_order" />
-                                                    </div>
-                                                    İnsure my order
-                                                </li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">15$</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <ul class="list-group list-group-horizontal mb-2">
-                                                <li class="list-group-item w-75 d-flex text-left">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input cargo_price_input" type="checkbox"
-                                                            data-price="1" name="extra_bubble" id="extra_bubble" />
-                                                    </div>
-                                                    Extra bubble
-                                                </li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">1$</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="col-12 col-md-4">
-                                            <ul class="list-group list-group-horizontal">
-                                                <li class="list-group-item w-75 d-flex text-left">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input cargo_price_input" type="checkbox"
-                                                            name="other_additional" id="other_additional" />
-                                                    </div>
-                                                    Other Additional
-                                                </li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2">1$</span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        @foreach ($additional_services as $service)
+                                            <div class="col-12 col-md-4">
+                                                <ul class="list-group list-group-horizontal mb-2">
+                                                    <li class="list-group-item w-75 d-flex text-left">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input cargo_price_input"
+                                                                type="checkbox" data-price="{{ $service->price }}" name="additional_services[{{$service->slug}}]"
+                                                                id="{{ $service->slug }}" />
+                                                        </div>
+                                                       {{ $service->title }}
+                                                    </li>
+                                                    <li class="list-group-item d-flex">
+                                                        <span class="me-2">{{ $service->price }} $</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endforeach
                                     </div>
                                 </li>
                             </ul>
@@ -463,15 +443,15 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="battery" id="battery_yes"
-                                                value="yes" />
+                                            <input class="form-check-input" type="radio" name="battery"
+                                                id="battery_yes" value="yes" />
                                             <label class="form-check-label" for="battery_yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="battery" id="battery_no"
-                                                value="no" checked />
+                                            <input class="form-check-input" type="radio" name="battery"
+                                                id="battery_no" value="no" checked />
                                             <label class="form-check-label" for="battery_no">
                                                 No
                                             </label>
@@ -485,8 +465,8 @@
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="liquid" id="liquid_yes"
-                                                value="yes" />
+                                            <input class="form-check-input" type="radio" name="liquid"
+                                                id="liquid_yes" value="yes" />
                                             <label class="form-check-label" for="liquid_yes">
                                                 Yes
                                             </label>
@@ -513,8 +493,8 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="food" id="food_no" checked
-                                                value="no" />
+                                            <input class="form-check-input" type="radio" name="food" id="food_no"
+                                                checked value="no" />
                                             <label class="form-check-label" for="food_no">
                                                 No
                                             </label>
@@ -534,8 +514,8 @@
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="dangerous" id="dangerous_no"
-                                                value="no" checked />
+                                            <input class="form-check-input" type="radio" name="dangerous"
+                                                id="dangerous_no" value="no" checked />
                                             <label class="form-check-label" for="dangerous_no">
                                                 No
                                             </label>
@@ -585,7 +565,8 @@
                                             <div class="custom-file-upload-div">
                                                 <label for="CustomFileUpload"
                                                     class="custom-file-upload label-for-hidden-input">
-                                                    <input type="file" name="document[]" id="CustomFileUpload" hidden />
+                                                    <input type="file" name="document[]" id="CustomFileUpload"
+                                                        hidden />
                                                     Custom Upload
                                                 </label>
                                                 <h6 class="ms-2" id="CustomFileUploadText">No file chosen, yet.
@@ -612,14 +593,11 @@
         </div>
     </section>
 
-
+{{--
     <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC"
-        async defer></script>
+        async defer></script> --}}
     <script>
-        setTimeout(() => {
-            console.clear();
-        }, 1000);
         $('#CustomFileUpload').change(function(e) {
             var fileName = e.target.files[0].name;
             $('#CustomFileUploadText').html(fileName);
@@ -663,10 +641,8 @@
     </script>
     <script>
         function changeUserAddress(select) {
-            // console.log($(select).val());
             select = $(select).val();
             address_array = select.split("<-->");
-            // console.table(address_array);
             document.querySelector('select[name="country"]').value = address_array[0];
             document.querySelector('input[name="state"]').value = address_array[1];
             document.querySelector('input[name="city"]').value = address_array[2];
@@ -712,5 +688,6 @@
             });
         });
     </script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/order_calculator.js"></script>
     <script src="{{ asset('/') }}frontend/userpanel/js/morder.js"></script>
 @endsection
