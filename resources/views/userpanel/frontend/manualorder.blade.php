@@ -74,6 +74,7 @@
             border-radius: 14px;
             background: #FFA555;
             justify-items: center;
+            gap: 10px;
         }
 
         .total_cargo_price input {
@@ -84,7 +85,7 @@
             font-weight: bold;
             color: white;
             font-size: 15px;
-            width: 100%;
+            width: max-content;
         }
 
         .total_cargo_price p {
@@ -244,7 +245,7 @@
                                             <h6>Phone Number<span class="red">*</span></h6>
                                             <input class="form-control mb-3" type="text" placeholder="+9383830834"
                                                 aria-label="default input example" name="phone" />
-                                            <h6>Emai<span class="red">*</span>l</h6>
+                                            <h6>Email<span class="red">*</span></h6>
                                             <input class="form-control mb-3" type="email" placeholder="john@examle.com"
                                                 aria-label="default input example" name="email" />
                                             <div class="form-check defaultCheckbox">
@@ -340,7 +341,7 @@
                                                 <i class="fa-solid fa-scale-balanced commonIcon"></i>
                                                 <div class="ms-2">
                                                     <h5>Total weight</h5>
-                                                    <span class="totalText totalWeight">0</span>
+                                                    <span class="totalText totalWeight">0</span><span> kg</span>
                                                 </div>
                                             </div>
                                             <div
@@ -356,7 +357,7 @@
                                                 <i class="fa-solid fa-sack-dollar commonIcon"></i>
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
-                                                    <span class="totalText totalWorth">0</span>
+                                                    <span class="totalText totalWorth">0</span><span> €</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -390,11 +391,11 @@
                                                     </li>
                                                     <li class="list-group-item w-50 text-left">{{ $company->name }}</li>
                                                     <li class="list-group-item d-flex">
-                                                        <span class="me-2"
-                                                            id="cargo_company_{{ $company->id }}">unknwon</span>
+                                                        <span class="me-2" id="cargo_company_{{ $company->id }}">0
+                                                            €</span>
                                                         <div class="form-check">
-                                                            <input class="form-check-input cargo_price_input"
-                                                                type="radio" name="cargo_company"
+                                                            <input class="form-check-input" type="radio"
+                                                                name="cargo_company"
                                                                 id="cargo_company_input_{{ $company->id }}"
                                                                 data-price="0" value="{{ $company->id }}" />
                                                         </div>
@@ -413,18 +414,41 @@
                                                 <ul class="list-group list-group-horizontal mb-2">
                                                     <li class="list-group-item w-75 d-flex text-left">
                                                         <div class="form-check">
-                                                            <input class="form-check-input cargo_price_input"
-                                                                type="checkbox" data-price="{{ $service->price }}" name="additional_services[{{$service->slug}}]"
+                                                            <input
+                                                                class="form-check-input cargo_price_input {{ $service->slug }}_input"
+                                                                type="checkbox" data-price="{{ $service->price }}"
+                                                                name="additional_services[{{ $service->slug }}]"
                                                                 id="{{ $service->slug }}" />
                                                         </div>
-                                                       {{ $service->title }}
+                                                        {{ $service->title }}
                                                     </li>
                                                     <li class="list-group-item d-flex">
-                                                        <span class="me-2">{{ $service->price }} $</span>
+                                                        <span
+                                                            class="me-2 {{ $service->slug }}_span">{{ $service->price }}
+                                                            €</span>
                                                     </li>
                                                 </ul>
                                             </div>
                                         @endforeach
+                                        <div class="col-12 col-md-4">
+                                            <ul class="list-group list-group-horizontal mb-2">
+                                                <li class="list-group-item w-75 d-flex text-left">
+                                                    <div class="form-check">
+                                                        <input
+                                                            class="form-check-input cargo_price_input insurance_input"
+                                                            type="checkbox" data-price="0"
+                                                            name="additional_services[insurance]"
+                                                            id="insurance" />
+                                                    </div>
+                                                    Insurance
+                                                </li>
+                                                <li class="list-group-item d-flex">
+                                                    <span
+                                                        class="me-2 insurance_input_span">0
+                                                        €</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </li>
                             </ul>
@@ -585,7 +609,7 @@
                 <div class="total_cargo_price">
                     <p>Total price: </p>
                     <input type="number" name="total_cargo_price" id="total_cargo_price" value="0" readonly>
-                    <p>$</p>
+                    <p>€</p>
                 </div>
 
                 <button class="btn btn-primary" type="submit">Submit order</button>
@@ -593,8 +617,9 @@
         </div>
     </section>
 
-{{--
-    <script
+    <input type="text" id="ajax_url" hidden value="{{ route('userpanel.getquote.manualorder') }}">
+
+    {{-- <script
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC"
         async defer></script> --}}
     <script>
@@ -659,32 +684,35 @@
             // console.log(document.querySelector('#save_address'));
         }
 
-        var cargo_price_inputs = document.querySelectorAll('.cargo_price_input');
+        var additional = document.querySelectorAll('.cargo_price_input');
+        var company = document.querySelector('input[name="cargo_company"]:checked');
+        var companies = document.querySelectorAll('input[name="cargo_company"]');
 
-        cargo_price_inputs.forEach(element => {
+        var total_additional = 0;
+        var helper_additional = 0;
+        var company_price = 0;
+
+        additional.forEach(element => {
             element.addEventListener('change', function() {
-                var cargo_company_price = parseInt(
-                    document.querySelector('input[name="cargo_company"]:checked').getAttribute(
-                        'data-price'));
+                additional.forEach(input => {
+                    if ($(input).is(":checked")) {
+                        helper_additional += parseFloat(input.getAttribute('data-price'));
+                    }
+                });
+                total_additional = helper_additional;
+                helper_additional = 0;
+                document.querySelector('input[name="total_cargo_price"]').value = total_additional +
+                    company_price
+            });
+        });
 
-                var total_cargo_price = cargo_company_price;
+        companies.forEach(element => {
+            element.addEventListener('change', function() {
+                company_price = parseFloat(document.querySelector('input[name="cargo_company"]:checked')
+                    .getAttribute('data-price'));
 
-                if (document.querySelector('input[name="insure_order"]:checked')) {
-                    var insure_order_price = parseInt(
-                        document.querySelector('input[name="insure_order"]').getAttribute('data-price'));
-                    total_cargo_price += insure_order_price;
-                }
-                if (document.querySelector('input[name="extra_bubble"]:checked')) {
-                    var extra_bubble_price = parseInt(
-                        document.querySelector('input[name="extra_bubble"]').getAttribute('data-price'));
-                    total_cargo_price += extra_bubble_price;
-                }
-
-                total_cargo_price += parseInt(document.querySelector('.totalWorth').innerHTML);
-
-                console.log(cargo_company_price + ";;;;;" + insure_order_price + ";;;;;" +
-                    extra_bubble_price + ";;;;" + total_cargo_price);
-                document.querySelector('#total_cargo_price').value = total_cargo_price;
+                document.querySelector('input[name="total_cargo_price"]').value = total_additional +
+                    company_price
             });
         });
     </script>

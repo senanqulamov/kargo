@@ -116,6 +116,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/packages', [ManuelOrderController::class, 'packages'])->name('packages');
 		});
 
+        Route::prefix('scanners/')->name('scanners.')->group(function(){
+			Route::get('/facilityscan', [ManuelOrderController::class, 'facilityscan'])->name('facilityscan');
+			Route::get('/workerscan', [ManuelOrderController::class, 'workerscan'])->name('workerscan');
+			Route::get('/searchscan', [ManuelOrderController::class, 'searchscan'])->name('searchscan');
+
+			Route::post('/scannedcode', [ManuelOrderController::class, 'scannedcode'])->name('scannedcode');
+			Route::post('/workerscannedcode', [ManuelOrderController::class, 'workerscannedcode'])->name('workerscannedcode');
+			Route::post('/searchscannedcode', [ManuelOrderController::class, 'searchscannedcode'])->name('searchscannedcode');
+		});
+
 		// messages
 		Route::prefix('messages/')->name('messages.')->group(function(){
 			Route::get('/inbox', [MessageController::class, 'inbox'])->name('inbox');
@@ -280,9 +290,10 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::post('/postManualorder', [UserPanelController::class, 'postManualorder'])->name('post.manualorder');
         Route::post('/getquotemanualorder', [UserPanelController::class, 'getquotemanualorder'])->name('getquote.manualorder');
 
+        Route::get('/generatePdfManualOrder/{id}', [UserPanelController::class, 'generatePdfManualOrder'])->name('generatePdfManualOrder');
+
         Route::get('/cargorequests', [UserPanelController::class, 'cargorequests'])->name('cargorequests');
-        Route::get('/edit-cargo/{id}', [UserPanelController::class, 'editcargorequest'])->name('editcargorequest');
-        Route::post('/update-cargo', [UserPanelController::class, 'updatecargo'])->name('updatecargo');
+        Route::post('/updatecargo/{id}', [UserPanelController::class, 'updatecargo'])->name('updatecargo');
 
 
         Route::get('/balance', [UserPanelController::class, 'balance'])->name('balance');

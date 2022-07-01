@@ -150,6 +150,40 @@
                                 </a>
                             </li>
 
+                            <li class="nav-item @if(Request::segment(2) == 'scanners') menu-open @endif">
+								<a href="#" class="nav-link  @if(Request::segment(2) == 'scanners') active @endif">
+									<i class="nav-icon fa-solid fa-scanner"></i>
+									<p>
+										Scanners
+										<i class="fas fa-angle-left right"></i>
+                                        <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+                                    <li class="nav-item">
+										<a href="{{route('admin.scanners.searchscan')}}" class="nav-link @if(Request::segment(3) == 'searchscan') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Search Scan</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+									<li class="nav-item">
+										<a href="{{route('admin.scanners.facilityscan')}}" class="nav-link @if(Request::segment(3) == 'facilityscan') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Facility Scan</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+                                    <li class="nav-item">
+										<a href="{{route('admin.scanners.workerscan')}}" class="nav-link @if(Request::segment(3) == 'workerscan') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Courier Scan</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+								</ul>
+							</li>
+
 							<li class="nav-item @if(Request::segment(2) == 'messages') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'messages') active @endif">
 									<i class="nav-icon far fa-envelope"></i>

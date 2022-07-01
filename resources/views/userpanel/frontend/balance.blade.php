@@ -484,7 +484,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/userpanel/check-comission',
+                url: '{{ route("userpanel.checkcomission") }}',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -513,7 +513,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: '/userpanel/postMoneyBackRequest',
+                url: '{{ route("userpanel.postMoneyBackRequest") }}',
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },

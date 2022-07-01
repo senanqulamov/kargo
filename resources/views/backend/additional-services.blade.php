@@ -9,9 +9,9 @@
 @section('content')
 <div class="row">
 	<div class="col-12 mb-4">
-		<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i> New Service</button>					
+		<button type="button" class="btn btn-success"  data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i> New Service</button>
 	</div>
-	
+
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -74,8 +74,11 @@
 						<select class="form-control" name="selectType" id="selectType">
 							<option value="">Choose Type</option>
 							<option value="1" {{ old("selectType") == "1" ? "selected" : "" }}>According to the DESI</option>
-							<option value="2" {{ old("selectType") == "2" ? "selected" : "" }}>According to the box</option>
-							<option value="3" {{ old("selectType") == "3" ? "selected" : "" }}>According to the product</option>
+							<option value="2" {{ old("selectType") == "2" ? "selected" : "" }}>According to the Box</option>
+							<option value="3" {{ old("selectType") == "3" ? "selected" : "" }}>According to the Product</option>
+							<option value="4" {{ old("selectType") == "4" ? "selected" : "" }}>According to the Weight</option>
+							<option value="5" {{ old("selectType") == "5" ? "selected" : "" }}>According to the Volume</option>
+							<option value="6" {{ old("selectType") == "6" ? "selected" : "" }}>According to the Price</option>
 						</select>
 						<span class="text-danger error-text selectType_error"></span>
 					</div>
@@ -119,9 +122,12 @@
 						<label for="selectType2">Type</label>
 						<select class="form-control" name="selectType2" id="selectType2">
 							<option value="">Choose Type</option>
-							<option value="1" {{ old("selectType2") == "1" ? "selected" : "" }}>According to the DESI</option>
-							<option value="2" {{ old("selectType2") == "2" ? "selected" : "" }}>According to the box</option>
-							<option value="3" {{ old("selectType2") == "3" ? "selected" : "" }}>According to the product</option>
+							<option value="1" {{ old("selectType") == "1" ? "selected" : "" }}>According to the DESI</option>
+							<option value="2" {{ old("selectType") == "2" ? "selected" : "" }}>According to the Box</option>
+							<option value="3" {{ old("selectType") == "3" ? "selected" : "" }}>According to the Product</option>
+							<option value="4" {{ old("selectType") == "4" ? "selected" : "" }}>According to the Weight</option>
+							<option value="5" {{ old("selectType") == "5" ? "selected" : "" }}>According to the Volume</option>
+							<option value="6" {{ old("selectType") == "6" ? "selected" : "" }}>According to the Price</option>
 						</select>
 						<span class="text-danger error-text selectType_error"></span>
 					</div>
@@ -150,7 +156,7 @@
 	$(function(){
 		$("#insertForm").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),
@@ -197,7 +203,7 @@
 
 		$("#updateService").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),

@@ -6,6 +6,7 @@ use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
+use App\Models\CargoZone;
 use App\Models\MoneyBackRequest;
 use App\Models\Package;
 use App\Models\Payment;
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
+use PDF;
+use Dompdf\Dompdf;
 use Illuminate\Support\Str;
 use Picqer\Barcode;
 use Picqer\Barcode\BarcodeGeneratorPNG;
@@ -130,8 +133,47 @@ class UserPanelController extends Controller
             $result_array += $result;
         }
 
+        $services = DB::table('additional_services')->get();
+        $services_array = [];
+
+        foreach ($services as $service) {
+            switch ($service->status) {
+                case '1':
+                    $price = $service->price * $request->total_deci;
+                    $services_array += array($service->slug => $price);
+                    break;
+                case '2':
+                    $price = $service->price * $request->total_box_count;
+                    $services_array += array($service->slug => $price);
+                    break;
+                case '3':
+                    $price = $service->price * $request->total_product_count;
+                    $services_array += array($service->slug => $price);
+                    break;
+                case '4':
+                    $price = $service->price * $request->total_weight;
+                    $services_array += array($service->slug => $price);
+                    break;
+                case '5':
+                    $price = $service->price * $request->total_volume;
+                    $services_array += array($service->slug => $price);
+                    break;
+                case '6':
+                    $price = $service->price * $request->total_worth;
+                    $services_array += array($service->slug => $price);
+                    break;
+                default:
+                    $price = $service->price;
+                    $services_array += array($service->slug => $price);
+                    break;
+            }
+        }
+
         // dd($result_array);
-        return response()->json($result_array, 200);
+        return response()->json([
+            'cargo_companies' => $result_array,
+            'additional_services' => $services_array
+        ]);
     }
 
     public function postManualorder(Request $request)
@@ -139,7 +181,7 @@ class UserPanelController extends Controller
 
         $cargo_id = uniqid(15);
 
-        dd($request->all());
+        // dd($request->all());
 
         if ($request->package_id) {
             foreach ($request->package_id as $package_id) {
@@ -156,6 +198,8 @@ class UserPanelController extends Controller
                 }
                 $data = array_unique($data);
             }
+
+            $additional_services = array_keys($request->additional_services);
 
             $order_request = array(
                 'id' => $cargo_id,
@@ -174,10 +218,12 @@ class UserPanelController extends Controller
                 'currency' => $request->currency_unit,
                 'order_info' => $request->order_info,
                 'packages' => json_encode($packages),
-                'cargo_company'=> $request->cargo_company,
-                'insure_order' => $request->insure_order,
-                'extra_bubble' => $request->extra_bubble,
-                'other_additional' => $request->other_additional,
+                'additional_services' => json_encode($additional_services),
+                'total_cargo_price' => $request->total_cargo_price,
+                'cargo_company' => $request->cargo_company,
+                // 'insure_order' => $request->insure_order,
+                // 'extra_bubble' => $request->extra_bubble,
+                // 'other_additional' => $request->other_additional,
                 'battery' => $request->battery,
                 'liquid' => $request->liquid,
                 'food' => $request->food,
@@ -265,12 +311,34 @@ class UserPanelController extends Controller
         }
     }
 
+    public function generatePdfManualOrder($id)
+    {
+
+        $order = DB::table('cargo_requests')->where('id', $id)->get()->first();
+        $company = DB::table('cargo_companies')->where('id', $order->cargo_company)->get()->first();
+
+        $data = [
+            'cargo_id' => $order->id,
+            'name' => $order->name,
+            'country' => $order->country,
+            'city' => $order->city,
+            'state' => $order->state,
+            'address' => $order->address,
+            'company' => $company->name,
+            'order_info' => $order->order_info
+        ];
+
+        $pdf = PDF::loadView('userpanel.frontend.cargo_pdf', $data)->setPaper('a5', 'landscape');
+
+        return $pdf->download('cargo_request.pdf');
+    }
+
     public function cargorequests()
     {
         $cargo_requests = DB::table('cargo_requests')
-        ->where('user_id', Auth::user()->id)
-        ->orderBy('created_at', 'DESC')
-        ->get();
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
 
         $packages = DB::table('packages')->get();
 
@@ -283,38 +351,41 @@ class UserPanelController extends Controller
             );
     }
 
-    public function editcargorequest($cargo_request_id){
+    public function updatecargo(Request $request, $id)
+    {
+        // dd($request->all() , $id);
 
-        $cargo_request = DB::table('cargo_requests')->where('id' , $cargo_request_id)->get()->first();
+        $data = array(
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'country' => $request->country,
+            'state' => $request->state,
+            'city' => $request->city,
+            'address' => $request->address,
+            'zipcode' => $request->zipcode,
+            'currency' => $request->currency,
+            'cargo_company' => $request->cargo_company,
+            'ioss_number' => $request->ioss_number,
+            'vat_number' => $request->vat_number
+        );
 
-        return view('userpanel.frontend.edit_cargo_request')
-        ->with('cargo' , $cargo_request);
+        Cargo_request::where('id', $id)->update($data);
+
+        return Redirect::back()->with('message', 'Succesfully updated cargo details');
     }
 
-    public function updatecargo(Request $request){
-
-        $cargo_id = $request->cargo_id;
-
-        $request->request->remove('_token');
-        $request->request->remove('cargo_id');
-        $data = collect(request()->all())->filter(function ($value) {
-            return null !== $value;
-        })->toArray();
-
-        Cargo_request::where('id', $cargo_id)->update($data);
-
-        return Redirect::back()->with('message' , 'Succesfully updated cargo details');
-    }
-
-    public function balance(){
+    public function balance()
+    {
 
         $comissions = DB::table('comissions')->get();
 
-        $payments=DB::table('payments')->orderBy('created_at','desc')->get();
-        return view('userpanel.frontend.balance',compact('payments' , 'comissions'));
+        $payments = DB::table('payments')->orderBy('created_at', 'desc')->get();
+        return view('userpanel.frontend.balance', compact('payments', 'comissions'));
     }
 
-    public function checkcomission(Request $request){
+    public function checkcomission(Request $request)
+    {
         $comission = DB::table('comissions')->where('payment', '=', $request->method)->get()->first();
         $comission = $comission->comission;
 
@@ -324,7 +395,8 @@ class UserPanelController extends Controller
         return response()->json(array('comission' => $value), 200);
     }
 
-    public function updateBalance(Request $request){
+    public function updateBalance(Request $request)
+    {
 
         // dd($request->all());
 
@@ -345,10 +417,11 @@ class UserPanelController extends Controller
 
         Payment::create($credentials);
 
-        return Redirect::back()->with('message' , 'payment succesfully uploaded');
+        return Redirect::back()->with('message', 'payment succesfully uploaded');
     }
 
-    public function updateUserBalanceInfo(Request $request){
+    public function updateUserBalanceInfo(Request $request)
+    {
         $request->request->remove('_token');
         $request->request->remove('user_name');
         $keynput = collect(request()->all())->filter(function ($value) {
@@ -357,10 +430,11 @@ class UserPanelController extends Controller
 
         UserModel::where('id', Auth::user()->id)->update($keynput);
 
-        return Redirect::back()->with('message' , 'Iban changed succesfully');
+        return Redirect::back()->with('message', 'Iban changed succesfully');
     }
 
-    public function postMoneyBackRequest(Request $request){
+    public function postMoneyBackRequest(Request $request)
+    {
 
         $data = array(
             'user_id' => Auth::user()->id,
@@ -373,3 +447,11 @@ class UserPanelController extends Controller
         return response()->json(array('message' => 'Money Back request sent'), 200);
     }
 }
+
+
+
+
+// $request->request->remove('_token');
+// $data = collect(request()->all())->filter(function ($value) {
+//     return null !== $value;
+// })->toArray();

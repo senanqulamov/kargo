@@ -87,6 +87,7 @@ function MultiplyPackageWeight(package_id) {
                 (total + package_weight) * package_count;
         }
     }
+    // console.log(weights_array);
     SumWeights(Object.values(weights_array));
     CalculateDeci(package_id);
 }
@@ -209,9 +210,9 @@ function CalculateDeci(package_id) {
             volumes_array[package_id] / 5000,
             weights_array[package_id]
         );
-    }else if(weights_array[package_id] == 0){
+    } else if (weights_array[package_id] == 0) {
         decis_array[package_id] = volumes_array[package_id] / 5000;
-    }else{
+    } else {
         decis_array[package_id] = 0;
     }
 
@@ -226,4 +227,110 @@ function SumDecis(array) {
 }
 //--------------------------- CALCULATING TOTAL DECI edns here--------------------------->
 
-// var deci = Math.max(package_volume / 5000, package_total_weight);
+function yekunHesabla() {
+    var totalAmount = parseFloat(
+        document.querySelector(".totalAmount").innerHTML
+    ).toFixed(2);
+    var totalWeight = parseFloat(
+        document.querySelector(".totalWeight").innerHTML
+    ).toFixed(2);
+    var totalVolume = parseFloat(
+        document.querySelector(".totalVolume").innerHTML
+    ).toFixed(2);
+    var totalDeci = parseFloat(
+        document.querySelector(".totalPricing").innerHTML
+    );
+    var totalWorth = parseFloat(
+        document.querySelector(".totalWorth").innerHTML
+    ).toFixed(2);
+    var country = document.querySelector('select[name="country"]').value;
+    var ajax_url = document.querySelector("#ajax_url").value;
+
+    var boxCounts = document.querySelectorAll(".boxCount");
+    var total_box_count = 0;
+    boxCounts.forEach((element) => {
+        total_box_count += parseInt(element.value);
+    });
+
+    var insurance_input = document.querySelector("#insurance");
+    var insurance_span = document.querySelector(".insurance_input_span");
+    var insurance_price = parseFloat((15 * (totalWorth * 1.5)) / 100).toFixed(
+        2
+    );
+    insurance_input.setAttribute("data-price", insurance_price);
+    insurance_span.innerHTML = insurance_price + " €";
+
+    if (country != "0" && totalDeci > 0) {
+        $.ajax({
+            type: "POST",
+            url: ajax_url,
+            headers: {
+                "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
+            },
+            data: {
+                total_worth: totalWorth,
+                total_count: totalAmount,
+                total_weight: totalWeight,
+                total_volume: totalVolume,
+                total_deci: totalDeci,
+                country: country,
+                total_box_count: total_box_count,
+                total_product_count: totalAmount,
+            },
+            success: function (data) {
+                console.log(data);
+                var companies = Object.keys(data.cargo_companies);
+                companies.forEach((element) => {
+                    document.querySelector(
+                        "#cargo_company_" + element
+                    ).innerHTML =
+                        parseFloat(data.cargo_companies[element]).toFixed(2) +
+                        " € ";
+                    document
+                        .querySelector("#cargo_company_input_" + element)
+                        .setAttribute(
+                            "data-price",
+                            parseFloat(data.cargo_companies[element]).toFixed(2)
+                        );
+                });
+
+                var services = Object.keys(data.additional_services);
+                console.log(services);
+                services.forEach((element) => {
+                    var service_input = document.querySelector(
+                        "." + element + "_input"
+                    );
+                    service_input.setAttribute(
+                        "data-price",
+                        parseFloat(data.additional_services[element]).toFixed(2)
+                    );
+                    var service_span = document.querySelector(
+                        "." + element + "_span"
+                    );
+                    service_span.innerHTML =
+                        parseFloat(data.additional_services[element]).toFixed(
+                            2
+                        ) + " €";
+                });
+
+                Swal.fire({
+                    position: "top-start",
+                    icon: "success",
+                    title: "Cargo company values calculated. See in Shipment definition",
+                    showConfirmButton: false,
+                    backdrop: true,
+                    timer: 3000,
+                });
+            },
+        });
+    } else {
+        Swal.fire({
+            position: "top-start",
+            icon: "error",
+            title: "Please enter country information and cargo details to calculate Cargo Company price",
+            showConfirmButton: false,
+            backdrop: true,
+            timer: 3000,
+        });
+    }
+}
