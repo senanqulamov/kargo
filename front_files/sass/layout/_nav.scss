@@ -1,11 +1,11 @@
 nav {
     background-color: #fff;
     width: 100%;
-    height: 104.5%;
+    height: 104%;
     padding: 3rem 0;
     margin-top: -3rem;
     border-radius: 0.5rem;
-    box-shadow: var(--color-shadow);
+    // box-shadow: var(--color-shadow);
     z-index: 200;
 }
 
@@ -56,7 +56,11 @@ nav {
         font-size: 1.7rem;
         line-height: 1.7rem;
         display: inline-block;
+
     }
+
+
+
 
     &__box {
         cursor: pointer;
@@ -89,7 +93,16 @@ nav {
         justify-content: center;
 
         img {
-            width: 25%;
+            width: 50%;
+            margin: 1.8rem 0;
+        }
+    }
+
+
+    &__logo {
+        img {
+            width: 60%;
+            margin-bottom: 20px;
         }
     }
 }
@@ -102,7 +115,17 @@ nav {
 
 
 
+@media screen and(max-width:1200px) {
+    .navigation__span-font {
+        font-size: 1.5rem;
+    }
+}
 
+@media screen and(max-width:1100px) {
+    .navigation__span-font {
+        font-size: 1.4rem;
+    }
+}
 
 
 

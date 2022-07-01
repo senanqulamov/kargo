@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fontfamily -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato&family=Prosto+One&family=Roboto:wght@100&family=Source+Serif+Pro:wght@200&display=swap"
+        rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css">
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <!--Jquery-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+
+    <link rel="stylesheet" href="css/style.css" />
+
+    <link rel="stylesheet" href="css/pages.css" />
+
+
+
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- Test commit -->
+
+
+
+    <div class="overlay overlay__active">
+    </div>
+
+
+    <nav class=" burger__menu">
+
+        <div class="navigation container">
+            <div class="navigation__data">
+
+                <div class="navigation__cancel d-flex justify-content-end">
+                    <span class="navigation__cancel-span">
+                        <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                    </span>
+                </div>
+
+                <div class="navigation__image">
+                    <img src="img/png/logo.svg" alt="">
+                </div>
+
+               
+                <ul class="navigation__items">
+                    <button class="navigation__box isActive ">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-house navigation__icon"></i>
+                                <span class="navigation__span ">Main Menu</span></a>
+                        </li>
+                    </button>
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-network-wired navigation__icon"></i>
+                                <span class="navigation__span">Balance System</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Orders</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i 
+                                class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                <span class="navigation__span">Manuel Order</span></a>
+                        </li>
+                    </button>
+
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-brands fa-amazon navigation__icon"></i>
+                                <span class="navigation__span">Amazon</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                <span class="navigation__span">Bulk Orderr</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                <span class="navigation__span">Order List</span></a>
+                        </li>
+                    </button>
+                
+                    <hr class="hr">
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-headset navigation__icon"></i>
+                                <span class="navigation__span">Courier Request</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                <span class="navigation__span">Stock</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                <span class="navigation__span">Invoices</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-address-card navigation__icon"></i>
+                                <span class="navigation__span">Site Usage</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                <span class="navigation__span">Buy for me</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                <span class="navigation__span">Share and Earn</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                <span class="navigation__span">Inventory</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                <span class="navigation__span">Cargo Companies</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Integrations</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-parachute-box navigation__icon"></i>
+                                <span class="navigation__span">Parachute</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link navigation__icon"><i
+                                    class="fa-solid fa-store  navigation__icon"></i>
+                                <span class="navigation__span">Marketplace</span></a>
+                        </li>
+                    </button>
+                </ul>
+
+            </div>
+        </div>
+
+
+    </nav>
+
+
+    <nav class="fnav">
+        <div class="fnav__box">
+            <div class="fnav__burger">
+                <span class="fnav__line  fnav__top">
+
+                </span>
+                <span class="fnav__line  fnav__center">
+
+                </span>
+                <span class="fnav__line  fnav__bottom">
+
+                </span>
+            </div>
+
+            <div class="fnav__input">
+                <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                <input class="header__input-search" type="text" placeholder="Axtar..." />
+            </div>
+
+
+            <div class="header__icons">
+                <ul class="header__item">
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-bell header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-gear header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-globe header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest">
+                            Dervilon
+                            <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest"><i
+                                class="fa-solid fa-right-from-bracket"></i></a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <header>
+        <div class="container header">
+            <div class="col-md-6">
+                <div class="header__input">
+                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                    <input class="header__input-search" type="text" placeholder="Axtar..." />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <ul class="header__item">
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-bell header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-gear header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-globe header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest">
+                                Dervilon
+                                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest"><i
+                                    class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="sturcture" class="structure">
+        <div class="row w-100">
+
+            <div class="drop__box">
+                <div class="drop__box-img">
+                    <img src="img/svg/Group 7 (2).svg" alt="">
+                </div>
+                <h4 class="ms-2">Bulk Order</h4>
+            </div>
+
+            <div class="col-lg-3   page__1">
+                <nav class="navigation__left">
+
+                    <div class="navigation container">
+
+
+                        <div class="navigation__logo text-center">
+                            <img src="img/png/logo.svg" class="navigation__logo-img" alt="" />
+                        </div>
+
+                        <div class="navigation__data">
+                           
+                            <ul class="navigation__items">
+                                <button class="navigation__box isActive ">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-house navigation__icon"></i>
+                                            <span class="navigation__span ">Main Menu</span></a>
+                                    </li>
+                                </button>
+            
+            
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-network-wired navigation__icon"></i>
+                                            <span class="navigation__span">Balance System</span></a>
+                                    </li>
+                                </button>
+            
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Orders</span></a>
+                                    </li>
+                                </div>
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
+                                        <a href="#" class="navigation__link"><i 
+                                            class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Manuel Order</span></a>
+                                    </li>
+                                </button>
+            
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-brands fa-amazon navigation__icon"></i>
+                                            <span class="navigation__span">Amazon</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Bulk Orderr</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                            <span class="navigation__span">Order List</span></a>
+                                    </li>
+                                </button>
+            
+                                <hr class="hr">
+            
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-headset navigation__icon"></i>
+                                            <span class="navigation__span">Courier Request</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                            <span class="navigation__span">Stock</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Invoices</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-address-card navigation__icon"></i>
+                                            <span class="navigation__span">Site Usage</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Buy for me</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                            <span class="navigation__span">Share and Earn</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                            <span class="navigation__span">Inventory</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                            <span class="navigation__span">Cargo Companies</span></a>
+                                    </li>
+                                </button>
+            
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Integrations</span></a>
+                                    </li>
+                                </div>
+            
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-parachute-box navigation__icon"></i>
+                                            <span class="navigation__span">Parachute</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link navigation__icon"><i
+                                                class="fa-solid fa-store  navigation__icon"></i>
+                                            <span class="navigation__span">Marketplace</span></a>
+                                    </li>
+                                </button>
+                            </ul>
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12 page__2">
+                      
+                <section id="balance" class="balance pt-3">
+ 
+                          <!-- Yuxarı hisse -->
+              <div class="container rounded bg-white py-3 mb-5 shadowBox">
+                <div class="border rounded row m-2 px-3 py-4">
+                  <span class="col-12 bulkOrderText mb-4"
+                    >Save the excel file that you will send in bulk from the
+                    Save As menu with the extension
+                    <a href="" class="bulkOrderTextLink">.csv</a> and the column
+                    separator comma.</span
+                  >
+
+                  <span class="col-12 bulkOrderText mb-4">
+                    The size of the file you create must be less than 100 Kb. Do
+                    not use special characters in any of the fields</span
+                  >
+                  <span class="col-12 bulkOrderText mb-4"
+                    >You can download the sample
+                    <a href="" class="bulkOrderTextLink">CSV</a> file from the
+                    link below.</span
+                  >
+                  <div class="col-12 my-4">
+                    <button class="btn-file1">
+                      Download sample file <input type="file" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- En Yuxari hisse -->
+              <!-- Asagi hisse -->
+              <div class="container rounded bg-white py-2 shadowBox">
+                <div class="row p-4">
+                  <span class="col-12 bulkOrderDownHeaderText mb-3 ms-3"
+                    >Select the file</span
+                  >
+                  <div
+                    class="border rounded py-5 col-12 d-flex flex-column justify-content-center align-items-center"
+                  >
+                    <img
+                      src="img/svg2/bulkOrder/bulkOrderIcon.svg"
+                      alt=""
+                      class="mt-5 bulkIcon"
+                    />
+                    <span class="bulkOrderText mt-4">Drop files here</span>
+                    <span class="bulkOrderText">or</span>
+                    <span class="btn-file">
+                      select files from your computer <input type="file" />
+                    </span>
+                    <span class="bulkOrderText2 mb-5"
+                      >(Maximum upload size 2MB)</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="container py-2 d-flex justify-content-center mt-4">
+                <button class="btn btn-lg btn-primary btnBulk shadowBox">
+                  <i class="fa-solid fa-check text-white"></i> Confirm Order
+                </button>
+              </div>
+
+              <!-- End Asagi hisse -->
+                   
+                </section>
+            </div>
+        </div>
+    </section>
+
+
+
+   
+
+
+    <!-- bootstrap  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <!--d3js-->
+    <!-- Load d3.js -->
+    <script src="js/chart.js"></script>
+    <script src="js/jquery.js"></script>
+    <!-- JavaScript-->
+    <script src="js/tabbtn.js"></script>
+    <script src="input.js"></script>
+    <script src="js/customer.js"></script>
+    <script defer src="js/index.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/nav.js"></script>
+</body>
+
+</html>

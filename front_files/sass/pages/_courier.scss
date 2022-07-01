@@ -1,0 +1,144 @@
+.courier {
+
+    padding-bottom: 5rem;
+
+    &__table {
+        padding-top: 1rem;
+        margin-top: 2rem;
+        box-shadow: 0px 4px 15px 0px #0000001A;
+        background-color: #fff;
+
+
+
+        h6 {
+            padding-left: 2rem;
+            margin: 2rem 0;
+            color: #4878D1;
+            font-size: 2rem;
+            line-height: 21px;
+        }
+    }
+
+
+    &__thead {
+        background: #E8EFF8;
+        border: 1px solid rgba(211, 211, 211, 0.99);
+
+        tr>th {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            color: #677094;
+
+        }
+
+        tr>td {
+            font-size: 16px;
+            // line-height: 19px;
+            color: #677094;
+        }
+    }
+
+    &__tbody {
+
+
+        tr>td>span {
+            font-size: 16px;
+            // line-height: 19px;
+            color: #677094;
+        }
+    }
+
+
+
+
+    &__input {
+        padding-top: 1rem;
+        margin-top: 2rem;
+        background-color: #fff;
+        width: 100%;
+        height: 100%;
+        padding: 2.5rem 2rem;
+        border: 0.5px solid rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+
+        .demand__box {
+            width: 3rem;
+            height: 3rem;
+            background: linear-gradient(to right top, #18BDF6, #00D2FF);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            img {
+                width: 55%;
+            }
+
+        }
+
+        .demand__h2 {
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 21px;
+            color: #4878D1;
+        }
+
+        .red-1 {
+            color: red;
+        }
+
+    }
+
+
+    &__input-box {
+        margin-top: 2rem;
+
+        h6 {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: #405982;
+        }
+
+
+        .form-select {
+            width: 100%;
+        }
+
+        .form-control {
+            width: 100%;
+        }
+
+    }
+
+
+
+    &__input-textare {
+        margin-top: 3rem;
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////

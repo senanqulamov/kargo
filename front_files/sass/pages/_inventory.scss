@@ -1,0 +1,230 @@
+.inventory {
+
+    
+
+
+
+    &__item {
+        background: #FFFFFF;
+        border: 0.5px solid rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        // min-height: 20rem;
+        height: 100%;
+        padding: 1rem;
+    }
+
+    &__image {
+        background: #FFFFFF;
+        border: 0.5px solid rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
+        border-radius: 5px;
+        padding: 2rem;
+        height: 100%;
+
+        img {
+            width: 100%;
+        }
+    }
+
+
+
+    &__image-box {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__page__not-box {
+        width: 3rem;
+        height: 3rem;
+    }
+
+    &__page__not-text {
+        font-size: 1.5rem;
+    }
+
+    &__data-box {
+        background: #FFFFFF;
+        border: 0.5px solid rgba(0, 0, 0, 0.18);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
+        border-radius: 5px;
+        padding: .4rem .6rem;
+        margin-top: .8rem;
+    }
+
+    &__data-box--text {
+        font-weight: 500;
+        font-size: 11px;
+        line-height: 13px;
+        color: #405982;
+    }
+
+    &__data {}
+
+    &__info {
+        background: #FFFFFF;
+        border: 0.5px solid rgba(0, 0, 0, 0.18);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.07);
+        border-radius: 5px;
+        margin-top: 1rem;
+        padding: 1rem .6rem;
+    }
+
+
+    &__barchart {
+        margin-top: 4rem;
+    }
+
+
+
+    &__order {
+
+        margin-top: 1.5rem;
+    }
+
+    &__order-count {
+        padding-left: .6rem;
+
+    }
+
+
+
+
+    &__order-h2 {
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 35px;
+
+        color: #3E5476;
+    }
+
+    &__order-h4 {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 26px;
+
+        color: #18BDF6;
+    }
+
+
+    &__order-time {
+        margin-top: 2rem;
+    }
+
+
+    &__order-progress {}
+
+    &__order-barchart {}
+
+
+
+
+    &__order-count {
+        position: relative;
+    }
+
+    &__order-count:after {
+        content: "";
+        width: 1px;
+        height: 100px;
+        background: rgba(0, 0, 0, 0.25);
+        position: absolute;
+        top: 5%;
+        right: -13%;
+    }
+
+    &__order-piechart {}
+
+
+    &__order-text {
+        text-align: center;
+
+
+        span {
+            display: inline-block;
+            margin-top: 2.2rem;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            color: rgba(64, 89, 130, 0.45);
+
+        }
+    }
+
+    &__order-progress{
+        margin-top: .8rem;
+    }
+
+
+
+
+    &__sold {
+        margin-top: 2rem;
+
+        p {
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 16px;
+            color: #405982;
+        }
+    }
+
+
+    &__data--1 {
+
+        display: inline-block;
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 13px;
+        color: #405982;
+
+    }
+
+
+
+
+
+
+    &__barcode {
+
+
+        img {
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+    }
+
+
+}
+
+@media screen and(max-width:992px) {
+    .inventory__myChart {
+        height: 240px !important;
+    }
+
+    .inventory__item-chart {
+        margin-top: 1rem;
+    }
+}
+
+@media screen and(max-width:766px) {
+    .inventory__data {
+        margin-top: 1rem;
+    }
+
+    .inventory__item-chart {
+        margin-top: 2rem;
+    }
+}
+
+@media screen and(max-width:577px) {
+    .inventory__image img {
+        width: 50%;
+    }
+
+    .inventory__myChart {
+        height: 175px !important;
+    }
+}

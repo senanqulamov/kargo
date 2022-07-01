@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- fontfamily -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato&family=Prosto+One&family=Roboto:wght@100&family=Source+Serif+Pro:wght@200&display=swap"
+        rel="stylesheet" />
+
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
+
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+        integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+
+
+    <!--Jquery-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/pages.css" />
+
+    <title>Share and earn</title>
+</head>
+
+<body>
+    <!-- Test commit -->
+
+    <div class="overlay overlay__active">
+    </div>
+
+
+    <nav class="burger__menu">
+
+        <div class="navigation container">
+            <div class="navigation__data">
+
+                <div class="navigation__cancel d-flex justify-content-end">
+                    <span class="navigation__cancel-span">
+                        <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                    </span>
+                </div>
+
+                <div class="navigation__image">
+                    <img src="img/png/logo.svg" alt="">
+                </div>
+
+
+                <ul class="navigation__items">
+                    <button class="navigation__box isActive ">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
+                                <span class="navigation__span ">Main Menu</span></a>
+                        </li>
+                    </button>
+
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-network-wired navigation__icon"></i>
+                                <span class="navigation__span">Balance System</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Orders</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                <span class="navigation__span">Manuel Order</span></a>
+                        </li>
+                    </button>
+
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-brands fa-amazon navigation__icon"></i>
+                                <span class="navigation__span">Amazon</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                <span class="navigation__span">Bulk Orderr</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                <span class="navigation__span">Order List</span></a>
+                        </li>
+                    </button>
+
+                    <hr class="hr">
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
+                                <span class="navigation__span">Courier Request</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                <span class="navigation__span">Stock</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                <span class="navigation__span">Invoices</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-address-card navigation__icon"></i>
+                                <span class="navigation__span">Site Usage</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                <span class="navigation__span">Buy for me</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                <span class="navigation__span">Share and Earn</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                <span class="navigation__span">Inventory</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                <span class="navigation__span">Cargo Companies</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Integrations</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-parachute-box navigation__icon"></i>
+                                <span class="navigation__span">Parachute</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link navigation__icon"><i
+                                    class="fa-solid fa-store  navigation__icon"></i>
+                                <span class="navigation__span">Marketplace</span></a>
+                        </li>
+                    </button>
+                </ul>
+
+
+            </div>
+        </div>
+
+
+    </nav>
+
+
+    <nav class="fnav">
+        <div class="fnav__box">
+            <div class="fnav__burger">
+                <span class="fnav__line  fnav__top">
+
+                </span>
+                <span class="fnav__line  fnav__center">
+
+                </span>
+                <span class="fnav__line  fnav__bottom">
+
+                </span>
+            </div>
+
+            <div class="fnav__input">
+                <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                <input class="header__input-search" type="text" placeholder="Axtar..." />
+            </div>
+
+
+            <div class="header__icons">
+                <ul class="header__item">
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-bell header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-gear header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-globe header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest">
+                            Dervilon
+                            <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest"><i
+                                class="fa-solid fa-right-from-bracket"></i></a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <header>
+        <div class="container header">
+            <div class="col-md-6">
+                <div class="header__input">
+                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                    <input class="header__input-search" type="text" placeholder="Axtar..." />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <ul class="header__item">
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-bell header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-gear header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-globe header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest">
+                                Dervilon
+                                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest"><i
+                                    class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="Sturcture" class="structure">
+        <div class="row w-100">
+
+            <div class="drop__box">
+                <div class="drop__box-img">
+                    <img src="img/svg/9. Return.svg" alt="">
+                </div>
+                <h4 class="ms-2">Share and Earn</h4>
+            </div>
+
+            <div class="col-lg-3 page__1">
+                <nav class="navigation__left">
+
+                    <div class="navigation container">
+
+
+                        <div class="navigation__logo text-center">
+                            <img src="img/png/logo.svg" class="navigation__logo-img" alt="" />
+                        </div>
+
+                        <div class="navigation__data">
+
+                            <ul class="navigation__items">
+                                <button class="navigation__box isActive ">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-house navigation__icon"></i>
+                                            <span class="navigation__span ">Main Menu</span></a>
+                                    </li>
+                                </button>
+
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-network-wired navigation__icon"></i>
+                                            <span class="navigation__span">Balance System</span></a>
+                                    </li>
+                                </button>
+
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Orders</span></a>
+                                    </li>
+                                </div>
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Manuel Order</span></a>
+                                    </li>
+                                </button>
+
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-brands fa-amazon navigation__icon"></i>
+                                            <span class="navigation__span">Amazon</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Bulk Orderr</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                            <span class="navigation__span">Order List</span></a>
+                                    </li>
+                                </button>
+
+                                <hr class="hr">
+
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-headset navigation__icon"></i>
+                                            <span class="navigation__span">Courier Request</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                            <span class="navigation__span">Stock</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Invoices</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-address-card navigation__icon"></i>
+                                            <span class="navigation__span">Site Usage</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Buy for me</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                            <span class="navigation__span">Share and Earn</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                            <span class="navigation__span">Inventory</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                            <span class="navigation__span">Cargo Companies</span></a>
+                                    </li>
+                                </button>
+
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Integrations</span></a>
+                                    </li>
+                                </div>
+
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-parachute-box navigation__icon"></i>
+                                            <span class="navigation__span">Parachute</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link navigation__icon"><i
+                                                class="fa-solid fa-store  navigation__icon"></i>
+                                            <span class="navigation__span">Marketplace</span></a>
+                                    </li>
+                                </button>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12 page__2">
+
+
+
+                <section id="share">
+
+                    <div class="share">
+
+
+                        <div class="container">
+
+
+
+                            <div class="row">
+
+
+                                <div class="col-12">
+
+
+                                    <div class="share__box">
+
+                                        <h2>Reference Link</h2>
+
+                                        <div class="row">
+
+                                            <div class="d-flex row align-items-center">
+                                                <div class="col-sm-9 col-12 d-flex align-items-center">
+
+                                                    <input class="form-control mt-sm-2" type="text"
+                                                        placeholder="Default input" aria-label="default input example">
+
+
+                                                </div>
+                                                <div class="col-sm-3 col-12  mt-3 mt-sm-2">
+                                                    <div class="d-flex justify-content-end justify-content-sm-center">
+                                                        <button class="share__url">Share and Copy URL </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12">
+                                                <p class="share__box-text  mt-4">*Balances you earn are only visible on
+                                                    Fridays and can be transferred to your account on Fridays.</p>
+                                            </div>
+                                            <div class="col-sm-10 col-12">
+                                                <p class="share__box-text  mt-4">*Balances you earn are only visible on
+                                                    Fridays and can be transferred to your account on Fridays.</p>
+                                            </div>
+                                            <div class="col-sm-2 col-12">
+                                                <div class="d-flex justify-content-end justify-content-sm-center">
+                                                    <button class="share__update mt-3 me-4">Update </button>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+
+                                    </div>
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <div class="share__items">
+
+                                <div class="row">
+
+
+                                    <div class="col-sm-6 col-12">
+                                        <div class="share__box share__box-balance  mt-5">
+                                            <div class="share__box-img">
+                                                <img src="./img/svg/Group (29).svg" style="width: 35%;" alt="">
+                                            </div>
+
+                                            <h2 class="mt-4">Number of Users refer to</h2>
+
+                                            <h2 class="share__number-zero mt-4">0</h2>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-12">
+                                        <div class="share__box share__box-balance  mt-5">
+
+                                            <div class="share__box-img">
+                                                <img src="./img/svg/colored.svg " alt="">
+                                            </div>
+
+                                            <h2 class="mt-4">Number of Users refer to</h2>
+
+                                            <h2 class="share__number-zero  mt-4">0</h2>
+
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-6 col-12">
+                                        <div class=" share__box-candition  mt-5">
+                                            <div class="text-center">
+                                                <div class="page__not page__not--1 justify-content-center">
+                                                    <div class="page__not-box share__candition-boxed  me-3">
+                                                        <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
+                                                    </div>
+
+                                                    <span class="share__candition-text">Condition</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="share__half-text">
+
+                                                <div class="row">
+
+                                                    <div class="col-6 ">
+
+                                                        <div class="share__half-mean share__half-meaned ">
+                                                            <p class="share__half-mean-1">In the first post of a friend
+                                                                who signed up with a referral lin</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="share__half-mean">
+
+                                                            <p class="share__half-mean-1">In every submission of a
+                                                                friend who is a member with a referral link </p>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6 col-12">
+                                        <div class=" share__box-candition  mt-5">
+                                            <div class="text-center">
+                                                <div class="page__not page__not--1 justify-content-center">
+                                                    <div class="page__not-box share__candition-boxed  me-3">
+                                                        <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
+                                                    </div>
+
+                                                    <span class="share__candition-text">Condition</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="share__half-text">
+
+                                                <div class="row">
+
+                                                    <div class="col-6 ">
+
+                                                        <div class="share__half-mean share__half-meaned ">
+                                                            <p class="share__half-mean-1">In the first post of a friend
+                                                                who signed up with a referral lin</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="share__half-mean">
+
+                                                            <p class="share__half-mean-1">In every submission of a
+                                                                friend who is a member with a referral link </p>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-sm-6 col-12">
+                                        <div class=" share__box-candition  mt-5">
+                                            <div class="text-center">
+                                                <div class="page__not page__not--1 justify-content-center">
+                                                    <div class="page__not-box share__candition-boxed  me-3">
+                                                        <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
+                                                    </div>
+
+                                                    <span class="share__candition-text">Condition</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="share__half-text">
+
+                                                <div class="row">
+
+                                                    <div class="col-6 ">
+
+                                                        <div class="share__half-mean share__half-meaned ">
+                                                            <p class="share__half-mean-1">In the first post of a friend
+                                                                who signed up with a referral lin</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="share__half-mean">
+
+                                                            <p class="share__half-mean-1">In every submission of a
+                                                                friend who is a member with a referral link </p>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <div class="col-sm-6 col-12">
+                                        <div class=" share__box-candition  mt-5">
+                                            <div class="text-center">
+                                                <div class="page__not page__not--1 justify-content-center">
+                                                    <div class="page__not-box share__candition-boxed  me-3">
+                                                        <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
+                                                    </div>
+
+                                                    <span class="share__candition-text">Condition</span>
+
+                                                </div>
+                                            </div>
+                                            <div class="share__half-text">
+
+                                                <div class="row">
+
+                                                    <div class="col-6 ">
+
+                                                        <div class="share__half-mean share__half-meaned ">
+                                                            <p class="share__half-mean-1">In the first post of a friend
+                                                                who signed up with a referral lin</p>
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="col-6">
+
+                                                        <div class="share__half-mean">
+
+                                                            <p class="share__half-mean-1">In every submission of a
+                                                                friend who is a member with a referral link </p>
+
+                                                        </div>
+
+
+
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-sm-6 col-12">
+
+                                        <div class="share__box-candition  mt-5">
+                                            <p class="share__half-text">5 USD cargo balance for both you and your friend
+                                                when your friend makes the first shipment.</p>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-sm-6 col-12">
+
+                                        <div class="share__box-candition mt-5">
+                                            <p class="share__half-text">A 2.5% cargo balance over the shipping cost from
+                                                your friend's postings after registration.</p>
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="share__bottom-text">
+
+                                <div class="share__box mt-5">
+                                  
+                                    <div class="page__not page__not--1 justify-content-center">
+                                        <div class="page__not-box share__candition-boxed  me-3">
+                                            <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
+                                        </div>
+
+                                        <span class="share__candition-text">Volunteering Program Terms and Conditions</span>
+
+                                    </div>
+
+
+
+
+                                    <div>
+                                        <p class="share__bottom-sec mt-4">1. Acceptance of Terms and
+                                            Conditions The ShipEntegra
+                                            E-export volunteers Program (the Program) is a program that aims to reward
+                                            you
+                                            and our new member for each eligible ShipEntegra member you refer to us. By
+                                            participating in this Program, you undertake to comply with ShipEntegra's
+                                            terms
+                                            and agreements of carriage, user agreement, all applicable overarching laws
+                                            and
+                                            to accept any subsequent changes to its Terms and Conditions. ShipEntegra
+                                            reserves the right to change the relevant Program and Program Terms and
+                                            Conditions at any time and quality without prior notice.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4">
+                                            2. What is a Verified Member? <br>
+                                            a. Approved member must not be a previous ShipEntegra member or have not
+                                            shipped with ShipEntegra. <br>
+                                            b. The member must become a member using the promotional code of the person
+                                            who referred him or the link sent to him. <br>
+                                            c. A verified member must make a post.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4"> 3. Earning and Redeeming Rewards <br> a. Our
+                                            customers, who become members and recommend the member using a promotional
+                                            code or link, will earn their balance of <br> 5 USD after the new member
+                                            sends
+                                            their first post. The terms of approval of membership are specified in
+                                            Article 2. <br> b. Our E-Export Volunteer member will earn 2.5% cargo
+                                            balance
+                                            from the shipments that his account will make for 2 months. <br> c. The
+                                            loading
+                                            dates of the relevant balance will be on Friday every week. <br> D. In order
+                                            to
+                                            transfer the relevant balance to your account, you must click on the
+                                            Transfer button, which will be activated on Fridays. to. Shipping balances
+                                            can only be used to make new shipments.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4">4. Fraudulent or Illegal Participation In case
+                                            of detecting fraudulent or illegal participation in violation of ShipEntegra
+                                            terms and conditions, it has the right to cancel, freeze and withdraw the
+                                            rights won by our member who is a member and whose promotional code is used.
+                                            Each user can create only one membership. If it is detected that the same
+                                            user has more than one account, fraudulent participation rules will apply.
+                                            If ShipEntegra detects the abuse of this campaign by the user or users, it
+                                            will be able to use the above rights.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4"> 5. Notice When your suggested members become
+                                            members using your code or via a link, when the membership is approved and
+                                            the reward balances are loaded, you will be informed via your panel.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4">
+                                            6. Responsibility ShipIntegra; It is not responsible for any errors /
+                                            damages that may occur during and / or before the membership.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4">
+                                            7.Special Provisions Earned balances; It must be used within the first 2
+                                            months from the date of acquisition. Unused balances will be reset. Earned
+                                            balances cannot be transferred to a different user or account.
+                                        </p>
+                                        <p class="share__bottom-sec mt-4">
+                                            8. Program Changes As ShipEntegra, we reserve the right to stop the program
+                                            and change its terms and conditions without prior notice. It reserves the
+                                            right to suspend/cancel the membership of users if they do not comply with
+                                            any rule written in the guide.
+                                        </p>
+                                    </div>
+
+
+
+
+
+
+
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+
+
+                </section>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+    <!-- bootstrap  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <!--d3js-->
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/jquery.js"></script>
+    <!-- JavaScript-->
+    <script defer src="js/index.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/nav.js"></script>
+</body>
+
+</html>

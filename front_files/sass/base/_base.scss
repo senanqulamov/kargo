@@ -35,31 +35,6 @@ p {
 }
 
 
-.header__item-link {
-    color: #fff;
-}
-
-
-.show{
-    display: block;
-}
-.hide{
-    display: none;
-}
-.close {
-    overflow:hidden;
-    transition:height .3s ease-out;
-    height:0;
-    
-    &.open {
-      height: auto;
-    }
-  }
-
-.btn-back{
-    background: linear-gradient(90deg, rgba(209, 210, 213, 0.5) -19.31%, rgba(218, 218, 218, 0.5) 105.37%);
-  box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.06);
-}
 
 
 
@@ -71,6 +46,7 @@ p {
     --color-grey-light-1: #FB985C;
     --color-page-background: #E5E5E5;
     --color-main-button: #3B69E4;
+    --color-text:#4878D1;
 
     --color-burger-btn :linear-gradient(93.84deg, rgba(251, 152, 92, 0.88) -42.66%, rgba(255, 180, 6, 0.88) 144.99%);
     // --color-primary: #eb2f64;

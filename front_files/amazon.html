@@ -1,0 +1,1599 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+        <!-- fontfamily -->
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato&family=Prosto+One&family=Roboto:wght@100&family=Source+Serif+Pro:wght@200&display=swap"
+            rel="stylesheet" />
+    
+        <!-- bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+    
+        <!--icon-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+            integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+        <!--Jquery-->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+    
+        <link rel="stylesheet" href="css/style.css" />
+    
+        <link rel="stylesheet" href="css/pages.css" />
+    
+    
+    
+        <title>Document</title>
+    </head>
+
+<body>
+    <!-- Test commit -->
+
+
+
+    <div class="overlay overlay__active">
+    </div>
+
+
+    <nav class="burger__menu">
+
+        <div class="navigation container">
+            <div class="navigation__data">
+
+                <div class="navigation__cancel d-flex justify-content-end">
+                    <span class="navigation__cancel-span">
+                        <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                    </span>
+                </div>
+
+                <div class="navigation__image">
+                    <img src="img/png/logo.svg" alt="">
+                </div>
+
+
+                <ul class="navigation__items">
+                    <button class="navigation__box isActive ">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-solid fa-house navigation__icon"></i>
+                                <span class="navigation__span ">Main Menu</span></a>
+                        </li>
+                    </button>
+
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-network-wired navigation__icon"></i>
+                                <span class="navigation__span">Balance System</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Orders</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                <span class="navigation__span">Manuel Order</span></a>
+                        </li>
+                    </button>
+
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-brands fa-amazon navigation__icon"></i>
+                                <span class="navigation__span">Amazon</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                <span class="navigation__span">Bulk Orderr</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                <span class="navigation__span">Order List</span></a>
+                        </li>
+                    </button>
+
+                    <hr class="hr">
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
+                                <span class="navigation__span">Courier Request</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                <span class="navigation__span">Stock</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                <span class="navigation__span">Invoices</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-address-card navigation__icon"></i>
+                                <span class="navigation__span">Site Usage</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                <span class="navigation__span">Buy for me</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                <span class="navigation__span">Share and Earn</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                <span class="navigation__span">Inventory</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                <span class="navigation__span">Cargo Companies</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Integrations</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-parachute-box navigation__icon"></i>
+                                <span class="navigation__span">Parachute</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link navigation__icon"><i
+                                    class="fa-solid fa-store  navigation__icon"></i>
+                                <span class="navigation__span">Marketplace</span></a>
+                        </li>
+                    </button>
+                </ul>
+
+
+            </div>
+        </div>
+
+
+    </nav>
+
+
+    <nav class="fnav">
+        <div class="fnav__box">
+            <div class="fnav__burger">
+                <span class="fnav__line  fnav__top">
+
+                </span>
+                <span class="fnav__line  fnav__center">
+
+                </span>
+                <span class="fnav__line  fnav__bottom">
+
+                </span>
+            </div>
+
+            <div class="fnav__input">
+                <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                <input class="header__input-search" type="text" placeholder="Axtar..." />
+            </div>
+
+
+            <div class="header__icons">
+                <ul class="header__item">
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-bell header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-gear header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link">
+                            <i class="fa-solid fa-globe header__item-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest">
+                            Dervilon
+                            <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                    </li>
+                    <li class="header__item-list">
+                        <a href="" class="header__item-link header__account-guest"><i
+                                class="fa-solid fa-right-from-bracket"></i></a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+
+    <header>
+        <div class="container header">
+            <div class="col-md-6">
+                <div class="header__input">
+                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                    <input class="header__input-search" type="text" placeholder="Axtar..." />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <ul class="header__item">
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-bell header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-gear header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-globe header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest">
+                                Dervilon
+                                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link header__account-guest"><i
+                                    class="fa-solid fa-right-from-bracket"></i></a>
+                        </li>
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+
+
+    <section id="Sturcture" class="structure">
+        <div class="row w-100">
+
+            <div class="drop__box">
+                <div class="drop__box-img">
+                    <img src="img/svg/Group 7 (2).svg" alt="">
+                </div>
+                <h4 class="ms-2">Amazon FBA</h4>
+            </div>
+
+            <div class="col-lg-3 page__1">
+                <nav class="navigation__left">
+
+                    <div class="navigation container">
+
+
+                        <div class="navigation__logo text-center">
+                            <img src="img/png/logo.svg" class="navigation__logo-img" alt="" />
+                        </div>
+
+                        <div class="navigation__data">
+
+                          
+                            <ul class="navigation__items">
+                                <button class="navigation__box isActive ">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-house navigation__icon"></i>
+                                            <span class="navigation__span ">Main Menu</span></a>
+                                    </li>
+                                </button>
+
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-network-wired navigation__icon"></i>
+                                            <span class="navigation__span">Balance System</span></a>
+                                    </li>
+                                </button>
+
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Orders</span></a>
+                                    </li>
+                                </div>
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Manuel Order</span></a>
+                                    </li>
+                                </button>
+
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-brands fa-amazon navigation__icon"></i>
+                                            <span class="navigation__span">Amazon</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Bulk Orderr</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                            <span class="navigation__span">Order List</span></a>
+                                    </li>
+                                </button>
+
+                                <hr class="hr">
+
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-headset navigation__icon"></i>
+                                            <span class="navigation__span">Courier Request</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                            <span class="navigation__span">Stock</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Invoices</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-address-card navigation__icon"></i>
+                                            <span class="navigation__span">Site Usage</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Buy for me</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                            <span class="navigation__span">Share and Earn</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                            <span class="navigation__span">Inventory</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                            <span class="navigation__span">Cargo Companies</span></a>
+                                    </li>
+                                </button>
+
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Integrations</span></a>
+                                    </li>
+                                </div>
+
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-parachute-box navigation__icon"></i>
+                                            <span class="navigation__span">Parachute</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link navigation__icon"><i
+                                                class="fa-solid fa-store  navigation__icon"></i>
+                                            <span class="navigation__span">Marketplace</span></a>
+                                    </li>
+                                </button>
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12 page__2">
+
+
+
+                <section class="pt-3">
+                    <!-- Amazon Store -->
+                    <div class="container borderBottom  p-3 pb-5">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="iconBG">
+                          <img
+                            src="img/svg2/amazonIcon.svg"
+                            alt=""
+                            class="iconSize"
+                          />
+                        </div>
+                        <span class="amazonHeaderText ms-2 amazonIcon"
+                          >Amazon Store</span
+                        >
+                      </div>
+                      <div class="rounded p-4 bg-white shadowBox">
+                        <div class="">
+                          <div class="mb-3">
+                            <label
+                              for="exampleFormControlInput1 "
+                              class="form-label amazonLabel"
+                              >Amazon Store<span class="red">*</span></label
+                            >
+                            <div class="d-flex row align-items-center">
+                              <div class="col-12 col-sm-10 d-flex align-items-center">
+                                <select
+                                  required
+                                  class="form-select amazonSelect"
+                                  aria-label="Default select example"
+                                >
+                                  <option class="" selected value="">
+                                    Amazon.com Decd LLC - PITP5 - Pittsburgh - 2250
+                                    Roswell Drive - 15205 - PA - US
+                                  </option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                              </div>
+                              <div class="col-sm-2 mt-3 mt-sm-0">
+                                <div
+                                  class="d-flex justify-content-end justify-content-sm-center"
+                                >
+                                  <button class="amazonBTN shadowBox">Select</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mb-3">
+                          <label
+                            for="exampleFormControlInput1"
+                            class="form-label amazonLabel"
+                            >Customer Name<span class="red">*</span></label
+                          >
+                          <div class="col-12 col-sm-10">
+                            <input
+                              type="text"
+                              class="form-control amazonSelect"
+                              id="exampleFormControlInput1"
+                              placeholder="Amazon.com Decd LLC"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Amazon Store -->
+                    <!-- Common Information -->
+                    <div class="container borderBottom p-3 pb-5">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="iconBG px-2">
+                          <img
+                            class="iconSize"
+                            src="img/svg2/gommonInformation.svg"
+                            alt=""
+                          />
+                        </div>
+                        <span class="amazonHeaderText ms-2">Common Information</span>
+                      </div>
+                      <div class="rounded p-4 bg-white shadowBox">
+                        <div class="row">
+                          <div class="mb-3 col-12 col-md-3">
+                            <label
+                              for="exampleFormControlInput1"
+                              class="form-label amazonLabel1"
+                              >IOSS Number<span class="red">*</span></label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="exampleFormControlInput1"
+                              placeholder="374593"
+                            />
+                          </div>
+                          <div class="mb-3 col-12 col-md-3">
+                            <label
+                              for="exampleFormControlInput1"
+                              class="form-label amazonLabel1"
+                              >Vat Number<span class="red">*</span></label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="exampleFormControlInput1"
+                              placeholder="3874983"
+                            />
+                          </div>
+                          <div class="mb-3 col-12 col-md-3">
+                            <label
+                              for="exampleFormControlInput1"
+                              class="form-label amazonLabel1"
+                              >Currency unit<span class="red">*</span></label
+                            >
+                            <select
+                              class="form-select"
+                              aria-label="Default select example"
+                            >
+                              <option selected>USD</option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                            </select>
+                          </div>
+                          <div class="mb-3 col-12 col-md-3">
+                            <label
+                              for="exampleFormControlInput1"
+                              class="form-label amazonLabel1"
+                              >To Be Sent Storage<span class="red">*</span></label
+                            >
+                            <select
+                              class="form-select"
+                              aria-label="Default select example"
+                            >
+                              <option selected></option>
+                              <option value="1">One</option>
+                              <option value="2">Two</option>
+                              <option value="3">Three</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Common Information -->
+                    <!-- Order Information -->
+                    <div class="container borderBottom p-3 pb-5">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="iconBG px-2">
+                          <img
+                            class="iconSize"
+                            src="img/svg2/orderInformation.svg"
+                            alt=""
+                          />
+                        </div>
+                        <span class="amazonHeaderText ms-2">Order Information</span>
+                      </div>
+                      <div class="row gx-5 mb-3">
+                        <div class="col-12 col-sm-6 mb-2">
+                          <div class="shadowBox">
+                            <div
+                              class="p-3 border rounded bg-white d-flex align-items-center justify-content-between"
+                            >
+                              <div class="d-flex align-items-center">
+                                <div class="iconBG me-2">
+                                  <img
+                                    src="img/svg2/Group 7 (1).svg"
+                                    alt=""
+                                    class="iconSize"
+                                  />
+                                </div>
+      
+                                <label for="flexRadioDefault1" class="amazonOrderText"
+                                  >Local storage list</label
+                                >
+                              </div>
+                              <div class="form-check d-flex align-items-center">
+                                <input
+                                  class="form-check-input radioSize"
+                                  type="radio"
+                                  name="flexRadioDefault"
+                                  id="flexRadioDefault1"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 col-sm-6 mb-5">
+                          <div class="shadowBox">
+                            <div
+                              class="p-3 border rounded bg-white d-flex align-items-center justify-content-between"
+                            >
+                              <div class="d-flex align-items-center">
+                                <div class="iconBG me-2">
+                                  <img
+                                    src="img/svg2/Group (4).svg"
+                                    alt=""
+                                    class="iconSize"
+                                  />
+                                </div>
+                                <label for="flexRadioDefault2" class="amazonOrderText"
+                                  >Ship Lounge storage list</label
+                                >
+                              </div>
+                              <div class="form-check d-flex align-items-center">
+                                <input
+                                  class="form-check-input radioSize"
+                                  type="radio"
+                                  name="flexRadioDefault"
+                                  id="flexRadioDefault2"
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div class="bg-white rounded p-3 shadowBox mb-3">
+                            <span class="amazonOrderText">Clock, Book</span>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Paket hisse--------------------------------------------- -->
+                      <div class="rounded bg-white p-3 shadowBox">
+                        <div class="list-group-item paketYaradilanYer">
+                          <button
+                            class="my-3 paketBtn shadowBox"
+                            onclick="yeniPaketElaveEt()"
+                          >
+                            + Add another package
+                          </button>
+                          <!-- JS paket kodu -->
+                          <div
+                            class="list-group list-group-flush border rounded mb-3 p-2 shadowBox"
+                          >
+                            <div class="d-flex align-items-center">
+                              <div class="iconBG me-3">
+                                <i class="fa-solid fa-box text-white"></i>
+                              </div>
+                              <h4 class="amazonCalcTextHeader">Package</h4>
+                            </div>
+                            <div class="list-group-item">
+                              <div class="row">
+                                <div class="col-6 col-md">
+                                  <h6 class="amazonCalcText">
+                                    Count:<span class="red">*</span>
+                                  </h6>
+                                  <input
+                                    class="form-control boxCount"
+                                    type="text"
+                                    placeholder="1"
+                                    aria-label="default input example"
+                                  />
+                                </div>
+                                <div class="col-6 col-md mb-3">
+                                  <h6 class="amazonCalcText">
+                                    Type:<span class="red">*</span>
+                                  </h6>
+                                  <select
+                                    class="form-select"
+                                    aria-label="Default select example"
+                                  >
+                                    <option selected>box</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                  </select>
+                                </div>
+                                <div class="col-6 col-md">
+                                  <h6 class="amazonCalcText">
+                                    Length:<span class="red">*</span>
+                                  </h6>
+                                  <div class="input-group mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control boxVolume"
+                                      placeholder="15"
+                                      aria-label="Username"
+                                      aria-describedby="basic-addon1"
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"
+                                      >sm</span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="col-6 col-md">
+                                  <h6 class="amazonCalcText">
+                                    Width:<span class="red">*</span>
+                                  </h6>
+                                  <div class="input-group mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control boxVolume"
+                                      placeholder="15"
+                                      aria-label="Username"
+                                      aria-describedby="basic-addon1"
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"
+                                      >sm</span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="col-6 col-md">
+                                  <h6 class="amazonCalcText">
+                                    Height:<span class="red">*</span>
+                                  </h6>
+                                  <div class="input-group mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control boxVolume"
+                                      placeholder="15"
+                                      aria-label="Username"
+                                      aria-describedby="basic-addon1"
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"
+                                      >sm</span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="col-6 col-md">
+                                  <h6 class="amazonCalcText">
+                                    Weight:<span class="red">*</span>
+                                  </h6>
+                                  <div class="input-group mb-3">
+                                    <input
+                                      type="text"
+                                      class="form-control boxWeight"
+                                      placeholder="2"
+                                      aria-label="Username"
+                                      aria-describedby="basic-addon1"
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"
+                                      >kq</span
+                                    >
+                                  </div>
+                                </div>
+                                <div
+                                  class="col-12 col-md-1 d-flex align-items-center justify-content-end"
+                                >
+                                  <button
+                                    class="btn btn-danger shadowBox px-3 py-2"
+                                    onclick="silPaket(this)"
+                                  >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                            <!-- product -->
+                            <div
+                              class="list-group-item ms-3 productYaradilanYer mt-3"
+                            >
+                              <div class="d-flex align-items-center">
+                                <div class="d-flex align-items-center">
+                                  <div class="iconBG me-3">
+                                    <i class="fa-solid fa-box text-white"></i>
+                                  </div>
+                                  <h4 class="amazonCalcTextHeader">Product</h4>
+                                </div>
+                                <div class="">
+                                  <button
+                                    class="productBtn my-3 mx-3"
+                                    onclick="yeniProductElaveEt(this)"
+                                  >
+                                    + Add another products
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="row mb-3">
+                                <div class="col-6 col-md">
+                                  <h6 class="amazonCalcText">SKU Code</h6>
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="12345"
+                                    aria-label="default input example"
+                                  />
+                                </div>
+                                <div class="col-6 col-md mb-3">
+                                  <h6 class="amazonCalcText">
+                                    Product<span class="red">*</span>
+                                  </h6>
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="Clock"
+                                    aria-label="default input example"
+                                  />
+                                </div>
+                                <div class="col-6 col-md mb-3">
+                                  <h6 class="amazonCalcText">
+                                    Count<span class="red">*</span>
+                                  </h6>
+                                  <div class="input-group">
+                                    <input
+                                      class="form-control"
+                                      type="text"
+                                      placeholder="1 (Storage 3)"
+                                      aria-label="default input example"
+                                    />
+                                  </div>
+                                </div>
+                                <div class="col-6 col-md mb-3">
+                                  <h6 class="amazonCalcText">
+                                    Unit Weight<span class="red">*</span>
+                                  </h6>
+                                  <div class="input-group">
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="2"
+                                      aria-label="Username"
+                                      aria-describedby="basic-addon1"
+                                    />
+                                    <span class="input-group-text" id="basic-addon1"
+                                      >kq</span
+                                    >
+                                  </div>
+                                </div>
+                                <div class="col-6 col-md mb-3">
+                                  <h6 class="amazonCalcText">
+                                    Unit Price<span class="red">*</span>
+                                  </h6>
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="200"
+                                    aria-label="default input example"
+                                  />
+                                </div>
+                                <div class="col-6 col-md mb-3">
+                                  <h6 class="amazonCalcText">GTIP Code</h6>
+                                  <input
+                                    class="form-control"
+                                    type="text"
+                                    placeholder="12345"
+                                    aria-label="default input example"
+                                  />
+                                </div>
+                                <div
+                                  class="col d-flex align-items-center justify-content-md-center justify-content-end"
+                                >
+                                  <button
+                                    class="btn btn-danger shadowBox px-3 py-2"
+                                    onclick="silProduct(this)"
+                                  >
+                                    <i class="fa-solid fa-trash-can"></i>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Yekun Hisse -->
+                        <div class="border-top mt-4">
+                          <div class="list-group-item mt-3">
+                            <div class="row mx-auto">
+                              <div class="totalBox">
+                                <div
+                                  class="mb-3 me-3 d-flex align-items-center total"
+                                >
+                                  <div class="iconBG">
+                                    <img
+                                      src="img/svg2/totalAmount.svg"
+                                      class="iconSize"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="ms-2">
+                                    <h5 class="amazonCalcText">Total amount</h5>
+                                    <span class="totalText totalAmount"></span>
+                                  </div>
+                                </div>
+                                <div
+                                  class="mb-3 me-3 d-flex align-items-center total"
+                                >
+                                  <div class="iconBG">
+                                    <img
+                                      src="img/svg2/Group (2).svg"
+                                      class="iconSize"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="ms-2">
+                                    <h5 class="amazonCalcText">Total volume</h5>
+                                    <span class="totalText totalVolume"></span>
+                                  </div>
+                                </div>
+                                <div
+                                  class="mb-3 me-4 d-flex align-items-center total"
+                                >
+                                  <div class="iconBG">
+                                    <img
+                                      src="img/svg2/Group (3).svg"
+                                      class="iconSize"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="ms-2">
+                                    <h5 class="amazonCalcText">Total weight</h5>
+                                    <span class="totalText totalWeight"></span>
+                                  </div>
+                                </div>
+                                <div
+                                  class="mb-3 me-3 d-flex align-items-center total"
+                                >
+                                  <div class="iconBG">
+                                    <img
+                                      src="img/svg2/P.svg"
+                                      class="iconSize"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="ms-2">
+                                    <h5 class="amazonCalcText">Pricing weight:</h5>
+                                    <span class="totalText totalPricing">0.003</span>
+                                  </div>
+                                </div>
+                                <div
+                                  class="mb-3 me-3 d-flex align-items-center total"
+                                >
+                                  <div class="iconBG">
+                                    <img
+                                      src="img/svg2/Group (4).svg"
+                                      class="iconSize"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div class="ms-3">
+                                    <h5 class="amazonCalcText">Total worth:</h5>
+                                    <span class="totalText">0.003 $</span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-12 d-flex justify-content-end mt-3">
+                                <button
+                                  class="quoteBtn mb-2"
+                                  onclick="yekunHesabla()"
+                                >
+                                  <img
+                                    src="img/svg2/Group (5).svg"
+                                    class="iconSize"
+                                    alt=""
+                                  />
+      
+                                  Get a quote
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- End Yekun Hisse -->
+                      </div>
+      
+                      <!-- End Paket hisse------------------------------------ -->
+                    </div>
+                    <!-- End Order Information -->
+                    <!-- Shipment definition-->
+                    <div class="container borderBottom p-3 pb-5">
+                      <div class="list-group list-group-flush rounded">
+                        <div class="d-flex align-items-center mb-3">
+                          <div class="iconBG">
+                            <img
+                              src="img/svg2/shipmentDefination/Group (6).svg"
+                              class="iconSize"
+                              alt=""
+                            />
+                          </div>
+                          <span class="amazonHeaderText ms-2"
+                            >Shipment definition</span
+                          >
+                        </div>
+                        <div class="list-group-item rounded shadowBox p-4">
+                          <div class="">
+                            <span class="amazonOrderText">Select the cargo</span>
+                            <div class="row">
+                              <div
+                                class="col-12 col-sm-6 mb-3"
+                                onclick="clicked(this)"
+                              >
+                                <div class="list-group list-group-horizontal">
+                                  <div class="list-group-item w-25 text-center">
+                                    <i
+                                      class="fa-brands fa-fedex text-warning fa-2xl"
+                                    ></i>
+                                  </div>
+                                  <div
+                                    class="list-group-item w-50 text-left amazonOrderText"
+                                  >
+                                    Deirvlon
+                                  </div>
+                                  <div
+                                    class="list-group-item d-flex align-items-center"
+                                  >
+                                    <label
+                                      class="me-2 amazonOrderText"
+                                      for="flexRadioDefault3"
+                                      >69$
+                                    </label>
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="flexRadioDefault"
+                                        id="flexRadioDefault3"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="col-12 col-sm-6 mb-3"
+                                onclick="clicked(this)"
+                              >
+                                <div class="list-group list-group-horizontal">
+                                  <div class="list-group-item w-25 text-center">
+                                    <i class="fa-brands fa-ups fa-xl"></i>
+                                  </div>
+                                  <div
+                                    class="list-group-item w-50 text-left amazonOrderText"
+                                  >
+                                    Deirvlon
+                                  </div>
+                                  <div
+                                    class="list-group-item d-flex align-items-center"
+                                  >
+                                    <label
+                                      for="flexRadioDefault4"
+                                      class="me-2 amazonOrderText"
+                                      >69$
+                                    </label>
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="flexRadioDefault"
+                                        id="flexRadioDefault4"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div
+                                class="col-12 col-sm-6 mb-3"
+                                onclick="clicked(this)"
+                              >
+                                <div class="list-group list-group-horizontal">
+                                  <div class="list-group-item w-25 text-center">
+                                    <img
+                                      class="expresLogo"
+                                      src="img/svg2/shipmentDefination/logoexpress-removebg-preview 1.svg"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div
+                                    class="list-group-item w-50 text-left amazonOrderText d-flex align-items-center"
+                                  >
+                                    Deirvlon
+                                  </div>
+                                  <div
+                                    class="list-group-item d-flex align-items-center"
+                                  >
+                                    <label
+                                      for="flexRadioDefault5"
+                                      class="me-2 amazonOrderText"
+                                      >69$
+                                    </label>
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="flexRadioDefault"
+                                        id="flexRadioDefault5"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-12 col-sm-6" onclick="clicked(this)">
+                                <div class="list-group list-group-horizontal">
+                                  <div class="list-group-item w-25 text-center">
+                                    <img
+                                      src="img/svg2/shipmentDefination/image 1.svg"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <div
+                                    class="list-group-item w-50 text-left amazonOrderText"
+                                  >
+                                    Deirvlon
+                                  </div>
+                                  <div
+                                    class="list-group-item d-flex align-items-center"
+                                  >
+                                    <label
+                                      for="flexRadioDefault6"
+                                      class="me-2 amazonOrderText"
+                                      >69$
+                                    </label>
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="flexRadioDefault"
+                                        id="flexRadioDefault6"
+                                      />
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="mt-3 border-top pt-3">
+                            <span class="amazonOrderText">Additional Services</span>
+                            <div class="row">
+                              <div class="col-12 col-md-4">
+                                <div class="list-group list-group-horizontal mb-2">
+                                  <div
+                                    class="list-group-item w-100 d-flex align-items-center"
+                                  >
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input form-check-inputs"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckDefault7"
+                                      />
+                                    </div>
+                                    <label
+                                      for="flexCheckDefault7"
+                                      class="amazonTextAdditional"
+                                    >
+                                      İnsure my order
+                                    </label>
+                                  </div>
+                                  <div
+                                    class="list-group-item d-flex align-items-center"
+                                  >
+                                    <span class="me-2 amazonTextPrice">69$ </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                <div class="list-group list-group-horizontal mb-2">
+                                  <div
+                                    class="list-group-item w-100 d-flex align-items-center"
+                                  >
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input form-check-inputs"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckDefault8"
+                                      />
+                                    </div>
+                                    <label
+                                      for="flexCheckDefault8"
+                                      class="amazonTextAdditional"
+                                    >
+                                      Extra bubble</label
+                                    >
+                                  </div>
+                                  <div class="list-group-item d-flex">
+                                    <span
+                                      class="me-2 amazonTextPrice d-flex align-items-center"
+                                      >69$
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-12 col-md-4">
+                                <div class="list-group list-group-horizontal">
+                                  <div
+                                    class="list-group-item w-100 d-flex align-items-center"
+                                  >
+                                    <div class="form-check">
+                                      <input
+                                        class="form-check-input form-check-inputs"
+                                        type="checkbox"
+                                        value=""
+                                        id="flexCheckDefault9"
+                                      />
+                                    </div>
+      
+                                    <label
+                                      for="flexCheckDefault9"
+                                      class="amazonTextAdditional"
+                                    >
+                                      Extra bubble</label
+                                    >
+                                  </div>
+                                  <div class="list-group-item d-flex">
+                                    <span
+                                      class="me-2 amazonTextPrice d-flex align-items-center"
+                                      >69$
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Footer -->
+                      </div>
+                    </div>
+                    <!-- End Shipment definition -->
+                    <!-- Product Content -->
+                    <div class="container borderBottom p-3 pb-5">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="iconBG">
+                          <img
+                            src="img/svg2/productContent.svg"
+                            class="iconSize"
+                            alt=""
+                          />
+                        </div>
+                        <span class="amazonHeaderText ms-2">Product Content</span>
+                      </div>
+                      <div class="list-group mb-3 shadowBox">
+                        <div class="list-group-item pt-4">
+                          <div class="row">
+                            <div class="row col-12 col-md-3 mb-2">
+                              <div class="col-12 border-end borderEnd">
+                                <h5 class="productText">
+                                  Does the product contain a battery?
+                                </h5>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault10"
+                                    checked
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault10"
+                                  >
+                                    Yes
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault11"
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault11"
+                                  >
+                                    No
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row col-12 col-md-3 mb-2">
+                              <div class="col-12 border-end borderEnd">
+                                <h5 class="productText">
+                                  Does the product contain a battery?
+                                </h5>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault12"
+                                    checked
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault12"
+                                  >
+                                    Yes
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault13"
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault13"
+                                  >
+                                    No
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row col-12 col-md-3 mb-2">
+                              <div class="col-12 border-end borderEnd">
+                                <h5 class="productText">
+                                  Does the product contain a battery?
+                                </h5>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault14"
+                                    checked
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault14"
+                                  >
+                                    Yes
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault15"
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault15"
+                                  >
+                                    No
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row col-12 col-md-3 mb-2">
+                              <div class="col-12 border-end borderEnd">
+                                <h5 class="productText">
+                                  Does the product contain a battery?
+                                </h5>
+                              </div>
+                              <div class="col-12">
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault16"
+                                    checked
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault16"
+                                  >
+                                    Yes
+                                  </label>
+                                </div>
+                                <div class="form-check">
+                                  <input
+                                    class="form-check-input"
+                                    type="radio"
+                                    name="flexRadioDefault"
+                                    id="flexRadioDefault17"
+                                  />
+                                  <label
+                                    class="form-check-label amazonOrderText"
+                                    for="flexRadioDefault17"
+                                  >
+                                    No
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col row productContentFooter m-2 rounded">
+                              <span class="col-12 mb-3 fw-semibold mt-3"
+                                >*If your cargo includes batteries and derivatives,
+                                you can send it together with your
+                                <span class="rengliSoz fw-semibold">MSDS</span>
+                                document.</span
+                              >
+      
+                              <span class="col-12 mb-3 fw-semibold"
+                                >*When sending your cargo containing cosmetics/liquid,
+                                you send it together with your
+                                <span class="rengliSoz fw-semibold">MSDS</span>
+                                document.</span
+                              >
+                              <span class="col-12 mb-3 fw-semibold"
+                                >*If you are selling dietary supplements, food, drugs,
+                                blood products, biological medical products,
+                                radiation-emitting devices, medical devices, cosmetics
+                                and veterinary equipment, you must obtain
+                                <span class="rengliSoz fw-semibold">FDA</span>
+                                certification for these.</span
+                              >
+                              <span class="col-12 mb-3 fw-semibold">
+                                *You must obtain an
+                                <span class="rengliSoz fw-semibold">MSDS</span>
+                                certificate for your products that contain flammable,
+                                harmful, irritating chemicals that may harm
+                                nature.</span
+                              >
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Product Content -->
+                    <!-- Attachment of documents -->
+                    <div class="container p-3">
+                      <div class="d-flex align-items-center mb-3">
+                        <div class="iconBG">
+                          <img
+                            src="img/svg2/attachmentDocument.svg"
+                            class="iconSize"
+                            alt=""
+                          />
+                        </div>
+                        <span class="amazonHeaderText ms-2"
+                          >Attachment of documents</span
+                        >
+                      </div>
+                      <div class="rounded p-4 bg-white shadowBox">
+                        <div>
+                          <div class="mb-3 borderBottom">
+                            <div class="row">
+                              <div
+                                class="col-12 col-sm-6 mb-2 d-flex align-items-center"
+                              >
+                                <select
+                                  required
+                                  class="form-select amazonSelect mt-5"
+                                  aria-label="Default select example"
+                                >
+                                  <option class="" selected value="">
+                                    File related to plants
+                                  </option>
+                                  <option value="1">One</option>
+                                  <option value="2">Two</option>
+                                  <option value="3">Three</option>
+                                </select>
+                              </div>
+                              <div
+                                class="col-12 col-sm-6 mb-2 d-flex align-items-center"
+                              >
+                                <form
+                                  action=""
+                                  class="d-flex flex-column justify-content-center"
+                                >
+                                  <p class="input__above-text">
+                                    (PDF, Maks. 5.0. MB)
+                                  </p>
+                                  <input type="file" />
+                                </form>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- File elave etmek ucun yer -->
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- End Attachment of documents -->
+                    <!-- Footer BTN -->
+                    <div class="container border-bottom p-3">
+                      <div class="text-sm-center text-end mb-3">
+                        <button class="quoteBtn shadowBox">
+                          <i class="fa-solid fa-check text-white"></i>
+                          Confirm Order
+                        </button>
+                      </div>
+                      <div class="text-end">
+                        <button class="paketBtn text-white shadowBox">
+                          <i class="fa-solid fa-basket-shopping text-white"></i>
+                          Total:200$
+                        </button>
+                      </div>
+                    </div>
+                    <!-- End Footer BTN -->
+                </section>
+
+
+
+            </div>
+        </div>
+    </section>
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+    <!-- bootstrap  -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
+    <!--d3js-->
+    <!-- Load d3.js -->
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+    <script src="js/chart.js"></script>
+    <script src="js/jquery.js"></script>
+    <!-- JavaScript-->
+    <script defer src="js/index.js"></script>
+    <script src="js/d3.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="https://kit.fontawesome.com/f1c0c87b9c.js" crossorigin="anonymous"></script>
+    <!-- JS file linki -->
+    <script src="js/amazon.js"></script>
+</body>
+</body>
+
+</html>

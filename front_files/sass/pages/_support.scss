@@ -1,0 +1,88 @@
+.support {
+
+    &__system {
+        margin-top: 4rem;
+        background: #FFFFFF;
+        border: 0.5px solid rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 2rem 1rem;
+
+    }
+
+    &__message {
+        margin-top: 4rem;
+
+    }
+
+    &__message-btn {
+
+        font-size: 2rem;
+
+    }
+
+    &__message-left {
+
+        background-color: #fff;
+        margin-top: 2rem;
+
+    }
+
+    &__message-right {
+
+        background-color: #fff;
+        margin-top: 2rem;
+
+    }
+
+    &__message-chat {
+
+        background-color: #fff;
+        width: 100%;
+        height: 10rem;
+        padding: 2rem 2rem;
+        height: auto;
+
+
+        h4 {
+            line-height: 16px;
+            color: #405982;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+    }
+
+
+    &__message-chatbox {
+        padding: .6rem .8rem 2rem .8rem;
+        background: #FFFFFF;
+        border: 0.5px solid rgba(0, 0, 0, 0.25);
+        box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        width: 100%;
+
+
+        p {
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 24px;
+            color: #000000;
+
+        }
+    }
+
+
+    &__message-time {
+        margin-top: 2rem;
+        display: flex;
+        justify-content: flex-end;
+
+        p {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            color: rgba(0, 0, 0, 0.41);
+        }
+    }
+}
