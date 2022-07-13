@@ -20,23 +20,27 @@
         }
 
         .package_status_0 {
-            background: #b16060;
-            border: 2px solid red;
+            background: #63AEE0;
         }
 
         .package_status_1 {
-            background: #b1a960;
-            border: 2px solid yellow;
+            background: #EDBA4F;
         }
 
         .package_status_2 {
-            background: #6074b1;
-            border: 2px solid blue;
+            background: #9C62E2;
         }
 
         .package_status_3 {
-            background: #74b160;
-            border: 2px solid green;
+            background: #8feab6;
+        }
+
+        .package_status_4 {
+            background: #5BBC73;
+        }
+
+        .package_status_5 {
+            background: #D94B5D;
         }
 
         .modal-package-details {
@@ -55,19 +59,39 @@
             height: max-content;
             width: 100%;
         }
+
+        .user-info-row-scan-modal {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
     </style>
 @endsection
 
 @section('content')
+    <div id="scanner-loader">
+        <div>
+            <div class="loader">Searching...</div>
+        </div>
+    </div>
     <div class="row justify-content-center">
         <div id="qr-reader" style="width: 600px"></div>
+        <div class="show-scanner-button-div">
+            <button class="btn btn-info" type="button" onclick="ShowScanner(this)">Scan BarCode</button>
+        </div>
     </div>
 
     <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
     <script>
+        var currentUrl = window.location.href;
+        var url = currentUrl.split('scanners')[0] + 'cargo-requests/cargo_details/';
+
         function onScanSuccess(decodedText, decodedResult) {
             console.log(`Code scanned = ${decodedText}`, decodedResult);
-            // window.alert(decodedText);
+            document.querySelector('#qr-reader').style.display = 'none';
+            document.querySelector('.show-scanner-button-div').style.display = 'block';
 
             $.ajax({
                 type: "POST",
@@ -76,7 +100,13 @@
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 data: {
-                    package_id:decodedText
+                    package_id: decodedText
+                },
+                beforeSend: function() {
+                    $('#scanner-loader').show();
+                },
+                complete: function() {
+                    $('#scanner-loader').hide();
                 },
                 success: function(data) {
                     console.table(data.package);
@@ -105,12 +135,46 @@
                             <span><b>Package Height: </b>` + data.package.package_height + ` </span>
                             <span><b>Package Weight: </b>` + data.package.package_weight + ` </span>
                         </div>
+                        <div class="user-info-row-scan-modal">
+                            <span><b>User name: </b>` + data.user.name + `</span>
+                            <span><b>User email: </b>` + data.user.name + `</span>
+                            <span><b>User phone: </b>` + data.user.name + `</span>
+                        </div>
+                        <div class="modal-package-details">
+                            <span><b>Name: </b>` + data.cargo.name + ` </span>
+                            <span><b>Country: </b>` + data.cargo.country + ` </span>
+                            <span><b>State: </b>` + data.cargo.state + ` </span>
+                            <span><b>City: </b>` + data.cargo.city + ` </span>
+                        </div>
+                        <div class="modal-package-details">
+                            <span><b>Address: </b>` + data.cargo.address + ` </span>
+                            <span><b>Zipcode: </b>` + data.cargo.zipcode + ` </span>
+                            <span><b>Phone: </b>` + data.cargo.phone + ` </span>
+                            <span><b>Email: </b>` + data.cargo.email + ` </span>
+                        </div>
+                        <div class="modal-package-details">
+                            <span><b>Order Info: </b>` + data.cargo.order_info + ` </span>
+                            <span><b>Currency: </b>` + data.cargo.currency + ` </span>
+                            <span><b>IOSS number: </b>` + data.cargo.ioss_number + ` </span>
+                            <span><b>VAT number: </b>` + data.cargo.vat_number + ` </span>
+                        </div>
+                        <a class="btn btn-success form-control"
+                            href="` + url + data.package.cargo_id + `">
+                            View This cargo
+                        </a>
                         `,
                         showConfirmButton: true,
                         backdrop: true,
                         timer: false
                     })
                 },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: `Couldn't find this package`
+                    })
+                }
             });
 
         }
@@ -120,5 +184,10 @@
                 qrbox: 250
             });
         html5QrcodeScanner.render(onScanSuccess);
+
+        function ShowScanner(button) {
+            document.querySelector('#qr-reader').style.display = 'block';
+            button.parentElement.style.display = 'none';
+        }
     </script>
 @endsection

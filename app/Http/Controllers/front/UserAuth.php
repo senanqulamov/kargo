@@ -9,17 +9,21 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Carbon\Carbon;
 
 class UserAuth extends Controller
 {
 
     public function create(Request $request)
     {
+        // dd($request->all());
 
         $this->validate(request(), [
             'name' => 'required',
             'email' => 'required|email',
             'phone' => 'required|numeric',
+            'country' => 'required',
             'password' => 'required'
         ]);
 
@@ -33,12 +37,23 @@ class UserAuth extends Controller
                 ->withInput($request->except('password'));
         }
 
-        $password = Hash::make($request->password);
+        $email_data = array(
+            'name' => $request->name,
+            'email' => $request->email,
+        );
 
+        Mail::send('userpanel.frontend.emailview', $email_data, function ($message) use ($email_data) {
+            $message->to($email_data['email'], $email_data['name'])
+                ->subject('Welcome to ShipLounge')
+                ->from('noreply@shiplounge.co', 'ShipLounge');
+        });
+
+        $password = Hash::make($request->password);
         $credentials = array(
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'country' => $request->country,
             'password' => $password
         );
         $user = UserModel::create($credentials);
@@ -89,6 +104,17 @@ class UserAuth extends Controller
             return redirect()->back()->withErrors($error)
                 ->withInput($request->except('password'));
         }
+    }
+
+    public function verifyEmail($email){
+
+        $now = Carbon::now();
+
+        UserModel::where('email' , $email)->first()->update([
+            'email_verified_at' => $now
+        ]);
+
+        return redirect()->route('login')->with('message' , $email.' succesfully verified , you can login now');
     }
 
     public function logout()

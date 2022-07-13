@@ -92,7 +92,6 @@ class UserPanelController extends Controller
         return Redirect::back()->with('message', 'Profile successfully updated');
     }
 
-
     public function manualorder()
     {
 
@@ -100,12 +99,14 @@ class UserPanelController extends Controller
         $cargo_companies = DB::table('cargo_companies')->get();
         $user_addresses = DB::table('user_addresses')->where('userID', Auth::user()->id)->get();
         $additional_services = DB::table('additional_services')->get();
+        $currencies = DB::table('currencies')->get();
 
         return view('userpanel.frontend.manualorder')->with([
             'countries' => $countries,
             'user_addresses' => $user_addresses,
             'cargo_companies' => $cargo_companies,
-            'additional_services' => $additional_services
+            'additional_services' => $additional_services,
+            'currencies' => $currencies
         ]);
     }
 
@@ -179,7 +180,9 @@ class UserPanelController extends Controller
     public function postManualorder(Request $request)
     {
 
-        $cargo_id = uniqid(15);
+        // $cargo_id = uniqid(15);
+        $cargo_id = random_int(10000000, 99999999);
+        $cargo_id = 'M'.$cargo_id;
 
         // dd($request->all());
 
@@ -199,12 +202,13 @@ class UserPanelController extends Controller
                 $data = array_unique($data);
             }
 
-            $additional_services = array_keys($request->additional_services);
+            $additional_services = json_encode($request->additional_services ,true);
+            $company_values = json_encode($request->company_value , true);
 
             $order_request = array(
                 'id' => $cargo_id,
+                'order_type' => 'Manual Order',
                 'user_id' => Auth::user()->id,
-                // 'customer' => $request->customer,
                 'name' => $request->name,
                 'country' => $request->country,
                 'city' => $request->city,
@@ -218,12 +222,15 @@ class UserPanelController extends Controller
                 'currency' => $request->currency_unit,
                 'order_info' => $request->order_info,
                 'packages' => json_encode($packages),
-                'additional_services' => json_encode($additional_services),
+                'additional_services' => $additional_services,
                 'total_cargo_price' => $request->total_cargo_price,
+                'total_weight' => $request->total_weight,
+                'total_volume' => $request->total_volume,
+                'total_deci' => $request->total_deci,
+                'total_count' => $request->total_count,
+                'total_worth' => $request->total_worth,
                 'cargo_company' => $request->cargo_company,
-                // 'insure_order' => $request->insure_order,
-                // 'extra_bubble' => $request->extra_bubble,
-                // 'other_additional' => $request->other_additional,
+                'company_value' => $company_values,
                 'battery' => $request->battery,
                 'liquid' => $request->liquid,
                 'food' => $request->food,
@@ -380,7 +387,7 @@ class UserPanelController extends Controller
 
         $comissions = DB::table('comissions')->get();
 
-        $payments = DB::table('payments')->orderBy('created_at', 'desc')->get();
+        $payments = DB::table('payments')->where('userID' , Auth::user()->id)->orderBy('created_at', 'desc')->get();
         return view('userpanel.frontend.balance', compact('payments', 'comissions'));
     }
 

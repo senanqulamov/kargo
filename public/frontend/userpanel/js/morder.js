@@ -51,7 +51,7 @@ function yeniPaketElaveEt() {
         `]"
                           >
                             <option selected>box</option>
-                            <option value="1">envelop</option>
+                            <option value="envelop">envelop</option>
                           </select>
                         </div>
                         <div class="col-6 col-md">
@@ -197,7 +197,7 @@ function yeniPaketElaveEt() {
                           </div>
                         </div>
                         <div class="col-6 col-md mb-3">
-                          <h6>Unit Weight<span class="red">*</span></h6>
+                          <h6>Unit Weight</h6>
                           <div class="input-group">
                             <input onchange="CalculateWeight(\'`+uniq_package_id+`\')"
                               type="text"
@@ -325,7 +325,7 @@ function yeniProductElaveEt(e) {
                           </div>
                         </div>
                         <div class="col-6 col-md mb-3">
-                          <h6>Unit Weight<span class="red">*</span></h6>
+                          <h6>Unit Weight</h6>
                           <div class="input-group">
                             <input onchange="CalculateWeight(\'`+package_id+`\')"
                               type="text"

@@ -59,6 +59,11 @@ class HomeController extends Controller
     public function register(){
         $users = UserModel::all();
 
-        return view('frontend.register')->with('users' , $users);
+        $countries = Country::all();
+
+        return view('frontend.register')->with([
+            'users' => $users ,
+            'countries' => $countries
+        ]);
     }
 }

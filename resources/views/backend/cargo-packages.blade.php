@@ -7,6 +7,45 @@
 @endsection
 
 @section('content')
+    <style>
+        .packages_td {
+            display: flex;
+            flex-direction: row;
+            gap: 5px;
+            text-align: center;
+            justify-content: center;
+        }
+        .package_status_span {
+            color: white;
+            border-radius: 20px;
+            width: max-content;
+            height: max-content;
+            font-size: 12px;
+            padding: 4px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .package_status_0 {
+            background: #63AEE0;
+        }
+
+        .package_status_1 {
+            background: #EDBA4F;
+        }
+
+        .package_status_2 {
+            background: #9C62E2;
+        }
+
+        .package_status_3 {
+            background: #5BBC73;
+        }
+        .package_status_4{
+            background: #D94B5D;
+        }
+    </style>
     <div class="row">
 
         <div class="col-12">
@@ -37,12 +76,18 @@
                                 <tr>
                                     <td>{{ $package->id ? $package->id : '---' }}</td>
                                     <td>{{ $package->cargo_id ? $package->cargo_id : '---' }}</td>
+                                    @php
+                                        $status = DB::table('package_statuses')
+                                            ->where('status', $package->status)
+                                            ->get()
+                                            ->first();
+                                    @endphp
                                     <td>
-                                        @if ($package->status == '1')
-                                            <b><span style="color: red;">Waiting for Delivery</span></b>
-                                        @else
-                                            <span style="color: green;">Already delivered</span>
-                                        @endif
+                                        <div class="packages_td">
+                                            <span class="package_status_span package_status_{{ $status->status }}">
+                                                {{ $status->status_name }}
+                                            </span>
+                                        </div>
                                     </td>
                                     <td>{{ $package->package_count ? $package->package_count : '---' }}</td>
                                     <td>{{ $package->package_type ? $package->package_type : '---' }}</td>
@@ -52,10 +97,10 @@
                                     <td>{{ $package->package_weight ? $package->package_weight : '---' }}</td>
                                     <td>
                                         @if ($package->barcode)
-                                        <p>Package barcode No: {{ $package->id }}</p>
-                                        <a href="{{ $package->barcode }}" download="{{ $package->id }}">
-                                            <img width="150px" height="70px" src="{{ $package->barcode }}">
-                                        </a>
+                                            <p>Package barcode No: {{ $package->id }}</p>
+                                            <a href="{{ $package->barcode }}" download="{{ $package->id }}">
+                                                <img width="150px" height="70px" src="{{ $package->barcode }}">
+                                            </a>
                                         @endif
                                     </td>
                                     <td>{{ $package->created_at ? $package->created_at : '---' }}</td>

@@ -114,16 +114,27 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::prefix('cargo-requests/')->name('cargo-requests.')->group(function(){
 			Route::get('/cargo-request-index', [ManuelOrderController::class, 'cargoRequests'])->name('index');
 			Route::get('/packages', [ManuelOrderController::class, 'packages'])->name('packages');
+			Route::get('/cargo_details/{id}', [ManuelOrderController::class, 'cargo_details'])->name('cargo_details');
+
+			Route::get('/submit_order/{id}', [ManuelOrderController::class, 'submit_order'])->name('submit_order');
+			Route::get('/post_on_wait/{id}', [ManuelOrderController::class, 'post_on_wait'])->name('post_on_wait');
+			Route::get('/remove_on_wait/{id}', [ManuelOrderController::class, 'remove_on_wait'])->name('remove_on_wait');
+			Route::post('/cancel_order/{id}', [ManuelOrderController::class, 'cancel_order'])->name('cancel_order');
+			Route::get('/revert_order/{id}', [ManuelOrderController::class, 'revert_order'])->name('revert_order');
+
+			Route::post('/cargo_update/{id}', [ManuelOrderController::class, 'cargo_update'])->name('cargo_update');
 		});
 
         Route::prefix('scanners/')->name('scanners.')->group(function(){
 			Route::get('/facilityscan', [ManuelOrderController::class, 'facilityscan'])->name('facilityscan');
 			Route::get('/workerscan', [ManuelOrderController::class, 'workerscan'])->name('workerscan');
 			Route::get('/searchscan', [ManuelOrderController::class, 'searchscan'])->name('searchscan');
+			Route::get('/measurement', [ManuelOrderController::class, 'measurement'])->name('measurement');
 
 			Route::post('/scannedcode', [ManuelOrderController::class, 'scannedcode'])->name('scannedcode');
 			Route::post('/workerscannedcode', [ManuelOrderController::class, 'workerscannedcode'])->name('workerscannedcode');
 			Route::post('/searchscannedcode', [ManuelOrderController::class, 'searchscannedcode'])->name('searchscannedcode');
+			Route::post('/measurementUpdate', [ManuelOrderController::class, 'measurementUpdate'])->name('measurementUpdate');
 		});
 
 		// messages
@@ -242,6 +253,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 			Route::post('/updatePayment', [BalanceController::class, 'updatePayment'])->name('updatePayment');
 			Route::post('/updateComission', [BalanceController::class, 'updateComission'])->name('updateComission');
+			Route::post('/addnewComission', [BalanceController::class, 'addnewComission'])->name('addnewComission');
+			Route::get('/deleteComission/{id}', [BalanceController::class, 'deleteComission'])->name('deleteComission');
 		});
 
 		//wardrobe
@@ -275,6 +288,7 @@ Route::get('/register', [HomeController::class, 'register'])->name('register');
 
 Route::prefix('userpanel')->name('userpanel.')->group(function(){
     Route::post('/createuser', [UserAuth::class, 'create'])->name('create_user');
+    Route::get('/verifyEmail/{email}', [UserAuth::class, 'verifyEmail'])->name('verifyEmail');
     Route::post('/loginuser', [UserAuth::class, 'login'])->name('login_user');
 
     Route::middleware('userpanellogin')->group(function(){

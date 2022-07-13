@@ -42,6 +42,7 @@ function SumCounts(array) {
         total_count += element;
     });
     document.querySelector(".totalAmount").innerHTML = total_count;
+    document.querySelector('input[name="total_count"]').value = total_count;
     total_count = 0;
 }
 //--------------------------- CALCULATING TOTAL COUNT ends here--------------------------->
@@ -59,32 +60,30 @@ function MultiplyPackageWeight(package_id) {
     var package_count = parseInt(
         document.querySelector(".package-count-" + package_id).value
     );
-    var package = document.querySelector(".package-cont-" + package_id);
-    var product_weightS = package.querySelectorAll(".product-weight");
-    var product_countS = package.querySelectorAll(".product-count");
-    var total = 0;
-    for (i = 0; i < product_weightS.length; i++) {
-        if (
-            parseInt(product_weightS[i].value) > 0 &&
-            parseInt(product_countS[i].value) > 0
-        ) {
-            total +=
-                parseInt(product_weightS[i].value) *
-                parseInt(product_countS[i].value);
-        }
-    }
+    // var package = document.querySelector(".package-cont-" + package_id);
+    // var product_weightS = package.querySelectorAll(".product-weight");
+    // var product_countS = package.querySelectorAll(".product-count");
+    // var total = 0;
+    // for (i = 0; i < product_weightS.length; i++) {
+    //     if (
+    //         parseInt(product_weightS[i].value) > 0 &&
+    //         parseInt(product_countS[i].value) > 0
+    //     ) {
+    //         total +=
+    //             parseInt(product_weightS[i].value) *
+    //             parseInt(product_countS[i].value);
+    //     }
+    // }
 
-    if (isNaN(total)) {
+    if (isNaN(package_weight)) {
         weights_array[package_id] = 0;
     } else {
         if (package_weight > 0 && package_count > 0) {
-            weights_array[package_id] =
-                (total + package_weight) * package_count;
+            weights_array[package_id] = package_weight * package_count;
         } else {
             package_weight = 0;
             package_count = 1;
-            weights_array[package_id] =
-                (total + package_weight) * package_count;
+            weights_array[package_id] = package_weight * package_count;
         }
     }
     // console.log(weights_array);
@@ -96,6 +95,7 @@ function SumWeights(array) {
         total_weight += element;
     });
     document.querySelector(".totalWeight").innerHTML = total_weight;
+    document.querySelector('input[name="total_weight"]').value = total_weight;
     total_weight = 0;
 }
 //--------------------------- CALCULATING Total weight ends here--------------------------->
@@ -144,6 +144,7 @@ function SumWorths(array) {
         total_worth += element;
     });
     document.querySelector(".totalWorth").innerHTML = total_worth;
+    document.querySelector('input[name="total_worth"]').value = total_worth;
     total_worth = 0;
 }
 //--------------------------- CALCULATING TOTAL WORTH ends here--------------------------->
@@ -197,7 +198,9 @@ function SumVolumes(array) {
     array.forEach((element) => {
         total_volume += element;
     });
+    total_volume = total_volume/1000000;
     document.querySelector(".totalVolume").innerHTML = total_volume;
+    document.querySelector('input[name="total_volume"]').value = total_volume;
     total_volume = 0;
 }
 
@@ -223,6 +226,7 @@ function SumDecis(array) {
         total_deci += element;
     });
     document.querySelector(".totalPricing").innerHTML = total_deci;
+    document.querySelector('input[name="total_deci"]').value = total_deci;
     total_deci = 0;
 }
 //--------------------------- CALCULATING TOTAL DECI edns here--------------------------->
@@ -258,6 +262,7 @@ function yekunHesabla() {
         2
     );
     insurance_input.setAttribute("data-price", insurance_price);
+    insurance_input.value = insurance_price;
     insurance_span.innerHTML = insurance_price + " €";
 
     if (country != "0" && totalDeci > 0) {
@@ -292,6 +297,11 @@ function yekunHesabla() {
                             "data-price",
                             parseFloat(data.cargo_companies[element]).toFixed(2)
                         );
+                    document.querySelector(
+                        'input[name="company_value[' + element + ']"]'
+                    ).value = parseFloat(data.cargo_companies[element]).toFixed(
+                        2
+                    );
                 });
 
                 var services = Object.keys(data.additional_services);
@@ -304,6 +314,10 @@ function yekunHesabla() {
                         "data-price",
                         parseFloat(data.additional_services[element]).toFixed(2)
                     );
+                    service_input.value = parseFloat(
+                        data.additional_services[element]
+                    ).toFixed(2);
+
                     var service_span = document.querySelector(
                         "." + element + "_span"
                     );

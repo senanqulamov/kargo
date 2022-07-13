@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Courier Scanner')
+@section('title', 'Measurement')
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
@@ -59,6 +59,10 @@
             height: max-content;
             width: 100%;
         }
+
+        .form-control {
+            text-align: center;
+        }
         .user-info-row-scan-modal {
             display: flex;
             flex-wrap: wrap;
@@ -70,6 +74,44 @@
 @endsection
 
 @section('content')
+    @if (session()->has('message') && session()->has('cargo_id'))
+        @if (session()->get('is_ready') == 1)
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: '{{ session()->get('message') }}',
+                    html: `
+                        <a class="btn btn-success form-control"
+                            href="{{ route('admin.cargo-requests.cargo_details', ['id' => session()->get('cargo_id')]) }}">
+                            View This cargo and submit ready
+                        </a>
+                    `,
+                    showConfirmButton: false,
+                    backdrop: true,
+                    timer: false
+                })
+            </script>
+        @else
+            <script>
+                Swal.fire({
+                    position: 'center',
+                    icon: 'info',
+                    title: '{{ session()->get('message') }}',
+                    html: `
+                        <a class="btn btn-success form-control"
+                            href="{{ route('admin.cargo-requests.cargo_details', ['id' => session()->get('cargo_id')]) }}">
+                            View This cargo and submit ready
+                        </a>
+                    `,
+                    showConfirmButton: false,
+                    backdrop: true,
+                    timer: false
+                })
+            </script>
+        @endif
+    @endif
+
     <div class="row justify-content-center">
         <div id="scanner-loader">
             <div>
@@ -84,8 +126,6 @@
 
     <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
     <script>
-        var currentUrl = window.location.href;
-        var url = currentUrl.split('scanners')[0]+ 'cargo-requests/cargo_details/';
         function onScanSuccess(decodedText, decodedResult) {
             console.log(`Code scanned = ${decodedText}`, decodedResult);
             document.querySelector('#qr-reader').style.display = 'none';
@@ -93,12 +133,12 @@
 
             $.ajax({
                 type: "POST",
-                url: "{{ route('admin.scanners.workerscannedcode') }}",
+                url: "{{ route('admin.scanners.searchscannedcode') }}",
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 data: {
-                    package_id:decodedText
+                    package_id: decodedText
                 },
                 beforeSend: function() {
                     $('#scanner-loader').show();
@@ -124,7 +164,7 @@
                         </div>
                         <div class="modal-package-details">
                             <span><b>Cargo ID: </b>` + data.package.cargo_id + `</span>
-                            <span><b>Package Count: </b>` + data.package.package_count + `</span>
+                            <span><b>Count: </b>` + data.package.package_count + `</span>
                             <span><b>Package Type: </b>` + data.package.package_type + ` </span>
                         </div>
                         <div class="modal-package-details">
@@ -133,6 +173,41 @@
                             <span><b>Package Height: </b>` + data.package.package_height + ` </span>
                             <span><b>Package Weight: </b>` + data.package.package_weight + ` </span>
                         </div>
+                        <div class="modal-package-details">
+                            <span><b>New Package Length: </b>` + data.package.n_package_length + ` </span>
+                            <span><b>New Package Width: </b>` + data.package.n_package_width + ` </span>
+                            <span><b>New Package Height: </b>` + data.package.n_package_height + ` </span>
+                            <span><b>New Package Weight: </b>` + data.package.n_package_weight + ` </span>
+                        </div>
+                        <form action="{{ route('admin.scanners.measurementUpdate') }}" method="POST">
+                            @csrf
+                            <div class="modal-package-details">
+                                <input type="hidden" name="id" value="` + decodedText + `">
+                                <span>
+                                    <b>Package Length: </b>
+                                    <input class="form-control" name="package_length"
+                                        value="` + data.package.package_length + `">
+                                </span>
+                                <span>
+                                    <b>Package Width: </b>
+                                    <input class="form-control" name="package_width"
+                                        value="` + data.package.package_width + `">
+                                </span>
+                                <span>
+                                    <b>Package Height: </b>
+                                    <input class="form-control" name="package_height"
+                                        value="` + data.package.package_height + `">
+                                </span>
+                                <span>
+                                    <b>Package Weight: </b>
+                                    <input class="form-control" name="package_weight"
+                                        value="` + data.package.package_weight + `">
+                                </span>
+                            </div>
+                            <div style="margin-bottom:10px;">
+                                <button class="btn btn-success form-control" type="submit">Submit</button>
+                            </div>
+                        </form>
                         <div class="user-info-row-scan-modal">
                             <span><b>User name: </b>` + data.user.name + `</span>
                             <span><b>User email: </b>` + data.user.name + `</span>
@@ -156,10 +231,6 @@
                             <span><b>IOSS number: </b>` + data.cargo.ioss_number + ` </span>
                             <span><b>VAT number: </b>` + data.cargo.vat_number + ` </span>
                         </div>
-                        <a class="btn btn-success form-control"
-                            href="`+url+data.package.cargo_id+`">
-                            View This cargo
-                        </a>
                         `,
                         showConfirmButton: true,
                         backdrop: true,

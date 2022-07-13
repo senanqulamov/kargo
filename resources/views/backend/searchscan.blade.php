@@ -9,65 +9,30 @@
 @section('css')
     <!-- icheck bootstrap -->
     <link rel="stylesheet" href="{{ asset('/') }}backend/assets/plugin/icheck-bootstrap/icheck-bootstrap.min.css">
-    <style>
-        .package_status_span {
-            color: white;
-            border-radius: 20px;
-            width: max-content;
-            height: max-content;
-            font-size: 12px;
-            padding: 4px 10px;
-        }
-
-        .package_status_0 {
-            background: #b16060;
-            border: 2px solid red;
-        }
-
-        .package_status_1 {
-            background: #b1a960;
-            border: 2px solid yellow;
-        }
-
-        .package_status_2 {
-            background: #6074b1;
-            border: 2px solid blue;
-        }
-
-        .package_status_3 {
-            background: #74b160;
-            border: 2px solid green;
-        }
-
-        .modal-package-details {
-            display: flex;
-            grid-template-columns: repeat(2, max-content);
-            grid-template-rows: repeat(2, max-content);
-            gap: 20px;
-            padding: 10px;
-            width: 100%;
-            height: max-content;
-            margin: 10px 0;
-            border: 1px dotted black;
-        }
-
-        .modal-package-details span {
-            height: max-content;
-            width: 100%;
-        }
-    </style>
 @endsection
 
 @section('content')
     <div class="row justify-content-center">
+        <div id="scanner-loader">
+            <div>
+                <div class="loader">Searching...</div>
+            </div>
+        </div>
         <div id="qr-reader" style="width: 600px"></div>
+        <div class="show-scanner-button-div">
+            <button class="btn btn-info" type="button" onclick="ShowScanner(this)">Scan BarCode</button>
+        </div>
     </div>
 
     <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
     <script>
+        var currentUrl = window.location.href;
+        var url = currentUrl.split('scanners')[0] + 'cargo-requests/cargo_details/';
+
         function onScanSuccess(decodedText, decodedResult) {
             console.log(`Code scanned = ${decodedText}`, decodedResult);
-            // window.alert(decodedText);
+            document.querySelector('#qr-reader').style.display = 'none';
+            document.querySelector('.show-scanner-button-div').style.display = 'block';
 
             $.ajax({
                 type: "POST",
@@ -77,6 +42,12 @@
                 },
                 data: {
                     package_id: decodedText
+                },
+                beforeSend: function() {
+                    $('#scanner-loader').show();
+                },
+                complete: function() {
+                    $('#scanner-loader').hide();
                 },
                 success: function(data) {
                     console.table(data.package);
@@ -96,7 +67,7 @@
                         </div>
                         <div class="modal-package-details">
                             <span><b>Cargo ID: </b>` + data.package.cargo_id + `</span>
-                            <span><b>Package Count: </b>` + data.package.package_count + `</span>
+                            <span><b>Count: </b>` + data.package.package_count + `</span>
                             <span><b>Package Type: </b>` + data.package.package_type + ` </span>
                         </div>
                         <div class="modal-package-details">
@@ -105,12 +76,46 @@
                             <span><b>Package Height: </b>` + data.package.package_height + ` </span>
                             <span><b>Package Weight: </b>` + data.package.package_weight + ` </span>
                         </div>
+                        <div class="user-info-row-scan-modal">
+                            <span><b>User name: </b>` + data.user.name + `</span>
+                            <span><b>User email: </b>` + data.user.name + `</span>
+                            <span><b>User phone: </b>` + data.user.name + `</span>
+                        </div>
+                        <div class="modal-package-details">
+                            <span><b>Name: </b>` + data.cargo.name + ` </span>
+                            <span><b>Country: </b>` + data.cargo.country + ` </span>
+                            <span><b>State: </b>` + data.cargo.state + ` </span>
+                            <span><b>City: </b>` + data.cargo.city + ` </span>
+                        </div>
+                        <div class="modal-package-details">
+                            <span><b>Address: </b>` + data.cargo.address + ` </span>
+                            <span><b>Zipcode: </b>` + data.cargo.zipcode + ` </span>
+                            <span><b>Phone: </b>` + data.cargo.phone + ` </span>
+                            <span><b>Email: </b>` + data.cargo.email + ` </span>
+                        </div>
+                        <div class="modal-package-details">
+                            <span><b>Order Info: </b>` + data.cargo.order_info + ` </span>
+                            <span><b>Currency: </b>` + data.cargo.currency + ` </span>
+                            <span><b>IOSS number: </b>` + data.cargo.ioss_number + ` </span>
+                            <span><b>VAT number: </b>` + data.cargo.vat_number + ` </span>
+                        </div>
+                        <a class="btn btn-success form-control"
+                            href="` + url + data.package.cargo_id + `">
+                            View This cargo
+                        </a>
                         `,
                         showConfirmButton: true,
                         backdrop: true,
                         timer: false
                     })
                 },
+                error: function(error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: `Couldn't find this package`
+                    })
+                }
             });
 
         }
@@ -120,5 +125,10 @@
                 qrbox: 250
             });
         html5QrcodeScanner.render(onScanSuccess);
+
+        function ShowScanner(button) {
+            document.querySelector('#qr-reader').style.display = 'block';
+            button.parentElement.style.display = 'none';
+        }
     </script>
 @endsection

@@ -5,17 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Comission extends Model
+class User_role extends Model
 {
     use HasFactory;
 
-    public $timestamps = true;
+    public $timestamps = false;
 
     protected $fillable = [
-        'payment',
-        'show_name',
-        'image',
-        'css_class',
-        'comission'
+        'role_name',
     ];
 }

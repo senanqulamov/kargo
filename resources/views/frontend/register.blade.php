@@ -49,12 +49,23 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="forms-input">
-                                            <input type="password" placeholder="Password">
+                                            <select name="country">
+                                                <option value="0" disabled selected>Select Country</option>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->name }}">{{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="forms-input">
-                                            <input name="password" type="password" placeholder="Confirm Password">
+                                            <input type="password" id="password" placeholder="Password">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="forms-input">
+                                            <input name="password" id="passwordcheck" type="password"
+                                                placeholder="Confirm Password">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
@@ -89,7 +100,8 @@
                                     <div class="or">
                                         <a href=""><img src="{{ asset('/') }}frontend/img/Google__G__Logo 1.svg"
                                                 alt=""></a>
-                                        <a href=""><img src="{{ asset('/') }}frontend/img/facebook-3 1.svg" alt=""></a>
+                                        <a href=""><img src="{{ asset('/') }}frontend/img/facebook-3 1.svg"
+                                                alt=""></a>
                                     </div>
                                 </div>
                             </div>
@@ -130,10 +142,15 @@
             background: gray !important;
             cursor: not-allowed;
         }
+        #password_text{
+            color: red;
+        }
     </style>
     <script>
         var check_box = document.querySelector('#terms_checkbox');
         var submit_button = document.querySelector('#submit_button');
+
+        submit_button.style.display = 'none';
 
         if (!check_box.checked) {
             submit_button.disabled = true;
@@ -144,6 +161,23 @@
                 submit_button.disabled = false;
             } else {
                 submit_button.disabled = true;
+            }
+        });
+
+        var password = document.querySelector('#password');
+        var passwordCheck = document.querySelector('#passwordcheck');
+
+        passwordCheck.addEventListener('change', function() {
+            if (password.value != passwordCheck.value) {
+                if(!document.querySelector('#password_text')){
+                    passwordCheck.insertAdjacentHTML('afterend', '<strong id="password_text">Password is not same</strong>');
+                    submit_button.style.display = 'none';
+                }
+            }else{
+                if(document.querySelector('#password_text')){
+                    document.querySelector('#password_text').remove();
+                    submit_button.style.display = 'block';
+                }
             }
         });
     </script>

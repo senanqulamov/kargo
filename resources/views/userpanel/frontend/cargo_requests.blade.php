@@ -33,7 +33,7 @@
 
         .additional_service_td {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             gap: 5px;
             text-align: center;
         }
@@ -48,6 +48,12 @@
         .additional_service_style {
             border-radius: 10px;
             padding: 0 10px;
+            font-size: 14px;
+            width: 110px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
         }
 
         .details-modal-header-flex {
@@ -59,27 +65,81 @@
         .status_style {
             border-radius: 10px;
             padding: 3px 10px;
-            background: rgb(122 103 103 / 11%);
         }
 
         .status_color_0 {
-            border: 1px solid red;
-            color: red;
+            color: #63AEE0;
+            border: 1px solid #63AEE0;
         }
 
         .status_color_1 {
-            border: 1px solid yellow;
-            color: #5b5b20;
+            color: #EDBA4F;
+            border: 1px solid #EDBA4F;
         }
 
         .status_color_2 {
-            border: 1px solid blue;
-            color: blue;
+            color: #9C62E2;
+            border: 1px solid #9C62E2;
         }
 
         .status_color_3 {
-            border: 1px solid green;
-            color: green;
+            color: #8feab6;
+            border: 1px solid #8feab6;
+        }
+
+        .status_color_4 {
+            color: #5BBC73;
+            border: 1px solid #5BBC73;
+        }
+
+        .status_color_5 {
+            color: #D94B5D;
+            border: 1px solid #D94B5D;
+        }
+
+        .status_color_6 {
+            color: #c4d94b;
+            border: 1px solid #c4d94b;
+        }
+
+        .package_status_span {
+            color: white;
+            border-radius: 20px;
+            width: max-content;
+            height: max-content;
+            font-size: 12px;
+            padding: 4px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .package_status_0 {
+            background: #63AEE0;
+        }
+
+        .package_status_1 {
+            background: #EDBA4F;
+        }
+
+        .package_status_2 {
+            background: #9C62E2;
+        }
+
+        .package_status_3 {
+            background: #8feab6;
+        }
+
+        .package_status_4 {
+            background: #5BBC73;
+        }
+
+        .package_status_5 {
+            background: #D94B5D;
+        }
+
+        .package_status_5 {
+            background: #c4d94b;
         }
     </style>
     <div class="row">
@@ -99,6 +159,7 @@
                                 <th>ID</th>
                                 <th>Date</th>
                                 <th>Order Status</th>
+                                <th>Order Type</th>
                                 <th>Customer name</th>
                                 <th>Phone</th>
                                 <th>Email</th>
@@ -107,7 +168,13 @@
                                 <th>City</th>
                                 <th>Address</th>
                                 <th>ZipCode</th>
+                                <th>Currency</th>
                                 <th>Total Cargo Price</th>
+                                <th>Total Volume</th>
+                                <th>Total Weight</th>
+                                <th>Total Pricing Weight</th>
+                                <th>Total Count</th>
+                                <th>Total Worth</th>
                                 <th>IOSS number</th>
                                 <th>VAT number</th>
                                 <th>Order info</th>
@@ -117,6 +184,8 @@
                                 <th>Liquid</th>
                                 <th>Food</th>
                                 <th>Dangerous items</th>
+                                <th>Pause Order</th>
+                                <th>Cancel Order</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -151,6 +220,9 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <td>
+                                        {{ $cargo->order_type }}
+                                    </td>
                                     <td>{{ $cargo->name ? $cargo->name : '---' }}</td>
                                     <td>{{ $cargo->phone ? $cargo->phone : '---' }}</td>
                                     <td>{{ $cargo->email ? $cargo->email : '---' }}</td>
@@ -159,23 +231,43 @@
                                     <td>{{ $cargo->city ? $cargo->city : '---' }}</td>
                                     <td>{{ $cargo->address ? $cargo->address : '---' }}</td>
                                     <td>{{ $cargo->zipcode ? $cargo->zipcode : '---' }}</td>
+                                    <td>
+                                        @php
+                                            $currency = DB::table('currencies')
+                                                ->where('currency_code', $cargo->currency)
+                                                ->get()
+                                                ->first();
+                                        @endphp
+                                        {{ $currency->currency_name ? $currency->currency_code . ' / ' . $currency->currency_name : '---' }}
+                                    </td>
                                     <td>{{ $cargo->total_cargo_price ? $cargo->total_cargo_price : '---' }}</td>
+                                    <td>{{ $cargo->total_volume ? $cargo->total_volume : '---' }} m3</td>
+                                    <td>{{ $cargo->total_weight ? $cargo->total_weight : '---' }} kg</td>
+                                    <td>{{ $cargo->total_deci ? $cargo->total_deci : '---' }} </td>
+                                    <td>{{ $cargo->total_count ? $cargo->total_count : '---' }} </td>
+                                    <td>{{ $cargo->total_worth ? $cargo->total_worth : '---' }} €</td>
                                     <td>{{ $cargo->ioss_number ? $cargo->ioss_number : '---' }}</td>
                                     <td>{{ $cargo->vat_number ? $cargo->vat_number : '---' }}</td>
                                     <td>{{ $cargo->order_info ? $cargo->order_info : '---' }}</td>
-                                    <td class="additional_service_td">
-                                        @if ($cargo->additional_services)
-                                            @foreach (json_decode($cargo->additional_services) as $service)
-                                                <span class="additional_service_style">
-                                                    {{ $service }}
-                                                </span>
-                                            @endforeach
-                                        @else
-                                            <span
-                                                style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
-                                                Additional
-                                                services</span>
-                                        @endif
+                                    <td>
+                                        <div class="additional_service_td">
+                                            @php
+                                                $services = json_decode($cargo->additional_services);
+                                                $services = json_decode(json_encode($services), true);
+                                            @endphp
+                                            @if ($cargo->additional_services)
+                                                @foreach ($services as $key => $service)
+                                                    <span class="additional_service_style">
+                                                        <b>{{ $key }}</b>{{ $service }} €
+                                                    </span>
+                                                @endforeach
+                                            @else
+                                                <span
+                                                    style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
+                                                    Additional
+                                                    services</span>
+                                            @endif
+                                        </div>
                                     </td>
                                     @php
                                         $cargo_company = DB::table('cargo_companies')
@@ -191,6 +283,27 @@
                                     <td>{{ $cargo->liquid == 'yes' ? 'Yes' : 'No' }}</td>
                                     <td>{{ $cargo->food == 'yes' ? 'Yes' : 'No' }}</td>
                                     <td>{{ $cargo->dangerous == 'yes' ? 'Yes' : 'No' }}</td>
+                                    <td>
+                                        <div style="display: flex;">
+                                            @if ($cargo->status != 4 && $cargo->status != 6)
+                                                <a href="{{ route('admin.cargo-requests.post_on_wait', ['id' => $cargo->id]) }}"
+                                                    class="col form-control btn btn-info">Pause order</a>
+                                            @endif
+
+                                            @if ($cargo->status == 6)
+                                                <a href="{{ route('admin.cargo-requests.remove_on_wait', ['id' => $cargo->id]) }}"
+                                                    class="col form-control btn btn-success">Continue Process</a>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display: flex;">
+                                            <a href="#" class="col form-control btn btn-danger" data-toggle="modal"
+                                                data-target="#modal-cancel-order-{{ $cargo->id }}">
+                                                Cancel Order
+                                            </a>
+                                        </div>
+                                    </td>
                                     <div class="modal fade" id="modal-view-{{ $cargo->id }}">
                                         <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                             <div class="modal-content">
@@ -205,7 +318,8 @@
                                                                     style="color:#0ea197b5">{{ $cargo->order_info }}</u></b>
                                                         </h4>
                                                         <h4>Total cargo price: <b><u
-                                                                    style="color:#0ea197b5">{{ $cargo->total_cargo_price }}</u></b>
+                                                                    style="color:#0ea197b5">{{ $cargo->total_cargo_price }}
+                                                                    €</u></b>
                                                         </h4>
                                                     </div>
                                                     <button type="button" class="close" data-dismiss="modal"
@@ -350,10 +464,15 @@
                                                             <h5>Additional services:</h5>
                                                             <div
                                                                 style="display: flex;flex-direction:row;gap:5px;margin-left: 5px">
+                                                                @php
+                                                                    $services = json_decode($cargo->additional_services);
+                                                                    $services = json_decode(json_encode($services), true);
+                                                                @endphp
                                                                 @if ($cargo->additional_services)
-                                                                    @foreach (json_decode($cargo->additional_services) as $service)
+                                                                    @foreach ($services as $key => $service)
                                                                         <span class="additional_service_style">
-                                                                            {{ $service }}
+                                                                            <b>{{ $key }}</b> :
+                                                                            {{ $service }} €
                                                                         </span>
                                                                     @endforeach
                                                                 @else
@@ -474,6 +593,44 @@
                                                         <div class="row d-flex justify-content-center">
                                                             <button type="submit" class="btn btn-success"
                                                                 style="width: max-content">Update</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                    <div class="modal fade" id="modal-cancel-order-{{ $cargo->id }}">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="details-modal-header-flex">
+                                                        <h4 style="color: red">Cancel order: {{ $cargo->id }}</h4>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form
+                                                        action="{{ route('admin.cargo-requests.cancel_order', ['id' => $cargo->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <div class="row form-group">
+                                                            <div class="col d-flex flex-column py-3">
+                                                                <label for="cancel_comment" class="labelCustom">Cancel
+                                                                    Comment</label>
+                                                                <input class="form-control" type="text"
+                                                                    name="cancel_comment"
+                                                                    placeholder="type your cancel message" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <button type="submit" class="col btn btn-danger">
+                                                                <i class="fa fa-check"></i>
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>

@@ -62,33 +62,20 @@
             position: fixed;
             bottom: 10%;
             right: 5%;
-            width: auto;
-            height: 3vw;
-            /* display: none; */
-            display: grid;
+            width: max-content;
+            height: 5vw;
+            display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: row;
-            grid-template-columns: 32% 22% 7%;
-            border: 1px solid transparent;
             border-radius: 14px;
             background: #FFA555;
             justify-items: center;
-            gap: 10px;
+            gap: 20px;
+            padding: 0px 20px;
         }
 
-        .total_cargo_price input {
-            all: unset;
-            border: none;
-            background: transparent;
-            text-align: center;
-            font-weight: bold;
-            color: white;
-            font-size: 15px;
-            width: max-content;
-        }
-
-        .total_cargo_price p {
+        .total_cargo_price span {
             all: unset;
             color: white;
             font-size: 15px;
@@ -284,7 +271,11 @@
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6>Currency unit<span class="red">*</span></h6>
                                             <select class="form-select" name="currency_unit" required>
-                                                <option class="optionText" selected>EURO</option>
+                                                @foreach ($currencies as $currency)
+                                                    <option value="{{ $currency->currency_code }}">
+                                                        {{ $currency->currency_name }}
+                                                    </option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -326,6 +317,7 @@
                                                 <div class="ms-2">
                                                     <h5>Total amount</h5>
                                                     <span class="totalText totalAmount">0</span>
+                                                    <input type="hidden" name="total_count" value="">
                                                 </div>
                                             </div>
                                             <div
@@ -334,6 +326,7 @@
                                                 <div class="ms-2">
                                                     <h5>Total volume</h5>
                                                     <span class="totalText totalVolume">0</span>
+                                                    <input type="hidden" name="total_volume" value="">
                                                 </div>
                                             </div>
                                             <div
@@ -342,6 +335,7 @@
                                                 <div class="ms-2">
                                                     <h5>Total weight</h5>
                                                     <span class="totalText totalWeight">0</span><span> kg</span>
+                                                    <input type="hidden" name="total_weight" value="">
                                                 </div>
                                             </div>
                                             <div
@@ -350,6 +344,7 @@
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
                                                     <span class="totalText totalPricing">0</span>
+                                                    <input type="hidden" name="total_deci" value="">
                                                 </div>
                                             </div>
                                             <div
@@ -358,6 +353,7 @@
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
                                                     <span class="totalText totalWorth">0</span><span> €</span>
+                                                    <input type="hidden" name="total_worth" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -398,6 +394,9 @@
                                                                 name="cargo_company"
                                                                 id="cargo_company_input_{{ $company->id }}"
                                                                 data-price="0" value="{{ $company->id }}" />
+                                                            <input type="hidden"
+                                                                name="company_value[{{ $company->id }}]"
+                                                                value="0">
                                                         </div>
                                                     </li>
                                                 </ul>
@@ -434,17 +433,14 @@
                                             <ul class="list-group list-group-horizontal mb-2">
                                                 <li class="list-group-item w-75 d-flex text-left">
                                                     <div class="form-check">
-                                                        <input
-                                                            class="form-check-input cargo_price_input insurance_input"
+                                                        <input class="form-check-input cargo_price_input insurance_input"
                                                             type="checkbox" data-price="0"
-                                                            name="additional_services[insurance]"
-                                                            id="insurance" />
+                                                            name="additional_services[insurance]" id="insurance" />
                                                     </div>
                                                     Insurance
                                                 </li>
                                                 <li class="list-group-item d-flex">
-                                                    <span
-                                                        class="me-2 insurance_input_span">0
+                                                    <span class="me-2 insurance_input_span">0
                                                         €</span>
                                                 </li>
                                             </ul>
@@ -607,9 +603,9 @@
                     </ul>
                 </div>
                 <div class="total_cargo_price">
-                    <p>Total price: </p>
-                    <input type="number" name="total_cargo_price" id="total_cargo_price" value="0" readonly>
-                    <p>€</p>
+                    <span>Total price: </span> <span id="total_cargo_price_span">0</span>
+                    <span>€</span>
+                    <input type="hidden" name="total_cargo_price" id="total_cargo_price" value="0">
                 </div>
 
                 <button class="btn btn-primary" type="submit">Submit order</button>
@@ -701,8 +697,10 @@
                 });
                 total_additional = helper_additional;
                 helper_additional = 0;
-                document.querySelector('input[name="total_cargo_price"]').value = total_additional +
-                    company_price
+                document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
+                    company_price).toFixed(2);
+                document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
+                    company_price).toFixed(2);
             });
         });
 
@@ -711,8 +709,10 @@
                 company_price = parseFloat(document.querySelector('input[name="cargo_company"]:checked')
                     .getAttribute('data-price'));
 
-                document.querySelector('input[name="total_cargo_price"]').value = total_additional +
-                    company_price
+                document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
+                    company_price).toFixed(2);
+                document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
+                    company_price).toFixed(2);
             });
         });
     </script>

@@ -9,54 +9,57 @@ use App\Models\User as UserModel;
 use Validator;
 
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+
 
 class UserController extends Controller
 {
-    public function index(){
-        $users=UserModel::all();
+    public function index()
+    {
+        $users = UserModel::orderBy('id', 'DESC')->get();
 
         return view('backend.users', compact('users'));
     }
 
-    public function details($id){
-        $user=UserModel::where('id', $id)->first();
+    public function details($id)
+    {
+        $user = UserModel::where('id', $id)->first();
 
         return view('backend.user-detail', compact('user'));
     }
 
-    public function updateUserGeneral(Request $request, $id){
-        $validator = Validator::make($request->all(),[
-            'username' => 'required|min:3|max:225',
-            'email' => 'required|min:3|max:225',
-            'phone' => 'required|min:3|max:225'
-        ]);
+    public function updateUserGeneral(Request $request, $id)
+    {
 
-        if(!$validator->passes()){
-            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
+        $request->request->remove('_token');
+        $data = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+
+        if ($data) {
+            UserModel::where('id', $id)->update($data);
+
+            return Redirect::back()->with('message', $data["name"] . " Updated succesfully");
         } else {
-            $user=UserModel::find($id);
-            $user->name=$request->username;
-            $user->email=$request->email;
-            $user->phone=$request->phone;
-            $user->update();
-
-            return response()->json(['status'=>1, 'msg'=>'User data has been successfully updated', 'state'=>'Congratulations!']);
+            return Redirect::back()->with('message', "Couldn't update user");
         }
     }
 
-    public function updateUserPassword(Request $request, $id){
-        $validator = Validator::make($request->all(),[
-            'inputPassword' => 'required|min:3|max:225',
-        ]);
+    public function updateUserPassword(Request $request, $id)
+    {
 
-        if(!$validator->passes()){
-            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
+        $password = Hash::make($request->password);
+        $data =  array(
+            'password' => $password
+        );
+        $user = UserModel::find($id);
+
+        if ($data) {
+            UserModel::where('id', $id)->update($data);
+
+            return Redirect::back()->with('message', "Password of ".$user->name." Updated succesfully");
         } else {
-            $user=UserModel::find($id);
-            $user->password=Hash::make($request->inputPassword);
-            $user->update();
-
-            return response()->json(['status'=>1, 'msg'=>'User data has been successfully updated', 'state'=>'Congratulations!']);
+            return Redirect::back()->with('message', "Couldn't update user password");
         }
     }
 }

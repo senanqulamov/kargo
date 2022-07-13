@@ -29,6 +29,7 @@
         @yield('css')
         <!-- Theme style -->
         <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/adminlte.min.css">
+        <link rel="stylesheet" href="{{asset('/')}}backend/assets/css/custom_style.css">
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
 
         <style>
@@ -178,6 +179,13 @@
 										<a href="{{route('admin.scanners.workerscan')}}" class="nav-link @if(Request::segment(3) == 'workerscan') active @endif">
 											<i class="far fa-circle nav-icon"></i>
 											<p>Courier Scan</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+                                    <li class="nav-item">
+										<a href="{{route('admin.scanners.measurement')}}" class="nav-link @if(Request::segment(3) == 'measurement') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Measurement</p>
                                             <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
 										</a>
 									</li>

@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('/') }}frontend/userpanel/css/style.css" />
     <link rel="stylesheet" href="{{ asset('/') }}frontend/userpanel/css/pages.css">
     <link rel="stylesheet" href="{{ asset('/') }}frontend/userpanel/css/main.css">
+
     <link rel="stylesheet"
         href="http://kargo.test/backend/assets/plugin/datatables-bs4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet"
@@ -51,6 +52,214 @@
 <body>
     <!-- Test commit -->
 
+    <div class="overlay overlay__active">
+    </div>
+
+    <nav class="burger__menu">
+
+        <div class="navigation container">
+            <div class="navigation__data">
+
+                <div class="navigation__cancel d-flex justify-content-end">
+                    <span class="navigation__cancel-span">
+                        <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
+                    </span>
+                </div>
+
+                <div class="navigation__image">
+                    <img src="img/png/logo.svg" alt="">
+                </div>
+
+
+                <ul class="navigation__items">
+                    <button class="navigation__box isActive ">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-house navigation__icon"></i>
+                                <span class="navigation__span ">Main Menu</span></a>
+                        </li>
+                    </button>
+
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-network-wired navigation__icon"></i>
+                                <span class="navigation__span">Balance System</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Orders</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class=" navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                <span class="navigation__span">Manuel Order</span></a>
+                        </li>
+                    </button>
+
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-brands fa-amazon navigation__icon"></i>
+                                <span class="navigation__span">Amazon</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                <span class="navigation__span">Bulk Orderr</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box ps-2">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                <span class="navigation__span">Order List</span></a>
+                        </li>
+                    </button>
+
+                    <hr class="hr">
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-headset navigation__icon"></i>
+                                <span class="navigation__span">Courier Request</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-boxes-stacked navigation__icon"></i>
+                                <span class="navigation__span">Stock</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                <span class="navigation__span">Invoices</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-address-card navigation__icon"></i>
+                                <span class="navigation__span">Site Usage</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-bag-shopping navigation__icon"></i>
+                                <span class="navigation__span">Buy for me</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-square-share-nodes navigation__icon"></i>
+                                <span class="navigation__span">Share and Earn</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-cart-flatbed navigation__icon"></i>
+                                <span class="navigation__span">Inventory</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-truck-ramp-box navigation__icon"></i>
+                                <span class="navigation__span">Cargo Companies</span></a>
+                        </li>
+                    </button>
+
+                    <div class="">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link">
+                                <span class="navigation__span">Integrations</span></a>
+                        </li>
+                    </div>
+
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link"><i
+                                    class="fa-solid fa-parachute-box navigation__icon"></i>
+                                <span class="navigation__span">Parachute</span></a>
+                        </li>
+                    </button>
+                    <button class="navigation__box">
+                        <li class="navigation__item">
+                            <a href="#" class="navigation__link navigation__icon"><i
+                                    class="fa-solid fa-store  navigation__icon"></i>
+                                <span class="navigation__span">Marketplace</span></a>
+                        </li>
+                    </button>
+                </ul>
+
+
+            </div>
+        </div>
+
+
+    </nav>
+
+    <header>
+        <div class="container header">
+            <div class="col-md-6">
+                <div class="header__input">
+                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                    <input class="header__input-search" type="text" placeholder="Axtar..." />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div>
+                    <ul class="header__item">
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-bell header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-gear header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="" class="header__item-link">
+                                <i class="fa-solid fa-globe header__item-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="{{ route('userpanel.index') }}"
+                                class="header__item-link header__account-guest">
+                                {{ Auth::user()->name }}
+                                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="{{ route('userpanel.logout_user') }}"
+                                class="header__item-link header__account-guest"><i
+                                    class="fa-solid fa-right-from-bracket"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <nav class="fnav">
         <div class="fnav__box">
@@ -80,158 +289,166 @@
     </nav>
 
 
-    <header>
-        <div class="container header">
-            <div class="col-md-6">
-                <div class="header__input">
-                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
-                    <input class="header__input-search" type="text" placeholder="Axtar..." />
-                </div>
-            </div>
-
-            <div class="col-md-6">
-                <div>
-                    <ul class="header__item">
-                        <li class="header__item-list">
-                            <a href="" class="header__item-link">
-                                Balance <br />
-                                <span class="header__item-balance">35 E</span>
-                            </a>
-                        </li>
-                        <li class="header__item-list">
-                            <a href="" class="header__item-link">
-                                <i class="fa-solid fa-bell header__item-icon"></i></a>
-                        </li>
-                        <li class="header__item-list">
-                            <a href="" class="header__item-link">
-                                <i class="fa-solid fa-gear header__item-icon"></i></a>
-                        </li>
-                        <li class="header__item-list">
-                            <a href="" class="header__item-link">
-                                <i class="fa-solid fa-circle-question header__item-icon"></i></a>
-                        </li>
-                        <li class="header__item-list">
-                            <a href="" class="header__item-link">
-                                <i class="fa-solid fa-globe header__item-icon"></i></a>
-                        </li>
-                        <li class="header__item-list">
-                            <a href="{{ route('userpanel.index') }}" class="header__item-link header__account-guest">
-                                {{ Auth::user()->name }}
-                                <i class="fa-solid fa-user header__item-icon header__account-icon"></i></a>
-                            <a href="{{ route('userpanel.logout_user') }}">
-                                <i class="fa-solid fa-right-from-bracket"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </header>
-
-
-
-
 
     <section id="Sturcture" class="structure">
         <div class="row w-100">
-            <div class="col-lg-3   page__1">
+            <div class="col-lg-3 page__1">
                 <nav class="navigation__left">
 
                     <div class="navigation container">
 
+
                         <div class="navigation__logo text-center">
-                            <img src="img/png/logo.png" class="navigation__logo-img" alt="" />
+                            <img src="img/png/logo.svg" class="navigation__logo-img" alt="" />
                         </div>
 
                         <div class="navigation__data">
+
                             <ul class="navigation__items">
-                                <div class="navigation__box">
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-house navigation__icon"></i>
-                                            <span class="navigation__span">Main Menu</span></a>
+                                            <span class="navigation__span ">Main Menu</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
-                                    <li class="navigation__item">
+                                </button>
+
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
                                         <a href="{{ route('userpanel.balance') }}" class="navigation__link"><i
                                                 class="fa-solid fa-network-wired navigation__icon"></i>
                                             <span class="navigation__span">Balance System</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+
+                                <div class="">
                                     <li class="navigation__item">
-                                        <a href="{{ route('userpanel.cargorequests') }}" class="navigation__link"><i
-                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                        <a href="#" class="navigation__link">
                                             <span class="navigation__span">Orders</span></a>
                                     </li>
                                 </div>
-                                <div class="navigation__box">
-                                    <li class="navigation__item">
+
+                                <button class="navigation__box">
+                                    <li class=" navigation__item">
                                         <a href="{{ route('userpanel.manualorder') }}" class="navigation__link"><i
-                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                            <span class="navigation__span">Manual Order</span></a>
+                                                class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Manuel Order</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-brands fa-amazon navigation__icon"></i>
+                                            <span class="navigation__span">Amazon</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-cart-shopping navigation__icon"></i>
+                                            <span class="navigation__span">Bulk Orderr</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box ps-2">
+                                    <li class="navigation__item">
+                                        <a href="{{ route('userpanel.cargorequests') }}" class="navigation__link"><i
+                                                class="fa-solid fa-clipboard-list navigation__icon"></i>
+                                            <span class="navigation__span">Order List</span></a>
+                                    </li>
+                                </button>
+
+                                <hr class="hr">
+
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-headset navigation__icon"></i>
                                             <span class="navigation__span">Courier Request</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-boxes-stacked navigation__icon"></i>
                                             <span class="navigation__span">Stock</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
+                                            <span class="navigation__span">Invoices</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-address-card navigation__icon"></i>
                                             <span class="navigation__span">Site Usage</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-bag-shopping navigation__icon"></i>
                                             <span class="navigation__span">Buy for me</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-square-share-nodes navigation__icon"></i>
                                             <span class="navigation__span">Share and Earn</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-cart-flatbed navigation__icon"></i>
                                             <span class="navigation__span">Inventory</span></a>
                                     </li>
-                                </div>
-                                <div class="navigation__box">
+                                </button>
+                                <button class="navigation__box">
                                     <li class="navigation__item">
                                         <a href="#" class="navigation__link"><i
                                                 class="fa-solid fa-truck-ramp-box navigation__icon"></i>
                                             <span class="navigation__span">Cargo Companies</span></a>
                                     </li>
+                                </button>
+
+                                <div class="">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link">
+                                            <span class="navigation__span">Integrations</span></a>
+                                    </li>
                                 </div>
+
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link"><i
+                                                class="fa-solid fa-parachute-box navigation__icon"></i>
+                                            <span class="navigation__span">Parachute</span></a>
+                                    </li>
+                                </button>
+                                <button class="navigation__box">
+                                    <li class="navigation__item">
+                                        <a href="#" class="navigation__link navigation__icon"><i
+                                                class="fa-solid fa-store  navigation__icon"></i>
+                                            <span class="navigation__span">Marketplace</span></a>
+                                    </li>
+                                </button>
                             </ul>
+
+
+
                         </div>
                     </div>
                 </nav>
             </div>
-            <div class="col-lg-9 col-md-11 col-sm-12 col-12 page__2">
-
+            <div class="col-lg-9 col-md-12 col-sm-12 col-12 page__2">
                 @yield('content')
-
-
             </div>
         </div>
         </div>
@@ -270,6 +487,89 @@
                 scrollX: true,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
+    </script>
+
+    <script>
+        const burgerLines = document.querySelector(".fnav__burger")
+        const fnav = document.querySelector(".fnav")
+        const burgerMenu = document.querySelector(".burger__menu")
+        const lineTop = document.querySelector(".fnav__top")
+        const lineCenter = document.querySelector(".fnav__center")
+        const lineBottom = document.querySelector(".fnav__bottom")
+        const over = document.querySelector(".over")
+        const body = document.querySelector('body')
+        const overlayActive = document.querySelector(".overlay__active")
+        const navigationCancel = document.querySelector('.navigation__cancel')
+
+        const navigationBox = document.querySelectorAll(".navigation__box")
+
+
+        burgerLines.addEventListener('click', function(e) {
+            e.preventDefault()
+
+            burgerMenu.classList.toggle("burger__menu-visible")
+
+            overlayActive.classList.add("visible")
+            body.classList.add('overflowY')
+
+        })
+
+
+
+        document.querySelector(".overlay").addEventListener('click', function() {
+            overlayActive.classList.remove("visible")
+            burgerMenu.classList.remove("burger__menu-visible")
+            body.classList.remove('overflowY')
+        })
+
+
+
+
+        navigationCancel.addEventListener('click', function() {
+            overlayActive.classList.remove("visible")
+            burgerMenu.classList.remove("burger__menu-visible")
+            body.classList.remove('overflowY')
+        })
+
+
+
+
+        navigationBox.forEach((box) => {
+
+
+            box.addEventListener('click', function() {
+
+                navigationBox.forEach((tabs) => {
+                    tabs.classList.remove('isActive')
+                })
+
+                box.classList.add('isActive')
+
+            })
+
+
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        ///
     </script>
 </body>
 
