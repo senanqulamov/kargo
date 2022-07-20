@@ -44,4 +44,8 @@ class Cargo_request extends Model
         'dangerous',
         'document',
     ];
+
+    protected $casts = [
+        'id' => 'string'
+    ];
 }

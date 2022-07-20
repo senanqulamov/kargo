@@ -19,12 +19,13 @@ class PriceCalculationController extends Controller
     }
 
     public function calculation(Request $request){
+
         $price=array();
         $company=array();
 
         $validator = Validator::make($request->all(),[
-            'selectCountry' => 'required',  
-            'inputCount' => 'numeric|not_in:0',          
+            'selectCountry' => 'required',
+            'inputCount' => 'numeric|not_in:0',
             'selectType' => 'required',
             'inputLength' => 'required|numeric',
             'inputWidth' => 'required|numeric',
@@ -41,13 +42,13 @@ class PriceCalculationController extends Controller
 
             $totalCompany=$this->totalCompany($request->selectCountry);
 
-            for ($i=0; $i < count($totalCompany); $i++) { 
+            for ($i=0; $i < count($totalCompany); $i++) {
                 $query=CargoZone::where('companyID', $totalCompany[$i])->where('desi', $totalDesi)->first();
                 $query=json_decode($query->zone, true);
                 array_push($price, $query[$totalZone[$i]-1]);
             }
 
-            for ($m=0; $m < count($totalCompany); $m++) { 
+            for ($m=0; $m < count($totalCompany); $m++) {
                 $company_data=CargoCompany::where('id', $totalCompany[$m])->first();
                 array_push($company, $company_data->name);
             }
@@ -62,13 +63,13 @@ class PriceCalculationController extends Controller
 
     public function totalZone($country){
         $quiry=Country::where('code', $country)->first();
-		
+
         $search=CargoCountry::where('country', $quiry->name)->get();
-		
+
 		$zone = array();
-		
+
 		foreach ($search as $item) {
-            array_push($zone, $item->zone);          
+            array_push($zone, $item->zone);
 		}
 
         return $zone;
@@ -76,13 +77,13 @@ class PriceCalculationController extends Controller
 
     public function totalCompany($country){
         $quiry=Country::where('code', $country)->first();
-		
+
         $search=CargoCountry::where('country', $quiry->name)->get();
-		
+
 		$company = array();
-		
+
 		foreach ($search as $item) {
-            array_push($company, $item->companyID);          
+            array_push($company, $item->companyID);
 		}
 
         return $company;

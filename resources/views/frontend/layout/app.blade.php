@@ -74,8 +74,15 @@
                             <option>EN</option>
                             <option>TR</option>
                         </select>
-                        <button class="login-nav"><a href="{{ route('login') }}">Login</a></button>
-                        <button class="register-nav"><a href="{{ route('register') }}">Register</a></button>
+                        @if (!Auth::user())
+                            <button class="login-nav"><a href="{{ route('login') }}">Login</a></button>
+                            <button class="register-nav"><a href="{{ route('register') }}">Register</a></button>
+                        @else
+                            <a href="{{ route('userpanel.index') }}" class="btn btn-info">
+                                {{ Auth::user()->name }}
+                                <i class="fa fa-user"></i>
+                            </a>
+                        @endif
                     </form>
                 </div>
             </div>

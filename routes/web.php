@@ -293,6 +293,14 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
 
     Route::middleware('userpanellogin')->group(function(){
         Route::get('/', [UserPanelController::class, 'index'])->name('index');
+        Route::get('/mainmenu', [UserPanelController::class, 'mainmenu'])->name('mainmenu');
+        Route::get('/loadChartsMainPage', [UserPanelController::class, 'loadChartsMainPage'])->name('loadChartsMainPage');
+
+        Route::post('/main_search', [UserPanelController::class, 'main_search'])->name('main_search');
+        Route::get('/getsortedcargo_orders/{status}', [UserPanelController::class, 'GetSortedCargoOrders'])->name('GetSortedCargoOrders');
+
+        Route::get('/viewCargoDetails/{id}', [UserPanelController::class, 'viewCargoDetails'])->name('viewCargoDetails');
+
         Route::post('/updateuser', [UserPanelController::class, 'updateuser'])->name('updateuser');
         Route::post('/updateuser', [UserPanelController::class, 'updateuser'])->name('updateuser');
         Route::post('/deleteuseraddress/{address_id}', [UserPanelController::class, 'deleteuseraddress'])->name('delete_user_address');

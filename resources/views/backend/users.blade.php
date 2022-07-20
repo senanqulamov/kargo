@@ -76,8 +76,8 @@
                                     </td>
                                     <td>{{ $user->name ? $user->name : '---' }}</td>
                                     <td class="balance_td">
-                                        <div class="balance_holder">
-                                            {{ $user->balance ? $user->balance : '0' }}
+                                        <div class="balance_holder" style="width: max-content">
+                                            {{ $user->balance ? $user->balance : '0' }} €
                                         </div>
                                     </td>
                                     <td>{{ $user->email ? $user->email : '---' }}</td>

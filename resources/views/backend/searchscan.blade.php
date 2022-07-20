@@ -59,10 +59,9 @@
                         title: 'Package number: ' + decodedText,
                         html: `
                         <div>
-                            <span>Status:
-                                <span class="package_status_span package_status_` + data.status.status + `">
-                                    ` + data.status.status_name + `
-                                </span>
+                            Status:
+                            <span class="package_status_span package_status_` + data.status.status + `">
+                                ` + data.status.status_name + `
                             </span>
                         </div>
                         <div class="modal-package-details">
@@ -77,9 +76,15 @@
                             <span><b>Package Weight: </b>` + data.package.package_weight + ` </span>
                         </div>
                         <div class="user-info-row-scan-modal">
+                            <a class="badge rounded-pill bg-info user_id_badge"
+                                target="__blank"
+                                href="` + currentUrl.split('scanners')[0] + 'users/' + data.user.id + `">
+                                010` + data.user.id + `20
+                                <i class="fa-solid fa-up-right-from-square"></i>
+                            </a>
                             <span><b>User name: </b>` + data.user.name + `</span>
-                            <span><b>User email: </b>` + data.user.name + `</span>
-                            <span><b>User phone: </b>` + data.user.name + `</span>
+                            <span><b>User email: </b>` + data.user.email + `</span>
+                            <span><b>User phone: </b>` + data.user.phone + `</span>
                         </div>
                         <div class="modal-package-details">
                             <span><b>Name: </b>` + data.cargo.name + ` </span>

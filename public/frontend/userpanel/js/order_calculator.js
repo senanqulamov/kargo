@@ -210,7 +210,7 @@ function SumVolumes(array) {
 function CalculateDeci(package_id) {
     if (volumes_array[package_id] > 0 && weights_array[package_id] > 0) {
         decis_array[package_id] = Math.max(
-            volumes_array[package_id] / 5000,
+            parseFloat(volumes_array[package_id]) / 5000,
             weights_array[package_id]
         );
     } else if (weights_array[package_id] == 0) {

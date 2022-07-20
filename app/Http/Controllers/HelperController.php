@@ -8,6 +8,8 @@ use App\Models\Cargo_document;
 use App\Models\Cargo_request;
 use App\Models\Package;
 use App\Models\Product;
+use App\Models\Transaction;
+use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -39,11 +41,11 @@ class HelperController extends Controller
 
         foreach ($packages as $key => $value) {
             if ($value->n_package_width && $value->n_package_length && $value->n_package_height && $value->n_package_weight) {
-                $total_volume += $value->n_package_length * $value->n_package_width * $value->n_package_height * $value->package_count;
+                $total_volume += floatval(($value->n_package_length * $value->n_package_width * $value->n_package_height * $value->package_count)/1000000);
                 $total_weight += $value->n_package_weight * $value->package_count;
                 $total_deci += max($total_volume / 5000, $total_weight);
             } else {
-                $total_volume += $value->package_length * $value->package_width * $value->package_height * $value->package_count;
+                $total_volume += floatval(($value->package_length * $value->package_width * $value->package_height * $value->package_count)/1000000);
                 $total_weight += $value->package_weight * $value->package_count;
                 $total_deci += max($total_volume / 5000, $total_weight);
             }
@@ -180,5 +182,22 @@ class HelperController extends Controller
 
 
         return $total_cargo_price;
+    }
+
+    public function checkTransaction($data){
+
+        $user = User::where('id' , $data->user_id)->first();
+
+        $create_data = array(
+            'user_id' => $data->user_id,
+            'payment_id' => $data->payment_id,
+            'old_balance' => $data->old_balance,
+            'new_balance' => $data->new_balance,
+            'transfer_method' => $data->transfer_method
+        );
+
+        Transaction::create($create_data);
+
+        // dd($create_data);
     }
 }

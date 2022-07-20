@@ -85,9 +85,9 @@
     height: max-content;
     font-size: 12px;
     padding: 4px 10px;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
 .package_status_0 {
@@ -232,4 +232,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.user_id_badge{
+    display: flex;
+    align-items: center;
+    gap:10px;
+    font-size: 14px;
+    padding: 5px 12px;
+    width:max-content;
 }

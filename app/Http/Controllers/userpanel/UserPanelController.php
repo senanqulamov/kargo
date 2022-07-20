@@ -4,8 +4,10 @@ namespace App\Http\Controllers\userpanel;
 
 use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
+use App\Models\AdditionalService;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
+use App\Models\CargoCompany;
 use App\Models\CargoZone;
 use App\Models\MoneyBackRequest;
 use App\Models\Package;
@@ -19,6 +21,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
 use PDF;
+use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Illuminate\Support\Str;
 use Picqer\Barcode;
@@ -90,6 +93,145 @@ class UserPanelController extends Controller
         }
 
         return Redirect::back()->with('message', 'Profile successfully updated');
+    }
+
+    public function mainmenu()
+    {
+
+        $countries = DB::table('countries')->get();
+
+        $cargo_requests = DB::table('cargo_requests')
+            ->where('user_id', Auth::user()->id)
+            ->select('status', DB::raw('count(*) as total'))
+            ->groupBy('status')
+            ->pluck('total', 'status');
+        $pending = 0;
+        $at_facility = 0;
+        $on_the_way = 0;
+        $total_cargo = count(DB::table('cargo_requests')->where('user_id', Auth::user()->id)->get());
+
+        if (isset($cargo_requests[0])) {
+            $pending = $cargo_requests[0];
+        }
+        if (isset($cargo_requests[2])) {
+            $at_facility = $cargo_requests[2];
+        }
+        if (isset($cargo_requests[4])) {
+            $on_the_way = $cargo_requests[4];
+        }
+
+        return view('userpanel.frontend.mainpage')->with([
+            'countries' => $countries,
+            'pending' => $pending,
+            'at_facility' => $at_facility,
+            'on_the_way' => $on_the_way,
+            'total_cargo' => $total_cargo,
+        ]);
+    }
+
+    public function loadChartsMainPage()
+    {
+
+        $date = Carbon::today()->subDays(30);
+        $reqs = Cargo_request::where(
+            [
+                ['user_id', Auth::user()->id],
+                ['created_at', '>=', $date],
+            ]
+        )->select('status', 'created_at')->orderBy('created_at', 'ASC')->get();
+
+        $grouped_by_days  = collect($reqs)
+            ->groupBy(function ($date) {
+                return Carbon::parse($date->created_at)->format('d-M');
+            })->toArray();
+        $status_days = array();
+        foreach ($grouped_by_days as $key => $value) {
+            array_push($status_days, $key);
+        }
+        $grouped_by_status  = collect($reqs)->groupBy('status')->toArray();
+
+
+        $status_chart_data = array();
+        foreach ($grouped_by_status as $key => $value) {
+            $days = array();
+            foreach ($value as $value) {
+                array_push($days, Carbon::parse($value['created_at'])->format('d-M'));
+            }
+            $days = array_count_values($days);
+            foreach ($status_days as $status_day) {
+                if (!array_key_exists($status_day, $days)) {
+                    $days[$status_day] = 0;
+                }
+            }
+            ksort($days);
+            //adding to result array
+            $status = DB::table('package_statuses')->where('status', $key)->get()->first();
+            $status_chart_data[$status->status_name] = $days;
+        }
+
+
+        return response()->json(['data' => $status_chart_data, 'days' => $status_days], 200);
+    }
+
+    public function main_search(Request $request)
+    {
+        $cargo = Cargo_request::where('id', $request->search_index)->get()->first();
+        $package = Package::where('id', $request->search_index)->get()->first();
+
+        sleep(3);
+        if ($cargo) {
+            return response()->json($cargo->id, 200);
+        } elseif ($package) {
+            return response()->json($package->cargo_id, 200);
+        }
+    }
+
+    public function GetSortedCargoOrders($status)
+    {
+
+        $cargos = Cargo_request::where(['user_id' => Auth::user()->id, 'status' => $status])
+            ->get();
+
+        $data = array();
+        foreach ($cargos as $cargo) {
+
+            $company = CargoCompany::where('id', $cargo->cargo_company)->get()->first();
+            $cargo_row = array(
+                'id' => $cargo->id,
+                'order_type' => $cargo->order_type ? $cargo->order_type : '---',
+                'name' => $cargo->name ? $cargo->name : '---',
+                'address' => $cargo->address ? $cargo->address : '---',
+                'total_cargo_price' => $cargo->total_cargo_price ? $cargo->total_cargo_price : '---',
+                'order_info' => $cargo->order_info ? $cargo->order_info : '---',
+                'cargo_company' => $company->name ? $company->name : '---',
+                'created_at' => Carbon::parse($cargo->created_at)->format('d-m-Y')
+            );
+            array_push($data, $cargo_row);
+        }
+        sleep(1);
+
+        return response()->json($data);
+    }
+
+    public function viewCargoDetails($id)
+    {
+        // dd($id);
+        $cargo = Cargo_request::where('id', $id)->get()->first();
+        $packages = Package::where('cargo_id', $id)->get();
+        $products = Product::where('cargo_id', $id)->get();
+        $additional_services = AdditionalService::get();
+        $currencies = DB::table('currencies')->get();
+
+        // dd($packages);
+
+        return view('userpanel.frontend.cargo_details')->with([
+            'cargo' => $cargo,
+            'cargo_id' => $id,
+            'packages' => $packages,
+            'products' => $products,
+            'additional_services' => $additional_services,
+            'currencies' => $currencies
+        ]);
     }
 
     public function manualorder()
@@ -182,7 +324,7 @@ class UserPanelController extends Controller
 
         // $cargo_id = uniqid(15);
         $cargo_id = random_int(10000000, 99999999);
-        $cargo_id = 'M'.$cargo_id;
+        $cargo_id = 'M' . $cargo_id;
 
         // dd($request->all());
 
@@ -202,8 +344,8 @@ class UserPanelController extends Controller
                 $data = array_unique($data);
             }
 
-            $additional_services = json_encode($request->additional_services ,true);
-            $company_values = json_encode($request->company_value , true);
+            $additional_services = json_encode($request->additional_services, true);
+            $company_values = json_encode($request->company_value, true);
 
             $order_request = array(
                 'id' => $cargo_id,
@@ -372,9 +514,9 @@ class UserPanelController extends Controller
             'address' => $request->address,
             'zipcode' => $request->zipcode,
             'currency' => $request->currency,
-            'cargo_company' => $request->cargo_company,
             'ioss_number' => $request->ioss_number,
-            'vat_number' => $request->vat_number
+            'vat_number' => $request->vat_number,
+            'order_info' => $request->order_info
         );
 
         Cargo_request::where('id', $id)->update($data);
@@ -386,9 +528,22 @@ class UserPanelController extends Controller
     {
 
         $comissions = DB::table('comissions')->get();
+        $payments = DB::table('payments')->where('userID', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+        $kur = $this->getKur();
 
-        $payments = DB::table('payments')->where('userID' , Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        return view('userpanel.frontend.balance', compact('payments', 'comissions'));
+        return view('userpanel.frontend.balance', compact('payments', 'comissions', 'kur'));
+    }
+
+    public function getKur()
+    {
+        $xml = simplexml_load_file('http://www.tcmb.gov.tr/kurlar/today.xml');
+
+        $index = 3;
+
+        $name = $xml->Currency[$index]->CurrencyName;
+        $buying = $xml->Currency[$index]->BanknoteBuying;
+        $selling = $xml->Currency[$index]->BanknoteSelling;
+        return $selling;
     }
 
     public function checkcomission(Request $request)
@@ -417,6 +572,7 @@ class UserPanelController extends Controller
             'method' => $request->payment,
             'amount' => $request->balance,
             'comission' => $request->comission,
+            'kur' => $request->kur,
             'money_type' => $request->money_type,
             'payment_comment' => json_encode($request->payment_comment),
             'document' => $name

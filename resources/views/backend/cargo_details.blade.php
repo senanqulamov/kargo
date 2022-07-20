@@ -21,6 +21,10 @@
         </script>
     @endif
     <style>
+        p {
+            margin: 0;
+        }
+
         .status_style {
             border-radius: 10px;
             padding: 3px 10px;
@@ -110,14 +114,18 @@
         .commonIcon {
             border-radius: 50%;
             color: #fff;
-            border: 0.1rem solid #18bdf6;
             background-color: #18bdf6;
-            padding: 0.5rem;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .file_inputs_style {
             display: flex;
             flex-direction: row;
+            align-items: center;
             gap: 10px;
         }
     </style>
@@ -140,16 +148,16 @@
                                     </h4>
                                     @if ($cargo->status == 3 && $cargo->submitted == 0)
                                         <a href="{{ route('admin.cargo-requests.submit_order', ['id' => $cargo_id]) }}"
-                                            class="col form-control btn btn-info">Submit order</a>
+                                            class="btn btn-info">Submit order</a>
                                     @endif
                                     @if ($cargo->status != 5)
-                                        <a href="#" class="col form-control btn btn-danger" data-toggle="modal"
+                                        <a href="#" class="btn btn-danger" data-toggle="modal"
                                             data-target="#modal-cancel-order">
                                             Cancel Order
                                         </a>
                                     @else
                                         <a href="{{ route('admin.cargo-requests.revert_order', ['id' => $cargo_id]) }}"
-                                            class="col form-control btn btn-info">
+                                            class="btn btn-info">
                                             Revert Order
                                         </a>
                                     @endif
@@ -167,6 +175,12 @@
                                         {{ $status->status_name }}
                                     </span>
                                     Order Type: <b><u>{{ $cargo->order_type }}</u></b>
+                                    Order By:
+                                    <a href="{{ route('admin.users.details', $cargo->user_id) }}"
+                                        class="badge rounded-pill bg-info user_id_badge" target="__blank">
+                                        010{{ $cargo->user_id ? $cargo->user_id : '---' }}20
+                                        <i class="fa-solid fa-up-right-from-square"></i>
+                                    </a>
                                 </h4>
                                 <div class="row form-group">
                                     <div class="col d-flex flex-column py-3">
@@ -238,7 +252,7 @@
                                         <select name="currency" class="form-control">
                                             @foreach ($currencies as $currency)
                                                 <option value="{{ $currency->currency_code }}"
-                                                    @if ($currency->currency_code == $cargo->currency)selected @endif>
+                                                    @if ($currency->currency_code == $cargo->currency) selected @endif>
                                                     {{ $currency->currency_name }}
                                                 </option>
                                             @endforeach
@@ -516,7 +530,7 @@
                                                 {{ $package_status->status_name }}
                                             </span>
                                         </h5>
-                                        <img src="{{ $package->barcode }}" alt="barcode" width="16%"
+                                        <img src="{{ $package->barcode }}" alt="barcode" width="10%"
                                             height="auto">
                                     </div>
                                     <hr>
@@ -601,7 +615,9 @@
                             </div>
                             <hr>
                         </section>
-                        <button type="submit" class="btn btn-success form-control">Update</button>
+                        <div class="row justify-content-center">
+                            <button type="submit" class="btn btn-success">Update</button>
+                        </div>
                     </form>
                 </div>
                 <!-- /.card-body -->

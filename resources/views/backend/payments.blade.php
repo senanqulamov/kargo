@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Balance')
+@section('title', 'Payments')
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
@@ -20,6 +20,21 @@
         </script>
     @endif
 
+    <style>
+        .user_link_w_eye {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .approvel-td {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -29,10 +44,12 @@
                             <tr>
                                 <th>Customer</th>
                                 <th>Approval Status</th>
+                                <th>Deny message</th>
                                 <th>Method</th>
                                 <th>Money Type</th>
                                 <th>Amount</th>
                                 <th>Comission</th>
+                                <th>Kur</th>
                                 <th>Document</th>
                                 <th>Payment Comment</th>
                                 <th>Created at</th>
@@ -48,22 +65,30 @@
                                             ->where('id', $payment->userID)
                                             ->first();
                                     @endphp
-                                    <td>{{ $user->name }}</td>
-                                    <td class="approvel-td">
-                                        @if ($payment->payment_status == '0')
-                                            <button class="btn btn-warning">Pending</button>
-                                        @elseif ($payment->payment_status == '1')
-                                            <button class="btn btn-danger">Denied</button>
-                                            <br>
-                                            <b>{{ $payment->deny_message }}</b>
-                                        @else
-                                            <button class="btn btn-success">Approved</button>
-                                        @endif
+                                    <td>
+                                        <a class="btn btn-info user_link_w_eye"
+                                            href="{{ route('admin.users.details', $user->id) }}">
+                                            {{ $user->name }}
+                                            <i class="fa-solid fa-up-right-from-square"></i>
+                                        </a>
                                     </td>
+                                    <td>
+                                        <div class="approvel-td">
+                                            @if ($payment->payment_status == '0')
+                                                <span class="badge rounded-pill bg-warning">Pending</span>
+                                            @elseif ($payment->payment_status == '1')
+                                                <span class="badge rounded-pill bg-danger">Denied</span>
+                                            @else
+                                                <span class="badge rounded-pill bg-success">Approved</span>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td><b>{{ $payment->deny_message }}</b></td>
                                     <td>{{ $payment->method }}</td>
                                     <td>{{ $payment->money_type }}</td>
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->comission }}</td>
+                                    <td>{{ $payment->kur }}</td>
                                     <td>
                                         <a href="/files/payments/{{ $payment->document }}" target="_blank">
                                             {{-- <img src="/files/payments/{{ $payment->document }}" class="img-fluid"
@@ -79,12 +104,17 @@
                                             data-target="#modal-edit-{{ $payment->id }}"><i class="fas fa-edit"></i></a>
                                     </td>
                                     <td>
-                                        <a href="#" onclick="denyPayment(this)" class="btn btn-danger"
-                                            data-payment-id="{{ $payment->id }}"><i
-                                                class="fa-solid fa-square-xmark"></i></a>
-                                        <a href="#" onclick="approvePayment(this)" class="btn btn-success cardcredit"
-                                            data-payment-id="{{ $payment->id }}"><i
-                                                class="fa-solid fa-check-to-slot"></i></a>
+                                        @if ($payment->payment_status != '1')
+                                            <a href="#" onclick="denyPayment(this)" class="btn btn-danger"
+                                                data-payment-id="{{ $payment->id }}"><i
+                                                    class="fa-solid fa-square-xmark"></i></a>
+                                        @endif
+                                        @if ($payment->payment_status != '2')
+                                            <a href="#" onclick="approvePayment(this)"
+                                                class="btn btn-success cardcredit"
+                                                data-payment-id="{{ $payment->id }}"><i
+                                                    class="fa-solid fa-check-to-slot"></i></a>
+                                        @endif
                                     </td>
 
                                     <div class="modal fade" id="modal-edit-{{ $payment->id }}">
@@ -125,7 +155,8 @@
                                                             </div>
                                                             <div class="form-group col">
                                                                 <label for="exampleInputEmail1">Money type
-                                                                    ({{ $payment->money_type }}) </label>
+                                                                    ({{ $payment->money_type }})
+                                                                </label>
                                                                 <select name="money_type" class="form-control">
                                                                     <option value="tl">tl</option>
                                                                     <option value="euro">Euro</option>

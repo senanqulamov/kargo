@@ -46,7 +46,8 @@
                             <tr>
                                 <th>View/Edit Details</th>
                                 <th>Download PDF</th>
-                                <th>ID</th>
+                                <th>Cargo ID</th>
+                                <th>User ID</th>
                                 <th>Date</th>
                                 <th>Order Status</th>
                                 <th>Order Type</th>
@@ -101,6 +102,14 @@
                                         </div>
                                     </td>
                                     <td>{{ $cargo->id ? $cargo->id : '---' }}</td>
+                                    <td>
+                                        <a href="{{ route('admin.users.details', $cargo->user_id) }}"
+                                            class="badge rounded-pill bg-info user_id_badge"
+                                            target="__blank">
+                                            010{{ $cargo->user_id ? $cargo->user_id : '---' }}20
+                                            <i class="fa-solid fa-up-right-from-square"></i>
+                                        </a>
+                                    </td>
                                     <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
                                     @php
                                         $status = DB::table('package_statuses')

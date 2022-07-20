@@ -9,9 +9,11 @@ use App\Models\Comission;
 use App\Models\CreditCard;
 use App\Models\MoneyBackRequest;
 use App\Models\Payment;
+use App\Models\Transaction;
 use App\Models\User;
 use DB;
 use Illuminate\Support\Facades\Redirect;
+use stdClass;
 
 class BalanceController extends Controller
 {
@@ -35,6 +37,24 @@ class BalanceController extends Controller
         $payment->deny_message = $request->deny_message;
         $payment->save();
 
+        $transaction = Transaction::where('payment_id', $request->id)->first();
+        if ($transaction) {
+            $user_payment = Payment::where('id', $request->id)->get()->first();
+            $user = User::find($user_payment->userID);
+
+            $data = new stdClass();
+            $data->user_id = $user_payment->userID;
+            $data->payment_id = $request->id;
+            $data->old_balance = $user->balance;
+            $data->new_balance = $user->balance - $user_payment->amount;
+            $data->transfer_method = "Payment Deny";
+
+            $user->balance = $user->balance - $user_payment->amount;
+            $user->save();
+
+            (new HelperController)->checkTransaction($data);
+        }
+
         return response()->json([
             'message' => 'payment denied'
         ]);
@@ -49,10 +69,21 @@ class BalanceController extends Controller
         $payment->save();
 
         $user_payment = Payment::where('id', $request->id)->get()->first();
-
         $user = User::find($user_payment->userID);
+
+        $data = new stdClass();
+        $data->user_id = $user_payment->userID;
+        $data->payment_id = $request->id;
+        $data->old_balance = $user->balance;
+        $data->new_balance = $user->balance + $user_payment->amount;
+        $data->transfer_method = "Payment Approval";
+
+        // Updating balance
         $user->balance = $user->balance + $user_payment->amount;
         $user->save();
+
+
+        (new HelperController)->checkTransaction($data);
 
         return response()->json([
             'message' => 'payment approved'
@@ -101,7 +132,7 @@ class BalanceController extends Controller
         $name = $file->getClientOriginalName();
         $file->move(public_path() . '/images/', $name);
 
-        $classes = ['balance__cards-box--1' , 'balance__cards-box--2' , 'balance__cards-box--3'];
+        $classes = ['balance__cards-box--1', 'balance__cards-box--2', 'balance__cards-box--3'];
         $css_class = $classes[array_rand($classes)];
 
         $data = array(
@@ -121,7 +152,7 @@ class BalanceController extends Controller
     {
         // dd($request->all());
 
-        if($request->hasFile('image')){
+        if ($request->hasFile('image')) {
             $file = $request->image;
             $name = $file->getClientOriginalName();
             $file->move(public_path() . '/images/', $name);
@@ -132,7 +163,7 @@ class BalanceController extends Controller
                 'comission' => $request->comission,
                 'image' => $name,
             );
-        }else{
+        } else {
             $data = array(
                 'payment' => $request->payment,
                 'show_name' => $request->show_name,
@@ -145,7 +176,8 @@ class BalanceController extends Controller
         return Redirect::back()->with('message', 'Payment method updated succesfully');
     }
 
-    public function deleteComission($id){
+    public function deleteComission($id)
+    {
         Comission::where('id', $id)->delete();
 
         return Redirect::back()->with('message', 'Payment method deleted succesfully');

@@ -33,11 +33,17 @@
         }
 
         .payments_table_div th {
-            font-size: 17px;
+            font-size: 15px;
         }
-        #upload{
+
+        #upload {
             cursor: pointer;
         }
+
+        /* table.dataTable thead th,
+            table.dataTable tbody td {
+                white-space: nowrap;
+            } */
     </style>
     <section id="balance" class="balance">
 
@@ -120,7 +126,7 @@
                                     <h6 class="balance__download-text--1">Bakiye yukle</h6>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="balance__download-text--2">Euro Selling Rate 15.54</h6>
+                                    <h6 class="balance__download-text--2">Euro Selling Rate : {{ $kur }}</h6>
                                 </div>
                             </div>
 
@@ -218,7 +224,7 @@
 
                         <div class="balance__cards mt-5">
                             <div class="container">
-                                <div class="row">
+                                <div class="row" style="gap: 20px 0px;">
 
                                     @foreach ($comissions as $comission)
                                         <div class="col-sm-4">
@@ -232,7 +238,8 @@
                                                 </div>
 
                                                 <div class="balance__card-imgs">
-                                                    <img src="{{asset('/')}}images/{{ $comission->image }}" style="width:25%;" alt="">
+                                                    <img src="{{ asset('/') }}images/{{ $comission->image }}"
+                                                        style="width:25%;" alt="">
                                                 </div>
 
                                                 <div class="balance__card-text">
@@ -279,15 +286,16 @@
                                 <div class="balance__input-file">
                                     <input type="text" class="form-control" name="balance" id="balance_input"
                                         onchange="checkComission()">
+                                    <input type="text" name="kur" value="{{$kur}}" hidden>
                                 </div>
 
                             </div>
                             <div class="col-sm-4">
                                 <div class="balance__input-file">
-                                    <select class="form-select" aria-label="Default select example" name="money_type">
+                                    <select class="form-select" aria-label="Default select example" name="money_type" id="money_type">
                                         <option selected value="tl">Turk lirasi</option>
                                         <option value="euro">Euro</option>
-                                        <option value="usd">USD</option>
+                                        {{-- <option value="usd">USD</option> --}}
                                     </select>
                                 </div>
 
@@ -359,24 +367,16 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h6 class="balance__download-text--2">Euro Selling Rate 15.54</h6>
+                                <h6 class="balance__download-text--2">Euro Selling Rate : {{ $kur }}</h6>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
                     </div>
 
                 </div>
 
 
-                <div class="payments_table_div">
-                    <table id="payments_table" class="table table-striped" style="width: 100%">
+                <div class="payments_table_div card-body">
+                    <table id="example1" class="table table-bordered table-striped" style="width:100%;">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -387,6 +387,7 @@
                                 <th>Money Type</th>
                                 <th>Amount</th>
                                 <th>Comission</th>
+                                <th>Kur</th>
                                 <th>Document</th>
                                 <th>Payment Comment</th>
                             </tr>
@@ -399,11 +400,11 @@
                                     <td>
                                         <div class="approvel-td">
                                             @if ($payment->payment_status == '0')
-                                                <button class="btn btn-warning">Pending</button>
+                                                <span class="badge rounded-pill bg-warning">Pending</span>
                                             @elseif ($payment->payment_status == '1')
-                                                <button class="btn btn-danger">Denied</button>
+                                                <span class="badge rounded-pill bg-danger">Denied</span>
                                             @else
-                                                <button class="btn btn-success">Approved</button>
+                                                <span class="badge rounded-pill bg-success">Approved</span>
                                             @endif
                                         </div>
                                     </td>
@@ -414,10 +415,11 @@
                                     <td>{{ $payment->money_type }}</td>
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->comission }}</td>
+                                    <td>{{ $payment->kur }}</td>
                                     <td>
                                         <div class="approvel-td">
                                             <a href="/files/payments/{{ $payment->document }}" target="_blank">
-                                                <button class="btn status" type="button"><i
+                                                <button class="btn btn-info" type="button"><i
                                                         class="fa-solid fa-eye"></i></button>
                                             </a>
                                         </div>
@@ -449,7 +451,7 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h6 class="balance__download-text--2">Euro Selling Rate 15.54</h6>
+                                <h6 class="balance__download-text--2">Euro Selling Rate : {{ $kur }}</h6>
                             </div>
                         </div>
 
@@ -488,8 +490,7 @@
                                             <button type="submit" class="balance__address-save--btn">Kaydet</button>
 
                                             <div class="balance__address-refund">
-                                                <button type="button" onclick="PostMoneyBackRequest()"
-                                                    class="balance__address-refund--btn">Para Iade
+                                                <button type="button" class="balance__address-refund--btn">Para Iade
                                                     telebi
                                                     olusdur</button>
                                             </div>
@@ -504,33 +505,30 @@
             </section>
         </div>
     </section>
-    <!--Table script-->
-    <script>
-        $(document).ready(function() {
-            $("#payments_table").DataTable({
-                "responsive": false,
-                "lengthChange": true,
-                "autoWidth": false,
-                scrollY: '50vh',
-                scrollCollapse: true,
-                paging: false,
-                scrollX: true,
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
-    </script>
+
+    <script src="{{ asset('/') }}frontend/userpanel/js/tabttn.js"></script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/customer.js"></script>
+
     <script>
         var rad = document.querySelectorAll('.payment-radio');
 
         for (var i = 0; i < rad.length; i++) {
             rad[i].addEventListener('change', function() {
-                console.log(this.value)
 
                 checkComission(this.value);
             });
         }
 
         function checkComission(changed_method) {
-            var balance = parseInt(document.querySelector("#balance_input").value);
+            var balance = parseFloat(document.querySelector("#balance_input").value);
+            var money_type = document.querySelector("#money_type").value;
+
+            if(money_type == "tl"){
+                var kur = {{ $kur }};
+                balance = parseFloat(balance / kur).toFixed(2);
+                console.log(balance);
+            }
+
             if (changed_method) {
                 var method = changed_method;
             } else {
@@ -548,38 +546,10 @@
                     balance: balance
                 },
                 success: function(data) {
-                    document.querySelector("input[name=comission]").value = data.comission;
+                    document.querySelector("input[name=comission]").value = parseFloat(data.comission).toFixed(2);
                 }
             });
         }
     </script>
-    <script>
-        function PostMoneyBackRequest() {
-
-            // var Iban = document.querySelector("input[name=Iban]").value;
-            // var user_name = document.querySelector("input[name=user_name]").value;
-
-            // $.ajax({
-            //     type: 'POST',
-            //     url: '{{ route('userpanel.postMoneyBackRequest') }}',
-            //     headers: {
-            //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            //     },
-            //     data: {
-            //         Iban: Iban,
-            //         user_name: user_name
-            //     },
-            //     success: function(data) {
-            //         Swal.fire({
-            //             position: 'top-end',
-            //             icon: 'success',
-            //             title: data.message,
-            //             showConfirmButton: false,
-            //             backdrop: false,
-            //             timer: 2000
-            //         })
-            //     }
-            // });
-        }
-    </script>
 @endsection
+

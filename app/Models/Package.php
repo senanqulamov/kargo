@@ -22,4 +22,9 @@ class Package extends Model
         'package_weight',
         'barcode',
     ];
+
+    protected $casts = [
+        'id' => 'string',
+        'cargo_id' => 'string',
+    ];
 }

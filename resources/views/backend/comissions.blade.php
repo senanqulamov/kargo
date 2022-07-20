@@ -1,6 +1,6 @@
 @extends('backend.layout.app')
 
-@section('title', 'Balance')
+@section('title', 'Comissions')
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>

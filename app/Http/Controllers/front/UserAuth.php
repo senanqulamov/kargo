@@ -98,7 +98,7 @@ class UserAuth extends Controller
         if (Auth::attempt($user)) {
             $username = UserModel::where('email', $request->email)->first();
             $username = $username->name;
-            return redirect()->route('userpanel.index')->with('log_in_message', 'Logged in as ' . $username . ' !');
+            return redirect()->route('userpanel.mainmenu')->with('log_in_message', 'Logged in as ' . $username . ' !');
         } else {
             $error = "Wrong password";
             return redirect()->back()->withErrors($error)

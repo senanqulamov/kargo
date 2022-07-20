@@ -13,19 +13,6 @@
             })
         </script>
     @endif
-    @if (session()->has('log_in_message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'info',
-                title: '{{ session()->get('log_in_message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
-
     <style>
         .user_addresses_table_holder {
             height: max-content;
