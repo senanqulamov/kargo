@@ -1851,3 +1851,62 @@ nav {
 
 .share__bottom-sec {
   font-size: 1.2rem; }
+
+.modal-title{
+  font-size: 1.7rem;
+  color: #405982;
+}
+
+.btn-close{
+  font-size: 1.7rem;
+}
+
+
+.modal {
+  position: fixed;
+  top: 30%;
+  left: 0;
+  z-index: 1060;
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+
+}
+
+
+.modal__link{
+  position: relative;
+}
+
+.market__success{
+  font-size: 25px;
+  color: white;
+  position: absolute;
+ 
+}
+
+.success__box{
+   background-color: green;
+   width: 40px;
+   height: 40px;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+   top: 0%;
+    right: 0%;
+}
+
+
+
+
+
+
+
+
+
+
