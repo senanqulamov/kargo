@@ -314,7 +314,7 @@
 
 
 
-    &__table {}
+   
 
 
     &__label {
@@ -501,22 +501,6 @@
 }
 
 
-.table__datas {
-    background-color: #fff;
-
-
-    .th {
-        padding: 1rem;
-        font-size: 1.6rem;
-    }
-
-    .td {
-        padding: 1rem;
-        font-size: 1.5rem;
-    }
-
-}
-
 
 #balance__download-btn-1 {}
 
@@ -526,6 +510,20 @@
 #balance__download-btn-3 {
     display: none;
 }
+
+
+.form-check-input__changed::check{
+    background-color: red !important;
+}
+
+
+
+
+
+
+
+
+
 
 // #balance__download-btn-3 {
 //     display: block;

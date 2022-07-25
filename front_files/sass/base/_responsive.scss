@@ -1,7 +1,7 @@
 @media screen and(max-width: 992px) {
 
     .burger__menu {
-        width: 50% !important;
+        width: 46% !important;
     }
 
     .page__packed {
@@ -43,6 +43,13 @@
         right: 3%;
     }
 
+    .page__2 {
+        width: 100%;
+        margin-top: 5rem !important;
+    }
+
+
+
     #balance__container {
         max-width: 871px;
     }
@@ -55,11 +62,11 @@
 }
 
 @media screen and(max-width:790px) {
-    .table__datas {
-        overflow: hidden;
-        width: 100%;
-        overflow-x: scroll;
-    }
+    // .table__datas {
+    //     overflow: hidden;
+    //     width: 100%;
+    //     overflow-x: scroll;
+    // }
 }
 
 @media screen and(max-width: 768px) {
@@ -94,7 +101,7 @@
 
     .page__2 {
         width: 100%;
-        margin-top: 5rem;
+        margin-top: 2rem !important;
     }
 
     #balance__tabs {
@@ -255,15 +262,10 @@
     }
 
 
-    // .drop__box {
-    //     top: 18% !important;
-    // }
-
-
     .fnav__input {
         width: 61% !important;
         position: absolute;
-        top: 9%;
+        top: 8.5%;
         left: 25%;
 
     }
@@ -277,7 +279,7 @@
     }
 
     .drop__box {
-        margin-top: 3rem;
+        margin-top: 2.5rem;
         width: 44% !important;
         right: 31% !important;
     }

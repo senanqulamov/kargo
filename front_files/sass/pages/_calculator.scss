@@ -10,6 +10,17 @@
 .calculator {
 
 
+    &__cargo {
+        margin-bottom: 2rem;
+    }
+
+    &__paraghrap {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom: .5rem;
+    }
+
 
     &__box {
         display: flex;
@@ -19,13 +30,13 @@
         border: 0.3px solid rgba(0, 0, 0, 0.25);
         box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
-        padding: .5rem;
         margin-top: 2rem;
+        padding: .5rem;
 
 
 
         img {
-            width: 19%;
+            width: 14%;
         }
 
 

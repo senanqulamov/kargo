@@ -312,12 +312,18 @@
     <section id="Sturcture" class="structure">
         <div class="row w-100">
 
-            <div class="drop__box">
+            <div class="drop__box drop__box-etax--1">
                 <div class="drop__box-img">
                     <img src="img/svg/Group (32).svg" alt="">
                 </div>
-                <h4 class="ms-2">E-Tax</h4>
+                <h4 class="ms-2 drop__box-etax--header">E-Tax</h4>
             </div>
+            <!-- <div class="drop__box drop__box-etax--2">
+                <div class="drop__box-img">
+                    <img src="img/svg/Group (32).svg" alt="">
+                </div>
+                <h4 class="ms-2">Invocies</h4>
+            </div> -->
 
             <div class="col-lg-3 page__1">
                 <nav class="navigation__left">
@@ -526,7 +532,7 @@
                         </div>
                     </div>
                     <div class="bg-white container pt-4 rounded shadowBox taxPageTwo">
-                        <div class="d-flex align-items-center mb-5">
+                        <div class="d-flex align-items-center mb-5 mt-3">
                             <div class="iconBG me-3">
                                 <img src="img/svg2/e-tax/createInvoices.svg" alt="" />
                             </div>
@@ -535,9 +541,9 @@
                         <div class="row d-flex align-items-center">
                             <div class="col-lg-6">
                                 <div class="d-flex justify-content-start align-items-end">
-                                    <button class="taxBtnSelect my-3">
-                                        Select the invoice integratons <input type="file" />
-                                    </button>
+                                    <form action="" class="form__file">
+                                        <input type="file">
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-lg-6 mb-4">

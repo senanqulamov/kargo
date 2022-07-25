@@ -1,6 +1,40 @@
 
 
 let yeniPaketYarat = document.querySelector(".paketYaradilanYer");
+let shadowbox__1 = document.querySelector('.shadowBox--1')
+let shadowbox__2 = document.querySelector('.shadowBox--2')
+
+let dataBoxs = document.querySelectorAll('.shadowBox')
+
+
+
+shadowbox__1.addEventListener('click',function(){
+  shadowbox__1.children[0].children[1].children[0].click()
+})
+
+shadowbox__2.addEventListener('click',function(){
+  shadowbox__2.children[0].children[1].children[0].click()
+})
+
+
+
+
+
+// function clickContainer(){
+//   shadowbox__1.children[1].click()
+//   shadowbox__2.children[1].click()
+// }
+
+
+// shadowbox__1.addEventListener('click',function(){
+//   shadowbox__1.children[1].clicked
+// })
+// shadowbox__2.addEventListener('click',function(){
+//   shadowbox__2.children[1].clicked
+// })
+
+
+
 // Yeni paket yaratmaq
 function yeniPaketElaveEt() {
   let yeniPaket = ` 

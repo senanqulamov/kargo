@@ -113,7 +113,7 @@
 
 .burger__menu {
     .navigation__box {
-        width: 50%;
+        width: 98%;
     }
 
     @media screen and(max-width:767px) {
@@ -289,7 +289,16 @@ input[type="file"]:hover::file-selector-button {
 
 
 
-
+.btn__price-calculator {
+    background: #3B69E4;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 5px;
+    color: #fff;
+    padding: .6rem .8rem;
+    font-weight: 500;
+    font-size: 14px;
+}
 
 
 

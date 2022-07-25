@@ -24,6 +24,9 @@ p {
   color: #405982;
   margin-bottom: 0; }
 
+.page__2 {
+  margin-top: 7rem !important; }
+
 :root {
   --color-white-thin: #CADBFE;
   --color-shadow: 0 2rem 6rem rgba(0, 0, 0, .3);
@@ -31,15 +34,15 @@ p {
   --color-grey-light-1: #FB985C;
   --color-page-background: #E5E5E5;
   --color-main-button: #3B69E4;
-  --color-text:#4878D1;
-  --color-burger-btn:linear-gradient(93.84deg, rgba(251, 152, 92, 0.88) -42.66%, rgba(255, 180, 6, 0.88) 144.99%);
+  --color-text: #4878D1;
+  --color-burger-btn: linear-gradient(93.84deg, rgba(251, 152, 92, 0.88) -42.66%, rgba(255, 180, 6, 0.88) 144.99%);
   --color-shadow: 0 2rem 6rem rgba(0, 0, 0, .3);
   --shadow-light: 0 2rem 5rem rgba(0, 0, 0, .06);
   --line: 1px solid var(--color-grey-light-2); }
 
 @media screen and (max-width: 992px) {
   .burger__menu {
-    width: 50% !important; }
+    width: 46% !important; }
   .page__packed p {
     font-size: 1.3rem; }
   header {
@@ -59,17 +62,14 @@ p {
     position: absolute;
     left: 3%;
     right: 3%; }
+  .page__2 {
+    width: 100%;
+    margin-top: 5rem !important; }
   #balance__container {
     max-width: 871px; }
   .w-100 {
     width: 100% !important;
     margin: 0; } }
-
-@media screen and (max-width: 790px) {
-  .table__datas {
-    overflow: hidden;
-    width: 100%;
-    overflow-x: scroll; } }
 
 @media screen and (max-width: 768px) {
   .page__box {
@@ -83,7 +83,7 @@ p {
     width: 100% !important; }
   .page__2 {
     width: 100%;
-    margin-top: 5rem; }
+    margin-top: 2rem !important; }
   #balance__tabs {
     max-width: 720px; }
   .balance__cards-box {
@@ -151,14 +151,14 @@ p {
   .fnav__input {
     width: 61% !important;
     position: absolute;
-    top: 9%;
+    top: 8.5%;
     left: 25%; }
   .header__item-list {
     padding: 0 .6rem; }
   .header__icons {
     margin-top: .5rem; }
   .drop__box {
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     width: 44% !important;
     right: 31% !important; } }
 
@@ -247,7 +247,7 @@ p {
   background: var(--color-burger-btn); }
 
 .burger__menu .navigation__box {
-  width: 50%; }
+  width: 98%; }
 
 @media screen and (max-width: 767px) {
   .burger__menu .navigation__box {
@@ -369,6 +369,16 @@ input[type="file"]:hover::file-selector-button {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
   color: #fff; }
+
+.btn__price-calculator {
+  background: #3B69E4;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  color: #fff;
+  padding: .6rem .8rem;
+  font-weight: 500;
+  font-size: 14px; }
 
 .steps {
   list-style: none;
@@ -700,9 +710,9 @@ nav {
 
 .burger__menu {
   position: absolute;
-  top: 4%;
-  left: 0;
-  width: calc(100% - 65%);
+  top: 3%;
+  left: 0%;
+  width: 40%;
   transform: translateX(-100%);
   z-index: 500;
   height: 103%;
@@ -739,10 +749,14 @@ nav {
   transition: ease .5s; }
 
 .fnav {
+  display: none !important;
   padding: 2rem .7rem 4rem .7rem;
   background: linear-gradient(88.78deg, rgba(106, 137, 231, 0.9) -4.73%, rgba(102, 171, 231, 0.9) 109.52%);
-  display: none;
-  transition: ease-in-out 3s; }
+  transition: ease-in-out 3s;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5rem; }
   .fnav__box {
     display: flex;
     justify-content: space-between;
@@ -751,16 +765,12 @@ nav {
     width: 20%; }
   @media screen and (max-width: 992px) {
     .fnav {
-      display: block; }
-      .fnav .fnav__input {
-        width: 40%; }
-        .fnav .fnav__input .header__input-search {
-          width: 100%; } }
-  @media screen and (max-width: 767px) {
-    .fnav .fnav__input {
-      width: 20%; }
+      display: block !important; }
       .fnav .fnav__input .header__input-search {
-        width: 100%; }
+        width: 100%; } }
+  @media screen and (max-width: 767px) {
+    .fnav .fnav__input .header__input-search {
+      width: 100%; }
     .fnav .header__item-list {
       padding: 0 1rem;
       margin-top: .8rem; } }
@@ -995,6 +1005,15 @@ nav {
 .page__calc {
   font-size: 1.8rem; }
 
+.calculator__cargo {
+  margin-bottom: 2rem; }
+
+.calculator__paraghrap {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: .5rem; }
+
 .calculator__box {
   display: flex;
   align-items: center;
@@ -1002,10 +1021,10 @@ nav {
   border: 0.3px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  padding: .5rem;
-  margin-top: 2rem; }
+  margin-top: 2rem;
+  padding: .5rem; }
   .calculator__box img {
-    width: 19%; }
+    width: 14%; }
   .calculator__box p {
     font-size: 1.6rem;
     margin: 0 2rem;
@@ -1365,48 +1384,17 @@ nav {
       text-align: center;
       padding: 0; } }
 
-.table__datas {
-  background-color: #fff; }
-  .table__datas .th {
-    padding: 1rem;
-    font-size: 1.6rem; }
-  .table__datas .td {
-    padding: 1rem;
-    font-size: 1.5rem; }
-
 #balance__download-btn-2 {
   display: none; }
 
 #balance__download-btn-3 {
   display: none; }
 
+.form-check-input__changed::check {
+  background-color: red !important; }
+
 .courier {
   padding-bottom: 5rem; }
-  .courier__table {
-    padding-top: 1rem;
-    margin-top: 2rem;
-    box-shadow: 0px 4px 15px 0px #0000001A;
-    background-color: #fff; }
-    .courier__table h6 {
-      padding-left: 2rem;
-      margin: 2rem 0;
-      color: #4878D1;
-      font-size: 2rem;
-      line-height: 21px; }
-  .courier__thead {
-    background: #E8EFF8;
-    border: 1px solid rgba(211, 211, 211, 0.99); }
-    .courier__thead tr > th {
-      font-weight: 500;
-      font-size: 18px;
-      line-height: 21px;
-      color: #677094; }
-    .courier__thead tr > td {
-      font-size: 16px;
-      color: #677094; }
-  .courier__tbody tr > td > span {
-    font-size: 16px;
-    color: #677094; }
   .courier__input {
     padding-top: 1rem;
     margin-top: 2rem;
@@ -1545,8 +1533,6 @@ nav {
     text-align: center; }
     .stock__img img {
       width: 50%; }
-  .stock .table__datas {
-    margin-top: 1.5rem; }
   .stock .courier__input-boxed {
     background: #FFFFFF;
     border: 1px solid rgba(0, 0, 0, 0.17);
@@ -1814,12 +1800,13 @@ nav {
   background: #FFFFFF;
   border: 0.5px solid rgba(0, 0, 0, 0.25);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 5px; }
+  border-radius: 5px;
+  min-height: 13rem; }
 
 .share__candition-text {
   font-weight: 500;
-  font-size: 17px;
-  line-height: 27px;
+  font-size: 15px;
+  line-height: 20px;
   /* identical to box height */
   color: #405982; }
 

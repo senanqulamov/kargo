@@ -1,8 +1,8 @@
 .burger__menu {
     position: absolute;
-    top: 4%;
-    left: 0;
-    width: calc(100% - 65%);
+    top: 3%;
+    left: 0%;
+    width: 40%;
     transform: translateX(-100%);
     z-index: 500;
     height: 103%;
@@ -57,10 +57,15 @@
 ////header --2
 
 .fnav {
+
+    display: none !important;
     padding: 2rem .7rem 4rem .7rem;
     background: linear-gradient(88.78deg, rgba(106, 137, 231, 0.9) -4.73%, rgba(102, 171, 231, 0.9) 109.52%);
-    display: none;
     transition: ease-in-out 3s;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5rem;
 
 
     &__box {
@@ -76,10 +81,10 @@
 
 
     @media screen and(max-width:992px) {
-        display: block;
+        display: block !important;
 
         .fnav__input {
-            width: 40%;
+            // width: 40%;
 
             .header__input-search {
                 width: 100%;
@@ -91,7 +96,7 @@
     @media screen and(max-width:767px) {
 
         .fnav__input {
-            width: 20%;
+            // width: 20%;
 
             .header__input-search {
                 width: 100%;
