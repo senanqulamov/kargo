@@ -1,0 +1,248 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Josefin Sans';
+}
+
+
+.majorData {
+    background-image: url('./img/26583.svg');
+    padding: 10px 18px;
+    box-sizing: border-box;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.majorData__logo {
+    width: 50%;
+    margin: 10px auto;
+
+}
+
+
+
+.majorData__box {
+    width: 100%;
+    margin: 0 auto;
+    z-index: 500;
+    height: 50px;
+    border-radius: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    position: relative;
+}
+
+
+.newMain {
+    margin-right: 47px;
+    color: white;
+    z-index: 100;
+
+}
+
+
+
+.majorData__box--2 {
+    background:    linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+    url('./img/merci.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* z-index: 110;
+    position: relative; */
+    /* background: rgba(255,255,255,0.5); */
+    /* filter: grayscale(2%) contrast(86%); */
+    /* filter: contrast(50%);  */
+    /* background: rgba(0, 0, 0, 0.5); */
+    /* z-index: 0; */
+   
+
+}
+
+.majorData__box--3 {
+    background-image:     linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+  url('./img/vapiano.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+    
+}
+
+.majorData__box--4 {
+    background-image:    linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+   url('./img/garagesandwichs_.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+    
+}
+
+.majorData__box--5 {
+    background-image:     linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+  url('./img/birriaa.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+    
+}
+
+.majorData__box--6 {
+    background-image:     linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+  url('./img/papa\ qurman.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+   
+}
+
+.majorData__box--7 {
+    background-image:    linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+   url('./img/le\ cafe.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+    
+}
+
+.majorData__box--8 {
+    background-image:    linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+   url('./img/garage\ healthy\ bar.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+    
+}
+
+.majorData__box--9 {
+    background-image:     linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+  url('./img/garage\ healthy\ ice.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+     
+}
+
+.majorData__box--10 {
+    background-image:    linear-gradient(
+        rgba(0, 0, 0, 0.5),
+        rgba(0, 0, 0, 0.5)
+      ),
+   url('./img/kalyan\ malyan.jpg');
+    background-repeat: none;
+    background-position: center;
+    background-size: cover;
+    /* filter: grayscale(2%) contrast(86%); */
+  
+}
+
+
+.majorData__rolled {
+    height: 50px;
+    width: 40px;
+    margin-bottom: 10px;
+    
+    margin-left: 8px;
+    /* background-color: pink; */
+}
+
+.majorData__heading {
+    color: #ffff;
+    margin: 0 auto;
+}
+
+
+.majorData__rolled-img {
+    width: 100%;
+    object-fit: cover;
+    margin-top: 10px;
+    border-radius: 100%;
+}
+
+
+.logo__box {
+    text-align: center;
+}
+
+
+.majorData__link {
+    text-decoration: none;
+}
+
+
+.newAddress {
+    text-align: center;
+    margin-top: 50px;
+}
+
+
+
+.text-muted {
+    font-size: 14px;
+    color: #333;
+}
+
+
+.newA{
+    text-decoration: none;
+    color: rgba(87, 72, 72, 0.973);
+}
+
+
+
+
+
+/* .add{
+    position: ablosute !important;
+    background: black ;
+    opacity: 1;
+    top: 0%;
+    left: 0%;
+    bottom: 0%;
+    right: 0%;
+
+   border-radius: 42px;
+} */
+
+
+
+
+
+
+/**/
