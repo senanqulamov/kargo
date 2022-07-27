@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    /*Courier*/
+
+  .courier__select::-webkit-input-placeholder {
+  color: #D9D9D9;
+  }
+
+  .dropdown {
+    position: relative;
+    /* margin-bottom: 20px; */
+  }
+  .dropdown .dropdown-list {
+    padding: 25px 20px;
+    background: #fff;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    max-height: 223px;
+    overflow-y: auto;
+    background: #fff;
+    display: none;
+    z-index: 10;
+  }
+  .dropdown .checkbox {
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .dropdown .dropdown-label {
+    display: block;
+    height: 33px;
+    font-size: 16px;
+    line-height: 30px;
+    background: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 0 40px 0 8px;
+    cursor: pointer;
+    position: relative;
+  }
+  .dropdown .dropdown-label:before {
+    font-family: "Font Awesome 5 Pro"; 
+    font-weight: 400;
+    content: "\f107";
+    /* content: ''; */
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: transform 0.25s;
+    transform-origin: center center;
+  }
+  .dropdown.open .dropdown-list {
+    display: block;
+  }
+  .dropdown.open .checkbox {
+    transition: 2s opacity 2s;
+    opacity: 1;
+  }
+  .dropdown.open .dropdown-label:before {
+    transform: translateY(-50%) rotate(-180deg);
+  }
+  .checkbox {
+    margin-bottom: 20px;
+  }
+  .checkbox:last-child {
+    margin-bottom: 0;
+  }
+  .checkbox .checkbox-custom {
+    display: none;
+  }
+  .checkbox .checkbox-custom-label {
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+  }
+  .checkbox .checkbox-custom + .checkbox-custom-label:before {
+    content: "";
+    background: #47C5FF;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+    text-align: center;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #84D8FF;
+    border-radius: 2px;
+    margin-top: -2px;
+  }
+  .checkbox .checkbox-custom:checked + .checkbox-custom-label:after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 6px;
+    height: 10px;
+    padding: 2px;
+    transform: rotate(45deg);
+    text-align: center;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+  }
+  .checkbox .checkbox-custom-label {
+    line-height: 16px;
+    font-size: 16px;
+    margin-right: 0;
+    margin-left: 0;
+    color: black;
+  }
+
+
+/**/
+</style>
+
+
+<body>
+
+    <section id="courier" class="courier">
+
+        <div class="container" id="balance__container">
+            <div class="container" id="balance__tabs">
+                <div class="row">
+                    <div class="col-4">
+
+                        <button class="balance__box d-flex align-items-center ">
+                            <div class="balance__box-img balance__box-img--1 ">
+                                <img src="img/svg4/note-svgrepo-com 1.svg" alt="">
+                            </div>
+                            <div class="balance__box-text ms-1">
+                                <p class="ms-3">My Courier Request </p>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                    <div class="col-4">
+                        <button class="balance__box d-flex align-items-center ">
+                            <div class="balance__box-img balance__box-img--2 ">
+                                <img src="img/svg4/request-quote-svgrepo-com 1.svg" alt="">
+                            </div>
+                            <div class="balance__box-text ms-1">
+                                <p class="ms-3"> Create Courier Demand</p>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                    <div class="col-4">
+                        <button class="balance__box d-flex align-items-center ">
+                            <div class="balance__box-img balance__box-img--3 ">
+                                <img src="img/svg/Vector (18).svg" alt="">
+                            </div>
+                            <div class="balance__box-text ms-1">
+                                <p class="ms-3">Courier Demand History </p>
+                            </div>
+
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+             <!--table section-->
+            <section class="courier__page" id="balance__download-btn-1">
+          
+             <div class="courier__input courier__table-box--1">
+                <div class="page__not page__not--1">
+                    <div class="demand__box   me-3">
+                        <img src="img/svg/Group (20).svg" alt="">
+                    </div>
+
+                    <h2 class="demand__h2">My Courier Request</h2>
+
+                </div>
+
+                <div class="courier--table-1">
+
+                     <div class="courier__table--1 mt-4">
+                         
+                        <!-- 1-ci table burda yerlesdirilmelidi-->
+
+                     </div>
+
+                </div>           
+
+            </div>
+
+            </section>
+
+            <section class="courier__page"  id="balance__download-btn-2">
+
+                <div class="courier__input">
+                    <div class="page__not page__not--1">
+                        <div class="demand__box   me-3">
+                            <img src="img/svg/Group (20).svg" alt="">
+                        </div>
+
+                        <h2 class="demand__h2">Create Demand</h2>
+
+                    </div>
+
+                    <hr class="hr">
+
+                    <div class="row">
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Order ID<span class="red-1">*</span></h6>
+                                <div class="dropdown">
+                                    <label class="dropdown-label">Select Options</label>
+                                    
+                                    <div class="dropdown-list">
+                                      <!-- <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group-all" class="check-all checkbox-custom" id="checkbox-main"/>
+                                        <label for="checkbox-main" class="checkbox-custom-label">5456464</label>
+                                      </div> -->
+                                      
+                                      <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_01"/>
+                                        <label for="checkbox-custom_01" class="checkbox-custom-label ">7878787</label>
+                                      </div>
+                                      
+                                      <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_02"/>
+                                        <label for="checkbox-custom_02" class="checkbox-custom-label">5656565</label>
+                                      </div>
+                                      
+                                      <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_03"/>
+                                        <label for="checkbox-custom_03" class="checkbox-custom-label">3558585</label>
+                                      </div>
+                                      
+                                      <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_04"/>
+                                        <label for="checkbox-custom_04" class="checkbox-custom-label">78451254</label>
+                                      </div>
+                                      <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_05"/>
+                                        <label for="checkbox-custom_05" class="checkbox-custom-label">96969689</label>
+                                      </div>
+                                      <div class="checkbox">
+                                        <input type="checkbox" name="dropdown-group" class="check checkbox-custom" id="checkbox-custom_06"/>
+                                        <label for="checkbox-custom_06" class="checkbox-custom-label">25457848</label>
+                                      </div>
+                                    </div>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Contact person name<span class="red-1">*</span></h6>
+                                <input type="text" class="form-control courier__select" placeholder="Deirvlon"
+                                    aria-label="Username" aria-describedby="addon-wrapping">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Country<span class="red-1">*</span></h6>
+                                <select class="form-select courier__select" aria-label="Default select example">
+                                    <option selected>US</option>
+                                    <option value="1">UK</option>
+                                    <option value="2">TR</option>
+                                    <option value="3">BRZ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Phone Number<span class="red-1">*</span></h6>
+                                <input class="form-control courier__select" type="text" placeholder="12/12/2020"
+                                    aria-label="default input example">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>City<span class="red-1">*</span></h6>
+                                <select class="form-select courier__select" aria-label="Default select example">
+                                    <option selected>New-York</option>
+                                    <option value="1">Baku</option>
+                                    <option value="2">Moscow</option>
+                                    <option value="3">Paris</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+                            <div class="courier__input-box">
+                                <h6>Date<span class="red-1">*</span></h6>
+                                <input class="form-control courier__select" type="date" placeholder="Deirvlon"
+                                    aria-label="default input example">
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Address<span class="red-1">*</span></h6>
+                                <input class="form-control courier__select" type="text" placeholder="Bergan street 57"
+                                    aria-label="default input example">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Note</h6>
+                                <input class="form-control courier__select" type="text" placeholder="Your wishes will be taken into account"
+                                    aria-label="default input example">
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6 col-12">
+
+                            <div class="courier__input-box">
+                                <h6>Posta Code<span class="red-1">*</span></h6>
+                                <input class="form-control courier__select" type="text" placeholder="216464"
+                                    aria-label="default input example">
+                            </div>
+
+                        </div>
+                       
+                        <div class="= col-12">
+
+                            <div class="courier__input-box d-flex justify-content-end mt-4">
+                                <button class="balance__address-refund--btn pe-5 mt-5"><i class="fa-solid fa-check me-2"></i> Confirm Demand</button>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+            <!--table section-->
+            <section class="courier__page"  id="balance__download-btn-3">   
+                                        
+                <div class="courier__input courier__table-box--2">
+                    <div class="page__not page__not--1">
+                        <div class="demand__box   me-3">
+                            <img src="img/svg/Group (20).svg" alt="">
+                        </div>
+
+                        <h2 class="demand__h2">Demand Courier History</h2>
+
+                    </div>
+
+                    <div class="courier--table-2">
+
+                         <div class="courier__table--2 mt-4">
+                             
+                            <!-- 2-ci table burda yerlesdirilmelidi-->
+
+                         </div>
+
+                    </div>
+                    
+                </div>
+
+            </section>
+
+        </div>
+    </section>
+    
+  
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <script>
+
+        
+   function checkboxDropdown(el) {
+      var $el = $(el)
+  
+    function updateStatus(label, result) {
+      if(!result.length) {
+        label.html('Select Options');
+      }
+    };
+    
+    $el.each(function(i, element) {
+      var $list = $(this).find('.dropdown-list'),
+        $label = $(this).find('.dropdown-label'),
+        $checkAll = $(this).find('.check-all'),
+        $inputs = $(this).find('.check'),
+        defaultChecked = $(this).find('input[type=checkbox]:checked'),
+        result = [];
+      
+      updateStatus($label, result);
+      if(defaultChecked.length) {
+        defaultChecked.each(function () {
+          result.push($(this).next().text());
+          $label.html(result.join(", "));
+        });
+      }
+      
+      $label.on('click', ()=> {
+        $(this).toggleClass('open');
+      });
+  
+      $checkAll.on('change', function() {
+        var checked = $(this).is(':checked');
+        var checkedText = $(this).next().text();
+        result = [];
+        if(checked) {
+          result.push(checkedText);
+          $label.html(result);
+          $inputs.prop('checked', false);
+        }else{
+          $label.html(result);
+        }
+          updateStatus($label, result);
+      });
+  
+      $inputs.on('change', function() {
+        var checked = $(this).is(':checked');
+        var checkedText = $(this).next().text();
+        if($checkAll.is(':checked')) {
+          result = [];
+        }
+        if(checked) {
+          result.push(checkedText);
+          $label.html(result.join(", "));
+          $checkAll.prop('checked', false);
+        }else{
+          let index = result.indexOf(checkedText);
+          if (index >= 0) {
+            result.splice(index, 1);
+          }
+          $label.html(result.join(", "));
+        }
+        updateStatus($label, result);
+      });
+  
+      $(document).on('click touchstart', e => {
+        if(!$(e.target).closest($(this)).length) {
+          $(this).removeClass('open');
+        }
+      });
+    });
+  };
+  
+  checkboxDropdown('.dropdown');
+
+    </script>
+
+
+</body>
+</html>

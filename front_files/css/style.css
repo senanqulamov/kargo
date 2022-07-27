@@ -1947,6 +1947,7 @@ nav {
     font-family: "Font Awesome 5 Pro"; 
     font-weight: 400;
     content: "\f107";
+    /* content: ''; */
     position: absolute;
     right: 20px;
     top: 50%;
@@ -2011,11 +2012,6 @@ nav {
     margin-left: 0;
     color: black;
   }
-
-
-
-
-
 
 
 
