@@ -4,6 +4,9 @@ let balanceDownload1 = document.querySelector("#balance__download-btn-1");
 let balanceDownload2 = document.querySelector("#balance__download-btn-2");
 let balanceDownload3 = document.querySelector("#balance__download-btn-3");
 
+var executed = false;
+
+
 balanceBoxs[0].classList.add("btn-back");
 balanceText[0].style.color = "#405982";
 
@@ -31,6 +34,37 @@ balanceBoxs[1].addEventListener("click", function () {
     balanceDownload1.style.display = "none";
     balanceDownload2.style.display = "block";
     balanceDownload3.style.display = "none";
+
+    if (executed == false) {
+        $("#payment_history")
+            .DataTable({
+                responsive: false,
+                lengthChange: false,
+                autoWidth: true,
+                scrollY: "50vh",
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+            })
+            .buttons()
+            .container()
+            .appendTo("#example1_wrapper .col-md-6:eq(0)");
+
+        $("#transaction_history")
+            .DataTable({
+                responsive: false,
+                lengthChange: false,
+                autoWidth: true,
+                scrollY: "50vh",
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+            })
+            .buttons()
+            .container()
+            .appendTo("#example1_wrapper .col-md-6:eq(0)");
+    }
+    executed = true;
 });
 
 balanceBoxs[2].addEventListener("click", function () {

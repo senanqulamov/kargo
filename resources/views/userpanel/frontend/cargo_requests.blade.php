@@ -285,7 +285,7 @@
                                     <td>{{ $cargo->dangerous == 'yes' ? 'Yes' : 'No' }}</td>
                                     <td>
                                         <div style="display: flex;">
-                                            @if ($cargo->status != 4 && $cargo->status != 6)
+                                            @if ($cargo->status != 4 && $cargo->status != 6 && $cargo->status != 5)
                                                 <a href="{{ route('admin.cargo-requests.post_on_wait', ['id' => $cargo->id]) }}"
                                                     class="col form-control btn btn-info">Pause order</a>
                                             @endif
@@ -298,10 +298,13 @@
                                     </td>
                                     <td>
                                         <div style="display: flex;">
-                                            <a href="#" class="col form-control btn btn-danger" data-toggle="modal"
-                                                data-target="#modal-cancel-order-{{ $cargo->id }}">
-                                                Cancel Order
-                                            </a>
+                                            @if ($cargo->status == 0)
+                                                <a href="#" class="col form-control btn btn-danger"
+                                                    data-toggle="modal"
+                                                    data-target="#modal-cancel-order-{{ $cargo->id }}">
+                                                    Cancel Order
+                                                </a>
+                                            @endif
                                         </div>
                                     </td>
                                     <div class="modal fade" id="modal-cancel-order-{{ $cargo->id }}">

@@ -9,10 +9,13 @@ use App\Models\Cargo_document;
 use App\Models\Cargo_request;
 use App\Models\CargoCompany;
 use App\Models\CargoZone;
+use App\Models\Courier_request;
 use App\Models\MoneyBackRequest;
+use App\Models\Order_time;
 use App\Models\Package;
 use App\Models\Payment;
 use App\Models\Product;
+use App\Models\Transaction;
 use App\Models\UserAddress;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,12 +23,14 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
-use PDF;
+// use PDF;
 use Carbon\Carbon;
-use Dompdf\Dompdf;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Str;
 use Picqer\Barcode;
 use Picqer\Barcode\BarcodeGeneratorPNG;
+use Spatie\Browsershot\Browsershot;
 
 class UserPanelController extends Controller
 {
@@ -40,31 +45,66 @@ class UserPanelController extends Controller
     public function updateuser(Request $request)
     {
 
+        if ($request->email != Auth::user()->email) {
+            $cloned_email = UserModel::where('email', $request->email)->first();
+            if ($cloned_email) {
+                return Redirect::back()->with('error', 'Unable to change email to existing one');
+            }
+        }
+        if($request->phone != Auth::user()->phone){
+            $cloned_phone = UserModel::where('phone', $request->phone)->first();
+            if ($cloned_phone) {
+                return Redirect::back()->with('error', 'Unable to change phone to existing one');
+            }
+        }
+        $request->request->remove('_token');
+        $update_data = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+
         $password = Hash::make($request->password);
         if (!$request->password) {
-            $password = Auth::user()->password;
+            $update_data['password'] = Auth::user()->password;
+        } else {
+            $update_data['password'] = $password;
         }
-
-        $update_data = array(
-            'name' => $request->name,
-            'email' => $request->email,
-            'phone' => $request->phone,
-            'password' => $password,
-            'Iban' => $request->Iban
-        );
 
         UserModel::where('id', Auth::user()->id)->update($update_data);
 
         return Redirect::back()->with('message', 'Profile successfully updated');
     }
 
-    public function updateuseraddress(Request $request)
+    public function getuseraddress(Request $request)
+    {
+        $address = UserAddress::where('id', $request->id)->first();
+
+        return response()->json($address);
+    }
+
+    public function adduseraddress(Request $request)
     {
 
-        DB::table('user_addresses')->where('id', $request->id)->update($request->all());
+        $request->request->remove('_token');
+        $data = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+        $data['userID'] = Auth::user()->id;
 
-        $msg = "This address succesfully updated";
-        return response()->json(array('msg' => $msg), 200);
+        UserAddress::create($data);
+
+        return Redirect::back()->with('message', 'New address added succesfully');
+    }
+
+    public function updateuseraddress(Request $request)
+    {
+        $request->request->remove('_token');
+        $data = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+
+        UserAddress::where('id', $request->id)->update($data);
+
+        return Redirect::back()->with('message', 'Address ' . $request->name . ' updated succesfully');
     }
 
     public function deleteuseraddress($address_id)
@@ -120,12 +160,15 @@ class UserPanelController extends Controller
             $on_the_way = $cargo_requests[4];
         }
 
+        $notifications = (new UserPanelHelper)->showNotifications();
+
         return view('userpanel.frontend.mainpage')->with([
             'countries' => $countries,
             'pending' => $pending,
             'at_facility' => $at_facility,
             'on_the_way' => $on_the_way,
             'total_cargo' => $total_cargo,
+            'notifications' => $notifications,
         ]);
     }
 
@@ -263,7 +306,11 @@ class UserPanelController extends Controller
         foreach ($deci as $deci) {
             $deci_zone_values =  json_decode($deci->zone);
             $deci_company = $deci->companyID;
-            $deci_zone_value = $deci_zone_values[$zone->zone - 1];
+            if (isset($deci_zone_values[$zone->zone - 1])) {
+                $deci_zone_value = $deci_zone_values[$zone->zone - 1];
+            } else {
+                $deci_zone_value = $deci_zone_values[0];
+            }
             $company = DB::table('cargo_companies')->where('id', $deci_company)->get()->first();
 
             $psh = ($deci_zone_value * $company->PSH) / 100;
@@ -466,7 +513,8 @@ class UserPanelController extends Controller
         $order = DB::table('cargo_requests')->where('id', $id)->get()->first();
         $company = DB::table('cargo_companies')->where('id', $order->cargo_company)->get()->first();
 
-        $data = [
+
+        return view('userpanel.frontend.cargo_pdf')->with([
             'cargo_id' => $order->id,
             'name' => $order->name,
             'country' => $order->country,
@@ -474,12 +522,30 @@ class UserPanelController extends Controller
             'state' => $order->state,
             'address' => $order->address,
             'company' => $company->name,
-            'order_info' => $order->order_info
-        ];
+            'order_info' => $order->order_info,
+            'phone' => $order->phone,
+            'date' => $order->created_at,
+            'tracking_number' => $order->tracking_number,
+            'user_id' => $order->user_id
+        ]);
 
-        $pdf = PDF::loadView('userpanel.frontend.cargo_pdf', $data)->setPaper('a5', 'landscape');
+        // $data = [
+        //     'cargo_id' => $order->id,
+        //     'name' => $order->name,
+        //     'country' => $order->country,
+        //     'city' => $order->city,
+        //     'state' => $order->state,
+        //     'address' => $order->address,
+        //     'company' => $company->name,
+        //     'order_info' => $order->order_info,
+        //     'phone' => $order->phone,
+        //     'date' => $order->created_at,
+        //     'tracking_number' => $order->tracking_number,
+        //     'user_id' => $order->user_id
+        // ];
 
-        return $pdf->download('cargo_request.pdf');
+        // $pdf = PDF::loadView('userpanel.frontend.cargo_pdf', $data)->setPaper('a5', 'landscape');
+        // return $pdf->download('cargo_request.pdf');
     }
 
     public function cargorequests()
@@ -521,6 +587,15 @@ class UserPanelController extends Controller
 
         Cargo_request::where('id', $id)->update($data);
 
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Cargo Request updated',
+            'time' => Carbon::now()
+        );
+
+        Order_time::create($time_data);
+
         return Redirect::back()->with('message', 'Succesfully updated cargo details');
     }
 
@@ -529,9 +604,10 @@ class UserPanelController extends Controller
 
         $comissions = DB::table('comissions')->get();
         $payments = DB::table('payments')->where('userID', Auth::user()->id)->orderBy('created_at', 'desc')->get();
-        $kur = $this->getKur();
+        // $kur = $this->getKur();
+        $transactions = Transaction::where('user_id', Auth::user()->id)->get();
 
-        return view('userpanel.frontend.balance', compact('payments', 'comissions', 'kur'));
+        return view('userpanel.frontend.balance', compact('payments', 'comissions', 'transactions'));
     }
 
     public function getKur()
@@ -543,7 +619,7 @@ class UserPanelController extends Controller
         $name = $xml->Currency[$index]->CurrencyName;
         $buying = $xml->Currency[$index]->BanknoteBuying;
         $selling = $xml->Currency[$index]->BanknoteSelling;
-        return $selling;
+        return  response()->json($selling);
     }
 
     public function checkcomission(Request $request)
@@ -586,7 +662,6 @@ class UserPanelController extends Controller
     public function updateUserBalanceInfo(Request $request)
     {
         $request->request->remove('_token');
-        $request->request->remove('user_name');
         $keynput = collect(request()->all())->filter(function ($value) {
             return null !== $value;
         })->toArray();
@@ -608,6 +683,60 @@ class UserPanelController extends Controller
         MoneyBackRequest::create($data);
 
         return response()->json(array('message' => 'Money Back request sent'), 200);
+    }
+
+    public function cargo_companies()
+    {
+        return view('userpanel.frontend.cargo_companies');
+    }
+
+    public function marketplace()
+    {
+        return view('userpanel.frontend.marketplace');
+    }
+
+    public function updateMarket(Request $request)
+    {
+
+        $data = array();
+        $data["market_name"] = $request->market_name;
+        $data["api_key"] = $request->api_key;
+        $data["private_key"] = $request->private_key;
+
+        $user = UserModel::find(Auth::user()->id);
+        $user->integration = json_encode($data);
+        $user->update();
+
+        return Redirect::back()->with('message', 'market has been set to ' . $request->market_name . ' succesfully');
+    }
+
+    public function courier_request()
+    {
+        $orders = Cargo_request::where([
+            ['user_id', Auth::user()->id],
+            ['status', 0]
+        ])->orderBy('created_at', 'DESC')->get();
+        $courier_requests = Courier_request::where('user_id', Auth::user()->id)->get();
+        return view('userpanel.frontend.courier_request', compact('orders', 'courier_requests'));
+    }
+
+    public function post_courier_request(Request $request)
+    {
+        $data = array();
+
+        $request->request->remove('_token');
+        $data = collect(request()->all())->filter(function ($value) {
+            return null !== $value;
+        })->toArray();
+
+        $data['orders'] = json_encode($request->order_ids);
+        $data['user_id'] = Auth::user()->id;
+        $data['status'] = 'pending';
+        unset($data['order_ids']);
+
+        Courier_request::create($data);
+
+        return Redirect::back()->with('message', 'Courier Request applied succesfully');
     }
 }
 

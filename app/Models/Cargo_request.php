@@ -16,6 +16,7 @@ class Cargo_request extends Model
         'user_id',
         'cancel_comment',
         'order_type',
+        'tracking_number',
         'name',
         'country',
         'state',

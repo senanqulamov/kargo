@@ -56,8 +56,8 @@
                                     <td>{{ $comission->show_name }}</td>
                                     <td style="background: rgb(199, 150, 150);">
                                         <div class="payment_logo_div">
-                                            <img src="{{ asset('/') }}images/{{ $comission->image }}"
-                                                style="width:35%;" alt="">
+                                            <img src="{{ asset('/') }}images/{{ $comission->image }}" style="width:35%;"
+                                                alt="">
                                         </div>
                                     </td>
                                     <td>
@@ -65,8 +65,8 @@
                                             data-target="#modal-edit-{{ $comission->id }}"><i class="fas fa-edit"></i></a>
                                     </td>
                                     <td>
-                                        <a href="{{ route('admin.payments.deleteComission', ['id' => $comission->id]) }}"
-                                            class="btn btn-dark">
+                                        <a class="btn btn-dark" data-url="{{ route('admin.payments.deleteComission', ['id' => $comission->id]) }}"
+                                            onclick="confirmAction(this)">
                                             <i class="fa-solid fa-trash-can"></i>
                                         </a>
                                     </td>
@@ -179,4 +179,40 @@
         <!-- /.modal-dialog -->
     </div>
     <!-- /.modal -->
+
+    <script>
+        function confirmAction(button) {
+            var url = button.getAttribute('data-url');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure to delete?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Accept',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open(url , '_self');
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action cancelled',
+                        'error'
+                    )
+                }
+            })
+        }
+    </script>
 @endsection

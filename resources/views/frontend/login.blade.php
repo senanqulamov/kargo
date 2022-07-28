@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row mt-3">
+                        {{-- <div class="row mt-3">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="or-title">
@@ -89,7 +89,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </form>
             </div>
@@ -97,11 +97,11 @@
     </section>
 
     <div class="footer-login">
-        <div class="container">
+        <div>
             <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="footer-title">
-                        <h5>Don’t have account?<a href=""> Register</a></h5>
+                        <h5>Don’t have account?<a href="{{ route('register') }}"> Register</a></h5>
                     </div>
                 </div>
             </div>

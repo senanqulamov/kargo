@@ -39,10 +39,13 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <a href="#" class="btn btn-success" data-toggle="modal" data-target="#modal-add-new">Add New <i
+                            class="fas fa-add"></i></a>
                     <table id="example1" class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>Customer</th>
+                                <th>Customer ID</th>
+                                <th>Customer Name</th>
                                 <th>Approval Status</th>
                                 <th>Deny message</th>
                                 <th>Method</th>
@@ -66,11 +69,15 @@
                                             ->first();
                                     @endphp
                                     <td>
-                                        <a class="btn btn-info user_link_w_eye"
-                                            href="{{ route('admin.users.details', $user->id) }}">
-                                            {{ $user->name }}
-                                            <i class="fa-solid fa-up-right-from-square"></i>
-                                        </a>
+                                        <div class="orders-holder-hm">
+                                            <span class="badge rounded-pill bg-info user_id_badge"
+                                                onclick="window.open('{{ route('admin.users.details', $payment->userID) }}')">
+                                                010{{ $payment->userID ? $payment->userID : '---' }}20
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ $user->name }}
                                     </td>
                                     <td>
                                         <div class="approvel-td">
@@ -84,15 +91,24 @@
                                         </div>
                                     </td>
                                     <td><b>{{ $payment->deny_message }}</b></td>
-                                    <td>{{ $payment->method }}</td>
+                                    @php
+                                        $method = DB::table('comissions')
+                                            ->where('payment', $payment->method)
+                                            ->first();
+                                    @endphp
+                                    <td>
+                                        @if ($method)
+                                            {{ $method->show_name }}
+                                        @else
+                                            ---
+                                        @endif
+                                    </td>
                                     <td>{{ $payment->money_type }}</td>
                                     <td>{{ $payment->amount }}</td>
                                     <td>{{ $payment->comission }}</td>
                                     <td>{{ $payment->kur }}</td>
                                     <td>
                                         <a href="/files/payments/{{ $payment->document }}" target="_blank">
-                                            {{-- <img src="/files/payments/{{ $payment->document }}" class="img-fluid"
-                                                width="100" height="100" alt=""> --}}
                                             <button class="btn status" type="button"><i
                                                     class="fa-solid fa-eye"></i></button>
                                         </a>
@@ -111,8 +127,7 @@
                                         @endif
                                         @if ($payment->payment_status != '2')
                                             <a href="#" onclick="approvePayment(this)"
-                                                class="btn btn-success cardcredit"
-                                                data-payment-id="{{ $payment->id }}"><i
+                                                class="btn btn-success cardcredit" data-payment-id="{{ $payment->id }}"><i
                                                     class="fa-solid fa-check-to-slot"></i></a>
                                         @endif
                                     </td>
@@ -138,29 +153,40 @@
                                                         <div class="row">
                                                             <div class="form-group col">
                                                                 <label for="exampleInputEmail1">Payment method</label>
-                                                                <input type="text" class="form-control" name="method"
-                                                                    value="{{ $payment->method }}">
+                                                                @php
+                                                                    $methods = DB::table('comissions')->get();
+                                                                @endphp
+                                                                <select name="method" class="form-control">
+                                                                    @foreach ($methods as $method)
+                                                                        <option value="{{ $method->payment }}"
+                                                                            @if ($method->payment == $payment->method) selected @endif>
+                                                                            {{ $method->show_name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
                                                             </div>
                                                             <div class="form-group col">
                                                                 <label for="exampleInputEmail1">Amount</label>
-                                                                <input type="number" class="form-control" name="amount"
+                                                                <input type="text" class="form-control" name="amount"
                                                                     value="{{ $payment->amount }}">
                                                             </div>
                                                         </div>
                                                         <div class="row">
                                                             <div class="form-group col">
                                                                 <label for="exampleInputEmail1">Comission</label>
-                                                                <input type="number" class="form-control" name="comission"
+                                                                <input type="text" class="form-control" name="comission"
                                                                     value="{{ $payment->comission }}">
                                                             </div>
                                                             <div class="form-group col">
                                                                 <label for="exampleInputEmail1">Money type
-                                                                    ({{ $payment->money_type }})
                                                                 </label>
                                                                 <select name="money_type" class="form-control">
-                                                                    <option value="tl">tl</option>
-                                                                    <option value="euro">Euro</option>
-                                                                    <option value="usd">USD</option>
+                                                                    <option value="tl"
+                                                                        @if ($payment->money_type == 'tl') selected @endif>Tl
+                                                                    </option>
+                                                                    <option value="euro"
+                                                                        @if ($payment->money_type == 'euro') selected @endif>
+                                                                        Euro</option>
                                                                 </select>
                                                             </div>
 
@@ -186,31 +212,88 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modal-refund">
+
+    <div class="modal fade" id="modal-add-new">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Refund Payment</h4>
+                    <h4 class="modal-title">Add new Payment</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Account Number</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                placeholder="Enter customer transaction code">
+                    <form action="{{ route('admin.payments.addpayment') }}" method="POST" enctype="multipart/form-data">
+                        @csrf
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">User ID</label>
+                                @php
+                                    $users = DB::table('users')->get();
+                                @endphp
+                                <select name="user_id" class="form-control">
+                                    @foreach ($users as $user)
+                                        <option value="{{ $user->id }}">010{{ $user->id }}20 |
+                                            {{ $user->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">IBAN Number</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
-                                placeholder="Enter customer transaction code">
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Payment method</label>
+                                <select name="method" id="calculate_method" class="form-control"
+                                    onchange="calculateComission()">
+                                    <option value="" selected disabled>Select method</option>
+                                    @foreach ($methods as $method)
+                                        <option value="{{ $method->payment }}"
+                                            data-comission="{{ $method->comission }}">
+                                            {{ $method->show_name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Money type</label>
+                                <select name="money_type" class="form-control" onchange="calculateComission()"
+                                    id="calculate_money_type">
+                                    <option value="" selected disabled>Select Money type</option>
+                                    <option value="tl">Tl</option>
+                                    <option value="euro">Euro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Amount</label>
+                                <input type="number" class="form-control" name="amount"
+                                    onchange="calculateComission()" id="calculate_amount">
+                            </div>
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Comission</label>
+                                <input type="text" class="form-control" name="comission" id="calculate_comission"
+                                    readonly>
+                            </div>
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Kur</label>
+                                <input type="text" class="form-control" name="kur" value="{{ $kur }}"
+                                    id="calculate_kur" readonly>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Payment Image</label>
+                                <input type="file" class="form-control" name="document">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col">
+                                <textarea name="payment_comment" cols="60" rows="5" placeholder="Payment Commentss"></textarea>
+                            </div>
                         </div>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary">Send</button>
+                            <button type="submit" class="btn btn-primary">Add New Payment</button>
                         </div>
-
                     </form>
                 </div>
             </div>
@@ -218,43 +301,6 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
-    <!-- /.modal -->
-
-    <div class="modal fade" id="modalCard">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Card Details</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table mb-0">
-                        <tr>
-                            <td class="border-top-0 border-bottom"><b>Card Number:</b></td>
-                            <td class="border-top-0 border-bottom"><span id="number"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0 border-bottom"><b>Expired:</b></td>
-                            <td class="border-top-0 border-bottom"><span id="expired"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0 border-bottom"><b>CVV:</b></td>
-                            <td class="border-top-0 border-bottom"><span id="cvv"></span></td>
-                        </tr>
-                        <tr>
-                            <td class="border-top-0 border-bottom"><b>Card Holder:</b></td>
-                            <td class="border-top-0 border-bottom"><span id="holder"></span></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
 @endsection
 
 @section('js')
@@ -266,12 +312,12 @@
                 title: "Deny Message",
                 text: "Write something for deny:",
                 input: 'text',
-                showCancelButton: false
+                showCancelButton: true
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
                         type: 'POST',
-                        url: '/admin/payments/denyPayment',
+                        url: '{{ route('admin.payments.denyPayment') }}',
                         headers: {
                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
@@ -289,6 +335,7 @@
                                 backdrop: false,
                                 timer: 2000
                             })
+                            window.location.reload();
                         }
                     });
                 }
@@ -298,27 +345,77 @@
         function approvePayment(button) {
             var id = button.getAttribute('data-payment-id');
 
-            $.ajax({
-                type: 'POST',
-                url: '/admin/payments/approvePayment',
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
                 },
-                data: {
-                    id: id,
-                    payment_status: 2
-                },
-                success: function(data) {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: data.message,
-                        showConfirmButton: false,
-                        backdrop: false,
-                        timer: 2000
-                    })
+                buttonsStyling: true
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Accept',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        type: 'POST',
+                        url: '{{ route('admin.payments.approvePayment') }}',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        data: {
+                            id: id,
+                            payment_status: 2
+                        },
+                        success: function(data) {
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: data.message,
+                                showConfirmButton: false,
+                                backdrop: false,
+                                timer: 2000
+                            })
+                            window.location.reload();
+                        }
+                    });
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action cancelled',
+                        'error'
+                    )
                 }
-            });
+            })
+        }
+    </script>
+
+    <script>
+        function calculateComission() {
+            var method_select = document.querySelector('#calculate_method');
+            var method = method_select.options[method_select.selectedIndex];
+            method = method.dataset.comission;
+
+            var money_type = document.querySelector('#calculate_money_type').value;
+            var amount = document.querySelector('#calculate_amount').value;
+            var kur = document.querySelector('#calculate_kur').value;
+
+            var comission = 0;
+
+            if (money_type == "tl") {
+                amount = parseFloat(amount / kur).toFixed(2);
+            }
+            comission = amount - (amount * method) / 100;
+
+            document.querySelector('#calculate_comission').value = parseFloat(comission).toFixed(2);
         }
     </script>
 @endsection

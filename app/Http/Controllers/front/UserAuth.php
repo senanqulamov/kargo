@@ -24,7 +24,8 @@ class UserAuth extends Controller
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'country' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'gender' => 'required'
         ]);
 
         if (Usermodel::where('email', '=', $request->email)->count() > 0) {
@@ -54,6 +55,11 @@ class UserAuth extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'country' => $request->country,
+            'gender' => $request->gender,
+            'user_market' => $request->user_market,
+            'from_where' => $request->from_where,
+            'promotion_code' => $request->promotion_code,
+            'average_requests' => $request->average_requests,
             'password' => $password
         );
         $user = UserModel::create($credentials);

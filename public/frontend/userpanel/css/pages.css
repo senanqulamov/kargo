@@ -40,7 +40,7 @@
 .fa-phone{color:#00ffb2}
 .headerIcon{border-radius:50%;color:#fff;border:.1rem solid #18bdf6;background-color:#18bdf6;padding:.5rem 1rem}
 .red{color:red}
-.defaultCheckbox input,label{color:#ff912c;font-weight:700}
+/* .defaultCheckbox input,label{color:#ff912c;font-weight:700} */
 .commonIcon{border-radius:50%;color:#fff;border:.1rem solid #18bdf6;background-color:#18bdf6;padding:.5rem}
 .totalText{font-size:1.3rem;font-weight:700}
 .fa-tag{color:#fff}

@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\User as UserModel;
+use Illuminate\Foundation\Auth\User;
 use Validator;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Mail;
 
 
 class UserController extends Controller
@@ -61,5 +63,25 @@ class UserController extends Controller
         } else {
             return Redirect::back()->with('message', "Couldn't update user password");
         }
+    }
+
+    public function sendEmail(Request $request){
+
+        $user = User::where('email' , '=' , $request->email)->get()->first();
+        $email_data = array(
+            'name' => $user->name,
+            'email' => $user->email,
+            'admin_message' => $request->message
+        );
+
+        // dd($request->message);
+
+        Mail::send('backend.mails.sendemailtouser', $email_data, function ($message) use ($email_data) {
+            $message->to($email_data['email'], $email_data['name'])
+                ->subject('ShipLounge Notification')
+                ->from('noreply@shiplounge.co', 'ShipLounge');
+        });
+
+        return Redirect::back()->with('message' , 'Email sent to '.$user->email);
     }
 }

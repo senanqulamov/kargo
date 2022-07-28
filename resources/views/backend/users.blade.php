@@ -61,10 +61,10 @@
                                     <td>
                                         010{{ $user->id }}20
                                     </td>
-                                    <td class="user_role_{{ $user->is_admin }}">
+                                    <td class="user_role_{{ $user->user_role }}">
                                         @php
                                             $user_role = DB::table('user_roles')
-                                                ->where('role_id', $user->is_admin)
+                                                ->where('role_id', $user->user_role)
                                                 ->first();
                                         @endphp
                                         {{ $user_role->role_name }}

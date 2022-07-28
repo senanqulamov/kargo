@@ -44,13 +44,14 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>View/Edit Details</th>
+                                <th>View</th>
                                 <th>Download PDF</th>
                                 <th>Cargo ID</th>
                                 <th>User ID</th>
                                 <th>Date</th>
                                 <th>Order Status</th>
                                 <th>Order Type</th>
+                                <th>Tracking Number</th>
                                 <th>Packages / Status</th>
                                 <th>Customer name</th>
                                 <th>Phone</th>
@@ -83,33 +84,34 @@
                                 <tr>
                                     <td>
                                         <div class="edit_view_buttons_div">
-                                            <a href="#" class="btn btn-info"
-                                                data-toggle="modal"data-target="#modal-view-{{ $cargo->id }}">
+                                            <a href="#" class="btn btn-info" data-toggle="modal"
+                                                data-target="#modal-view-{{ $cargo->id }}">
                                                 <i class="fa-solid fa-eye"></i>
-                                            </a>
-                                            <a href="{{ route('admin.cargo-requests.cargo_details', ['id' => $cargo->id]) }}"
-                                                class="btn btn-info">
-                                                <i class="fa-solid fa-pen"></i>
                                             </a>
                                         </div>
                                     </td>
                                     <td>
                                         <div style="display: flex;justify-content:center;">
-                                            <a
-                                                href="{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}">
+                                            <a href="{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}">
                                                 <i class="fa-solid fa-arrow-down navigation__icon"></i>
                                             </a>
                                         </div>
                                     </td>
-                                    <td>{{ $cargo->id ? $cargo->id : '---' }}</td>
                                     <td>
-                                        <a href="{{ route('admin.users.details', $cargo->user_id) }}"
-                                            class="badge rounded-pill bg-info user_id_badge"
-                                            target="__blank">
-                                            010{{ $cargo->user_id ? $cargo->user_id : '---' }}20
-                                            <i class="fa-solid fa-up-right-from-square"></i>
-                                        </a>
+                                        <div class="orders-holder-hm">
+                                            <span class="badge rounded-pill bg-info user_id_badge"
+                                                onclick="window.open('{{ route('admin.cargo-requests.cargo_details', $cargo->id) }}' , '_self')">
+                                                {{ $cargo->id }}
+                                            </span>
+                                        </div>
                                     </td>
+                                    <td>
+                                        <div class="orders-holder-hm">
+                                            <span class="badge rounded-pill bg-info user_id_badge"
+                                                onclick="window.open('{{ route('admin.users.details', $cargo->user_id) }}')">
+                                                010{{ $cargo->user_id ? $cargo->user_id : '---' }}20
+                                            </span>
+                                        </div>                                    </td>
                                     <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
                                     @php
                                         $status = DB::table('package_statuses')
@@ -127,6 +129,7 @@
                                     <td>
                                         {{ $cargo->order_type }}
                                     </td>
+                                    <td>{{ $cargo->tracking_number ? $cargo->tracking_number : '---' }}</td>
                                     <td>
                                         <div class="packages packages_td">
                                             @foreach ($packages->where('cargo_id', $cargo->id) as $package)
@@ -151,7 +154,7 @@
                                                 ->get()
                                                 ->first();
                                         @endphp
-                                        {{ $currency->currency_name ? $currency->currency_code.' / '.$currency->currency_name : '---' }}
+                                        {{ $currency->currency_name ? $currency->currency_code . ' / ' . $currency->currency_name : '---' }}
                                     </td>
                                     <td>{{ $cargo->total_cargo_price ? $cargo->total_cargo_price : '---' }} €</td>
                                     <td>{{ $cargo->total_volume ? $cargo->total_volume : '---' }} m3</td>
@@ -187,8 +190,10 @@
                                             ->first();
                                     @endphp
                                     <td>
-                                        <img style="width:60px;"
-                                            src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $cargo_company->logo == null ? 'user.png' : $cargo_company->logo }}" />
+                                        @if ($cargo_company)
+                                            <img style="width:60px;"
+                                                src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $cargo_company->logo == null ? 'user.png' : $cargo_company->logo }}" />
+                                        @endif
                                     </td>
                                     <td>{{ $cargo->battery == 'yes' ? 'Yes' : 'No' }}</td>
                                     <td>{{ $cargo->liquid == 'yes' ? 'Yes' : 'No' }}</td>

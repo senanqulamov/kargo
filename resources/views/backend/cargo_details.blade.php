@@ -150,12 +150,13 @@
                                         <a href="{{ route('admin.cargo-requests.submit_order', ['id' => $cargo_id]) }}"
                                             class="btn btn-info">Submit order</a>
                                     @endif
-                                    @if ($cargo->status != 5)
+                                    @if ($cargo->status != 5 && $cargo->status != 4)
                                         <a href="#" class="btn btn-danger" data-toggle="modal"
                                             data-target="#modal-cancel-order">
                                             Cancel Order
                                         </a>
-                                    @else
+                                    @endif
+                                    @if ($cargo->status == 5)
                                         <a href="{{ route('admin.cargo-requests.revert_order', ['id' => $cargo_id]) }}"
                                             class="btn btn-info">
                                             Revert Order
@@ -181,7 +182,17 @@
                                         010{{ $cargo->user_id ? $cargo->user_id : '---' }}20
                                         <i class="fa-solid fa-up-right-from-square"></i>
                                     </a>
+                                    <a href="{{ route('admin.cargo-requests.cargo_logs_with_id', $cargo_id) }}"
+                                        class="badge rounded-pill bg-info user_id_badge">
+                                        Cargo Logs
+                                        <i class="fa-solid fa-up-right-from-square"></i>
+                                    </a>
                                 </h4>
+                                <div class="col-4 d-flex flex-column py-3">
+                                    <label for="tracking_number" class="labelCustom">Tracking Number</label>
+                                    <input class="form-control" type="text" name="tracking_number"
+                                        value="{{ $cargo->tracking_number }}" />
+                                </div>
                                 <div class="row form-group">
                                     <div class="col d-flex flex-column py-3">
                                         <label for="name" class="labelCustom">Name</label>
@@ -363,27 +374,29 @@
                                         $services = json_decode($cargo->additional_services);
                                         $services = json_decode(json_encode($services), true);
                                     @endphp
-                                    @foreach ($services as $key => $value)
-                                        <div class="col-12 col-md-4">
-                                            <ul class="list-group list-group-horizontal mb-2">
-                                                <li class="list-group-item w-75 d-flex text-left">
-                                                    <div class="form-check">
-                                                        <input
-                                                            class="form-check-input cargo_price_input {{ $key }}_input"
-                                                            type="checkbox" data-price="{{ $value }}"
-                                                            name="additional_services[{{ $key }}]"
-                                                            id="{{ $key }}" value="{{ $value }}"
-                                                            checked />
-                                                    </div>
-                                                    {{ $key }}
-                                                </li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2 {{ $key }}_span">{{ $value }}
-                                                        €</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    @endforeach
+                                    @if ($services)
+                                        @foreach ($services as $key => $value)
+                                            <div class="col-12 col-md-4">
+                                                <ul class="list-group list-group-horizontal mb-2">
+                                                    <li class="list-group-item w-75 d-flex text-left">
+                                                        <div class="form-check">
+                                                            <input
+                                                                class="form-check-input cargo_price_input {{ $key }}_input"
+                                                                type="checkbox" data-price="{{ $value }}"
+                                                                name="additional_services[{{ $key }}]"
+                                                                id="{{ $key }}" value="{{ $value }}"
+                                                                checked />
+                                                        </div>
+                                                        {{ $key }}
+                                                    </li>
+                                                    <li class="list-group-item d-flex">
+                                                        <span class="me-2 {{ $key }}_span">{{ $value }}
+                                                            €</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        @endforeach
+                                    @endif
                                 </div>
                                 <div class="row form-group">
                                     <p>
@@ -638,8 +651,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('admin.cargo-requests.cancel_order', ['id' => $cargo_id]) }}"
-                        method="POST">
+                    <form action="{{ route('admin.cargo-requests.cancel_order', ['id' => $cargo_id]) }}" method="POST">
                         @csrf
                         <div class="row form-group">
                             <div class="col d-flex flex-column py-3">

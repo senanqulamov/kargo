@@ -39,11 +39,6 @@
         #upload {
             cursor: pointer;
         }
-
-        /* table.dataTable thead th,
-            table.dataTable tbody td {
-                white-space: nowrap;
-            } */
     </style>
     <section id="balance" class="balance">
 
@@ -126,7 +121,7 @@
                                     <h6 class="balance__download-text--1">Bakiye yukle</h6>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="balance__download-text--2">Euro Selling Rate : {{ $kur }}</h6>
+                                    <h6 class="balance__download-text--2 kur-show-text">Euro Selling Rate : </h6>
                                 </div>
                             </div>
 
@@ -232,8 +227,7 @@
                                             <div class="balance__cards-box {{ $comission->css_class }}">
                                                 <div class="form-check form-check-inline  mt-4">
                                                     <input class="form-check-input payment-radio" type="radio"
-                                                        name="payment" id="payment1"
-                                                        value="{{ $comission->payment }}">
+                                                        name="payment" id="payment1" value="{{ $comission->payment }}">
 
                                                 </div>
 
@@ -286,13 +280,14 @@
                                 <div class="balance__input-file">
                                     <input type="text" class="form-control" name="balance" id="balance_input"
                                         onchange="checkComission()">
-                                    <input type="text" name="kur" value="{{$kur}}" hidden>
+                                    <input type="text" name="kur" hidden>
                                 </div>
 
                             </div>
                             <div class="col-sm-4">
                                 <div class="balance__input-file">
-                                    <select class="form-select" aria-label="Default select example" name="money_type" id="money_type">
+                                    <select class="form-select" aria-label="Default select example" name="money_type"
+                                        id="money_type">
                                         <option selected value="tl">Turk lirasi</option>
                                         <option value="euro">Euro</option>
                                         {{-- <option value="usd">USD</option> --}}
@@ -367,73 +362,120 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h6 class="balance__download-text--2">Euro Selling Rate : {{ $kur }}</h6>
+                                <h6 class="balance__download-text--2 kur-show-text">Euro Selling Rate : </h6>
                             </div>
                         </div>
                     </div>
 
                 </div>
 
-
-                <div class="payments_table_div card-body">
-                    <table id="example1" class="table table-bordered table-striped" style="width:100%;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Created at</th>
-                                <th>Approval status</th>
-                                <th>Deny Message</th>
-                                <th>Method</th>
-                                <th>Money Type</th>
-                                <th>Amount</th>
-                                <th>Comission</th>
-                                <th>Kur</th>
-                                <th>Document</th>
-                                <th>Payment Comment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($payments as $payment)
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Payment History</h3>
+                    </div>
+                    <div class="payments_table_div card-body">
+                        <table id="payment_history" class="table table-bordered table-striped" style="width:100%;">
+                            <thead>
                                 <tr>
-                                    <td>{{ $payment->id }}</td>
-                                    <td>{{ $payment->created_at }}</td>
-                                    <td>
-                                        <div class="approvel-td">
-                                            @if ($payment->payment_status == '0')
-                                                <span class="badge rounded-pill bg-warning">Pending</span>
-                                            @elseif ($payment->payment_status == '1')
-                                                <span class="badge rounded-pill bg-danger">Denied</span>
-                                            @else
-                                                <span class="badge rounded-pill bg-success">Approved</span>
-                                            @endif
-                                        </div>
-                                    </td>
-                                    <td>
-                                        {{ $payment->deny_message }}
-                                    </td>
-                                    <td>{{ $payment->method }}</td>
-                                    <td>{{ $payment->money_type }}</td>
-                                    <td>{{ $payment->amount }}</td>
-                                    <td>{{ $payment->comission }}</td>
-                                    <td>{{ $payment->kur }}</td>
-                                    <td>
-                                        <div class="approvel-td">
-                                            <a href="/files/payments/{{ $payment->document }}" target="_blank">
-                                                <button class="btn btn-info" type="button"><i
-                                                        class="fa-solid fa-eye"></i></button>
-                                            </a>
-                                        </div>
-                                    </td>
-                                    <td>{{ $payment->payment_comment }}</td>
+                                    <th>ID</th>
+                                    <th>Created at</th>
+                                    <th>Approval status</th>
+                                    <th>Deny Message</th>
+                                    <th>Method</th>
+                                    <th>Money Type</th>
+                                    <th>Amount</th>
+                                    <th>Comission</th>
+                                    <th>Kur</th>
+                                    <th>Document</th>
+                                    <th>Payment Comment</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach ($payments as $payment)
+                                    <tr>
+                                        <td>{{ $payment->id }}</td>
+                                        <td>{{ $payment->created_at }}</td>
+                                        <td>
+                                            <div class="approvel-td">
+                                                @if ($payment->payment_status == '0')
+                                                    <span class="badge rounded-pill bg-warning">Pending</span>
+                                                @elseif ($payment->payment_status == '1')
+                                                    <span class="badge rounded-pill bg-danger">Denied</span>
+                                                @else
+                                                    <span class="badge rounded-pill bg-success">Approved</span>
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td>
+                                            {{ $payment->deny_message }}
+                                        </td>
+                                        <td>{{ $payment->method }}</td>
+                                        <td>{{ $payment->money_type }}</td>
+                                        <td>{{ $payment->amount }} €</td>
+                                        <td>{{ $payment->comission }} €</td>
+                                        <td>{{ $payment->kur }}</td>
+                                        <td>
+                                            <div class="approvel-td">
+                                                <a href="/files/payments/{{ $payment->document }}" target="_blank">
+                                                    <button class="btn btn-info" type="button"><i
+                                                            class="fa-solid fa-eye"></i></button>
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>{{ $payment->payment_comment }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-
-
+                <br>
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Money transactions History</h3>
+                    </div>
+                    <div class="payments_table_div card-body">
+                        <table id="transaction_history" class="table table-bordered table-striped" style="width:100%;">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Transfer method</th>
+                                    <th>Old Balance</th>
+                                    <th>New Balance</th>
+                                    <th>Payment ID</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($transactions as $transaction)
+                                    <tr>
+                                        <td>{{ $transaction->id }}</td>
+                                        <td>
+                                            <div style="display: flex;justify-content:center">
+                                                @if ($transaction->transfer_method == 'Payment Deny' ||
+                                                    $transaction->transfer_method == 'Cargo payment returned for cancel')
+                                                    <span class="badge rounded-pill bg-warning">
+                                                        {{ $transaction->transfer_method }}
+                                                    </span>
+                                                @else
+                                                    <span class="badge rounded-pill bg-info">
+                                                        {{ $transaction->transfer_method }}
+                                                    </span>
+                                                @endif
+                                            </div>
+                                        </td>
+                                        <td>{{ $transaction->old_balance }} €</td>
+                                        <td>{{ $transaction->new_balance }} €</td>
+                                        <td>{{ $transaction->payment_id }}</td>
+                                        <td>{{ $transaction->created_at }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </section>
+
 
 
             <section id="balance__download-btn-3">
@@ -451,7 +493,7 @@
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h6 class="balance__download-text--2">Euro Selling Rate : {{ $kur }}</h6>
+                                <h6 class="balance__download-text--2 kur-show-text">Euro Selling Rate : </h6>
                             </div>
                         </div>
 
@@ -475,7 +517,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="balance__iban-input  balance__iban-input--1">
                                             <h6>Hesab Sahibinin adi ve nomresi</h6>
-                                            <input type="text" name="user_name">
+                                            <input type="text" name="balance_name">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -503,13 +545,74 @@
                 </div>
 
             </section>
+
         </div>
     </section>
+
 
     <script src="{{ asset('/') }}frontend/userpanel/js/tabttn.js"></script>
     <script src="{{ asset('/') }}frontend/userpanel/js/customer.js"></script>
 
     <script>
+        var kur = 0;
+
+        $(document).ready(function() {
+            $.ajax({
+                type: 'GET',
+                url: '{{ route('userpanel.getKur') }}',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                beforeSend: function() {
+                    let timerInterval
+                    Swal.fire({
+                        position: 'top-right',
+                        title: 'Loading Euro selling rate',
+                        backdrop: false,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    });
+                },
+                complete: function() {
+                    Swal.hideLoading();
+                },
+                success: function(data) {
+                    Swal.fire({
+                        position: 'top-right',
+                        icon: 'success',
+                        title: 'Euro selling rate loaded succesfully',
+                        backdrop: true,
+                        confirmButton:true
+                    });
+
+                    console.log(data);
+                    if (data[0] > 0) {
+                        kur = data[0];
+                    }
+                    var kur_texts = document.querySelectorAll('.kur-show-text');
+                    kur_texts.forEach(element => {
+                        element.innerHTML = "Euro Selling Rate : " + kur;
+                    });
+                    document.querySelector('input[name="kur"]').value = kur;
+                    console.log(document.querySelector('input[name="kur"]').value);
+                },
+                error: function(error){
+                    Swal.fire({
+                        position: 'top-right',
+                        icon: 'error',
+                        title: 'Couldnt load Euro selling rate',
+                        backdrop: true,
+                        confirmButton:false,
+                        html: `
+                            <button class="btn btn-info" onclick="window.reload()">Reload Page</button>
+                        `
+                    });
+                }
+            });
+        });
+
         var rad = document.querySelectorAll('.payment-radio');
 
         for (var i = 0; i < rad.length; i++) {
@@ -523,8 +626,7 @@
             var balance = parseFloat(document.querySelector("#balance_input").value);
             var money_type = document.querySelector("#money_type").value;
 
-            if(money_type == "tl"){
-                var kur = {{ $kur }};
+            if (money_type == "tl") {
                 balance = parseFloat(balance / kur).toFixed(2);
                 console.log(balance);
             }
@@ -546,10 +648,10 @@
                     balance: balance
                 },
                 success: function(data) {
-                    document.querySelector("input[name=comission]").value = parseFloat(data.comission).toFixed(2);
+                    document.querySelector("input[name=comission]").value = parseFloat(data.comission).toFixed(
+                        2);
                 }
             });
         }
     </script>
 @endsection
-

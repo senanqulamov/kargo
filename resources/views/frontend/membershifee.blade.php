@@ -11,7 +11,7 @@
             <div class="col-lg-12">
                 <div class="title">
                     <h2>Membership Fees</h2>
-                    <span>Choose the most suitable package for you, easily manage all 
+                    <span>Choose the most suitable package for you, easily manage all
                         your orders from a single point.</span>
                 </div>
             </div>
@@ -20,8 +20,8 @@
             <div class="col-lg-12">
                 <div class="title">
                     <h2>Great Support for E-Export from ShipLounge!</h2>
-                    <span>In this difficult time we are in, you can use any of the ShipLounge software  packages free of 
-                        charge until 30 June  2021 to encourage you, our valued sellers, to e-export, to 
+                    <span>In this difficult time we are in, you can use any of the ShipLounge software  packages free of
+                        charge until 30 June  2021 to encourage you, our valued sellers, to e-export, to
                         enable you to manage your order from a single screen and to save a lot of time.</span>
                 </div>
             </div>
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button>Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button>Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -182,7 +182,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button>Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -249,7 +249,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button>Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -310,11 +310,11 @@
                 <div class="left-free">
                     <h2>Want to try for free?</h2>
                     <span>With our technological solutions, you can bot
-                        facilitate the operation of your 
-                        orders and provide your customers with a 
-                        pleasant delivery experience thanks to our 
+                        facilitate the operation of your
+                        orders and provide your customers with a
+                        pleasant delivery experience thanks to our
                         end-to-end logistics service.</span>
-                    <button>Start now</button>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">Start now</button>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">

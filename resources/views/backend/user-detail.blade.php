@@ -22,6 +22,7 @@
     @endif
     <style>
         #is_admin,
+        #user_role,
         #balance {
             border: 1px dashed #08f475;
         }
@@ -61,6 +62,8 @@
                         <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">General
                                 Information</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Change Password</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="#sendemail" data-toggle="tab">Send Email</a>
                         </li>
                     </ul>
                 </div>
@@ -178,20 +181,31 @@
                                             id="balance" name="balance" value="{{ $user->balance }}" />
                                     </div>
                                 </div>
+                                @php
+                                    $user_roles = DB::table('user_roles')->get();
+                                @endphp
                                 <div class="row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="is_admin">Is Admin</label>
-                                            @php
-                                                $user_roles = DB::table('user_roles')->get();
-                                            @endphp
-                                            <select name="is_admin" id="is_admin" class="form-control">
+                                            <label for="user_role">User Role</label>
+                                            <select name="user_role" id="user_role" class="form-control">
                                                 @foreach ($user_roles as $role)
                                                     <option value="{{ $role->role_id }}"
-                                                        @if ($user->is_admin == $role->role_id) selected @endif>
+                                                        @if ($user->user_role == $role->role_id) selected @endif>
                                                         {{ $role->role_name }}
                                                     </option>
                                                 @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="is_admin">Is Admin</label>
+                                            <select name="is_admin" id="is_admin" class="form-control">
+                                                <option value="0" @if ($user->is_admin == '0') selected @endif>Not Admin</option>
+                                                <option value="1" @if ($user->is_admin == '1') selected @endif>
+                                                    Admin
+                                                </option>
                                             </select>
                                         </div>
                                     </div>
@@ -203,8 +217,7 @@
                         </div>
                         <div class="tab-pane" id="settings">
                             <form class="form-horizontal" method="post"
-                                action="{{ route('admin.users.password.update', $user->id) }}"
-                                id="editGeneralPassword">
+                                action="{{ route('admin.users.password.update', $user->id) }}" id="editGeneralPassword">
                                 @csrf
                                 <div class="form-group">
                                     <label for="password" class="col-form-label">New Password</label>
@@ -213,6 +226,24 @@
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success">Update</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="tab-pane" id="sendemail">
+                            <form class="form-horizontal" method="post" action="{{ route('admin.users.sendemail') }}"
+                                id="sendEmailForm">
+                                @csrf
+                                <div class="form-group">
+                                    <label for="email" class="col-form-label">email</label>
+                                    <input type="text" class="form-control" id="email" name="email"
+                                        value="{{ $user->email }}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message" class="col-form-label">Message</label>
+                                    <input type="text" class="form-control" id="message" name="message">
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success">Send</button>
                                 </div>
                             </form>
                         </div>

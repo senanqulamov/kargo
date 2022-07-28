@@ -14,7 +14,7 @@
                     <p>ShipLounge We are aware of the importance of just-in-time shipment in terms of business efficiency and prestige of our valued customers, and we make our expertise in air transportation speak. Thanks to our wide agency network,
                         we easily transport all your cargo to important commercial points in the world by air.
                     </p>
-                    <button>Start now</button>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">Start now</button>
                 </div>
             </div>
             <div class="col-lg-6">

@@ -20,6 +20,7 @@ use App\Http\Controllers\admin\{
 	DomesticCompanyController,
 	WarehouseController,
 	AdditionalServiceController,
+    CourierRequest,
 };
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\CareerController;
@@ -106,6 +107,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		Route::post('/users/update/general/{id}', [UserController::class, 'updateUserGeneral'])->name('users.general.update');
 		Route::post('/users/update/password/{id}', [UserController::class, 'updateUserPassword'])->name('users.password.update');
 
+		Route::post('/users/sendemail', [UserController::class, 'sendEmail'])->name('users.sendemail');
+
 		// order
 		Route::prefix('orders/')->name('orders.')->group(function(){
 			Route::get('/', [ManuelOrderController::class, 'index'])->name('index');
@@ -113,8 +116,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
         Route::prefix('cargo-requests/')->name('cargo-requests.')->group(function(){
 			Route::get('/cargo-request-index', [ManuelOrderController::class, 'cargoRequests'])->name('index');
-			Route::get('/packages', [ManuelOrderController::class, 'packages'])->name('packages');
 			Route::get('/cargo_details/{id}', [ManuelOrderController::class, 'cargo_details'])->name('cargo_details');
+			Route::post('/cargo_update/{id}', [ManuelOrderController::class, 'cargo_update'])->name('cargo_update');
+			Route::get('/packages', [ManuelOrderController::class, 'packages'])->name('packages');
+
+			Route::get('/courier_requests', [CourierRequest::class, 'courier_requests'])->name('courier_requests');
+			Route::get('/myorders', [CourierRequest::class, 'myorders'])->name('myorders');
+			Route::post('/update_courier_request', [CourierRequest::class, 'update_courier_request'])->name('update_courier_request');
+			Route::post('/status_courier_request', [CourierRequest::class, 'status_courier_request'])->name('status_courier_request');
 
 			Route::get('/submit_order/{id}', [ManuelOrderController::class, 'submit_order'])->name('submit_order');
 			Route::get('/post_on_wait/{id}', [ManuelOrderController::class, 'post_on_wait'])->name('post_on_wait');
@@ -122,7 +131,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::post('/cancel_order/{id}', [ManuelOrderController::class, 'cancel_order'])->name('cancel_order');
 			Route::get('/revert_order/{id}', [ManuelOrderController::class, 'revert_order'])->name('revert_order');
 
-			Route::post('/cargo_update/{id}', [ManuelOrderController::class, 'cargo_update'])->name('cargo_update');
+			Route::get('/cargo_logs', [ManuelOrderController::class, 'cargo_logs'])->name('cargo_logs');
+			Route::get('/cargo_logs/{id}', [ManuelOrderController::class, 'cargo_logs_with_id'])->name('cargo_logs_with_id');
 		});
 
         Route::prefix('scanners/')->name('scanners.')->group(function(){
@@ -152,6 +162,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
 				Route::put('/update', [MessageController::class, 'updateCategory'])->name('update');
 				Route::get('/delete/{id}', [MessageController::class, 'deleteCategory'])->name('delete');
 			});
+
+            Route::get('/notifications', [MessageController::class, 'showNotifications'])->name('showNotifications');
+            Route::post('/add-notification', [MessageController::class, 'addNotification'])->name('addNotification');
+            Route::get('/disable-notification/{id}', [MessageController::class, 'disableNotification'])->name('disableNotification');
+            Route::get('/activate-notification/{id}', [MessageController::class, 'activateNotification'])->name('activateNotification');
+            Route::get('/delete-notification/{id}', [MessageController::class, 'deleteNotification'])->name('deleteNotification');
 		});
 
 		//faqs
@@ -176,7 +192,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/cargo', [CargoCompanyController::class, 'index'])->name('cargo');
 			Route::post('/cargo/create', [CargoCompanyController::class, 'create'])->name('cargo.create');
 			Route::get('/cargo/edit', [CargoCompanyController::class, 'edit'])->name('cargo.edit');
-			Route::put('/cargo/update', [CargoCompanyController::class, 'update'])->name('cargo.update');
+			Route::post('/cargo/update', [CargoCompanyController::class, 'update'])->name('cargo.update');
+
 			Route::get('/cargo/delete/{id}', [CargoCompanyController::class, 'delete'])->name('cargo.delete');
 			Route::post('/cargo/upload', [CargoCompanyController::class, 'upload'])->name('cargo.upload');
 			Route::get('/download/list', [CargoCompanyController::class, 'downloadList'])->name('cargo.download.list');
@@ -243,7 +260,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 		// balance
 		Route::prefix('payments/')->name('payments.')->group(function(){
-			Route::get('/balance', [BalanceController::class, 'balance'])->name('balance');
+			Route::get('/transactions', [BalanceController::class, 'transactions'])->name('transactions');
 			Route::get('/payments', [BalanceController::class, 'payments'])->name('payments');
 			Route::get('/comissions', [BalanceController::class, 'comissions'])->name('comissions');
             Route::get('/moneyBackRequests', [BalanceController::class, 'moneyBackRequests'])->name('moneyBackRequests');
@@ -255,6 +272,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::post('/updateComission', [BalanceController::class, 'updateComission'])->name('updateComission');
 			Route::post('/addnewComission', [BalanceController::class, 'addnewComission'])->name('addnewComission');
 			Route::get('/deleteComission/{id}', [BalanceController::class, 'deleteComission'])->name('deleteComission');
+
+			Route::post('/addpayment', [BalanceController::class, 'addPayment'])->name('addpayment');
 		});
 
 		//wardrobe
@@ -302,9 +321,11 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::get('/viewCargoDetails/{id}', [UserPanelController::class, 'viewCargoDetails'])->name('viewCargoDetails');
 
         Route::post('/updateuser', [UserPanelController::class, 'updateuser'])->name('updateuser');
-        Route::post('/updateuser', [UserPanelController::class, 'updateuser'])->name('updateuser');
         Route::post('/deleteuseraddress/{address_id}', [UserPanelController::class, 'deleteuseraddress'])->name('delete_user_address');
         Route::post('/updatemyprofile', [UserPanelController::class, 'updatemyprofile'])->name('updatemyprofile');
+
+        Route::get('/getuseraddress', [UserPanelController::class, 'getuseraddress'])->name('getuseraddress');
+        Route::post('/adduseraddress', [UserPanelController::class, 'adduseraddress'])->name('adduseraddress');
         Route::post('/updateuseraddress', [UserPanelController::class, 'updateuseraddress'])->name('updateuseraddress');
 
 
@@ -319,10 +340,20 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
 
 
         Route::get('/balance', [UserPanelController::class, 'balance'])->name('balance');
+        Route::get('/getKur', [UserPanelController::class, 'getKur'])->name('getKur');
+
         Route::post('/update-balance', [UserPanelController::class, 'updateBalance'])->name('update_balance');
         Route::post('/check-comission', [UserPanelController::class, 'checkcomission'])->name('checkcomission');
         Route::post('/updateUserBalanceInfo', [UserPanelController::class, 'updateUserBalanceInfo'])->name('updateUserBalanceInfo');
         Route::post('/postMoneyBackRequest', [UserPanelController::class, 'postMoneyBackRequest'])->name('postMoneyBackRequest');
+
+        Route::get('/courier_request', [UserPanelController::class, 'courier_request'])->name('courier_request');
+        Route::post('/post_courier_request', [UserPanelController::class, 'post_courier_request'])->name('post_courier_request');
+
+        Route::get('/cargo_companies', [UserPanelController::class, 'cargo_companies'])->name('cargo_companies');
+        Route::get('/marketplace', [UserPanelController::class, 'marketplace'])->name('marketplace');
+
+        Route::post('/updateMarket', [UserPanelController::class, 'updateMarket'])->name('updateMarket');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

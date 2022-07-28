@@ -48,7 +48,7 @@
     <div class="container">
         <form action="{{route('index.calculate')}}" method="post" id="price_calc">
             @csrf
-            <div class="row my-3 calculateBox align-items-center">            
+            <div class="row my-3 calculateBox align-items-center">
                 <div class="calculate-title">
                     <h4>Country</h4>
                 </div>
@@ -91,7 +91,7 @@
                     <div class="calculate-content">
                         <button type="submit">Calculate</button>
                     </div>
-                </div>          
+                </div>
             </div>
         </form>
     </div>
@@ -143,13 +143,13 @@
                     <div class="packing-number">
                         <h3>1$ + KDV</h3>
                     </div>
-                    <button>Sign up</button>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">Sign up</button>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="packing">
                     <div class="packing-title">
-                        <h4>0-1 Kg</h4>
+                        <h4>1-5 Kg</h4>
                     </div>
                     <div class="packing-content">
                         <ul>
@@ -163,13 +163,13 @@
                     <div class="packing-number">
                         <h3>1$ + KDV</h3>
                     </div>
-                    <button>Sign up</button>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">Sign up</button>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="packing">
                     <div class="packing-title">
-                        <h4>0-1 Kg</h4>
+                        <h4>5-10 Kg</h4>
                     </div>
                     <div class="packing-content">
                         <ul>
@@ -183,13 +183,13 @@
                     <div class="packing-number">
                         <h3>1$ + KDV</h3>
                     </div>
-                    <button>Sign up</button>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">Sign up</button>
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="packing">
                     <div class="packing-title">
-                        <h4>0-1 Kg</h4>
+                        <h4>10-20 Kg </h4>
                     </div>
                     <div class="packing-content">
                         <ul>
@@ -203,7 +203,7 @@
                     <div class="packing-number">
                         <h3>1$ + KDV</h3>
                     </div>
-                    <button>Sign up</button>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">Sign up</button>
                 </div>
             </div>
         </div>
@@ -231,10 +231,10 @@
                     </div>
                     <div class="services-text">
                         <h4>E-Commerce Logistics</h4>
-                        <span>You can manage all your 
-                            processes from order 
-                            management to logistics 
-                            planning  faster and easier with 
+                        <span>You can manage all your
+                            processes from order
+                            management to logistics
+                            planning  faster and easier with
                             FBA Logistcs 's competitive prices.</span>
                     </div>
                     <div class="services-details">
@@ -249,10 +249,10 @@
                     </div>
                     <div class="services-text">
                         <h4>Amazon FBA</h4>
-                        <span>You can manage all your 
-                            processes from order 
-                            management to logistics 
-                            planning  faster and easier with 
+                        <span>You can manage all your
+                            processes from order
+                            management to logistics
+                            planning  faster and easier with
                             FBA Logistcs 's competitive prices.</span>
                     </div>
                     <div class="services-details">
@@ -267,10 +267,10 @@
                     </div>
                     <div class="services-text">
                         <h4>Marketplace Integration</h4>
-                        <span>You can manage all your 
-                            processes from order 
-                            management to logistics 
-                            planning  faster and easier with 
+                        <span>You can manage all your
+                            processes from order
+                            management to logistics
+                            planning  faster and easier with
                             FBA Logistcs 's competitive prices.</span>
                     </div>
                     <div class="services-details">
@@ -614,7 +614,7 @@
 	$(function(){
 		$("#price_calc").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),
@@ -638,7 +638,7 @@
                         $('#tableCompany').text(' ');
                         var trHTML = '';
                         for (let i = 0; i < data.company.length; i++) {
-                            trHTML += '<tr><td>' + data.company[i] + '</td><td>' + data.price[i] + '</td></tr>';                          
+                            trHTML += '<tr><td>' + data.company[i] + '</td><td>' + data.price[i] + '</td></tr>';
                         }
                         $('#tableCompany').append(trHTML);
 					}

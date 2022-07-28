@@ -8,6 +8,8 @@ use App\Models\AdditionalService;
 use Illuminate\Http\Request;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
+use App\Models\Courier_request;
+use App\Models\Order_time;
 use App\Models\Package;
 use App\Models\Product;
 use App\Models\User;
@@ -20,6 +22,7 @@ use DB;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
+use stdClass;
 
 class ManuelOrderController extends Controller
 {
@@ -87,7 +90,9 @@ class ManuelOrderController extends Controller
         $data = [
             'status' => 2
         ];
-        Package::where('id', $request->package_id)->update($data);
+        if ($cargo->status != 5) {
+            Package::where('id', $request->package_id)->update($data);
+        }
         $change_status = 0;
 
 
@@ -97,25 +102,36 @@ class ManuelOrderController extends Controller
         }
         $user = DB::table('users')->where('id', $cargo->user_id)->get()->first();
 
-        if ($change_status == 2 * count($packages)) {
-            Cargo_request::where('id', $package->cargo_id)->update([
-                'status' => 2
-            ]);
-            $email_data = array(
-                'name' => $user->name,
-                'email' => $user->email,
-            );
+        if ($cargo->status != 5) {
+            if ($change_status == 2 * count($packages)) {
+                Cargo_request::where('id', $package->cargo_id)->update([
+                    'status' => 2
+                ]);
+                $email_data = array(
+                    'name' => $user->name,
+                    'email' => $user->email,
+                );
 
-            Mail::send('backend.mails.cargoatfacility', $email_data, function ($message) use ($email_data) {
-                $message->to($email_data['email'], $email_data['name'])
-                    ->subject('Cargo Notification')
-                    ->from('noreply@shiplounge.co', 'ShipLounge');
-            });
-        } else {
-            Cargo_request::where('id', $package->cargo_id)->update([
-                'status' => 0
-            ]);
+                Mail::send('backend.mails.cargoatfacility', $email_data, function ($message) use ($email_data) {
+                    $message->to($email_data['email'], $email_data['name'])
+                        ->subject('Cargo Notification')
+                        ->from('noreply@shiplounge.co', 'ShipLounge');
+                });
+            } else {
+                Cargo_request::where('id', $package->cargo_id)->update([
+                    'status' => 0
+                ]);
+            }
         }
+
+        $time_data = array(
+            'cargo_id' => $cargo->id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Facility scan',
+            'time' => Carbon::now()
+        );
+
+        Order_time::create($time_data);
 
         $package = Package::where('id', $request->package_id)->get()->first();
         $status = DB::table('package_statuses')->where('status', $package->status)->get()->first();
@@ -143,11 +159,36 @@ class ManuelOrderController extends Controller
             Cargo_request::where('id', $package->cargo_id)->update([
                 'status' => 1
             ]);
+
+            // Courier Request part
+            $courier_request = Courier_request::whereJsonContains('orders', $package->cargo_id)->get();
+            foreach ($courier_request as $courier_request) {
+                $courier_change_status = 0;
+                foreach (json_decode($courier_request->orders) as $order) {
+                    $cargo_order_in_courier = Cargo_request::where('id', $order)->first();
+                    if ($cargo_order_in_courier->status == 1) {
+                        $courier_change_status += 1;
+                    }
+                }
+                if ($courier_change_status == count(json_decode($courier_request->orders))) {
+                    $courier_request->status = "done";
+                    $courier_request->save();
+                }
+            }
         } else {
             Cargo_request::where('id', $package->cargo_id)->update([
                 'status' => 0
             ]);
         }
+
+        $time_data = array(
+            'cargo_id' => $cargo->id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Worker scan',
+            'time' => Carbon::now()
+        );
+
+        Order_time::create($time_data);
 
         $package = Package::where('id', $request->package_id)->get()->first();
         $status = DB::table('package_statuses')->where('status', $package->status)->get()->first();
@@ -206,8 +247,17 @@ class ManuelOrderController extends Controller
 
         // dd($result);
 
+        $time_data = array(
+            'cargo_id' => $result->cargo_id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Measurement scan',
+            'time' => Carbon::now()
+        );
+
+        Order_time::create($time_data);
+
         return Redirect::back()->with([
-            'message' => 'Package: ' . $request->id.' '.$message,
+            'message' => 'Package: ' . $request->id . ' ' . $message,
             'cargo_id' => $result->cargo_id,
             'is_ready' => $is_reeady
         ]);
@@ -232,74 +282,140 @@ class ManuelOrderController extends Controller
         ]);
     }
 
-    public function submit_order($id){
-        $cargo = Cargo_request::where('id' , $id)->get()->first();
+    public function submit_order($id)
+    {
+        $cargo = Cargo_request::where('id', $id)->get()->first();
         $total_cargo_price = $cargo->total_cargo_price;
 
-        $user = User::where('id' , $cargo->user_id)->get()->first();
+        $user = User::where('id', $cargo->user_id)->get()->first();
         $new_user_balance = $user->balance - $total_cargo_price;
-        User::where('id' , $cargo->user_id)->update([
+        User::where('id', $cargo->user_id)->update([
             'balance' => $new_user_balance
         ]);
-        Cargo_request::where('id' , $id)->update([
+        Cargo_request::where('id', $id)->update([
             'submitted' => 1
         ]);
 
-        return Redirect::back()->with('message' , 'Order Submited and balance of '.$user->name.' has been updated');
+        $data = new stdClass();
+        $data->user_id = $user->id;
+        $data->payment_id = null;
+        $data->old_balance = $user->balance;
+        $data->new_balance = $user->balance - $total_cargo_price;
+        $data->transfer_method = "Order Charged after Measurement";
+
+        (new HelperController)->checkTransaction($data);
+
+        return Redirect::back()->with('message', 'Order Submited and balance of ' . $user->name . ' has been updated');
     }
 
-    public function post_on_wait($id){
-        Cargo_request::where('id' , $id)->update([
+    public function post_on_wait($id)
+    {
+        Cargo_request::where('id', $id)->update([
             'status' => 6
         ]);
 
-        return Redirect::back()->with('message' , 'Order Request is on wait');
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Cargo Request paused',
+            'time' => Carbon::now()
+        );
+        Order_time::create($time_data);
+
+        return Redirect::back()->with('message', 'Order Request is on wait');
     }
 
-    public function remove_on_wait($id){
-        Cargo_request::where('id' , $id)->update([
+    public function remove_on_wait($id)
+    {
+        Cargo_request::where('id', $id)->update([
             'status' => 0
         ]);
 
-        return Redirect::back()->with('message' , 'Order Request is pending');
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Cargo Request pause removed',
+            'time' => Carbon::now()
+        );
+        Order_time::create($time_data);
+
+        return Redirect::back()->with('message', 'Order Request is pending');
     }
 
-    public function cancel_order(Request $request , $id){
-        Cargo_request::where('id' , $id)->update([
+    public function cancel_order(Request $request, $id)
+    {
+        Cargo_request::where('id', $id)->update([
             'cancel_comment' => $request->cancel_comment,
             'status' => 5
         ]);
-        $cargo = Cargo_request::where('id' , $id)->get()->first();
+        $cargo = Cargo_request::where('id', $id)->get()->first();
 
         $total_cargo_price = $cargo->total_cargo_price;
-        $user = User::where('id' , $cargo->user_id)->get()->first();
+        $user = User::where('id', $cargo->user_id)->get()->first();
 
-        if($cargo->submitted == 1){
+        if ($cargo->submitted == 1) {
             $new_user_balance = $user->balance + $total_cargo_price;
-            User::where('id' , $cargo->user_id)->update([
+            User::where('id', $cargo->user_id)->update([
                 'balance' => $new_user_balance
             ]);
+
+            $data = new stdClass();
+            $data->user_id = $user->id;
+            $data->payment_id = null;
+            $data->old_balance = $user->balance;
+            $data->new_balance = $user->balance + $total_cargo_price;
+            $data->transfer_method = "Cargo payment returned for cancel";
+
+            (new HelperController)->checkTransaction($data);
         }
 
-        return Redirect::back()->with('message' , 'Order Cancelled of '.$user->name.' has been updated');
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Cargo Request cancelled',
+            'time' => Carbon::now()
+        );
+        Order_time::create($time_data);
+
+        return Redirect::back()->with('message', 'Order Cancelled of ' . $user->name . ' has been updated');
     }
 
-    public function revert_order($id){
-        $cargo = Cargo_request::where('id' , $id)->get()->first();
+    public function revert_order($id)
+    {
+        $cargo = Cargo_request::where('id', $id)->get()->first();
         $total_cargo_price = $cargo->total_cargo_price;
 
-        $user = User::where('id' , $cargo->user_id)->get()->first();
-        $new_user_balance = $user->balance - $total_cargo_price;
-        User::where('id' , $cargo->user_id)->update([
-            'balance' => $new_user_balance
-        ]);
+        $user = User::where('id', $cargo->user_id)->get()->first();
 
-        Cargo_request::where('id' , $id)->update([
+        if ($cargo->submitted == 1) {
+            $new_user_balance = $user->balance - $total_cargo_price;
+            User::where('id', $cargo->user_id)->update([
+                'balance' => $new_user_balance
+            ]);
+
+            $data = new stdClass();
+            $data->user_id = $user->id;
+            $data->payment_id = null;
+            $data->old_balance = $user->balance;
+            $data->new_balance = $user->balance - $total_cargo_price;
+            $data->transfer_method = "Cargo payment charged after revert";
+
+            (new HelperController)->checkTransaction($data);
+        }
+
+        Cargo_request::where('id', $id)->update([
             'status' => 0
         ]);
 
-        return Redirect::back()->with('message' , 'Order Reverted and balance of '.$user->name.' has been updated');
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Cargo Request reverted',
+            'time' => Carbon::now()
+        );
+        Order_time::create($time_data);
 
+        return Redirect::back()->with('message', 'Order Reverted and balance of ' . $user->name . ' has been updated');
     }
 
     public function cargo_update(Request $request, $id)
@@ -348,6 +464,7 @@ class ManuelOrderController extends Controller
             'vat_number' => $request->vat_number,
             'currency' => $request->currency,
             'order_info' => $request->order_info,
+            'tracking_number' => $request->tracking_number,
             'total_cargo_price' => $request->total_cargo_price,
             'cargo_company' => $request->cargo_company,
             'company_value' => $cargo_companies,
@@ -376,14 +493,34 @@ class ManuelOrderController extends Controller
 
         $result = (new HelperController)->calculator($id);
 
-        $cargo = Cargo_request::where('id' , $id)->get()->first();
+        $cargo = Cargo_request::where('id', $id)->get()->first();
         $total_cargo_price = (new HelperController)->calculateTotalCargoPrice($result);
-        if($cargo->total_cargo_price != $total_cargo_price){
+        if ($cargo->total_cargo_price != $total_cargo_price) {
             Cargo_request::where('id', $id)->update([
                 'total_cargo_price' => $total_cargo_price
             ]);
         }
 
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Cargo Request updated',
+            'time' => Carbon::now()
+        );
+        Order_time::create($time_data);
+
         return Redirect::back()->with('message', 'Order ' . $id . ' , Succesfully updated');
+    }
+
+    public function cargo_logs(){
+        $logs = Order_time::orderBy('id' , 'DESC')->get();
+
+        return view('backend.helpers.cargo_logs')->with('logs' , $logs);
+    }
+
+    public function cargo_logs_with_id($id){
+        $logs = Order_time::where('cargo_id' , $id)->orderBy('id' , 'DESC')->get();
+
+        return view('backend.helpers.cargo_logs')->with('logs' , $logs);
     }
 }

@@ -12,6 +12,7 @@ use App\Models\Payment;
 use App\Models\Transaction;
 use App\Models\User;
 use DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use stdClass;
 
@@ -19,14 +20,17 @@ class BalanceController extends Controller
 {
     public function balance()
     {
-        $users = User::orderBy('balance', 'desc')->get();
-        return view('backend.balance', compact('users'));
+        $transactions = Transaction::orderBy('created_at', 'desc')->get();
+        return view('backend.transactions', compact('transactions'));
     }
 
     public function payments()
     {
         $payments = DB::table('payments')->orderBy('created_at', 'desc')->get();
-        return view('backend.payments', compact('payments'));
+        // $kur = $this->getKur();
+        $kur = 18.00;
+
+        return view('backend.payments', compact('payments' , 'kur'));
     }
 
     public function denyPayment(Request $request)
@@ -46,10 +50,10 @@ class BalanceController extends Controller
             $data->user_id = $user_payment->userID;
             $data->payment_id = $request->id;
             $data->old_balance = $user->balance;
-            $data->new_balance = $user->balance - $user_payment->amount;
+            $data->new_balance = $user->balance - $user_payment->comission;
             $data->transfer_method = "Payment Deny";
 
-            $user->balance = $user->balance - $user_payment->amount;
+            $user->balance = $user->balance - $user_payment->comission;
             $user->save();
 
             (new HelperController)->checkTransaction($data);
@@ -75,11 +79,11 @@ class BalanceController extends Controller
         $data->user_id = $user_payment->userID;
         $data->payment_id = $request->id;
         $data->old_balance = $user->balance;
-        $data->new_balance = $user->balance + $user_payment->amount;
+        $data->new_balance = $user->balance + $user_payment->comission;
         $data->transfer_method = "Payment Approval";
 
         // Updating balance
-        $user->balance = $user->balance + $user_payment->amount;
+        $user->balance = $user->balance + $user_payment->comission;
         $user->save();
 
 
@@ -108,20 +112,16 @@ class BalanceController extends Controller
 
     public function updatePayment(Request $request)
     {
-        $file = $request->image;
-        $name = $file->getClientOriginalName();
-        $file->move(public_path() . '/images/', $name);
-
         $data = array(
-            'payment' => $request->payment,
-            'show_name' => $request->show_name,
+            'method' => $request->method,
+            'amount' => $request->amount,
             'comission' => $request->comission,
-            'image' => $name
+            'money_type' => $request->money_type
         );
 
-        Comission::where('id', $request->payment_id)->update($data);
+        Payment::where('id', $request->payment_id)->update($data);
 
-        return Redirect::back()->with('message', 'Payment method Comission updated succesfully');
+        return Redirect::back()->with('message', 'Payment updated succesfully');
     }
 
     public function addnewComission(Request $request)
@@ -189,5 +189,50 @@ class BalanceController extends Controller
         $moneyback_requests = MoneyBackRequest::get();
 
         return view('backend.moneyback')->with('requests', $moneyback_requests);
+    }
+
+    public function transactions(){
+
+        $transactions = Transaction::all();
+
+        return view('backend.transactions')->with('transactions' , $transactions);
+
+    }
+
+    public function addPayment(Request $request){
+
+        // dd($request->all());
+
+        if ($request->document) {
+            $file = $request->document;
+            $name = $file->getClientOriginalName();
+            $file->move(public_path() . '/files/payments/', $name);
+        }
+        $credentials = array(
+            'userID' => $request->user_id,
+            'method' => $request->method,
+            'amount' => $request->amount,
+            'comission' => $request->comission,
+            'kur' => $request->kur,
+            'money_type' => $request->money_type,
+            'payment_comment' => json_encode($request->payment_comment),
+            'document' => $name
+        );
+
+        Payment::create($credentials);
+
+        return Redirect::back()->with('message', 'Payment added succesfully');
+    }
+
+    public function getKur()
+    {
+        $xml = simplexml_load_file('http://www.tcmb.gov.tr/kurlar/today.xml');
+
+        $index = 3;
+
+        $name = $xml->Currency[$index]->CurrencyName;
+        $buying = $xml->Currency[$index]->BanknoteBuying;
+        $selling = $xml->Currency[$index]->BanknoteSelling;
+        return $selling;
     }
 }

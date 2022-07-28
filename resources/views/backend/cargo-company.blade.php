@@ -7,6 +7,19 @@
 @endsection
 
 @section('content')
+    @if (session()->has('message'))
+        <script>
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: '{{ session()->get('message') }}',
+                showConfirmButton: false,
+                backdrop: false,
+                timer: 2000
+            })
+        </script>
+    @endif
+
     <div class="row">
         <div class="col-12 mb-4">
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#cargoModal"><i
@@ -54,14 +67,15 @@
                                         <span><b>PRIVATE KEY:</b> {{ $entegre[1] }}</span>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-primary edit_btn"
-                                            value="{{ $cargo->id }}">
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#modal-edit-{{ $cargo->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
                                     </td>
                                     <td class="text-center">
-                                        <a href="{{ route('admin.companies.cargo.delete', $cargo->id) }}"
-                                            class="btn btn-danger">
+                                        <a href="#"
+                                            data-url="{{ route('admin.companies.cargo.delete', $cargo->id) }}"
+                                            onclick="confirmAction(this)" class="btn btn-danger">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
                                     </td>
@@ -71,6 +85,103 @@
                                         </button>
                                     </td>
                                 </tr>
+
+                                <div class="modal fade" id="modal-edit-{{ $cargo->id }}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Update Company</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="POST" action="{{ route('admin.companies.cargo.update') }}"
+                                                    enctype="multipart/form-data">
+                                                    @csrf
+                                                    <div class="form-group">
+                                                        <label for="name">Name</label>
+                                                        <input type="text" class="form-control" id="name"
+                                                            placeholder="Enter company name" name="name"
+                                                            value="{{ $cargo->name }}">
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="inputApi2">API key</label>
+                                                                <input type="text" class="form-control" id="inputApi2"
+                                                                    placeholder="Enter company api key" name="inputApi2"
+                                                                    value="{{ $entegre[0] }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="form-group">
+                                                                <label for="inputPrivate2">PRIVATE key</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="inputPrivate2"
+                                                                    placeholder="Enter company private key"
+                                                                    name="inputPrivate2" value="{{ $entegre[1] }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="PSH">PSH</label>
+                                                                <input type="number" class="form-control" id="PSH"
+                                                                    placeholder="Enter company PSH" name="PSH"
+                                                                    value="{{ $cargo->PSH }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="jet_price">Jet Price</label>
+                                                                <input type="number" class="form-control" id="jet_price"
+                                                                    placeholder="Enter company Jet Price" name="jet_price"
+                                                                    value="{{ $cargo->jet_price }}">
+                                                                <span </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="emergency">Emergency</label>
+                                                                <input type="number" class="form-control" id="emergency"
+                                                                    placeholder="Enter company emergency" name="emergency"
+                                                                    value="{{ $cargo->emergency }}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col">
+                                                            <div class="form-group">
+                                                                <label for="kar_marj">Kar Marj</label>
+                                                                <input type="number" class="form-control" id="kar_marj"
+                                                                    placeholder="Enter company Kar Marj" name="kar_marj"
+                                                                    value="{{ $cargo->kar_marj }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <label for="logo">Logo</label>
+                                                        <input type="file" class="form-control" name="file">
+                                                    </div>
+                                                    <input type="hidden" name="hiddenID" value="{{ $cargo->id }}">
+
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                    <button type="button" class="btn btn-default"
+                                                        data-dismiss="modal">Close</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        <!-- /.modal-content -->
+                                    </div>
+                                    <!-- /.modal-dialog -->
+                                </div>
                             @endforeach
                         </tbody>
                     </table>
@@ -106,7 +217,8 @@
                                 <div class="form-group">
                                     <label for="inputApi">API key</label>
                                     <input type="text" class="form-control" id="inputApi"
-                                        placeholder="Enter company api key" name="inputApi" value="{{ old('inputApi') }}">
+                                        placeholder="Enter company api key" name="inputApi"
+                                        value="{{ old('inputApi') }}">
                                     <span class="text-danger error-text inputApi_error"></span>
                                 </div>
                             </div>
@@ -121,6 +233,47 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="PSH">PSH</label>
+                                    <input type="number" class="form-control" id="PSH"
+                                        placeholder="Enter company PSH" name="PSH">
+                                    <span class="text-danger error-text inputApi_error"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="jet_price">Jet Price</label>
+                                    <input type="number" class="form-control" id="jet_price"
+                                        placeholder="Enter company Jet Price" name="jet_price"
+                                        value="{{ old('inputPrivate') }}">
+                                    <span class="text-danger error-text inputPrivate_error"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="emergency">Emergency</label>
+                                    <input type="number" class="form-control" id="emergency"
+                                        placeholder="Enter company emergency" name="emergency"
+                                        value="{{ old('inputPrivate') }}">
+                                    <span class="text-danger error-text inputPrivate_error"></span>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="kar_marj">Kar Marj</label>
+                                    <input type="number" class="form-control" id="kar_marj"
+                                        placeholder="Enter company Kar Marj" name="kar_marj"
+                                        value="{{ old('inputPrivate') }}">
+                                    <span class="text-danger error-text inputPrivate_error"></span>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label for="fileLogo">Logo</label>
                             <input type="file" class="form-control" id="fileLogo" name="fileLogo">
@@ -128,67 +281,6 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Create</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </form>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!-- /.modal -->
-
-    <div class="modal fade" id="editModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Update Company</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ route('admin.companies.cargo.update') }}" method="post" autocomplete="off"
-                        id="updateCargo" enctype="multipart/from-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="form-group">
-                            <label for="inputName2">Name</label>
-                            <input type="text" class="form-control" id="inputName2" placeholder="Enter company name"
-                                name="inputName2" value="{{ old('inputName2') }}">
-                            <span class="text-danger error-text inputName2_error"></span>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputApi2">API key</label>
-                                    <input type="text" class="form-control" id="inputApi2"
-                                        placeholder="Enter company api key" name="inputApi2"
-                                        value="{{ old('inputApi2') }}">
-                                    <span class="text-danger error-text inputApi2_error"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="inputPrivate2">PRIVATE key</label>
-                                    <input type="text" class="form-control" id="inputPrivate2"
-                                        placeholder="Enter company private key" name="inputPrivate2"
-                                        value="{{ old('inputPrivate2') }}">
-                                    <span class="text-danger error-text inputPrivate2_error"></span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="fileLogo2">Logo</label>
-                            <input type="file" class="form-control" id="fileLogo2" name="fileLogo2">
-                            <span class="text-danger error-text fileLogo2_error"></span>
-                        </div>
-
-                        <input type="hidden" name="hiddenID" id="hiddenID">
-
-                        <button type="submit" class="btn btn-primary">Update</button>
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     </form>
                 </div>
@@ -269,56 +361,56 @@
                 });
             });
 
-            $(".edit_btn").click(function() {
-                var id_data = $(this).val();
-                $("#editModal").modal('show');
+            // $(".edit_btn").click(function() {
+            //     var id_data = $(this).val();
+            //     $("#editModal").modal('show');
 
-                $.ajax({
-                    type: "GET",
-                    data: {
-                        id: id_data
-                    },
-                    url: "{{ route('admin.companies.cargo.edit') }}",
-                    success: function(response) {
-                        var entegrations = JSON.parse(response.data.entegrations);
+            //     $.ajax({
+            //         type: "GET",
+            //         data: {
+            //             id: id_data
+            //         },
+            //         url: "{{ route('admin.companies.cargo.edit') }}",
+            //         success: function(response) {
+            //             var entegrations = JSON.parse(response.data.entegrations);
 
-                        $("#inputName2").val(response.data.name);
-                        $("#inputApi2").val(entegrations[0]);
-                        $("#inputPrivate2").val(entegrations[1]);
-                        $("#hiddenID").val(response.data.id);
-                    }
-                });
-            });
+            //             $("#inputName2").val(response.data.name);
+            //             $("#inputApi2").val(entegrations[0]);
+            //             $("#inputPrivate2").val(entegrations[1]);
+            //             $("#hiddenID").val(response.data.id);
+            //         }
+            //     });
+            // });
 
-            $("#updateCargo").on('submit', function(e) {
-                e.preventDefault();
+            // $("#updateCargo").on('submit', function(e) {
+            //     e.preventDefault();
 
-                $.ajax({
-                    url: $(this).attr('action'),
-                    method: $(this).attr('method'),
-                    data: new FormData(this),
-                    processData: false,
-                    dataType: 'json',
-                    contentType: false,
-                    beforeSend: function() {
-                        $(document).find('span.error-text').text('');
-                    },
-                    success: function(data) {
-                        if (data.status == 0) {
-                            $.each(data.error, function(prefix, val) {
-                                $('span.' + prefix + '_error').text(val[0]);
-                            });
-                        } else {
-                            // $('#formOptionalCompany')[0].reset();
-                            toastr.success(data.msg, data.state);
-                            $("#editModal").modal().hide();
-                            setTimeout(function() {
-                                location.reload();
-                            }, 3000);
-                        }
-                    }
-                });
-            });
+            //     $.ajax({
+            //         url: $(this).attr('action'),
+            //         method: $(this).attr('method'),
+            //         data: new FormData(this),
+            //         processData: false,
+            //         dataType: 'json',
+            //         contentType: false,
+            //         beforeSend: function() {
+            //             $(document).find('span.error-text').text('');
+            //         },
+            //         success: function(data) {
+            //             if (data.status == 0) {
+            //                 $.each(data.error, function(prefix, val) {
+            //                     $('span.' + prefix + '_error').text(val[0]);
+            //                 });
+            //             } else {
+            //                 // $('#formOptionalCompany')[0].reset();
+            //                 toastr.success(data.msg, data.state);
+            //                 $("#editModal").modal().hide();
+            //                 setTimeout(function() {
+            //                     location.reload();
+            //                 }, 3000);
+            //             }
+            //         }
+            //     });
+            // });
 
             $(".btnDownload").click(function() {
                 $id = $(this).attr('data-id');
@@ -357,5 +449,39 @@
                 });
             });
         })
+
+        function confirmAction(button) {
+            var url = button.getAttribute('data-url');
+
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: true
+            })
+
+            swalWithBootstrapButtons.fire({
+                title: 'Are you sure to delete?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Accept',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.open(url, '_self');
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    swalWithBootstrapButtons.fire(
+                        'Cancelled',
+                        'Action cancelled',
+                        'error'
+                    )
+                }
+            })
+        }
     </script>
 @endsection

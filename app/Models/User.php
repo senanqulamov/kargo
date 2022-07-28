@@ -23,6 +23,13 @@ class User extends Authenticatable
         'country',
         'password',
         'email_verified_at',
+        'gender',
+        'user_market',
+        'from_where',
+        'promotion_code',
+        'average_requests',
+        'integration',
+        'balance_name',
     ];
 
     protected $hidden = [

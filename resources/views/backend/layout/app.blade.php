@@ -108,7 +108,7 @@
                     <!-- Sidebar user (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img class="img-circle elevation-2" src="{{asset('/')}}images/{{ Auth::user()->image == NULL ? 'icons/user.png' : Auth::user()->image }}" alt="user profile picture">
+                            <img class="img-circle elevation-2" src="{{ asset('/') }}images/{{ Auth::user()->image == null ? 'user.png' : Auth::user()->image }}" alt="user profile picture">
                         </div>
                         <div class="info">
                             <a href="{{route('admin.profile')}}" class="d-block text-capitalize">{{Auth::user()->name}}</a>
@@ -138,22 +138,55 @@
                                     <p> Orders Manager</p>
                                 </a>
                             </li>
-                            <li class="nav-item">
-                                <a href="{{route('admin.cargo-requests.index')}}" class="nav-link @if(Request::segment(3) == 'cargo-request-index') active @endif">
-                                    <i class="nav-icon fas fa-code-pull-request"></i>
-                                    <p> Cargo Requests</p>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="{{route('admin.cargo-requests.packages')}}" class="nav-link @if(Request::segment(3) == 'packages') active @endif">
-                                    <i class="nav-icon fas fa-box"></i>
-                                    <p> Packages </p>
-                                </a>
-                            </li>
+
+                            <li class="nav-item @if(Request::segment(2) == 'cargo-requests') menu-open @endif">
+								<a href="#" class="nav-link  @if(Request::segment(2) == 'cargo-requests') active @endif">
+									<i class="nav-icon fas fa-box"></i>
+									<p>
+										Cargo
+										<i class="fas fa-angle-left right"></i>
+                                        <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+									</p>
+								</a>
+								<ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.cargo-requests.index')}}" class="nav-link @if(Request::segment(3) == 'cargo-request-index') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Cargo Requests</p>
+                                        </a>
+                                    </li>
+									<li class="nav-item">
+										<a href="{{route('admin.cargo-requests.courier_requests')}}" class="nav-link @if(Request::segment(3) == 'courier_requests') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>Courier Requests</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+                                    <li class="nav-item">
+										<a href="{{route('admin.cargo-requests.myorders')}}" class="nav-link @if(Request::segment(3) == 'myorders') active @endif">
+											<i class="far fa-circle nav-icon"></i>
+											<p>My Orders</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+										</a>
+									</li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.cargo-requests.packages')}}" class="nav-link @if(Request::segment(3) == 'packages') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Packages </p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.cargo-requests.cargo_logs')}}" class="nav-link @if(Request::segment(3) == 'cargo_logs') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p> Cargo Logs </p>
+                                        </a>
+                                    </li>
+								</ul>
+							</li>
 
                             <li class="nav-item @if(Request::segment(2) == 'scanners') menu-open @endif">
 								<a href="#" class="nav-link  @if(Request::segment(2) == 'scanners') active @endif">
-									<i class="nav-icon fa-solid fa-scanner"></i>
+									<i class="nav-icon fas fa-barcode"></i>
 									<p>
 										Scanners
 										<i class="fas fa-angle-left right"></i>
@@ -202,6 +235,13 @@
 									</p>
 								</a>
 								<ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="{{route('admin.messages.showNotifications')}}" class="nav-link @if(Request::segment(3) == 'notifications' || Request::segment(3) == 'settings') active @endif">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Notifications</p>
+                                            <span class="badge badge-info right">{{count($message) > 0 ? count($message) : ''}}</span>
+                                        </a>
+                                    </li>
 									<li class="nav-item">
 										<a href="{{route('admin.messages.inbox')}}" class="nav-link @if(Request::segment(3) == 'inbox' || Request::segment(3) == 'settings') active @endif">
 											<i class="far fa-circle nav-icon"></i>
@@ -278,9 +318,9 @@
                                         </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="{{route('admin.payments.balance')}}" class="nav-link @if(Request::segment(3) == 'balance') active @endif">
+                                        <a href="{{route('admin.payments.transactions')}}" class="nav-link @if(Request::segment(3) == 'transactions') active @endif">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Balance</p>
+                                            <p>Transactions</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
