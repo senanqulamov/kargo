@@ -198,7 +198,7 @@ function SumVolumes(array) {
     array.forEach((element) => {
         total_volume += element;
     });
-    total_volume = total_volume/1000000;
+    total_volume = total_volume / 1000000;
     document.querySelector(".totalVolume").innerHTML = total_volume;
     document.querySelector('input[name="total_volume"]').value = total_volume;
     total_volume = 0;
@@ -231,7 +231,7 @@ function SumDecis(array) {
 }
 //--------------------------- CALCULATING TOTAL DECI edns here--------------------------->
 
-function yekunHesabla() {
+function yekunHesabla(from_where) {
     var totalAmount = parseFloat(
         document.querySelector(".totalAmount").innerHTML
     ).toFixed(2);
@@ -328,7 +328,7 @@ function yekunHesabla() {
                 });
 
                 Swal.fire({
-                    position: "top-start",
+                    position: "center",
                     icon: "success",
                     title: "Cargo company values calculated. See in Shipment definition",
                     showConfirmButton: false,
@@ -339,12 +339,157 @@ function yekunHesabla() {
         });
     } else {
         Swal.fire({
-            position: "top-start",
+            position: "center",
             icon: "error",
             title: "Please enter country information and cargo details to calculate Cargo Company price",
             showConfirmButton: false,
             backdrop: true,
             timer: 3000,
+        });
+    }
+
+    if(from_where == 'next'){
+        setTimeout(() => {
+            button = document.querySelector(".next-button-with-quote");
+            nextTo("shipment_def", button);
+        }, 2000);
+    }
+}
+
+// Check inputs with Next TO
+function nextTo(section_name, button) {
+    var form_li = button.parentNode.previousElementSibling;
+    inputs = form_li.querySelectorAll(".check-input");
+    var result = 1;
+    var required = [];
+    var section = document.querySelector("#" + section_name);
+
+    if (section.querySelector(".amazonHeaderText") == null) {
+        section_text = "";
+    } else {
+        var section_text = section.querySelector(".amazonHeaderText").innerHTML;
+    }
+
+    var modal_message = "Please fill inputs in next field: ";
+    var required_message = "Please check everything again";
+
+    inputs.forEach((input) => {
+        if (!input.value || input.value == "") {
+            var input_name = input.getAttribute("name");
+            input_name = input_name.replace("_", " ");
+            input_name =
+                " " +
+                input_name.charAt(0).toUpperCase() +
+                input_name.slice(1) +
+                " ";
+            required.push(input_name);
+        }
+    });
+
+    if (section_name == "shipment_def") {
+        required_message = "Not all total values calculated. Please fill all fields to calculate";
+        var totalAmount = parseFloat(
+            document.querySelector(".totalAmount").innerHTML
+        ).toFixed(2);
+        var totalWeight = parseFloat(
+            document.querySelector(".totalWeight").innerHTML
+        ).toFixed(2);
+        var totalVolume = parseFloat(
+            document.querySelector(".totalVolume").innerHTML
+        );
+        var totalDeci = parseFloat(
+            document.querySelector(".totalPricing").innerHTML
+        );
+        var totalWorth = parseFloat(
+            document.querySelector(".totalWorth").innerHTML
+        ).toFixed(2);
+
+        if (
+            totalAmount > 0 &&
+            totalWeight > 0 &&
+            totalVolume > 0 &&
+            totalDeci > 0 &&
+            totalWorth > 0
+        ) {
+            result = 1;
+        } else {
+            result = 0;
+        }
+    }
+    if (section_name == "product_content") {
+        var company = document.querySelector(
+            'input[name="cargo_company"]:checked'
+        );
+        if (company == null) {
+            result = 0;
+            required_message = "Please select any cargo company";
+        }
+    }
+    if (section_name == "submit_button_form") {
+        var file_input_check = document.querySelector("#CustomFileUpload");
+        console.log(file_input_check.value);
+        if (!file_input_check.value) {
+            result = 0;
+            required_message = "Please upload needed documents";
+        } else {
+            modal_message = "Everything is ready to submit. You can submit now";
+        }
+    }
+
+    // check all inputs
+    if (result == 1) {
+        if (required.length > 0) {
+            Swal.fire({
+                position: "center",
+                icon: "error",
+                title: "All fields are required. Please fill theese fields: ",
+                html:
+                    `
+                        <h3 style="color:#f27474;">
+                        ` +
+                    required +
+                    `
+                        </h3>
+                    `,
+                backdrop: true,
+                showConfirmButton: true,
+            });
+        } else {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                html:
+                    `
+                        <h3 style="color:rgb(66 164 11);">
+                        ` +
+                    modal_message +
+                    section_text +
+                    `
+                        </h3>
+                    `,
+                backdrop: true,
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+            });
+            section.classList.add("active-order-form-div");
+            button.style.display = "none";
+            if(section_name == "shipment_def"){
+                document.querySelector(".next-button-get-quote").style.display = "block";
+            }
+        }
+    } else {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            html:
+                `
+                    <h3 style="color:#f27474;">` +
+                    required_message +
+                    `</h3>
+                `,
+            backdrop: true,
+            showConfirmButton: true,
         });
     }
 }

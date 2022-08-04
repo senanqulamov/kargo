@@ -23,7 +23,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use DB;
-// use PDF;
 use Carbon\Carbon;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Foundation\Auth\User;
@@ -31,6 +30,7 @@ use Illuminate\Support\Str;
 use Picqer\Barcode;
 use Picqer\Barcode\BarcodeGeneratorPNG;
 use Spatie\Browsershot\Browsershot;
+use Symfony\Component\Console\Input\Input;
 
 class UserPanelController extends Controller
 {
@@ -375,7 +375,7 @@ class UserPanelController extends Controller
 
         // dd($request->all());
 
-        if ($request->package_id) {
+        if ($request->package_id && $request->product_id) {
             foreach ($request->package_id as $package_id) {
                 $packages[] = $package_id;
             }
@@ -610,6 +610,11 @@ class UserPanelController extends Controller
         return view('userpanel.frontend.balance', compact('payments', 'comissions', 'transactions'));
     }
 
+    public function transactions(){
+        $transactions = Transaction::where('user_id', Auth::user()->id)->get();
+        return view('userpanel.frontend.transactions', compact('transactions'));
+    }
+
     public function getKur()
     {
         $xml = simplexml_load_file('http://www.tcmb.gov.tr/kurlar/today.xml');
@@ -722,6 +727,9 @@ class UserPanelController extends Controller
 
     public function post_courier_request(Request $request)
     {
+        if(!$request->order_ids){
+            return Redirect::back()->with('error', 'Please select at least one Order');
+        }
         $data = array();
 
         $request->request->remove('_token');

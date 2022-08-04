@@ -222,12 +222,13 @@
                                 <div class="row" style="gap: 20px 0px;">
 
                                     @foreach ($comissions as $comission)
-                                        <div class="col-sm-4">
+                                        <label for="payment_{{ $comission->id }}" class="col-sm-4">
 
                                             <div class="balance__cards-box {{ $comission->css_class }}">
                                                 <div class="form-check form-check-inline  mt-4">
                                                     <input class="form-check-input payment-radio" type="radio"
-                                                        name="payment" id="payment1" value="{{ $comission->payment }}">
+                                                        name="payment" id="payment_{{ $comission->id }}"
+                                                        value="{{ $comission->payment }}">
 
                                                 </div>
 
@@ -241,7 +242,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                        </label>
                                     @endforeach
                                 </div>
                             </div>
@@ -276,13 +277,16 @@
                         </div>
                         <div class="balance__input  row ">
                             <div class="col-sm-4">
-
                                 <div class="balance__input-file">
-                                    <input type="text" class="form-control" name="balance" id="balance_input"
-                                        onchange="checkComission()">
+                                    <div style="display:flex;">
+                                        <a class="btn btn-info" style="font-size:15px;cursor:default">
+                                            010{{ Auth::user()->id }}20
+                                        </a>
+                                        <input type="text" class="form-control" name="balance" id="balance_input"
+                                            onchange="checkComission()">
+                                    </div>
                                     <input type="text" name="kur" hidden>
                                 </div>
-
                             </div>
                             <div class="col-sm-4">
                                 <div class="balance__input-file">
@@ -409,9 +413,25 @@
                                         <td>
                                             {{ $payment->deny_message }}
                                         </td>
-                                        <td>{{ $payment->method }}</td>
-                                        <td>{{ $payment->money_type }}</td>
-                                        <td>{{ $payment->amount }} €</td>
+                                        @php
+                                            $comission = DB::table('comissions')
+                                                ->where('payment', $payment->method)
+                                                ->get()
+                                                ->first();
+                                        @endphp
+                                        <td style="background: rgb(199, 150, 150);">
+                                            @if ($comission)
+                                                <div class="payment_logo_div">
+                                                    <img src="{{ asset('/') }}images/{{ $comission->image }}"
+                                                        style="width:35%;" alt="">
+                                                    <p>{{ $comission->show_name }}</p>
+                                                </div>
+                                            @endif
+                                        </td>
+                                        <td class="money-td money-td-{{ $payment->money_type }}">
+                                            {{ $payment->money_type }}
+                                        </td>
+                                        <td>{{ $payment->amount }}</td>
                                         <td>{{ $payment->comission }} €</td>
                                         <td>{{ $payment->kur }}</td>
                                         <td>
@@ -422,7 +442,7 @@
                                                 </a>
                                             </div>
                                         </td>
-                                        <td>{{ $payment->payment_comment }}</td>
+                                        <td>{{ $payment->payment_comment ? $payment->payment_comment : '---' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -430,7 +450,7 @@
                     </div>
                 </div>
                 <br>
-                <div class="card">
+                {{-- <div class="card">
                     <div class="card-header">
                         <h3 class="card-title">Money transactions History</h3>
                     </div>
@@ -452,8 +472,7 @@
                                         <td>{{ $transaction->id }}</td>
                                         <td>
                                             <div style="display: flex;justify-content:center">
-                                                @if ($transaction->transfer_method == 'Payment Deny' ||
-                                                    $transaction->transfer_method == 'Cargo payment returned for cancel')
+                                                @if ($transaction->transfer_method == 'Payment Deny' || $transaction->transfer_method == 'Cargo payment returned for cancel')
                                                     <span class="badge rounded-pill bg-warning">
                                                         {{ $transaction->transfer_method }}
                                                     </span>
@@ -473,7 +492,7 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
+                </div> --}}
             </section>
 
 
@@ -581,10 +600,11 @@
                 success: function(data) {
                     Swal.fire({
                         position: 'top-right',
-                        icon: 'success',
                         title: 'Euro selling rate loaded succesfully',
-                        backdrop: true,
-                        confirmButton:true
+                        backdrop: false,
+                        showConfirmButton: false,
+                        timerProgressBar: true,
+                        timer: 3000
                     });
 
                     console.log(data);
@@ -598,13 +618,13 @@
                     document.querySelector('input[name="kur"]').value = kur;
                     console.log(document.querySelector('input[name="kur"]').value);
                 },
-                error: function(error){
+                error: function(error) {
                     Swal.fire({
                         position: 'top-right',
                         icon: 'error',
                         title: 'Couldnt load Euro selling rate',
                         backdrop: true,
-                        confirmButton:false,
+                        confirmButton: false,
                         html: `
                             <button class="btn btn-info" onclick="window.reload()">Reload Page</button>
                         `

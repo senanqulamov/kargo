@@ -16,6 +16,7 @@
     "postcss": "^8.1.14"
   },
   "dependencies": {
+    "etsy-js": "^0.0.6",
     "quagga": "^0.12.1",
     "tcmb-exchange-rates": "^0.1.10"
   },

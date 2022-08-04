@@ -43,6 +43,10 @@
                                 <th style="width:50px">Image</th>
                                 <th>Company Name</th>
                                 <th>Entegrations</th>
+                                <th>PSH</th>
+                                <th>Jet Price</th>
+                                <th>Emergency</th>
+                                <th>Kar Marj</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
                                 <th>Upload Excel</th>
@@ -66,6 +70,10 @@
                                         <span><b>API:</b> {{ $entegre[0] }}</span></br>
                                         <span><b>PRIVATE KEY:</b> {{ $entegre[1] }}</span>
                                     </td>
+                                    <td>{{ $cargo->PSH }}</td>
+                                    <td>{{ $cargo->jet_price }}</td>
+                                    <td>{{ $cargo->emergency }}</td>
+                                    <td>{{ $cargo->kar_marj }}</td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-primary" data-toggle="modal"
                                             data-target="#modal-edit-{{ $cargo->id }}">

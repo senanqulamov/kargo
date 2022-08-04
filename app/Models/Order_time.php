@@ -13,6 +13,7 @@ class Order_time extends Model
 
     protected $fillable = [
         'cargo_id',
+        'package_id',
         'user_id',
         'action',
         'time',

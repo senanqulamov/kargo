@@ -24,7 +24,7 @@ class UserAuth extends Controller
             'email' => 'required|email',
             'phone' => 'required|numeric',
             'country' => 'required',
-            'password' => 'required',
+            'password' => 'required|min:5',
             'gender' => 'required'
         ]);
 
@@ -50,11 +50,16 @@ class UserAuth extends Controller
         });
 
         $password = Hash::make($request->password);
+        $city = null;
+        if($request->city){
+            $city = $request->city;
+        }
         $credentials = array(
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'country' => $request->country,
+            'city' => $city,
             'gender' => $request->gender,
             'user_market' => $request->user_market,
             'from_where' => $request->from_where,
@@ -72,13 +77,13 @@ class UserAuth extends Controller
 
         $rules = array(
             'email' => 'required|email',
-            'password' => 'required|alphaNum|min:3'
+            'password' => 'required|min:3'
         );
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            $error = "Something happened";
+            $error = "Password or Email is wrong";
             return redirect()->back()->withErrors($error)
                 ->withInput($request->except('password'));
         }

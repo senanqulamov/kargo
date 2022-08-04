@@ -38,6 +38,7 @@ balanceBoxs[1].addEventListener("click", function () {
     if (executed == false) {
         $("#payment_history")
             .DataTable({
+                order: [[0, 'desc']],
                 responsive: false,
                 lengthChange: false,
                 autoWidth: true,
@@ -52,6 +53,7 @@ balanceBoxs[1].addEventListener("click", function () {
 
         $("#transaction_history")
             .DataTable({
+                order: [[0, 'desc']],
                 responsive: false,
                 lengthChange: false,
                 autoWidth: true,

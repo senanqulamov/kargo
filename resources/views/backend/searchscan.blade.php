@@ -28,8 +28,15 @@
     <script>
         var currentUrl = window.location.href;
         var url = currentUrl.split('scanners')[0] + 'cargo-requests/cargo_details/';
+        var scanner_return = 0;
 
         function onScanSuccess(decodedText, decodedResult) {
+            console.clear();
+            if(scanner_return == 1){
+                return;
+            }
+            scanner_return = 1;
+
             console.log(`Code scanned = ${decodedText}`, decodedResult);
             document.querySelector('#qr-reader').style.display = 'none';
             document.querySelector('.show-scanner-button-div').style.display = 'block';
@@ -134,6 +141,7 @@
         function ShowScanner(button) {
             document.querySelector('#qr-reader').style.display = 'block';
             button.parentElement.style.display = 'none';
+            scanner_return = 0;
         }
     </script>
 @endsection

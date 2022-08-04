@@ -28,8 +28,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PriceCalculationController;
 use App\Http\Controllers\CalculateController;
 use App\Http\Controllers\BalanceController;
-
-
+use App\Http\Controllers\userpanel\SimplePages;
 use App\Http\Controllers\userpanel\UserPanelController;
 
 /*
@@ -340,6 +339,7 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
 
 
         Route::get('/balance', [UserPanelController::class, 'balance'])->name('balance');
+        Route::get('/transactions', [UserPanelController::class, 'transactions'])->name('transactions');
         Route::get('/getKur', [UserPanelController::class, 'getKur'])->name('getKur');
 
         Route::post('/update-balance', [UserPanelController::class, 'updateBalance'])->name('update_balance');
@@ -354,6 +354,11 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::get('/marketplace', [UserPanelController::class, 'marketplace'])->name('marketplace');
 
         Route::post('/updateMarket', [UserPanelController::class, 'updateMarket'])->name('updateMarket');
+
+        Route::get('/share_and_earn', [SimplePages::class, 'share_and_earn'])->name('share_and_earn');
+        Route::get('/support', [SimplePages::class, 'support'])->name('support');
+        // Route::get('/marketplace', [SimplePages::class, 'marketplace'])->name('marketplace');
+        // Route::get('/marketplace', [SimplePages::class, 'marketplace'])->name('marketplace');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

@@ -15,10 +15,11 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>User</th>
-                                <th>Transfer method</th>
+                                <th>User ID</th>
+                                <th>Transaction</th>
                                 <th>Old Balance</th>
                                 <th>New Balance</th>
+                                <th>Transfer method</th>
                                 <th>Payment ID</th>
                                 <th>Date</th>
                             </tr>
@@ -36,21 +37,34 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div style="display: flex;justify-content:center">
-                                            @if ($transaction->transfer_method == 'Payment Deny' ||
-                                                $transaction->transfer_method == 'Cargo payment returned for cancel')
-                                                <span class="badge rounded-pill bg-warning">
-                                                    {{ $transaction->transfer_method }}
+                                        <div class="orders-holder-hm">
+                                            @if ($transaction->old_balance > $transaction->new_balance)
+                                                <span class="badge rounded-pill bg-danger user_id_badge">
+                                                    Money Out: {{ $transaction->new_balance - $transaction->old_balance }} €
                                                 </span>
-                                            @else
-                                                <span class="badge rounded-pill bg-info">
-                                                    {{ $transaction->transfer_method }}
+                                            @elseif ($transaction->old_balance < $transaction->new_balance)
+                                                <span class="badge rounded-pill bg-success user_id_badge">
+                                                    Money in {{ $transaction->new_balance - $transaction->old_balance }} €
                                                 </span>
                                             @endif
                                         </div>
                                     </td>
                                     <td>{{ $transaction->old_balance }} €</td>
                                     <td>{{ $transaction->new_balance }} €</td>
+                                    <td>
+                                        <div class="orders-holder-hm">
+                                            @if ($transaction->transfer_method == 'Payment Deny' ||
+                                                $transaction->transfer_method == 'Cargo payment returned for cancel')
+                                                <span class="badge rounded-pill bg-warning user_id_badge">
+                                                    {{ $transaction->transfer_method }}
+                                                </span>
+                                            @else
+                                                <span class="badge rounded-pill bg-info user_id_badge">
+                                                    {{ $transaction->transfer_method }}
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </td>
                                     <td>{{ $transaction->payment_id }}</td>
                                     <td>{{ $transaction->created_at }}</td>
                                 </tr>

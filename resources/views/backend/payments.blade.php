@@ -44,6 +44,7 @@
                     <table id="example1" class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Customer ID</th>
                                 <th>Customer Name</th>
                                 <th>Approval Status</th>
@@ -68,6 +69,7 @@
                                             ->where('id', $payment->userID)
                                             ->first();
                                     @endphp
+                                    <td>{{ $payment->id ? $payment->id : '---' }}</td>
                                     <td>
                                         <div class="orders-holder-hm">
                                             <span class="badge rounded-pill bg-info user_id_badge"

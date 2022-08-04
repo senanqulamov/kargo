@@ -47,6 +47,7 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Cargo ID</th>
+                                <th>Package ID</th>
                                 <th>User ID</th>
                                 <th>Action</th>
                                 <th>Date</th>
@@ -72,10 +73,26 @@
                                     </td>
                                     <td>
                                         <div class="orders-holder-hm">
+                                            @if ($log->package_id)
+                                                <span class="badge rounded-pill bg-secondary user_id_badge" style="cursor: default;">
+                                                    {{ $log->package_id }}
+                                                </span>
+                                            @else
+                                                <span class="badge rounded-pill bg-warning user_id_badge" style="cursor: default">
+                                                    Not Settled
+                                                </span>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="orders-holder-hm">
+                                            @php
+                                                $user = DB::table('users')->where('id' , $log->user_id)->first();
+                                            @endphp
                                             @if ($log->user_id)
                                                 <span class="badge rounded-pill bg-info user_id_badge"
                                                     onclick="window.open('{{ route('admin.users.details', $log->user_id) }}' , '_self')">
-                                                    010{{ $log->user_id }}20
+                                                    010{{ $log->user_id }}20 : {{$user->name}}
                                                 </span>
                                             @else
                                                 <span class="badge rounded-pill bg-warning user_id_badge">

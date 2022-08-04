@@ -32,6 +32,7 @@
                                 <th>User Role</th>
                                 <th style="width:40px">Image</th>
                                 <th>Username</th>
+                                <th>Gender</th>
                                 <th>Balance</th>
                                 <th>Email</th>
                                 <th>Email Verified At</th>
@@ -48,6 +49,10 @@
                                 <th>Tax Adminstration</th>
                                 <th>Tax Number</th>
                                 <th>Iban</th>
+                                <th>User Market</th>
+                                <th>From Where</th>
+                                <th>Promotion Code</th>
+                                <th>Average Requests</th>
                                 <th>Created At</th>
                             </tr>
                         </thead>
@@ -75,6 +80,7 @@
                                             alt="user profile picture">
                                     </td>
                                     <td>{{ $user->name ? $user->name : '---' }}</td>
+                                    <td>{{ $user->gender ? $user->gender : '---' }}</td>
                                     <td class="balance_td">
                                         <div class="balance_holder" style="width: max-content">
                                             {{ $user->balance ? $user->balance : '0' }} €
@@ -97,6 +103,10 @@
                                     <td>{{ $user->tax_adminstration ? $user->tax_adminstration : '---' }}</td>
                                     <td>{{ $user->tax_number ? $user->tax_number : '---' }}</td>
                                     <td>{{ $user->Iban ? $user->Iban : '---' }}</td>
+                                    <td>{{ $user->user_market ? $user->user_market : '---' }}</td>
+                                    <td>{{ $user->from_where ? $user->from_where : '---' }}</td>
+                                    <td>{{ $user->promotion_code ? $user->promotion_code : '---' }}</td>
+                                    <td>{{ $user->average_requests ? $user->average_requests : '---' }}</td>
                                     <td>{{ $user->created_at->format('d M Y') }}</td>
                                 </tr>
                             @endforeach

@@ -11,9 +11,10 @@
                 position: 'top-end',
                 icon: 'error',
                 title: '{{ implode('', $errors->all(':message')) }}',
-                showConfirmButton: false,
                 backdrop: false,
-                timer: 2000
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 4000
             })
         </script>
     @endif
@@ -23,8 +24,9 @@
                 position: 'top-end',
                 icon: 'info',
                 title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
                 backdrop: false,
+                showConfirmButton: false,
+                timerProgressBar: true,
                 timer: 4000
             })
         </script>

@@ -19,6 +19,7 @@ class Courier_request extends Model
         'customer_name',
         'phone',
         'city',
+        'state',
         'country',
         'address',
         'zipcode',

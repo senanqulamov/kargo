@@ -126,6 +126,7 @@ class ManuelOrderController extends Controller
 
         $time_data = array(
             'cargo_id' => $cargo->id,
+            'package_id' => $package->id,
             'user_id' => Auth::user()->id,
             'action' => 'Facility scan',
             'time' => Carbon::now()
@@ -183,6 +184,7 @@ class ManuelOrderController extends Controller
 
         $time_data = array(
             'cargo_id' => $cargo->id,
+            'package_id' => $package->id,
             'user_id' => Auth::user()->id,
             'action' => 'Worker scan',
             'time' => Carbon::now()
@@ -249,6 +251,7 @@ class ManuelOrderController extends Controller
 
         $time_data = array(
             'cargo_id' => $result->cargo_id,
+            'package_id' => $package->id,
             'user_id' => Auth::user()->id,
             'action' => 'Measurement scan',
             'time' => Carbon::now()
@@ -515,12 +518,12 @@ class ManuelOrderController extends Controller
     public function cargo_logs(){
         $logs = Order_time::orderBy('id' , 'DESC')->get();
 
-        return view('backend.helpers.cargo_logs')->with('logs' , $logs);
+        return view('backend.logs.cargo_logs')->with('logs' , $logs);
     }
 
     public function cargo_logs_with_id($id){
         $logs = Order_time::where('cargo_id' , $id)->orderBy('id' , 'DESC')->get();
 
-        return view('backend.helpers.cargo_logs')->with('logs' , $logs);
+        return view('backend.logs.cargo_logs')->with('logs' , $logs);
     }
 }

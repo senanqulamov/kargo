@@ -165,7 +165,6 @@
             <div class="container" id="balance__tabs">
                 <div class="row">
                     <div class="col-4">
-
                         <button class="balance__box btn-back d-flex align-items-center" onclick="changeTab(this)"
                             data-name="requests">
                             <svg width="46" height="46" viewBox="0 0 46 46" fill="none"
@@ -205,13 +204,10 @@
                                     fill="white" />
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">My Courier Request </p>
+                                <p class="ms-3">Support Demand</p>
                             </div>
-
                         </button>
-
                     </div>
-
                     <div class="col-4">
                         <button class="balance__box d-flex align-items-center" onclick="changeTab(this)" data-name="demand">
                             <svg width="47" height="47" viewBox="0 0 47 47" fill="none"
@@ -233,13 +229,10 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3"> Create Courier Demand</p>
+                                <p class="ms-3">Create Support Demand</p>
                             </div>
-
                         </button>
-
                     </div>
-
                     <div class="col-4">
                         <button class="balance__box d-flex align-items-center" onclick="changeTab(this)"
                             data-name="history">
@@ -265,12 +258,10 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">Courier Demand History </p>
+                                <p class="ms-3">System Messages</p>
                             </div>
-
                         </button>
                     </div>
-
                 </div>
             </div>
 
@@ -280,27 +271,9 @@
                     <div class="courier__input courier__table-box--1">
                         <div class="page__not page__not--1">
                             <div class="demand__box   me-3">
-                                <svg width="37" height="37" viewBox="0 0 37 37" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <g clip-path="url(#clip0_194_422)">
-                                        <path
-                                            d="M18.5 37C8.29927 37 0 28.7007 0 18.5C0 8.29927 8.29927 0 18.5 0C28.7007 0 37 8.29927 37 18.5C37 28.7007 28.7007 37 18.5 37Z"
-                                            fill="#00D2FF" />
-                                        <path
-                                            d="M27.1334 30.833C16.9326 30.833 8.63336 22.5337 8.63336 12.333C8.63336 8.06299 10.1017 4.13731 12.5408 1.00293C5.25862 3.49082 0 10.3856 0 18.4996C0 28.7003 8.29927 36.9996 18.5 36.9996C24.4308 36.9996 29.7047 34.1831 33.0925 29.8296C31.2196 30.4695 29.22 30.833 27.1334 30.833Z"
-                                            fill="#18BDF6" />
-                                        <path
-                                            d="M11.3286 21.0676H19.6123C19.7361 21.0676 19.8374 20.9663 19.8374 20.8425V14.1323C19.8374 13.7594 19.535 13.457 19.1621 13.457H11.7788C11.4059 13.457 11.1036 13.7594 11.1036 14.1323V20.8425C11.1035 20.9663 11.2048 21.0676 11.3286 21.0676ZM12.9978 16.5459C12.9978 16.3916 13.1229 16.2665 13.2772 16.2665H15.4871V15.4791C15.4871 15.2302 15.7881 15.1055 15.9641 15.2816L17.8684 17.1868C17.9774 17.2959 17.9774 17.4727 17.8684 17.5818L15.9641 19.4867C15.7881 19.6627 15.4871 19.5381 15.4871 19.2892V18.5016H13.2772C13.1229 18.5016 12.9978 18.3765 12.9978 18.2222V16.5459H12.9978ZM13.9668 22.8751H11.2251C11.1013 22.8751 11 22.7739 11 22.6501V21.9658C11 21.8419 11.1013 21.7406 11.2251 21.7406H14.5881C14.2594 22.0265 14.0321 22.425 13.9668 22.8751ZM26.7749 21.7407H26.2279V18.6816C26.2279 18.3237 26.1199 17.9725 25.9195 17.6754L24.5487 15.645C24.2133 15.1498 23.655 14.8526 23.0563 14.8526H20.9314C20.6815 14.8526 20.4812 15.0552 20.4812 15.3028V21.7407H17.0011C17.332 22.0265 17.5594 22.425 17.6247 22.8752H21.2938C21.4243 21.9815 22.1941 21.2905 23.1238 21.2905C24.0535 21.2905 24.821 21.9816 24.9516 22.8752H26.7749C26.8987 22.8752 27 22.7739 27 22.6501V21.9658C27 21.842 26.8987 21.7407 26.7749 21.7407ZM24.5329 18.0805H21.7282C21.6044 18.0805 21.5031 17.9815 21.5031 17.8554V16.3C21.5031 16.1762 21.6044 16.0749 21.7282 16.0749H23.4367C23.511 16.0749 23.5785 16.1109 23.6213 16.1694L24.7175 17.7271C24.821 17.8757 24.7152 18.0805 24.5329 18.0805ZM15.7946 21.7407C15.0225 21.7407 14.3945 22.3687 14.3945 23.143C14.3945 23.9151 15.0225 24.5431 15.7946 24.5431C16.5689 24.5431 17.1947 23.9151 17.1947 23.143C17.1947 22.3687 16.5689 21.7407 15.7946 21.7407ZM15.7946 23.8431C15.4074 23.8431 15.0946 23.5279 15.0946 23.143C15.0946 22.7558 15.4075 22.443 15.7946 22.443C16.1818 22.443 16.4947 22.7559 16.4947 23.143C16.4947 23.5279 16.1818 23.8431 15.7946 23.8431ZM23.1238 21.7407C22.3495 21.7407 21.7237 22.3687 21.7237 23.143C21.7237 23.9151 22.3495 24.5431 23.1238 24.5431C23.8959 24.5431 24.5239 23.9151 24.5239 23.143C24.5239 22.3687 23.8959 21.7407 23.1238 21.7407ZM23.1238 23.8431C22.7366 23.8431 22.4237 23.5279 22.4237 23.143C22.4237 22.7558 22.7366 22.443 23.1238 22.443C23.511 22.443 23.8238 22.7559 23.8238 23.143C23.8239 23.5279 23.511 23.8431 23.1238 23.8431Z"
-                                            fill="white" />
-                                    </g>
-                                    <defs>
-                                        <clipPath id="clip0_194_422">
-                                            <rect width="37" height="37" fill="white" />
-                                        </clipPath>
-                                    </defs>
-                                </svg>
+
                             </div>
-                            <h2 class="demand__h2">My Courier Request</h2>
+                            <h2 class="demand__h2">Support Demand</h2>
                         </div>
                         <div class="courier--table-1">
                             <div class="courier__table--1 mt-4">
@@ -323,63 +296,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php
-                                            $pending = ['accepted', 'pending'];
-                                        @endphp
-                                        @foreach ($courier_requests->whereIn('status', $pending) as $cr_req)
-                                            <tr>
-                                                <td>{{ $cr_req->id ? $cr_req->id : '---' }}</td>
-                                                <td>
-                                                    @if ($cr_req->status == 'pending')
-                                                        <span class="badge rounded-pill bg-info">Pending</span>
-                                                    @elseif ($cr_req->status == 'cancelled')
-                                                        <span class="badge rounded-pill bg-danger">Cancelled</span>
-                                                    @elseif ($cr_req->status == 'accepted')
-                                                        <span class="badge rounded-pill bg-warning">Accepted</span>
-                                                    @elseif ($cr_req->status == 'done')
-                                                        <span class="badge rounded-pill bg-success">Courier
-                                                            Collected</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $cr_req->comment ? $cr_req->comment : '---' }}</td>
-                                                @php
-                                                    $courier_orders = json_decode($cr_req->orders);
-                                                @endphp
-                                                <td>
-                                                    <div class="orders-holder-hm">
-                                                        @if ($courier_orders)
-                                                            @foreach ($courier_orders as $courier_order)
-                                                                <span class="badge rounded-pill bg-info user_id_badge"
-                                                                    onclick="window.open('{{ route('userpanel.viewCargoDetails', $courier_order) }}' , '_self')">
-                                                                    {{ $courier_order }}
-                                                                </span>
-                                                            @endforeach
-                                                        @else
-                                                            <span class="badge rounded-pill bg-danger user_id_badge">
-                                                                None
-                                                            </span>
-                                                        @endif
-                                                    </div>
-                                                </td>
-                                                <td>{{ $cr_req->customer_name ? $cr_req->customer_name : '---' }}</td>
-                                                <td>{{ $cr_req->phone ? $cr_req->phone : '---' }}</td>
-                                                <td>{{ $cr_req->city ? $cr_req->city : '---' }}</td>
-                                                <td>{{ $cr_req->country ? $cr_req->country : '---' }}</td>
-                                                <td>{{ $cr_req->address ? $cr_req->address : '---' }}</td>
-                                                <td>{{ $cr_req->zipcode ? $cr_req->zipcode : '---' }}</td>
-                                                <td>{{ $cr_req->note ? $cr_req->note : '---' }}</td>
-                                                <td>{{ $cr_req->date ? $cr_req->date : '---' }}</td>
-                                                <td>
-                                                    @if ($cr_req->status != 'cancelled' && $cr_req->status != 'done')
-                                                        <a href="#" onclick="requestAction(this)"
-                                                            class="btn btn-danger" data-request-id="{{ $cr_req->id }}"
-                                                            data-status="cancelled">
-                                                            <i class="fas fa-window-close"></i>
-                                                        </a>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -391,7 +308,7 @@
 
                     <div class="courier__input">
                         <div class="page__not page__not--1">
-                            <div class="demand__box   me-3">
+                            <div class="page__not-box me-3">
                                 <svg width="37" height="37" viewBox="0 0 37 37" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <g clip-path="url(#clip0_194_422)">
@@ -412,20 +329,34 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <h2 class="demand__h2">Create Demand</h2>
+                            <h2 class="color__text">Create Support Demand</h2>
                         </div>
-
                         <hr class="hr">
-
-                        <form action="{{ route('userpanel.post_courier_request') }}" method="POST">
-                            @csrf
+                        <div class="courier__input-1">
                             <div class="row">
-                                <div class="col-sm-6 col-12">
+                                <div class="col-sm-4 col-12">
+                                    <div class="courier__input-box">
+                                        <h6>Type of cause<span class="red-1">*</span></h6>
+                                        <select class="form-select" placeholder="Cargo tracking" name="cause" required>
+                                            <option selected>4683579</option>
+                                            <option value="1">468357</option>
+                                            <option value="2">468357</option>
+                                            <option value="3">468357</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-12">
+                                    <div class="courier__input-box">
+                                        <h6>Topic title<span class="red-1">*</span></h6>
+                                        <input type="text" class="form-control" placeholder="Cargo" name="title"
+                                            required>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-12">
                                     <div class="courier__input-box">
                                         <h6>Order ID<span class="red-1">*</span></h6>
                                         <div class="dropdown">
                                             <label class="dropdown-label">Select Options</label>
-
                                             <div class="dropdown-list">
                                                 @foreach ($orders as $key => $order)
                                                     <div class="checkbox">
@@ -435,8 +366,8 @@
                                                             value="{{ $order->id }}" />
                                                         <label for="checkbox-custom_0{{ $key }}"
                                                             class="checkbox-custom-label ">
-                                                            Order ID: <b><span
-                                                                    class="select-text-form-hm">{{ $order->id }}</span></b>
+                                                            Order ID:
+                                                            <b><span class="select-text-form-hm">{{ $order->id }}</span></b>
                                                             <br><br>
                                                             <span>Order Info: <b>{{ $order->order_info }}</b></span>
                                                         </label>
@@ -446,97 +377,77 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>Contact person name<span class="red-1">*</span></h6>
-                                        <input type="text" class="form-control" placeholder="Deirvlon"
-                                            name="customer_name" required>
+                            </div>
+                        </div>
+                        <hr class="hr">
+                        {{-- <div class="courier__input-2">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12  mt-4">
+                                    <!--1ci input-->
+                                    <p class="input__above-text">Package ID:</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="package_id">
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>Country<span class="red-1">*</span></h6>
-                                        @php
-                                            $countries = DB::table('cargo_countries')->get();
-                                        @endphp
-                                        <select class="form-select" name="country" required>
-                                            <option value="" selected disabled>Select Country</option>
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->country }}">{{ $country->country }}</option>
-                                            @endforeach
-                                        </select>
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12  mt-4">
+                                    <!--1ci input-->
+                                    <p class="input__above-text">Length:</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="package_length">
+                                        <span class="input-group-text" id="basic-addon1">cm</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>Phone Number<span class="red-1">*</span></h6>
-                                        <input class="form-control" type="tel" name="phone" id="telephone">
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>City<span class="red-1">*</span></h6>
-                                        <input type="text" class="form-control" name="city" required>
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12  mt-4">
+                                    <!--3ci input-->
+                                    <p class="input__above-text">Width:</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="package_width">
+                                        <span class="input-group-text" id="basic-addon1">cm</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-12">
-                                    <div class="courier__input-box">
-                                        <h6>Date<span class="red-1">*</span></h6>
-                                        <input type="date" class="form-control" name="date" required>
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12  mt-4">
+                                    <!--4ci input-->
+                                    <p class="input__above-text">Height:</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control" name="package_height">
+                                        <span class="input-group-text" id="basic-addon1">cm</span>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>Address<span class="red-1">*</span></h6>
-                                        <input type="address" class="form-control" name="address" required>
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12  mt-4">
+                                    <!--5ci input-->
+                                    <p class="input__above-text">Weight:</p>
+                                    <div class="input-group mb-3">
+                                        <input class="form-control" id="numControl"
+                                            onkeypress="return  changeToNumber(event)" name="package_weight">
+                                        <span class="input-group-text" id="basic-addon1">kg</span>
                                     </div>
-
                                 </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>State<span class="red-1">*</span></h6>
-                                        <input type="text" class="form-control" name="state" required>
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>Note</h6>
-                                        <input class="form-control" type="text"
-                                            placeholder="Your wishes will be taken into account" name="note">
-                                    </div>
-
-                                </div>
-                                <div class="col-sm-6 col-12">
-
-                                    <div class="courier__input-box">
-                                        <h6>Zip Code<span class="red-1">*</span></h6>
-                                        <input class="form-control" type="text" placeholder="216464"
-                                            name="zipcode" required>
-                                    </div>
-
-                                </div>
-                                <div class="col-12">
-                                    <div class="courier__input-box d-flex justify-content-end mt-4">
-                                        <button class="balance__address-refund--btn pe-5 mt-5" type="submit">
-                                            <i class="fa-solid fa-check me-2"></i> Confirm Demand
-                                        </button>
+                                <div class="col-lg-2 col-md-4 col-sm-6 col-12 mt-4">
+                                    <!--6ci input-->
+                                    <p class="input__above-text">Note:</p>
+                                    <div class="input-group mb-3">
+                                        <input type="text" class="form-control text" name="note">
                                     </div>
                                 </div>
                             </div>
-                        </form>
-
-
+                        </div> --}}
+                        <div class="courier__input-3">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form action="" class="form__file">
+                                        <p class="input__above-text">(PDF, Maks. 5.0. MB)</p>
+                                        <input type="file" name="document"></input>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="courier__input-3">
+                            <div class="courier__input-textare">
+                                <p class="input__below-text">Text</p>
+                                <textarea name="text" cols="30" rows="15" style="width: 100%;"></textarea>
+                            </div>
+                        </div>
                     </div>
-
                 </section>
 
                 <!--table section-->
@@ -565,78 +476,177 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <h2 class="demand__h2">Demand Courier History</h2>
+                            <h2 class="demand__h2">System Messages</h2>
                         </div>
-                        <div class="courier--table-2">
-                            <div class="courier__table--2 mt-4">
-                                <table id="example2" class="table table-bordered table-striped" style="with:100%;">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Status</th>
-                                            <th>Comment</th>
-                                            <th>Orders</th>
-                                            <th>Customer name</th>
-                                            <th>Phone</th>
-                                            <th>City</th>
-                                            <th>Country</th>
-                                            <th>Address</th>
-                                            <th>ZipCode</th>
-                                            <th>Note</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php
-                                            $cancelled = ['cancelled', 'done'];
-                                        @endphp
-                                        @foreach ($courier_requests->whereIn('status', $cancelled) as $cr_req)
-                                            <tr>
-                                                <td>{{ $cr_req->id ? $cr_req->id : '---' }}</td>
-                                                <td>
-                                                    @if ($cr_req->status == 'pending')
-                                                        <span class="badge rounded-pill bg-info">Pending</span>
-                                                    @elseif ($cr_req->status == 'cancelled')
-                                                        <span class="badge rounded-pill bg-danger">Cancelled</span>
-                                                    @elseif ($cr_req->status == 'accepted')
-                                                        <span class="badge rounded-pill bg-warning">Accepted</span>
-                                                    @elseif ($cr_req->status == 'done')
-                                                        <span class="badge rounded-pill bg-success">Courier
-                                                            Collected</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $cr_req->comment ? $cr_req->comment : '---' }}</td>
-                                                @php
-                                                    $courier_orders = json_decode($cr_req->orders);
-                                                @endphp
-                                                <td>
-                                                    <div class="orders-holder-hm">
-                                                        @if ($courier_orders)
-                                                            @foreach ($courier_orders as $courier_order)
-                                                                <span class="badge rounded-pill bg-info user_id_badge"
-                                                                    onclick="window.open('{{ route('userpanel.viewCargoDetails', $courier_order) }}' , '_self')">
-                                                                    {{ $courier_order }}
-                                                                </span>
-                                                            @endforeach
-                                                        @else
-                                                            <span class="badge rounded-pill bg-danger user_id_badge">
-                                                                None
-                                                            </span>
-                                                        @endif
+                        <div class="support__message ">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="support__message-box support__message-box--1">
+                                        <div class="balance__address-refund--btn-2">Support ID</div>
+                                    </div>
+                                    <div class="nav flex-column nav-pills  support__message-left" id="v-pills-tab"
+                                        role="tablist" aria-orientation="vertical">
+                                        <button class="nav-link active support__message-btn" id="v-pills-home-tab"
+                                            data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button"
+                                            role="tab" aria-controls="v-pills-home"
+                                            aria-selected="true">8347874</button>
+                                        <button class="nav-link support__message-btn" id="v-pills-profile-tab"
+                                            data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button"
+                                            role="tab" aria-controls="v-pills-profile"
+                                            aria-selected="false">8515478</button>
+                                        <button class="nav-link support__message-btn" id="v-pills-messages-tab"
+                                            data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button"
+                                            role="tab" aria-controls="v-pills-messages"
+                                            aria-selected="false">7587514</button>
+                                        <button class="nav-link support__message-btn" id="v-pills-settings-tab"
+                                            data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button"
+                                            role="tab" aria-controls="v-pills-settings"
+                                            aria-selected="false">1224112</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-8 offset-1 support__message-primary">
+                                    <div class="support__message-box support__message-box--2">
+                                        <div class="balance__address-refund--btn-2">Messages</div>
+                                    </div>
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                                            aria-labelledby="v-pills-home-tab">
+                                            <div class="support__message-chat support__message-right">
+                                                <h4>Deirvlon</h4>
+                                                <hr class="hr">
+
+                                                {{-- TODO -----Support CHAT----- --}}
+                                                <div class="row support-chat-hm">
+                                                    <div class="col-md-7 col-sm-6 col-9  support__message-text-1">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Hello. Can I return my order in the warehouse and get
+                                                                my payment back?</p>
+                                                            <div class="support__message-time">
+                                                                <p>21.07.2022 / 13:30</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </td>
-                                                <td>{{ $cr_req->customer_name ? $cr_req->customer_name : '---' }}</td>
-                                                <td>{{ $cr_req->phone ? $cr_req->phone : '---' }}</td>
-                                                <td>{{ $cr_req->city ? $cr_req->city : '---' }}</td>
-                                                <td>{{ $cr_req->country ? $cr_req->country : '---' }}</td>
-                                                <td>{{ $cr_req->address ? $cr_req->address : '---' }}</td>
-                                                <td>{{ $cr_req->zipcode ? $cr_req->zipcode : '---' }}</td>
-                                                <td>{{ $cr_req->note ? $cr_req->note : '---' }}</td>
-                                                <td>{{ $cr_req->date ? $cr_req->date : '---' }}</td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                    <div
+                                                        class="col-md-7  col-sm-6 col-9  offset-5 mt-5 support__message-text-2">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Deirvlon, as mentioned in the terms of carriage, we
+                                                                do not have a return service from an external
+                                                                warehouse.</p>
+                                                            <div class="support__message-time">
+                                                                <p>21.11.2021 / 16:57</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 col-sm-6 col-9 mt-5 support__message-text-1">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Hello. Can I return my order in the warehouse and get
+                                                                my payment back?</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.07.2022 / 13:30</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                                            aria-labelledby="v-pills-profile-tab">
+                                            <div class="support__message-chat support__message-right">
+                                                <h4>Deirvlon</h4>
+                                                <hr class="hr">
+                                                <div class="row">
+                                                    <div class="col-md-7 col-sm-6 col-9  support__message-text-1">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Hello. Can I return my order in the warehouse and get
+                                                                my payment back?</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.07.2022 / 13:30</p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-md-7  col-sm-6 col-9  offset-5 mt-5 support__message-text-2">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Deirvlon, as mentioned in the terms of carriage, we
+                                                                do not have a return service from an external
+                                                                warehouse.</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.11.2021 / 16:57</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
+                                            aria-labelledby="v-pills-messages-tab">
+                                            <div class="support__message-chat support__message-right">
+                                                <h4>Deirvlon</h4>
+                                                <hr class="hr">
+                                                <div class="row">
+                                                    <div class="col-md-7 col-sm-6 col-9  support__message-text-1">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Hello. Can I return my order in the warehouse and get
+                                                                my payment back?</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.07.2022 / 13:30</p>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-md-7  col-sm-6 col-9  offset-5 mt-5 support__message-text-2">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Deirvlon, as mentioned in the terms of carriage, we
+                                                                do not have a return service from an external
+                                                                warehouse.</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.11.2021 / 16:57</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
+                                            aria-labelledby="v-pills-settings-tab">
+                                            <div class="support__message-chat support__message-right">
+                                                <h4>Deirvlon</h4>
+                                                <hr class="hr">
+                                                <div class="row">
+                                                    <div class="col-md-7 col-sm-6 col-9  support__message-text-1">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Hello. Can I return my order in the warehouse and get
+                                                                my payment back?</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.07.2022 / 13:30</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="col-md-7  col-sm-6 col-9  offset-5 mt-5 support__message-text-2">
+                                                        <div class="support__message-chatbox">
+                                                            <p>Deirvlon, as mentioned in the terms of carriage, we
+                                                                do not have a return service from an external
+                                                                warehouse.</p>
+
+                                                            <div class="support__message-time">
+                                                                <p>21.11.2021 / 16:57</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -750,47 +760,5 @@
                 scrollX: true,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
-    </script>
-    <script>
-        function requestAction(button) {
-            var id = button.getAttribute('data-request-id');
-            var status = button.getAttribute('data-status');
-
-            Swal.fire({
-                title: "Comment: ",
-                input: 'text',
-                showCancelButton: true
-            }).then((result) => {
-                if (result.value) {
-                    $.ajax({
-                        type: 'POST',
-                        url: '{{ route('admin.cargo-requests.status_courier_request') }}',
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        data: {
-                            id: id,
-                            status: status,
-                            comment: result.value
-                        },
-                        success: function(data) {
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'info',
-                                title: data,
-                                showConfirmButton: false,
-                                backdrop: true,
-                                timer: 2000,
-                                timerProgressBar: true
-                            });
-
-                            setTimeout(() => {
-                                window.location.reload();
-                            }, 2000);
-                        }
-                    });
-                }
-            });
-        }
     </script>
 @endsection

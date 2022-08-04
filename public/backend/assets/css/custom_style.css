@@ -1,3 +1,16 @@
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background: #cccccc05;
+    position: fixed;
+    z-index: 2000;
+}
+
+.progress-bar {
+    height: 4px;
+    background: linear-gradient(93.84deg, rgba(251, 152, 92, 0.88) -42.66%, rgba(255, 180, 6, 0.88) 144.99%);
+    width: 0%;
+}
 
 .modal_package_cont {
     border-bottom: 1px dotted #0ea197b5;
@@ -148,7 +161,7 @@
 }
 #scanner-loader{
     width: 100%;
-    height: 71vw;
+    height: 100%;
     backdrop-filter: blur(10px);
     margin: 0;
     position: fixed;
@@ -276,4 +289,153 @@ table td {
 .orders-holder-hm span:hover {
     transform: scale(1.1);
     color: black !important;
+}
+
+.navigation__box {
+    position: relative;
+    background-image: linear-gradient(to right,
+            hsl(0, 0%, 100%),
+            hsl(0, 0%, 100%));
+    z-index: 1;
+    transition: background-image 0.3s linear;
+    transition: 0.3s ease-in-out;
+    border-radius: 3px;
+}
+
+.navigation__box::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: linear-gradient(93.84deg, rgba(251, 152, 92, 0.88) -42.66%, rgba(255, 180, 6, 0.88) 144.99%);
+    z-index: -1;
+    transition: opacity 0.3s linear, border-radius 0.6s;
+    opacity: 0;
+    border-radius: 3px;
+}
+
+.navigation__box:hover {
+    transform: scale(1.05);
+}
+
+.navigation__box:hover::before {
+    opacity: 1;
+    border-radius: 25px;
+}
+
+.active-link-hm {
+    background-image: linear-gradient(93.84deg, rgba(251, 152, 92, 0.88) -42.66%, rgba(255, 180, 6, 0.88) 144.99%) !important;
+}
+
+.balance_bar_in_header {
+    padding: 5px 20px;
+    font-size: 14px;
+    border-radius: 15px;
+    background: white;
+    font-weight: bold;
+    width: max-content;
+}
+
+.balance_bar_red {
+    border: 2px solid #f15d13;
+    color: #f15d13;
+}
+
+.balance_bar_green {
+    border: 2px solid #198754;
+    color: #198754;
+}
+
+.navigation__logo {
+    cursor: pointer;
+}
+
+.header__account-guest {
+    display: inline-block;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+    width: 100px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.cancelled-row{
+    background: #f8676752 !important;
+}
+
+.money-td{
+    text-transform:uppercase
+}
+.money-td-tl{
+    background: #ff00004a !important;
+}
+.money-td-euro{
+    background: #0000ff54 !important;
+}
+.pdf-download-td-hm{
+    cursor:pointer;
+    transition:0.6s ease-in-out;
+    outline: 1px solid transparent;
+}
+.pdf-download-td-hm:hover{
+    background: white !important;
+    transform: scale(1.1);
+    outline: 1px solid rgb(173, 117, 117);
+    z-index: 200;
+}
+
+
+/* asdasd */
+.order-form-cont{
+    position: relative;
+}
+
+.order-form-div{
+    visibility:hidden;
+    z-index: -1;
+    position: absolute;
+    top: 0;
+}
+.active-order-form-div{
+    visibility: visible;
+    position: static;
+    z-index: 1;
+}
+
+#submit_button_form{
+    display: flex;
+}
+
+.cargo-company-labels-holder{
+    display: grid;
+    grid-template-columns: repeat(2, 40%);
+    gap: 10px 0;
+    justify-content: space-around;
+    justify-items: center;
+    align-items: center;
+}
+
+.cargo-company-label{
+    height: max-content;
+    width: 100%;
 }

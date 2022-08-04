@@ -13,18 +13,6 @@
             })
         </script>
     @endif
-    @if (session()->has('error'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: '{{ session()->get('error') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
 
     <style>
         .custom-file-upload {
@@ -113,11 +101,7 @@
         }
 
         .textShipment {
-            Font-size: 17px;
-            Line-height: 19px;
-            Line-height: 100%;
             color: #405982;
-
         }
 
         .customerText {
@@ -265,9 +249,9 @@
         <div class="variable variableManualOrder container py-4 row mx-auto">
             <form action="{{ route('userpanel.post.manualorder') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="col-12">
+                <div class="col-12 order-form-cont">
                     <!-- Customer -->
-                    <ul class="list-group mb-5">
+                    <ul class="list-group mb-5 order-form-div active-order-form-div">
                         <li class="list-group-item row pt-4">
                             <ul class="list-group list-group-flush">
                                 <div class="d-flex align-items-center mb-3">
@@ -290,15 +274,13 @@
                                             Open this select menu
                                         </option>
                                         @foreach ($user_addresses as $address)
-                                            <option>
-                                                {{ $address->country }}<-->
-                                                    {{ $address->city }}<-->
-                                                        {{ $address->state }}<-->
-                                                            {{ $address->address }}<-->
-                                                                {{ $address->zipcode }}<-->
-                                                                    {{ $address->name }}<-->
-                                                                        {{ $address->phone }}<-->
-                                                                            {{ $address->email }}
+                                            <option data-country="{{ $address->country }}"
+                                                data-state="{{ $address->state }}" data-city="{{ $address->city }}"
+                                                data-address="{{ $address->address }}"
+                                                data-zipcode="{{ $address->zipcode }}" data-name="{{ $address->name }}"
+                                                data-phone="{{ $address->phone }}" data-email="{{ $address->email }}">
+                                                {{ $address->email }} / {{ $address->address }} / {{ $address->city }}
+                                                /{{ $address->country }}
                                             </option>
                                         @endforeach
                                     </select>
@@ -309,37 +291,42 @@
                                             <h5 class="textShipment">Address Information</h5>
                                             <h6 class="customerText">Country<span class="red">*</span></h6>
                                             {{-- <input type="text" placeholder="Country" id="country-input" /> --}}
-                                            <select class="form-select mb-3" name="country">
-                                                <option value="0" selected disabled>Select</option>
+                                            <select class="form-select mb-3 check-input" name="country">
+                                                <option value="" selected disabled>Select</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->name }}">{{ $country->name }}</option>
                                                 @endforeach
                                             </select>
                                             <h6 class="customerText">City<span class="red">*</span></h6>
-                                            <input class="form-control mb-3" type="text" placeholder="New York"
-                                                aria-label="default input example" name="city" id="locality-input" />
+                                            <input class="form-control mb-3 check-input" type="text"
+                                                placeholder="New York" aria-label="default input example" name="city"
+                                                id="locality-input" />
                                             <h6 class="customerText">State</h6>
-                                            <input class="form-control mb-3" type="text" placeholder="California"
-                                                aria-label="default input example" name="state"
+                                            <input class="form-control mb-3 check-input" type="text"
+                                                placeholder="California" aria-label="default input example" name="state"
                                                 id="administrative_area_level_1-input" />
                                             <h6 class="customerText">Adress<span class="red">*</span></h6>
-                                            <input class="form-control mb-3" type="text" placeholder="Bergen street 57"
-                                                aria-label="default input example" name="address" id="location-input" />
+                                            <input class="form-control mb-3 check-input" type="text"
+                                                placeholder="Bergen street 57" aria-label="default input example"
+                                                name="address" id="location-input" />
                                             <h6 class="customerText">ZIP Code<span class="red">*</span></h6>
-                                            <input class="form-control mb-3" type="text" placeholder="745844"
+                                            <input class="form-control mb-3 check-input" type="text" placeholder="745844"
                                                 aria-label="default input example" name="zipcode" id="postal_code-input" />
                                         </div>
                                         <div class="col-12 col-sm-6">
                                             <h5 class="textShipment">Contact Info</h5>
                                             <h6 class="customerText">Full Name<span class="red">*</span></h6>
-                                            <input class="form-control mb-3" type="text" placeholder="Emma John"
-                                                aria-label="default input example" name="name" />
+                                            <input class="form-control mb-3 check-input" type="text"
+                                                placeholder="Emma John" aria-label="default input example"
+                                                name="name" />
                                             <h6 class="customerText">Phone Number<span class="red">*</span></h6>
-                                            <input class="form-control mb-3" type="text" placeholder="+9383830834"
-                                                aria-label="default input example" name="phone" />
+                                            <input class="form-control mb-3 check-input" type="tel"
+                                                placeholder="+9383830834" aria-label="default input example"
+                                                name="phone" />
                                             <h6 class="customerText">Email<span class="red">*</span></h6>
-                                            <input class="form-control mb-3" type="email" placeholder="john@examle.com"
-                                                aria-label="default input example" name="email" />
+                                            <input class="form-control mb-3 check-input" type="email"
+                                                placeholder="john@examle.com" aria-label="default input example"
+                                                name="email" />
                                             <div class="form-check defaultCheckbox  ms-auto mt-auto">
                                                 <input class="form-check-input" type="checkbox" id="save_address"
                                                     name="save_address">
@@ -352,9 +339,13 @@
                                 </li>
                             </ul>
                         </li>
+                        <li class="list-group-item row next-button-holder-hm">
+                            <button type="button" class="btn btn-info next-button-hm"
+                                onclick="nextTo('common_info' , this)">Next</button>
+                        </li>
                     </ul>
                     <!-- Common Information -->
-                    <ul class="list-group mb-5">
+                    <ul class="list-group mb-5 order-form-div" id="common_info">
                         <li class="list-group-item row pt-4">
                             <ul class="list-group list-group-flush">
                                 <div class="d-flex align-items-center mb-3">
@@ -389,35 +380,38 @@
                                     <div class="row">
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6 class="customerText">IOSS Number<span class="red">*</span></h6>
-                                            <input class="form-control" type="text" placeholder="498980948"
-                                                aria-label="default input example" name="ioss_number" />
+                                            <input class="form-control check-input" type="text"
+                                                placeholder="498980948" aria-label="default input example"
+                                                name="ioss_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6 class="customerText">Vat Number<span class="red">*</span></h6>
-                                            <input class="form-control" type="text" placeholder="498980948"
-                                                aria-label="default input example" name="vat_number" />
+                                            <input class="form-control check-input" type="text"
+                                                placeholder="498980948" aria-label="default input example"
+                                                name="vat_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
                                             <h6 class="customerText">Currency unit<span class="red">*</span></h6>
-                                            <select class="form-select" name="currency_unit" required>
-                                                @foreach ($currencies as $currency)
-                                                    <option value="{{ $currency->currency_code }}">
-                                                        {{ $currency->currency_name }}
-                                                    </option>
-                                                @endforeach
+                                            <select class="form-select check-input" name="currency_unit"
+                                                onchange="changeCurrency(this)" required>
+                                                <option value="EUR" data-currency="€" selected>EUR - Euro - €</option>
+                                                <option value="USD" data-currency="$">USD - US dollar - $</option>
                                             </select>
                                         </div>
                                     </div>
                                 </li>
                             </ul>
                         </li>
+                        <li class="list-group-item row next-button-holder-hm">
+                            <button type="button" class="btn btn-info next-button-hm"
+                                onclick="nextTo('order_info' , this)">Next</button>
+                        </li>
                     </ul>
                     <!-- Order Information -->
-                    <ul class="list-group mb-5">
+                    <ul class="list-group mb-5 order-form-div" id="order_info">
                         <li class="list-group-item row pt-4">
                             <ul class="list-group list-group-flush">
                                 <!-- Header -->
-
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="iconBG">
                                         <svg width="20" height="19" viewBox="0 0 14 13" fill="none"
@@ -426,21 +420,14 @@
                                                 d="M11.8499 4.90637C11.9533 4.90608 12.0529 4.94393 12.1288 5.01229C12.2047 5.08065 12.2511 5.17445 12.2589 5.27484V10.8816C12.2591 11.1911 12.136 11.4887 11.9156 11.7116C11.6951 11.9345 11.3945 12.0653 11.077 12.0767H2.85249C2.53474 12.0769 2.22929 11.957 2.00045 11.7423C1.77161 11.5276 1.63722 11.2348 1.62557 10.9255V5.30472C1.62527 5.20405 1.66413 5.107 1.73431 5.0331C1.80449 4.9592 1.9008 4.91392 2.00387 4.90637H11.8499ZM8.68037 6.56749L8.65584 6.58741L6.31446 9.05918L5.25112 8.0633C5.19722 8.01189 5.12586 7.98148 5.05051 7.97782C4.97517 7.97415 4.90105 7.99747 4.84215 8.04339L4.81966 8.0633L4.38205 8.44572C4.35427 8.4667 4.33145 8.49324 4.31511 8.52356C4.29878 8.55387 4.28933 8.58725 4.28739 8.62143C4.28545 8.65562 4.29107 8.68981 4.30388 8.72169C4.31668 8.75357 4.33637 8.7824 4.3616 8.80623L4.38205 8.82814L5.88094 10.2104C5.99743 10.3229 6.1545 10.3866 6.31855 10.3877C6.39989 10.3899 6.48079 10.3752 6.55588 10.3446C6.63097 10.3141 6.69853 10.2683 6.75411 10.2104L7.96467 8.9576L8.0526 8.86997L8.13848 8.78034L8.25095 8.66482L8.29389 8.621L8.37978 8.53336L9.529 7.35225C9.57096 7.30138 9.59517 7.2388 9.59811 7.17361C9.60105 7.10841 9.58257 7.04401 9.54535 6.98975L9.529 6.96983L9.09139 6.58741C9.03738 6.53546 8.9656 6.50471 8.88979 6.50104C8.81397 6.49736 8.73942 6.52102 8.68037 6.56749ZM11.8499 0.922852C12.1753 0.922852 12.4874 1.04876 12.7175 1.27287C12.9476 1.49699 13.0768 1.80096 13.0768 2.11791V3.31296C13.0768 3.41861 13.0338 3.51993 12.9571 3.59464C12.8804 3.66934 12.7763 3.71131 12.6679 3.71131H1.21659C1.10812 3.71131 1.0041 3.66934 0.927403 3.59464C0.850706 3.51993 0.807617 3.41861 0.807617 3.31296V2.11791C0.807617 1.80096 0.936882 1.49699 1.16697 1.27287C1.39707 1.04876 1.70914 0.922852 2.03454 0.922852H11.8499Z"
                                                 fill="white" />
                                         </svg>
-
-
-
                                     </div>
                                     <span class="amazonHeaderText ms-2 amazonIcon">Order Information</span>
                                 </div>
-
-
-
-
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-12">
-                                            <input class="form-control" type="text" aria-label="default input example"
-                                                name="order_info" readonly />
+                                            <input class="form-control check-input" type="text"
+                                                aria-label="default input example" name="order_info" readonly />
                                         </div>
                                     </div>
                                 </li>
@@ -534,7 +521,7 @@
                                                 </div>
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
-                                                    <span class="totalText totalPricing">0</span>
+                                                    <span class="totalText totalPricing">0</span> KG\DESİ
                                                     <input type="hidden" name="total_deci" value="">
                                                 </div>
                                             </div>
@@ -559,24 +546,34 @@
                                                 </div>
                                                 <div class="ms-3">
                                                     <h5>Total worth:</h5>
-                                                    <span class="totalText totalWorth">0</span><span> €</span>
+                                                    <span class="totalText totalWorth">0</span><span
+                                                        class="total-worth-currency"> €</span>
                                                     <input type="hidden" name="total_worth" value="">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 d-flex justify-content-end">
+                                        {{-- <div class="col-12 d-flex justify-content-end">
                                             <button type="button" class="btn btn-primary btnText"
                                                 onclick="yekunHesabla()">
                                                 <i class="fa-solid fa-tag me-1"></i> Get a quote
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </li>
                             </ul>
                         </li>
+                        <li class="list-group-item row next-button-holder-hm">
+                            <button type="button" class="btn btn-outline-primary next-button-with-quote next-button-hm"
+                                onclick="yekunHesabla('next')">Get Quote
+                            </button>
+                            <button style="display: none" type="button"
+                                class="btn btn-outline-primary next-button-get-quote next-button-hm"
+                                onclick="yekunHesabla('quote')">Get Quote
+                            </button>
+                        </li>
                     </ul>
                     <!-- Shipment definition -->
-                    <ul class="list-group mb-5">
+                    <ul class="list-group mb-5 order-form-div" id="shipment_def">
                         <li class="list-group-item row pt-4">
                             <ul class="list-group list-group-flush">
 
@@ -598,17 +595,19 @@
                                 </div>
                                 <li class="list-group-item">
                                     <h5 class="textShipment">Select the cargo</h5>
-                                    <div class="row">
+                                    <div class="cargo-company-labels-holder">
                                         @foreach ($cargo_companies as $company)
-                                            <div class="col-12 col-sm-6 mb-3">
-                                                <ul class="list-group list-group-horizontal">
-                                                    <li class="list-group-item w-25 text-center d-flex align-items-center">
-                                                        <img style="width:48px;"
+                                            <label for="cargo_company_input_{{ $company->id }}"
+                                                class="cargo-company-label">
+                                                <div class="list-group list-group-horizontal">
+                                                    <div
+                                                        class="list-group-item w-25 text-center d-flex align-items-center">
+                                                        <img style="height:48px;"
                                                             src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $company->logo == null ? 'user.png' : $company->logo }}" />
-                                                    </li>
-                                                    <li class="list-group-item w-50 text-left d-flex align-items-center ">
-                                                        {{ $company->name }}</li>
-                                                    <li class="list-group-item d-flex d-flex align-items-center">
+                                                    </div>
+                                                    <div class="list-group-item w-50 text-left d-flex align-items-center ">
+                                                        {{ $company->name }}</div>
+                                                    <div class="list-group-item d-flex d-flex align-items-center">
                                                         <span class="me-2 textShipment"
                                                             id="cargo_company_{{ $company->id }}">0
                                                             €</span>
@@ -618,12 +617,11 @@
                                                                 id="cargo_company_input_{{ $company->id }}"
                                                                 data-price="0" value="{{ $company->id }}" />
                                                             <input type="hidden"
-                                                                name="company_value[{{ $company->id }}]"
-                                                                value="0">
+                                                                name="company_value[{{ $company->id }}]" value="0">
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    </div>
+                                                </div>
+                                            </label>
                                         @endforeach
                                     </div>
                                 </li>
@@ -632,49 +630,58 @@
                                     <h5 class="textShipment">Additional Services</h5>
                                     <div class="row">
                                         @foreach ($additional_services as $service)
-                                            <div class="col-12 col-md-4">
+                                            <label for="{{ $service->slug }}" class="col-12 col-md-4">
+                                                <div>
+                                                    <ul class="list-group list-group-horizontal mb-2">
+                                                        <li class="list-group-item w-75 d-flex text-left">
+                                                            <div class="form-check">
+                                                                <input
+                                                                    class="form-check-input cargo_price_input {{ $service->slug }}_input"
+                                                                    type="checkbox" data-price="{{ $service->price }}"
+                                                                    name="additional_services[{{ $service->slug }}]"
+                                                                    id="{{ $service->slug }}" />
+                                                            </div>
+                                                            {{ $service->title }}
+                                                        </li>
+                                                        <li class="list-group-item d-flex">
+                                                            <span
+                                                                class="me-2 {{ $service->slug }}_span">{{ $service->price }}
+                                                                €</span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </label>
+                                        @endforeach
+                                        <label for="insurance" class="col-12 col-md-4">
+                                            <div>
                                                 <ul class="list-group list-group-horizontal mb-2">
                                                     <li class="list-group-item w-75 d-flex text-left">
                                                         <div class="form-check">
                                                             <input
-                                                                class="form-check-input cargo_price_input {{ $service->slug }}_input"
-                                                                type="checkbox" data-price="{{ $service->price }}"
-                                                                name="additional_services[{{ $service->slug }}]"
-                                                                id="{{ $service->slug }}" />
+                                                                class="form-check-input cargo_price_input insurance_input"
+                                                                type="checkbox" data-price="0"
+                                                                name="additional_services[insurance]" id="insurance" />
                                                         </div>
-                                                        {{ $service->title }}
+                                                        Insurance
                                                     </li>
                                                     <li class="list-group-item d-flex">
-                                                        <span
-                                                            class="me-2 {{ $service->slug }}_span">{{ $service->price }}
+                                                        <span class="me-2 insurance_input_span">0
                                                             €</span>
                                                     </li>
                                                 </ul>
                                             </div>
-                                        @endforeach
-                                        <div class="col-12 col-md-4">
-                                            <ul class="list-group list-group-horizontal mb-2">
-                                                <li class="list-group-item w-75 d-flex text-left">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input cargo_price_input insurance_input"
-                                                            type="checkbox" data-price="0"
-                                                            name="additional_services[insurance]" id="insurance" />
-                                                    </div>
-                                                    Insurance
-                                                </li>
-                                                <li class="list-group-item d-flex">
-                                                    <span class="me-2 insurance_input_span">0
-                                                        €</span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        </label>
                                     </div>
                                 </li>
                             </ul>
                         </li>
+                        <li class="list-group-item row next-button-holder-hm">
+                            <button type="button" class="btn btn-info next-button-hm"
+                                onclick="nextTo('product_content' , this)">Next</button>
+                        </li>
                     </ul>
                     <!-- Product Content -->
-                    <ul class="list-group mb-5">
+                    <ul class="list-group mb-5 order-form-div" id="product_content">
                         <li class="list-group-item pt-4">
 
                             <div class="d-flex align-items-center mb-3">
@@ -808,9 +815,13 @@
                                 </div>
                             </div>
                         </li>
+                        <li class="list-group-item row next-button-holder-hm">
+                            <button type="button" class="btn btn-info next-button-hm"
+                                onclick="nextTo('attachment' , this)">Next</button>
+                        </li>
                     </ul>
                     <!-- Attachment of documents -->
-                    <ul class="list-group mb-5">
+                    <ul class="list-group mb-5 order-form-div" id="attachment">
                         <li class="list-group-item row pt-4">
                             <ul class="list-group list-group-flush">
 
@@ -833,59 +844,63 @@
 
                                 <li class="list-group-item">
                                     <div class="row">
-                                        <div class="></div>
                                         <div class="cont-for-file-input ">
-                                                <p class="variable-footer-text">(PDF, Maks. 5.0. MB)</p>
-                                                <div class="custom-file-upload-div">
-                                                    <label for="CustomFileUpload"
-                                                        class="custom-file-upload label-for-hidden-input">
-                                                        <input type="file" name="document[]" id="CustomFileUpload"
-                                                            hidden />
-                                                        Custom Upload
-                                                    </label>
-                                                    <h6 class="ms-2" id="CustomFileUploadText">No file chosen, yet.
-                                                    </h6>
-                                                </div>
+                                            <p class="variable-footer-text">(PDF, Maks. 5.0. MB)</p>
+                                            <div class="custom-file-upload-div">
+                                                <label for="CustomFileUpload"
+                                                    class="custom-file-upload label-for-hidden-input">
+                                                    <input type="file" name="document[]" id="CustomFileUpload"
+                                                        hidden />
+                                                    Custom Upload
+                                                </label>
+                                                <h6 class="ms-2" id="CustomFileUploadText">No file chosen, yet.
+                                                </h6>
                                             </div>
                                         </div>
-                                    </li>
-                                    <!-- Elave olunan fayllar li teqinin icinde olacaq -->
-                                    <li class="list-group-item added-files-after-upload">
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="total_cargo_price">
-                        <span>Total price: </span> <span id="total_cargo_price_span">0</span>
-                        <span>€</span>
-                        <input type="hidden" name="total_cargo_price" id="total_cargo_price" value="0">
-                    </div>
+                                    </div>
+                                </li>
+                                <!-- Elave olunan fayllar li teqinin icinde olacaq -->
+                                <li class="list-group-item added-files-after-upload">
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="list-group-item row next-button-holder-hm">
+                            <button type="button" class="btn btn-info next-button-hm"
+                                onclick="nextTo('submit_button_form' , this)">Ready ?</button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="total_cargo_price">
+                    <span>Total price: </span> <span id="total_cargo_price_span">0</span>
+                    <span>€</span>
+                    <input type="hidden" name="total_cargo_price" id="total_cargo_price" value="0">
+                </div>
 
-                    <button class="btn btn-primary" type="submit">Submit order</button>
-                </form>
-            </div>
-        </section>
+                <div class="order-form-div next-button-holder-hm" id="submit_button_form">
+                    <button class="btn btn-success" type="submit">Submit order</button>
+                </div>
+            </form>
+        </div>
+    </section>
 
-        <input type="text" id="ajax_url" hidden value="{{ route('userpanel.getquote.manualorder') }}">
+    <input type="text" id="ajax_url" hidden value="{{ route('userpanel.getquote.manualorder') }}">
 
-        {{-- <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC"
-        async defer></script> --}}
-        <script>
-            $('#CustomFileUpload').change(function(e) {
-                var fileName = e.target.files[0].name;
-                $('#CustomFileUploadText').html(fileName);
-            });
-        </script>
-        <script>
-            $("#CustomFileUpload").change(function() {
+    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC" async defer></script> --}}
+    <script>
+        $('#CustomFileUpload').change(function(e) {
+            var fileName = e.target.files[0].name;
+            $('#CustomFileUploadText').html(fileName);
+        });
+    </script>
+    {{-- File upload --}}
+    <script>
+        $("#CustomFileUpload").change(function() {
 
-                var input_value = this.value;
-                var file_name = this.files[0].name;
-                var file_id = Math.random().toString(36).substr(2, 9);
+            var input_value = this.value;
+            var file_name = this.files[0].name;
+            var file_id = Math.random().toString(36).substr(2, 9);
 
-                var $element = $(`
+            var $element = $(`
                 <div class="custom-file-upload-div" id="file-upload-div-` + file_id + `">
                     <label class="label-for-hidden-input new_input_for_file">
                         ${file_name}
@@ -896,98 +911,101 @@
                         <option value="other">other</option>
                     </select>
                     <button type="button" class="remove_button_file_upld" onclick="removeFileLabel(this)">
-
-
-                             <div class="d-flex align-items-center">
-                                    <div class="iconBGS">
-
-<svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M10.2545 1.62215H8.10439L8.06407 1.47955C7.84453 0.697352 7.23035 0.171875 6.53589 0.171875H5.0126C4.31817 0.171875 3.70397 0.697352 3.48403 1.47955L3.44412 1.62215H1.29401C1.06878 1.62215 0.886719 1.83872 0.886719 2.10557C0.886719 2.37242 1.06878 2.58899 1.29401 2.58899H3.73778H7.81072H10.2545C10.4797 2.58899 10.6618 2.37242 10.6618 2.10557C10.6618 1.83872 10.4797 1.62215 10.2545 1.62215ZM4.31777 1.62215C4.45667 1.32727 4.72017 1.13874 5.01262 1.13874H6.53591C6.82835 1.13874 7.09227 1.32727 7.23077 1.62215H4.31777Z" fill="white"/>
-<path d="M9.43984 3.07227H2.10852C1.9961 3.07227 1.88858 3.12738 1.8116 3.22455C1.73462 3.3222 1.6947 3.45273 1.70203 3.58568L2.06168 10.4109C2.10119 11.1757 2.63842 11.7742 3.28357 11.7742H8.26481C8.90996 11.7742 9.44719 11.1757 9.48669 10.4114L9.84633 3.58568C9.85366 3.45273 9.81374 3.3222 9.73676 3.22455C9.65978 3.12738 9.55226 3.07227 9.43984 3.07227ZM7.81067 9.84045H3.73771C3.51249 9.84045 3.33042 9.62387 3.33042 9.35701C3.33042 9.09015 3.51247 8.87356 3.73771 8.87356H7.81067C8.03589 8.87356 8.21796 9.09013 8.21796 9.35699C8.21796 9.62385 8.03589 9.84045 7.81067 9.84045ZM7.81067 7.90667H3.73771C3.51249 7.90667 3.33042 7.69009 3.33042 7.42323C3.33042 7.15637 3.51249 6.9398 3.73771 6.9398H7.81067C8.03589 6.9398 8.21796 7.15637 8.21796 7.42323C8.21796 7.69009 8.03589 7.90667 7.81067 7.90667Z" fill="white"/>
-</svg>
-
-
-
-
-
-                                     </div>
-
-                                 </div>
-
-
+                        <div class="d-flex align-items-center">
+                            <div class="iconBGS">
+                                <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10.2545 1.62215H8.10439L8.06407 1.47955C7.84453 0.697352 7.23035 0.171875 6.53589 0.171875H5.0126C4.31817 0.171875 3.70397 0.697352 3.48403 1.47955L3.44412 1.62215H1.29401C1.06878 1.62215 0.886719 1.83872 0.886719 2.10557C0.886719 2.37242 1.06878 2.58899 1.29401 2.58899H3.73778H7.81072H10.2545C10.4797 2.58899 10.6618 2.37242 10.6618 2.10557C10.6618 1.83872 10.4797 1.62215 10.2545 1.62215ZM4.31777 1.62215C4.45667 1.32727 4.72017 1.13874 5.01262 1.13874H6.53591C6.82835 1.13874 7.09227 1.32727 7.23077 1.62215H4.31777Z" fill="white"/>
+                                    <path d="M9.43984 3.07227H2.10852C1.9961 3.07227 1.88858 3.12738 1.8116 3.22455C1.73462 3.3222 1.6947 3.45273 1.70203 3.58568L2.06168 10.4109C2.10119 11.1757 2.63842 11.7742 3.28357 11.7742H8.26481C8.90996 11.7742 9.44719 11.1757 9.48669 10.4114L9.84633 3.58568C9.85366 3.45273 9.81374 3.3222 9.73676 3.22455C9.65978 3.12738 9.55226 3.07227 9.43984 3.07227ZM7.81067 9.84045H3.73771C3.51249 9.84045 3.33042 9.62387 3.33042 9.35701C3.33042 9.09015 3.51247 8.87356 3.73771 8.87356H7.81067C8.03589 8.87356 8.21796 9.09013 8.21796 9.35699C8.21796 9.62385 8.03589 9.84045 7.81067 9.84045ZM7.81067 7.90667H3.73771C3.51249 7.90667 3.33042 7.69009 3.33042 7.42323C3.33042 7.15637 3.51249 6.9398 3.73771 6.9398H7.81067C8.03589 6.9398 8.21796 7.15637 8.21796 7.42323C8.21796 7.69009 8.03589 7.90667 7.81067 7.90667Z" fill="white"/>
+                                </svg>
+                            </div>
+                        </div>
                     </button>
                 </div>
                 <br>
             `).append($(this).clone());
 
-                $('.added-files-after-upload').append($element);
+            $('.added-files-after-upload').append($element);
 
-                var div = document.querySelector('#file-upload-div-' + file_id + '');
-                var new_file_input_hidden = div.querySelector('#CustomFileUpload');
-                new_file_input_hidden.setAttribute('name', 'document[' + file_id + ']');
-                // console.log(div , new_file_input_hidden);
-            });
+            var div = document.querySelector('#file-upload-div-' + file_id + '');
+            var new_file_input_hidden = div.querySelector('#CustomFileUpload');
+            new_file_input_hidden.setAttribute('name', 'document[' + file_id + ']');
+            // console.log(div , new_file_input_hidden);
+        });
 
-            function removeFileLabel(remove_button) {
-                remove_button.parentNode.remove();
+        function removeFileLabel(remove_button) {
+            remove_button.parentNode.remove();
+        }
+    </script>
+    {{-- User Address --}}
+    <script>
+        function changeUserAddress(select) {
+            var options = select.options;
+            var address = options[options.selectedIndex].getAttribute('data-address');
+            var country = options[options.selectedIndex].getAttribute('data-country');
+            var city = options[options.selectedIndex].getAttribute('data-city');
+            var state = options[options.selectedIndex].getAttribute('data-state');
+            var zipcode = options[options.selectedIndex].getAttribute('data-zipcode');
+            var phone = options[options.selectedIndex].getAttribute('data-phone');
+            var email = options[options.selectedIndex].getAttribute('data-email');
+            var name = options[options.selectedIndex].getAttribute('data-name');
+
+            document.querySelector('select[name="country"]').value = country;
+            document.querySelector('input[name="state"]').value = state;
+            document.querySelector('input[name="city"]').value = city;
+            document.querySelector('input[name="address"]').value = address;
+            document.querySelector('input[name="zipcode"]').value = zipcode;
+            document.querySelector('input[name="name"]').value = name;
+            document.querySelector('input[name="phone"]').value = phone;
+            document.querySelector('input[name="email"]').value = email;
+
+            if (document.querySelector('#save_address').checked == true) {
+                document.querySelector('#save_address').checked = false;
             }
-        </script>
-        <script>
-            function changeUserAddress(select) {
-                select = $(select).val();
-                address_array = select.split("<-->");
-                document.querySelector('select[name="country"]').value = address_array[0];
-                document.querySelector('input[name="state"]').value = address_array[1];
-                document.querySelector('input[name="city"]').value = address_array[2];
-                document.querySelector('input[name="address"]').value = address_array[3];
-                document.querySelector('input[name="zipcode"]').value = address_array[4];
-                document.querySelector('input[name="name"]').value = address_array[5];
-                document.querySelector('input[name="phone"]').value = address_array[6];
-                document.querySelector('input[name="email"]').value = address_array[7];
+        }
 
-                if (document.querySelector('#save_address').checked == true) {
-                    document.querySelector('#save_address').checked = false;
-                }
+        var additional = document.querySelectorAll('.cargo_price_input');
+        var company = document.querySelector('input[name="cargo_company"]:checked');
+        var companies = document.querySelectorAll('input[name="cargo_company"]');
 
-                // console.log(document.querySelector('#save_address'));
-            }
+        var total_additional = 0;
+        var helper_additional = 0;
+        var company_price = 0;
 
-            var additional = document.querySelectorAll('.cargo_price_input');
-            var company = document.querySelector('input[name="cargo_company"]:checked');
-            var companies = document.querySelectorAll('input[name="cargo_company"]');
-
-            var total_additional = 0;
-            var helper_additional = 0;
-            var company_price = 0;
-
-            additional.forEach(element => {
-                element.addEventListener('change', function() {
-                    additional.forEach(input => {
-                        if ($(input).is(":checked")) {
-                            helper_additional += parseFloat(input.getAttribute('data-price'));
-                        }
-                    });
-                    total_additional = helper_additional;
-                    helper_additional = 0;
-                    document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
-                        company_price).toFixed(2);
-                    document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
-                        company_price).toFixed(2);
+        additional.forEach(element => {
+            element.addEventListener('change', function() {
+                additional.forEach(input => {
+                    if ($(input).is(":checked")) {
+                        helper_additional += parseFloat(input.getAttribute('data-price'));
+                    }
                 });
+                total_additional = helper_additional;
+                helper_additional = 0;
+                document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
+                    company_price).toFixed(2);
+                document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
+                    company_price).toFixed(2);
             });
+        });
 
-            companies.forEach(element => {
-                element.addEventListener('change', function() {
-                    company_price = parseFloat(document.querySelector('input[name="cargo_company"]:checked')
-                        .getAttribute('data-price'));
+        companies.forEach(element => {
+            element.addEventListener('change', function() {
+                company_price = parseFloat(document.querySelector('input[name="cargo_company"]:checked')
+                    .getAttribute('data-price'));
 
-                    document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
-                        company_price).toFixed(2);
-                    document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
-                        company_price).toFixed(2);
-                });
+                document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
+                    company_price).toFixed(2);
+                document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
+                    company_price).toFixed(2);
             });
-        </script>
-        <script src="{{ asset('/') }}frontend/userpanel/js/order_calculator.js"></script>
-        <script src="{{ asset('/') }}frontend/userpanel/js/morder.js"></script>
+        });
+
+        function changeCurrency(select) {
+            var options = select.options;
+            var currency = options[options.selectedIndex].getAttribute('data-currency');
+
+            document.querySelector('.total-worth-currency').innerHTML = " " + currency;
+        }
+    </script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/order_calculator.js"></script>
+    <script src="{{ asset('/') }}frontend/userpanel/js/morder.js"></script>
 @endsection

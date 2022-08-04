@@ -23,6 +23,14 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/0.8.2/css/flag-icon.min.css" />
 
+    {{-- International phone INPUT --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/js/intlTelInput.min.js"
+        integrity="sha512-hpJ6J4jGqnovQ5g1J39VtNq1/UPsaFjjR6tuCVVkKtFIx8Uy4GeixgIxHPSG72lRUYx1xg/Em+dsqxvKNwyrSg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.18/css/intlTelInput.css"
+        integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <title>@yield('title') | {{ $data->title }}</title>
     @php(
     $favico = DB::table('configs')->where('key', 'favicon')->first()
@@ -277,6 +285,35 @@
     <script>
         $(function() {
             $(".selectpicker").selectpicker();
+        });
+    </script>
+    <script>
+        var input = document.querySelector("#telephone");
+        window.intlTelInput(input, ({
+            allowDropdown: true,
+            autoHideDialCode: false,
+            autoPlaceholder: "polite",
+            customPlaceholder: null,
+            dropdownContainer: null,
+            excludeCountries: [],
+            formatOnDisplay: true,
+            geoIpLookup: null,
+            hiddenInput: "",
+            initialCountry: "tr",
+            localizedCountries: null,
+            nationalMode: true,
+            onlyCountries: [],
+            placeholderNumberType: "MOBILE",
+            preferredCountries: ["tr", "us" , "az"],
+            separateDialCode: true,
+            utilsScript: ""
+        }));
+        $('.iti__flag-container').click(function() {
+            var countryCode = document.querySelector('.iti__selected-dial-code');
+            console.log(countryCode.innerHTML);
+            var countryCode = countryCode.innerHTML;
+            $('#telephone').val("");
+            $('#telephone').val(countryCode + "" + $('#telephone').val());
         });
     </script>
     <!-- End Elave -->

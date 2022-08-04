@@ -45,7 +45,6 @@
                     <table id="example1" class="table table-bordered table-striped" style="with:100%;">
                         <thead>
                             <tr>
-                                <th>Edit/View</th>
                                 <th>ID</th>
                                 <th>Status</th>
                                 <th>Orders</th>
@@ -54,23 +53,19 @@
                                 <th>Customer name</th>
                                 <th>Phone</th>
                                 <th>City</th>
+                                <th>State</th>
                                 <th>Country</th>
                                 <th>Address</th>
                                 <th>ZipCode</th>
                                 <th>Note</th>
                                 <th>Date</th>
+                                <th>Edit/View</th>
                                 <th>Deny/Accept</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($courier_requests as $cr_req)
                                 <tr @if ($cr_req->status == 'cancelled') class="cancelled-courier-req" @endif>
-                                    <td>
-                                        <a href="#" class="btn btn-info" data-toggle="modal"
-                                            data-target="#modal-edit-{{ $cr_req->id }}">
-                                            <i class="fa-solid fa-pen"></i>
-                                        </a>
-                                    </td>
                                     <td>{{ $cr_req->id ? $cr_req->id : '---' }}</td>
                                     <td>
                                         <div class="approvel-td">
@@ -140,11 +135,18 @@
                                     <td>{{ $cr_req->customer_name ? $cr_req->customer_name : '---' }}</td>
                                     <td>{{ $cr_req->phone ? $cr_req->phone : '---' }}</td>
                                     <td>{{ $cr_req->city ? $cr_req->city : '---' }}</td>
+                                    <td>{{ $cr_req->state ? $cr_req->state : '---' }}</td>
                                     <td>{{ $cr_req->country ? $cr_req->country : '---' }}</td>
                                     <td>{{ $cr_req->address ? $cr_req->address : '---' }}</td>
                                     <td>{{ $cr_req->zipcode ? $cr_req->zipcode : '---' }}</td>
                                     <td>{{ $cr_req->note ? $cr_req->note : '---' }}</td>
                                     <td>{{ $cr_req->date ? $cr_req->date : '---' }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-info" data-toggle="modal"
+                                            data-target="#modal-edit-{{ $cr_req->id }}">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                    </td>
                                     <td>
                                         @if ($cr_req->status != 'cancelled')
                                             <a href="#" onclick="requestAction(this)" class="btn btn-danger"
@@ -269,6 +271,13 @@
                                                                     <label>City<span class="red-1">*</span></label>
                                                                     <input type="text" class="form-control"
                                                                         name="city" value="{{ $cr_req->city }}">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-6 col-12">
+                                                                <div class="form-group">
+                                                                    <label>State<span class="red-1">*</span></label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="state" value="{{ $cr_req->state }}">
                                                                 </div>
                                                             </div>
                                                             <div class="col-sm-6 col-12">

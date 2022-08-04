@@ -45,7 +45,7 @@
                         <thead>
                             <tr>
                                 <th>View</th>
-                                <th>Download PDF</th>
+                                <th>Download Label</th>
                                 <th>Cargo ID</th>
                                 <th>User ID</th>
                                 <th>Date</th>
@@ -90,9 +90,10 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="pdf-download-td-hm"
+                                        onclick="window.open('{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}')">
                                         <div style="display: flex;justify-content:center;">
-                                            <a href="{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}">
+                                            <a href="#">
                                                 <i class="fa-solid fa-arrow-down navigation__icon"></i>
                                             </a>
                                         </div>
@@ -111,7 +112,8 @@
                                                 onclick="window.open('{{ route('admin.users.details', $cargo->user_id) }}')">
                                                 010{{ $cargo->user_id ? $cargo->user_id : '---' }}20
                                             </span>
-                                        </div>                                    </td>
+                                        </div>
+                                    </td>
                                     <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
                                     @php
                                         $status = DB::table('package_statuses')
@@ -165,24 +167,26 @@
                                     <td>{{ $cargo->ioss_number ? $cargo->ioss_number : '---' }}</td>
                                     <td>{{ $cargo->vat_number ? $cargo->vat_number : '---' }}</td>
                                     <td>{{ $cargo->order_info ? $cargo->order_info : '---' }}</td>
-                                    <td class="additional_service_td">
-                                        @php
-                                            $services = json_decode($cargo->additional_services);
-                                            $services = json_decode(json_encode($services), true);
-                                        @endphp
-                                        @if ($cargo->additional_services)
+                                    @php
+                                        $services = json_decode($cargo->additional_services);
+                                        $services = json_decode(json_encode($services), true);
+                                    @endphp
+                                    @if ($services)
+                                        <td class="additional_service_td">
                                             @foreach ($services as $key => $service)
                                                 <span class="additional_service_style">
-                                                    <b>{{ $key }}</b> : {{ $service }} €
+                                                    <b>{{ $key }}</b>: {{ $service }}€
                                                 </span>
                                             @endforeach
-                                        @else
+                                        </td>
+                                    @else
+                                        <td>
                                             <span
                                                 style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
                                                 Additional
                                                 services</span>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                     @php
                                         $cargo_company = DB::table('cargo_companies')
                                             ->where('id', $cargo->cargo_company)
@@ -362,7 +366,7 @@
                                                                 $services = json_decode($cargo->additional_services);
                                                                 $services = json_decode(json_encode($services), true);
                                                             @endphp
-                                                            @if ($cargo->additional_services)
+                                                            @if ($services)
                                                                 @foreach ($services as $key => $service)
                                                                     <span class="additional_service_style">
                                                                         <b>{{ $key }}</b> :

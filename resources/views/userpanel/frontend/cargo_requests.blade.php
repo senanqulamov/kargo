@@ -13,7 +13,7 @@
             })
         </script>
     @endif
-    <style>
+    {{-- <style>
         hr {
             margin-top: 1rem;
             margin-bottom: 1rem;
@@ -141,7 +141,7 @@
         .package_status_5 {
             background: #c4d94b;
         }
-    </style>
+    </style> --}}
     <div class="row">
 
         <div class="col-12">
@@ -151,15 +151,16 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                    <table id="example1" class="table table-bordered table-striped">
+                    <table id="cargo-requests" class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th>View/Edit Details</th>
-                                <th>Download PDF</th>
+                                <th>Download Label</th>
                                 <th>ID</th>
                                 <th>Date</th>
                                 <th>Order Status</th>
                                 <th>Order Type</th>
+                                <th>Tracking Number</th>
                                 <th>Customer name</th>
                                 <th>Phone</th>
                                 <th>Email</th>
@@ -190,18 +191,17 @@
                         </thead>
                         <tbody>
                             @foreach ($cargo_requests as $cargo)
-                                <tr>
+                                <tr @if ($cargo->status == 5) class="cancelled-row" @endif>
                                     <td>
-                                        <a href="{{ route('userpanel.viewCargoDetails', $cargo->id) }}"
-                                            class="btn btn-info">
+                                        <a href="{{ route('userpanel.viewCargoDetails', $cargo->id) }}" class="btn btn-info">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
                                     </td>
-                                    <td>
+                                    <td class="pdf-download-td-hm"
+                                        onclick="window.open('{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}')">
                                         <div style="display: flex;justify-content:center;">
-                                            <a
-                                                href="{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}">
-                                                <i class="fa-solid fa-arrow-down navigation__icon"></i>
+                                            <a href="#">
+                                                <i class="fa-solid fa-arrow-down"></i>
                                             </a>
                                         </div>
                                     </td>
@@ -223,6 +223,7 @@
                                     <td>
                                         {{ $cargo->order_type }}
                                     </td>
+                                    <td>{{ $cargo->tracking_number ? $cargo->tracking_number : '---' }}</td>
                                     <td>{{ $cargo->name ? $cargo->name : '---' }}</td>
                                     <td>{{ $cargo->phone ? $cargo->phone : '---' }}</td>
                                     <td>{{ $cargo->email ? $cargo->email : '---' }}</td>
@@ -249,26 +250,26 @@
                                     <td>{{ $cargo->ioss_number ? $cargo->ioss_number : '---' }}</td>
                                     <td>{{ $cargo->vat_number ? $cargo->vat_number : '---' }}</td>
                                     <td>{{ $cargo->order_info ? $cargo->order_info : '---' }}</td>
-                                    <td>
-                                        <div class="additional_service_td">
-                                            @php
-                                                $services = json_decode($cargo->additional_services);
-                                                $services = json_decode(json_encode($services), true);
-                                            @endphp
-                                            @if ($cargo->additional_services)
-                                                @foreach ($services as $key => $service)
-                                                    <span class="additional_service_style">
-                                                        <b>{{ $key }}</b>{{ $service }} €
-                                                    </span>
-                                                @endforeach
-                                            @else
-                                                <span
-                                                    style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
-                                                    Additional
-                                                    services</span>
-                                            @endif
-                                        </div>
-                                    </td>
+                                    @php
+                                        $services = json_decode($cargo->additional_services);
+                                        $services = json_decode(json_encode($services), true);
+                                    @endphp
+                                    @if ($services)
+                                        <td class="additional_service_td">
+                                            @foreach ($services as $key => $service)
+                                                <span class="additional_service_style">
+                                                    <b>{{ $key }}</b>: {{ $service }}€
+                                                </span>
+                                            @endforeach
+                                        </td>
+                                    @else
+                                        <td>
+                                            <span
+                                                style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
+                                                Additional
+                                                services</span>
+                                        </td>
+                                    @endif
                                     @php
                                         $cargo_company = DB::table('cargo_companies')
                                             ->where('id', $cargo->cargo_company)
@@ -383,304 +384,20 @@
                 }
             });
         }
+
+        $(function() {
+            $("#cargo-requests").DataTable({
+                order: [
+                    [3, 'desc']
+                ],
+                "responsive": false,
+                "lengthChange": false,
+                "autoWidth": true,
+                scrollY: '50vh',
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
     </script>
 @endsection
-
-
-{{-- <div class="modal fade" id="modal-view-{{ $cargo->id }}">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="details-modal-header-flex">
-                    <button class="btn btn-warning" type="button"
-                        onclick="StartToEdit(this)" data-id="{{ $cargo->id }}">
-                        <i class="fa-solid fa-pen"></i>
-                    </button>
-                    <h4 class="modal-title">
-                        View details of <b><u
-                                style="color:#0ea197b5">{{ $cargo->order_info }}</u></b>
-                    </h4>
-                    <h4>Total cargo price: <b><u
-                                style="color:#0ea197b5">{{ $cargo->total_cargo_price }}
-                                €</u></b>
-                    </h4>
-                </div>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" id="form-{{ $cargo->id }}">
-                <form
-                    action="{{ route('userpanel.updatecargo', ['id' => $cargo->id]) }}"
-                    method="POST">
-                    @csrf
-                    <div class="row d-flex justify-content-center">
-                        <h4 style="text-align: center;color:#0ea197b5">User Information
-                        </h4>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="country">User Name</label>
-                            <input type="text" name="name"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->name ? $cargo->name : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">Phone</label>
-                            <input type="number" name="phone"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->phone ? $cargo->phone : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">Email</label>
-                            <input type="text" name="email"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->email ? $cargo->email : '' }}"
-                                readonly="true">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row d-flex justify-content-center">
-                        <h4 style="text-align: center;color:#0ea197b5">Address
-                            Information
-                        </h4>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="country">Country</label>
-                            <input type="text" name="country"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->country ? $cargo->country : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">State</label>
-                            <input type="text" name="state"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->state ? $cargo->state : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">City</label>
-                            <input type="text" name="city"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->city ? $cargo->city : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">Address</label>
-                            <input type="text" name="address"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->address ? $cargo->address : '' }}"
-                                readonly="true">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="country">Zip/Postal code</label>
-                            <input type="text" name="zipcode"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->zipcode ? $cargo->zipcode : '' }}"
-                                readonly="true">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row d-flex justify-content-center">
-                        <h4 style="text-align: center;color:#0ea197b5">Cargo
-                            Information
-                        </h4>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col">
-                            <label for="country">currency</label>
-                            <input type="text" name="currency"
-                                class="form-control"
-                                value="{{ $cargo->currency ? $cargo->currency : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">Cargo Company</label>
-                            @php
-                                $cargo_companies = DB::table('cargo_companies')->get();
-                            @endphp
-                            <select name="cargo_company"
-                                class="form-control readonly-details" readonly="true">
-                                @foreach ($cargo_companies as $company)
-                                    <option value="{{ $company->id }}"
-                                        @if ($company->id == $cargo->cargo_company) selected @endif>
-                                        {{ $company->name }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">IOSS number</label>
-                            <input type="text" name="ioss_number"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->ioss_number ? $cargo->ioss_number : '' }}"
-                                readonly="true">
-                        </div>
-                        <div class="form-group col">
-                            <label for="country">VAT number</label>
-                            <input type="text" name="vat_number"
-                                class="form-control readonly-details"
-                                value="{{ $cargo->vat_number ? $cargo->vat_number : '' }}"
-                                readonly="true">
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row d-flex justify-content-center">
-                        <h4 style="text-align: center;color:#0ea197b5">Shipment
-                            definition
-                        </h4>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <h5>Additional services:</h5>
-                        <div
-                            style="display: flex;flex-direction:row;gap:5px;margin-left: 5px">
-                            @php
-                                $services = json_decode($cargo->additional_services);
-                                $services = json_decode(json_encode($services), true);
-                            @endphp
-                            @if ($cargo->additional_services)
-                                @foreach ($services as $key => $service)
-                                    <span class="additional_service_style">
-                                        <b>{{ $key }}</b> :
-                                        {{ $service }} €
-                                    </span>
-                                @endforeach
-                            @else
-                                <span
-                                    style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
-                                    Additional
-                                    services</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <hr>
-
-                    <div class="row d-flex justify-content-center">
-                        <h4 style="text-align: center;color:#0ea197b5">Product content
-                        </h4>
-                    </div>
-                    <div class="row d-flex justify-content-center">
-                        <h5>
-                            Battery:
-                            <u><b>{{ $cargo->battery == 'yes' ? 'Yes' : 'No' }}</b></u>
-                            /
-                            Liquid:
-                            <u><b>{{ $cargo->liquid == 'yes' ? 'Yes' : 'No' }}</b></u>
-                            /
-                            Food:
-                            <u><b>{{ $cargo->food == 'yes' ? 'Yes' : 'No' }}</b></u>
-                            /
-                            Dangerous items:
-                            <u><b>{{ $cargo->dangerous == 'yes' ? 'Yes' : 'No' }}</b></u>
-                        </h5>
-                    </div>
-
-                    <hr>
-
-                    <div class="row d-flex justify-content-center">
-                        <h3 style="text-align: center;color:#0ea197b5">Packages
-                        </h3>
-                    </div>
-                    @foreach ($packages->where('cargo_id', $cargo->id) as $package)
-                        <div class="modal_package_cont">
-                            <div class="row">
-                                <h6 style="text-align:center;">Package Number:
-                                    <b
-                                        style="color:#0ea197b5">{{ $package->id }}</b>
-                                </h6>
-                            </div>
-                            @if ($package->barcode)
-                                <a href="{{ $package->barcode }}"
-                                    download="{{ $package->id }}">
-                                    <img width="150px" height="70px"
-                                        src="{{ $package->barcode }}">
-                                </a>
-                            @endif
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label for="country">Package count</label>
-                                    <input type="text" name="package_count"
-                                        class="form-control"
-                                        value="{{ $package->package_count ? $package->package_count : '' }}"
-                                        readonly="true">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="country">Package Type</label>
-                                    <input type="text" name="package_type"
-                                        class="form-control"
-                                        value="{{ $package->package_type ? $package->package_type : '' }}"
-                                        readonly="true">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="country">Package Length</label>
-                                    <input type="text" name="package_length"
-                                        class="form-control"
-                                        value="{{ $package->package_length ? $package->package_length : '' }}"
-                                        readonly="true">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="country">Package Width</label>
-                                    <input type="text" name="package_width"
-                                        class="form-control"
-                                        value="{{ $package->package_width ? $package->package_width : '' }}"
-                                        readonly="true">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label for="country">Package height</label>
-                                    <input type="text" name="package_height"
-                                        class="form-control"
-                                        value="{{ $package->package_height ? $package->package_height : '' }}"
-                                        readonly="true">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="country">Package weight</label>
-                                    <input type="text" name="package_weight"
-                                        class="form-control"
-                                        value="{{ $package->package_weight ? $package->package_weight : '' }}"
-                                        readonly="true">
-                                </div>
-                                <div class="form-group col">
-                                    <label for="country">Package Status</label>
-                                    @php
-                                        $status = DB::table('package_statuses')
-                                            ->where('status', $package->status)
-                                            ->get()
-                                            ->first();
-                                    @endphp
-                                    <div class="status_td">
-                                        <span
-                                            class="status_style status_color_{{ $status->status }}">
-                                            {{ $status->status_name }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <div class="row d-flex justify-content-center">
-                        <button type="submit" class="btn btn-success"
-                            style="width: max-content">Update</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div> --}}
