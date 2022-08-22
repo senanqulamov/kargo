@@ -1,18 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
 
     <style>
         .custom-file-upload {
@@ -327,11 +315,22 @@
                                             <input class="form-control mb-3 check-input" type="email"
                                                 placeholder="john@examle.com" aria-label="default input example"
                                                 name="email" />
-                                            <div class="form-check defaultCheckbox  ms-auto mt-auto">
+                                            {{-- <div class="form-check defaultCheckbox  ms-auto mt-auto">
                                                 <input class="form-check-input" type="checkbox" id="save_address"
                                                     name="save_address">
                                                 <label class="form-check-label customerCheck" for="save_address">
                                                     Save to address book
+                                                </label>
+                                            </div> --}}
+                                            <div class="row justify-content-end">
+                                                <label for="save_address"
+                                                    class="buy__info-address--button btn form-control"
+                                                    style="width: max-content;">
+                                                    <input class="form-check-input" type="checkbox"
+                                                        id="save_address" name="save_address">
+                                                    <span class="ms-2">Save to the address
+                                                        book
+                                                    </span>
                                                 </label>
                                             </div>
                                         </div>
@@ -340,7 +339,7 @@
                             </ul>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
-                            <button type="button" class="btn btn-info next-button-hm"
+                            <button type="button" class="btn btn-primary next-button-hm"
                                 onclick="nextTo('common_info' , this)">Next</button>
                         </li>
                     </ul>
@@ -403,7 +402,7 @@
                             </ul>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
-                            <button type="button" class="btn btn-info next-button-hm"
+                            <button type="button" class="btn btn-primary next-button-hm"
                                 onclick="nextTo('order_info' , this)">Next</button>
                         </li>
                     </ul>
@@ -624,6 +623,8 @@
                                             </label>
                                         @endforeach
                                     </div>
+                                    <input type="text" hidden name="personal_cargo" value="false">
+                                    <input type="text" hidden name="selected_personal" id="selected_personal">
                                 </li>
                                 <!-- Footer -->
                                 <li class="list-group-item">
@@ -676,7 +677,7 @@
                             </ul>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
-                            <button type="button" class="btn btn-info next-button-hm"
+                            <button type="button" class="btn btn-primary next-button-hm"
                                 onclick="nextTo('product_content' , this)">Next</button>
                         </li>
                     </ul>
@@ -816,7 +817,7 @@
                             </div>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
-                            <button type="button" class="btn btn-info next-button-hm"
+                            <button type="button" class="btn btn-primary next-button-hm"
                                 onclick="nextTo('attachment' , this)">Next</button>
                         </li>
                     </ul>
@@ -865,7 +866,7 @@
                             </ul>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
-                            <button type="button" class="btn btn-info next-button-hm"
+                            <button type="button" class="btn btn-primary next-button-hm"
                                 onclick="nextTo('submit_button_form' , this)">Ready ?</button>
                         </li>
                     </ul>
@@ -884,6 +885,7 @@
     </section>
 
     <input type="text" id="ajax_url" hidden value="{{ route('userpanel.getquote.manualorder') }}">
+    <input type="text" id="src_url" hidden value="{{ asset('/') }}">
 
     {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC" async defer></script> --}}
     <script>
@@ -962,43 +964,6 @@
                 document.querySelector('#save_address').checked = false;
             }
         }
-
-        var additional = document.querySelectorAll('.cargo_price_input');
-        var company = document.querySelector('input[name="cargo_company"]:checked');
-        var companies = document.querySelectorAll('input[name="cargo_company"]');
-
-        var total_additional = 0;
-        var helper_additional = 0;
-        var company_price = 0;
-
-        additional.forEach(element => {
-            element.addEventListener('change', function() {
-                additional.forEach(input => {
-                    if ($(input).is(":checked")) {
-                        helper_additional += parseFloat(input.getAttribute('data-price'));
-                    }
-                });
-                total_additional = helper_additional;
-                helper_additional = 0;
-                document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
-                    company_price).toFixed(2);
-                document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
-                    company_price).toFixed(2);
-            });
-        });
-
-        companies.forEach(element => {
-            element.addEventListener('change', function() {
-                company_price = parseFloat(document.querySelector('input[name="cargo_company"]:checked')
-                    .getAttribute('data-price'));
-
-                document.querySelector('input[name="total_cargo_price"]').value = (total_additional +
-                    company_price).toFixed(2);
-                document.querySelector('#total_cargo_price_span').innerHTML = (total_additional +
-                    company_price).toFixed(2);
-            });
-        });
-
         function changeCurrency(select) {
             var options = select.options;
             var currency = options[options.selectedIndex].getAttribute('data-currency');

@@ -1,6 +1,6 @@
-setTimeout(() => {
-    console.clear();
-}, 1000);
+// setTimeout(() => {
+//     console.clear();
+// }, 1000);
 
 //--------------------------- CALCULATING TOTAL COUNT starts here--------------------------->
 var total_count = 0;
@@ -304,6 +304,143 @@ function yekunHesabla(from_where) {
                     );
                 });
 
+                if (data.personal_array) {
+                    var personal_companies = Object.values(data.personal_array);
+                    var src_url = document.querySelector("#src_url").value;
+
+                    personal_companies.forEach((element) => {
+                        var personal_cargo_id = Math.floor(
+                            10000000 + Math.random() * 90000000
+                        );
+                        var company_html =
+                            `
+                        <label for="personal_company_input_` +
+                            element.id +
+                            `" class="cargo-company-label" onclick="changePersonalCargo('`+element.name+`')">
+                            <div class="list-group list-group-horizontal">
+                                <div
+                                    class="list-group-item w-25 text-center d-flex align-items-center">
+                                    <img style="height:48px;"
+                                        src="` +
+                            src_url +
+                            `backend/assets/img/companies/cargo/` +
+                            element.logo +
+                            `" />
+                                </div>
+                                <div class="list-group-item w-50 text-left d-flex align-items-center ">
+                                    ` +
+                            element.name +
+                            `
+                                </div>
+                                <div class="list-group-item d-flex d-flex align-items-center">
+                                    <span class="me-2 textShipment"
+                                        id="cargo_company_` +
+                            element.id +
+                            `">` +
+                            parseFloat(element.price).toFixed(2) +
+                            ` €</span>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio"
+                                            name="cargo_company"
+                                            id="personal_company_input_` +
+                            element.id +
+                            `"
+                                            data-price="` +
+                            parseFloat(element.price).toFixed(2) +
+                            `" value="` +
+                            element.id +
+                            `" />
+                                        <input type="hidden"
+                                            name="company_value[` +
+                            element.id +
+                            `]" value="` +
+                            parseFloat(element.price).toFixed(2) +
+                            `">
+                                        <input type="hidden" name="personal_cargo_id[]" value="` +
+                            personal_cargo_id +
+                            `">
+                                        <input type="hidden" name="personal_cargo_name[` +
+                            personal_cargo_id +
+                            `]" value="` +
+                            element.name +
+                            `">
+                                        <input type="hidden" name="personal_cargo_value[` +
+                            personal_cargo_id +
+                            `]" value="` +
+                            parseFloat(element.price).toFixed(2) +
+                            `"></input>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        `;
+                        console.log(company_html);
+                        document
+                            .querySelector(".cargo-company-labels-holder")
+                            .insertAdjacentHTML("beforeend", company_html);
+                        document.querySelector(
+                            'input[name="personal_cargo"]'
+                        ).value = "true";
+                    });
+                }
+
+                var additional =
+                    document.querySelectorAll(".cargo_price_input");
+                var company = document.querySelector(
+                    'input[name="cargo_company"]:checked'
+                );
+                var companies = document.querySelectorAll(
+                    'input[name="cargo_company"]'
+                );
+
+                var total_additional = 0;
+                var helper_additional = 0;
+                var company_price = 0;
+
+                additional.forEach((element) => {
+                    element.addEventListener("change", function () {
+                        additional.forEach((input) => {
+                            if ($(input).is(":checked")) {
+                                helper_additional += parseFloat(
+                                    input.getAttribute("data-price")
+                                );
+                            }
+                        });
+                        total_additional = helper_additional;
+                        helper_additional = 0;
+                        document.querySelector(
+                            'input[name="total_cargo_price"]'
+                        ).value = (total_additional + company_price).toFixed(2);
+                        document.querySelector(
+                            "#total_cargo_price_span"
+                        ).innerHTML = (
+                            total_additional + company_price
+                        ).toFixed(2);
+                    });
+                });
+
+                companies.forEach((element) => {
+                    element.addEventListener("change", function () {
+                        console.log(companies);
+                        company_price = parseFloat(
+                            document
+                                .querySelector(
+                                    'input[name="cargo_company"]:checked'
+                                )
+                                .getAttribute("data-price")
+                        );
+
+                        document.querySelector(
+                            'input[name="total_cargo_price"]'
+                        ).value = (total_additional + company_price).toFixed(2);
+                        document.querySelector(
+                            "#total_cargo_price_span"
+                        ).innerHTML = (
+                            total_additional + company_price
+                        ).toFixed(2);
+                    });
+                });
+
                 var services = Object.keys(data.additional_services);
                 console.log(services);
                 services.forEach((element) => {
@@ -348,7 +485,7 @@ function yekunHesabla(from_where) {
         });
     }
 
-    if(from_where == 'next'){
+    if (from_where == "next") {
         setTimeout(() => {
             button = document.querySelector(".next-button-with-quote");
             nextTo("shipment_def", button);
@@ -387,7 +524,8 @@ function nextTo(section_name, button) {
     });
 
     if (section_name == "shipment_def") {
-        required_message = "Not all total values calculated. Please fill all fields to calculate";
+        required_message =
+            "Not all total values calculated. Please fill all fields to calculate";
         var totalAmount = parseFloat(
             document.querySelector(".totalAmount").innerHTML
         ).toFixed(2);
@@ -474,8 +612,9 @@ function nextTo(section_name, button) {
             });
             section.classList.add("active-order-form-div");
             button.style.display = "none";
-            if(section_name == "shipment_def"){
-                document.querySelector(".next-button-get-quote").style.display = "block";
+            if (section_name == "shipment_def") {
+                document.querySelector(".next-button-get-quote").style.display =
+                    "block";
             }
         }
     } else {
@@ -485,11 +624,15 @@ function nextTo(section_name, button) {
             html:
                 `
                     <h3 style="color:#f27474;">` +
-                    required_message +
-                    `</h3>
+                required_message +
+                `</h3>
                 `,
             backdrop: true,
             showConfirmButton: true,
         });
     }
+}
+
+function changePersonalCargo(personal_name){
+    document.querySelector('#selected_personal').value = personal_name;
 }

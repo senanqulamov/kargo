@@ -32,6 +32,8 @@ class Cargo_request extends Model
         'packages',
         'cargo_company',
         'company_value',
+        'personal_cargo',
+        'selected_personal',
         'additional_services',
         'total_cargo_price',
         'total_count',

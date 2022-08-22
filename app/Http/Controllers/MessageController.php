@@ -8,8 +8,14 @@ use App\Models\Message;
 use App\Models\ContactService;
 use App\Models\Branch;
 use App\Models\Notification;
+use App\Models\Support_demand;
+use App\Models\Support_message;
+use App\Models\Usage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Validator;
+use App\Models\User as UserModel;
+use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
@@ -157,15 +163,23 @@ class MessageController extends Controller
 
     public function addNotification(Request $request)
     {
+        if($request->image){
+            $file = $request->image;
+            $name = $file->getClientOriginalName();
+            $file->move(public_path() . '/images/static_images/', $name);
+        }else{
+            $name = "notification.png";
+        }
 
         $data = array(
             'name' => $request->name,
-            'message' => json_encode($request->message)
+            'message' => json_encode($request->message),
+            'image' => $name,
         );
 
         Notification::create($data);
 
-        return Redirect::back();
+        return Redirect::back()->with('message' , 'Notification succesfully posted');
     }
 
     public function disableNotification($id)
@@ -196,6 +210,151 @@ class MessageController extends Controller
     {
 
         Notification::where('id', $id)->delete();
+
+        return Redirect::back()->with('message', 'Notification deleted Succesfully');
+    }
+
+    public function support(){
+
+        $support_demands = Support_demand::all();
+
+        return view('backend.public.support' , compact('support_demands'));
+    }
+
+    public function support_message(Request $request){
+
+        $demand_data = array(
+            'status' => $request->status
+        );
+        $demand = Support_demand::where('id' , $request->id)->first();
+        $message_data = array(
+            'by' => "moderator",
+            'support_id' => $request->id,
+            'user_id' => $demand->user_id,
+            'moderator_id' => Auth::user()->id,
+            'message' => json_encode($request->message)
+        );
+
+        Support_demand::where('id' , $request->id)->update($demand_data);
+        Support_message::create($message_data);
+
+        $user = UserModel::where('id' , $demand->user_id)->first();
+        $email_data = array(
+            'name' => $user->name,
+            'email' => $user->email,
+            'mod_text' => json_encode($request->message),
+        );
+        Mail::send('backend.mails.supportmail', $email_data, function ($message) use ($email_data) {
+            $message->to($email_data['email'], $email_data['name'])
+                ->subject('ShipLounge , Support notification')
+                ->from('noreply@shiplounge.co', 'ShipLounge');
+        });
+
+        return response()->json('Reply for support demand has been sent succesfully');
+    }
+
+    public function show_support_chat(Request $request){
+
+        $demand = Support_demand::where('id' , $request->id)->first();
+        $messages = Support_message::where('support_id' , $demand->id)->orderBy('created_at' , 'DESC')->get();
+
+        return response()->json([
+            'demand' => $demand,
+            'messages' => $messages
+        ]);
+    }
+
+    public function sendMessage(Request $request){
+        // dd($request->all());
+
+        $demand_data = array(
+            'status' => $request->status
+        );
+        $demand = Support_demand::where('id' , $request->id)->first();
+        $message_data = array(
+            'by' => "moderator",
+            'support_id' => $request->id,
+            'user_id' => $demand->user_id,
+            'moderator_id' => Auth::user()->id,
+            'message' => json_encode($request->message)
+        );
+
+        Support_demand::where('id' , $request->id)->update($demand_data);
+        Support_message::create($message_data);
+
+        $user = UserModel::where('id' , $demand->user_id)->first();
+        $email_data = array(
+            'name' => $user->name,
+            'email' => $user->email,
+            'mod_text' => json_encode($request->message),
+        );
+        Mail::send('backend.mails.supportmail', $email_data, function ($message) use ($email_data) {
+            $message->to($email_data['email'], $email_data['name'])
+                ->subject('ShipLounge , Support notification')
+                ->from('noreply@shiplounge.co', 'ShipLounge');
+        });
+
+        return response()->json('Reply for support demand has been sent succesfully');
+    }
+
+    public function usages()
+    {
+
+        $usages = Usage::all();
+
+        return view('backend.helpers.siteusage')->with('usages', $usages);
+    }
+
+    public function addUsage(Request $request)
+    {
+        if($request->image){
+            $file = $request->image;
+            $name = $file->getClientOriginalName();
+            $file->move(public_path() . '/images/static_images/', $name);
+        }else{
+            $name = "usage.png";
+        }
+
+        $data = array(
+            'title' => $request->title,
+            'link' => $request->link,
+            'description' => json_encode($request->description),
+            'image' => $name,
+        );
+
+        Usage::create($data);
+
+        return Redirect::back()->with('message' , 'Notification succesfully posted');
+    }
+
+    public function disableUsage($id)
+    {
+
+        $data = array(
+            'status' => 0
+        );
+
+        Usage::where('id', $id)->update($data);
+
+        return Redirect::back()->with('message', 'Notification disabled Succesfully');
+    }
+
+    public function activateUsage($id)
+    {
+
+        $data = array(
+            'status' => 1
+        );
+
+        Usage::where('id', $id)->update($data);
+
+        return Redirect::back()->with('message', 'Notification activated Succesfully');
+    }
+
+    public function deleteUsage($id)
+    {
+
+        Usage::where('id', $id)->delete();
 
         return Redirect::back()->with('message', 'Notification deleted Succesfully');
     }

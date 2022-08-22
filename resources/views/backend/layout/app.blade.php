@@ -62,8 +62,33 @@
     </style>
     @livewireStyles
 </head>
-
 <body class="hold-transition sidebar-mini">
+    @if (session()->has('message'))
+        <script>
+            Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: '{{ session()->get('message') }}',
+                backdrop: true,
+                showConfirmButton: true,
+                timerProgressBar: true,
+                timer: 6000
+            })
+        </script>
+    @endif
+    @if (session()->has('error'))
+        <script>
+            Swal.fire({
+                position: 'center',
+                icon: 'error',
+                title: '{{ session()->get('error') }}',
+                backdrop: true,
+                showConfirmButton: true,
+                timerProgressBar: true,
+                timer: 6000
+            })
+        </script>
+    @endif
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -161,13 +186,6 @@
                                 <p> Users </p>
                             </a>
                         </li>
-                        {{-- <li class="nav-item">
-                            <a href="{{ route('admin.orders.index') }}"
-                                class="nav-link @if (Request::segment(2) == 'orders') active @endif">
-                                <i class="nav-icon fas fa-file-alt"></i>
-                                <p> Orders Manager</p>
-                            </a>
-                        </li> --}}
 
                         <li class="nav-item @if (Request::segment(2) == 'cargo-requests') menu-open @endif">
                             <a href="#" class="nav-link  @if (Request::segment(2) == 'cargo-requests') active @endif">
@@ -180,13 +198,47 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item">
+                                <li class="nav-item @if (Request::segment(3) == 'cargo-request-index') menu-open @endif">
+                                    <a href="#" class="nav-link @if (Request::segment(3) == 'cargo-request-index') active @endif">
+                                        <i class="nav-icon fas fa-box"></i>
+                                        <p>
+                                            Orders
+                                            <i class="fas fa-angle-left right"></i>
+                                            <span
+                                                class="badge badge-info right">{{ count($message) > 0 ? count($message) : '' }}</span>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview" style="margin-left: 20px">
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.cargo-requests.index') }}"
+                                                class="nav-link @if (Request::segment(3) == 'cargo-request-index') active @endif">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Cargo Requests (M)</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.cargo-requests.buyforme') }}"
+                                                class="nav-link @if (Request::segment(3) == 'buyforme') active @endif">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Buy for me (B)</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.cargo-requests.amazonOrders') }}"
+                                                class="nav-link @if (Request::segment(3) == 'amazonOrders') active @endif">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Amazon orders (A)</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                {{-- <li class="nav-item">
                                     <a href="{{ route('admin.cargo-requests.index') }}"
                                         class="nav-link @if (Request::segment(3) == 'cargo-request-index') active @endif">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p> Cargo Requests</p>
                                     </a>
-                                </li>
+                                </li> --}}
                                 <li class="nav-item">
                                     <a href="{{ route('admin.cargo-requests.courier_requests') }}"
                                         class="nav-link @if (Request::segment(3) == 'courier_requests') active @endif">
@@ -276,7 +328,7 @@
                             <a href="#" class="nav-link  @if (Request::segment(2) == 'messages') active @endif">
                                 <i class="nav-icon far fa-envelope"></i>
                                 <p>
-                                    Mailbox
+                                    MailBox
                                     <i class="fas fa-angle-left right"></i>
                                     <span
                                         class="badge badge-info right">{{ count($message) > 0 ? count($message) : '' }}</span>
@@ -301,12 +353,30 @@
                                             class="badge badge-info right">{{ count($message) > 0 ? count($message) : '' }}</span>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.messages.support') }}"
+                                        class="nav-link @if (Request::segment(3) == 'support') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Support</p>
+                                        <span
+                                            class="badge badge-info right">{{ count($message) > 0 ? count($message) : '' }}</span>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.messages.usages') }}"
+                                        class="nav-link @if (Request::segment(3) == 'usages') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Usage blogs</p>
+                                        <span
+                                            class="badge badge-info right">{{ count($message) > 0 ? count($message) : '' }}</span>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-header text-uppercase">Configurations</li>
 
-                        <li class="nav-item @if (Request::segment(3) == 'cargo' || Request::segment(3) == 'domestic') menu-open @endif">
-                            <a href="#" class="nav-link @if (Request::segment(3) == 'cargo' || Request::segment(3) == 'domestic') active @endif">
+                        <li class="nav-item @if (Request::segment(3) == 'cargo' || Request::segment(3) == 'personal' || Request::segment(3) == 'domestic') menu-open @endif">
+                            <a href="#" class="nav-link @if (Request::segment(3) == 'cargo' || Request::segment(3) == 'personal' || Request::segment(3) == 'domestic') active @endif">
                                 <i class="nav-icon fas fa-truck-moving"></i>
                                 <p>Cargo Manager <i class="right fas fa-angle-left"></i></p>
                             </a>
@@ -323,6 +393,13 @@
                                         class="nav-link @if (Request::segment(3) == 'domestic') active @endif">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Domestic Cargo</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.companies.personal') }}"
+                                        class="nav-link @if (Request::segment(3) == 'personal') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Personal Cargo</p>
                                     </a>
                                 </li>
                             </ul>

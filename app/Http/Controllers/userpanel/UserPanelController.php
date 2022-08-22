@@ -5,15 +5,18 @@ namespace App\Http\Controllers\userpanel;
 use App\Models\User as UserModel;
 use App\Http\Controllers\Controller;
 use App\Models\AdditionalService;
+use App\Models\Amazon_order;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
 use App\Models\CargoCompany;
 use App\Models\CargoZone;
 use App\Models\Courier_request;
+use App\Models\Forme_request;
 use App\Models\MoneyBackRequest;
 use App\Models\Order_time;
 use App\Models\Package;
 use App\Models\Payment;
+use App\Models\PersonalCargo;
 use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\UserAddress;
@@ -51,7 +54,7 @@ class UserPanelController extends Controller
                 return Redirect::back()->with('error', 'Unable to change email to existing one');
             }
         }
-        if($request->phone != Auth::user()->phone){
+        if ($request->phone != Auth::user()->phone) {
             $cloned_phone = UserModel::where('phone', $request->phone)->first();
             if ($cloned_phone) {
                 return Redirect::back()->with('error', 'Unable to change phone to existing one');
@@ -139,6 +142,7 @@ class UserPanelController extends Controller
     {
 
         $countries = DB::table('countries')->get();
+        $cargo_companies = DB::table('cargo_companies')->get();
 
         $cargo_requests = DB::table('cargo_requests')
             ->where('user_id', Auth::user()->id)
@@ -169,6 +173,7 @@ class UserPanelController extends Controller
             'on_the_way' => $on_the_way,
             'total_cargo' => $total_cargo,
             'notifications' => $notifications,
+            'cargo_companies' => $cargo_companies,
         ]);
     }
 
@@ -258,14 +263,20 @@ class UserPanelController extends Controller
 
     public function viewCargoDetails($id)
     {
-        // dd($id);
-        $cargo = Cargo_request::where('id', $id)->get()->first();
+
+        switch (substr($id, 0, 1)) {
+            case 'A':
+                $cargo = Amazon_order::where('id', $id)->get()->first();
+                break;
+            default:
+                $cargo = Cargo_request::where('id', $id)->get()->first();
+                break;
+        }
         $packages = Package::where('cargo_id', $id)->get();
         $products = Product::where('cargo_id', $id)->get();
         $additional_services = AdditionalService::get();
         $currencies = DB::table('currencies')->get();
 
-        // dd($packages);
 
         return view('userpanel.frontend.cargo_details')->with([
             'cargo' => $cargo,
@@ -299,7 +310,10 @@ class UserPanelController extends Controller
     {
         // dd($request->all());
 
-        $deci = DB::table('cargo_zones')->select('companyID', 'zone')->where('desi', $request->total_deci)->get();
+        $deci = DB::table('cargo_zones')->select('companyID', 'zone')->where([
+            ['desi', $request->total_deci],
+            ['user_id', 'null'],
+        ])->get();
         $zone = DB::table('cargo_countries')->where('country', $request->country)->get()->first();
 
         $result_array = array();
@@ -359,10 +373,48 @@ class UserPanelController extends Controller
             }
         }
 
-        // dd($result_array);
+        $personal_deci = DB::table('cargo_zones')
+            ->where([
+                ['desi', $request->total_deci],
+                ['user_id', Auth::user()->id],
+            ])
+            ->get();
+
+        if ($personal_deci) {
+            $personal_array = array();
+            foreach ($personal_deci as $deci) {
+                $deci_zone_values =  json_decode($deci->zone);
+                $deci_company = $deci->companyID;
+                if (isset($deci_zone_values[$zone->zone - 1])) {
+                    $deci_zone_value = $deci_zone_values[$zone->zone - 1];
+                } else {
+                    $deci_zone_value = $deci_zone_values[0];
+                }
+                $company = DB::table('cargo_companies')->where('id', $deci_company)->get()->first();
+
+                $psh = ($deci_zone_value * $company->PSH) / 100;
+                $jet = ($deci_zone_value * $company->jet_price) / 100;
+                $emergency = ($deci_zone_value * $company->emergency) / 100;
+                $kar_marj = ($deci_zone_value * $company->kar_marj) / 100;
+                $deci_zone_value = $deci_zone_value + $psh + $jet + $emergency + $kar_marj;
+
+                // $result = array($deci->companyID => $deci_zone_value);
+                $company = CargoCompany::where('id' , $deci->companyID)->first();
+                $company_array = array(
+                    'id' => $deci->companyID,
+                    'name' =>$deci->personal_name,
+                    'logo' => $company->logo,
+                    'slug' => $company->slug,
+                    'price' => $deci_zone_value
+                );
+                $personal_array[$company->name] = $company_array;
+            }
+        }
+
         return response()->json([
             'cargo_companies' => $result_array,
-            'additional_services' => $services_array
+            'additional_services' => $services_array,
+            'personal_array' => $personal_array
         ]);
     }
 
@@ -420,6 +472,8 @@ class UserPanelController extends Controller
                 'total_worth' => $request->total_worth,
                 'cargo_company' => $request->cargo_company,
                 'company_value' => $company_values,
+                'personal_cargo' => $request->personal_cargo,
+                'selected_personal' => $request->selected_personal,
                 'battery' => $request->battery,
                 'liquid' => $request->liquid,
                 'food' => $request->food,
@@ -501,6 +555,19 @@ class UserPanelController extends Controller
                 UserAddress::create($new_user_address);
             }
 
+            if($request->personal_cargo == 'true'){
+                foreach ($request->personal_cargo_id as $key => $value) {
+                    $personal_cargo = array(
+                        'user_id' => Auth::user()->id,
+                        'company_id' => $value,
+                        'order_id' => $cargo_id,
+                        'name' => $request->personal_cargo_name[$value],
+                        'value' => $request->personal_cargo_value[$value],
+                    );
+                    PersonalCargo::create($personal_cargo);
+                }
+            }
+
             return Redirect::back()->with('message', 'Cargo order successfully sent');
         } else {
             return Redirect::back()->with('error', 'Invalid arguments');
@@ -555,12 +622,18 @@ class UserPanelController extends Controller
             ->orderBy('created_at', 'DESC')
             ->get();
 
+        $amazon_orders = DB::table('amazon_orders')
+            ->where('user_id', Auth::user()->id)
+            ->orderBy('created_at', 'DESC')
+            ->get();
+
         $packages = DB::table('packages')->get();
 
         return view('userpanel.frontend.cargo_requests')
             ->with(
                 [
                     'cargo_requests' => $cargo_requests,
+                    'amazon_orders' => $amazon_orders,
                     'packages' => $packages
                 ]
             );
@@ -570,27 +643,55 @@ class UserPanelController extends Controller
     {
         // dd($request->all() , $id);
 
-        $data = array(
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'email' => $request->email,
-            'country' => $request->country,
-            'state' => $request->state,
-            'city' => $request->city,
-            'address' => $request->address,
-            'zipcode' => $request->zipcode,
-            'currency' => $request->currency,
-            'ioss_number' => $request->ioss_number,
-            'vat_number' => $request->vat_number,
-            'order_info' => $request->order_info
-        );
+        switch (substr($id, 0, 1)) {
+            case 'A':
+                $data = array(
+                    'country' => $request->country,
+                    'currency' => $request->currency,
+                    'ioss_number' => $request->ioss_number,
+                    'vat_number' => $request->vat_number,
+                    'order_info' => $request->order_info
+                );
+                Amazon_order::where('id', $id)->update($data);
+                break;
+            default:
+                $data = array(
+                    'name' => $request->name,
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'country' => $request->country,
+                    'state' => $request->state,
+                    'city' => $request->city,
+                    'address' => $request->address,
+                    'zipcode' => $request->zipcode,
+                    'currency' => $request->currency,
+                    'ioss_number' => $request->ioss_number,
+                    'vat_number' => $request->vat_number,
+                    'order_info' => $request->order_info
+                );
+                Cargo_request::where('id', $id)->update($data);
+                break;
+        }
 
-        Cargo_request::where('id', $id)->update($data);
+        foreach ($request->package_id as $key => $value) {
+            $package = array(
+                'barcode' => $request->barcode[$value]
+            );
+            Package::where('id', $value)->update($package);
+        }
 
+        switch (substr($id, 0, 1)) {
+            case 'A':
+                $action = 'Amazon order updated';
+                break;
+            default:
+                $action = 'Cargo Request updated';
+                break;
+        }
         $time_data = array(
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
-            'action' => 'Cargo Request updated',
+            'action' => $action,
             'time' => Carbon::now()
         );
 
@@ -610,7 +711,8 @@ class UserPanelController extends Controller
         return view('userpanel.frontend.balance', compact('payments', 'comissions', 'transactions'));
     }
 
-    public function transactions(){
+    public function transactions()
+    {
         $transactions = Transaction::where('user_id', Auth::user()->id)->get();
         return view('userpanel.frontend.transactions', compact('transactions'));
     }
@@ -727,7 +829,7 @@ class UserPanelController extends Controller
 
     public function post_courier_request(Request $request)
     {
-        if(!$request->order_ids){
+        if (!$request->order_ids) {
             return Redirect::back()->with('error', 'Please select at least one Order');
         }
         $data = array();

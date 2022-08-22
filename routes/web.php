@@ -132,6 +132,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 			Route::get('/cargo_logs', [ManuelOrderController::class, 'cargo_logs'])->name('cargo_logs');
 			Route::get('/cargo_logs/{id}', [ManuelOrderController::class, 'cargo_logs_with_id'])->name('cargo_logs_with_id');
+
+			Route::get('/buyforme', [ManuelOrderController::class, 'buyforme'])->name('buyforme');
+			Route::get('/amazonOrders', [ManuelOrderController::class, 'amazonOrders'])->name('amazonOrders');
+
+			Route::get('/custom_order_details/{id}', [ManuelOrderController::class, 'custom_order_details'])->name('custom_order_details');
+			Route::post('/order_update/{id}', [ManuelOrderController::class, 'order_update'])->name('order_update');
+			Route::post('/order_action', [ManuelOrderController::class, 'order_action'])->name('order_action');
+
 		});
 
         Route::prefix('scanners/')->name('scanners.')->group(function(){
@@ -167,6 +175,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/disable-notification/{id}', [MessageController::class, 'disableNotification'])->name('disableNotification');
             Route::get('/activate-notification/{id}', [MessageController::class, 'activateNotification'])->name('activateNotification');
             Route::get('/delete-notification/{id}', [MessageController::class, 'deleteNotification'])->name('deleteNotification');
+
+            Route::get('/usages', [MessageController::class, 'usages'])->name('usages');
+            Route::post('/add-usage', [MessageController::class, 'addUsage'])->name('addUsage');
+            Route::get('/disable-usage/{id}', [MessageController::class, 'disableUsage'])->name('disableUsage');
+            Route::get('/activate-usage/{id}', [MessageController::class, 'activateUsage'])->name('activateUsage');
+            Route::get('/delete-usage/{id}', [MessageController::class, 'deleteUsage'])->name('deleteUsage');
+
+            Route::get('/support', [MessageController::class, 'support'])->name('support');
+            Route::post('/support_message', [MessageController::class, 'support_message'])->name('support_message');
+            Route::get('/show_support_chat', [MessageController::class, 'show_support_chat'])->name('show_support_chat');
+            Route::post('/sendMessage', [MessageController::class, 'sendMessage'])->name('sendMessage');
 		});
 
 		//faqs
@@ -203,6 +222,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::get('/domestic/edit', [DomesticCompanyController::class, 'edit'])->name('domestic.edit');
 			Route::put('/domestic/update', [DomesticCompanyController::class, 'update'])->name('domestic.update');
 			Route::get('/domestic/delete/{id}', [DomesticCompanyController::class, 'delete'])->name('domestic.delete');
+
+			Route::get('/personal', [CargoCompanyController::class, 'personal_cargo'])->name('personal');
+			Route::post('/create_personal_cargo', [CargoCompanyController::class, 'create_personal_cargo'])->name('create_personal_cargo');
 		});
 
 		// branch
@@ -351,14 +373,36 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::post('/post_courier_request', [UserPanelController::class, 'post_courier_request'])->name('post_courier_request');
 
         Route::get('/cargo_companies', [UserPanelController::class, 'cargo_companies'])->name('cargo_companies');
-        Route::get('/marketplace', [UserPanelController::class, 'marketplace'])->name('marketplace');
 
+        Route::get('/marketplace', [UserPanelController::class, 'marketplace'])->name('marketplace');
         Route::post('/updateMarket', [UserPanelController::class, 'updateMarket'])->name('updateMarket');
 
         Route::get('/share_and_earn', [SimplePages::class, 'share_and_earn'])->name('share_and_earn');
+
         Route::get('/support', [SimplePages::class, 'support'])->name('support');
-        // Route::get('/marketplace', [SimplePages::class, 'marketplace'])->name('marketplace');
-        // Route::get('/marketplace', [SimplePages::class, 'marketplace'])->name('marketplace');
+        Route::post('/support_demand', [SimplePages::class, 'support_demand'])->name('support_demand');
+        Route::post('/sendMessage', [SimplePages::class, 'sendMessage'])->name('sendMessage');
+
+        Route::get('/calculator', [SimplePages::class, 'calculator'])->name('calculator');
+        Route::get('/faq', [SimplePages::class, 'faq'])->name('faq');
+
+        Route::get('/notifications', [SimplePages::class, 'notifications'])->name('notifications');
+        Route::get('/getnotification', [SimplePages::class, 'getnotification'])->name('getnotification');
+
+        Route::get('/locations', [SimplePages::class, 'locations'])->name('locations');
+        Route::get('/siteusage', [SimplePages::class, 'siteusage'])->name('siteusage');
+
+        Route::get('/buyforme', [SimplePages::class, 'buyforme'])->name('buyforme');
+        Route::post('/post_buyforme', [SimplePages::class, 'post_buyforme'])->name('post_buyforme');
+        Route::post('/order_status_action', [SimplePages::class, 'order_status_action'])->name('order_status_action');
+
+        Route::get('/amazon_order', [SimplePages::class, 'amazon_order'])->name('amazon_order');
+        Route::post('/post_amazon_order', [SimplePages::class, 'postAmazonorder'])->name('postAmazonorder');
+
+        Route::get('/bulk_order', [SimplePages::class, 'bulk_order'])->name('bulk_order');
+        Route::post('/create_bulk_order', [SimplePages::class, 'create_bulk_order'])->name('create_bulk_order');
+
+        Route::get('/get_special_offer', [SimplePages::class, 'get_special_offer'])->name('get_special_offer');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

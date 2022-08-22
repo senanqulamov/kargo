@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class CargoZone extends Model
 {
     use HasFactory;
+
+    public $timestamps = true;
+
+    protected $fillable = [
+        'user_id',
+        'companyID',
+        'personal_name',
+        'desi',
+        'zone',
+    ];
 }

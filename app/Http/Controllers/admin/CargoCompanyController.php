@@ -189,4 +189,35 @@ class CargoCompanyController extends Controller
         $path = public_path('backend/document/template/zone.xlsx');
         return response()->download($path);
     }
+
+    public function personal_cargo(){
+
+        $personal_cargo = CargoZone::where('user_id' , '!=' , 'null')->orderBy('id' , 'DESC')->get();
+
+        return view('backend.helpers.personal_cargo' , compact('personal_cargo'));
+    }
+
+    public function create_personal_cargo(Request $request){
+
+        // dd($request->all());
+
+        $excel = SimpleXLSX::parse($request->zone);
+
+        $test_data = [];
+        for ($i=0; $i < count($excel->rows()); $i++) {
+            $data = array(
+                'user_id' => $request->user,
+                'companyID' => $request->company,
+                'personal_name' => $request->personal_name,
+                'desi' => $excel->rows()[$i][0],
+                'zone' => $excel->rows()[$i][1]
+            );
+            $test_data[] = $data;
+            CargoZone::create($data);
+        }
+
+        // dd($test_data);
+
+        return Redirect::back()->with('message' , 'Personal cargo created succesfully');
+    }
 }

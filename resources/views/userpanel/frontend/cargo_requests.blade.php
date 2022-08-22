@@ -1,18 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
     {{-- <style>
         hr {
             margin-top: 1rem;
@@ -255,12 +243,213 @@
                                         $services = json_decode(json_encode($services), true);
                                     @endphp
                                     @if ($services)
-                                        <td class="additional_service_td">
-                                            @foreach ($services as $key => $service)
-                                                <span class="additional_service_style">
-                                                    <b>{{ $key }}</b>: {{ $service }}€
-                                                </span>
-                                            @endforeach
+                                        <td>
+                                            <div class="additional_service_td">
+                                                @foreach ($services as $key => $service)
+                                                    <span class="additional_service_style">
+                                                        <b>{{ $key }}</b>: {{ $service }}€
+                                                    </span>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                    @else
+                                        <td>
+                                            <span
+                                                style="background:#f9c0c0;color:#020000;border-radius: 10px;padding: 0 10px;">No
+                                                Additional
+                                                services</span>
+                                        </td>
+                                    @endif
+                                    @php
+                                        $cargo_company = DB::table('cargo_companies')
+                                            ->where('id', $cargo->cargo_company)
+                                            ->get()
+                                            ->first();
+                                    @endphp
+                                    <td>
+                                        @if ($cargo_company)
+                                            <img style="width:60px;"
+                                                src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $cargo_company->logo == null ? 'user.png' : $cargo_company->logo }}" />
+                                        @endif
+                                    </td>
+                                    <td>{{ $cargo->battery == 'yes' ? 'Yes' : 'No' }}</td>
+                                    <td>{{ $cargo->liquid == 'yes' ? 'Yes' : 'No' }}</td>
+                                    <td>{{ $cargo->food == 'yes' ? 'Yes' : 'No' }}</td>
+                                    <td>{{ $cargo->dangerous == 'yes' ? 'Yes' : 'No' }}</td>
+                                    <td>
+                                        <div style="display: flex;">
+                                            @if ($cargo->status != 4 && $cargo->status != 6 && $cargo->status != 5)
+                                                <a href="{{ route('admin.cargo-requests.post_on_wait', ['id' => $cargo->id]) }}"
+                                                    class="col form-control btn btn-info">Pause order</a>
+                                            @endif
+
+                                            @if ($cargo->status == 6)
+                                                <a href="{{ route('admin.cargo-requests.remove_on_wait', ['id' => $cargo->id]) }}"
+                                                    class="col form-control btn btn-success">Continue Process</a>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div style="display: flex;">
+                                            @if ($cargo->status == 0)
+                                                <a href="#" class="col form-control btn btn-danger"
+                                                    data-toggle="modal"
+                                                    data-target="#modal-cancel-order-{{ $cargo->id }}">
+                                                    Cancel Order
+                                                </a>
+                                            @endif
+                                        </div>
+                                    </td>
+                                    <div class="modal fade" id="modal-cancel-order-{{ $cargo->id }}">
+                                        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <div class="details-modal-header-flex">
+                                                        <h4 style="color: red">Cancel order: {{ $cargo->id }}</h4>
+                                                    </div>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form
+                                                        action="{{ route('admin.cargo-requests.cancel_order', ['id' => $cargo->id]) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <div class="row form-group">
+                                                            <div class="col d-flex flex-column py-3">
+                                                                <label for="cancel_comment" class="labelCustom">Cancel
+                                                                    Comment</label>
+                                                                <input class="form-control" type="text"
+                                                                    name="cancel_comment"
+                                                                    placeholder="type your cancel message" required />
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <button type="submit" class="col btn btn-danger">
+                                                                <i class="fa fa-check"></i>
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.card-body -->
+            </div>
+            <div class="empty-space-hm-30"></div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        List of Amazon orders
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <table id="amazon-orders" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>View/Edit Details</th>
+                                <th>Download Label</th>
+                                <th>ID</th>
+                                <th>Date</th>
+                                <th>Order Status</th>
+                                <th>Order Type</th>
+                                <th>Tracking Number</th>
+                                <th>Currency</th>
+                                <th>Total Cargo Price</th>
+                                <th>Total Volume</th>
+                                <th>Total Weight</th>
+                                <th>Total Pricing Weight</th>
+                                <th>Total Count</th>
+                                <th>Total Worth</th>
+                                <th>IOSS number</th>
+                                <th>VAT number</th>
+                                <th>Order info</th>
+                                <th class="additional_services_th">Additional Services</th>
+                                <th>Cargo Company</th>
+                                <th>Battery</th>
+                                <th>Liquid</th>
+                                <th>Food</th>
+                                <th>Dangerous items</th>
+                                <th>Pause Order</th>
+                                <th>Cancel Order</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($amazon_orders as $cargo)
+                                <tr @if ($cargo->status == 5) class="cancelled-row" @endif>
+                                    <td>
+                                        <a href="{{ route('userpanel.viewCargoDetails', $cargo->id) }}"
+                                            class="btn btn-info">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </td>
+                                    <td class="pdf-download-td-hm"
+                                        onclick="window.open('{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}')">
+                                        <div style="display: flex;justify-content:center;">
+                                            <a href="#">
+                                                <i class="fa-solid fa-arrow-down"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                    <td>{{ $cargo->id ? $cargo->id : '---' }}</td>
+                                    <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
+                                    @php
+                                        $status = DB::table('package_statuses')
+                                            ->where('status', $cargo->status)
+                                            ->get()
+                                            ->first();
+                                    @endphp
+                                    <td>
+                                        <div class="status_td">
+                                            <span class="status_style status_color_{{ $status->status }}">
+                                                {{ $status->status_name }}
+                                            </span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        {{ $cargo->order_type }}
+                                    </td>
+                                    <td>{{ $cargo->tracking_number ? $cargo->tracking_number : '---' }}</td>
+                                    <td>
+                                        @php
+                                            $currency = DB::table('currencies')
+                                                ->where('currency_code', $cargo->currency)
+                                                ->get()
+                                                ->first();
+                                        @endphp
+                                        {{ $currency->currency_name ? $currency->currency_code . ' / ' . $currency->currency_name : '---' }}
+                                    </td>
+                                    <td>{{ $cargo->total_cargo_price ? $cargo->total_cargo_price : '---' }}</td>
+                                    <td>{{ $cargo->total_volume ? $cargo->total_volume : '---' }} m3</td>
+                                    <td>{{ $cargo->total_weight ? $cargo->total_weight : '---' }} kg</td>
+                                    <td>{{ $cargo->total_deci ? $cargo->total_deci : '---' }} </td>
+                                    <td>{{ $cargo->total_count ? $cargo->total_count : '---' }} </td>
+                                    <td>{{ $cargo->total_worth ? $cargo->total_worth : '---' }} €</td>
+                                    <td>{{ $cargo->ioss_number ? $cargo->ioss_number : '---' }}</td>
+                                    <td>{{ $cargo->vat_number ? $cargo->vat_number : '---' }}</td>
+                                    <td>{{ $cargo->order_info ? $cargo->order_info : '---' }}</td>
+                                    @php
+                                        $services = json_decode($cargo->additional_services);
+                                        $services = json_decode(json_encode($services), true);
+                                    @endphp
+                                    @if ($services)
+                                        <td>
+                                            <div class="additional_service_td">
+                                                @foreach ($services as $key => $service)
+                                                    <span class="additional_service_style">
+                                                        <b>{{ $key }}</b>: {{ $service }}€
+                                                    </span>
+                                                @endforeach
+                                            </div>
                                         </td>
                                     @else
                                         <td>
@@ -351,7 +540,6 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- /.card-body -->
             </div>
             <!-- /.card -->
         </div>
@@ -387,6 +575,19 @@
 
         $(function() {
             $("#cargo-requests").DataTable({
+                order: [
+                    [3, 'desc']
+                ],
+                "responsive": false,
+                "lengthChange": false,
+                "autoWidth": true,
+                scrollY: '50vh',
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+            $("#amazon-orders").DataTable({
                 order: [
                     [3, 'desc']
                 ],

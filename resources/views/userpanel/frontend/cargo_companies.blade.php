@@ -1,18 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
     <!--Market-Place -->
 
     <div class="drop__box">

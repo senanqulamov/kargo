@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Amazon_order;
 use Illuminate\Http\Request;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
+use App\Models\CargoCompany;
 use App\Models\Package;
 use App\Models\Product;
 use App\Models\Transaction;
@@ -28,7 +30,16 @@ class HelperController extends Controller
     {
 
         $packages = Package::where('cargo_id', $cargo_id)->get();
-        $cargo = Cargo_request::where('id', $cargo_id)->get()->first();
+
+        switch (substr($cargo_id, 0, 1)) {
+            case 'A':
+                $cargo = Amazon_order::where('id', $cargo_id)->get()->first();
+                break;
+            default :
+                $cargo = Cargo_request::where('id', $cargo_id)->get()->first();
+                break;
+        }
+
 
         // dd($cargo , $cargo_id);
         $total_volume = 0;
@@ -64,13 +75,26 @@ class HelperController extends Controller
             $total_product_count += $product_total_count;
         }
 
-        Cargo_request::where('id', $cargo_id)->update([
-            'total_volume' => $total_volume,
-            'total_weight' => $total_weight,
-            'total_count' => $total_count,
-            'total_deci' => $total_deci,
-            'total_worth' => $total_price
-        ]);
+        switch (substr($cargo_id, 0, 1)) {
+            case 'A':
+                Amazon_order::where('id', $cargo_id)->update([
+                    'total_volume' => $total_volume,
+                    'total_weight' => $total_weight,
+                    'total_count' => $total_count,
+                    'total_deci' => $total_deci,
+                    'total_worth' => $total_price
+                ]);
+                break;
+            default :
+                Cargo_request::where('id', $cargo_id)->update([
+                    'total_volume' => $total_volume,
+                    'total_weight' => $total_weight,
+                    'total_count' => $total_count,
+                    'total_deci' => $total_deci,
+                    'total_worth' => $total_price
+                ]);
+                break;
+        }
 
         $data = new stdClass();
         $data->total_deci = $total_deci;
@@ -102,20 +126,28 @@ class HelperController extends Controller
         $zone = DB::table('cargo_countries')->where('country', $data->country)->get()->first();
 
         $result_array = array();
-        foreach ($deci as $deci) {
-            $deci_zone_values =  json_decode($deci->zone);
-            $deci_company = $deci->companyID;
-            $deci_zone_value = $deci_zone_values[$zone->zone - 1];
-            $company = DB::table('cargo_companies')->where('id', $deci_company)->get()->first();
+        if(count($deci) >0){
+            foreach ($deci as $deci) {
+                $deci_zone_values =  json_decode($deci->zone);
+                $deci_company = $deci->companyID;
+                $deci_zone_value = $deci_zone_values[$zone->zone - 1];
+                $company = DB::table('cargo_companies')->where('id', $deci_company)->get()->first();
 
-            $psh = ($deci_zone_value * $company->PSH) / 100;
-            $jet = ($deci_zone_value * $company->jet_price) / 100;
-            $emergency = ($deci_zone_value * $company->emergency) / 100;
-            $kar_marj = ($deci_zone_value * $company->kar_marj) / 100;
-            $deci_zone_value = $deci_zone_value + $psh + $jet + $emergency + $kar_marj;
+                $psh = ($deci_zone_value * $company->PSH) / 100;
+                $jet = ($deci_zone_value * $company->jet_price) / 100;
+                $emergency = ($deci_zone_value * $company->emergency) / 100;
+                $kar_marj = ($deci_zone_value * $company->kar_marj) / 100;
+                $deci_zone_value = $deci_zone_value + $psh + $jet + $emergency + $kar_marj;
 
-            $result = array($deci->companyID => $deci_zone_value);
-            $result_array += $result;
+                $result = array($deci->companyID => $deci_zone_value);
+                $result_array += $result;
+            }
+        }else{
+            $companies = CargoCompany::all();
+            foreach ($companies as $company) {
+                $result = array($company->id => '0');
+                $result_array += $result;
+            }
         }
 
         return $result_array;
@@ -165,7 +197,16 @@ class HelperController extends Controller
     public function calculateTotalCargoPrice($result){
 
         $total_cargo_price =0;
-        $cargo = Cargo_request::where('id' , $result->cargo_id)->get()->first();
+
+        switch (substr($result->cargo_id, 0, 1)) {
+            case 'A':
+                $cargo = Amazon_order::where('id' , $result->cargo_id)->get()->first();
+                break;
+            default :
+                $cargo = Cargo_request::where('id' , $result->cargo_id)->get()->first();
+                break;
+        }
+
         if(isset($result->companies[$cargo->cargo_company])){
             $company_price = $result->companies[$cargo->cargo_company];
         }else{

@@ -1,32 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timerProgressBar:true,
-                timer: 3000
-            })
-        </script>
-    @endif
-    @if (session()->has('error'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: '{{ session()->get('error') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timerProgressBar:true,
-                timer: 4000
-            })
-        </script>
-    @endif
     <style>
         .tab-col-holder-hm table th {
             font-size: 16px;
@@ -558,7 +532,7 @@
                 beforeSend: function() {
                     let timerInterval
                     Swal.fire({
-                        position: 'top-right',
+                        position: 'center',
                         title: 'Loading Address',
                         backdrop: true,
                         timerProgressBar: true,
@@ -572,7 +546,7 @@
                 },
                 success: function(data) {
                     Swal.fire({
-                        position: 'top-right',
+                        position: 'center',
                         icon: 'success',
                         title: 'Address loaded succesfully !',
                         backdrop: false,
@@ -599,7 +573,7 @@
                 },
                 error: function(error) {
                     Swal.fire({
-                        position: 'top-right',
+                        position: 'center',
                         icon: 'error',
                         title: 'Couldnt load address',
                         backdrop: false,

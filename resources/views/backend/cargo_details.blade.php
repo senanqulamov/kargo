@@ -4,22 +4,14 @@
 
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-    <li class="breadcrumb-item"><a href="{{ route('admin.cargo-requests.index') }}">Cargo Requests</a></li>
+    @if (substr($cargo_id, 0, 1) == 'A')
+        <li class="breadcrumb-item"><a href="{{ route('admin.cargo-requests.amazonOrders') }}">Amazon Orders</a></li>
+    @else
+        <li class="breadcrumb-item"><a href="{{ route('admin.cargo-requests.index') }}">Cargo Requests</a></li>
+    @endif
 @endsection
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
     <style>
         p {
             margin: 0;
@@ -129,6 +121,8 @@
             gap: 10px;
         }
     </style>
+    <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
+
     <div class="row">
         <div class="col-12">
             <div class="card">
@@ -193,60 +187,74 @@
                                     <input class="form-control" type="text" name="tracking_number"
                                         value="{{ $cargo->tracking_number }}" />
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="name" class="labelCustom">Name</label>
-                                        <input class="form-control" type="text" name="name"
-                                            value="{{ $cargo->name }}" />
+
+                                @if (substr($cargo_id, 0, 1) != 'A')
+                                    <div class="row form-group">
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="name" class="labelCustom">Name</label>
+                                            <input class="form-control" type="text" name="name"
+                                                value="{{ $cargo->name }}" />
+                                        </div>
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="country" class="labelCustom">Country</label>
+                                            @php
+                                                $countries = DB::table('cargo_countries')->get();
+                                            @endphp
+                                            <select name="country" class="form-control">
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country->country }}"
+                                                        @if ($country->country == $cargo->country) selected @endif>
+                                                        {{ $country->country }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="state" class="labelCustom">State</label>
+                                            <input class="form-control" type="text" name="state"
+                                                value="{{ $cargo->state }}" />
+                                        </div>
                                     </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="country" class="labelCustom">Country</label>
-                                        @php
-                                            $countries = DB::table('cargo_countries')->get();
-                                        @endphp
-                                        <select name="country" class="form-control">
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->country }}"
-                                                    @if ($country->country == $cargo->country) selected @endif>
-                                                    {{ $country->country }}</option>
-                                            @endforeach
-                                        </select>
+                                    <div class="row form-group">
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="city" class="labelCustom">City</label>
+                                            <input class="form-control" type="text" name="city"
+                                                value="{{ $cargo->city }}" />
+                                        </div>
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="address" class="labelCustom">Address</label>
+                                            <input class="form-control" type="text" name="address"
+                                                value="{{ $cargo->address }}" />
+                                        </div>
                                     </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="state" class="labelCustom">State</label>
-                                        <input class="form-control" type="text" name="state"
-                                            value="{{ $cargo->state }}" />
+                                    <div class="row form-group">
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="zipcode" class="labelCustom">Zip Code</label>
+                                            <input class="form-control" type="text" name="zipcode"
+                                                value="{{ $cargo->zipcode }}" />
+                                        </div>
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="phone" class="labelCustom">Phone</label>
+                                            <input class="form-control" type="number" name="phone"
+                                                value="{{ $cargo->phone }}" />
+                                        </div>
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="email" class="labelCustom">Email</label>
+                                            <input class="form-control" type="email" name="email"
+                                                value="{{ $cargo->email }}" />
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="city" class="labelCustom">City</label>
-                                        <input class="form-control" type="text" name="city"
-                                            value="{{ $cargo->city }}" />
-                                    </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="address" class="labelCustom">Address</label>
-                                        <input class="form-control" type="text" name="address"
-                                            value="{{ $cargo->address }}" />
-                                    </div>
-                                </div>
-                                <div class="row form-group">
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="zipcode" class="labelCustom">Zip Code</label>
-                                        <input class="form-control" type="text" name="zipcode"
-                                            value="{{ $cargo->zipcode }}" />
-                                    </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="phone" class="labelCustom">Phone</label>
-                                        <input class="form-control" type="number" name="phone"
-                                            value="{{ $cargo->phone }}" />
-                                    </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="email" class="labelCustom">Email</label>
-                                        <input class="form-control" type="email" name="email"
-                                            value="{{ $cargo->email }}" />
-                                    </div>
-                                </div>
+                                @else
+                                    @php
+                                        $countries = DB::table('cargo_countries')->get();
+                                    @endphp
+                                    <select name="country" class="form-control">
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->country }}"
+                                                @if ($country->country == $cargo->country) selected @endif>
+                                                {{ $country->country }}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                                 <div class="row form-group">
                                     <div class="col d-flex flex-column py-3">
                                         <label for="ioss_number" class="labelCustom">IOSS number</label>
@@ -326,7 +334,9 @@
                                             $cargo_companies = json_decode($cargo->company_value);
                                             $cargo_companies = json_decode(json_encode($cargo_companies), true);
                                             $companies = DB::table('cargo_companies')->get();
-                                            // dd($cargo_companies);
+                                            $personal_cargos = DB::table('personal_cargos')
+                                                ->where('order_id', $cargo->id)
+                                                ->get();
                                         @endphp
                                         <div class="row form-group">
                                             @if ($cargo_companies)
@@ -357,6 +367,37 @@
                                                                     <input type="hidden"
                                                                         name="company_value[{{ $company->id }}]"
                                                                         value="@if (isset($cargo_companies[$company->id])) {{ $cargo_companies[$company->id] }}@else 0 @endif">
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                            @if ($personal_cargos)
+                                                @foreach ($personal_cargos as $personal)
+                                                    @php
+                                                        $company = DB::table('cargo_companies')
+                                                            ->where('id', $personal->company_id)
+                                                            ->first();
+                                                    @endphp
+                                                    <div class="col-12 col-sm-6 mb-3">
+                                                        <ul class="list-group list-group-horizontal">
+                                                            <li class="list-group-item w-25 text-center">
+                                                                <img style="width:60px;height:60px;"
+                                                                    src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $company->logo == null ? 'user.png' : $company->logo }}" />
+                                                            </li>
+                                                            <li class="list-group-item w-50 text-left">
+                                                                {{ $personal->name }}</li>
+                                                            <li class="list-group-item d-flex">
+                                                                <span class="me-2">
+                                                                    {{ $personal->value }} €
+                                                                </span>
+                                                                <div class="form-check">
+                                                                    <input class="form-check-input" type="radio"
+                                                                        name="selected_personal"
+                                                                        id="cargo_company_input_{{ $personal->id }}"
+                                                                        value="{{ $personal->name }}"
+                                                                        @if ($personal->name == $cargo->selected_personal) checked @endif />
                                                                 </div>
                                                             </li>
                                                         </ul>
@@ -543,8 +584,20 @@
                                                 {{ $package_status->status_name }}
                                             </span>
                                         </h5>
-                                        <img src="{{ $package->barcode }}" alt="barcode" width="10%"
-                                            height="auto">
+                                        @if ($package->barcode)
+                                            <img src="{{ $package->barcode }}" width="10%" height="auto">
+                                            <input class="form-control barcode_input" type="hidden"
+                                                name="barcode[{{ $package->id }}]" value="{{ $package->barcode }}" />
+                                        @else
+                                            <img id="barcode_{{ $package->id }}_hm" width="10%" height="auto"
+                                                style="display: none;">
+                                            <input class="form-control barcode_input" type="hidden"
+                                                name="barcode[{{ $package->id }}]" value="" />
+                                            <button class="btn btn-warning" onclick="generateBarcode(this)"
+                                                data-id="{{ $package->id }}" type="button">
+                                                Generate Barcode
+                                            </button>
+                                        @endif
                                     </div>
                                     <hr>
                                     <div class="row form-group">
@@ -672,6 +725,21 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+
+    <script>
+        function generateBarcode(button) {
+            uniq_package_id = button.getAttribute('data-id');
+            JsBarcode("#barcode_" + uniq_package_id + "_hm", uniq_package_id);
+            var image = document.querySelector("#barcode_" + uniq_package_id + "_hm");
+
+            image.style.display = "block";
+            button.style.display = "none";
+
+            var image_src = image.getAttribute('src');
+            document.querySelector("input[name='barcode[" + uniq_package_id + "]']").value = image_src;
+
+        }
+    </script>
 @endsection
 
 @section('js')

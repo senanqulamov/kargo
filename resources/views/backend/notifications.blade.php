@@ -58,7 +58,9 @@
                                 <th>Status</th>
                                 <th>Name</th>
                                 <th>Message</th>
+                                <th>Image</th>
                                 <th>Date</th>
+                                <th>For Main Page</th>
                                 <th>Action</th>
                                 <th>Delete</th>
                             </thead>
@@ -77,7 +79,19 @@
                                         @endif
                                         <td>{{ $notification->name }}</td>
                                         <td>{!! json_decode($notification->message) !!}</td>
+                                        <td>
+                                            <img src="{{ asset('/') }}images/static_images/{{ $notification->image }}"
+                                                alt="" width="55%">
+                                        </td>
                                         <td>{{ $notification->created_at }}</td>
+                                        <td>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input"
+                                                id="main_page_{{ $notification->id }}" onchange="changeNotfView(this)">
+                                                <label class="custom-control-label" for="main_page_{{ $notification->id }}">
+                                                </label>
+                                            </div>
+                                        </td>
                                         <td>
                                             <div class="button-div-hm">
                                                 @if ($notification->status == 0)
@@ -127,13 +141,19 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.messages.addNotification') }}" method="POST">
+                <form action="{{ route('admin.messages.addNotification') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
+                            <label for="name">Title</label>
                             <input class="form-control" placeholder="Name:" name="name" required>
                         </div>
                         <div class="form-group">
+                            <label for="image">Image</label>
+                            <input type="file" class="form-control" placeholder="upload image" name="image">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
                             <textarea id="compose-textarea" class="form-control" name="message" style="height: 400px">
 
                             </textarea>
@@ -147,6 +167,12 @@
             </div>
         </div>
     </div>
+    <script>
+        function changeNotfView(switch_input){
+            console.log(switch_input);
+            console.log(switch_input.value);
+        }
+    </script>
 @endsection
 
 @section('js')
@@ -193,5 +219,4 @@
             })
         }
     </script>
-
 @endsection

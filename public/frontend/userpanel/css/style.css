@@ -489,17 +489,6 @@ input[type="file"]:hover::file-selector-button {
 .header__item-link {
   color: #fff; }
 
-.buy__info {
-  padding: 2rem 2rem;
-  background: #fff;
-  background: #FFFFFF;
-  border: 1px solid rgba(0, 0, 0, 0.17);
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  height: auto;
-  display: none;
-  transition: .5s ease-in; }
-
 .show {
   display: block; }
 
@@ -1466,10 +1455,12 @@ nav {
   padding: 2rem 1rem; }
 
 .support-chat-hm{
-    outline: 1px solid #18BDF6;
-    padding: 10px;
-    overflow: auto;
+    outline: 1px solid #d7dadeb2;
+    padding: 40px 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
     height: 20vw;
+    background: #17060617;
 }
 
 .support__message {
@@ -1499,17 +1490,26 @@ nav {
     font-size: 14px; }
 
 .support__message-chatbox {
-  padding: .6rem .8rem 2rem .8rem;
-  background: #FFFFFF;
-  border: 0.5px solid rgba(0, 0, 0, 0.25);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: 5px;
-  width: 100%; }
-  .support__message-chatbox p {
+    padding: .6rem .8rem 0.4rem .8rem;
+    background: #FFFFFF;
+    outline: 0.5px solid rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 100%;
+    transition: all 0.6s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.support__message-chatbox p {
     font-weight: 400;
     font-size: 15px;
     line-height: 24px;
-    color: #000000; }
+    color: #000000;
+}
+.support__message-chatbox:hover{
+    transform: scale(1.1);
+    cursor: cell;
+    outline: 2px solid rgb(10 229 10);
+}
 
 .support__message-time {
   margin-top: 2rem;
@@ -1535,21 +1535,13 @@ nav {
   color: #405982; }
 
 .buy__info-address--button {
-  padding: .6rem .6rem;
-  border: none;
-  background: #FF912C;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
-  border-radius: 5px;
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 19px;
-  display: flex;
-  align-items: center;
-  margin-right: 1.5rem;
-  margin-top: 2rem;
-  display: flex;
-  align-items: center; }
+    background: #FF912C;
+    box-shadow: 0px 4px 10px rgb(0 0 0 / 15%);
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 500;
+}
+
   .buy__info-address--button span {
     font-size: 1.5rem; }
 

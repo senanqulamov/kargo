@@ -1,18 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-    @if (session()->has('log_in_message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'info',
-                title: '{{ session()->get('log_in_message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
     <style>
         table * {
             font-size: 15px;
@@ -23,11 +11,13 @@
             justify-content: center;
             color: white;
         }
-        .page__box{
+
+        .page__box {
             transition: 0.6s;
             cursor: pointer;
         }
-        .page__box:hover{
+
+        .page__box:hover {
             transform: scale(1.1);
         }
 
@@ -99,8 +89,8 @@
         }
 
         /* .nots-cont {
-            overflow-y: scroll;
-        } */
+                                        overflow-y: scroll;
+                                    } */
 
         .notification-cont {
             gap: 10px;
@@ -116,7 +106,8 @@
             transition: 0.6s;
             z-index: 100;
         }
-        .notification-cont:hover{
+
+        .notification-cont:hover {
             transform: scale(1.3);
         }
 
@@ -124,6 +115,14 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+        }
+
+        .cargo-companies-holder {
+            display: grid;
+            grid-template-columns: repeat(2, 50%);
+            justify-content: space-around;
+            gap: 20px 0;
+            margin-top: 30px;
         }
     </style>
     <section class="page" id="page">
@@ -571,7 +570,7 @@
                                 <select class="form-select" name="selectCountry" id="selectCountry">
                                     <option value="" selected disabled>Select Country</option>
                                     @foreach ($countries as $country)
-                                        <option value="{{ $country->code }}"
+                                        <option value="{{ $country->name }}"
                                             {{ old('selectCountry') == $country->code ? 'selected' : '' }}>
                                             {{ $country->name }}</option>
                                     @endforeach
@@ -591,7 +590,8 @@
                             <!--1ci input-->
                             <p>Count:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="inputCount">
+                                <input type="text" class="form-control" name="inputCount"
+                                    onchange="Calculate('desi' , this)">
                                 <span class="text-danger error-text inputCount_error"></span>
                             </div>
 
@@ -602,7 +602,6 @@
 
                             <div class="input-group mb-3">
                                 <select name="selectType" id="selectType" class="form-select">
-                                    <option value="">Choose Type</option>
                                     <option value="box">Box</option>
                                     <option value="envelope">Envelope</option>
                                 </select>
@@ -615,7 +614,8 @@
                             <!--3ci input-->
                             <p>Length:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="inputLength">
+                                <input type="text" class="form-control" name="inputLength"
+                                    onchange="Calculate('desi' , this)">
                                 <span class="input-group-text" id="basic-addon1">cm</span>
                                 <span class="text-danger error-text inputLength_error"></span>
                             </div>
@@ -625,17 +625,19 @@
                             <!--4ci input-->
                             <p>Width:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="inputWidth">
+                                <input type="text" class="form-control" name="inputWidth"
+                                    onchange="Calculate('desi' , this)">
                                 <span class="input-group-text" id="basic-addon1">cm</span>
                                 <span class="text-danger error-text inputWidth_error"></span>
                             </div>
 
                         </div>
-                        <div class="col-lg-2 col-md-4 col-sm-6  mt-2">
+                        <div class="col-lg-2 col-md-4 col-sm-6  mt-2" id="heightArea">
                             <!--5ci input-->
                             <p>Height:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="inputHeight">
+                                <input type="text" class="form-control" name="inputHeight"
+                                    onchange="Calculate('desi' , this)">
                                 <span class="input-group-text" id="basic-addon1">cm</span>
                                 <span class="text-danger error-text inputHeight_error"></span>
                             </div>
@@ -645,7 +647,8 @@
                             <!--6ci input-->
                             <p>Weight:</p>
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="inputWeight">
+                                <input type="text" class="form-control" name="inputWeight"
+                                    onchange="Calculate('desi' , this)">
                                 <span class="input-group-text" id="basic-addon1">kq</span>
                                 <span class="text-danger error-text inputWeight_error"></span>
                             </div>
@@ -657,31 +660,6 @@
 
 
                         <div class="color__box  row mt-4">
-                            <div class="col-lg-2 col-6  page__calc-box page__calc-box--1">
-                                <div class="page__not page__not--1 col-12 mb-4">
-                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
-                                        class="me-3" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="17" cy="17" r="17"
-                                            fill="url(#paint0_linear_0_1)" />
-                                        <path
-                                            d="M13.4521 23L15.9395 10.2031H17.2051L14.709 23H13.4521ZM17.0293 23L19.5254 10.2031H20.7822L18.2861 23H17.0293ZM21.8545 15.0811H12.7139V13.8594H21.8545V15.0811ZM21.1953 19.3965H12.0459V18.1836H21.1953V19.3965Z"
-                                            fill="white" />
-                                        <defs>
-                                            <linearGradient id="paint0_linear_0_1" x1="17" y1="-2.83333"
-                                                x2="34" y2="42.5" gradientUnits="userSpaceOnUse">
-                                                <stop stop-color="#85E2F1" />
-                                                <stop offset="1" stop-color="#47C5FF" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-
-                                    <div class="page__cacl-icon ">
-                                        <p class="calc__box-text total">Total amount:</p>
-                                        <p class="calc__box-text">1box</p>
-                                    </div>
-
-                                </div>
-                            </div>
                             <div class="col-lg-2 col-6  page__calc-box">
                                 <div class="page__not page__not--1 col-12 mb-4">
                                     <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
@@ -708,39 +686,8 @@
 
 
                                     <div class="page__cacl-icon ">
-                                        <p class="calc__box-text">Total valume:</p>
-                                        <p class="calc__box-text">0.003m</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-2 col-6  page__calc-box">
-                                <div class="page__not page__not--1 col-12 mb-4">
-                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
-                                        class="me-3" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="17" cy="17" r="17"
-                                            fill="url(#paint0_linear_0_1)" />
-                                        <path
-                                            d="M24.018 22.2973H13.2711V15.4785H11.9961V22.9379C11.9961 23.291 12.2805 23.5754 12.6336 23.5754H14.0273V24.0191C14.0273 24.3723 14.3117 24.6566 14.6648 24.6566C15.018 24.6566 15.3023 24.3723 15.3023 24.0191V23.5754H22.0805V24.0191C22.0805 24.3723 22.3648 24.6566 22.718 24.6566C23.0711 24.6566 23.3555 24.3723 23.3555 24.0191V23.5754H24.0148C24.368 23.5754 24.6523 23.291 24.6523 22.9379C24.6555 22.5848 24.3711 22.2973 24.018 22.2973Z"
-                                            fill="white" />
-                                        <path
-                                            d="M15.95 12.6906V10.8562C15.95 10.0219 15.2719 9.34375 14.4375 9.34375H10.8563C10.0219 9.34375 9.34375 10.0219 9.34375 10.8562V12.6875C9.34375 13.5219 10.0219 14.2 10.8563 14.2H14.4375C15.2719 14.2031 15.95 13.525 15.95 12.6906Z"
-                                            fill="white" />
-                                        <path
-                                            d="M15.75 15.9441V20.5379C15.75 20.891 16.0344 21.1754 16.3875 21.1754H22.7219C23.075 21.1754 23.3594 20.891 23.3594 20.5379V15.9441C23.3594 15.591 23.075 15.3066 22.7219 15.3066H16.3875C16.0344 15.3066 15.75 15.5941 15.75 15.9441Z"
-                                            fill="white" />
-                                        <defs>
-                                            <linearGradient id="paint0_linear_0_1" x1="17" y1="-2.83333"
-                                                x2="34" y2="42.5" gradientUnits="userSpaceOnUse">
-                                                <stop stop-color="#85E2F1" />
-                                                <stop offset="1" stop-color="#47C5FF" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-
-                                    <div class="page__cacl-icon ">
-                                        <p class="calc__box-text">Total weight:</p>
-                                        <p class="calc__box-text">0.003kq</p>
+                                        <p class="calc__box-text">Total volume:</p>
+                                        <p class="total_volume_div">0 m</p>
                                     </div>
 
                                 </div>
@@ -766,45 +713,12 @@
 
                                     <div class="page__cacl-icon ">
                                         <p class="calc__box-text">Pricing weight:</p>
-                                        <p class="calc__box-text">0.003</p>
+                                        <p class="total_desi_div">0 desi</p>
+                                        <input type="text" name="total_desi" id="total_desi_input" hidden />
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col-lg-2 col-12  page__calc-box">
-                                <div class="page__not page__not--1 col-12 mb-4">
-                                    <svg width="34" height="34" viewBox="0 0 34 34" fill="none"
-                                        class="me-3" xmlns="http://www.w3.org/2000/svg">
-                                        <circle cx="17" cy="17" r="17"
-                                            fill="url(#paint0_linear_0_1)" />
-                                        <path
-                                            d="M17.3271 18.3476C17.3271 18.5347 17.4829 18.6865 17.6751 18.6865C17.8673 18.6865 18.0231 18.5347 18.0231 18.3476C18.0231 17.6463 17.5206 17.0576 16.8478 16.9038V16.6729C16.8478 16.4857 16.692 16.334 16.4998 16.334C16.3076 16.334 16.1518 16.4857 16.1518 16.6729V16.9038C15.4791 17.0575 14.9766 17.6463 14.9766 18.3476C14.9766 19.0489 15.4791 19.6376 16.1518 19.7914V21.367C15.8691 21.2388 15.6726 20.9596 15.6726 20.6365C15.6726 20.4493 15.5168 20.2976 15.3246 20.2976C15.1324 20.2976 14.9766 20.4493 14.9766 20.6365C14.9766 21.3378 15.4791 21.9265 16.1518 22.0803V22.3112C16.1518 22.4983 16.3076 22.6501 16.4998 22.6501C16.692 22.6501 16.8478 22.4983 16.8478 22.3112V22.0803C17.5206 21.9266 18.0231 21.3378 18.0231 20.6365C18.0231 19.9352 17.5206 19.3464 16.8478 19.1926V17.617C17.1305 17.7453 17.3271 18.0244 17.3271 18.3476ZM15.6726 18.3476C15.6726 18.0245 15.8691 17.7453 16.1518 17.6171V19.0781C15.8691 18.9499 15.6726 18.6707 15.6726 18.3476ZM17.3271 20.6365C17.3271 20.9596 17.1305 21.2388 16.8478 21.367V19.9059C17.1305 20.0342 17.3271 20.3133 17.3271 20.6365Z"
-                                            fill="white" />
-                                        <path
-                                            d="M17.4577 10.5166H15.5408C14.1732 10.5166 13.0605 11.6001 13.0605 12.9319V14.4105C13.0605 14.5909 13.1588 14.7578 13.3186 14.8491C13.4001 14.8955 13.4913 14.9189 13.5826 14.9189C13.6704 14.9189 13.7584 14.8973 13.8377 14.854C14.6466 14.4129 15.5669 14.1797 16.4993 14.1797C17.4316 14.1797 18.3519 14.4129 19.1608 14.854C19.3225 14.9422 19.52 14.9403 19.6798 14.8491C19.8397 14.7578 19.9379 14.5909 19.9379 14.4105V12.9319C19.9379 11.6001 18.8253 10.5166 17.4577 10.5166ZM18.8938 13.6074C18.1352 13.3152 17.321 13.163 16.4992 13.163C15.6774 13.163 14.8632 13.3152 14.1046 13.6075V12.9318C14.1046 12.1607 14.7489 11.5333 15.5408 11.5333H17.4577C18.2496 11.5333 18.8938 12.1607 18.8938 12.9318V13.6074H18.8938Z"
-                                            fill="white" />
-                                        <path
-                                            d="M21.4962 15.4443V12.932C21.4962 10.7639 19.6848 9 17.4584 9H15.5415C13.3151 9 11.5038 10.7639 11.5038 12.932V15.4443C10.5326 16.5799 10 18.0099 10 19.4929C10 20.6074 10.3018 21.7034 10.8726 22.6624C11.4262 23.5924 12.2195 24.3758 13.167 24.9279C13.2481 24.9751 13.3407 25 13.4351 25H19.5649C19.6593 25 19.752 24.9751 19.833 24.9279C20.7805 24.3758 21.5738 23.5924 22.1274 22.6624C22.6982 21.7034 23 20.6074 23 19.4929C23 18.0099 22.4674 16.5799 21.4962 15.4443ZM21.2241 22.1526C20.7828 22.894 20.1599 23.5246 19.4171 23.9833H13.5829C12.8401 23.5246 12.2172 22.894 11.7759 22.1526C11.2971 21.3483 11.044 20.4285 11.044 19.4929C11.044 18.1931 11.5314 16.9419 12.4164 15.9699C12.5011 15.8769 12.5478 15.7569 12.5478 15.6327V12.9321C12.5478 11.3245 13.8908 10.0167 15.5415 10.0167H17.4584C19.1092 10.0167 20.4521 11.3245 20.4521 12.9321V15.6327C20.4521 15.7569 20.4989 15.8769 20.5835 15.9699C21.4685 16.9419 21.9559 18.1931 21.9559 19.4929C21.9559 20.4285 21.7029 21.3482 21.2241 22.1526Z"
-                                            fill="white" />
-                                        <defs>
-                                            <linearGradient id="paint0_linear_0_1" x1="17" y1="-2.83333"
-                                                x2="34" y2="42.5" gradientUnits="userSpaceOnUse">
-                                                <stop stop-color="#85E2F1" />
-                                                <stop offset="1" stop-color="#47C5FF" />
-                                            </linearGradient>
-                                        </defs>
-                                    </svg>
-
-
-                                    <div class="page__cacl-icon ">
-                                        <p class="calc__box-text">Total worth:</p>
-                                        <p class="calc__box-text">0.003$</p>
-                                    </div>
-
-                                </div>
-                            </div>
-
-
                         </div>
 
                     </div>
@@ -822,18 +736,31 @@
 
             <section class="my-4 d-none" id="table_section">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <table class="table table-hover table-bordered">
-                                <thead>
-                                    <tr class="table-dark">
-                                        <th>Cargo Company</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tableCompany"></tbody>
-                            </table>
-                        </div>
+                    <div class="cargo-companies-holder">
+                        @foreach ($cargo_companies as $company)
+                            <div class="cargo-company-label">
+                                <div class="list-group list-group-horizontal">
+                                    <div class="list-group-item w-25 text-center d-flex align-items-center">
+                                        <img style="height:48px;"
+                                            src="{{ asset('/') }}backend/assets/img/companies/cargo/{{ $company->logo == null ? 'user.png' : $company->logo }}" />
+                                    </div>
+                                    <div class="list-group-item w-50 text-left d-flex align-items-center ">
+                                        {{ $company->name }}</div>
+                                    <div class="list-group-item d-flex d-flex align-items-center">
+                                        <span class="me-2 textShipment" id="cargo_company_{{ $company->id }}">0 €</span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- <table class="table table-hover table-bordered">
+                            <thead>
+                                <tr class="table-dark">
+                                    <th>Cargo Company</th>
+                                    <th>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableCompany"></tbody>
+                        </table> --}}
                     </div>
                 </div>
             </section>
@@ -990,52 +917,72 @@
     </div>
 
     <script>
-        $("#selectType").change(function() {
-            var data = $(this).val();
+        $(function() {
+            $("#selectType").change(function() {
+                var data = $(this).val();
 
-            if (data == "envelope") {
-                $("#heightArea").addClass("d-none");
-            } else {
-                $("#heightArea").removeClass("d-none");
-            }
-        });
-
-        $("#price_calc").on('submit', function(e) {
-            e.preventDefault();
-
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: new FormData(this),
-                processData: false,
-                dataType: 'json',
-                contentType: false,
-                beforeSend: function() {
-                    $(document).find('span.error-text').text('');
-                },
-                success: function(data) {
-                    if (data.status == 0) {
-                        $.each(data.error, function(prefix, val) {
-                            $('span.' + prefix + '_error').text(val[0]);
-                        });
-                    } else {
-                        if ($("#table_section").hasClass("d-none")) {
-                            $("#table_section").removeClass("d-none");
-                        }
-
-                        $('#tableCompany').text(' ');
-                        var trHTML = '';
-                        for (let i = 0; i < data.company.length; i++) {
-                            trHTML += '<tr><td>' + data.company[i] + '</td><td>' + data
-                                .price[i] + '</td></tr>';
-                        }
-                        $('#tableCompany').append(trHTML);
-                    }
+                if (data == "envelope") {
+                    $("#heightArea").addClass("d-none");
+                } else {
+                    $("#heightArea").removeClass("d-none");
                 }
             });
-        });
-    </script>
 
+            $("#price_calc").on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: $(this).attr('method'),
+                    data: new FormData(this),
+                    processData: false,
+                    dataType: 'json',
+                    contentType: false,
+                    beforeSend: function() {
+                        $(document).find('span.error-text').text('');
+                    },
+                    success: function(data) {
+                        if (data.status == 0) {
+                            $.each(data.error, function(prefix, val) {
+                                $('span.' + prefix + '_error').text(val[0]);
+                            });
+                        } else {
+                            if ($("#table_section").hasClass("d-none")) {
+                                $("#table_section").removeClass("d-none");
+                            }
+                            var companies = Object.keys(data);
+                            var prices = Object.values(data);
+                            companies.forEach(element => {
+                                price = parseFloat(prices[companies.indexOf(element)]).toFixed(2) + " €"
+                                document.querySelector('#cargo_company_' + element).innerHTML = price;
+                            });
+                        }
+                    }
+                });
+            });
+        })
+
+        function Calculate(type, input) {
+            var count = parseFloat(document.querySelector('input[name="inputCount"]').value);
+            var height = parseFloat(document.querySelector('input[name="inputHeight"]').value);
+            var width = parseFloat(document.querySelector('input[name="inputWidth"]').value);
+            var length = parseFloat(document.querySelector('input[name="inputLength"]').value);
+            var weight = parseFloat(document.querySelector('input[name="inputWeight"]').value);
+
+            var volume = parseFloat((height * width * length * count) / 1000000);
+            if (isNaN(volume)) {
+                volume = 0;
+            }
+            var desi = Math.max(volume / 5000, weight) * count;
+            if (isNaN(desi)) {
+                desi = 0;
+            }
+
+            document.querySelector('.total_volume_div').innerHTML = volume + " m";
+            document.querySelector('.total_desi_div').innerHTML = desi + " desi";
+            document.querySelector('#total_desi_input').value = desi;
+        }
+    </script>
     <script>
         function searchID(submit_btn) {
             var search_input = document.querySelector('input[name="search_id_input"]');
@@ -1093,7 +1040,6 @@
             });
         }
     </script>
-
     <script>
         function GetSortedCargoOrders(button) {
             var status = button.getAttribute('data-status');

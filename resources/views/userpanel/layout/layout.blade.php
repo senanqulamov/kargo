@@ -58,16 +58,29 @@
 </head>
 
 <body>
-    @if (session()->has('error'))
+    @if (session()->has('message'))
         <script>
             Swal.fire({
                 position: 'top-center',
+                icon: 'success',
+                title: '{{ session()->get('message') }}',
+                backdrop: true,
+                showConfirmButton: true,
+                timerProgressBar: true,
+                timer: 6000
+            })
+        </script>
+    @endif
+    @if (session()->has('error'))
+        <script>
+            Swal.fire({
+                position: 'center',
                 icon: 'error',
                 title: '{{ session()->get('error') }}',
                 backdrop: true,
-                showConfirmButton: false,
+                showConfirmButton: true,
                 timerProgressBar: true,
-                timer: 4000
+                timer: 6000
             })
         </script>
     @endif
@@ -80,16 +93,13 @@
         <div class="overlay">
         </div>
         <nav class="burger__menu">
-
             <div class="navigation container">
                 <div class="navigation__data">
-
                     <div class="navigation__cancel d-flex justify-content-end">
                         <span class="navigation__cancel-span">
                             <i class="fa-solid fa-xmark navigation__cancel-icon"></i>
                         </span>
                     </div>
-
                     <div class="navigation__image">
                         <svg width="148" height="46" viewBox="0 0 148 46" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -130,7 +140,6 @@
                                 fill="#489AD5" />
                         </svg>
                     </div>
-
                     <ul class="navigation__items">
 
                         <button onclick="window.open('{{ route('userpanel.mainmenu') }}' , '_self')"
@@ -147,7 +156,8 @@
                         <button onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'balance') active-link-hm @endif">
                             <li class=" navigation__item">
-                                <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                <a class="navigation__link"><i
+                                        class="fa-solid fa-network-wired navigation__icon"></i>
                                     <span class="navigation__span">Balance System</span></a>
                             </li>
                         </button>
@@ -155,7 +165,8 @@
                         <button onclick="window.open('{{ route('userpanel.transactions') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'transactions') active-link-hm @endif">
                             <li class=" navigation__item">
-                                <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                <a class="navigation__link"><i
+                                        class="fa-solid fa-network-wired navigation__icon"></i>
                                     <span class="navigation__span">Transactions</span></a>
                             </li>
                         </button>
@@ -176,14 +187,18 @@
                             </li>
                         </button>
 
-                        <button class="navigation__box ps-2">
+                        <button
+                            class="navigation__box ps-2 @if (Request::segment(2) == 'amazon_order') active-link-hm @endif"
+                            onclick="window.open('{{ route('userpanel.amazon_order') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-brands fa-amazon navigation__icon"></i>
                                     <span class="navigation__span">Amazon</span></a>
                             </li>
                         </button>
-                        <button class="navigation__box ps-2">
+                        <button
+                            class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
+                            onclick="window.open('{{ route('userpanel.bulk_order') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-cart-shopping navigation__icon"></i>
@@ -201,10 +216,12 @@
 
                         <hr class="hr">
 
-                        <button onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
+                        <button
+                            onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'courier_request') active-link-hm @endif">
                             <li class="navigation__item">
-                                <a class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
+                                <a class="navigation__link"><i
+                                        class="fa-solid fa-headset navigation__icon"></i>
                                     <span class="navigation__span">Courier Request</span>
                                 </a>
                             </li>
@@ -223,14 +240,18 @@
                                     <span class="navigation__span">Invoices</span></a>
                             </li>
                         </button>
-                        <button class="navigation__box">
+                        <button
+                            class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
+                            onclick="window.open('{{ route('userpanel.siteusage') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-address-card navigation__icon"></i>
                                     <span class="navigation__span">Site Usage</span></a>
                             </li>
                         </button>
-                        <button class="navigation__box">
+                        <button
+                            class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
+                            onclick="window.open('{{ route('userpanel.buyforme') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-bag-shopping navigation__icon"></i>
@@ -240,7 +261,8 @@
                         <button onclick="window.open('{{ route('userpanel.share_and_earn') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'share_and_earn') active-link-hm @endif">
                             <li class=" navigation__item">
-                                <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                <a class="navigation__link"><i
+                                        class="fa-solid fa-network-wired navigation__icon"></i>
                                     <span class="navigation__span">Share and Earn</span></a>
                             </li>
                         </button>
@@ -251,7 +273,8 @@
                                     <span class="navigation__span">Inventory</span></a>
                             </li>
                         </button>
-                        <button onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
+                        <button
+                            onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'cargo_companies') active-link-hm @endif">
                             <li class="navigation__item">
                                 <a class="navigation__link"><i
@@ -283,12 +306,8 @@
                             </li>
                         </button>
                     </ul>
-
-
                 </div>
             </div>
-
-
         </nav>
         <header class="header-section scrollheader" data-sticky="true">
             <div class="container header">
@@ -309,7 +328,7 @@
                                 </div>
                             </li>
                             <li class="header__item-list">
-                                <a href="" class="header__item-link">
+                                <a href="{{ route('userpanel.notifications') }}" class="header__item-link">
                                     <i class="fa-solid fa-bell header__item-icon"></i></a>
                             </li>
                             <li class="header__item-list">
@@ -317,12 +336,17 @@
                                     <i class="fa-solid fa-gear header__item-icon"></i></a>
                             </li>
                             <li class="header__item-list">
-                                <a href="" class="header__item-link">
+                                <a href="{{ route('userpanel.faq') }}" class="header__item-link">
                                     <i class="fa-solid fa-circle-question header__item-icon"></i></a>
                             </li>
                             <li class="header__item-list">
-                                <a href="" class="header__item-link">
+                                <a href="{{ route('userpanel.locations') }}" class="header__item-link">
                                     <i class="fa-solid fa-globe header__item-icon"></i></a>
+                            </li>
+                            <li class="header__item-list">
+                                <a href="{{ route('userpanel.calculator') }}" class="header__item-link">
+                                    <i class="fas fa-calculator-alt"></i>
+                                </a>
                             </li>
                             <li class="header__item-list">
                                 <a href="{{ route('userpanel.index') }}"
@@ -389,10 +413,7 @@
             <div class="row w-100">
                 <div class="col-lg-3 page__1">
                     <nav class="navigation__left">
-
                         <div class="navigation container">
-
-
                             <div class="navigation__logo text-center"
                                 onclick="window.open('{{ route('index') }}' , '_self')">
                                 <svg width="148" height="46" viewBox="0 0 148 46" fill="none"
@@ -446,7 +467,6 @@
                                     User ID: 010{{ Auth::user()->id }}20
                                 </a>
                             </div>
-
                             <div class="navigation__data">
                                 <ul class="navigation__items">
 
@@ -464,7 +484,8 @@
                                     <button onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'balance') active-link-hm @endif">
                                         <li class=" navigation__item">
-                                            <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                            <a class="navigation__link"><i
+                                                    class="fa-solid fa-network-wired navigation__icon"></i>
                                                 <span class="navigation__span">Balance System</span></a>
                                         </li>
                                     </button>
@@ -472,7 +493,8 @@
                                     <button onclick="window.open('{{ route('userpanel.transactions') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'transactions') active-link-hm @endif">
                                         <li class=" navigation__item">
-                                            <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                            <a class="navigation__link"><i
+                                                    class="fa-solid fa-network-wired navigation__icon"></i>
                                                 <span class="navigation__span">Transactions</span></a>
                                         </li>
                                     </button>
@@ -493,14 +515,18 @@
                                         </li>
                                     </button>
 
-                                    <button class="navigation__box ps-2">
+                                    <button
+                                        class="navigation__box ps-2 @if (Request::segment(2) == 'amazon_order') active-link-hm @endif"
+                                        onclick="window.open('{{ route('userpanel.amazon_order') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-brands fa-amazon navigation__icon"></i>
                                                 <span class="navigation__span">Amazon</span></a>
                                         </li>
                                     </button>
-                                    <button class="navigation__box ps-2">
+                                    <button
+                                        class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
+                                        onclick="window.open('{{ route('userpanel.bulk_order') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-cart-shopping navigation__icon"></i>
@@ -518,10 +544,12 @@
 
                                     <hr class="hr">
 
-                                    <button onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
+                                    <button
+                                        onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'courier_request') active-link-hm @endif">
                                         <li class="navigation__item">
-                                            <a class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
+                                            <a class="navigation__link"><i
+                                                    class="fa-solid fa-headset navigation__icon"></i>
                                                 <span class="navigation__span">Courier Request</span>
                                             </a>
                                         </li>
@@ -540,14 +568,18 @@
                                                 <span class="navigation__span">Invoices</span></a>
                                         </li>
                                     </button>
-                                    <button class="navigation__box">
+                                    <button
+                                        class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
+                                        onclick="window.open('{{ route('userpanel.siteusage') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-address-card navigation__icon"></i>
                                                 <span class="navigation__span">Site Usage</span></a>
                                         </li>
                                     </button>
-                                    <button class="navigation__box">
+                                    <button
+                                        class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
+                                        onclick="window.open('{{ route('userpanel.buyforme') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-bag-shopping navigation__icon"></i>
@@ -557,7 +589,8 @@
                                     <button onclick="window.open('{{ route('userpanel.share_and_earn') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'share_and_earn') active-link-hm @endif">
                                         <li class=" navigation__item">
-                                            <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                            <a class="navigation__link"><i
+                                                    class="fa-solid fa-network-wired navigation__icon"></i>
                                                 <span class="navigation__span">Share and Earn</span></a>
                                         </li>
                                     </button>
@@ -568,7 +601,8 @@
                                                 <span class="navigation__span">Inventory</span></a>
                                         </li>
                                     </button>
-                                    <button onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
+                                    <button
+                                        onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'cargo_companies') active-link-hm @endif">
                                         <li class="navigation__item">
                                             <a class="navigation__link"><i

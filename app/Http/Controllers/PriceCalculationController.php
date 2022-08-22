@@ -8,22 +8,26 @@ use App\Models\Country;
 use App\Models\CargoCountry;
 use App\Models\CargoZone;
 use App\Models\CargoCompany;
-
+use stdClass;
 use Validator;
+use DB;
 
 class PriceCalculationController extends Controller
 {
-    public function index(){
-        $countries=Country::orderBy('name','asc')->get();
-        return view('frontend.pricecalculator', compact('countries'));
+    public function index()
+    {
+        $countries = Country::orderBy('name', 'asc')->get();
+        $cargo_companies = DB::table('cargo_companies')->get();
+        return view('frontend.pricecalculator', compact('countries' , 'cargo_companies'));
     }
 
-    public function calculation(Request $request){
+    public function calculation(Request $request)
+    {
 
-        $price=array();
-        $company=array();
+        $price = array();
+        $company = array();
 
-        $validator = Validator::make($request->all(),[
+        $validator = Validator::make($request->all(), [
             'selectCountry' => 'required',
             'inputCount' => 'numeric|not_in:0',
             'selectType' => 'required',
@@ -33,59 +37,71 @@ class PriceCalculationController extends Controller
             'inputWeight' => 'required|numeric',
         ]);
 
-        if(!$validator->passes()){
-            return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
+        if (!$validator->passes()) {
+            return response()->json(['status' => 0, 'error' => $validator->errors()->toArray()]);
         } else {
-            $totalDesi=$this->totalDesi($request->inputWeight, $request->inputWidth, $request->inputHeight, $request->inputLength, $request->inputCount);
 
-            $totalZone=$this->totalZone($request->selectCountry);
+            $data = new stdClass();
+            $data->total_deci = $request->total_desi;
+            $data->country = $request->selectCountry;
 
-            $totalCompany=$this->totalCompany($request->selectCountry);
+            // dd($data , $request->all());
 
-            for ($i=0; $i < count($totalCompany); $i++) {
-                $query=CargoZone::where('companyID', $totalCompany[$i])->where('desi', $totalDesi)->first();
-                $query=json_decode($query->zone, true);
-                array_push($price, $query[$totalZone[$i]-1]);
-            }
+            $result = (new HelperController)->CalculateCompany($data);
 
-            for ($m=0; $m < count($totalCompany); $m++) {
-                $company_data=CargoCompany::where('id', $totalCompany[$m])->first();
-                array_push($company, $company_data->name);
-            }
+            // $totalDesi=$this->totalDesi($request->inputWeight, $request->inputWidth, $request->inputHeight, $request->inputLength, $request->inputCount);
 
-            return response()->json(['price'=>$price, 'company'=>$company]);
+            // $totalZone=$this->totalZone($request->selectCountry);
+
+            // $totalCompany=$this->totalCompany($request->selectCountry);
+
+            // for ($i=0; $i < count($totalCompany); $i++) {
+            //     $query=CargoZone::where('companyID', $totalCompany[$i])->where('desi', $totalDesi)->first();
+            //     $query=json_decode($query->zone, true);
+            //     array_push($price, $query[$totalZone[$i]-1]);
+            // }
+
+            // for ($m=0; $m < count($totalCompany); $m++) {
+            //     $company_data=CargoCompany::where('id', $totalCompany[$m])->first();
+            //     array_push($company, $company_data->name);
+            // }
+
+            return response()->json($result);
         }
     }
 
-    public function totalDesi($weight, $width, $height=1, $length, $count=1){
-		return $calc=round($weight, ($count*($width*$height*$length)/5000));
-	}
+    public function totalDesi($weight, $width, $height = 1, $length, $count = 1)
+    {
+        return $calc = round($weight, ($count * ($width * $height * $length) / 5000));
+    }
 
-    public function totalZone($country){
-        $quiry=Country::where('code', $country)->first();
+    public function totalZone($country)
+    {
+        $quiry = Country::where('code', $country)->first();
 
-        $search=CargoCountry::where('country', $quiry->name)->get();
+        $search = CargoCountry::where('country', $quiry->name)->get();
 
-		$zone = array();
+        $zone = array();
 
-		foreach ($search as $item) {
+        foreach ($search as $item) {
             array_push($zone, $item->zone);
-		}
+        }
 
         return $zone;
-	}
+    }
 
-    public function totalCompany($country){
-        $quiry=Country::where('code', $country)->first();
+    public function totalCompany($country)
+    {
+        $quiry = Country::where('code', $country)->first();
 
-        $search=CargoCountry::where('country', $quiry->name)->get();
+        $search = CargoCountry::where('country', $quiry->name)->get();
 
-		$company = array();
+        $company = array();
 
-		foreach ($search as $item) {
+        foreach ($search as $item) {
             array_push($company, $item->companyID);
-		}
+        }
 
         return $company;
-	}
+    }
 }

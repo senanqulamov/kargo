@@ -99,6 +99,7 @@
             white-space: nowrap;
             overflow: hidden !important;
             text-overflow: ellipsis;
+            height: max-content;
         }
     </style>
 </head>
