@@ -211,12 +211,20 @@
                                     <div class="col-sm-4 col-12">
                                         <div class="courier__input-box">
                                             <h6>Type of cause<span class="red-1">*</span></h6>
-                                            <select class="form-select" placeholder="Cargo tracking" name="cause"
-                                                required>
-                                                <option value="" selected disabled>Select cause</option>
-                                                <option>Test 1</option>
-                                                <option>Test 2</option>
-                                                <option>Test 3</option>
+                                            <select class="form-select select-custom-hm" placeholder="Cargo tracking"
+                                                name="cause" required>
+                                                <option value="" selected disabled>Bir Hizmet Seçin</option>
+                                                <option>E-Ticaret Lojistik</option>
+                                                <option>Fullfillment</option>
+                                                <option>Amazon FBA</option>
+                                                <option>Topdan Satiş Temsil</option>
+                                                <option>Kargo Takip</option>
+                                                <option>Mağaza Entegrasyon</option>
+                                                <option>Ödeme ve Bakiye</option>
+                                                <option>Kurye Talebi</option>
+                                                <option>ETGB/Mikro İhracat</option>
+                                                <option>Hasar/Tazmin/Kayıp</option>
+                                                <option>Diger</option>
                                             </select>
                                         </div>
                                     </div>
@@ -231,8 +239,14 @@
                                         <div class="courier__input-box">
                                             <h6>Order ID<span class="red-1">*</span></h6>
                                             <div class="dropdown">
-                                                <label class="dropdown-label">Select Options</label>
-                                                <div class="dropdown-list">
+                                                <select name="orders[]" class="select-custom-hm" multiple
+                                                    title="Choose at least one of the following...">
+                                                    @foreach ($orders as $key => $order)
+                                                        <option value="{{ $order->id }}">{{ $order->id }}</option>
+                                                    @endforeach
+                                                </select>
+                                                {{-- <label class="dropdown-label">Select Options</label> --}}
+                                                {{-- <div class="dropdown-list">
                                                     @foreach ($orders as $key => $order)
                                                         <div class="checkbox">
                                                             <input type="checkbox" name="orders[]"
@@ -249,7 +263,7 @@
                                                             </label>
                                                         </div>
                                                     @endforeach
-                                                </div>
+                                                </div> --}}
                                             </div>
                                         </div>
                                     </div>
@@ -300,7 +314,21 @@
                                         @foreach ($message_ids as $key => $message)
                                             <button class="nav-link support__message-btn" style="border: 1px solid;"
                                                 onclick="changeMessageTab(this)" data-support-id="{{ $message }}">
-                                                {{ $message }}
+                                                @php
+                                                    $demand = DB::table('support_demands')
+                                                        ->where('id', $message)
+                                                        ->first();
+                                                @endphp
+                                                {{ $demand->title }}
+                                                <p style="font-size: 12px;">
+                                                    @if ($demand->status == 'pending')
+                                                        <span class="badge rounded-pill bg-info">Pending</span>
+                                                    @elseif ($demand->status == 'closed')
+                                                        <span class="badge rounded-pill bg-warning">Closed</span>
+                                                    @elseif ($demand->status == 'answered')
+                                                        <span class="badge rounded-pill bg-success">Answered</span>
+                                                    @endif
+                                                </p>
                                             </button>
                                             <br>
                                         @endforeach
@@ -326,7 +354,7 @@
                                                     <h4>
                                                         Reply from moderator for support demand ID: {{ $key }}
                                                         @if ($user_message->status == 'pending')
-                                                            <span class="badge rounded-pill bg-primary">Pending</span>
+                                                            <span class="badge rounded-pill bg-info">Pending</span>
                                                         @elseif ($user_message->status == 'closed')
                                                             <span class="badge rounded-pill bg-warning">Closed</span>
                                                         @elseif ($user_message->status == 'answered')

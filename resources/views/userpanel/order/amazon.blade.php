@@ -34,28 +34,6 @@
             all: unset;
         }
 
-        .total_cargo_price {
-            position: fixed;
-            bottom: 5%;
-            right: 3%;
-            width: max-content;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row;
-            border-radius: 10px;
-            background: #FFA555;
-            justify-items: center;
-            gap: 20px;
-            padding: 10px 20px;
-        }
-
-        .total_cargo_price span {
-            all: unset;
-            color: white;
-            font-size: 15px;
-        }
-
         .new_input_for_file {
 
             color: #405982;
@@ -141,7 +119,7 @@
                         fill="white" />
                 </svg>
             </div>
-            <span class="amazonHeaderText ms-2 amazonIcon">Manuel order</span>
+            <span class="amazonHeaderText ms-2 amazonIcon">Amazon FBA</span>
 
 
         </div>
@@ -170,12 +148,13 @@
                                                 fill="white" />
                                         </svg>
                                     </div>
-                                    <span class="amazonHeaderText ms-2 amazonIcon">Amazon Store</span>
+                                    <span class="amazonHeaderText ms-2 amazonIcon">Amazon Warehouses</span>
                                 </div>
                                 <li class="list-group-item pb-4">
-                                    <select class="form-control border-primary" name="amazon_address" id="amazon-country"
-                                    data-country="United States">
-                                        <option selected disabled>Open this select menu</option>
+                                    <select class="selectpicker show-tick form-control" data-size="6"
+                                        data-live-search="true" name="amazon_address" id="amazon-country"
+                                        onchange="changeUserAddress(this)">
+                                        <option selected disabled>Choose one of the following...</option>
                                         <option>Amazon.com Decd LLC - MDW2 - Joliet -
                                             250 Emerald Drive - 60433 - IL - US</option>
                                         <option>Amazon.com Decd LLC - ABE3 -
@@ -348,6 +327,38 @@
                                             City - 7130 N Broadway Ave - 67219-1410 - KS - US</option>
                                     </select>
                                 </li>
+                                <li class="list-group-item mt-3">
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-12 col-sm-6">
+                                                <h6 class="customerText">Country<span class="red">*</span></h6>
+                                                <input class="form-control mb-3 check-input" type="text" name="country"/>
+                                                <h6 class="customerText">City<span class="red">*</span></h6>
+                                                <input class="form-control mb-3 check-input" type="text"
+                                                    placeholder="New York" aria-label="default input example" name="city"
+                                                    id="locality-input" />
+                                                <h6 class="customerText">State</h6>
+                                                <input class="form-control mb-3 check-input" type="text"
+                                                    placeholder="California" aria-label="default input example"
+                                                    name="state" id="administrative_area_level_1-input" />
+                                            </div>
+                                            <div class="col-12 col-sm-6">
+                                                <h6 class="customerText">Name<span class="red">*</span></h6>
+                                                <input class="form-control mb-3 check-input" type="text"
+                                                    placeholder="Emma John" aria-label="default input example"
+                                                    name="name" />
+                                                <h6 class="customerText">Adress<span class="red">*</span></h6>
+                                                <input class="form-control mb-3 check-input" type="text"
+                                                    placeholder="Bergen street 57" aria-label="default input example"
+                                                    name="address" id="location-input" />
+                                                <h6 class="customerText">ZIP Code<span class="red">*</span></h6>
+                                                <input class="form-control mb-3 check-input" type="text"
+                                                    placeholder="745844" aria-label="default input example" name="zipcode"
+                                                    id="postal_code-input" />
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                </li>
                             </ul>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
@@ -390,13 +401,13 @@
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">IOSS Number<span class="red">*</span></h6>
+                                            <h6 class="customerText">IOSS Number</h6>
                                             <input class="form-control check-input" type="text"
                                                 placeholder="498980948" aria-label="default input example"
                                                 name="ioss_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">Vat Number<span class="red">*</span></h6>
+                                            <h6 class="customerText">Vat Number</h6>
                                             <input class="form-control check-input" type="text"
                                                 placeholder="498980948" aria-label="default input example"
                                                 name="vat_number" />
@@ -488,7 +499,7 @@
                                                 </div>
                                                 <div class="ms-2">
                                                     <h5>Total volume</h5>
-                                                    <span class="totalText totalVolume">0</span>
+                                                    <span class="totalText totalVolume">0</span><span> m3</span>
                                                     <input type="hidden" name="total_volume" value="">
                                                 </div>
                                             </div>
@@ -532,7 +543,7 @@
                                                 </div>
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
-                                                    <span class="totalText totalPricing">0</span> KG\DESİ
+                                                    <span class="totalText totalPricing">0</span> KGS
                                                     <input type="hidden" name="total_deci" value="">
                                                 </div>
                                             </div>
@@ -823,6 +834,10 @@
                                         <span class="rengliSoz">MSDS</span> certificate for your
                                         products that contain flammable, harmful, irritating
                                         chemicals that may harm nature.</span>
+                                    <span class="col-12">*I do according to the Amazon rules
+                                        <a class="rengliSoz" href="https://sellercentral.amazon.com/help/hub/reference/external/G200141500">Rules</a>
+                                        <input type="checkbox">
+                                    </span>
                                 </div>
                             </div>
                         </li>
@@ -881,7 +896,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="total_cargo_price">
+                <div class="total_cargo_price" onclick="ScrollToBottom()">
                     <span>Total price: </span> <span id="total_cargo_price_span">0</span>
                     <span>€</span>
                     <input type="hidden" name="total_cargo_price" id="total_cargo_price" value="0">
@@ -896,7 +911,15 @@
 
     <input type="text" id="ajax_url" hidden value="{{ route('userpanel.getquote.manualorder') }}">
 
-    {{-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB4ZZ0J1KtfskZ0lulNJjiYx04zpQx4XyE&libraries=places&callback=initMap&solution_channel=GMP_QB_addressselection_v1_cAC" async defer></script> --}}
+    <script>
+        setTimeout(() => {
+            var select_buttons = document.querySelectorAll('.dropdown-toggle');
+            console.log(select_buttons);
+            select_buttons.forEach(element => {
+                element.setAttribute('id', 'custom_select_button');
+            });
+        }, 1000);
+    </script>
     <script>
         $('#CustomFileUpload').change(function(e) {
             var fileName = e.target.files[0].name;
@@ -919,6 +942,7 @@
                     <select style="width:25%;" class="form-select" name="file_type[` + file_id + `]">
                         <option value="FDA">FDA</option>
                         <option value="MSDS">MSDS</option>
+                        <option value="FNSKU">FNSKU</option>
                         <option value="other">other</option>
                     </select>
                     <button type="button" class="remove_button_file_upld" onclick="removeFileLabel(this)">
@@ -948,6 +972,33 @@
         }
     </script>
     {{-- User Address --}}
+    <script>
+        document.querySelector('input[name="country"]').setAttribute('readonly' ,'');
+        document.querySelector('input[name="state"]').setAttribute('readonly' ,'');
+        document.querySelector('input[name="city"]').setAttribute('readonly' ,'');
+        document.querySelector('input[name="address"]').setAttribute('readonly' ,'');
+        document.querySelector('input[name="zipcode"]').setAttribute('readonly' ,'');
+        document.querySelector('input[name="name"]').setAttribute('readonly' ,'');
+
+        function changeUserAddress(select) {
+            var options = select.options;
+            var address_data = options[select.selectedIndex].text;
+            address_data = address_data.split('-');
+            var address = address_data[3];
+            var country = "United States";
+            var city = address_data[2];
+            var state = address_data[5];
+            var zipcode = address_data[4];
+            var name = address_data[0] + " - " + address_data[1];
+
+            document.querySelector('input[name="country"]').value = country;
+            document.querySelector('input[name="state"]').value = state;
+            document.querySelector('input[name="city"]').value = city;
+            document.querySelector('input[name="address"]').value = address;
+            document.querySelector('input[name="zipcode"]').value = zipcode;
+            document.querySelector('input[name="name"]').value = name;
+        }
+    </script>
     <script>
         var additional = document.querySelectorAll('.cargo_price_input');
         var company = document.querySelector('input[name="cargo_company"]:checked');

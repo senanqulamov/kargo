@@ -39,6 +39,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    {{-- Select Style --}}
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     @yield('css')
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('/') }}backend/assets/css/adminlte.min.css">
@@ -62,6 +66,7 @@
     </style>
     @livewireStyles
 </head>
+
 <body class="hold-transition sidebar-mini">
     @if (session()->has('message'))
         <script>
@@ -179,15 +184,49 @@
                                 <p> Dashboard </p>
                             </a>
                         </li>
-                        <li class="nav-item">
+
+                        <li class="nav-item @if (Request::segment(2) == 'users' || Request::segment(2) == 'user_logs') menu-open @endif">
+                            <a href="#" class="nav-link  @if (Request::segment(2) == 'users' || Request::segment(2) == 'user_logs') active @endif">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    User
+                                    <i class="fas fa-angle-left right"></i>
+                                    <span
+                                        class="badge badge-info right">{{ count($message) > 0 ? count($message) : '' }}</span>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.users') }}"
+                                        class="nav-link @if (Request::segment(2) == 'users') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Users </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.user_logs') }}"
+                                        class="nav-link @if (Request::segment(2) == 'user_logs') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> User Logs </p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        {{-- <li class="nav-item">
                             <a href="{{ route('admin.users') }}"
                                 class="nav-link @if (Request::segment(2) == 'users') active @endif">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p> Users </p>
                             </a>
-                        </li>
+                        </li> --}}
 
-                        <li class="nav-item @if (Request::segment(2) == 'cargo-requests') menu-open @endif">
+                        <li class="nav-item
+                            @if (Request::segment(2) == 'cargo-requests' ||
+                                Request::segment(2) == 'special_offers' ||
+                                Request::segment(2) == 'amazonOrders' ||
+                                Request::segment(2) == 'buyforme' )
+                                menu-open
+                            @endif">
                             <a href="#" class="nav-link  @if (Request::segment(2) == 'cargo-requests') active @endif">
                                 <i class="nav-icon fas fa-box"></i>
                                 <p>
@@ -198,8 +237,21 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item @if (Request::segment(3) == 'cargo-request-index') menu-open @endif">
-                                    <a href="#" class="nav-link @if (Request::segment(3) == 'cargo-request-index') active @endif">
+                                <li class="nav-item
+                                @if (Request::segment(2) == 'cargo-requests' ||
+                                    Request::segment(2) == 'special_offers' ||
+                                    Request::segment(2) == 'amazonOrders' ||
+                                    Request::segment(2) == 'buyforme' )
+                                    menu-open
+                                @endif">
+                                    <a href="#"
+                                        class="nav-link
+                                        @if (Request::segment(2) == 'cargo-requests' ||
+                                            Request::segment(2) == 'special_offers' ||
+                                            Request::segment(2) == 'amazonOrders' ||
+                                            Request::segment(2) == 'buyforme' )
+                                            active
+                                        @endif">
                                         <i class="nav-icon fas fa-box"></i>
                                         <p>
                                             Orders
@@ -228,6 +280,13 @@
                                                 class="nav-link @if (Request::segment(3) == 'amazonOrders') active @endif">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Amazon orders (A)</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="{{ route('admin.cargo-requests.special_offers') }}"
+                                                class="nav-link @if (Request::segment(3) == 'special_offers') active @endif">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Special Offers</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -400,6 +459,13 @@
                                         class="nav-link @if (Request::segment(3) == 'personal') active @endif">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Personal Cargo</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.companies.amazon_addresses') }}"
+                                        class="nav-link @if (Request::segment(3) == 'amazon_addresses') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Amazon Addresses</p>
                                     </a>
                                 </li>
                             </ul>
@@ -598,6 +664,7 @@
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <script>
         $(function() {
@@ -614,6 +681,27 @@
                 scrollX: true,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
+    </script>
+    <script>
+        var modals_hm = document.querySelectorAll('.modal');
+        modals_hm.forEach(element => {
+            element.setAttribute('data-backdrop', 'static');
+        });
+        var selects_hm = document.querySelectorAll('.select-custom-hm');
+        selects_hm.forEach(element => {
+            element.setAttribute('data-size', '6');
+            element.setAttribute('data-live-search', 'true');
+            element.classList.add('selectpicker');
+            element.classList.add('show-tick');
+            element.classList.remove('form-select');
+        });
+
+        $('.modal').on('show.bs.modal', function(e) {
+            this.classList.add('overlay-hm');
+        })
+        $('.modal').on('hide.bs.modal', function(e) {
+            this.classList.remove('overlay-hm');
+        })
     </script>
     @yield('js')
 

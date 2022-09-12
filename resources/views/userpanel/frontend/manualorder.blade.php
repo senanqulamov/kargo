@@ -1,7 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-
     <style>
         .custom-file-upload {
             border: 1px solid transparent;
@@ -33,28 +32,6 @@
 
         .remove_button_file_upld {
             all: unset;
-        }
-
-        .total_cargo_price {
-            position: fixed;
-            bottom: 5%;
-            right: 3%;
-            width: max-content;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: row;
-            border-radius: 10px;
-            background: #FFA555;
-            justify-items: center;
-            gap: 20px;
-            padding: 10px 20px;
-        }
-
-        .total_cargo_price span {
-            all: unset;
-            color: white;
-            font-size: 15px;
         }
 
         .new_input_for_file {
@@ -257,7 +234,8 @@
                                     <span class="amazonHeaderText ms-2 amazonIcon">Customer</span>
                                 </div>
                                 <li class="list-group-item pb-4">
-                                    <select class="form-select border-primary" onchange="changeUserAddress(this)" required>
+                                    <select class="selectpicker show-tick form-control"
+                                        data-size="6" data-live-search="true" onchange="changeUserAddress(this)" required>
                                         <option class="optionText" selected disabled>
                                             Open this select menu
                                         </option>
@@ -326,8 +304,8 @@
                                                 <label for="save_address"
                                                     class="buy__info-address--button btn form-control"
                                                     style="width: max-content;">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="save_address" name="save_address">
+                                                    <input class="form-check-input" type="checkbox" id="save_address"
+                                                        name="save_address">
                                                     <span class="ms-2">Save to the address
                                                         book
                                                     </span>
@@ -378,13 +356,13 @@
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">IOSS Number<span class="red">*</span></h6>
+                                            <h6 class="customerText">IOSS Number</h6>
                                             <input class="form-control check-input" type="text"
                                                 placeholder="498980948" aria-label="default input example"
                                                 name="ioss_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">Vat Number<span class="red">*</span></h6>
+                                            <h6 class="customerText">Vat Number</h6>
                                             <input class="form-control check-input" type="text"
                                                 placeholder="498980948" aria-label="default input example"
                                                 name="vat_number" />
@@ -476,7 +454,7 @@
                                                 </div>
                                                 <div class="ms-2">
                                                     <h5>Total volume</h5>
-                                                    <span class="totalText totalVolume">0</span>
+                                                    <span class="totalText totalVolume">0</span><span> m3</span>
                                                     <input type="hidden" name="total_volume" value="">
                                                 </div>
                                             </div>
@@ -520,7 +498,7 @@
                                                 </div>
                                                 <div class="ms-3">
                                                     <h5>Pricing weight:</h5>
-                                                    <span class="totalText totalPricing">0</span> KG\DESİ
+                                                    <span class="totalText totalPricing">0</span> KGS
                                                     <input type="hidden" name="total_deci" value="">
                                                 </div>
                                             </div>
@@ -597,7 +575,7 @@
                                     <div class="cargo-company-labels-holder">
                                         @foreach ($cargo_companies as $company)
                                             <label for="cargo_company_input_{{ $company->id }}"
-                                                class="cargo-company-label">
+                                                class="cargo-company-label ttp" data-ttp="{{ $company->description }}">
                                                 <div class="list-group list-group-horizontal">
                                                     <div
                                                         class="list-group-item w-25 text-center d-flex align-items-center">
@@ -607,15 +585,15 @@
                                                     <div class="list-group-item w-50 text-left d-flex align-items-center ">
                                                         {{ $company->name }}</div>
                                                     <div class="list-group-item d-flex d-flex align-items-center">
-                                                        <span class="me-2 textShipment"
+                                                        <span class="me-2 textShipment company_span_cls"
                                                             id="cargo_company_{{ $company->id }}">0
                                                             €</span>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="cargo_company"
+                                                            <input class="form-check-input company_radio_cls"
+                                                                type="radio" name="cargo_company"
                                                                 id="cargo_company_input_{{ $company->id }}"
                                                                 data-price="0" value="{{ $company->id }}" />
-                                                            <input type="hidden"
+                                                            <input type="hidden" class="company_hidden_cls"
                                                                 name="company_value[{{ $company->id }}]" value="0">
                                                         </div>
                                                     </div>
@@ -871,7 +849,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="total_cargo_price">
+                <div class="total_cargo_price" onclick="ScrollToBottom()">
                     <span>Total price: </span> <span id="total_cargo_price_span">0</span>
                     <span>€</span>
                     <input type="hidden" name="total_cargo_price" id="total_cargo_price" value="0">
@@ -964,6 +942,7 @@
                 document.querySelector('#save_address').checked = false;
             }
         }
+
         function changeCurrency(select) {
             var options = select.options;
             var currency = options[options.selectedIndex].getAttribute('data-currency');

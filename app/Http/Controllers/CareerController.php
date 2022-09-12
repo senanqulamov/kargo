@@ -16,10 +16,30 @@ use Validator;
 class CareerController extends Controller
 {
     public function index(){
+        $worktimes = ['parttime','fulltime','intership','remote'];
+        $career = Career::query();
+        if(request()->exists('s') || request()->exists('worktime')){
+            if(request()->get('s')!=''){
+                $like = '%'.request()->get('s').'%';
+                $career->where('title','LIKE',$like);
+            }
+            if(request()->get('worktime')!=''){
+                $worktime = explode(',',request()->get('worktime'));
+                foreach ($worktime as $key => $wrktim) {
+                    if(!in_array($wrktim,$worktimes)){
+                        unset($worktime[$key]);
+                    }
+                }
+                $career->whereIn('worktime',$worktime);
+            }
+            $careers = $career->where('status', 1)->orderBy('created_at','desc')->get();
+            return view('frontend.career', compact('careers'));
+
+        }
 		$careers=Career::where('status', 1)->orderBy('created_at','desc')->get();
         return view('frontend.career', compact('careers'));
     }
-	
+
 	public function fetch(Request $request)
     {
         $career_details=Career::find($request->id);
@@ -28,12 +48,12 @@ class CareerController extends Controller
             'data' => $career_details,
         ]);
     }
-	
+
 	public function apply($id){
 		$career_detail=Career::find($id);
         return view('frontend.apply', compact('career_detail'));
     }
-	
+
 	public function postApply(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -60,7 +80,7 @@ class CareerController extends Controller
             $apply->save();
 
             return response()->json(['status'=>1, 'msg'=>'Career apply was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function indexAdmin(){
@@ -91,7 +111,7 @@ class CareerController extends Controller
             'selectWorkTime' => 'required',
             'inputExperience' => 'max:225',
             'inputFinishTime'=> 'required',
-            'desc'=> 'required|min:3|max:225',
+            'desc'=> 'required|min:3',
         ]);
 
         if(!$validator->passes()){
@@ -109,13 +129,13 @@ class CareerController extends Controller
             $career->save();
 
             return response()->json(['status'=>1, 'msg'=>'Career was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function activate($id)
     {
         $career=Career::where('id', $id)->first();
-        
+
         if($career->status == 2){
             $career->status=1;
             toastr()->success('Career was activated', 'Congratulations!');
@@ -124,7 +144,7 @@ class CareerController extends Controller
             toastr()->success('Career was deactivated', 'Congratulations!');
         }
         $career->save();
-        
+
         return redirect()->route('admin.human.careers.index');
     }
 
@@ -145,7 +165,7 @@ class CareerController extends Controller
             'selectWorkTime2' => 'required',
             'inputExperience2' => 'max:225',
             'inputFinishTime2'=> 'required',
-            'desc2'=> 'required|min:3|max:225',
+            'desc2'=> 'required|min:3',
         ]);
 
         if(!$validator->passes()){
@@ -165,7 +185,7 @@ class CareerController extends Controller
             $career->save();
 
             return response()->json(['status'=>1, 'msg'=>'Career was successfully updated', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function delete($id)

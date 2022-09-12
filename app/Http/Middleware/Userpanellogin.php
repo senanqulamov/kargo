@@ -18,9 +18,14 @@ class Userpanellogin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()){
-            return $next($request);
-        }else{
+        if (Auth::user()) {
+            if (Auth::user()->is_banned != 1) {
+                return $next($request);
+            } else {
+                $error = "You are banned from website, please contact with moderator";
+                return Redirect::route('login')->withErrors($error);
+            }
+        } else {
             $error = "Login first";
             return Redirect::back()->withErrors($error);
         }

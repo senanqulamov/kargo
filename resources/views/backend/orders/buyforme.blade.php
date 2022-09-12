@@ -40,7 +40,7 @@
                                 <th>Product Link</th>
                                 <th>Note</th>
                                 <th>Date</th>
-                                <th>Actions</th>
+                                {{-- <th>Actions</th> --}}
                             </tr>
                         </thead>
                         <tbody>
@@ -93,14 +93,14 @@
                                     </td>
                                     <td>{{ $cargo->product_note ? $cargo->product_note : '---' }}</td>
                                     <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
-                                    <td>
+                                    {{-- <td>
                                         @if ($cargo->status != 'cancelled' && $cargo->status != 'payment')
                                             <a href="#" onclick="requestAction(this)" class="btn btn-danger"
                                                 data-request-id="{{ $cargo->id }}" data-status="cancelled">
                                                 <i class="fas fa-window-close"></i>
                                             </a>
                                         @endif
-                                    </td>
+                                    </td> --}}
                                 </tr>
                             @endforeach
                         </tbody>

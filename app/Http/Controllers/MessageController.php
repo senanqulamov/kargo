@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Message;
 use App\Models\ContactService;
 use App\Models\Branch;
+use App\Models\Faqs;
+use App\Models\FaqsCategory;
 use App\Models\Notification;
 use App\Models\Support_demand;
 use App\Models\Support_message;
@@ -50,10 +52,13 @@ class MessageController extends Controller
 
     public function indexFront()
     {
-        $services = ContactService::orderBy('created_at', 'desc')->get();
+        $services = ContactService::orderBy('created_at', 'asc')->get();
         $branches = Branch::orderBy('created_at', 'desc')->get();
         $headOffice = Branch::where('status', 1)->first();
-        return view('frontend.contact', compact('services', 'branches', 'headOffice'));
+        $faqs = Faqs::all();
+        $categories = FaqsCategory::all();
+
+        return view('frontend.contact', compact('services', 'branches', 'headOffice','faqs','categories'));
     }
 
     public function indexFrontPost(Request $request)
@@ -206,6 +211,25 @@ class MessageController extends Controller
         return Redirect::back()->with('message', 'Notification activated Succesfully');
     }
 
+    public function editNotification(Request $request){
+
+        if($request->image){
+            $file = $request->image;
+            $image = $file->getClientOriginalName();
+            $file->move(public_path() . '/images/static_images/', $image);
+        }else{
+            $image = "notification.png";
+        }
+
+        Notification::where('id' , $request->notification_id)->update([
+            'name' => $request->name,
+            'message' => json_encode($request->message),
+            'image' => $image
+        ]);
+
+        return Redirect::back()->with('message' , 'Notification updated successfully');
+    }
+
     public function deleteNotification($id)
     {
 
@@ -349,6 +373,26 @@ class MessageController extends Controller
         Usage::where('id', $id)->update($data);
 
         return Redirect::back()->with('message', 'Notification activated Succesfully');
+    }
+
+    public function editUsage(Request $request){
+
+        if($request->image){
+            $file = $request->image;
+            $image = $file->getClientOriginalName();
+            $file->move(public_path() . '/images/static_images/', $image);
+        }else{
+            $image = "usage.png";
+        }
+
+        Usage::where('id' , $request->usage_id)->update([
+            'title' => $request->title,
+            'description' => json_encode($request->description),
+            'link' => $request->link,
+            'image' => $image
+        ]);
+
+        return Redirect::back()->with('message' , 'Notification updated successfully');
     }
 
     public function deleteUsage($id)

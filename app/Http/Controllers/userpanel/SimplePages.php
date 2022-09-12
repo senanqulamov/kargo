@@ -11,11 +11,14 @@ use App\Models\Branch;
 use App\Models\Cargo_document;
 use App\Models\Cargo_request;
 use App\Models\CargoCompany;
+use App\Models\Country;
 use App\Models\Faqs;
+use App\Models\FaqsCategory;
 use App\Models\Forme_request;
 use App\Models\Notification;
 use App\Models\Package;
 use App\Models\Product;
+use App\Models\SpecialOffer;
 use App\Models\Support_demand;
 use App\Models\Support_message;
 use App\Models\Usage;
@@ -260,7 +263,7 @@ class SimplePages extends Controller
         } else if ($request->status == 'payment') {
             $message = 'Order accepted and paid succesfully';
 
-            $total_cargo_price = $order->cargo_price;
+            $total_cargo_price = $order->product_price + $order->cargo_price + $order->comission;
             $new_user_balance = Auth::user()->balance - $total_cargo_price;
 
             User::where('id', Auth::user()->id)->update([
@@ -299,12 +302,11 @@ class SimplePages extends Controller
 
     public function postAmazonorder(Request $request)
     {
+        // dd($request->all());
 
         // $cargo_id = uniqid(15);
         $cargo_id = random_int(10000000, 99999999);
         $cargo_id = 'A' . $cargo_id;
-
-        // dd($request->all() , $cargo_id);
 
         if ($request->package_id && $request->product_id) {
             foreach ($request->package_id as $package_id) {
@@ -320,6 +322,8 @@ class SimplePages extends Controller
                     $data[] = $name;
                 }
                 $data = array_unique($data);
+            } else {
+                $data = [];
             }
 
             $additional_services = json_encode($request->additional_services, true);
@@ -330,6 +334,12 @@ class SimplePages extends Controller
                 'order_type' => 'Amazon Order',
                 'user_id' => Auth::user()->id,
                 'amazon_address' => $request->amazon_address,
+                'name' => $request->name,
+                'country' => $request->country,
+                'city' => $request->city,
+                'state' => $request->state,
+                'address' => $request->address,
+                'zipcode' => $request->zipcode,
                 'ioss_number' => $request->ioss_number,
                 'vat_number' => $request->vat_number,
                 'currency' => $request->currency_unit,
@@ -409,10 +419,39 @@ class SimplePages extends Controller
                     Cargo_document::create($cargo_document);
                 }
             }
-            return Redirect::back()->with('message', 'Amazon order successfully sent');
+            $cargo_requests = Cargo_request::all();
+            $amazon_orders = Amazon_order::all();
+            return view('userpanel.frontend.cargo_requests')->with([
+                'message' => 'Amazon order successfully sent',
+                'cargo_requests' => $cargo_requests,
+                'amazon_orders' => $amazon_orders
+            ]);
         } else {
             return Redirect::back()->with('error', 'Invalid arguments');
         }
+    }
+
+    public function generatePdfAmazonOrder($id)
+    {
+
+        $order = DB::table('amazon_orders')->where('id', $id)->get()->first();
+        $company = DB::table('cargo_companies')->where('id', $order->cargo_company)->get()->first();
+
+
+        return view('userpanel.frontend.cargo_pdf')->with([
+            'cargo_id' => $order->id,
+            'name' => $order->name,
+            'country' => $order->country,
+            'city' => $order->city,
+            'state' => $order->state,
+            'address' => $order->address,
+            'company' => $company->name,
+            'order_info' => $order->order_info,
+            'phone' => $order->phone,
+            'date' => $order->created_at,
+            'tracking_number' => $order->tracking_number,
+            'user_id' => $order->user_id
+        ]);
     }
 
     public function bulk_order()
@@ -423,6 +462,8 @@ class SimplePages extends Controller
 
     public function create_bulk_order(Request $request)
     {
+
+        // dd($request->all());
 
         $excel = SimpleXLSX::parse($request->order_file);
 
@@ -450,7 +491,7 @@ class SimplePages extends Controller
             $company = $this->company_calculation($data);
             $companies = CargoCompany::all();
             foreach ($companies as $cmpn) {
-                if(isset($company[$cmpn->id])){
+                if (isset($company[$cmpn->id])) {
                     $cargo_company = $cmpn->id;
                 }
             }
@@ -587,16 +628,87 @@ class SimplePages extends Controller
         return $services_array;
     }
 
-    public function get_special_offer(){
+    public function get_special_offer()
+    {
 
-        return view('userpanel.helpers.get_special_offer');
+        $countries = Country::all();
+
+        return view('userpanel.helpers.get_special_offer', compact('countries'));
     }
 
-    public function faq(){
+    public function post_special_offer(Request $request)
+    {
+
+        if ($request->hasfile('document')) {
+            $file = $request->file('document');
+            $document = $file->getClientOriginalName();
+            $file->move(public_path() . '/special_offers/', $document);
+        } else {
+            $document = 'empty';
+        }
+
+        switch ($request->shipment_type) {
+            case 'air':
+                $data = array(
+                    'shipment_type' => $request->shipment_type,
+                    'cargo' => $request->cargo,
+                    'address' => $request->address,
+                    'date' => $request->date,
+                    'origin' => $request->origin,
+                    'destination' => $request->destination,
+                    'shipping_type' => $request->shipping_type,
+                    'additional' => $request->additional,
+                    'document' => $document,
+                    'insurance' => $request->insurance,
+                    'quantity' => $request->quantity,
+                    'length' => $request->length,
+                    'width' => $request->width,
+                    'height' => $request->height,
+                    'weight' => $request->weight,
+                    'total_volume' => $request->total_volume,
+                    'total_weight' => $request->total_weight
+                );
+                break;
+
+            default:
+                $data = array(
+                    'shipment_type' => $request->shipment_type,
+                    'cargo' => $request->cargo,
+                    'address' => $request->address,
+                    'date' => $request->date,
+                    'origin' => $request->origin,
+                    'destination' => $request->destination,
+                    'shipping_type' => $request->shipping_type,
+                    'additional' => $request->additional,
+                    'document' => $document,
+                    'insurance' => $request->insurance,
+                    'quantity' => $request->quantity,
+                    'incoterm' => $request->incoterm,
+                    'containeer_type' => $request->containeer_type,
+                    'cargo_weight_containeer' => $request->cargo_weight_containeer
+                );
+                break;
+        }
+
+        SpecialOffer::create($data);
+
+        return Redirect::back()->with('message', 'Offer succesfully created');
+    }
+
+    public function special_offers()
+    {
+        $special_offers = SpecialOffer::all();
+
+        return view('userpanel.order.special_offers', compact('special_offers'));
+    }
+
+    public function faq()
+    {
 
         $faqs = Faqs::all();
+        $categories = FaqsCategory::all();
 
-        return view('userpanel.faq.faq' , compact('faqs'));
+        return view('userpanel.faq.faq', compact('faqs', 'categories'));
     }
 }
 

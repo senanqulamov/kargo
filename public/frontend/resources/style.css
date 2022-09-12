@@ -27,8 +27,8 @@
 
         .navbar .navbar-nav {
             display: flex !important;
-            width: 70%;
-            justify-content: space-between !important;
+            width: 100%;
+            justify-content: space-evenly !important;
         }
 
         .navbar a {
@@ -888,12 +888,12 @@
         /* OurLOcation Start */
 
         #OurLocation .mapLocation {
-            width: 50%;
+            width: 60%;
             margin: auto;
         }
 
         #OurLocation .showBoxes {
-            width: 50%;
+            width: 60%;
             margin: auto;
         }
 
@@ -1089,6 +1089,11 @@
             background-color: transparent !important;
             border: 1px solid #ced4da;
             border-radius: 0.25rem;
+            position: absolute;
+            z-index: e4343;
+            z-index: 44;
+            right: 0;
+            height: 34px;
         }
 
         .getQuoteForm .fileInput p {
@@ -1234,9 +1239,13 @@
         }
 
         #Calculator .input-group-text {
-            background-color: #fff !important;
+            position: absolute;
             border: none !important;
             border-radius: 0 10px 10px 0;
+            z-index: 3;
+            right: 0;
+            top: 5px;
+            background: #fff !important;
         }
 
         #Calculator .forms-img {

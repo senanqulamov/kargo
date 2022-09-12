@@ -13,6 +13,7 @@ use App\Models\Product;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\UserAddress;
+use App\Models\UserLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -240,5 +241,16 @@ class HelperController extends Controller
         Transaction::create($create_data);
 
         // dd($create_data);
+    }
+
+    public function userLogs($data){
+        $create_data = array(
+            'user_id' => $data->user_id,
+            'moderator_id' => $data->moderator_id,
+            'action' => $data->action,
+            'title' => $data->title
+        );
+
+        UserLog::create($create_data);
     }
 }

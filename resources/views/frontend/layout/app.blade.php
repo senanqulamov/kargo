@@ -16,7 +16,9 @@
     <link rel="stylesheet" href="{{ asset('/') }}frontend/resources/style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
 
+    {{-- @if (!request()->is('servicesFee'))
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    @endif --}}
 
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.2/css/bootstrap-select.min.css" />
@@ -49,8 +51,51 @@
             left: 0;
             width: 100%;
             z-index: 98;
-            background-color: rgba(255, 255, 255, 0.23);
+            background-color: rgba(255, 255, 255, 0.51);
             backdrop-filter: blur(4px);
+            border-bottom: 0.5px solid #ED5A23;
+        }
+
+        .navbar-nav li {
+            transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            height: max-content;
+            padding: 0 20px;
+            border: 1px solid transparent;
+        }
+
+        .navbar-nav li:hover {
+            box-shadow: 0 0 7rem rgb(0 0 0 / 17%);
+            border-radius: 15px;
+            transform: scale(1.1);
+            padding: 10px 20px;
+            cursor: pointer;
+            border: 1px solid #ED5A23;
+        }
+
+        .profile-li-element {
+            transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+            height: max-content;
+            padding: 0 20px;
+            border: 1px solid #0dcaf0;
+            border-radius: 15px;
+        }
+
+        .profile-li-element:hover {
+            transform: scale(1.1);
+            padding: 10px 20px;
+            border: 1px solid #ED5A23;
+            box-shadow: 0 0 7rem rgb(0 0 0 / 17%);
+            transform: scale(1.1);
+        }
+
+        .dropdown-item:focus,
+        .dropdown-item:hover {
+            background: white;
+        }
+
+        .active-navbar-item-hm {
+            border: 1px solid #ED5A23 !important;
+            border-radius: 10px;
         }
 
         section {
@@ -100,6 +145,27 @@
             overflow: hidden !important;
             text-overflow: ellipsis;
             height: max-content;
+            padding: 5px 20px;
+        }
+
+        .login-li-element {
+            border: 0.55px solid #3249701A;
+            box-shadow: 0px 4px 10px 0px #0000001a;
+            padding: 5px 15px;
+            border-radius: 7px;
+            color: #324970;
+            background-color: #fff;
+        }
+
+        .register-li-element {
+            border: 0.55px solid #3249701A;
+            box-shadow: 0px 4px 10px 0px #0000001a;
+            padding: 5px 15px;
+            border-radius: 7px;
+            background-color: #00A3FE;
+        }
+        .register-li-element a{
+            color: #fff !important;
         }
     </style>
 </head>
@@ -119,8 +185,14 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item dropdown">
+                <div class="navbar-nav">
+                    <li
+                        class="nav-item dropdown
+                        @if (Request::segment(1) == 'e-commerce' ||
+                            Request::segment(1) == 'fba' ||
+                            Request::segment(1) == 'marketplace' ||
+                            Request::segment(1) == 'export' ||
+                            Request::segment(1) == 'servicesFee') active-navbar-item-hm @endif">
                         <a class="nav-link dropdown-toggle" href="servicesFee.html" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Services
@@ -137,7 +209,12 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li
+                        class="nav-item dropdown
+                        @if (Request::segment(1) == 'pricecalculator' ||
+                            Request::segment(1) == 'getquote' ||
+                            Request::segment(1) == 'service' ||
+                            Request::segment(1) == 'membershifee') active-navbar-item-hm @endif">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Pricing
@@ -150,49 +227,51 @@
                             <li><a class="dropdown-item" href="{{ route('membershifee') }}">Membership Plans</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::segment(1) == 'contact') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'contact') active @endif" aria-current="page"
                             href="{{ route('contact') }}">Contact</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::segment(1) == 'blogs') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'blogs') active @endif"
                             href="{{ route('blogs.index') }}">Blog</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::segment(1) == 'faqs') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'faqs') active @endif"
                             href="{{ route('faqs') }}">FAQ</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::segment(1) == 'track') active-navbar-item-hm @endif">
                         <a class="nav-link" href="{{ route('track') }}">Cargo Track</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @if (Request::segment(1) == 'careers') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'careers') active @endif"
                             href="{{ route('careers.index') }}">Career</a>
                     </li>
-                </ul>
-                <form class="d-flex">
-                    <select class="selectpicker" data-width="fit">
+                    {{-- <select class="selectpicker" data-width="fit">
                         <option data-content='<span class="flag-icon flag-icon-gb"></span>'>
                             EN
                         </option>
                         <option data-content='<span class="flag-icon flag-icon-tr"></span> '>
                             TR
                         </option>
-                    </select>
+                    </select> --}}
                     @if (!Auth::user())
-                        {{-- <button class="header-nav-hm login-nav"> --}}
-                        <a class="header-nav-hm login-nav" href="{{ route('login') }}">Login</a>
-                        {{-- </button> --}}
-                        {{-- <button class="header-nav-hm register-nav"> --}}
-                        <a class="header-nav-hm register-nav" href="{{ route('register') }}">Register</a>
-                        {{-- </button> --}}
+                        <li
+                            class="nav-item login-li-element @if (Request::segment(1) == 'login') active-navbar-item-hm @endif">
+                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                        </li>
+                        <li
+                            class="nav-item register-li-element @if (Request::segment(1) == 'register') active-navbar-item-hm @endif">
+                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                        </li>
                     @else
-                        <a href="{{ route('userpanel.index') }}" class="btn btn-info profile-button-hm">
-                            {{ Auth::user()->name }}
-                            <i class="fa fa-user"></i>
-                        </a>
+                        <div class="nav-item d-flex profile-li-element">
+                            <a href="{{ route('userpanel.index') }}" class="profile-button-hm">
+                                {{ Auth::user()->name }}
+                                <i class="fa fa-user"></i>
+                            </a>
+                        </div>
                     @endif
-                </form>
+                </div>
             </div>
         </div>
     </nav>
@@ -305,7 +384,7 @@
             nationalMode: true,
             onlyCountries: [],
             placeholderNumberType: "MOBILE",
-            preferredCountries: ["tr", "us" , "az"],
+            preferredCountries: ["tr", "us", "az"],
             separateDialCode: true,
             utilsScript: ""
         }));

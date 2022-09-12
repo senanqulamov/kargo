@@ -1,6 +1,11 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
+<style>
+    .iti{
+        width: 100%;
+    }
+</style>
     <section id="courier" class="courier">
 
         <div class="container" id="balance__container">
@@ -303,7 +308,7 @@
                                         @php
                                             $countries = DB::table('cargo_countries')->get();
                                         @endphp
-                                        <select class="form-select" name="country" required>
+                                        <select class="form-select select-custom-hm" name="country" required>
                                             <option value="" selected disabled>Select Country</option>
                                             @foreach ($countries as $country)
                                                 <option value="{{ $country->country }}">{{ $country->country }}</option>

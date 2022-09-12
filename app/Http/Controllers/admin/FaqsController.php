@@ -38,7 +38,7 @@ class FaqsController extends Controller
             $faqs->save();
 
             return response()->json(['status'=>1, 'msg'=>'FAQS was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function edit(Request $request)
@@ -72,7 +72,7 @@ class FaqsController extends Controller
             return response()->json(['status'=>1, 'msg'=>'FAQS has been successfully updated', 'state'=>'Congratulations!']);
         }
 
-         
+
     }
 
     public function delete($id)
@@ -81,13 +81,13 @@ class FaqsController extends Controller
         toastr()->success('Faqs was successfully deleted', 'Congratulations!');
         return redirect()->route('admin.faqs.index');
     }
-	
+
 	public function categories()
     {
 		$categories=FaqsCategory::orderBy('title','desc')->get();
         return view('backend.faqs-category', compact('categories'));
     }
-	
+
 	public function createCategory(Request $request)
     {
         $request->validate([
@@ -99,7 +99,7 @@ class FaqsController extends Controller
         $faqsCategory->save();
 
         toastr()->success('Category was successfully registered', 'Congratulations!!');
-        return redirect()->route('admin.faqs.categories.index');  
+        return redirect()->route('admin.faqs.categories.index');
     }
 
     public function editCategory(Request $request)
@@ -110,7 +110,7 @@ class FaqsController extends Controller
             'data' => $faqsCategory
         ]);
     }
-	
+
 	public function updateCategory(Request $request)
     {
         $request->validate([
@@ -124,13 +124,13 @@ class FaqsController extends Controller
         $faqsCategory->update();
 
         toastr()->success('Category has been successfully updated', 'Congratulations!!');
-        return redirect()->route('admin.faqs.categories.index');  
+        return redirect()->route('admin.faqs.categories.index');
     }
-	
+
 	public function deleteCategory($id)
     {
 		$check=Faqs::where('categoryID', $id)->count();
-		
+
 		if($check > 0){
 			toastr()->error('This category is used in the FAQS section', 'Ooops!');
 			return redirect()->route('admin.faqs.categories.index');
@@ -138,11 +138,13 @@ class FaqsController extends Controller
 			FaqsCategory::where('id', $id)->delete();
 			toastr()->success('Category was successfully deleted', 'Congratulations!');
 			return redirect()->route('admin.faqs.categories.index');
-		}        
+		}
     }
 
     public function indexFront()
     {
-        return view('frontend.faqs');
+        $faqs = Faqs::all();
+        $categories = FaqsCategory::all();
+        return view('frontend.faqs',compact('categories','faqs'));
     }
 }

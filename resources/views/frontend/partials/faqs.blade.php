@@ -1,3 +1,121 @@
+<style>
+    #FAQ .tab-cont {
+        float: left;
+        width: 30%;
+        background-color: #fff;
+        height: 100%;
+        border-right: 1px solid #d1d1d1;
+    }
+
+    #FAQ .tab-cont button {
+        width: 100%;
+        background-color: inherit;
+        padding: 18px;
+        font-size: 16px;
+        border: none;
+        text-align: start;
+        font-weight: 400;
+    }
+
+    #FAQ .tab-content {
+        background: #fff;
+        height: 100%;
+        float: left;
+        padding: 0 10px;
+        width: 70%;
+        animation: anime 1s
+    }
+
+    #FAQ .tab-content h2 {
+        font-size: 24px;
+        font-weight: 400;
+    }
+
+    #FAQ .tab-content p {
+        color: #666;
+    }
+
+    #FAQ .tab-cont .but.active {
+        border-bottom: 3px solid #3b69e4;
+    }
+
+    @keyframes anime {
+        from {
+            opacity: 0
+        }
+
+        to {
+            opacity: 1
+        }
+    }
+
+    accordion-single {
+        border-bottom: 1px solid #efefef;
+        margin-top: 10px;
+    }
+
+    .accordion-single-title {
+        border-top: 1px solid #efefef;
+        padding: 20px;
+        cursor: pointer;
+        position: relative;
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .accordion-single-title::after {
+        content: &#34;
+        &#34;
+        ;
+        position: absolute;
+        right: 25px;
+        top: 50%;
+        transition: all 0.2s ease-in-out;
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-top: solid 2px #999;
+        border-right: solid 2px #999;
+        transform: translateY(-50%) rotate(135deg);
+    }
+
+    .accordion-single-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .accordion-single-content p {
+        padding: 20px;
+    }
+
+    .accordion-single-item.is-open .accordion-single-content {
+        max-height: 30vw;
+    }
+
+    .accordion-single-item.is-open .accordion-single-title::after {
+        transform: translateY(-50%) rotate(315deg);
+    }
+
+    @media screen and (max-width: 420px) {
+        #FAQ .tab-cont {
+            float: left;
+            width: 100% !important;
+            background-color: #fff;
+            height: 100%;
+            border-right: 1px solid #d1d1d1;
+        }
+
+        #FAQ .tab-content {
+            background: #fff;
+            height: 100%;
+            float: left;
+            padding: 20px;
+            width: 100% !important;
+            animation: anime 1s
+        }
+    }
+</style>
 <!-- Blogs Section Start -->
 <section id="FAQ">
     <div class="container">
@@ -9,27 +127,64 @@
             </div>
         </div>
         <div class="row my-6">
-            @php ($faqs = DB::table('faqs')->get() )
-            @foreach($faqs as $faq)
-            <div class="col-lg-6">
-                <div class="accordion accordion-flush" id="accordionFlushExample">
-                    
-                    
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="flush-heading{{$faq->id}}">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{$faq->id}}" aria-expanded="false" aria-controls="flush-collapse{{$faq->id}}">
-                                {{$faq->question}}
-                            </button>
-                        </h2>
-                        <div id="flush-collapse{{$faq->id}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{$faq->id}}" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">{{$faq->answer}}</div>
-                        </div>
-                    </div>
-                   
-                </div>
+            <div class="tab-cont">
+                @foreach ($categories as $category)
+                    <button class="but "  onclick="city(event, '{{ $category->title }}')">{{ $category->title }}</button>
+                @endforeach
             </div>
+            @foreach ($categories as $category)
+                <div class="tab-content " id="{{ $category->title }}" style="display: none;">
+                    <main class="contents">
+                        <div class="accordion-single js-acc-single">
+                            @foreach ($faqs->where('categoryID', '==', $category->id) as $faq)
+                                <div class="accordion-single-item js-acc-item {{ $loop->first ? 'is-open' : null }}">
+                                    <h2 class="accordion-single-title js-acc-single-trigger">{{ $faq->question }}</h2>
+                                    <div class="accordion-single-content">
+                                        <p>{{ $faq->answer }}</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </main>
+                </div>
             @endforeach
         </div>
     </div>
 </section>
+
+<script>
+    var button = document.getElementsByClassName('but'),
+        tabContent = document.getElementsByClassName('tab-content');
+    button[0].classList.add('active');
+    tabContent[0].style.display = 'block';
+
+
+    function city(e, city) {
+        var i;
+        for (i = 0; i < button.length; i++) {
+            tabContent[i].style.display = 'none';
+            button[i].classList.remove('active');
+        }
+        document.getElementById(city).style.display = 'block';
+        e.currentTarget.classList.add('active');
+    }
+
+
+    const accSingleTriggers = document.querySelectorAll('.js-acc-single-trigger');
+
+    accSingleTriggers.forEach(trigger => trigger.addEventListener('click', toggleAccordion));
+
+    function toggleAccordion() {
+        const items = document.querySelectorAll('.js-acc-item');
+        const thisItem = this.parentNode;
+
+        items.forEach(item => {
+            if (thisItem == item) {
+                thisItem.classList.toggle('is-open');
+                return;
+            }
+            item.classList.remove('is-open');
+        });
+    }
+</script>
 <!-- Blogs Section End -->

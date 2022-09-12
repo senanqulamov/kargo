@@ -50,9 +50,9 @@
 
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                {{-- <div class="card-header">
                     <h3 class="card-title">List of Packages waiting for delivery</h3>
-                </div>
+                </div> --}}
                 <!-- /.card-header -->
                 <div class="card-body">
                     <table id="example1" class="table table-bordered table-striped">

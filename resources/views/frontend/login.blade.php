@@ -8,13 +8,11 @@
     @if ($errors->any())
         <script>
             Swal.fire({
-                position: 'top-end',
+                position: 'center',
                 icon: 'error',
                 title: '{{ implode('', $errors->all(':message')) }}',
-                backdrop: false,
-                showConfirmButton: false,
-                timerProgressBar: true,
-                timer: 4000
+                backdrop: true,
+                showConfirmButton: true
             })
         </script>
     @endif

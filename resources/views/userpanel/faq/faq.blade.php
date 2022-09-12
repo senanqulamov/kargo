@@ -97,7 +97,7 @@
         }
 
         .accordion-single-item.is-open .accordion-single-content {
-            max-height: 150px;
+            max-height: 30vw;
         }
 
         .accordion-single-item.is-open .accordion-single-title::after {
@@ -127,208 +127,26 @@
     <section id="tabsContent">
         <div class="container">
             <div class="tab-cont">
-                @foreach ($faqs as $faq)
-                    @php
-                        $category = DB::table('faqs_categories')
-                            ->where('id', $faq->categoryID)
-                            ->first();
-                    @endphp
+                @foreach ($categories as $category)
                     <button class="but" onclick="city(event, '{{ $category->title }}')">{{ $category->title }}</button>
                 @endforeach
             </div>
-
-            @foreach ($faqs as $faq)
-                @php
-                    $category = DB::table('faqs_categories')
-                        ->where('id', $faq->categoryID)
-                        ->first();
-                @endphp
+            @foreach ($categories as $category)
                 <div class="tab-content " id="{{ $category->title }}" style="display: none;">
                     <main class="contents">
-                        <!-- acc single -->
                         <div class="accordion-single js-acc-single">
-                            <div class="accordion-single-item js-acc-item">
-                                <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                                <div class="accordion-single-content">
-                                    <p>This is an Answer 1</p>
+                            @foreach ($faqs->where('categoryID', '==', $category->id) as $faq)
+                                <div class="accordion-single-item js-acc-item">
+                                    <h2 class="accordion-single-title js-acc-single-trigger">{{ $faq->question }}</h2>
+                                    <div class="accordion-single-content">
+                                        <p>{{ $faq->answer }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="accordion-single-item js-acc-item">
-                                <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                                <div class="accordion-single-content">
-                                    <p>This is an Answer 2</p>
-                                </div>
-                            </div>
-                            <div class="accordion-single-item js-acc-item">
-                                <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                                <div class="accordion-single-content">
-                                    <p>This is an Answer 3</p>
-                                </div>
-                            </div>
-                        </div><!-- accordion-single -->
-                        <!-- acc single -->
-                        <div class="accordion-single js-acc-single">
-                            <div class="accordion-single-item js-acc-item">
-                                <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                                <div class="accordion-single-content">
-                                    <p>This is an Answer 1</p>
-                                </div>
-                            </div>
-                            <div class="accordion-single-item js-acc-item">
-                                <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                                <div class="accordion-single-content">
-                                    <p>This is an Answer 2</p>
-                                </div>
-                            </div>
-                            <div class="accordion-single-item js-acc-item">
-                                <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                                <div class="accordion-single-content">
-                                    <p>This is an Answer 3</p>
-                                </div>
-                            </div>
-                        </div><!-- accordion-single -->
+                            @endforeach
+                        </div>
                     </main>
                 </div>
             @endforeach
-            {{-- <div class="tab-content " id="london">
-                <main class="contents">
-                    <!-- acc single -->
-                    <div class="accordion-single js-acc-single">
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 1</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 2</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 3</p>
-                            </div>
-                        </div>
-                    </div><!-- accordion-single -->
-                    <!-- acc single -->
-                    <div class="accordion-single js-acc-single">
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 1</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 2</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 3</p>
-                            </div>
-                        </div>
-                    </div><!-- accordion-single -->
-                </main>
-            </div>
-            <div class="tab-content" id="paris" style="display:none;">
-                <main class="contents">
-                    <!-- acc single -->
-                    <div class="accordion-single js-acc-single">
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 1</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 2</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 3</p>
-                            </div>
-                        </div>
-                    </div><!-- accordion-single -->
-                    <!-- acc single -->
-                    <div class="accordion-single js-acc-single">
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 1</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 2</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 3</p>
-                            </div>
-                        </div>
-                    </div><!-- accordion-single -->
-                </main>
-            </div>
-            <div class="tab-content" id="tokyo" style="display:none;">
-                <main class="contents">
-                    <!-- acc single -->
-                    <div class="accordion-single js-acc-single">
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 1</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 2</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 3</p>
-                            </div>
-                        </div>
-                    </div><!-- accordion-single -->
-                    <!-- acc single -->
-                    <div class="accordion-single js-acc-single">
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 1</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 1</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 2</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 2</p>
-                            </div>
-                        </div>
-                        <div class="accordion-single-item js-acc-item">
-                            <h2 class="accordion-single-title js-acc-single-trigger">Question 3</h2>
-                            <div class="accordion-single-content">
-                                <p>This is an Answer 3</p>
-                            </div>
-                        </div>
-                    </div><!-- accordion-single -->
-                </main>
-            </div>
-            --}}
         </div>
     </section>
 

@@ -53,6 +53,9 @@
         integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    {{-- Select Style --}}
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="icon" href="{{ asset('/') }}images/logo.svg">
     <title>ShipLounge</title>
 </head>
@@ -156,8 +159,7 @@
                         <button onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'balance') active-link-hm @endif">
                             <li class=" navigation__item">
-                                <a class="navigation__link"><i
-                                        class="fa-solid fa-network-wired navigation__icon"></i>
+                                <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
                                     <span class="navigation__span">Balance System</span></a>
                             </li>
                         </button>
@@ -165,8 +167,7 @@
                         <button onclick="window.open('{{ route('userpanel.transactions') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'transactions') active-link-hm @endif">
                             <li class=" navigation__item">
-                                <a class="navigation__link"><i
-                                        class="fa-solid fa-network-wired navigation__icon"></i>
+                                <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
                                     <span class="navigation__span">Transactions</span></a>
                             </li>
                         </button>
@@ -187,8 +188,7 @@
                             </li>
                         </button>
 
-                        <button
-                            class="navigation__box ps-2 @if (Request::segment(2) == 'amazon_order') active-link-hm @endif"
+                        <button class="navigation__box ps-2 @if (Request::segment(2) == 'amazon_order') active-link-hm @endif"
                             onclick="window.open('{{ route('userpanel.amazon_order') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
@@ -196,8 +196,7 @@
                                     <span class="navigation__span">Amazon</span></a>
                             </li>
                         </button>
-                        <button
-                            class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
+                        <button class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
                             onclick="window.open('{{ route('userpanel.bulk_order') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
@@ -216,12 +215,37 @@
 
                         <hr class="hr">
 
-                        <button
-                            onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
+                        <div class="">
+                            <li class="navigation__item">
+                                <a href="#" class="navigation__link">
+                                    <span class="navigation__span">Special</span></a>
+                            </li>
+                        </div>
+
+                        <button onclick="window.open('{{ route('userpanel.get_special_offer') }}' , '_self')"
+                            class="navigation__box @if (Request::segment(2) == 'get_special_offer') active-link-hm @endif">
+                            <li class=" navigation__item">
+                                <a class="navigation__link"><i
+                                        class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                    <span class="navigation__span">Get Special Offer</span></a>
+                            </li>
+                        </button>
+
+                        <button onclick="window.open('{{ route('userpanel.special_offers') }}' , '_self')"
+                            class="navigation__box @if (Request::segment(2) == 'special_offers') active-link-hm @endif">
+                            <li class=" navigation__item">
+                                <a class="navigation__link"><i
+                                        class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                    <span class="navigation__span">Your special offers</span></a>
+                            </li>
+                        </button>
+
+                        <hr class="hr">
+
+                        <button onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'courier_request') active-link-hm @endif">
                             <li class="navigation__item">
-                                <a class="navigation__link"><i
-                                        class="fa-solid fa-headset navigation__icon"></i>
+                                <a class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
                                     <span class="navigation__span">Courier Request</span>
                                 </a>
                             </li>
@@ -240,8 +264,7 @@
                                     <span class="navigation__span">Invoices</span></a>
                             </li>
                         </button>
-                        <button
-                            class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
+                        <button class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
                             onclick="window.open('{{ route('userpanel.siteusage') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
@@ -249,8 +272,7 @@
                                     <span class="navigation__span">Site Usage</span></a>
                             </li>
                         </button>
-                        <button
-                            class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
+                        <button class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
                             onclick="window.open('{{ route('userpanel.buyforme') }}' , '_self')">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
@@ -261,8 +283,7 @@
                         <button onclick="window.open('{{ route('userpanel.share_and_earn') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'share_and_earn') active-link-hm @endif">
                             <li class=" navigation__item">
-                                <a class="navigation__link"><i
-                                        class="fa-solid fa-network-wired navigation__icon"></i>
+                                <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
                                     <span class="navigation__span">Share and Earn</span></a>
                             </li>
                         </button>
@@ -273,8 +294,7 @@
                                     <span class="navigation__span">Inventory</span></a>
                             </li>
                         </button>
-                        <button
-                            onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
+                        <button onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'cargo_companies') active-link-hm @endif">
                             <li class="navigation__item">
                                 <a class="navigation__link"><i
@@ -322,7 +342,7 @@
                     <div>
                         <ul class="header__item">
                             <li class="header__item-list">
-                                <div
+                                <div onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                                     class="balance_bar_in_header balance_bar_{{ Auth::user()->balance < 0 ? 'red' : 'green' }}">
                                     Balance: {{ Auth::user()->balance }} €
                                 </div>
@@ -388,7 +408,7 @@
                 <div class="navigation__logo text-center">
                     <div class="mobile-header-cont-hm">
                         <div class="">
-                            <div
+                            <div onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                                 class="balance_bar_in_header balance_bar_{{ Auth::user()->balance < 0 ? 'red' : 'green' }}">
                                 Balance: {{ Auth::user()->balance }} €
                             </div>
@@ -544,6 +564,34 @@
 
                                     <hr class="hr">
 
+                                    <div class="">
+                                        <li class="navigation__item">
+                                            <a href="#" class="navigation__link">
+                                                <span class="navigation__span">Special</span></a>
+                                        </li>
+                                    </div>
+
+                                    <button
+                                        onclick="window.open('{{ route('userpanel.get_special_offer') }}' , '_self')"
+                                        class="navigation__box @if (Request::segment(2) == 'get_special_offer') active-link-hm @endif">
+                                        <li class=" navigation__item">
+                                            <a class="navigation__link"><i
+                                                    class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                                <span class="navigation__span">Get Special Offer</span></a>
+                                        </li>
+                                    </button>
+
+                                    <button onclick="window.open('{{ route('userpanel.special_offers') }}' , '_self')"
+                                        class="navigation__box @if (Request::segment(2) == 'special_offers') active-link-hm @endif">
+                                        <li class=" navigation__item">
+                                            <a class="navigation__link"><i
+                                                    class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
+                                                <span class="navigation__span">Your special offers</span></a>
+                                        </li>
+                                    </button>
+
+                                    <hr class="hr">
+
                                     <button
                                         onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'courier_request') active-link-hm @endif">
@@ -672,6 +720,7 @@
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.html5.min.js"></script>
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
 
     <script>
         $(function() {
@@ -686,6 +735,13 @@
                 scrollCollapse: true,
                 paging: false,
                 scrollX: true,
+                dom: 'Brftip',
+                buttons: [{
+                    extend: 'excel',
+                    text: 'Save as Excel',
+                    filename: 'table_to_excel',
+                    extension: '.xlsx'
+                }]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
         });
 
@@ -717,36 +773,55 @@
             var scrolled = (winScroll / height) * 100;
             document.getElementById("myBar").style.width = scrolled + "%";
         }
+
+        function ScrollToBottom(){
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+
+        var modals_hm = document.querySelectorAll('.modal');
+        modals_hm.forEach(element => {
+            element.setAttribute('data-backdrop' , 'static');
+        });
+        var selects_hm = document.querySelectorAll('.select-custom-hm');
+        selects_hm.forEach(element =>{
+            element.setAttribute('data-size' , '6');
+            element.setAttribute('data-live-search' , 'true');
+            element.classList.add('selectpicker');
+            element.classList.add('show-tick');
+            element.classList.remove('form-select');
+        });
     </script>
     {{-- International phone input --}}
     <script>
         var input = document.querySelector("#telephone");
-        window.intlTelInput(input, ({
-            allowDropdown: true,
-            autoHideDialCode: false,
-            autoPlaceholder: "polite",
-            customPlaceholder: null,
-            dropdownContainer: null,
-            excludeCountries: [],
-            formatOnDisplay: true,
-            geoIpLookup: null,
-            hiddenInput: "",
-            initialCountry: "tr",
-            localizedCountries: null,
-            nationalMode: true,
-            onlyCountries: [],
-            placeholderNumberType: "MOBILE",
-            preferredCountries: ["tr", "us", "az"],
-            separateDialCode: true,
-            utilsScript: ""
-        }));
-        $('.iti__flag-container').click(function() {
-            var countryCode = document.querySelector('.iti__selected-dial-code');
-            console.log(countryCode.innerHTML);
-            var countryCode = countryCode.innerHTML;
-            $('#telephone').val("");
-            $('#telephone').val(countryCode + "" + $('#telephone').val());
-        });
+        if (input) {
+            window.intlTelInput(input, ({
+                allowDropdown: true,
+                autoHideDialCode: false,
+                autoPlaceholder: "polite",
+                customPlaceholder: null,
+                dropdownContainer: null,
+                excludeCountries: [],
+                formatOnDisplay: true,
+                geoIpLookup: null,
+                hiddenInput: "",
+                initialCountry: "tr",
+                localizedCountries: null,
+                nationalMode: true,
+                onlyCountries: [],
+                placeholderNumberType: "MOBILE",
+                preferredCountries: ["tr", "us", "az"],
+                separateDialCode: true,
+                utilsScript: ""
+            }));
+            $('.iti__flag-container').click(function() {
+                var countryCode = document.querySelector('.iti__selected-dial-code');
+                console.log(countryCode.innerHTML);
+                var countryCode = countryCode.innerHTML;
+                $('#telephone').val("");
+                $('#telephone').val(countryCode + "" + $('#telephone').val());
+            });
+        }
     </script>
 
     {{-- Fixed Header --}}

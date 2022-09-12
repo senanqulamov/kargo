@@ -6,7 +6,7 @@
 
 @section('css')
 <!-- Toastr -->
-<link rel="stylesheet" href="{{asset('/')}}frontend/plugin/toastr/toastr.min.css"> 
+<link rel="stylesheet" href="{{asset('/')}}frontend/plugin/toastr/toastr.min.css">
 @endsection
 
 @section('content')
@@ -33,7 +33,7 @@
                         <div class="contact-text">
                             <div class="contact-text">
                                 <h5>Our Address:</h5>
-                                <span>{{$data->address}}</span>
+                                <span>{{$headOffice->address}}</span>
                             </div>
                         </div>
                     </div>
@@ -176,7 +176,7 @@
                     <div class="col-lg-8">
                         <div class="map-text">
                             <div class="text-title">
-                                @php ($country = DB::table('countries')->where('code', $branch->country)->first() ) 
+                                @php ($country = DB::table('countries')->where('code', $branch->country)->first() )
                                 <h5>{{$country->code}}</h5>
                                 <span>|</span>
                                 <h5>{{$country->name}}</h5>
@@ -239,7 +239,7 @@
 
         $("button.confirm").click(function(){
             var id_data=$(this).attr("data-id");
-            
+
             $.ajax({
                 type:"GET",
                 data:{id:id_data},
@@ -256,7 +256,7 @@
         // form app
 		$("#formApply").on('submit', function(e){
 			e.preventDefault();
-		
+
 			$.ajax({
 				url:$(this).attr('action'),
 				method:$(this).attr('method'),

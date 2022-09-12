@@ -231,7 +231,6 @@ li {
     font-size: 15px;
 }
 .next-button-hm:hover{
-    outline: 10px ridge #0d6efd;
-    transform: scale(1.1);
+    outline: 5px ridge #0d6efd;
     color: white;
 }

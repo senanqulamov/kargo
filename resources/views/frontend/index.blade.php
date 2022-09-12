@@ -16,6 +16,14 @@
             background-color: #EE591F;
             color: #fff;
         }
+
+        .map {
+            width: 100% !important;
+            height: 470px !important;
+            border: 0;
+            border-radius: 12px !important;
+            margin: 0 !important;
+        }
 </style>
 @endsection
 
@@ -483,7 +491,7 @@
                     <div class="statics-img">
                         <img src="{{asset('/')}}frontend/img/car.svg" alt="">
                         <div class="count">
-                            <h3 class="counter">1000000</h3><span>+</span>
+                            <h3 class="counter">{{$cargo_request_count}}</h3><span>+</span>
                         </div>
                     </div>
                     <div class="statics-footer">
@@ -496,7 +504,7 @@
                     <div class="statics-img">
                         <img src="{{asset('/')}}frontend/img/planet.svg" alt="">
                         <div class="count">
-                            <h3 class="counter">150</h3><span>+</span>
+                            <h3 class="counter">{{$country_count}}</h3><span>+</span>
                         </div>
                     </div>
                     <div class="statics-footer">
@@ -509,7 +517,7 @@
                     <div class="statics-img">
                         <img src="{{asset('/')}}frontend/img/person.svg" alt="">
                         <div class="count">
-                            <h3 class="counter">50000</h3> <span>+</span>
+                            <h3 class="counter">{{$customer_count}}</h3> <span>+</span>
                         </div>
                     </div>
                     <div class="statics-footer">
@@ -589,7 +597,7 @@
 
 
 <!-- Loaction Start -->
-<section id="Location">
+<section id="OurLocation">
     <div class="container">
         <div class="row my-5" style="text-align: center;">
             <div class="col-lg-12">
@@ -597,19 +605,44 @@
                     <h2> Our Locations</h2>
                 </div>
             </div>
-        </div>
-        <div class="row mx-5 my-5 l-m">
             <div class="col-lg-12">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d387193.3059669857!2d-74.25986773739224!3d40.697149413874705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2z0J3RjNGOLdCZ0L7RgNC6LCDQodCo0JA!5e0!3m2!1sru!2s!4v1649885127182!5m2!1sru!2s"
-                    width="100%" height="600" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map" id="map"></div>
             </div>
         </div>
+        <div class="row  my-5 l-m ">
+            @foreach ($locations as $location)
+            <div class="col-lg-12">
+                <div class="row show-map">
+                    <div class="map-text">
+                        <div class="text-title d-flex align-items-start">
+                            <h5>{{ $location->country }}</h5>
+                            <span>|</span>
+                            <h5 class="align-self-end">{{ $location->city }}</h5>
+                        </div>
+                    </div>
+                    <div class="show-map-button d-flex align-items-center justify-content-between flex-wrap">
+                        <div class="text-desc mb-3">
+                            <span class="ms-4">{{ $location->address }}</span>
+                        </div>
+                        <button class="ms-4 mb-3" type="button" onclick="selectLocation('{{ $location->latitude }}', '{{ $location->longitude }}' ,'{{ $location->title }}')">
+                            Show on map
+                        </button>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
+        </div>
+
+
     </div>
 </section>
 <!-- Loaction End -->
 @endsection
 
 @section('js')
+
+
 <script>
 	$(function(){
 		$("#price_calc").on('submit', function(e){
@@ -646,5 +679,95 @@
 			});
 		});
 	})
+</script>
+<script>
+    var map, infoWindow;
+    var geocoder;
+    var marker;
+    var geo_address = '';
+
+    function geocodeLatLng() {
+
+        geocoder
+            .geocode({
+                location: marker.getPosition()
+            })
+            .then((response) => {
+                if (response.results[0]) {
+                    // map.setZoom(11);
+
+                    // const marker = new google.maps.Marker({
+                    //   position: latlng,
+                    //   map: map,
+                    // });
+
+                    infoWindow.setContent(response.results[0].formatted_address);
+                    infoWindow.open(map, marker);
+
+                    geo_address = response.results[0].formatted_address;
+                    // map.setCenter(marker.getPosition());
+                } else {
+                    window.alert("No results found");
+                }
+            })
+            .catch((e) => window.alert("Geocoder failed due to: " + e));
+    }
+
+
+
+    function initMap() {
+        var myLatlng = new google.maps.LatLng(40, 40);
+
+        geocoder = new google.maps.Geocoder();
+
+
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: {
+                lat: 40,
+                lng: 40
+            },
+            zoom: 12.5,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        infoWindow = new google.maps.InfoWindow();
+
+
+        // Place a draggable marker on the map
+        marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title: "Drag me!"
+        });
+
+
+
+        infoWindow.setContent();
+
+        //Go to center
+        infoWindow.open(map, marker);
+
+    }
+
+
+    function selectLocation(lat, lon, name) {
+
+        if (lat == '' && lon == '') {
+            return;
+        }
+
+        infoWindow.setContent(name);
+
+        marker.setPosition(new google.maps.LatLng(lat, lon));
+        infoWindow.open(map, marker);
+        map.setCenter(marker.getPosition());
+
+
+
+        window.location.href = '#map';
+
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBByp1zFwtmhqM3ibxX-oVAVxi2eaYXlbk&callback=initMap">
 </script>
 @endsection

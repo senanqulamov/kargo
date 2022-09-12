@@ -395,21 +395,24 @@ input[type="file"]:hover::file-selector-button {
     .steps > .step:before {
       font-family: "Font Awesome 6 Free";
       content: "\f00c";
-      display: block;
+      display: flex;
+      justify-content:center;
+      align-items:center;
       margin: 0 auto;
       background: #ffffff;
       border: 2px solid #e6e6e6;
       color: #e6e6e6;
-      width: 2rem;
-      height: 2rem;
+      width: 3rem;
+      height: 3rem;
       text-align: center;
-      margin-bottom: -4.2rem;
+      margin-bottom: -5.2rem;
       line-height: 1.9rem;
       border-radius: 100%;
       position: relative;
       z-index: 1;
       font-weight: 700;
-      font-size: 1rem; }
+
+      font-size: 2rem; }
     .steps > .step:after {
       content: '';
       position: absolute;
@@ -490,10 +493,19 @@ input[type="file"]:hover::file-selector-button {
   color: #fff; }
 
 .show {
-  display: block; }
+  display: block ;
+}
 
 .hide {
-  display: none; }
+  display: none !important;
+}
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    /* border-color: #86b7fe !important; */
+    outline: 0;
+    border: 1.3px solid #bebebe !important;
+}
 
 .close {
   overflow: hidden;
@@ -1259,13 +1271,92 @@ nav {
       .balance__load h4 {
         font-size: 1.4rem; } }
 
+
+.balance__textArea textarea{
+    box-shadow: 0px 4px 5px 0px #0000000D !important;
+
+}
+
+.balance__input-file .btn-info{
+    font-size: 15px;
+    cursor: default;
+    background: transparent;
+    color: #0dcaf0;
+}
+
+
+.iti{
+    width:100%;
+}
+.newRow{
+    width:110%;
+}
+
+.newRow .btn-info{
+    color: #4D7CCC;
+    width: 100%;
+    background: #E4EEFF;
+    text-align: start;
+    border: none;
+    font-weight: 600;
+}
+
+.balance__input-file label{
+    width: 100%;
+    font-size: 16px;
+    color: #4970D4;
+    font-weight: 600;
+}
 .balance__input-file {
   margin-top: 3rem; }
+.User_id_box{
+    width:100%;
+}
+
+/*TolTip Style Start*/
+    .tooltip1 {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+        }
+
+    .tooltip1 .tooltiptext1 {
+        visibility: hidden;
+        width: 120px;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 150%;
+        left: 70%;
+        background: #E4EEFF;
+        margin-left: -60px;
+    }
+
+    .tooltip1 .tooltiptext1::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #E4EEFF transparent transparent transparent;
+    }
+
+    .tooltip1:hover .tooltiptext1 {
+        visibility: visible;
+    }
+/*TolTip Style End*/
+
 
 .balance__input-file input ,
 .balance__input-file select{
   margin-top: 1.5rem;
-  width: 50%;
+  border: 0.5px solid #4970D4;
+
+  width: 100%;
   margin: 0 auto; }
   @media screen and (max-width: 577px) {
     .balance__input-file > * {
@@ -1274,9 +1365,14 @@ nav {
       margin-top: 4rem; } }
   @media screen and (max-width: 992px) {
     .balance__input-file > * {
-      width: 80%;
+      width: 100%;
       font-size: 1.8rem;
-      margin-top: 4rem; } }
+      margin-top: 4rem; }
+
+     .newRow{
+    width:100% !important;
+}
+     }
 
 .balance__selectFiles {
   margin-top: 6rem; }
@@ -1340,10 +1436,15 @@ nav {
     font-size: 1.8rem;
     line-height: 1rem;
     color: #405982; }
+
   .balance__iban-input input {
-    font-size: 2rem;
+    font-size: 1.4rem;
+    border: 1px solid #00000040;
+    border-radius: 5px;
     margin-top: 1.5rem;
-    width: 80%; }
+    width: 80%;
+    padding: 5px;
+}
     @media screen and (max-width: 768px) {
       .balance__iban-input input {
         width: 100%; } }
@@ -1467,7 +1568,12 @@ nav {
   margin-top: 4rem; }
 
 .support__message-btn {
-  font-size: 2rem; }
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
 
 .support__message-left {
   background-color: #fff;

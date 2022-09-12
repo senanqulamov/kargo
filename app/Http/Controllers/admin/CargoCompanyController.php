@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AmazonAddress;
 use Illuminate\Http\Request;
 
 use App\Models\CargoCompany;
@@ -51,6 +52,7 @@ class CargoCompanyController extends Controller
                 $cargo->logo = $image;
             }
 
+            $cargo->description = $request->description;
             $cargo->PSH = $request->PSH;
             $cargo->jet_price = $request->jet_price;
             $cargo->emergency = $request->emergency;
@@ -92,6 +94,7 @@ class CargoCompanyController extends Controller
             $cargo->logo = $image;
         }
 
+        $cargo->description = $request->description;
         $cargo->PSH = $request->PSH;
         $cargo->jet_price = $request->jet_price;
         $cargo->emergency = $request->emergency;
@@ -220,4 +223,36 @@ class CargoCompanyController extends Controller
 
         return Redirect::back()->with('message' , 'Personal cargo created succesfully');
     }
+
+    public function amazon_addresses(){
+
+        // dd(AmazonAddress::all());
+        $amazon_addresses = AmazonAddress::all();
+
+        return view('backend.helpers.amazon_addresses' , compact('amazon_addresses'));
+    }
+    public function amazon_addresses_create(Request $request){
+
+        AmazonAddress::create($request->all());
+
+        return Redirect::back()->with('message' , 'New address has been created succesfully');
+
+    }
+
+    public function amazon_addresses_update(Request $request,AmazonAddress $amazon_address){
+
+        $request = $request->all();
+        $amazon_address->update($request);
+
+        return Redirect::back()->with('message' , 'New address has been updated succesfully');
+    }
+
+    public function amazon_addresses_delete(AmazonAddress $amazon_address){
+        $amazon_address->delete();
+
+        return Redirect::back()->with('message' , 'New address has been updated succesfully');
+    }
+
+
+
 }

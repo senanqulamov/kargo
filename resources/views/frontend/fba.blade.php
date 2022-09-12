@@ -3,6 +3,7 @@
 @section('title', 'FBA')
 
 @section('css')
+
 <style>
     #First-FBA .left-content a{
         border: 1px solid #EE591F;
@@ -15,7 +16,154 @@
     #First-FBA .left-content a:hover {
             background-color: #EE591F;
             color: #fff;
-        }
+    }
+    .checkbox-alias{
+        width: 100%;
+        margin: 10px 0;
+        height: 100px;
+        box-shadow: 0px 4px 8px 0px #0000001a;
+        background-color: transparent;
+        cursor: pointer;
+        padding: 30px;
+        border-radius: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 1
+        position: relative;
+        transition: all 250ms ease-out;
+        cursor: pointer;
+        text-align:center !important;
+    }
+
+    .invisible-checkboxes input[type=checkbox]{
+      display: none;
+    }
+
+    .invisible-checkboxes input[type=checkbox]:checked + .checkbox-alias{
+        background-color: #2386FF !important;
+        color: #fff !important;
+    }
+     .invisible-checkboxes input[type=checkbox]:checked + .checkbox-alias span{
+        color: #fff !important;
+        opacity:1 !important;
+    }
+
+  #FbaServices .services-select{
+      display:flex;
+      align-items:center !important;
+      flex-direction:row !important;
+  }
+
+  .services-select   input,
+output {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1em;
+
+}
+
+.services-select output {
+  background: #2386FF;
+  padding: 5px 16px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.services-select input[type="number"] {
+  width: 40px;
+  padding: 4px 5px;
+  border: 1px solid #bbb;
+  border-radius: 3px;
+}
+
+/* input[type="range"]:focus,
+input[type="number"]:focus {
+  box-shadow: 0 0 3px 1px #4b81dd;
+  outline: none;
+} */
+
+.services-select input[type="range"] {
+  -webkit-appearance: none;
+  margin-right: 15px;
+  width: 100%;
+  height: 7px;
+  padding:0 !important;
+  background: #c8c8c8;
+  border-radius: 5px;
+  background-image:linear-gradient(#2386FF, #2386ff);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Input Thumb */
+.services-select input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #2386FF;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+.services-select input[type="range"]::-moz-range-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #2386FF;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+.services-select input[type="range"]::-ms-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: #2386FF;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 #555;
+  transition: background .3s ease-in-out;
+}
+
+.services-select input[type="range"]::-webkit-slider-thumb:hover {
+  background: #2386FF;
+}
+
+.services-select input[type="range"]::-moz-range-thumb:hover {
+  background: #2386FF;
+}
+
+.services-select input[type="range"]::-ms-thumb:hover {
+  background: #2386FF;
+}
+
+/* Input Track */
+.services-select input[type=range]::-webkit-slider-runnable-track  {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.services-select input[type=range]::-moz-range-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.services-select input[type="range"]::-ms-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
 </style>
 @endsection
 
@@ -152,7 +300,7 @@
             </div>
         </div>
         <div class="row align-items-center">
-            <div class="col-lg-6">
+            {{-- <div class="col-lg-6">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="services-select">
@@ -196,6 +344,67 @@
                             <input id="chb" type="radio" />
                             <span>Pazarlama ve Promosyon ekleri</span>
                             <p>0.15$/adet</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="total-button">
+                            <button>Hesabla</button>
+                        </div>
+                    </div>
+                </div>
+            </div> --}}
+            <div class="col-lg-6">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="services-select">
+                            <input type="range" value="0"min="0"max="100" oninput="rangevalue.value=value"/>
+                            <output id="rangevalue">0</output>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-2 mt-4">
+                    <div class="col-lg-12">
+                        <div class="big-title">
+                            <h4>Kaç ürünün hazırlanmasına ihtiyacınız var </h4>
+                            <span>Ek hizmetleri işareliyerek satın alabilirsiniz</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col-lg-6">
+                        <div class="invisible-checkboxes">
+                            <input type="checkbox" name="rGroup" value="1" id="r1"/>
+                            <label class="checkbox-alias" for="r1">
+                                <span>FNSKU Etiketleme</span>
+                                <p>0.40$/adet</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                       <div class="invisible-checkboxes">
+                            <input type="checkbox" name="rGroup" value="2" id="r2"/>
+                            <label class="checkbox-alias" for="r2">
+                                <span>Koruyucu Malzeme</span>
+                                <p>0.49$/adett</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                       <div class="invisible-checkboxes">
+                            <input type="checkbox" name="rGroup" value="3" id="r3"/>
+                            <label class="checkbox-alias" for="r3">
+                                <span>Ekstra Koli</span>
+                                <p>1.99$/adet</p>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="invisible-checkboxes">
+                            <input type="checkbox" name="rGroup" value="4" id="r4"/>
+                            <label class="checkbox-alias" for="r4">
+                                <span>Pazarlama ve Promosyon ekleri</span>
+                                <p>0.15$/adet</p>
+                            </label>
                         </div>
                     </div>
                     <div class="col-lg-12">

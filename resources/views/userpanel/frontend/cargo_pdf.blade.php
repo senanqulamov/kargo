@@ -12,10 +12,10 @@
             height: 100%;
         }
 
-        body {
+        /* body {
             width: 40%;
             margin: auto;
-        }
+        } */
 
         .pdf-cont {
             width: 100%;
@@ -28,9 +28,9 @@
             transition: 0.6s;
         }
 
-        .pdf-cont:hover {
+        /* .pdf-cont:hover {
             transform: scale(1.1);
-        }
+        } */
 
         .cont {
             border: 2px solid black;

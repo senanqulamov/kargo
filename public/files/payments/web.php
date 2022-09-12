@@ -54,7 +54,7 @@ Route::get('/marketplace', [HomeController::class, 'marketplace'])->name('market
 Route::get('/export', [HomeController::class, 'export'])->name('export');
 Route::get('/servicesFee', [HomeController::class, 'servicesFee'])->name('servicesFee');
 Route::get('/getquote', [HomeController::class, 'getquote'])->name('getquote');
-Route::get('/service', [HomeController::class, 'servcice'])->name('servcice');
+Route::get('/service', [HomeController::class, 'service'])->name('servcice');
 Route::get('/membershifee', [HomeController::class, 'membershifee'])->name('membershifee');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/track', [HomeController::class, 'track'])->name('track');

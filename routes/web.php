@@ -54,7 +54,7 @@ Route::get('/marketplace', [HomeController::class, 'marketplace'])->name('market
 Route::get('/export', [HomeController::class, 'export'])->name('export');
 Route::get('/servicesFee', [HomeController::class, 'servicesFee'])->name('servicesFee');
 Route::get('/getquote', [HomeController::class, 'getquote'])->name('getquote');
-Route::get('/service', [HomeController::class, 'servcice'])->name('servcice');
+Route::get('/service', [HomeController::class, 'service'])->name('servcice');
 Route::get('/membershifee', [HomeController::class, 'membershifee'])->name('membershifee');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/track', [HomeController::class, 'track'])->name('track');
@@ -103,6 +103,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
 		// users
 		Route::get('/users', [UserController::class, 'index'])->name('users');
 		Route::get('/users/{id}', [UserController::class, 'details'])->name('users.details');
+		Route::post('/users/addnew', [UserController::class, 'addnew'])->name('users.addnew');
+		Route::get('/ban_user{id}', [UserController::class, 'ban_user'])->name('users.ban_user');
+		Route::get('/unban_user{id}', [UserController::class, 'unban_user'])->name('users.unban_user');
+		Route::get('/user_logs', [UserController::class, 'user_logs'])->name('user_logs');
 		Route::post('/users/update/general/{id}', [UserController::class, 'updateUserGeneral'])->name('users.general.update');
 		Route::post('/users/update/password/{id}', [UserController::class, 'updateUserPassword'])->name('users.password.update');
 
@@ -140,6 +144,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 			Route::post('/order_update/{id}', [ManuelOrderController::class, 'order_update'])->name('order_update');
 			Route::post('/order_action', [ManuelOrderController::class, 'order_action'])->name('order_action');
 
+            Route::get('/special_offers', [ManuelOrderController::class, 'special_offers'])->name('special_offers');
+            Route::post('/give_offer/{id}', [ManuelOrderController::class, 'give_offer'])->name('give_offer');
+
 		});
 
         Route::prefix('scanners/')->name('scanners.')->group(function(){
@@ -174,12 +181,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::post('/add-notification', [MessageController::class, 'addNotification'])->name('addNotification');
             Route::get('/disable-notification/{id}', [MessageController::class, 'disableNotification'])->name('disableNotification');
             Route::get('/activate-notification/{id}', [MessageController::class, 'activateNotification'])->name('activateNotification');
+            Route::post('/edit-notification', [MessageController::class, 'editNotification'])->name('editNotification');
             Route::get('/delete-notification/{id}', [MessageController::class, 'deleteNotification'])->name('deleteNotification');
 
             Route::get('/usages', [MessageController::class, 'usages'])->name('usages');
             Route::post('/add-usage', [MessageController::class, 'addUsage'])->name('addUsage');
             Route::get('/disable-usage/{id}', [MessageController::class, 'disableUsage'])->name('disableUsage');
             Route::get('/activate-usage/{id}', [MessageController::class, 'activateUsage'])->name('activateUsage');
+            Route::post('/edit-usage', [MessageController::class, 'editUsage'])->name('editUsage');
             Route::get('/delete-usage/{id}', [MessageController::class, 'deleteUsage'])->name('deleteUsage');
 
             Route::get('/support', [MessageController::class, 'support'])->name('support');
@@ -225,7 +234,13 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 			Route::get('/personal', [CargoCompanyController::class, 'personal_cargo'])->name('personal');
 			Route::post('/create_personal_cargo', [CargoCompanyController::class, 'create_personal_cargo'])->name('create_personal_cargo');
-		});
+
+            Route::get('/amazon_addresses', [CargoCompanyController::class, 'amazon_addresses'])->name('amazon_addresses');
+            Route::post('/amazon/addresses/create', [CargoCompanyController::class, 'amazon_addresses_create'])->name('amazon_addresses.create');
+            Route::patch('/amazon/addresses/{amazon_address}', [CargoCompanyController::class, 'amazon_addresses_update'])->name('amazon_addresses.update');
+            Route::get('/amazon/addresses/delete/{amazon_address}', [CargoCompanyController::class, 'amazon_addresses_delete'])->name('amazon_addresses.delete');
+
+        });
 
 		// branch
 		Route::prefix('branches/')->name('branches.')->group(function(){
@@ -355,6 +370,7 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::post('/getquotemanualorder', [UserPanelController::class, 'getquotemanualorder'])->name('getquote.manualorder');
 
         Route::get('/generatePdfManualOrder/{id}', [UserPanelController::class, 'generatePdfManualOrder'])->name('generatePdfManualOrder');
+        Route::get('/generatePdfAmazonOrder/{id}', [SimplePages::class, 'generatePdfAmazonOrder'])->name('generatePdfAmazonOrder');
 
         Route::get('/cargorequests', [UserPanelController::class, 'cargorequests'])->name('cargorequests');
         Route::post('/updatecargo/{id}', [UserPanelController::class, 'updatecargo'])->name('updatecargo');
@@ -403,6 +419,8 @@ Route::prefix('userpanel')->name('userpanel.')->group(function(){
         Route::post('/create_bulk_order', [SimplePages::class, 'create_bulk_order'])->name('create_bulk_order');
 
         Route::get('/get_special_offer', [SimplePages::class, 'get_special_offer'])->name('get_special_offer');
+        Route::post('/post_special_offer', [SimplePages::class, 'post_special_offer'])->name('post_special_offer');
+        Route::get('/special_offers', [SimplePages::class, 'special_offers'])->name('special_offers');
 
         Route::get('/logout', [UserAuth::class, 'logout'])->name('logout_user');
 	});

@@ -42,6 +42,7 @@
                             <tr>
                                 <th style="width:50px">Image</th>
                                 <th>Company Name</th>
+                                <th>Description</th>
                                 <th>Entegrations</th>
                                 <th>PSH</th>
                                 <th>Jet Price</th>
@@ -65,6 +66,7 @@
                                         @endif
                                     </td>
                                     <td>{{ $cargo->name }}</td>
+                                    <td>{{ $cargo->description }}</td>
                                     <td>
                                         @php $entegre=json_decode($cargo->entegrations) @endphp
                                         <span><b>API:</b> {{ $entegre[0] }}</span></br>
@@ -114,6 +116,12 @@
                                                             placeholder="Enter company name" name="name"
                                                             value="{{ $cargo->name }}">
                                                     </div>
+                                                    <div class="form-group">
+                                                        <label for="description">Description</label>
+                                                        <input type="text" class="form-control" id="description"
+                                                            placeholder="Enter company description" name="description"
+                                                            value="{{ $cargo->description }}">
+                                                    </div>
 
                                                     <div class="row">
                                                         <div class="col-md-6">
@@ -139,7 +147,7 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label for="PSH">PSH</label>
-                                                                <input type="number" class="form-control" id="PSH"
+                                                                <input type="number" class="form-control" id="PSH" step="any"
                                                                     placeholder="Enter company PSH" name="PSH"
                                                                     value="{{ $cargo->PSH }}">
                                                             </div>
@@ -147,7 +155,7 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label for="jet_price">Jet Price</label>
-                                                                <input type="number" class="form-control" id="jet_price"
+                                                                <input type="number" class="form-control" id="jet_price" step="any"
                                                                     placeholder="Enter company Jet Price" name="jet_price"
                                                                     value="{{ $cargo->jet_price }}">
                                                                 <span </div>
@@ -159,7 +167,7 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label for="emergency">Emergency</label>
-                                                                <input type="number" class="form-control" id="emergency"
+                                                                <input type="number" class="form-control" id="emergency" step="any"
                                                                     placeholder="Enter company emergency" name="emergency"
                                                                     value="{{ $cargo->emergency }}">
                                                             </div>
@@ -167,7 +175,7 @@
                                                         <div class="col">
                                                             <div class="form-group">
                                                                 <label for="kar_marj">Kar Marj</label>
-                                                                <input type="number" class="form-control" id="kar_marj"
+                                                                <input type="number" class="form-control" id="kar_marj" step="any"
                                                                     placeholder="Enter company Kar Marj" name="kar_marj"
                                                                     value="{{ $cargo->kar_marj }}">
                                                             </div>
@@ -219,6 +227,11 @@
                                 name="inputName" value="{{ old('inputName') }}">
                             <span class="text-danger error-text inputName_error"></span>
                         </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control" id="description"
+                                placeholder="Enter company description" name="description">
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
@@ -245,7 +258,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="PSH">PSH</label>
-                                    <input type="number" class="form-control" id="PSH"
+                                    <input type="number" class="form-control" id="PSH" step="any"
                                         placeholder="Enter company PSH" name="PSH">
                                     <span class="text-danger error-text inputApi_error"></span>
                                 </div>
@@ -253,7 +266,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="jet_price">Jet Price</label>
-                                    <input type="number" class="form-control" id="jet_price"
+                                    <input type="number" class="form-control" id="jet_price" step="any"
                                         placeholder="Enter company Jet Price" name="jet_price"
                                         value="{{ old('inputPrivate') }}">
                                     <span class="text-danger error-text inputPrivate_error"></span>
@@ -265,7 +278,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="emergency">Emergency</label>
-                                    <input type="number" class="form-control" id="emergency"
+                                    <input type="number" class="form-control" id="emergency" step="any"
                                         placeholder="Enter company emergency" name="emergency"
                                         value="{{ old('inputPrivate') }}">
                                     <span class="text-danger error-text inputPrivate_error"></span>
@@ -274,7 +287,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="kar_marj">Kar Marj</label>
-                                    <input type="number" class="form-control" id="kar_marj"
+                                    <input type="number" class="form-control" id="kar_marj" step="any"
                                         placeholder="Enter company Kar Marj" name="kar_marj"
                                         value="{{ old('inputPrivate') }}">
                                     <span class="text-danger error-text inputPrivate_error"></span>

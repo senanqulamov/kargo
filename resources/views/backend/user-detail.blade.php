@@ -8,18 +8,6 @@
 @endsection
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: true,
-                timer: 4000
-            })
-        </script>
-    @endif
     <style>
         #is_admin,
         #user_role,
@@ -188,7 +176,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="user_role">User Role</label>
-                                            <select name="user_role" id="user_role" class="form-control">
+                                            <select name="user_role" id="user_role" class="form-control select-custom-hm">
                                                 @foreach ($user_roles as $role)
                                                     <option value="{{ $role->role_id }}"
                                                         @if ($user->user_role == $role->role_id) selected @endif>
@@ -201,7 +189,7 @@
                                     <div class="col">
                                         <div class="form-group">
                                             <label for="is_admin">Is Admin</label>
-                                            <select name="is_admin" id="is_admin" class="form-control">
+                                            <select name="is_admin" id="is_admin" class="form-control select-custom-hm">
                                                 <option value="0" @if ($user->is_admin == '0') selected @endif>Not Admin</option>
                                                 <option value="1" @if ($user->is_admin == '1') selected @endif>
                                                     Admin

@@ -13,19 +13,6 @@
 @endsection
 
 @section('content')
-    @if (session()->has('message'))
-        <script>
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: '{{ session()->get('message') }}',
-                showConfirmButton: false,
-                backdrop: false,
-                timer: 2000
-            })
-        </script>
-    @endif
-
     <div class="row">
         <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -42,93 +29,132 @@
         <!-- ./col -->
     </div>
     <div class="row">
-        <!-- /.col -->
         <div class="col">
-            <div class="card card-primary card-outline">
-                <div class="card-header">
-                    <h3 class="card-title">Notifications</h3>
-                </div>
-                <!-- /.card-header -->
+            <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                    <th>ID</th>
+                    <th>Status</th>
+                    <th>Name</th>
+                    <th>Message</th>
+                    <th>Image</th>
+                    <th>Date</th>
+                    <th>For Main Page</th>
+                    <th>Action</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </thead>
+                <tbody>
+                    @foreach ($notifications as $notification)
+                        <tr>
+                            <td>{{ $notification->id }}</td>
+                            @if ($notification->status == 0)
+                                <td style="background: #d41f1f73">
+                                    Disabled
+                                </td>
+                            @elseif ($notification->status == 1)
+                                <td style="background: #3fff4657">
+                                    Active
+                                </td>
+                            @endif
+                            <td>{{ $notification->name }}</td>
+                            <td>{!! json_decode($notification->message) !!}</td>
+                            <td>
+                                <img src="{{ asset('/') }}images/static_images/{{ $notification->image }}" alt=""
+                                    width="55%">
+                            </td>
+                            <td>{{ $notification->created_at }}</td>
+                            <td>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input"
+                                        id="main_page_{{ $notification->id }}" onchange="changeNotfView(this)">
+                                    <label class="custom-control-label" for="main_page_{{ $notification->id }}">
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-div-hm">
+                                    @if ($notification->status == 0)
+                                        <a href="{{ route('admin.messages.activateNotification', ['id' => $notification->id]) }}"
+                                            class="btn btn-success">
+                                            <i class="fa-solid fa-check-to-slot"></i>
+                                        </a>
+                                    @elseif ($notification->status == 1)
+                                        <a href="{{ route('admin.messages.disableNotification', ['id' => $notification->id]) }}"
+                                            class="btn btn-warning">
+                                            <i class="fa-solid fa-square-xmark"></i>
+                                        </a>
+                                    @endif
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-div-hm">
+                                    <a href="#" class="btn btn-info" data-toggle="modal"
+                                        data-target="#modal-edit-{{ $notification->id }}">
+                                        <i class="fa-solid fa-pen"></i>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="button-div-hm">
+                                    <a href="#" class="btn btn-danger" onclick="confirmAction(this)"
+                                        data-url="{{ route('admin.messages.deleteNotification', ['id' => $notification->id]) }}">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </div>
+                            </td>
 
-                <div class="card-body p-0">
-                    <div class="table-responsive mailbox-messages">
-                        <table class="table table-striped" style="width: 100%">
-                            <thead>
-                                <th>ID</th>
-                                <th>Status</th>
-                                <th>Name</th>
-                                <th>Message</th>
-                                <th>Image</th>
-                                <th>Date</th>
-                                <th>For Main Page</th>
-                                <th>Action</th>
-                                <th>Delete</th>
-                            </thead>
-                            <tbody>
-                                @foreach ($notifications as $notification)
-                                    <tr>
-                                        <td>{{ $notification->id }}</td>
-                                        @if ($notification->status == 0)
-                                            <td style="background: #d41f1f73">
-                                                Disabled
-                                            </td>
-                                        @elseif ($notification->status == 1)
-                                            <td style="background: #3fff4657">
-                                                Active
-                                            </td>
-                                        @endif
-                                        <td>{{ $notification->name }}</td>
-                                        <td>{!! json_decode($notification->message) !!}</td>
-                                        <td>
-                                            <img src="{{ asset('/') }}images/static_images/{{ $notification->image }}"
-                                                alt="" width="55%">
-                                        </td>
-                                        <td>{{ $notification->created_at }}</td>
-                                        <td>
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input"
-                                                id="main_page_{{ $notification->id }}" onchange="changeNotfView(this)">
-                                                <label class="custom-control-label" for="main_page_{{ $notification->id }}">
-                                                </label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="button-div-hm">
-                                                @if ($notification->status == 0)
-                                                    <a href="{{ route('admin.messages.activateNotification', ['id' => $notification->id]) }}"
-                                                        class="btn btn-success">
-                                                        <i class="fa-solid fa-check-to-slot"></i>
-                                                    </a>
-                                                @elseif ($notification->status == 1)
-                                                    <a href="{{ route('admin.messages.disableNotification', ['id' => $notification->id]) }}"
-                                                        class="btn btn-warning">
-                                                        <i class="fa-solid fa-square-xmark"></i>
-                                                    </a>
-                                                @endif
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="button-div-hm">
-                                                <a href="#" class="btn btn-danger" onclick="confirmAction(this)"
-                                                    data-url="{{ route('admin.messages.deleteNotification', ['id' => $notification->id]) }}">
-                                                    <i class="fa-solid fa-trash-can"></i>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                        <!-- /.table -->
-                    </div>
-                    <!-- /.mail-box-messages -->
-                </div>
-            </div>
-            <!-- /.card -->
+                            <div class="modal fade" id="modal-edit-{{ $notification->id }}">
+                                <div class="modal-dialog modal-dialog-centered modal-lg">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">
+                                                Edit <b>{{ $notification->name }}</b>'s Payment
+                                            </h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="{{ route('admin.messages.editNotification') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <input type="hidden" name="notification_id"
+                                                    value="{{ $notification->id }}">
+                                                <div class="row">
+                                                    <div class="form-group col">
+                                                        <label for="name">Name</label>
+                                                        <input type="text" class="form-control" name="name"
+                                                            value="{{ $notification->name }}">
+                                                    </div>
+                                                    <div class="form-group col">
+                                                        <label for="image">Image</label>
+                                                        <input type="file" class="form-control" name="image">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="form-group col">
+                                                        <label for="image">Message</label>
+                                                        <textarea class="compose-textarea form-control" name="message" style="height: 400px">
+                                                                {!! json_decode($notification->message) !!}
+                                                            </textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="text-right">
+                                                    <button type="submit" class="btn btn-primary">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        <!-- /.col -->
     </div>
-    <!-- /.row -->
 
     <!-- Add new Notification Modal -->
     <div class="modal fade" id="add-notification" tabindex="-1" role="dialog" aria-labelledby="add-notificationLabel"
@@ -141,7 +167,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form action="{{ route('admin.messages.addNotification') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.messages.addNotification') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="form-group">
@@ -154,7 +181,7 @@
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="compose-textarea" class="form-control" name="message" style="height: 400px">
+                            <textarea class="compose-textarea form-control" name="message">
 
                             </textarea>
                         </div>
@@ -168,7 +195,7 @@
         </div>
     </div>
     <script>
-        function changeNotfView(switch_input){
+        function changeNotfView(switch_input) {
             console.log(switch_input);
             console.log(switch_input.value);
         }
@@ -182,7 +209,7 @@
     <script>
         $(function() {
             // Summernote
-            $('#compose-textarea').summernote();
+            $('.compose-textarea').summernote();
         })
 
         function confirmAction(button) {

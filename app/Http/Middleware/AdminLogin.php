@@ -20,7 +20,12 @@ class AdminLogin
     {
         if(Auth::user()){
             if(Auth::user()->is_admin == "1"){
-                return $next($request);
+                if (Auth::user()->is_banned != 1) {
+                    return $next($request);
+                } else {
+                    $error = "You are banned from website, please contact with moderator";
+                    return Redirect::route('admin.index')->withErrors($error);
+                }
             }else{
                 $error = "You need to have admin role";
                 return Redirect::route('admin.index')->withErrors($error);

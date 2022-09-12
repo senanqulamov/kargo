@@ -1,6 +1,6 @@
-setTimeout(() => {
-    console.clear();
-}, 1000);
+// setTimeout(() => {
+//     console.clear();
+// }, 1000);
 
 //--------------------------- CALCULATING TOTAL COUNT starts here--------------------------->
 var total_count = 0;
@@ -54,7 +54,7 @@ function CalculateWeight(package_id) {
     MultiplyPackageWeight(package_id);
 }
 function MultiplyPackageWeight(package_id) {
-    var package_weight = parseInt(
+    var package_weight = parseFloat(
         document.querySelector(".package_weight_" + package_id).value
     );
     var package_count = parseInt(
@@ -94,8 +94,8 @@ function SumWeights(array) {
     array.forEach((element) => {
         total_weight += element;
     });
-    document.querySelector(".totalWeight").innerHTML = total_weight;
-    document.querySelector('input[name="total_weight"]').value = total_weight;
+    document.querySelector(".totalWeight").innerHTML = parseFloat(total_weight).toFixed(2);
+    document.querySelector('input[name="total_weight"]').value = parseFloat(total_weight).toFixed(2);
     total_weight = 0;
 }
 //--------------------------- CALCULATING Total weight ends here--------------------------->
@@ -225,6 +225,9 @@ function SumDecis(array) {
     array.forEach((element) => {
         total_deci += element;
     });
+    if(total_deci >=10){
+        total_deci = Math.round(total_deci);
+    }
     document.querySelector(".totalPricing").innerHTML = total_deci;
     document.querySelector('input[name="total_deci"]').value = total_deci;
     total_deci = 0;
@@ -247,7 +250,7 @@ function yekunHesabla(from_where) {
     var totalWorth = parseFloat(
         document.querySelector(".totalWorth").innerHTML
     ).toFixed(2);
-    var country = document.querySelector('#amazon-country').getAttribute('data-country');
+    var country = document.querySelector('input[name="country"]').value;
     var ajax_url = document.querySelector("#ajax_url").value;
 
     var boxCounts = document.querySelectorAll(".boxCount");
@@ -425,15 +428,18 @@ function nextTo(section_name, button) {
             required_message = "Please select any cargo company";
         }
     }
-    if (section_name == "submit_button_form") {
-        var file_input_check = document.querySelector("#CustomFileUpload");
-        console.log(file_input_check.value);
-        if (!file_input_check.value) {
-            result = 0;
-            required_message = "Please upload needed documents";
-        } else {
-            modal_message = "Everything is ready to submit. You can submit now";
-        }
+    // if (section_name == "submit_button_form") {
+    //     var file_input_check = document.querySelector("#CustomFileUpload");
+    //     console.log(file_input_check.value);
+    //     if (!file_input_check.value) {
+    //         result = 0;
+    //         required_message = "Please upload needed documents";
+    //     } else {
+    //         modal_message = "Everything is ready to submit. You can submit now";
+    //     }
+    // }
+    if(section_name == "order_info"){
+        required = [];
     }
 
     // check all inputs
@@ -456,7 +462,7 @@ function nextTo(section_name, button) {
             });
         } else {
             Swal.fire({
-                position: "center",
+                position: "top",
                 icon: "success",
                 html:
                     `
@@ -467,16 +473,17 @@ function nextTo(section_name, button) {
                     `
                         </h3>
                     `,
-                backdrop: true,
+                backdrop: false,
                 showConfirmButton: false,
                 timerProgressBar: true,
-                timer: 3000,
+                timer: 4000,
             });
             section.classList.add("active-order-form-div");
             button.style.display = "none";
             if(section_name == "shipment_def"){
                 document.querySelector(".next-button-get-quote").style.display = "block";
             }
+            window.scrollTo(0, document.body.scrollHeight);
         }
     } else {
         Swal.fire({

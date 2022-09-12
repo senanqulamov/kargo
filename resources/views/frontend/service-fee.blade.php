@@ -3,7 +3,123 @@
 @section('title', 'Service Fee')
 
 @section('content')
+<style>
+ .services-select{
+    display:flex;
+    align-items:flex-start !important;
+    flex-direction:column !important;
+}
 
+.services-select   input,
+output {
+display: inline-block;
+vertical-align: middle;
+font-size: 1em;
+
+}
+
+.services-select output {
+    background: transparent;
+    border-radius: 3px;
+    color: #000;
+    #000: 15px 0;
+    font-size: 30px;
+}
+
+.services-select input[type="number"] {
+width: 40px;
+padding: 4px 5px;
+border: 1px solid #bbb;
+border-radius: 3px;
+}
+
+/* input[type="range"]:focus,
+input[type="number"]:focus {
+box-shadow: 0 0 3px 1px #4b81dd;
+outline: none;
+} */
+
+.services-select input[type="range"] {
+-webkit-appearance: none;
+margin-right: 15px;
+width: 100%;
+height: 7px;
+padding:0 !important;
+background: #c8c8c8;
+border-radius: 5px;
+background-image:linear-gradient(#2386FF, #2386ff);
+background-size: 0% 100%;
+background-repeat: no-repeat;
+}
+
+/* Input Thumb */
+.services-select input[type="range"]::-webkit-slider-thumb {
+-webkit-appearance: none;
+height: 20px;
+width: 20px;
+border-radius: 50%;
+background: #2386FF;
+cursor: ew-resize;
+box-shadow: 0 0 2px 0 #555;
+transition: background .3s ease-in-out;
+}
+
+.services-select input[type="range"]::-moz-range-thumb {
+-webkit-appearance: none;
+height: 20px;
+width: 20px;
+border-radius: 50%;
+background: #2386FF;
+cursor: ew-resize;
+box-shadow: 0 0 2px 0 #555;
+transition: background .3s ease-in-out;
+}
+
+.services-select input[type="range"]::-ms-thumb {
+-webkit-appearance: none;
+height: 20px;
+width: 20px;
+border-radius: 50%;
+background: #2386FF;
+cursor: ew-resize;
+box-shadow: 0 0 2px 0 #555;
+transition: background .3s ease-in-out;
+}
+
+.services-select input[type="range"]::-webkit-slider-thumb:hover {
+background: #2386FF;
+}
+
+.services-select input[type="range"]::-moz-range-thumb:hover {
+background: #2386FF;
+}
+
+.services-select input[type="range"]::-ms-thumb:hover {
+background: #2386FF;
+}
+
+/* Input Track */
+.services-select input[type=range]::-webkit-slider-runnable-track  {
+-webkit-appearance: none;
+box-shadow: none;
+border: none;
+background: transparent;
+}
+
+.services-select input[type=range]::-moz-range-track {
+-webkit-appearance: none;
+box-shadow: none;
+border: none;
+background: transparent;
+}
+
+.services-select input[type="range"]::-ms-track {
+-webkit-appearance: none;
+box-shadow: none;
+border: none;
+background: transparent;
+}
+</style>
 <!-- ServicesFee start -->
 <section id="ServicesFeeTitle">
     <div class="container">
@@ -43,9 +159,9 @@
                             <div class="col-lg-12">
                                 <div class="title-fulment">
                                     <h2>SEFF Fulfillment</h2>
-                                    <span>With our technological solutions, you can both facilitate the 
-                                        operation of your orders and provide your customers with a 
-                                        pleasant delivery experience thanks to our end-to-end logistics 
+                                    <span>With our technological solutions, you can both facilitate the
+                                        operation of your orders and provide your customers with a
+                                        pleasant delivery experience thanks to our end-to-end logistics
                                         service.</span>
                                 </div>
                             </div>
@@ -201,7 +317,7 @@
                                 <div class="storage-title">
                                     <h2>ShipLounge Warehousing</h2>
                                     <span>You can start the operational process of your orders on the s
-                                        ame day, while ensuring that your products are kept safely by 
+                                        ame day, while ensuring that your products are kept safely by
                                         utilizing warehousing services.</span>
                                 </div>
                             </div>
@@ -256,8 +372,8 @@
                             <div class="col-lg-12">
                                 <div class="title">
                                     <h2>ShipLounge Amazon FBA</h2>
-                                    <span>We manage your Amazon FBA operation on your behalf. While 
-                                        our experienced team is doing your product packaging and 
+                                    <span>We manage your Amazon FBA operation on your behalf. While
+                                        our experienced team is doing your product packaging and
                                         labeling, you only have to do your FBA planning.</span>
                                 </div>
                             </div>
@@ -273,12 +389,9 @@
                                         <h4>1) How many products do you need to prepare?</h4>
                                         <span>Please specify the number of products!</span>
                                     </div>
-                                    <div class="progressBar">
-                                        <div class="progress">
-                                            <div class="progress-bar w-25" role="progressbar" aria-valuenow="5" aria-valuemin="0" aria-valuemax="5000">
-                                            </div>
-                                        </div>
-                                        <span>0</span>
+                                    <div class="services-select">
+                                        <input type="range" value="0"min="0"max="100" oninput="rangevalue.value=value"/>
+                                        <output id="rangevalue">0</output>
                                     </div>
                                     <div class="bar2">
                                         <h4>2) Services You Want To Add</h4>
@@ -321,7 +434,7 @@
                                 <div class="card__body">
                                     <div class="card__body-cover">
                                         <img class="card__body-cover-image" src="{{asset('/')}}frontend/img/material.png" />
-                                        <span class="card__body-cover-checkbox"> 
+                                        <span class="card__body-cover-checkbox">
                                             <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
                                                 <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                             </svg>
@@ -336,7 +449,7 @@
                                     <div class="card__body">
                                         <div class="card__body-cover">
                                             <img class="card__body-cover-image" src="{{asset('/')}}frontend/img/inserts.png" />
-                                            <span class="card__body-cover-checkbox"> 
+                                            <span class="card__body-cover-checkbox">
                                                 <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
                                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                                 </svg>
@@ -352,7 +465,7 @@
                                     <div class="card__body">
                                         <div class="card__body-cover">
                                             <img class="card__body-cover-image" src="{{asset('/')}}frontend/img/box.png" />
-                                            <span class="card__body-cover-checkbox"> 
+                                            <span class="card__body-cover-checkbox">
                                                 <svg class="card__body-cover-checkbox--svg" viewBox="0 0 12 10">
                                                     <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
                                                 </svg>
@@ -380,9 +493,9 @@
                 <div class="left-free">
                     <h2>Want to try for free?</h2>
                     <span>With our technological solutions, you can bot
-                        facilitate the operation of your 
-                        orders and provide your customers with a 
-                        pleasant delivery experience thanks to our 
+                        facilitate the operation of your
+                        orders and provide your customers with a
+                        pleasant delivery experience thanks to our
                         end-to-end logistics service.</span>
                     <button>Start now</button>
                 </div>
@@ -397,8 +510,35 @@
 </section>
 <!-- Free Section end -->
 
+
+<script>
+
+const rangeInputs = document.querySelectorAll('input[type="range"]')
+const numberInput = document.querySelector('input[type="number"]')
+
+function handleInputChange(e) {
+  let target = e.target
+  if (e.target.type !== 'range') {
+    target = document.getElementById('range')
+  }
+  const min = target.min
+  const max = target.max
+  const val = target.value
+
+  target.style.backgroundSize = (val - min) * 100 / (max - min) + '% 100%'
+}
+
+rangeInputs.forEach(input => {
+  input.addEventListener('input', handleInputChange)
+})
+
+numberInput.addEventListener('input', handleInputChange)
+
+</script>
+
+@include('frontend.partials.faqs')
 <!-- Accordion Start -->
-<section id="Accordion">
+{{-- <section id="Accordion">
     <div class="container">
         <div class="row mt-6 mb-5">
             <div class="title" style="text-align: center;">
@@ -544,6 +684,6 @@
             </div>
         </div>
     </div>
-</section>
+</section> --}}
 <!-- Accordion End -->
 @endsection

@@ -54,7 +54,7 @@ function CalculateWeight(package_id) {
     MultiplyPackageWeight(package_id);
 }
 function MultiplyPackageWeight(package_id) {
-    var package_weight = parseInt(
+    var package_weight = parseFloat(
         document.querySelector(".package_weight_" + package_id).value
     );
     var package_count = parseInt(
@@ -94,8 +94,10 @@ function SumWeights(array) {
     array.forEach((element) => {
         total_weight += element;
     });
-    document.querySelector(".totalWeight").innerHTML = total_weight;
-    document.querySelector('input[name="total_weight"]').value = total_weight;
+    document.querySelector(".totalWeight").innerHTML =
+        parseFloat(total_weight).toFixed(2);
+    document.querySelector('input[name="total_weight"]').value =
+        parseFloat(total_weight).toFixed(2);
     total_weight = 0;
 }
 //--------------------------- CALCULATING Total weight ends here--------------------------->
@@ -225,6 +227,9 @@ function SumDecis(array) {
     array.forEach((element) => {
         total_deci += element;
     });
+    if (total_deci >= 10) {
+        total_deci = Math.round(total_deci);
+    }
     document.querySelector(".totalPricing").innerHTML = total_deci;
     document.querySelector('input[name="total_deci"]').value = total_deci;
     total_deci = 0;
@@ -284,25 +289,47 @@ function yekunHesabla(from_where) {
             },
             success: function (data) {
                 console.log(data);
-                var companies = Object.keys(data.cargo_companies);
-                companies.forEach((element) => {
-                    document.querySelector(
-                        "#cargo_company_" + element
-                    ).innerHTML =
-                        parseFloat(data.cargo_companies[element]).toFixed(2) +
-                        " € ";
-                    document
-                        .querySelector("#cargo_company_input_" + element)
-                        .setAttribute(
-                            "data-price",
-                            parseFloat(data.cargo_companies[element]).toFixed(2)
-                        );
-                    document.querySelector(
-                        'input[name="company_value[' + element + ']"]'
-                    ).value = parseFloat(data.cargo_companies[element]).toFixed(
-                        2
-                    );
+                var company_spans =
+                    document.querySelectorAll(".company_span_cls");
+                var company_radios =
+                    document.querySelectorAll(".company_radio_cls");
+                var company_hiddens = document.querySelectorAll(
+                    ".company_hidden_cls"
+                );
+                company_spans.forEach((element) => {
+                    element.innerHTML = 0 + " € ";
                 });
+                company_radios.forEach((element) => {
+                    element.setAttribute("data-price", 0);
+                });
+                company_hiddens.forEach((element) => {
+                    element.value = 0;
+                });
+
+                var companies = Object.keys(data.cargo_companies);
+                if (companies.length != 0) {
+                    companies.forEach((element) => {
+                        document.querySelector(
+                            "#cargo_company_" + element
+                        ).innerHTML =
+                            parseFloat(data.cargo_companies[element]).toFixed(
+                                2
+                            ) + " € ";
+                        document
+                            .querySelector("#cargo_company_input_" + element)
+                            .setAttribute(
+                                "data-price",
+                                parseFloat(
+                                    data.cargo_companies[element]
+                                ).toFixed(2)
+                            );
+                        document.querySelector(
+                            'input[name="company_value[' + element + ']"]'
+                        ).value = parseFloat(
+                            data.cargo_companies[element]
+                        ).toFixed(2);
+                    });
+                }
 
                 if (data.personal_array) {
                     var personal_companies = Object.values(data.personal_array);
@@ -316,7 +343,9 @@ function yekunHesabla(from_where) {
                             `
                         <label for="personal_company_input_` +
                             element.id +
-                            `" class="cargo-company-label" onclick="changePersonalCargo('`+element.name+`')">
+                            `" class="cargo-company-label" onclick="changePersonalCargo('` +
+                            element.name +
+                            `')">
                             <div class="list-group list-group-horizontal">
                                 <div
                                     class="list-group-item w-25 text-center d-flex align-items-center">
@@ -421,7 +450,7 @@ function yekunHesabla(from_where) {
 
                 companies.forEach((element) => {
                     element.addEventListener("change", function () {
-                        console.log(companies);
+                        // console.log(companies);
                         company_price = parseFloat(
                             document
                                 .querySelector(
@@ -563,15 +592,18 @@ function nextTo(section_name, button) {
             required_message = "Please select any cargo company";
         }
     }
-    if (section_name == "submit_button_form") {
-        var file_input_check = document.querySelector("#CustomFileUpload");
-        console.log(file_input_check.value);
-        if (!file_input_check.value) {
-            result = 0;
-            required_message = "Please upload needed documents";
-        } else {
-            modal_message = "Everything is ready to submit. You can submit now";
-        }
+    // if (section_name == "submit_button_form") {
+    //     var file_input_check = document.querySelector("#CustomFileUpload");
+    //     console.log(file_input_check.value);
+    //     if (!file_input_check.value) {
+    //         result = 0;
+    //         required_message = "Please upload needed documents";
+    //     } else {
+    //         modal_message = "Everything is ready to submit. You can submit now";
+    //     }
+    // }
+    if (section_name == "order_info") {
+        required = [];
     }
 
     // check all inputs
@@ -594,7 +626,7 @@ function nextTo(section_name, button) {
             });
         } else {
             Swal.fire({
-                position: "center",
+                position: "top",
                 icon: "success",
                 html:
                     `
@@ -605,7 +637,7 @@ function nextTo(section_name, button) {
                     `
                         </h3>
                     `,
-                backdrop: true,
+                backdrop: false,
                 showConfirmButton: false,
                 timerProgressBar: true,
                 timer: 3000,
@@ -616,6 +648,7 @@ function nextTo(section_name, button) {
                 document.querySelector(".next-button-get-quote").style.display =
                     "block";
             }
+            window.scrollTo(0, document.body.scrollHeight);
         }
     } else {
         Swal.fire({
@@ -633,6 +666,6 @@ function nextTo(section_name, button) {
     }
 }
 
-function changePersonalCargo(personal_name){
-    document.querySelector('#selected_personal').value = personal_name;
+function changePersonalCargo(personal_name) {
+    document.querySelector("#selected_personal").value = personal_name;
 }

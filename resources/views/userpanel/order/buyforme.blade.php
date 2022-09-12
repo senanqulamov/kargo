@@ -116,7 +116,7 @@
                             <h2 class="demand__h2">My Request</h2>
                         </div>
                         <div class="courier__table--1 mt-4">
-                            <table id="example1" class="table table-bordered" style="with:100%;">
+                            <table id="buyformeTable" class="table table-bordered" style="with:100%;">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
@@ -177,13 +177,29 @@
                                                 </a>
                                             </td>
                                             <td>{{ $cargo->product_note ? $cargo->product_note : '---' }}</td>
-                                            <td>{{ $cargo->created_at ? $cargo->created_at : '---' }}</td>
+                                            <td>
+                                                @php
+                                                    $created_at = Carbon\Carbon::parse($cargo->created_at)->format('d-M-Y H:i');
+                                                @endphp
+                                                <div class="orders-holder-hm" bis_skin_checked="1">
+                                                    <span class="badge rounded-pill bg-info user_id_badge">
+                                                        {{ $created_at ? $created_at : '---' }}
+                                                    </span>
+                                                </div>
+                                            </td>
                                             <td>
                                                 @if ($cargo->status != 'cancelled' && $cargo->status != 'payment')
                                                     <a href="#" onclick="requestAction(this)"
                                                         class="btn btn-danger" data-request-id="{{ $cargo->id }}"
                                                         data-status="cancelled" data-status_name="Cancel">
                                                         <i class="fas fa-window-close"></i>
+                                                    </a>
+                                                @endif
+                                                @if ($cargo->status == 'accepted')
+                                                    <a href="#" onclick="requestAction(this)"
+                                                        class="btn btn-success" data-request-id="{{ $cargo->id }}"
+                                                        data-status="payment" data-status_name="Acceptance">
+                                                        <i class="fas fa-check-to-slot"></i>
                                                     </a>
                                                 @endif
                                             </td>
@@ -212,7 +228,7 @@
                                                 <h2>Address information</h2>
                                             </div>
                                             <li class="list-group-item pb-4">
-                                                <select class="form-select border-primary"
+                                                <select class="form-select border-primary select-custom-hm"
                                                     onchange="changeUserAddress(this)" required>
                                                     <option class="optionText" selected disabled>
                                                         Select Address
@@ -307,15 +323,14 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="form-label">Count<span class="red-1">*</span></label>
-                                                    <input class="form-control" type="text" placeholder="12/12/2020"
-                                                        name="product_count">
+                                                    <input class="form-control" type="text" name="product_count">
                                                 </div>
                                                 <div class="form-group">
                                                     <label cclass="form-label">Link<span class="red-1">*</span></label>
                                                     <input class="form-control" type="text" name="product_link">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label">Note<span class="red-1">*</span></label>
+                                                    <label class="form-label">Note</label>
                                                     <input class="form-control" type="text" name="product_note">
                                                 </div>
                                             </div>
@@ -361,7 +376,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($forme_orders as $cargo)
-                                        @if ($cargo->status != 'pending')
+                                        @if ($cargo->status == 'payment' || $cargo->status == 'cancelled')
                                             <tr>
                                                 <td>{{ $cargo->id ? $cargo->id : '---' }}</td>
                                                 <td>
@@ -437,6 +452,50 @@
     </section>
 
     <script>
+        $(function() {
+            $("#buyformeTable").DataTable({
+                order: [
+                    [15, 'desc']
+                ],
+                "responsive": false,
+                "lengthChange": false,
+                "autoWidth": true,
+                scrollY: '50vh',
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+                dom: 'Brftip',
+                buttons: [{
+                    extend: 'excel',
+                    text: 'Save as Excel',
+                    filename: 'table_to_excel',
+                    extension: '.xlsx'
+                }]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $(function() {
+            $("#example2").DataTable({
+                order: [
+                    [3, 'asc']
+                ],
+                "responsive": false,
+                "lengthChange": false,
+                "autoWidth": true,
+                scrollY: '50vh',
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+                dom: 'Brftip',
+                buttons: [{
+                    extend: 'excel',
+                    text: 'Save as Excel',
+                    filename: 'table_to_excel',
+                    extension: '.xlsx'
+                }]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+    <script>
         function changeTab(tab_link) {
             var tab_name = tab_link.getAttribute('data-name');
             var tab = document.querySelector('.' + tab_name + '-hm');
@@ -491,21 +550,6 @@
                 document.querySelector('#save_address').checked = false;
             }
         }
-
-        $(function() {
-            $("#example2").DataTable({
-                order: [
-                    [0, 'desc']
-                ],
-                "responsive": false,
-                "lengthChange": false,
-                "autoWidth": true,
-                scrollY: '50vh',
-                scrollCollapse: true,
-                paging: false,
-                scrollX: true,
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        });
     </script>
     <script>
         function requestAction(button) {

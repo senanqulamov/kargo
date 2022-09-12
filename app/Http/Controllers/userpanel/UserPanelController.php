@@ -312,7 +312,7 @@ class UserPanelController extends Controller
 
         $deci = DB::table('cargo_zones')->select('companyID', 'zone')->where([
             ['desi', $request->total_deci],
-            ['user_id', 'null'],
+            ['user_id', null],
         ])->get();
         $zone = DB::table('cargo_countries')->where('country', $request->country)->get()->first();
 
@@ -399,10 +399,10 @@ class UserPanelController extends Controller
                 $deci_zone_value = $deci_zone_value + $psh + $jet + $emergency + $kar_marj;
 
                 // $result = array($deci->companyID => $deci_zone_value);
-                $company = CargoCompany::where('id' , $deci->companyID)->first();
+                $company = CargoCompany::where('id', $deci->companyID)->first();
                 $company_array = array(
                     'id' => $deci->companyID,
-                    'name' =>$deci->personal_name,
+                    'name' => $deci->personal_name,
                     'logo' => $company->logo,
                     'slug' => $company->slug,
                     'price' => $deci_zone_value
@@ -441,6 +441,8 @@ class UserPanelController extends Controller
                     $data[] = $name;
                 }
                 $data = array_unique($data);
+            } else {
+                $data = [];
             }
 
             $additional_services = json_encode($request->additional_services, true);
@@ -555,7 +557,7 @@ class UserPanelController extends Controller
                 UserAddress::create($new_user_address);
             }
 
-            if($request->personal_cargo == 'true'){
+            if ($request->personal_cargo == 'true') {
                 foreach ($request->personal_cargo_id as $key => $value) {
                     $personal_cargo = array(
                         'user_id' => Auth::user()->id,
@@ -568,7 +570,13 @@ class UserPanelController extends Controller
                 }
             }
 
-            return Redirect::back()->with('message', 'Cargo order successfully sent');
+            $cargo_requests = Cargo_request::all();
+            $amazon_orders = Amazon_order::all();
+            return view('userpanel.frontend.cargo_requests')->with([
+                'message' => 'Cargo order successfully sent',
+                'cargo_requests' => $cargo_requests,
+                'amazon_orders' => $amazon_orders
+            ]);
         } else {
             return Redirect::back()->with('error', 'Invalid arguments');
         }
@@ -646,11 +654,16 @@ class UserPanelController extends Controller
         switch (substr($id, 0, 1)) {
             case 'A':
                 $data = array(
+                    'name' => $request->name,
                     'country' => $request->country,
                     'currency' => $request->currency,
                     'ioss_number' => $request->ioss_number,
                     'vat_number' => $request->vat_number,
-                    'order_info' => $request->order_info
+                    'order_info' => $request->order_info,
+                    'city' => $request->city,
+                    'state' => $request->state,
+                    'address' => $request->address,
+                    'zipcode' => $request->zipcode
                 );
                 Amazon_order::where('id', $id)->update($data);
                 break;

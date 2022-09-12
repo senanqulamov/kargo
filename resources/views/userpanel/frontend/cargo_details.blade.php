@@ -41,128 +41,159 @@
                     <form action="{{ route('userpanel.updatecargo', ['id' => $cargo_id]) }}" method="POST">
                         @csrf
                         <section class="container p-1">
-                            <div class="border p-3">
-                                <div class="row" style="gap: 10px;">
-                                    <h4 class="package-id-style">
-                                        Order number:
-                                        <span>{{ $cargo_id }}</span>
+                            <fieldset style="padding: 0;" @if ($cargo->status != 0) disabled @endif>
+                                <div class="border p-3">
+                                    <div class="row" style="gap: 10px;">
+                                        <h4 class="package-id-style">
+                                            Order number:
+                                            <span>{{ $cargo_id }}</span>
+                                        </h4>
+                                    </div>
+                                    <hr>
+                                    <h4 class="row-hm">
+                                        Order status:
+                                        @php
+                                            $status = DB::table('package_statuses')
+                                                ->where('status', $cargo->status)
+                                                ->get()
+                                                ->first();
+                                        @endphp
+                                        <span class="status_style status_color_{{ $status->status }}">
+                                            {{ $status->status_name }}
+                                        </span>
+                                        Order Type: <b><u>{{ $cargo->order_type }}</u></b>
                                     </h4>
-                                </div>
-                                <hr>
-                                <h4 class="row-hm">
-                                    Order status:
-                                    @php
-                                        $status = DB::table('package_statuses')
-                                            ->where('status', $cargo->status)
-                                            ->get()
-                                            ->first();
-                                    @endphp
-                                    <span class="status_style status_color_{{ $status->status }}">
-                                        {{ $status->status_name }}
-                                    </span>
-                                    Order Type: <b><u>{{ $cargo->order_type }}</u></b>
-                                </h4>
-                                @if (substr($cargo_id, 0, 1) != 'A')
+                                    @if (substr($cargo_id, 0, 1) != 'A')
+                                        <div class="row form-group">
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="name" class="labelCustom">Name</label>
+                                                <input class="form-control" type="text" name="name"
+                                                    value="{{ $cargo->name }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="country" class="labelCustom">Country</label>
+                                                @php
+                                                    $countries = DB::table('cargo_countries')->get();
+                                                @endphp
+                                                <select name="country" class="form-control select-custom-hm">
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->country }}"
+                                                            @if ($country->country == $cargo->country) selected @endif>
+                                                            {{ $country->country }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="state" class="labelCustom">State</label>
+                                                <input class="form-control" type="text" name="state"
+                                                    value="{{ $cargo->state }}" />
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="city" class="labelCustom">City</label>
+                                                <input class="form-control" type="text" name="city"
+                                                    value="{{ $cargo->city }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="address" class="labelCustom">Address</label>
+                                                <input class="form-control" type="text" name="address"
+                                                    value="{{ $cargo->address }}" />
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="zipcode" class="labelCustom">Zip Code</label>
+                                                <input class="form-control" type="text" name="zipcode"
+                                                    value="{{ $cargo->zipcode }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="phone" class="labelCustom">Phone</label>
+                                                <input class="form-control" type="number" name="phone"
+                                                    value="{{ $cargo->phone }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="email" class="labelCustom">Email</label>
+                                                <input class="form-control" type="email" name="email"
+                                                    value="{{ $cargo->email }}" />
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="row">
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="name" class="labelCustom">Name</label>
+                                                <input class="form-control" type="text" name="name"
+                                                    value="{{ $cargo->name }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="country" class="labelCustom">Country</label>
+                                                @php
+                                                    $countries = DB::table('cargo_countries')->get();
+                                                @endphp
+                                                <select name="country" class="form-control select-custom-hm">
+                                                    @foreach ($countries as $country)
+                                                        <option value="{{ $country->country }}"
+                                                            @if ($country->country == $cargo->country) selected @endif>
+                                                            {{ $country->country }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="state" class="labelCustom">State</label>
+                                                <input class="form-control" type="text" name="state"
+                                                    value="{{ $cargo->state }}" />
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="city" class="labelCustom">City</label>
+                                                <input class="form-control" type="text" name="city"
+                                                    value="{{ $cargo->city }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="address" class="labelCustom">Address</label>
+                                                <input class="form-control" type="text" name="address"
+                                                    value="{{ $cargo->address }}" />
+                                            </div>
+                                            <div class="col d-flex flex-column py-3">
+                                                <label for="zipcode" class="labelCustom">Zip Code</label>
+                                                <input class="form-control" type="text" name="zipcode"
+                                                    value="{{ $cargo->zipcode }}" />
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="row form-group">
                                         <div class="col d-flex flex-column py-3">
-                                            <label for="name" class="labelCustom">Name</label>
-                                            <input class="form-control" type="text" name="name"
-                                                value="{{ $cargo->name }}" />
+                                            <label for="ioss_number" class="labelCustom">IOSS number</label>
+                                            <input class="form-control" type="text" name="ioss_number"
+                                                value="{{ $cargo->ioss_number }}" />
                                         </div>
                                         <div class="col d-flex flex-column py-3">
-                                            <label for="country" class="labelCustom">Country</label>
-                                            @php
-                                                $countries = DB::table('cargo_countries')->get();
-                                            @endphp
-                                            <select name="country" class="form-control">
-                                                @foreach ($countries as $country)
-                                                    <option value="{{ $country->country }}"
-                                                        @if ($country->country == $cargo->country) selected @endif>
-                                                        {{ $country->country }}</option>
+                                            <label for="vat_number" class="labelCustom">VAT number</label>
+                                            <input class="form-control" type="text" name="vat_number"
+                                                value="{{ $cargo->vat_number }}" />
+                                        </div>
+                                        <div class="col d-flex flex-column py-3">
+                                            <label for="currency" class="labelCustom">Currency</label>
+                                            <select name="currency" class="form-control">
+                                                @foreach ($currencies as $currency)
+                                                    <option value="{{ $currency->currency_code }}"
+                                                        @if ($currency->currency_code == $cargo->currency) selected @endif>
+                                                        {{ $currency->currency_name }}
+                                                    </option>
                                                 @endforeach
+                                                {{-- <option value="{{ $cargo->currency }}">{{ $cargo->currency }}</option> --}}
                                             </select>
                                         </div>
-                                        <div class="col d-flex flex-column py-3">
-                                            <label for="state" class="labelCustom">State</label>
-                                            <input class="form-control" type="text" name="state"
-                                                value="{{ $cargo->state }}" />
-                                        </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col d-flex flex-column py-3">
-                                            <label for="city" class="labelCustom">City</label>
-                                            <input class="form-control" type="text" name="city"
-                                                value="{{ $cargo->city }}" />
+                                            <label for="order_info" class="labelCustom">Order Info</label>
+                                            <textarea class="form-control" name="order_info" rows="4" cols="50">{{ $cargo->order_info }}</textarea>
                                         </div>
-                                        <div class="col d-flex flex-column py-3">
-                                            <label for="address" class="labelCustom">Address</label>
-                                            <input class="form-control" type="text" name="address"
-                                                value="{{ $cargo->address }}" />
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col d-flex flex-column py-3">
-                                            <label for="zipcode" class="labelCustom">Zip Code</label>
-                                            <input class="form-control" type="text" name="zipcode"
-                                                value="{{ $cargo->zipcode }}" />
-                                        </div>
-                                        <div class="col d-flex flex-column py-3">
-                                            <label for="phone" class="labelCustom">Phone</label>
-                                            <input class="form-control" type="number" name="phone"
-                                                value="{{ $cargo->phone }}" />
-                                        </div>
-                                        <div class="col d-flex flex-column py-3">
-                                            <label for="email" class="labelCustom">Email</label>
-                                            <input class="form-control" type="email" name="email"
-                                                value="{{ $cargo->email }}" />
-                                        </div>
-                                    </div>
-                                @else
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="country" class="labelCustom">Country</label>
-                                        @php
-                                            $countries = DB::table('cargo_countries')->get();
-                                        @endphp
-                                        <select name="country" class="form-control">
-                                            @foreach ($countries as $country)
-                                                <option value="{{ $country->country }}"
-                                                    @if ($country->country == $cargo->country) selected @endif>
-                                                    {{ $country->country }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                @endif
-                                <div class="row form-group">
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="ioss_number" class="labelCustom">IOSS number</label>
-                                        <input class="form-control" type="text" name="ioss_number"
-                                            value="{{ $cargo->ioss_number }}" />
-                                    </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="vat_number" class="labelCustom">VAT number</label>
-                                        <input class="form-control" type="text" name="vat_number"
-                                            value="{{ $cargo->vat_number }}" />
-                                    </div>
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="currency" class="labelCustom">Currency</label>
-                                        <select name="currency" class="form-control">
-                                            @foreach ($currencies as $currency)
-                                                <option value="{{ $currency->currency_code }}"
-                                                    @if ($currency->currency_code == $cargo->currency) selected @endif>
-                                                    {{ $currency->currency_name }}
-                                                </option>
-                                            @endforeach
-                                            {{-- <option value="{{ $cargo->currency }}">{{ $cargo->currency }}</option> --}}
-                                        </select>
                                     </div>
                                 </div>
-                                <div class="row form-group">
-                                    <div class="col d-flex flex-column py-3">
-                                        <label for="order_info" class="labelCustom">Order Info</label>
-                                        <textarea class="form-control" name="order_info" rows="4" cols="50">{{ $cargo->order_info }}</textarea>
-                                    </div>
-                                </div>
-                            </div>
+                            </fieldset>
                             <hr>
                             <div class="border p-3">
                                 <h4>Total values</h4>
@@ -218,10 +249,7 @@
 
                                             if ($cargo->personal_cargo == 'true') {
                                                 $personal_company = DB::table('personal_cargos')
-                                                    ->where([
-                                                        ['order_id', $cargo->id],
-                                                        ['name' , $cargo->selected_personal]
-                                                    ])
+                                                    ->where([['order_id', $cargo->id], ['name', $cargo->selected_personal]])
                                                     ->first();
                                             }
                                         @endphp
@@ -461,9 +489,11 @@
                             </div>
                             <hr>
                         </section>
-                        <div class="row justify-content-center">
-                            <button type="submit" class="btn btn-success" style="width: max-content">Update</button>
-                        </div>
+                        @if ($cargo->status == 0)
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-success" style="width: max-content">Update</button>
+                            </div>
+                        @endif
                     </form>
                 </div>
                 <!-- /.card-body -->

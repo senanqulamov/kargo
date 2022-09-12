@@ -27,6 +27,11 @@
         #upload {
             cursor: pointer;
         }
+        .form-control[readonly] {
+        background-color: #D1E2FF !important;
+        opacity: 1;
+        }
+
     </style>
     <section id="balance" class="balance">
 
@@ -114,7 +119,7 @@
                             </div>
 
                             <div class="balance__download-info mt-5">
-                                <div class="row balance__download-info-row">
+                                <div class="row balance__download-info-row align-items-center">
                                     <div class="col-4">
                                         <button type="button" class="balance__download-buttons">
                                             <div class="btn btn-light"><i class="far fa-plus plus"></i><i
@@ -237,63 +242,80 @@
                         </div>
 
 
-                        <div class="balance__label row mt-5">
-                            <div class="col-4">
+                        <!--<div class="balance__label row mt-5">-->
+                        <!--    <div class="col-4">-->
 
-                                <div class="balance__load">
-                                    <h4>Yuklenen tutar</h4>
+                        <!--        <div class="balance__load">-->
+                        <!--            <h4>Yuklenen tutar</h4>-->
+                        <!--        </div>-->
+
+                        <!--    </div>-->
+                        <!--    <div class="col-4">-->
+
+                        <!--        <div class="balance__load">-->
+                        <!--            <h4>Para birimi</h4>-->
+                        <!--        </div>-->
+
+
+                        <!--    </div>-->
+
+                        <!--    <div class="col-4">-->
+
+                        <!--        <div class="balance__load">-->
+                        <!--            <h4>Komission Hesablamar</h4>-->
+                        <!--        </div>-->
+
+
+                        <!--    </div>-->
+
+                        <!--</div>-->
+                        <div class="balance__input newRow row ">
+                            <div class="col-lg-2  col-md-6 col-sm-12 col-12">
+                                <div class="balance__input-file">
+                                    <div style="display:flex;" class="User_id_box">
+                                        <label> Name/ID
+                                            <a class="btn btn-info ttp" data-ttp="User ID">
+                                                010{{ Auth::user()->id }}20
+                                            </a>
+                                        </label>
+                                    </div>
                                 </div>
-
                             </div>
-                            <div class="col-4">
-
-                                <div class="balance__load">
-                                    <h4>Para birimi</h4>
-                                </div>
-
-
-                            </div>
-                            <div class="col-4">
-
-                                <div class="balance__load">
-                                    <h4>Komission Hesablamar</h4>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-                        <div class="balance__input  row ">
-                            <div class="col-sm-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                                 <div class="balance__input-file">
                                     <div style="display:flex;">
-                                        <a class="btn btn-info" style="font-size:15px;cursor:default">
-                                            010{{ Auth::user()->id }}20
-                                        </a>
-                                        <input type="text" class="form-control" name="balance" id="balance_input"
+                                        <label>Yüklenilen  tutar
+
+                                        <input type="text" class="form-control" placeholder="Örn:400" name="balance" id="balance_input"
                                             onchange="checkComission()">
+                                        </label>
                                     </div>
                                     <input type="text" name="kur" hidden>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
                                 <div class="balance__input-file">
+                                    <label>Para birimi
+
                                     <select class="form-select" aria-label="Default select example" name="money_type"
                                         id="money_type">
                                         <option selected value="tl">Turk lirasi</option>
                                         <option value="euro">Euro</option>
                                         {{-- <option value="usd">USD</option> --}}
                                     </select>
+                                    </label>
                                 </div>
 
 
 
 
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
 
                                 <div class="balance__input-file">
-                                    <input type="text" class="form-control" name="comission" readonly>
+                                    <label>Komisyon hesaplama
+                                        <input type="text" class="form-control" name="comission" readonly>
+                                    </label>
                                 </div>
 
 
@@ -539,9 +561,11 @@
                                             <button type="submit" class="balance__address-save--btn">Kaydet</button>
 
                                             <div class="balance__address-refund">
-                                                <button type="button" class="balance__address-refund--btn">Para Iade
-                                                    telebi
-                                                    olusdur</button>
+                                                <a type="button" class="btn btn-primary ttp ttp-right f-s-1-6"
+                                                    data-ttp="Request money refund at support page"
+                                                    href="{{ route('userpanel.support') }}">
+                                                    Request refund
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

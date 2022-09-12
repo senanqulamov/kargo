@@ -3,17 +3,28 @@
 namespace App\Http\Controllers\front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cargo_request;
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Branch;
 
 use App\Models\Country;
+use App\Models\Faqs;
+use App\Models\FaqsCategory;
 use App\Models\User as UserModel;
 
 class HomeController extends Controller
 {
     // index section
     public function index(){
+        $cargo_request_count = Cargo_request::whereIn('status',[3,4,7])->count();
+        $country_count = count(array_unique(Cargo_request::all()->pluck('country')->toArray()));
+        $customer_count = User::whereIsAdmin(0)->whereIsBanned(0)->whereUserRole(0)->count();
+        $locations = Branch::all();
+
         $countries=Country::orderBy('name','asc')->get();
-        return view('frontend.index', compact('countries'));
+
+        return view('frontend.index', compact('countries','cargo_request_count','country_count','customer_count','locations'));
     }
 
     public function ecommerce(){
@@ -33,7 +44,9 @@ class HomeController extends Controller
     }
 
     public function servicesFee(){
-        return view('frontend.services-fee');
+        $faqs = Faqs::all();
+        $categories = FaqsCategory::all();
+        return view('frontend.service-fee',compact('faqs','categories'));
     }
 
     public function getquote(){
@@ -41,7 +54,9 @@ class HomeController extends Controller
     }
 
     public function service(){
-        return view('frontend.services-fee');
+        $faqs = Faqs::all();
+        $categories = FaqsCategory::all();
+        return view('frontend.service-fee',compact('faqs','categories'));
     }
 
     public function membershifee(){

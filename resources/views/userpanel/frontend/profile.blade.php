@@ -178,17 +178,17 @@
                                     </div>
                                     <div class="col-12 col-md-6 d-flex">
                                         <div class="form-check me-3">
-                                            <input class="form-check-input" type="radio"
-                                                name="membership" id="membership1" value="personal"
-                                                @if (Auth::user()->membership == 'personal')checked @endif/>
+                                            <input class="form-check-input" type="radio" name="membership"
+                                                id="membership1" value="personal"
+                                                @if (Auth::user()->membership == 'personal') checked @endif />
                                             <label class="form-check-label h6" for="membership1">
                                                 Personal
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio"
-                                                name="membership" id="membership2" value="company"
-                                                @if (Auth::user()->membership == 'company')checked @endif/>
+                                            <input class="form-check-input" type="radio" name="membership"
+                                                id="membership2" value="company"
+                                                @if (Auth::user()->membership == 'company') checked @endif />
                                             <label class="form-check-label h6" for="membership2">
                                                 Company
                                             </label>
@@ -378,13 +378,15 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="name" class="label">Name</label>
-                                    <input class="form-control" type="text" name="name" id="ad_name" value="">
+                                    <input class="form-control" type="text" name="name" id="ad_name"
+                                        value="">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="address" class="label">Address</label>
-                                    <input class="form-control" type="text" name="address" id="ad_address" value="">
+                                    <input class="form-control" type="text" name="address" id="ad_address"
+                                        value="">
                                 </div>
                             </div>
                         </div>
@@ -392,13 +394,15 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="state" class="label">State</label>
-                                    <input class="form-control" type="text" name="state" id="ad_state" value="">
+                                    <input class="form-control" type="text" name="state" id="ad_state"
+                                        value="">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="city" class="label">City</label>
-                                    <input class="form-control" type="text" name="city" id="ad_city" value="">
+                                    <input class="form-control" type="text" name="city" id="ad_city"
+                                        value="">
                                 </div>
                             </div>
                         </div>
@@ -406,13 +410,15 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="country" class="label">Country</label>
-                                    <input class="form-control" type="text" name="country" id="ad_country" value="">
+                                    <input class="form-control" type="text" name="country" id="ad_country"
+                                        value="">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="zipcode" class="label">Zip Code</label>
-                                    <input class="form-control" type="text" name="zipcode" id="ad_zipcode" value="">
+                                    <input class="form-control" type="text" name="zipcode" id="ad_zipcode"
+                                        value="">
                                 </div>
                             </div>
                         </div>
@@ -420,13 +426,15 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="phone" class="label">Phone number</label>
-                                    <input class="form-control" type="text" name="phone" id="ad_phone" value="">
+                                    <input class="form-control" type="text" name="phone" id="ad_phone"
+                                        value="">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="email" class="label">Email address</label>
-                                    <input class="form-control" type="text" name="email" id="ad_email" value="">
+                                    <input class="form-control" type="text" name="email" id="ad_email"
+                                        value="">
                                 </div>
                             </div>
                         </div>
@@ -456,13 +464,13 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="name" class="label">Name</label>
-                                    <input class="form-control" type="text" name="name" id="ad_name" value="">
+                                    <input class="form-control" type="text" name="name" id="ad_name">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="address" class="label">Address</label>
-                                    <input class="form-control" type="text" name="address" id="ad_address" value="">
+                                    <input class="form-control" type="text" name="address" id="ad_address">
                                 </div>
                             </div>
                         </div>
@@ -470,13 +478,13 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="state" class="label">State</label>
-                                    <input class="form-control" type="text" name="state" id="ad_state" value="">
+                                    <input class="form-control" type="text" name="state" id="ad_state">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="city" class="label">City</label>
-                                    <input class="form-control" type="text" name="city" id="ad_city" value="">
+                                    <input class="form-control" type="text" name="city" id="ad_city">
                                 </div>
                             </div>
                         </div>
@@ -484,13 +492,21 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="country" class="label">Country</label>
-                                    <input class="form-control" type="text" name="country" id="ad_country" value="">
+                                    @php
+                                        $countries = DB::table('cargo_countries')->get();
+                                    @endphp
+                                    <select name="country" id="ad_country" class="select-custom-hm">
+                                        <option value="" selected disabled>Select Country</option>
+                                        @foreach ($countries as $country)
+                                            <option value="{{ $country->country }}">{{ $country->country }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="zipcode" class="label">Zip Code</label>
-                                    <input class="form-control" type="text" name="zipcode" id="ad_zipcode" value="">
+                                    <input class="form-control" type="text" name="zipcode" id="ad_zipcode">
                                 </div>
                             </div>
                         </div>
@@ -498,13 +514,13 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="phone" class="label">Phone number</label>
-                                    <input class="form-control" type="text" name="phone" id="ad_phone" value="">
+                                    <input class="form-control" type="text" name="phone" id="ad_phone">
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="email" class="label">Email address</label>
-                                    <input class="form-control" type="text" name="email" id="ad_email" value="">
+                                    <input class="form-control" type="text" name="email" id="ad_email">
                                 </div>
                             </div>
                         </div>

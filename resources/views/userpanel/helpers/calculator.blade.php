@@ -33,7 +33,7 @@
                         <div class="col-md-4 mt-4 mb-3">
                             <p>Country:</p>
                             <div class="input-group mb-3">
-                                <select class="form-select" name="selectCountry" id="selectCountry">
+                                <select class="form-select select-custom-hm" name="selectCountry" id="selectCountry">
                                     <option value="" selected disabled>Select Country</option>
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->name }}"
@@ -115,7 +115,7 @@
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="inputWeight"
                                     onchange="Calculate('desi' , this)">
-                                <span class="input-group-text" id="basic-addon1">kq</span>
+                                <span class="input-group-text" id="basic-addon1">kg</span>
                                 <span class="text-danger error-text inputWeight_error"></span>
                             </div>
                         </div>
@@ -179,7 +179,7 @@
 
                                     <div class="page__cacl-icon ">
                                         <p class="calc__box-text">Pricing weight:</p>
-                                        <p class="total_desi_div">0 desi</p>
+                                        <p class="total_desi_div">0 KGS</p>
                                         <input type="text" name="total_desi" id="total_desi_input" hidden />
                                     </div>
 
@@ -284,10 +284,12 @@
             var desi = Math.max(volume / 5000, weight) * count;
             if (isNaN(desi)) {
                 desi = 0;
+            }else if(desi >= 10){
+                desi = Math.round(desi);
             }
 
             document.querySelector('.total_volume_div').innerHTML = volume + ` m<sup>3</sup>`;
-            document.querySelector('.total_desi_div').innerHTML = desi + " desi";
+            document.querySelector('.total_desi_div').innerHTML = desi + " KGS";
             document.querySelector('#total_desi_input').value = desi;
         }
     </script>

@@ -22,6 +22,17 @@ class User extends Authenticatable
         'phone',
         'country',
         'city',
+        'address',
+        'address_2',
+        'indetification_number',
+        'tax_number',
+        'tax_adminstration',
+        'company_name',
+        'Iban',
+        'user_role',
+        'is_admin',
+        'is_banned',
+        'postcode',
         'password',
         'email_verified_at',
         'gender',
@@ -31,6 +42,7 @@ class User extends Authenticatable
         'average_requests',
         'integration',
         'balance_name',
+        'balance',
     ];
 
     protected $hidden = [

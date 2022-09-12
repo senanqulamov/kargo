@@ -80,6 +80,11 @@ class UserAuth extends Controller
             'password' => 'required|min:3'
         );
 
+        $user = UserModel::where('email' , '=' , $request->email)->first();
+        if($user->is_banned == 1){
+            return redirect()->back()->withErrors('You are banned from website, please contact with moderator');
+        }
+
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {

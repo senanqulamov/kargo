@@ -14,6 +14,7 @@ use App\Models\Forme_request;
 use App\Models\Order_time;
 use App\Models\Package;
 use App\Models\Product;
+use App\Models\SpecialOffer;
 use App\Models\User;
 use App\Models\UserAddress;
 use Illuminate\Support\Facades\Auth;
@@ -580,7 +581,7 @@ class ManuelOrderController extends Controller
                     'total_cargo_price' => $request->total_cargo_price,
                     'cargo_company' => $request->cargo_company,
                     'company_value' => $cargo_companies,
-                    'selected_personal' => $request->selected_personal,
+                    // 'selected_personal' => $request->selected_personal,
                     'additional_services' => $additional_services,
                     'battery' => $request->battery,
                     'liquid' => $request->liquid,
@@ -723,6 +724,14 @@ class ManuelOrderController extends Controller
 
         Forme_request::where('id', $id)->update($data);
 
+        $time_data = array(
+            'cargo_id' => $id,
+            'user_id' => Auth::user()->id,
+            'action' => 'Order updated',
+            'time' => Carbon::now()
+        );
+        Order_time::create($time_data);
+
         return Redirect::back()->with('message', 'Order succesfully updated');
     }
 
@@ -758,5 +767,23 @@ class ManuelOrderController extends Controller
         });
 
         return response()->json($message);
+    }
+
+    public function special_offers(){
+        $special_offers = SpecialOffer::all();
+
+        return view('backend.orders.special_offers', compact('special_offers'));
+    }
+
+    public function give_offer(Request $request , $id){
+
+        $data = array(
+            'offer_price' => $request->offer_price,
+            'comment' => $request->comment
+        );
+
+        SpecialOffer::where('id' , $id)->update($data);
+
+        return Redirect::back()->with('message' , 'Offer price succesfully sent');
     }
 }

@@ -1,135 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-    {{-- <style>
-        hr {
-            margin-top: 1rem;
-            margin-bottom: 1rem;
-            border: 0;
-            border-top: 3px dashed #0ea197b5;
-        }
-
-        .modal_package_cont {
-            border-bottom: 1px dotted #0ea197b5;
-            margin-bottom: 5px;
-            padding: 20px;
-        }
-
-        #example1 * {
-            font-size: 15px;
-        }
-
-        .additional_service_td {
-            display: flex;
-            flex-direction: row;
-            gap: 5px;
-            text-align: center;
-        }
-
-        .status_td {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-            text-align: center;
-        }
-
-        .additional_service_style {
-            border-radius: 10px;
-            padding: 0 10px;
-            font-size: 14px;
-            width: 110px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-
-        .details-modal-header-flex {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-        }
-
-        .status_style {
-            border-radius: 10px;
-            padding: 3px 10px;
-        }
-
-        .status_color_0 {
-            color: #63AEE0;
-            border: 1px solid #63AEE0;
-        }
-
-        .status_color_1 {
-            color: #EDBA4F;
-            border: 1px solid #EDBA4F;
-        }
-
-        .status_color_2 {
-            color: #9C62E2;
-            border: 1px solid #9C62E2;
-        }
-
-        .status_color_3 {
-            color: #8feab6;
-            border: 1px solid #8feab6;
-        }
-
-        .status_color_4 {
-            color: #5BBC73;
-            border: 1px solid #5BBC73;
-        }
-
-        .status_color_5 {
-            color: #D94B5D;
-            border: 1px solid #D94B5D;
-        }
-
-        .status_color_6 {
-            color: #c4d94b;
-            border: 1px solid #c4d94b;
-        }
-
-        .package_status_span {
-            color: white;
-            border-radius: 20px;
-            width: max-content;
-            height: max-content;
-            font-size: 12px;
-            padding: 4px 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .package_status_0 {
-            background: #63AEE0;
-        }
-
-        .package_status_1 {
-            background: #EDBA4F;
-        }
-
-        .package_status_2 {
-            background: #9C62E2;
-        }
-
-        .package_status_3 {
-            background: #8feab6;
-        }
-
-        .package_status_4 {
-            background: #5BBC73;
-        }
-
-        .package_status_5 {
-            background: #D94B5D;
-        }
-
-        .package_status_5 {
-            background: #c4d94b;
-        }
-    </style> --}}
     <div class="row">
 
         <div class="col-12">
@@ -393,7 +264,7 @@
                                         </a>
                                     </td>
                                     <td class="pdf-download-td-hm"
-                                        onclick="window.open('{{ route('userpanel.generatePdfManualOrder', ['id' => $cargo->id]) }}')">
+                                        onclick="window.open('{{ route('userpanel.generatePdfAmazonOrder', ['id' => $cargo->id]) }}')">
                                         <div style="display: flex;justify-content:center;">
                                             <a href="#">
                                                 <i class="fa-solid fa-arrow-down"></i>

@@ -28,7 +28,7 @@ class BlogController extends Controller
         $blogs=Blog::orderBy('created_at','desc')->get();
         return view('backend.blogs', compact('blogs'));
     }
-	
+
 	public function createAdmin(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -41,6 +41,7 @@ class BlogController extends Controller
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
             $services=new Blog;
+            $services->category=$request->category;
             $services->title=$request->inputTitle;
             $services->slug=Str::slug($request->inputTitle, '-');
             $services->description=$request->textareaDescription;
@@ -48,13 +49,13 @@ class BlogController extends Controller
             $file_name = time().'.'.$request->fileImage->extension();
             $request->fileImage->move(public_path('frontend/img/blog'), $file_name);
             $services->img=$file_name;
-            
+
             $services->save();
 
             return response()->json(['status'=>1, 'msg'=>'Blog was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
-	
+
 	public function editAdmin(Request $request)
     {
         $services=Blog::find($request->id);
@@ -82,6 +83,7 @@ class BlogController extends Controller
             $services=Blog::find($id);
 
             $services->title=$request->inputTitle2;
+            $services->category=$request->category;
             $services->slug=Str::slug($request->inputTitle2, '-');
             $services->description=$request->textareaDescription2;
 
@@ -94,7 +96,7 @@ class BlogController extends Controller
             $services->update();
 
             return response()->json(['status'=>1, 'msg'=>'Services company has been successfully updated', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function deleteAdmin($id){

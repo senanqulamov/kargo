@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User as UserModel;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -29,6 +30,11 @@ class AuthController extends Controller
             'email' => 'required|email',
             'password' => 'required|alphaNum|min:3'
         );
+
+        $user = UserModel::where('email' , '=' , $request->email)->first();
+        if($user->is_banned == 1){
+            return redirect()->back()->withErrors('You are banned from website, please contact with moderator');
+        }
 
         $validator = Validator::make($request->all() , $rules);
 
