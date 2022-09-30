@@ -68,13 +68,20 @@
                     order: [
                         [0, 'desc']
                     ],
-                    responsive: false,
-                    lengthChange: false,
-                    autoWidth: true,
-                    scrollY: "50vh",
+                    "responsive": false,
+                    "lengthChange": false,
+                    "autoWidth": true,
+                    scrollY: '50vh',
                     scrollCollapse: true,
                     paging: false,
                     scrollX: true,
+                    dom: 'Brftip',
+                    buttons: [{
+                        extend: 'excel',
+                        text: 'Save as Excel',
+                        filename: 'table_to_excel',
+                        extension: '.xlsx'
+                    }]
                 })
                 .buttons()
                 .container()

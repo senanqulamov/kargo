@@ -47,6 +47,7 @@
                                 <th>Name</th>
                                 <th>Address</th>
                                 <th>ZipCode</th>
+                                <th>City</th>
                                 <th>State</th>
                                 <th>Country</th>
                                 <th>Edit</th>
@@ -60,6 +61,7 @@
                                 <td>{{$amazon_address->name ?? null}}</td>
                                 <td>{{$amazon_address->address ?? null}}</td>
                                 <td>{{$amazon_address->zipcode ?? null}}</td>
+                                <td>{{$amazon_address->city ?? null}}</td>
                                 <td>{{$amazon_address->state ?? null}}</td>
                                 <td>{{$amazon_address->country ?? null}}</td>
                                 <td>

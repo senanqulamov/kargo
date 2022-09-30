@@ -27,6 +27,13 @@
             align-items: center;
             gap: 10px;
         }
+
+        .submit-btn-hm {
+            width: max-content;
+            width: max-content;
+            font-size: 1.5rem;
+            padding: 5px 16px;
+        }
     </style>
     <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
 
@@ -75,7 +82,7 @@
                                                 @php
                                                     $countries = DB::table('cargo_countries')->get();
                                                 @endphp
-                                                <select name="country" class="form-control select-custom-hm">
+                                                <select name="country" class="form-control select-custom-hm" disabled>
                                                     @foreach ($countries as $country)
                                                         <option value="{{ $country->country }}"
                                                             @if ($country->country == $cargo->country) selected @endif>
@@ -491,7 +498,7 @@
                         </section>
                         @if ($cargo->status == 0)
                             <div class="row justify-content-center">
-                                <button type="submit" class="btn btn-success" style="width: max-content">Update</button>
+                                <button type="submit" class="btn btn-success submit-btn-hm">Update</button>
                             </div>
                         @endif
                     </form>

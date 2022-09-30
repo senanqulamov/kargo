@@ -160,12 +160,12 @@
                         <img src="{{ asset('/') }}frontend/img/DHLFirma.svg" alt="">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-6" onclick="openIframe(this)" data-name="TNT" data-url="asdad">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6" onclick="openIframe(this)" data-name="TNT" data-url="https://www.tnt.com/express/en_us/site/tracking.html?searchType=con&cons=">
                     <div class="firma-card">
                         <img src="{{ asset('/') }}frontend/img/TNTFirma.svg" alt="">
                     </div>
                 </div>
-                <div class="col-lg-2 col-md-6 col-sm-6 col-6" onclick="openIframe(this)" data-name="Ptt" data-url="asdas">
+                <div class="col-lg-2 col-md-6 col-sm-6 col-6" onclick="openIframe(this)" data-name="Ptt" data-url="https://gonderitakip.ptt.gov.tr/Track/Verify?q=">
                     <div class="firma-card">
                         <img src="{{ asset('/') }}frontend/img/pttFirma.svg" alt="">
                     </div>

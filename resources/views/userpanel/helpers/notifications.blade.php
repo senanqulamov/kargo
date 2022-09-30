@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container p-4">
-            <div class="my-5 usage-div-cont">
+            <div class="usage-div-cont">
                 @foreach ($notifications as $notification)
                     @if ($notification->status == 1)
                         <a class="usage-div-holder" onclick="openNotification(this)" data-name="{{ $notification->name }}">

@@ -141,11 +141,13 @@
             </thead>
             <thead>
                 <tr>
+                    @php
+                        $settings = DB::table('settings')->where('name' , 'Packaging Fees')->orderBy('text')->get();
+                    @endphp
                     <th class="oneColumn" scope="col">Ücret</th>
-                    <th scope="col">7.79$</th>
-                    <th scope="col">8.79$</th>
-                    <th scope="col">8.79$</th>
-                    <th scope="col">8.79$</th>
+                    @foreach ($settings as $setting)
+                        <th scope="col">{!! json_decode($setting->details) !!}</th>
+                    @endforeach
                 </tr>
             </thead>
             <tbody>

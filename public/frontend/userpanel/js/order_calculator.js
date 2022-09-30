@@ -171,14 +171,24 @@ function MultiplyPackageVolume(package_id) {
     var total = 0;
     for (i = 0; i < product_lengthS.length; i++) {
         if (
-            parseInt(product_lengthS[i].value) > 0 &&
-            parseInt(product_heightS[i].value) > 0 &&
-            parseInt(product_widthS[i].value) > 0
+            !parseInt(product_heightS[i].value) ||
+            parseInt(product_heightS[i].value) < 0
         ) {
             total +=
                 parseInt(product_lengthS[i].value) *
-                parseInt(product_heightS[i].value) *
+                1 *
                 parseInt(product_widthS[i].value);
+        } else {
+            if (
+                parseInt(product_lengthS[i].value) > 0 &&
+                // parseInt(product_heightS[i].value) > 0 &&
+                parseInt(product_widthS[i].value) > 0
+            ) {
+                total +=
+                    parseInt(product_lengthS[i].value) *
+                    parseInt(product_heightS[i].value) *
+                    parseInt(product_widthS[i].value);
+            }
         }
     }
 
@@ -228,7 +238,13 @@ function SumDecis(array) {
         total_deci += element;
     });
     if (total_deci >= 10) {
-        total_deci = Math.round(total_deci);
+        total_deci = Math.ceil(total_deci);
+    } else {
+        if (total_deci % 1 > 0.5) {
+            total_deci = Math.round(total_deci);
+        } else {
+            total_deci = total_deci - (total_deci % 1) + 0.5;
+        }
     }
     document.querySelector(".totalPricing").innerHTML = total_deci;
     document.querySelector('input[name="total_deci"]').value = total_deci;
@@ -668,4 +684,25 @@ function nextTo(section_name, button) {
 
 function changePersonalCargo(personal_name) {
     document.querySelector("#selected_personal").value = personal_name;
+}
+
+function checkPackageType(select, package_id) {
+    var package_row = select.parentElement.parentElement;
+    var package_height = package_row.querySelector(".package-height-holder-hm");
+    var package_height_input = package_row.querySelector(".package-height");
+    var package_height_style = `
+        display:none;
+    `;
+
+    if (select.value == "envelop") {
+        package_height.setAttribute("style", package_height_style);
+        package_height_input.setAttribute("type", "hidden");
+        package_height_input.value = 1;
+    } else {
+        package_height.setAttribute("style", "");
+        package_height_input.setAttribute("type", "text");
+    }
+
+    MultiplyPackageVolume(package_id);
+    CalculateDeci(package_id);
 }

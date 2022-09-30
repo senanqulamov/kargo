@@ -266,7 +266,7 @@
                                 </div>
                                 <div class="img-title-content">
                                     <span>Total volume:</span>
-                                    <span class="total_volume_div">0 m</span>
+                                    <span class="total_volume_div">0 m <sup>3</sup></span>
                                 </div>
                             </div>
                         </div>
@@ -277,7 +277,7 @@
                                 </div>
                                 <div class="img-title-content">
                                     <span>Pricing weight:</span>
-                                    <span class="total_desi_div">0 desi</span>
+                                    <span class="total_desi_div">0 KGS</span>
                                     <input type="text" name="total_desi" id="total_desi_input" hidden />
                                 </div>
                             </div>
@@ -385,8 +385,8 @@
                 desi = 0;
             }
 
-            document.querySelector('.total_volume_div').innerHTML = volume + " m";
-            document.querySelector('.total_desi_div').innerHTML = desi + " desi";
+            document.querySelector('.total_volume_div').innerHTML = volume + ` m<sup>3</sup>`;
+            document.querySelector('.total_desi_div').innerHTML = desi + " KGS";
             document.querySelector('#total_desi_input').value = desi;
 
         }

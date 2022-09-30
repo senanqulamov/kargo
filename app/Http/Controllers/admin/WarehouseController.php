@@ -13,9 +13,11 @@ class WarehouseController extends Controller
 {
     public function index(){
         $packages=Package::orderBy('created_at','desc')->where('status', 1)->get();
-        return view('backend.warehouse', compact('packages'));
+        $page_title = "Warehouses";
+
+        return view('backend.warehouse', compact('packages','page_title'));
     }
-	
+
 	public function create(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -26,13 +28,13 @@ class WarehouseController extends Controller
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
             $package=Package::where('barcode', $request->inputBarcode)->first();
-            $package->status=1;            
+            $package->status=1;
             $package->save();
 
             return response()->json(['status'=>1, 'msg'=>'Package was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
-	
+
 	public function edit(Request $request)
     {
         $package=Package::find($request->id);
@@ -66,9 +68,9 @@ class WarehouseController extends Controller
             $package->update();
 
             return response()->json(['status'=>1, 'msg'=>'Package has been successfully updated', 'state'=>'Congratulations!']);
-        }         
+        }
     }
-	
+
 	public function search(Request $request)
     {
         $package=Package::where('barcode', $request->id)->where('status', 0)->first();

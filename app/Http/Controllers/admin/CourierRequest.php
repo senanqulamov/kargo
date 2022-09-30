@@ -16,9 +16,11 @@ class CourierRequest extends Controller
     {
 
         $courier_requests = Courier_request::all();
+        $page_title = "Courier Requests";
 
         return view('backend.courier_request')->with([
-            'courier_requests' => $courier_requests
+            'courier_requests' => $courier_requests,
+            'page_title' => $page_title
         ]);
     }
 
@@ -92,8 +94,11 @@ class CourierRequest extends Controller
             ['status', 'accepted']
         ])->get();
 
+        $page_title = "My Courier Requests";
+
         return view('backend.helpers.myorders')->with([
-            'courier_requests' => $courier_requests
+            'courier_requests' => $courier_requests,
+            'page_title' => $page_title
         ]);
     }
 }

@@ -178,8 +178,8 @@
                                             <label for="user_role">User Role</label>
                                             <select name="user_role" id="user_role" class="form-control select-custom-hm">
                                                 @foreach ($user_roles as $role)
-                                                    <option value="{{ $role->role_id }}"
-                                                        @if ($user->user_role == $role->role_id) selected @endif>
+                                                    <option value="{{ $role->id }}"
+                                                        @if ($user->user_role == $role->id) selected @endif>
                                                         {{ $role->role_name }}
                                                     </option>
                                                 @endforeach

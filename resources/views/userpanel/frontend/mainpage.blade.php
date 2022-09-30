@@ -108,13 +108,14 @@
         }
 
         .notification-cont:hover {
-            transform: scale(1.3);
+            transform: scale(1.03);
         }
 
         .notification-header {
             display: flex;
             flex-direction: row;
             align-items: center;
+            font-size: 14px;
         }
 
         .cargo-companies-holder {
@@ -459,9 +460,9 @@
                                                 <div class="details-modal-header-flex">
                                                     <h4 class="modal-title">Notification: {{ $notification->name }}</h4>
                                                 </div>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
+                                                <button type="button" data-dismiss="modal"
+                                                    aria-label="Close" class="btn btn-outline-secondary">
+                                                    <i class="fa fa-close" aria-hidden="true"></i>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
@@ -546,7 +547,7 @@
 
         <hr class="hr">
 
-        <div class="page__calc">
+        <div class="page__calc p-4">
             <div class="container">
                 <form action="{{ route('pricecalculator.calculation') }}" method="post" id="price_calc">
                     @csrf
@@ -767,7 +768,7 @@
             <!--1-st container-end-->
 
 
-            <div class="page__map">
+            {{-- <div class="page__map">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-6 ">
@@ -885,7 +886,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </section>

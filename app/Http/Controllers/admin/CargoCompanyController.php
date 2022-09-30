@@ -22,7 +22,9 @@ class CargoCompanyController extends Controller
     public function index()
     {
         $cargos = CargoCompany::orderBy('created_at', 'desc')->get();
-        return view('backend.cargo-company', compact('cargos'));
+        $page_title = "Cargo Companies";
+
+        return view('backend.cargo-company', compact('cargos' , 'page_title'));
     }
 
     public function create(Request $request)
@@ -196,8 +198,9 @@ class CargoCompanyController extends Controller
     public function personal_cargo(){
 
         $personal_cargo = CargoZone::where('user_id' , '!=' , 'null')->orderBy('id' , 'DESC')->get();
+        $page_title = "Personal Cargo";
 
-        return view('backend.helpers.personal_cargo' , compact('personal_cargo'));
+        return view('backend.helpers.personal_cargo' , compact('personal_cargo' , 'page_title'));
     }
 
     public function create_personal_cargo(Request $request){
@@ -228,8 +231,9 @@ class CargoCompanyController extends Controller
 
         // dd(AmazonAddress::all());
         $amazon_addresses = AmazonAddress::all();
+        $page_title = "Amazon Addresses";
 
-        return view('backend.helpers.amazon_addresses' , compact('amazon_addresses'));
+        return view('backend.helpers.amazon_addresses' , compact('amazon_addresses' , 'page_title'));
     }
     public function amazon_addresses_create(Request $request){
 

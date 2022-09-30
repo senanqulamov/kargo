@@ -6,19 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    @php(
-    $user = DB::table('users')->where('id', session()->get('Profile'))->first()
-)
+    @php
+        use App\Http\Controllers\admin\UserController;
+        $is_allowed = 'false';
+        $actions_allowed = 'false';
 
-    @php(
-    $message = DB::table('messages')->where('status', '1')->get()
-)
-    @php(
-    $career_applies = DB::table('career_applies')->where('status', '2')->get()
-)
+        $is_allowed = (new UserController())->check_permissions($page_title);
+        $actions_allowed = (new UserController())->check_action_permissions($page_title);
+
+        $message = DB::table('messages')
+            ->where('status', '1')
+            ->get();
+        $career_applies = DB::table('career_applies')
+            ->where('status', '2')
+            ->get();
+    @endphp
 
     <title>Cargo | @yield('title')</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('/') }}backend/assets/img/favicon.png">
+    <link rel="icon" type="image/x-icon" href="{{ asset('/') }}images/logo.svg">
     @toastr_css
 
     <!-- Google Font: Source Sans Pro -->
@@ -49,6 +54,9 @@
     <link rel="stylesheet" href="{{ asset('/') }}backend/assets/css/custom_style.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.17/dist/sweetalert2.all.min.js"></script>
 
+    {{-- Select2 --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <style>
         .form-control.is-invalid,
         .was-validated .form-control:invalid {
@@ -62,6 +70,35 @@
 
         th {
             text-align: center
+        }
+
+        .sidebar {
+            height: 45vw;
+            overflow-x: hidden;
+            overflow-y: scroll;
+        }
+
+        .content-wrapper {
+            position: relative;
+        }
+
+        .select2-selection__choice__display {
+            color: black;
+            margin: 10px;
+        }
+
+        .not-allowed-hm {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            background: rgba(237, 237, 237, 0.233);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
     @livewireStyles
@@ -94,6 +131,7 @@
             })
         </script>
     @endif
+
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
@@ -105,7 +143,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link btn btn-success text-white text-uppercase" href="{{ route('index') }}"
+                    <a class="nav-link btn-success text-white text-uppercase" href="{{ route('index') }}"
                         role="button"> <i class="fas fa-globe" style="margin-right:7px"></i> Go to Website</a>
                 </li>
             </ul>
@@ -150,9 +188,9 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ route('admin.dashboard') }}" class="brand-link">
-                <img src="{{ asset('/') }}backend/assets/img/favicon.png" alt="AdminLTE Logo"
-                    class="brand-image img-circle">
+            <a href="{{ route('admin.dashboard') }}" class="brand-link d-flex justify-content-center">
+                <img src="{{ asset('/') }}images/logo.svg" alt="AdminLTE Logo"
+                    height="25px" style="margin-right: 10px;">
                 <span class="brand-text font-weight-light">Administration</span>
             </a>
 
@@ -184,9 +222,21 @@
                                 <p> Dashboard </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.settings') }}"
+                                class="nav-link @if (Request::segment(2) == 'settings') active @endif">
+                                <i class="fas fa-gear nav-icon"></i>
+                                <p>Settings</p>
+                            </a>
+                        </li>
 
-                        <li class="nav-item @if (Request::segment(2) == 'users' || Request::segment(2) == 'user_logs') menu-open @endif">
-                            <a href="#" class="nav-link  @if (Request::segment(2) == 'users' || Request::segment(2) == 'user_logs') active @endif">
+                        <li
+                            class="nav-item
+                        @if (Request::segment(2) == 'users' || Request::segment(2) == 'user_logs' || Request::segment(2) == 'user_roles') menu-open @endif">
+
+                            <a href="#"
+                                class="nav-link
+                            @if (Request::segment(2) == 'users' || Request::segment(2) == 'user_logs' || Request::segment(2) == 'user_roles') active @endif">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
                                     User
@@ -210,6 +260,13 @@
                                         <p> User Logs </p>
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.user_roles') }}"
+                                        class="nav-link @if (Request::segment(2) == 'user_roles') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Roles Managment </p>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         {{-- <li class="nav-item">
@@ -220,13 +277,12 @@
                             </a>
                         </li> --}}
 
-                        <li class="nav-item
+                        <li
+                            class="nav-item
                             @if (Request::segment(2) == 'cargo-requests' ||
                                 Request::segment(2) == 'special_offers' ||
                                 Request::segment(2) == 'amazonOrders' ||
-                                Request::segment(2) == 'buyforme' )
-                                menu-open
-                            @endif">
+                                Request::segment(2) == 'buyforme') menu-open @endif">
                             <a href="#" class="nav-link  @if (Request::segment(2) == 'cargo-requests') active @endif">
                                 <i class="nav-icon fas fa-box"></i>
                                 <p>
@@ -237,21 +293,18 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                <li class="nav-item
+                                <li
+                                    class="nav-item
                                 @if (Request::segment(2) == 'cargo-requests' ||
                                     Request::segment(2) == 'special_offers' ||
                                     Request::segment(2) == 'amazonOrders' ||
-                                    Request::segment(2) == 'buyforme' )
-                                    menu-open
-                                @endif">
+                                    Request::segment(2) == 'buyforme') menu-open @endif">
                                     <a href="#"
                                         class="nav-link
                                         @if (Request::segment(2) == 'cargo-requests' ||
                                             Request::segment(2) == 'special_offers' ||
                                             Request::segment(2) == 'amazonOrders' ||
-                                            Request::segment(2) == 'buyforme' )
-                                            active
-                                        @endif">
+                                            Request::segment(2) == 'buyforme') active @endif">
                                         <i class="nav-icon fas fa-box"></i>
                                         <p>
                                             Orders
@@ -434,8 +487,18 @@
                         </li>
                         <li class="nav-header text-uppercase">Configurations</li>
 
-                        <li class="nav-item @if (Request::segment(3) == 'cargo' || Request::segment(3) == 'personal' || Request::segment(3) == 'domestic') menu-open @endif">
-                            <a href="#" class="nav-link @if (Request::segment(3) == 'cargo' || Request::segment(3) == 'personal' || Request::segment(3) == 'domestic') active @endif">
+                        <li
+                            class="nav-item
+                            @if (Request::segment(3) == 'cargo' ||
+                                Request::segment(3) == 'personal' ||
+                                Request::segment(3) == 'domestic' ||
+                                Request::segment(3) == 'amazon_addresses') menu-open @endif">
+                            <a href="#"
+                                class="nav-link
+                                @if (Request::segment(3) == 'cargo' ||
+                                    Request::segment(3) == 'personal' ||
+                                    Request::segment(3) == 'domestic' ||
+                                    Request::segment(3) == 'amazon_addresses') active @endif">
                                 <i class="nav-icon fas fa-truck-moving"></i>
                                 <p>Cargo Manager <i class="right fas fa-angle-left"></i></p>
                             </a>
@@ -536,12 +599,27 @@
                             </ul>
                         </li>
 
-                        <li class="nav-item">
-                            <a href="{{ route('admin.services.index') }}"
-                                class="nav-link @if (Request::segment(2) == 'services') active @endif">
+                        <li class="nav-item @if (Request::segment(2) == 'services') menu-open @endif">
+                            <a href="#" class="nav-link @if (Request::segment(2) == 'services') active @endif">
                                 <i class="nav-icon fab fa-servicestack"></i>
-                                <p> Additional Services </p>
+                                <p>Services<i class="right fas fa-angle-left"></i></p>
                             </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.services.index') }}"
+                                        class="nav-link @if (Request::segment(3) == 'index') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Additional Services </p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="{{ route('admin.services.packing') }}"
+                                        class="nav-link @if (Request::segment(3) == 'packing') active @endif">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p> Packing </p>
+                                    </a>
+                                </li>
+                            </ul>
                         </li>
 
                         <li class="nav-header text-uppercase">Site Settings</li>
@@ -620,7 +698,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1>@yield('title')</h1>
+                            <h1 id="page-title-hm">@yield('title')</h1>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -634,7 +712,13 @@
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    @yield('content')
+                    @if ($is_allowed == 'false')
+                        <div class="not-allowed-hm">
+                            <h3>You don't have permission to view this page</h3>
+                        </div>
+                    @else
+                        @yield('content')
+                    @endif
                 </div>
             </section>
         </div>
@@ -665,6 +749,8 @@
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="{{ asset('/') }}backend/assets/plugin/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
     <script>
         $(function() {
@@ -680,6 +766,26 @@
                 paging: false,
                 scrollX: true,
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        $(function() {
+            $(".example1").DataTable({
+                order: [
+                    [0, 'desc']
+                ],
+                "responsive": false,
+                "lengthChange": false,
+                "autoWidth": true,
+                scrollY: '50vh',
+                scrollCollapse: true,
+                paging: false,
+                scrollX: true,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2({
+                closeOnSelect: false
+            });
         });
     </script>
     <script>
@@ -702,6 +808,35 @@
         $('.modal').on('hide.bs.modal', function(e) {
             this.classList.remove('overlay-hm');
         })
+    </script>
+
+    <script>
+        setTimeout(() => {
+            var edit_permission = "{{ $actions_allowed }}";
+            console.log(edit_permission);
+
+            if (edit_permission == "false") {
+                var buttons = document.querySelectorAll('.btn');
+                buttons.forEach(element => {
+                    element.remove();
+                });
+
+                var forms = document.querySelectorAll('form');
+                forms.forEach(element => {
+
+                    element.setAttribute('action', '');
+                    var inputs = element.querySelectorAll('input');
+                    var selects = element.querySelectorAll('select');
+
+                    inputs.forEach(element => {
+                        element.setAttribute('disabled', 'true');
+                    });
+                    selects.forEach(element => {
+                        element.setAttribute('disabled', 'true');
+                    });
+                });
+            }
+        }, 700);
     </script>
     @yield('js')
 

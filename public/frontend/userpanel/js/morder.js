@@ -56,6 +56,9 @@ function yeniPaketElaveEt() {
                           <h6>Type:<span class="red">*</span></h6>
                           <select
                             class="form-select"
+                            onchange="checkPackageType(this , ` +
+        uniq_package_id +
+        `)"
                             name="package_type[` +
         uniq_package_id +
         `]"
@@ -100,7 +103,7 @@ function yeniPaketElaveEt() {
                             >
                           </div>
                         </div>
-                        <div class="col-6 col-md">
+                        <div class="col-6 col-md package-height-holder-hm">
                           <h6>Height:<span class="red">*</span></h6>
                           <div class="input-group mb-3">
                             <input onchange="CalculateVolume(\'` +

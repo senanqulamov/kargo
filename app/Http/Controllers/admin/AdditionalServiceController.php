@@ -14,9 +14,11 @@ class AdditionalServiceController extends Controller
 {
     public function index(){
         $services=AdditionalService::orderBy('created_at','desc')->get();
-        return view('backend.additional-services', compact('services'));
+        $page_title = "Additional Services";
+
+        return view('backend.additional-services', compact('services' , 'page_title'));
     }
-	
+
 	public function create(Request $request)
     {
         $validator = Validator::make($request->all(),[
@@ -33,13 +35,13 @@ class AdditionalServiceController extends Controller
             $services->slug=Str::slug($request->inputTitle, '-');
             $services->status=$request->selectType;
             $services->price=$request->inputPrice;
-            
+
             $services->save();
 
             return response()->json(['status'=>1, 'msg'=>'Services company was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
-	
+
 	public function edit(Request $request)
     {
         $services=AdditionalService::find($request->id);
@@ -72,7 +74,7 @@ class AdditionalServiceController extends Controller
             $services->update();
 
             return response()->json(['status'=>1, 'msg'=>'Services company has been successfully updated', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function delete($id){

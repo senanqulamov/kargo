@@ -94,8 +94,10 @@ function SumWeights(array) {
     array.forEach((element) => {
         total_weight += element;
     });
-    document.querySelector(".totalWeight").innerHTML = parseFloat(total_weight).toFixed(2);
-    document.querySelector('input[name="total_weight"]').value = parseFloat(total_weight).toFixed(2);
+    document.querySelector(".totalWeight").innerHTML =
+        parseFloat(total_weight).toFixed(2);
+    document.querySelector('input[name="total_weight"]').value =
+        parseFloat(total_weight).toFixed(2);
     total_weight = 0;
 }
 //--------------------------- CALCULATING Total weight ends here--------------------------->
@@ -169,14 +171,24 @@ function MultiplyPackageVolume(package_id) {
     var total = 0;
     for (i = 0; i < product_lengthS.length; i++) {
         if (
-            parseInt(product_lengthS[i].value) > 0 &&
-            parseInt(product_heightS[i].value) > 0 &&
-            parseInt(product_widthS[i].value) > 0
+            !parseInt(product_heightS[i].value) ||
+            parseInt(product_heightS[i].value) < 0
         ) {
             total +=
                 parseInt(product_lengthS[i].value) *
-                parseInt(product_heightS[i].value) *
+                1 *
                 parseInt(product_widthS[i].value);
+        } else {
+            if (
+                parseInt(product_lengthS[i].value) > 0 &&
+                // parseInt(product_heightS[i].value) > 0 &&
+                parseInt(product_widthS[i].value) > 0
+            ) {
+                total +=
+                    parseInt(product_lengthS[i].value) *
+                    parseInt(product_heightS[i].value) *
+                    parseInt(product_widthS[i].value);
+            }
         }
     }
 
@@ -225,8 +237,14 @@ function SumDecis(array) {
     array.forEach((element) => {
         total_deci += element;
     });
-    if(total_deci >=10){
-        total_deci = Math.round(total_deci);
+    if (total_deci >= 10) {
+        total_deci = Math.ceil(total_deci);
+    } else {
+        if (total_deci % 1 > 0.5) {
+            total_deci = Math.round(total_deci);
+        } else {
+            total_deci = total_deci - (total_deci % 1) + 0.5;
+        }
     }
     document.querySelector(".totalPricing").innerHTML = total_deci;
     document.querySelector('input[name="total_deci"]').value = total_deci;
@@ -351,7 +369,7 @@ function yekunHesabla(from_where) {
         });
     }
 
-    if(from_where == 'next'){
+    if (from_where == "next") {
         setTimeout(() => {
             button = document.querySelector(".next-button-with-quote");
             nextTo("shipment_def", button);
@@ -390,7 +408,8 @@ function nextTo(section_name, button) {
     });
 
     if (section_name == "shipment_def") {
-        required_message = "Not all total values calculated. Please fill all fields to calculate";
+        required_message =
+            "Not all total values calculated. Please fill all fields to calculate";
         var totalAmount = parseFloat(
             document.querySelector(".totalAmount").innerHTML
         ).toFixed(2);
@@ -438,7 +457,7 @@ function nextTo(section_name, button) {
     //         modal_message = "Everything is ready to submit. You can submit now";
     //     }
     // }
-    if(section_name == "order_info"){
+    if (section_name == "order_info") {
         required = [];
     }
 
@@ -480,8 +499,9 @@ function nextTo(section_name, button) {
             });
             section.classList.add("active-order-form-div");
             button.style.display = "none";
-            if(section_name == "shipment_def"){
-                document.querySelector(".next-button-get-quote").style.display = "block";
+            if (section_name == "shipment_def") {
+                document.querySelector(".next-button-get-quote").style.display =
+                    "block";
             }
             window.scrollTo(0, document.body.scrollHeight);
         }
@@ -492,11 +512,32 @@ function nextTo(section_name, button) {
             html:
                 `
                     <h3 style="color:#f27474;">` +
-                    required_message +
-                    `</h3>
+                required_message +
+                `</h3>
                 `,
             backdrop: true,
             showConfirmButton: true,
         });
     }
+}
+
+function checkPackageType(select, package_id) {
+    var package_row = select.parentElement.parentElement;
+    var package_height = package_row.querySelector(".package-height-holder-hm");
+    var package_height_input = package_row.querySelector(".package-height");
+    var package_height_style = `
+        display:none;
+    `;
+
+    if (select.value == "envelop") {
+        package_height.setAttribute("style", package_height_style);
+        package_height_input.setAttribute("type", "hidden");
+        package_height_input.value = 1;
+    } else {
+        package_height.setAttribute("style", "");
+        package_height_input.setAttribute("type", "text");
+    }
+
+    MultiplyPackageVolume(package_id);
+    CalculateDeci(package_id);
 }

@@ -1,8 +1,19 @@
 <!doctype html>
 <html lang="en">
-@php(
-    $data = DB::table('companies')->where('status', 1)->first()
-)
+@php
+$data = DB::table('companies')
+    ->where('status', 1)
+    ->first();
+$favico = DB::table('configs')
+    ->where('key', 'favicon')
+    ->first();
+$logo = DB::table('configs')
+    ->where('key', 'logo')
+    ->first();
+$footer_logo = DB::table('configs')
+    ->where('key', 'footer_logo')
+    ->first();
+@endphp
 
 <head>
     <meta charset="utf-8">
@@ -34,9 +45,6 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <title>@yield('title') | {{ $data->title }}</title>
-    @php(
-    $favico = DB::table('configs')->where('key', 'favicon')->first()
-)
     <link rel="icon" type="image/x-icon" href="{{ asset('/') }}frontend/img/{{ $favico->value }}">
 
     @yield('css')
@@ -51,7 +59,7 @@
             left: 0;
             width: 100%;
             z-index: 98;
-            background-color: rgba(255, 255, 255, 0.51);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(4px);
             border-bottom: 0.5px solid #ED5A23;
         }
@@ -59,33 +67,41 @@
         .navbar-nav li {
             transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
             height: max-content;
-            padding: 0 20px;
+            padding: 4px 7px;
+            border-radius: 5px;
             border: 1px solid transparent;
         }
 
+        .navbar-nav li a {
+            padding: 6px 3px !important;
+        }
+
+        .navbar-collapse {
+            margin: 0 !important;
+        }
+
         .navbar-nav li:hover {
-            box-shadow: 0 0 7rem rgb(0 0 0 / 17%);
-            border-radius: 15px;
-            transform: scale(1.1);
-            padding: 10px 20px;
+            box-shadow: 0 0 4px rgb(0 0 0 / 17%);
+            /*border-radius: 15px;*/
+            /*transform: scale(1.1);*/
+            /*padding: 10px 20px;*/
             cursor: pointer;
-            border: 1px solid #ED5A23;
+            /*border: 1px solid #ED5A23;*/
         }
 
         .profile-li-element {
             transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
             height: max-content;
-            padding: 0 20px;
+            padding: 0 10px;
             border: 1px solid #0dcaf0;
             border-radius: 15px;
         }
 
         .profile-li-element:hover {
-            transform: scale(1.1);
-            padding: 10px 20px;
-            border: 1px solid #ED5A23;
-            box-shadow: 0 0 7rem rgb(0 0 0 / 17%);
-            transform: scale(1.1);
+            transform: scale(1.01);
+            /*padding: 10px 20px;*/
+            /*border: 1px solid #ED5A23;*/
+            box-shadow: 0 0 5px rgb(0 0 0 / 17%);
         }
 
         .dropdown-item:focus,
@@ -94,12 +110,9 @@
         }
 
         .active-navbar-item-hm {
-            border: 1px solid #ED5A23 !important;
-            border-radius: 10px;
-        }
+            box-shadow: 0 0 4px rgb(0 0 0 / 17%);
+            border-radius: 5px;
 
-        section {
-            margin-top: 90px;
         }
 
         .bootstrap-select.btn-group.fit-width .btn .caret {
@@ -120,6 +133,17 @@
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        .faq-item {
+            font-size: 28px;
+            margin: 10px 0;
+            padding-left: 32px;
+        }
+
+        .faq-item a {
+            color: #fff !important;
+            text-decoration: none;
         }
 
         a:hover {
@@ -164,8 +188,31 @@
             border-radius: 7px;
             background-color: #00A3FE;
         }
-        .register-li-element a{
+
+        .register-li-element a {
             color: #fff !important;
+        }
+
+        @media only screen and (max-width:425px) {
+            .navbar-nav li {
+                margin-top: 5px;
+            }
+
+            .navbar .navbar-nav {
+                align-items: left !important;
+            }
+        }
+
+        .footerLinkDesing {
+            display: inline-block;
+            text-decoration: none;
+            transition: all ease .4s;
+            color: white;
+        }
+
+        .footerLinkDesing:hover {
+            transform: translateX(5px) scale(1.01);
+            color: white;
         }
     </style>
 </head>
@@ -174,9 +221,6 @@
     <!-- Navbar Start -->
     <nav class="navbar navbar-expand-lg navbar-light ">
         <div class="container">
-            @php(
-    $logo = DB::table('configs')->where('key', 'logo')->first()
-)
             <a class="navbar-brand" href="{{ route('index') }}"><img
                     src="{{ asset('/') }}frontend/img/{{ $logo->value }}" alt="{{ $data->title }}"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -195,12 +239,12 @@
                             Request::segment(1) == 'servicesFee') active-navbar-item-hm @endif">
                         <a class="nav-link dropdown-toggle" href="servicesFee.html" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Services
+                            {{ __('homepage.navbar.services')}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('e-commerce') }}">E-Commerce Logistics</a>
+                            <li><a class="dropdown-item" href="{{ route('e-commerce') }}">{{ __('homepage.navbar.e-commerce services')}}</a>
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('fba') }}">Amazon FBA</a></li>
+                            <li><a class="dropdown-item" href="{{ route('fba') }}">{{ __('homepage.navbar.amazon-fba')}}</a></li>
                             <li><a class="dropdown-item" href="{{ route('marketplace') }}">Marketplace
                                     Integration</a>
                             </li>
@@ -277,7 +321,9 @@
     </nav>
     <!-- Navbar End -->
 
-    @yield('content')
+    <div class="margin-top-hm">
+        @yield('content')
+    </div>
 
     <!-- Footer Start -->
     <footer class="mt-5">
@@ -290,6 +336,12 @@
                             <li>{{ $data->description }}</li>
                         </ul>
                     </div>
+                    <div>
+                        <div class="faq-item @if (Request::segment(1) == 'faqs')  @endif">
+                            <a class=" @if (Request::segment(1) == 'faqs')  @endif"
+                                href="{{ route('faqs') }}">FAQ</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="footer-content">
@@ -297,23 +349,18 @@
                             LEGAL
                             <li>Terms of use</li>
                             <li>PDPL</li>
-                            <li>Terms of use</li>
-                            <li>Terms of use</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="footer-logo">
-                        @php(
-    $footer_logo = DB::table('configs')->where('key', 'footer_logo')->first()
-)
                         <img src="{{ asset('/') }}frontend/img/{{ $footer_logo->value }}" alt="">
                         <div class="footer-social">
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
                 </div>
@@ -321,10 +368,12 @@
                     <div class="footer-content">
                         <ul>
                             Prices
-                            <li>Price Calculation</li>
-                            <li>Get A Quote</li>
-                            <li>Services Fees</li>
-                            <li>Membership Fee</li>
+                            <li><a class="footerLinkDesing" href="{{ route('pricecalculator') }}">Price
+                                    Calculation</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('getquote') }}">Get a Quote</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('servcice') }}">Service Fees</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('membershifee') }}">Membership Fee</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -332,11 +381,14 @@
                     <div class="footer-content">
                         <ul>
                             Services
-                            <li>E-Commerce Logistics</li>
-                            <li>Amazon FBA</li>
-                            <li>MarketPlace Integration</li>
-                            <li>FullFilment </li>
-                            <li>Purchasing Service</li>
+                            <li><a class="footerLinkDesing" href="{{ route('e-commerce') }}">E-Commerce Logistics</a>
+                            </li>
+                            <li><a class="footerLinkDesing" href="{{ route('fba') }}">Amazon FBA</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('marketplace') }}">Marketplace
+                                    Integration</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('export') }}">Fullfilment</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('servicesFee') }}">Purchasing Service</a>
+                            </li>
                         </ul>
                     </div>
                 </div>

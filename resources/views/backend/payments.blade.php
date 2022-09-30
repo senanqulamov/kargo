@@ -53,6 +53,7 @@
                                 <th>Money Type</th>
                                 <th>Amount</th>
                                 <th>Comission</th>
+                                <th>Result price</th>
                                 <th>Kur</th>
                                 <th>Document</th>
                                 <th>Payment Comment</th>
@@ -107,7 +108,8 @@
                                     </td>
                                     <td>{{ $payment->money_type }}</td>
                                     <td>{{ $payment->amount }}</td>
-                                    <td>{{ $payment->comission }}</td>
+                                    <td>{{ $payment->comission }} %</td>
+                                    <td>{{ $payment->result_price }} €</td>
                                     <td>{{ $payment->kur }}</td>
                                     <td>
                                         <a href="/files/payments/{{ $payment->document }}" target="_blank">
@@ -180,6 +182,11 @@
                                                                     value="{{ $payment->comission }}">
                                                             </div>
                                                             <div class="form-group col">
+                                                                <label for="exampleInputEmail1">Result price</label>
+                                                                <input type="text" class="form-control" name="result_price"
+                                                                    value="{{ $payment->result_price }}">
+                                                            </div>
+                                                            <div class="form-group col">
                                                                 <label for="exampleInputEmail1">Money type
                                                                 </label>
                                                                 <select name="money_type" class="form-control">
@@ -233,7 +240,7 @@
                                 @php
                                     $users = DB::table('users')->get();
                                 @endphp
-                                <select name="user_id" class="form-control">
+                                <select name="user_id" class="form-control select-custom-hm">
                                     @foreach ($users as $user)
                                         <option value="{{ $user->id }}">010{{ $user->id }}20 |
                                             {{ $user->name }}</option>
@@ -244,7 +251,7 @@
                         <div class="row">
                             <div class="form-group col">
                                 <label for="exampleInputEmail1">Payment method</label>
-                                <select name="method" id="calculate_method" class="form-control"
+                                <select name="method" id="calculate_method" class="form-control select-custom-hm"
                                     onchange="calculateComission()">
                                     <option value="" selected disabled>Select method</option>
                                     @foreach ($methods as $method)
@@ -257,7 +264,7 @@
                             </div>
                             <div class="form-group col">
                                 <label for="exampleInputEmail1">Money type</label>
-                                <select name="money_type" class="form-control" onchange="calculateComission()"
+                                <select name="money_type" class="form-control select-custom-hm" onchange="calculateComission()"
                                     id="calculate_money_type">
                                     <option value="" selected disabled>Select Money type</option>
                                     <option value="tl">Tl</option>
@@ -273,7 +280,11 @@
                             </div>
                             <div class="form-group col">
                                 <label for="exampleInputEmail1">Comission</label>
-                                <input type="text" class="form-control" name="comission" id="calculate_comission"
+                                <input type="text" class="form-control" name="comission" id="calculate_comission" readonly>
+                            </div>
+                            <div class="form-group col">
+                                <label for="exampleInputEmail1">Result price</label>
+                                <input type="text" class="form-control" name="result_price" id="calculate_result"
                                     readonly>
                             </div>
                             <div class="form-group col">
@@ -417,7 +428,8 @@
             }
             comission = amount - (amount * method) / 100;
 
-            document.querySelector('#calculate_comission').value = parseFloat(comission).toFixed(2);
+            document.querySelector('#calculate_comission').value = parseFloat(method).toFixed(2);
+            document.querySelector('#calculate_result').value = parseFloat(comission).toFixed(2);
         }
     </script>
 @endsection

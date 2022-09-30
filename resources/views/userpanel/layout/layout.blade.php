@@ -58,6 +58,20 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
     <link rel="icon" href="{{ asset('/') }}images/logo.svg">
     <title>ShipLounge</title>
+
+    <style>
+        .content-holder-hm {
+            position: relative;
+        }
+
+        .drop-box-hm {
+            background: white;
+            width: max-content;
+            padding: 10px 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px 1px rgb(0 0 0 / 25%);
+        }
+    </style>
 </head>
 
 <body>
@@ -143,6 +157,29 @@
                                 fill="#489AD5" />
                         </svg>
                     </div>
+                    <ul class="sidebarIconList">
+                        <li>
+                            <a href="{{ route('userpanel.notifications') }}" class="">
+                                <i class="fa-solid fa-bell"></i></a>
+                        </li>
+                        <li class="header__item-list">
+                            <a href="{{ route('userpanel.support') }}" class="header__item-link">
+                                <i class="fa-solid fa-gear header__item-icon"></i></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('userpanel.faq') }}">
+                                <i class="fa-solid fa-circle-question"></i></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('userpanel.locations') }}">
+                                <i class="fa-solid fa-globe"></i></a>
+                        </li>
+                        <li>
+                            <a href="{{ route('userpanel.calculator') }}">
+                                <i class="fas fa-calculator-alt"></i>
+                            </a>
+                        </li>
+                    </ul>
                     <ul class="navigation__items">
 
                         <button onclick="window.open('{{ route('userpanel.mainmenu') }}' , '_self')"
@@ -201,7 +238,7 @@
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                    <span class="navigation__span">Bulk Orderr</span></a>
+                                    <span class="navigation__span">Bulk Order</span></a>
                             </li>
                         </button>
                         <button onclick="window.open('{{ route('userpanel.cargorequests') }}' , '_self')"
@@ -250,20 +287,20 @@
                                 </a>
                             </li>
                         </button>
-                        <button class="navigation__box">
+                        {{-- <button class="navigation__box btn disabled">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-boxes-stacked navigation__icon"></i>
                                     <span class="navigation__span">Stock</span></a>
                             </li>
-                        </button>
-                        <button class="navigation__box">
+                        </button> --}}
+                        {{-- <button class="navigation__box btn disabled">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
                                     <span class="navigation__span">Invoices</span></a>
                             </li>
-                        </button>
+                        </button> --}}
                         <button class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
                             onclick="window.open('{{ route('userpanel.siteusage') }}' , '_self')">
                             <li class="navigation__item">
@@ -287,13 +324,13 @@
                                     <span class="navigation__span">Share and Earn</span></a>
                             </li>
                         </button>
-                        <button class="navigation__box">
+                        {{-- <button class="navigation__box btn disabled">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-cart-flatbed navigation__icon"></i>
                                     <span class="navigation__span">Inventory</span></a>
                             </li>
-                        </button>
+                        </button> --}}
                         <button onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'cargo_companies') active-link-hm @endif">
                             <li class="navigation__item">
@@ -310,13 +347,13 @@
                             </li>
                         </div>
 
-                        <button class="navigation__box">
+                        {{-- <button class="navigation__box btn disabled">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-parachute-box navigation__icon"></i>
                                     <span class="navigation__span">Parachute</span></a>
                             </li>
-                        </button>
+                        </button> --}}
                         <button onclick="window.open('{{ route('userpanel.marketplace') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'marketplace') active-link-hm @endif">
                             <li class="navigation__item">
@@ -333,8 +370,8 @@
             <div class="container header">
                 <div class="col-md-6">
                     <div class="header__input">
-                        <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
-                        <input class="header__input-search" type="text" placeholder="Axtar..." />
+                        {{-- <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                        <input class="header__input-search" type="text" placeholder="Axtar..." /> --}}
                     </div>
                 </div>
 
@@ -400,8 +437,8 @@
                 </div>
 
                 <div class="header__input">
-                    <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
-                    <input class="header__input-search" type="text" placeholder="Axtar..." />
+                    {{-- <i class="fa-solid fa-magnifying-glass header__input-icon"></i>
+                    <input class="header__input-search" type="text" placeholder="Axtar..." /> --}}
                 </div>
 
 
@@ -478,12 +515,12 @@
 
                             <div style="display:flex;justify-content:center;margin-top:20px;gap:10px;">
                                 @if (Auth::user()->is_admin == 1)
-                                    <a class="btn btn-info" href="{{ route('admin.index') }}"
+                                    <a class="btn btn-outline-info" href="{{ route('admin.index') }}"
                                         style="font-size:15px;">
                                         Admin Page
                                     </a>
                                 @endif
-                                <a class="btn btn-info" style="font-size:15px;cursor:default">
+                                <a class="btn btn-outline-info" style="font-size:15px;cursor:default">
                                     User ID: 010{{ Auth::user()->id }}20
                                 </a>
                             </div>
@@ -550,7 +587,7 @@
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                                <span class="navigation__span">Bulk Orderr</span></a>
+                                                <span class="navigation__span">Bulk Order</span></a>
                                         </li>
                                     </button>
                                     <button onclick="window.open('{{ route('userpanel.cargorequests') }}' , '_self')"
@@ -602,20 +639,20 @@
                                             </a>
                                         </li>
                                     </button>
-                                    <button class="navigation__box">
+                                    {{-- <button class="navigation__box btn disabled">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-boxes-stacked navigation__icon"></i>
                                                 <span class="navigation__span">Stock</span></a>
                                         </li>
-                                    </button>
-                                    <button class="navigation__box">
+                                    </button> --}}
+                                    {{-- <button class="navigation__box btn disabled">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-file-invoice-dollar navigation__icon"></i>
                                                 <span class="navigation__span">Invoices</span></a>
                                         </li>
-                                    </button>
+                                    </button> --}}
                                     <button
                                         class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
                                         onclick="window.open('{{ route('userpanel.siteusage') }}' , '_self')">
@@ -642,13 +679,13 @@
                                                 <span class="navigation__span">Share and Earn</span></a>
                                         </li>
                                     </button>
-                                    <button class="navigation__box">
+                                    {{-- <button class="navigation__box btn disabled">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-cart-flatbed navigation__icon"></i>
                                                 <span class="navigation__span">Inventory</span></a>
                                         </li>
-                                    </button>
+                                    </button> --}}
                                     <button
                                         onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'cargo_companies') active-link-hm @endif">
@@ -666,13 +703,13 @@
                                         </li>
                                     </div>
 
-                                    <button class="navigation__box">
+                                    {{-- <button class="navigation__box btn disabled">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-parachute-box navigation__icon"></i>
                                                 <span class="navigation__span">Parachute</span></a>
                                         </li>
-                                    </button>
+                                    </button> --}}
                                     <button onclick="window.open('{{ route('userpanel.marketplace') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'marketplace') active-link-hm @endif">
                                         <li class="navigation__item">
@@ -686,8 +723,33 @@
                         </div>
                     </nav>
                 </div>
-                <div class="col-lg-9 col-md-12 col-sm-12 col-12 page__2 content-holder-hm" style="position: relative">
+                <div class="col-12 col-lg-9 content-holder-hm">
                     {{-- <div class="custom-focus-overlay active-overlay-hm"></div> --}}
+                    <div class="row justify-content-center align-items-center my-3">
+                        <div class="drop-box-hm">
+                            <div class="d-flex align-items-center">
+                                <div class="iconBG">
+                                    <svg class="iconSize" width="17" height="17" viewBox="0 0 17 17"
+                                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M16.9123 13.2038L16.1369 12.0205C15.9768 11.776 15.6487 11.7077 15.4041 11.8679L11.0811 14.7005C10.8365 14.8607 10.7682 15.1888 10.9284 15.4333L11.7038 16.6166C11.864 16.8611 12.1921 16.9295 12.4366 16.7693L16.7597 13.9366C17.0042 13.7764 17.0726 13.4484 16.9123 13.2038Z"
+                                            fill="white" />
+                                        <path
+                                            d="M11.8174 13.1783L13.2328 12.2508C13.8041 11.8765 14.1955 11.3021 14.3347 10.6335C14.4664 10.001 14.3639 9.31744 13.9702 8.71055C13.768 8.40195 12.0795 5.82511 11.8811 5.52232C11.6194 5.12294 11.0835 5.01134 10.6841 5.27302C10.4242 5.44334 10.2871 5.72988 10.2946 6.01933L10.1406 5.78422C9.87888 5.3849 9.34287 5.27325 8.9436 5.53492C8.68364 5.70525 8.54661 5.99178 8.55408 6.28117L8.44745 6.11843C8.18572 5.71905 7.64988 5.60745 7.25049 5.86913C6.99053 6.03946 6.85345 6.32605 6.86098 6.61549L5.42761 4.42789C5.16593 4.02851 4.63009 3.91697 4.23065 4.17859C3.83127 4.44027 3.71967 4.97616 3.98135 5.37554L7.54576 10.8154L6.05377 10.3071C5.60135 10.153 5.11056 10.3946 4.9566 10.8466C4.80264 11.2986 5.04419 11.7898 5.49615 11.9438L9.69128 13.3731C9.97029 13.4892 10.2701 13.5502 10.5725 13.5502C11.0006 13.5502 11.4334 13.4299 11.8174 13.1783Z"
+                                            fill="white" />
+                                        <path
+                                            d="M5.86923 3.91283C6.04178 4.17622 6.39532 4.25 6.65871 4.07728C6.92215 3.90473 6.99577 3.55119 6.82316 3.28781C6.02029 2.06251 4.3704 1.71878 3.14517 2.52166C1.91993 3.32447 1.57625 4.97447 2.37901 6.19971C2.48844 6.36679 2.67063 6.45751 2.85652 6.45751C2.96366 6.45751 3.07212 6.42734 3.16849 6.36416C3.43187 6.19161 3.50555 5.83813 3.33294 5.57469C2.87482 4.87537 3.07092 3.93376 3.77019 3.47553C4.46939 3.01747 5.41106 3.21357 5.86923 3.91283Z"
+                                            fill="white" />
+                                        <path
+                                            d="M1.2146 4.03869C1.40294 3.13437 1.93222 2.3575 2.70487 1.8512C3.47753 1.3449 4.40106 1.16984 5.30549 1.35818C6.20981 1.54653 6.98668 2.07581 7.49298 2.84846C7.66559 3.11185 8.01901 3.18563 8.28245 3.01291C8.5459 2.84036 8.61951 2.48683 8.4469 2.22344C7.77364 1.19595 6.74063 0.492129 5.53803 0.241687C4.33554 -0.00881208 3.10734 0.22401 2.07985 0.897272C1.05237 1.57053 0.348541 2.60355 0.0980991 3.80615C-0.152343 5.00875 0.0804793 6.2369 0.753685 7.26432C0.863167 7.4314 1.0453 7.52212 1.23119 7.52212C1.33833 7.52212 1.44679 7.49196 1.54316 7.42878C1.8066 7.25617 1.88022 6.90269 1.70761 6.6393C1.20125 5.86659 1.02619 4.943 1.2146 4.03869Z"
+                                            fill="white" />
+                                    </svg>
+                                </div>
+                                <span class="amazonHeaderText ms-2 amazonIcon drop-box-text"></span>
+                            </div>
+                        </div>
+                    </div>
+
                     @yield('content')
                 </div>
             </div>
@@ -774,18 +836,18 @@
             document.getElementById("myBar").style.width = scrolled + "%";
         }
 
-        function ScrollToBottom(){
+        function ScrollToBottom() {
             window.scrollTo(0, document.body.scrollHeight);
         }
 
         var modals_hm = document.querySelectorAll('.modal');
         modals_hm.forEach(element => {
-            element.setAttribute('data-backdrop' , 'static');
+            element.setAttribute('data-backdrop', 'static');
         });
         var selects_hm = document.querySelectorAll('.select-custom-hm');
-        selects_hm.forEach(element =>{
-            element.setAttribute('data-size' , '6');
-            element.setAttribute('data-live-search' , 'true');
+        selects_hm.forEach(element => {
+            element.setAttribute('data-size', '6');
+            element.setAttribute('data-live-search', 'true');
             element.classList.add('selectpicker');
             element.classList.add('show-tick');
             element.classList.remove('form-select');
@@ -823,7 +885,6 @@
             });
         }
     </script>
-
     {{-- Fixed Header --}}
     <script>
         (function enableStickyHeader() {
@@ -839,6 +900,26 @@
                 }
             });
         })();
+    </script>
+    {{-- Page Title --}}
+    <script>
+        $(window).on("load", function() {
+            var drop_box_text = document.querySelector('.drop-box-text');
+            var active_link = document.querySelector('.active-link-hm');
+
+            if(!active_link){
+                var link_text = "{{ Request::segment(2) }}";
+                if(!link_text){
+                    link_text = "profile";
+                }
+                drop_box_text.innerHTML = link_text;
+            }else{
+                var link_text = active_link.querySelector('.navigation__span').innerHTML;
+                drop_box_text.innerHTML = link_text;
+            }
+
+            drop_box_text.style.textTransform = "capitalize";
+        });
     </script>
 </body>
 

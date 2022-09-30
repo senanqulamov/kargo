@@ -24,6 +24,8 @@ class Amazon_order extends Model
         'city',
         'state',
         'zipcode',
+        'email',
+        'phone',
         'ioss_number',
         'vat_number',
         'currency',

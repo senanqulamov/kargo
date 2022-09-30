@@ -229,7 +229,7 @@
                                             value="{{ $cargo->zipcode }}" />
                                     </div>
                                 </div>
-                                @if (substr($cargo_id, 0, 1) != 'A')
+                                {{-- @if (substr($cargo_id, 0, 1) != 'A') --}}
                                     <div class="row form-group">
                                         <div class="col d-flex flex-column py-3">
                                             <label for="phone" class="labelCustom">Phone</label>
@@ -242,7 +242,7 @@
                                                 value="{{ $cargo->email }}" />
                                         </div>
                                     </div>
-                                @endif
+                                {{-- @endif --}}
                                 <div class="row form-group">
                                     <div class="col d-flex flex-column py-3">
                                         <label for="ioss_number" class="labelCustom">IOSS number</label>

@@ -12,20 +12,22 @@ use Validator;
 
 class BranchController extends Controller
 {
-    public function index(){		
+    public function index(){
 		$branches=Branch::orderBy('created_at','asc')->get();
 		$countries=Country::orderBy('name','asc')->get();
+        $page_title = "Branch Lists";
 
-        return view('backend.branch-list', compact('branches', 'countries'));
+        return view('backend.branch-list', compact('branches', 'countries' , 'page_title'));
     }
 
-    public function create(){		
+    public function create(){
 		$branches=Branch::orderBy('created_at','asc')->get();
 		$countries=Country::orderBy('name','asc')->get();
+        $page_title = "Branch Create";
 
-        return view('backend.branch', compact('branches', 'countries'));
+        return view('backend.branch', compact('branches', 'countries' , 'page_title'));
     }
-	
+
 	public function createPost(Request $request){
         $request->validate([
             'inputTitle' => 'required|min:3|max:225',
@@ -44,7 +46,7 @@ class BranchController extends Controller
         $branch->save();
 
         toastr()->success('Branch was successfully registered', 'Congratulations!!');
-        return redirect()->route('admin.branches.index');  
+        return redirect()->route('admin.branches.index');
     }
 
     public function edit(Request $request)
@@ -55,7 +57,7 @@ class BranchController extends Controller
             'data' => $branch
         ]);
     }
-	
+
 	public function update(Request $request){
         $validator = Validator::make($request->all(),[
             'inputTitle2' => 'required|min:3|max:225',
@@ -64,7 +66,7 @@ class BranchController extends Controller
             'textareaAddress2' => 'required|min:3|max:225',
             'selectCountry2' => 'required'
         ]);
-		
+
 		if(!$validator->passes()){
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
@@ -78,10 +80,10 @@ class BranchController extends Controller
 			$branch->country=$request->selectCountry2;
 			$branch->save();
 
-			return response()->json(['status'=>1, 'msg'=>'Branch has been successfully updated', 'state'=>'Congratulations!']);			
+			return response()->json(['status'=>1, 'msg'=>'Branch has been successfully updated', 'state'=>'Congratulations!']);
 		}
     }
-	
+
 	public function delete($id){
         Branch::where('id', $id)->delete();
         toastr()->success('Branch was successfully deleted', 'Congratulations!');
@@ -93,12 +95,12 @@ class BranchController extends Controller
         $branch=Branch::where('status', 1)->first();
         $branch->status=NULL;
         $branch->save();
-        
+
         $head=Branch::find($id);
         $head->status=1;
         $head->save();
 
         toastr()->success('Branch was successfully Head Office', 'Congratulations!!');
-        return redirect()->route('admin.branches.index');  
+        return redirect()->route('admin.branches.index');
     }
 }

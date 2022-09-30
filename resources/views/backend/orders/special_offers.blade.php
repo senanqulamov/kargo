@@ -21,6 +21,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Status</th>
                                 <th>Shipment type</th>
                                 <th>Ready date</th>
                                 <th>Cargo</th>
@@ -50,6 +51,19 @@
                             @foreach ($special_offers as $offer)
                                 <tr>
                                     <td>{{ $offer->id ? $offer->id : '---' }}</td>
+                                    @php
+                                        $status = DB::table('package_statuses')
+                                            ->where('status', $offer->status)
+                                            ->get()
+                                            ->first();
+                                    @endphp
+                                    <td>
+                                        <div class="status_td">
+                                            <span class="status_style status_color_{{ $status->status }}">
+                                                {{ $status->status_name }}
+                                            </span>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="orders-holder-hm">
                                             <span class="badge rounded-pill bg-info user_id_badge text-white">

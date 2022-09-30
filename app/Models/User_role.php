@@ -13,5 +13,9 @@ class User_role extends Model
 
     protected $fillable = [
         'role_name',
+        'edit_permissions',
+        'view_permissions',
+        'background',
+        'color',
     ];
 }

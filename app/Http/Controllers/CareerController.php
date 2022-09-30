@@ -33,11 +33,15 @@ class CareerController extends Controller
                 $career->whereIn('worktime',$worktime);
             }
             $careers = $career->where('status', 1)->orderBy('created_at','desc')->get();
-            return view('frontend.career', compact('careers'));
+            $page_title = "Careers";
+
+            return view('frontend.career', compact('careers' , 'page_title'));
 
         }
 		$careers=Career::where('status', 1)->orderBy('created_at','desc')->get();
-        return view('frontend.career', compact('careers'));
+        $page_title = "Careers";
+
+        return view('frontend.career', compact('careers' , 'page_title'));
     }
 
 	public function fetch(Request $request)
@@ -51,7 +55,9 @@ class CareerController extends Controller
 
 	public function apply($id){
 		$career_detail=Career::find($id);
-        return view('frontend.apply', compact('career_detail'));
+        $page_title = "Careers";
+
+        return view('frontend.apply', compact('career_detail' , 'page_title'));
     }
 
 	public function postApply(Request $request)
@@ -86,12 +92,16 @@ class CareerController extends Controller
     public function indexAdmin(){
         $careers=Career::orderBy('created_at','desc')->get();
         $countries=Country::orderBy('name','asc')->get();
-        return view('backend.careers', compact('careers', 'countries'));
+        $page_title = "Careers";
+
+        return view('backend.careers', compact('careers', 'countries' , 'page_title'));
     }
 
     public function showAdmin($id){
         $applies=CareerApply::where('careerID', $id)->orderBy('created_at','desc')->get();
-        return view('backend.careers-detail', compact('applies'));
+        $page_title = "Careers";
+
+        return view('backend.careers-detail', compact('applies' , 'page_title'));
     }
 
     public function downloadAdmin($filename){

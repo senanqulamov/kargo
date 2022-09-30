@@ -16,17 +16,23 @@ class BlogController extends Controller
 {
     public function index(){
         $blogs=Blog::orderBy('created_at','desc')->get();
-        return view('frontend.blogs', compact('blogs'));
+        $page_title = "Blogs";
+
+        return view('frontend.blogs', compact('blogs' , 'page_title'));
     }
 
     public function detail($slug){
         $details=Blog::where('slug', $slug)->first();
-        return view('frontend.blog', compact('details'));
+        $page_title = "Blogs";
+
+        return view('frontend.blog', compact('details' , 'page_title'));
     }
 
     public function indexAdmin(){
         $blogs=Blog::orderBy('created_at','desc')->get();
-        return view('backend.blogs', compact('blogs'));
+        $page_title = "Blogs";
+
+        return view('backend.blogs', compact('blogs' , 'page_title'));
     }
 
 	public function createAdmin(Request $request)

@@ -12,7 +12,7 @@
             width: 100%;
             margin: auto;
             box-shadow: 0px 4px 15px 0px #00000026;
-            padding: 10px;
+            padding: 20px 12px;
             background: #fff;
         }
 
@@ -81,7 +81,7 @@
 
         .getQuoteForm .select-box input {
             width: 100%;
-            padding: 10px;
+            padding: 6px;
             border: 1px solid #0004;
             border-radius: 5px;
             color: #000;
@@ -96,10 +96,10 @@
         .getQuoteForm .minus,
         .plus {
             width: 8%;
-            height: 45px;
+            height: 32px;
             background: transparent;
             border-radius: 4px;
-            padding: 5px 5px 8px 5px;
+            padding: 0;
             border: 1px solid #ddd;
             display: inline-block;
             color: #405982;
@@ -111,10 +111,10 @@
         }
 
         .getQuoteForm .pm input {
-            height: 45px;
+            height: 30px;
             width: 82%;
             text-align: center;
-            font-size: 26px;
+            font-size: 22px;
             border: 1px solid #ddd;
             border-radius: 4px;
             display: inline-block;
@@ -185,12 +185,18 @@
 
         /* Get A Quote End */
 
+        .btn-success {
+            font-size: 19px;
+            padding: 5px 15px;
+            margin-bottom: 15px;
+        }
+
         @media only screen and (max-width:992px) {
             .getQuoteForm .pm input {
-                height: 45px;
+                height: 30px !important;
                 width: 70% !important;
                 text-align: center;
-                font-size: 26px;
+                font-size: 22px;
                 border: 1px solid #ddd;
                 border-radius: 4px;
                 display: inline-block;
@@ -207,6 +213,17 @@
             .getQuoteForm .form__group .form__radio-group {
                 margin: 10px 0;
             }
+        }
+
+        .add-button-hm {
+            font-size: 16px;
+            padding: 10px 30px;
+            margin-block: 20px;
+            width: max-content;
+        }
+
+        hr {
+            margin: 25px 0 !important;
         }
     </style>
 
@@ -278,6 +295,31 @@
                             </select>
                         </div>
                     </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="address">Delivery address</label>
+                                <div class="select-box">
+                                    <input type="text" placeholder="Additional details or requests" name="address">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <label for="additional">Additional information</label>
+                                <div class="select-box">
+                                    <input type="text" placeholder="Additional details or requests" name="additional">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{--  --}}
+
+                    <hr class="mt-4">
+
                     <div class="col-lg-12">
                         <div class="form-title">
                             <h5>Shipping type</h5>
@@ -287,7 +329,7 @@
                                 <div class="form__radio-group normal_type">
                                     <input type="radio" name="shipping_type" id="fcl" class="form__radio-input"
                                         value="fcl">
-                                    <label class="form__label-radio" for="fcl">
+                                    <label class="form__label-radio" for="fcl" onclick="FCL()">
                                         <span class="form__radio-button"></span>
                                         <svg width="17" height="9" viewBox="0 0 17 9" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -301,7 +343,7 @@
                                 <div class="form__radio-group normal_type">
                                     <input type="radio" name="shipping_type" id="lcl" class="form__radio-input"
                                         value="lcl">
-                                    <label class="form__label-radio" for="lcl">
+                                    <label class="form__label-radio" for="lcl" onclick="LCL_Air()">
                                         <span class="form__radio-button"></span>
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -320,7 +362,7 @@
                                 <div class="form__radio-group air_type">
                                     <input type="radio" name="shipping_type" id="air_cargo" class="form__radio-input"
                                         value="air cargo">
-                                    <label class="form__label-radio" for="air_cargo">
+                                    <label class="form__label-radio" for="air_cargo" onclick="LCL_Air()">
                                         <span class="form__radio-button"></span>
                                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -339,115 +381,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-12 normal_type">
-                        <div class="form-title">
-                            <h5>Container</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="select-box">
-                                    <label for="containeer_type">Type</label>
-                                    <select class="selectpicker show-tick form-control" name="containeer_type"
-                                        title="Choose one of the following..." data-size="6">
-                                        <option disabled>Containeer Type</option>
-                                        <option>20'DV</option>
-                                        <option>40'DV</option>
-                                        <option>40'HC</option>
-                                        <option>45'</option>
-                                        <option>45'HC</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="cargo_weight_containeer">Cargo weight (per containeer)</label>
-                                <div class="input-group mb-3">
-                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
-                                        name="cargo_weight_containeer">
-                                    <span class="input-group-text" id="basic-addon2">cm</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 air_type">
-                        <div class="form-title">
-                            <h5>Box/Pallet</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="">Length</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
-                                        name="length">
-                                    <span class="input-group-text" id="basic-addon2">cm</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="">Width</label>
-                                <div class="input-group mb-3">
-                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
-                                        name="width">
-                                    <span class="input-group-text" id="basic-addon2">cm</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12 air_type">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <label for="">Height</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
-                                        name="height">
-                                    <span class="input-group-text" id="basic-addon2">cm</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="">Weight</label>
-                                <div class="input-group mb-3">
-                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
-                                        name="weight">
-                                    <span class="input-group-text" id="basic-addon2">kg</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-12">
-                        <div class="row pm ">
-                            <div class="col-lg-6">
-                                <label for="">Quantity</label>
-                                <div class="number">
-                                    <span class="minus">-</span>
-                                    <input type="text" value="1" name="quantity" />
-                                    <span class="plus">+</span>
-                                </div>
-                            </div>
-                            {{-- <div class="col-lg-6">
-                            <div class="addToButton">
-                                <button>+ Add</button>
-                            </div>
-                        </div> --}}
-                        </div>
-                    </div>
-                    <div class="col-lg-12 air_type">
-                        <div class="row my-3">
-                            <div class="col-lg-6">
-                                <label for="">Total Volume</label>
-                                <div class="input-group mb-3">
-                                    <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
-                                        name="total_volume">
-                                    <span class="input-group-text" id="basic-addon2">m²</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="">Total Weight</label>
-                                <div class="input-group mb-3">
-                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
-                                        name="total_weight">
-                                    <span class="input-group-text" id="basic-addon2">kg</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
+                    {{--  --}}
+
+                    <div class="insert-holder-hm"></div>
+
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12">
@@ -520,26 +458,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label for="address">Delivery address</label>
-                                <div class="select-box">
-                                    <input type="text" placeholder="Additional details or requests" name="address">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <label for="additional">Additional information</label>
-                                <div class="select-box">
-                                    <input type="text" placeholder="Additional details or requests" name="additional">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-lg-12">
                         <div class="form-title">
                             <h5>MSDS / Other Document / Photo</h5>
@@ -551,9 +469,9 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <button class="btn btn-success" style="width: max-content;">Submit</button>
+                    <div class="row justify-content-center">
+                        <button class="btn btn-success" style="width: max-content;">Submit</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -611,6 +529,268 @@
                     element.style.display = "block";
                 });
             }
+        }
+    </script>
+
+    <script>
+        var insert_holder_hm = document.querySelector('.insert-holder-hm');
+
+        function FCL() {
+            var html = `
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-title">
+                            <h5>Container</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="select-box">
+                                    <label for="containeer_type">Type</label>
+                                    <select class="form-control" name="containeer_type[]"
+                                        title="Choose one of the following...">
+                                        <option disabled>Containeer Type</option>
+                                        <option>20'DV</option>
+                                        <option>40'DV</option>
+                                        <option>40'HC</option>
+                                        <option>45'</option>
+                                        <option>45'HC</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="cargo_weight_containeer">Cargo weight (per containeer)</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                        name="cargo_weight_containeer[]">
+                                    <span class="input-group-text" id="basic-addon2">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pm">
+                            <label for="">Quantity</label>
+                            <div class="number">
+                                <span class="minus">-</span>
+                                <input type="text" value="1" name="quantity[]" />
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-danger add-button-hm col-1" onclick="delete_row(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+                <div class="add-button-helper"></div>
+                <hr>
+            `;
+            var shipping_type = "FCL";
+            insertHtml(html, shipping_type);
+        }
+
+        function LCL_Air() {
+            var html = `
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-title">
+                            <h5>Box/Pallet</h5>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="">Length</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
+                                        name="length[]">
+                                    <span class="input-group-text" id="basic-addon2">cm</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="">Width</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                        name="width[]">
+                                    <span class="input-group-text" id="basic-addon2">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label for="">Height</label>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
+                                        name="height[]">
+                                    <span class="input-group-text" id="basic-addon2">cm</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="">Weight</label>
+                                <div class="input-group mb-3">
+                                    <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                        name="weight[]">
+                                    <span class="input-group-text" id="basic-addon2">kg</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pm">
+                            <label for="">Quantity</label>
+                            <div class="number">
+                                <span class="minus">-</span>
+                                <input type="text" value="1" name="quantity[]" />
+                                <span class="plus">+</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-outline-danger add-button-hm col-1" onclick="delete_row(this)">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
+                <div class="add-button-helper"></div>
+                <hr>
+                <div class="col-lg-12 totals-row-hm">
+                    <div class="row my-3">
+                        <div class="col-lg-6">
+                            <label for="">Total Volume</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
+                                    name="total_volume">
+                                <span class="input-group-text" id="basic-addon2">m²</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Total Weight</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                    name="total_weight">
+                                <span class="input-group-text" id="basic-addon2">kg</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            `;
+            var shipping_type = "LCL";
+            insertHtml(html, shipping_type);
+        }
+
+        function insertHtml(html, shipping_type) {
+            insert_holder_hm.innerHTML = "";
+            insert_holder_hm.insertAdjacentHTML('afterbegin', html);
+
+            var add_btn = `
+                <div class="add-button-row-helper"></div>
+                <button type="button" class="btn btn-outline-primary add-button-hm row"
+                    onclick="add_new_row('` + shipping_type + `')">
+                    Add
+                </button>
+            `;
+            var add_button_helper = document.querySelector('.add-button-helper');
+            add_button_helper.insertAdjacentHTML('beforebegin', add_btn);
+        }
+
+        function add_new_row(shipping_type) {
+            var button = document.querySelector('.add-button-row-helper');
+            if (shipping_type == "LCL") {
+                var html = `
+                    <div class="row">
+                        <hr>
+                        <div class="col-lg-6">
+                            <label for="">Length</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
+                                    name="length[]">
+                                <span class="input-group-text" id="basic-addon2">cm</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Width</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                    name="width[]">
+                                <span class="input-group-text" id="basic-addon2">cm</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Height</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
+                                    name="height[]">
+                                <span class="input-group-text" id="basic-addon2">cm</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Weight</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                    name="weight[]">
+                                <span class="input-group-text" id="basic-addon2">kg</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="pm">
+                                <label for="">Quantity</label>
+                                <div class="number">
+                                    <span class="minus">-</span>
+                                    <input type="text" value="1" name="quantity[]" />
+                                    <span class="plus">+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger add-button-hm col-1" onclick="delete_row(this)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            } else if (shipping_type == "FCL") {
+                var html = `
+                    <div class="row">
+                        <hr>
+                        <div class="col-lg-6">
+                            <div class="select-box">
+                                <label for="containeer_type">Type</label>
+                                <select class="form-control" name="containeer_type[]"
+                                    title="Choose one of the following...">
+                                    <option disabled>Containeer Type</option>
+                                    <option>20'DV</option>
+                                    <option>40'DV</option>
+                                    <option>40'HC</option>
+                                    <option>45'</option>
+                                    <option>45'HC</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="cargo_weight_containeer">Cargo weight (per containeer)</label>
+                            <div class="input-group mb-3">
+                                <input type="number" class="form-control pad-block-10px" placeholder="0"
+                                    name="cargo_weight_containeer[]">
+                                <span class="input-group-text" id="basic-addon2">cm</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="pm">
+                                <label for="">Quantity</label>
+                                <div class="number">
+                                    <span class="minus">-</span>
+                                    <input type="text" value="1" name="quantity[]" />
+                                    <span class="plus">+</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-outline-danger add-button-hm col-1" onclick="delete_row(this)">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            }
+            button.insertAdjacentHTML('beforebegin', html);
+        }
+
+        function delete_row(row){
+            row.parentNode.remove();
         }
     </script>
 @endsection

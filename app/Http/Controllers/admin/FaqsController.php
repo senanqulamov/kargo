@@ -16,8 +16,9 @@ class FaqsController extends Controller
     {
         $faqs=Faqs::orderBy('created_at','desc')->get();
         $categories=FaqsCategory::orderBy('title','desc')->get();
+        $page_title = "FAQ";
 
-        return view('backend.faqs', compact('faqs', 'categories'));
+        return view('backend.faqs', compact('faqs', 'categories' , 'page_title'));
     }
 
     public function create(Request $request)
@@ -85,7 +86,9 @@ class FaqsController extends Controller
 	public function categories()
     {
 		$categories=FaqsCategory::orderBy('title','desc')->get();
-        return view('backend.faqs-category', compact('categories'));
+        $page_title = "Faq Categories";
+
+        return view('backend.faqs-category', compact('categories' , 'page_title'));
     }
 
 	public function createCategory(Request $request)
@@ -145,6 +148,8 @@ class FaqsController extends Controller
     {
         $faqs = Faqs::all();
         $categories = FaqsCategory::all();
-        return view('frontend.faqs',compact('categories','faqs'));
+        $page_title = "FAQ";
+
+        return view('frontend.faqs',compact('categories','faqs' , 'page_title'));
     }
 }

@@ -17,6 +17,7 @@ class Payment extends Model
         'money_type',
         'amount',
         'comission',
+        'result_price',
         'kur',
         'document',
         'payment_comment',

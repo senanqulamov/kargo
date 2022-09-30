@@ -14,7 +14,6 @@ use Carbon\Carbon;
 
 class UserAuth extends Controller
 {
-
     public function create(Request $request)
     {
         // dd($request->all());
@@ -25,36 +24,45 @@ class UserAuth extends Controller
             'phone' => 'required|numeric',
             'country' => 'required',
             'password' => 'required|min:5',
-            'gender' => 'required'
+            'gender' => 'required',
         ]);
 
         if (Usermodel::where('email', '=', $request->email)->count() > 0) {
             $error = 'This email is already registered';
-            return redirect()->back()->withErrors($error)
+            return redirect()
+                ->back()
+                ->withErrors($error)
                 ->withInput($request->except('password'));
-        } else if (Usermodel::where('phone', '=', $request->phone)->count() > 0) {
+        } elseif (
+            Usermodel::where('phone', '=', $request->phone)->count() > 0
+        ) {
             $error = 'This phone is already registered';
-            return redirect()->back()->withErrors($error)
+            return redirect()
+                ->back()
+                ->withErrors($error)
                 ->withInput($request->except('password'));
         }
 
-        $email_data = array(
+        $email_data = [
             'name' => $request->name,
             'email' => $request->email,
-        );
+        ];
 
-        Mail::send('userpanel.frontend.emailview', $email_data, function ($message) use ($email_data) {
-            $message->to($email_data['email'], $email_data['name'])
+        Mail::send('userpanel.frontend.emailview', $email_data, function (
+            $message
+        ) use ($email_data) {
+            $message
+                ->to($email_data['email'], $email_data['name'])
                 ->subject('Welcome to ShipLounge')
                 ->from('noreply@shiplounge.co', 'ShipLounge');
         });
 
         $password = Hash::make($request->password);
         $city = null;
-        if($request->city){
+        if ($request->city) {
             $city = $request->city;
         }
-        $credentials = array(
+        $credentials = [
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -65,79 +73,101 @@ class UserAuth extends Controller
             'from_where' => $request->from_where,
             'promotion_code' => $request->promotion_code,
             'average_requests' => $request->average_requests,
-            'password' => $password
-        );
+            'password' => $password,
+        ];
         $user = UserModel::create($credentials);
 
-        return redirect()->route('login')->with('message', 'Confirm your email address');
+        return redirect()
+            ->route('login')
+            ->with('message', 'Confirm your email address');
     }
 
     public function login(Request $request)
     {
-
-        $rules = array(
+        $rules = [
             'email' => 'required|email',
-            'password' => 'required|min:3'
-        );
-
-        $user = UserModel::where('email' , '=' , $request->email)->first();
-        if($user->is_banned == 1){
-            return redirect()->back()->withErrors('You are banned from website, please contact with moderator');
-        }
+            'password' => 'required|min:3',
+        ];
 
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
-            $error = "Password or Email is wrong";
-            return redirect()->back()->withErrors($error)
+            $error = 'Password or Email is wrong';
+            return redirect()
+                ->back()
+                ->withErrors($error)
                 ->withInput($request->except('password'));
         }
         $logging_user = UserModel::where('email', $request->email)->first();
 
         if (!$logging_user) {
-            $error = "This email is not registered";
-            return redirect()->back()->withErrors($error)
+            $error = 'This email is not registered';
+            return redirect()
+                ->back()
+                ->withErrors($error)
                 ->withInput($request->except('password'));
         } else {
             if (!$logging_user->email_verified_at) {
-                $error = "This email is not verified";
-                return redirect()->back()->withErrors($error)
+                $error = 'This email is not verified';
+                return redirect()
+                    ->back()
+                    ->withErrors($error)
                     ->withInput($request->except('password'));
+            }
+
+            if ($logging_user->is_banned == 1) {
+                return redirect()
+                    ->back()
+                    ->withErrors(
+                        'You are banned from website, please contact with moderator'
+                    );
             }
         }
 
-        $user = array(
+        $user = [
             'email' => $request->email,
-            'password' => $request->password
-        );
+            'password' => $request->password,
+        ];
 
         if (Auth::attempt($user)) {
             $username = UserModel::where('email', $request->email)->first();
             $username = $username->name;
-            return redirect()->route('userpanel.mainmenu')->with('log_in_message', 'Logged in as ' . $username . ' !');
+            return redirect()
+                ->route('userpanel.mainmenu')
+                ->with('log_in_message', 'Logged in as ' . $username . ' !');
         } else {
-            $error = "Wrong password";
-            return redirect()->back()->withErrors($error)
+            $error = 'Wrong password';
+            return redirect()
+                ->back()
+                ->withErrors($error)
                 ->withInput($request->except('password'));
         }
     }
 
-    public function verifyEmail($email){
-
+    public function verifyEmail($email)
+    {
         $now = Carbon::now();
 
-        UserModel::where('email' , $email)->first()->update([
-            'email_verified_at' => $now
-        ]);
+        UserModel::where('email', $email)
+            ->first()
+            ->update([
+                'email_verified_at' => $now,
+            ]);
 
-        return redirect()->route('login')->with('message' , $email.' succesfully verified , you can login now');
+        return redirect()
+            ->route('login')
+            ->with(
+                'message',
+                $email . ' succesfully verified , you can login now'
+            );
     }
 
     public function logout()
     {
-
         Auth::logout();
 
-        return redirect()->route('login')->with('message', 'Logged out successfully');
+        return redirect()
+            ->route('login')
+            ->with('message', 'Logged out successfully');
     }
 }

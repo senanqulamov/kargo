@@ -100,35 +100,8 @@
     </style>
     <script src="https://unpkg.com/jsbarcode@latest/dist/JsBarcode.all.min.js"></script>
 
-    <div class="drop__box">
-        <div class="d-flex align-items-center">
-            <div class="iconBG">
-                <svg class="iconSize" width="17" height="17" viewBox="0 0 17 17" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M16.9123 13.2038L16.1369 12.0205C15.9768 11.776 15.6487 11.7077 15.4041 11.8679L11.0811 14.7005C10.8365 14.8607 10.7682 15.1888 10.9284 15.4333L11.7038 16.6166C11.864 16.8611 12.1921 16.9295 12.4366 16.7693L16.7597 13.9366C17.0042 13.7764 17.0726 13.4484 16.9123 13.2038Z"
-                        fill="white" />
-                    <path
-                        d="M11.8174 13.1783L13.2328 12.2508C13.8041 11.8765 14.1955 11.3021 14.3347 10.6335C14.4664 10.001 14.3639 9.31744 13.9702 8.71055C13.768 8.40195 12.0795 5.82511 11.8811 5.52232C11.6194 5.12294 11.0835 5.01134 10.6841 5.27302C10.4242 5.44334 10.2871 5.72988 10.2946 6.01933L10.1406 5.78422C9.87888 5.3849 9.34287 5.27325 8.9436 5.53492C8.68364 5.70525 8.54661 5.99178 8.55408 6.28117L8.44745 6.11843C8.18572 5.71905 7.64988 5.60745 7.25049 5.86913C6.99053 6.03946 6.85345 6.32605 6.86098 6.61549L5.42761 4.42789C5.16593 4.02851 4.63009 3.91697 4.23065 4.17859C3.83127 4.44027 3.71967 4.97616 3.98135 5.37554L7.54576 10.8154L6.05377 10.3071C5.60135 10.153 5.11056 10.3946 4.9566 10.8466C4.80264 11.2986 5.04419 11.7898 5.49615 11.9438L9.69128 13.3731C9.97029 13.4892 10.2701 13.5502 10.5725 13.5502C11.0006 13.5502 11.4334 13.4299 11.8174 13.1783Z"
-                        fill="white" />
-                    <path
-                        d="M5.86923 3.91283C6.04178 4.17622 6.39532 4.25 6.65871 4.07728C6.92215 3.90473 6.99577 3.55119 6.82316 3.28781C6.02029 2.06251 4.3704 1.71878 3.14517 2.52166C1.91993 3.32447 1.57625 4.97447 2.37901 6.19971C2.48844 6.36679 2.67063 6.45751 2.85652 6.45751C2.96366 6.45751 3.07212 6.42734 3.16849 6.36416C3.43187 6.19161 3.50555 5.83813 3.33294 5.57469C2.87482 4.87537 3.07092 3.93376 3.77019 3.47553C4.46939 3.01747 5.41106 3.21357 5.86923 3.91283Z"
-                        fill="white" />
-                    <path
-                        d="M1.2146 4.03869C1.40294 3.13437 1.93222 2.3575 2.70487 1.8512C3.47753 1.3449 4.40106 1.16984 5.30549 1.35818C6.20981 1.54653 6.98668 2.07581 7.49298 2.84846C7.66559 3.11185 8.01901 3.18563 8.28245 3.01291C8.5459 2.84036 8.61951 2.48683 8.4469 2.22344C7.77364 1.19595 6.74063 0.492129 5.53803 0.241687C4.33554 -0.00881208 3.10734 0.22401 2.07985 0.897272C1.05237 1.57053 0.348541 2.60355 0.0980991 3.80615C-0.152343 5.00875 0.0804793 6.2369 0.753685 7.26432C0.863167 7.4314 1.0453 7.52212 1.23119 7.52212C1.33833 7.52212 1.44679 7.49196 1.54316 7.42878C1.8066 7.25617 1.88022 6.90269 1.70761 6.6393C1.20125 5.86659 1.02619 4.943 1.2146 4.03869Z"
-                        fill="white" />
-                </svg>
-            </div>
-            <span class="amazonHeaderText ms-2 amazonIcon">Amazon FBA</span>
-
-
-        </div>
-
-
-    </div>
-
     <section id="manual-order">
-        <div class="variable variableManualOrder container py-4 row mx-auto">
+        <div class="variable variableManualOrder container row mx-auto">
             <form action="{{ route('userpanel.postAmazonorder') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-12 order-form-cont">
@@ -151,180 +124,23 @@
                                     <span class="amazonHeaderText ms-2 amazonIcon">Amazon Warehouses</span>
                                 </div>
                                 <li class="list-group-item pb-4">
+                                    @php
+                                        $amazon_adresses = DB::table('amazon_addresses')->get();
+                                    @endphp
                                     <select class="selectpicker show-tick form-control" data-size="6"
                                         data-live-search="true" name="amazon_address" id="amazon-country"
                                         onchange="changeUserAddress(this)">
                                         <option selected disabled>Choose one of the following...</option>
-                                        <option>Amazon.com Decd LLC - MDW2 - Joliet -
-                                            250 Emerald Drive - 60433 - IL - US</option>
-                                        <option>Amazon.com Decd LLC - ABE3 -
-                                            Breinigsville - 650 Boulder Drive - 18031 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - AVP1 - Hazleton -
-                                            550 Oak Ridge Road - 18202 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - BFI1 - Sumner -
-                                            1800 140th Avenue E. - 98390 - WA - US</option>
-                                        <option>Amazon.com Decd LLC - BNA1 - Lebanon -
-                                            14840 Central Pike Suite 190 - 37090 - TN - US</option>
-                                        <option>Amazon.com Decd LLC - BNA2 - Lebanon -
-                                            500 Duke DR - 37090 - TN - US</option>
-                                        <option>Amazon.com Decd LLC - BNA3 -
-                                            Murfreesboro - Joe B Jackson Pkwy - 37127 - TN - US</option>
-                                        <option>Amazon.com Decd LLC - CAE1 - West
-                                            Columbia - 4400 12 Street Extension - 29172 - SC - US</option>
-                                        <option>Amazon.com Decd LLC - CHA1 - Chattanooga
-                                            - 7200 Discovery Drive - 37416-1757 - TN - US</option>
-                                        <option>Amazon.com Decd LLC - CHA2 - Charleston
-                                            - 225 Infinity Dr NW - 37310 - TN - US</option>
-                                        <option>Amazon.com Decd LLC - CVG1 - Hebron -
-                                            1155 Worldwide Blvd. - 41048 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - CVG2 - Hebron -
-                                            1600 Worldwide Blvd - 41048 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - CVG3 - Hebron -
-                                            3680 Langley Dr. - 41048 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - IND1 - Whitestown
-                                            - 4255 Anson Blvd - 46075 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - IND2 - Plainfield
-                                            - 715 Airtech Pkwy - 46168 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - IND3 - Plainfield
-                                            - 715 Airtech Pkwy Suite 195 - 46168 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - IND4 -
-                                            Indianapolis - 710 S. Girls School Rd - 46231 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - IND5 - Plainfield
-                                            - 800 Perry Road - 46168 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - SDF8 -
-                                            Jeffersonville - 900 Patrol Rd - 47130 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - LAS2 - Las Vegas -
-                                            3837 Bay Lake Trail, Suite 111 North - 89030 - NV - US</option>
-                                        <option>Amazon.com Decd LLC - LEX1 - Lexington -
-                                            1850 Mercer Drive - 40511 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - LEX2 - Lexington -
-                                            172 Trade St. - 40511 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - PHL1 - New Castle
-                                            - 1 Centerpoint Blvd. - 19720 - DE - US</option>
-                                        <option>Amazon.com Decd LLC - PHL3 - New Castle
-                                            - 1600 Johnson Way - 19720 - DE - US</option>
-                                        <option>Amazon.com Decd LLC - PHL4 - Carlisle -
-                                            21 Roadway Dr - 17015 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - PHL5 - Lewisberry
-                                            - 500 McCarthy Dr. Fairview Business Park - 17339 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - PHL6 - Carlisle -
-                                            675 Allen Rd. - 17015 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - PHX3 - Phoenix -
-                                            6835 West Buckeye Road - 85043 - AZ - US</option>
-                                        <option>Amazon.com Decd LLC - PHX5 - Goodyear
-                                            - 16920 W Commerce Drive - 85338 - AZ - US</option>
-                                        <option>Amazon.com Decd LLC - PHX6 - Phoenix -
-                                            4750 West Mohave St - 85043 - AZ - US</option>
-                                        <option>Amazon.com Decd LLC - PHX7 - Phoenix -
-                                            800 N 75th Ave - 85043 - AZ - US</option>
-                                        <option>Amazon.com Decd LLC - RNO1 - Fernley -
-                                            1600 East Newlands Drive - 89408 - NV - US</option>
-                                        <option>Amazon.com Decd LLC - SDF1 -
-                                            Campbellsville - 1051 S Columbia Ave - 42718 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - SDF2 -
-                                            Louisville - 4360 Robards Ln - 40218 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - SDF4 -
-                                            Shepherdsville - 376 Zappos.com Blvd - 40165 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - SDF6 -
-                                            Shepherdsville - 271 Omega Pkwy - 40165 - KY - US</option>
-                                        <option>Amazon.com Decd LLC - TUL1 -
-                                            Coffeyville - 2654 North Highway 169 - 67337 - KS - US</option>
-                                        <option>Amazon.com Decd LLC - ONT2 -
-                                            San&nbsp;Bernardino - 1910&nbsp;E&nbsp;Central&nbsp;Ave - 92408-0123 - CA - US
-                                        </option>
-                                        <option>Amazon.com Decd LLC - PHL7 -
-                                            Middletown - 560&nbsp;Merrimac&nbsp;Ave - 19709 - DE - US</option>
-                                        <option>Amazon.com Decd LLC - RIC1 -
-                                            Petersburg - 5000 Commerce Way - 23803 - VA - US</option>
-                                        <option>Amazon.com Decd LLC - RIC2 - Chester -
-                                            1901 Meadowville Technology Pkwy - 23836 - VA - US</option>
-                                        <option>Amazon.com Decd LLC - GSP1 -
-                                            Spartanburg - 402&nbsp;John&nbsp;Dodd&nbsp;Rd - 29303 - SC - US</option>
-                                        <option>Amazon.com Decd LLC - ONT6 -
-                                            Moreno&nbsp;Valley - 24208 San Michele Rd - 92551 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - EWR4 -
-                                            Robbinsville - 50 New Canton Way - 08691-2350 - NJ - US</option>
-                                        <option>Amazon.com Decd LLC - OAK4 - Tracy -
-                                            1555 N. Chrisman Rd - 95304-9370 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - TPA2 - Lakeland
-                                            - 1760 County Line Rd - 33811 - FL - US</option>
-                                        <option>Amazon.com Decd LLC - TPA1 - Ruskin -
-                                            3350 Laurel Ridge Ave. - 33570 - FL - US</option>
-                                        <option>Amazon.com Decd LLC - DFW6 - Coppell -
-                                            940 W Bethel Road - 75019-4424 - TX - US</option>
-                                        <option>Amazon.com Decd LLC - MDT1 - Carlisle
-                                            - 2 Ames Drive - 17015 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - ONT8 - Moreno
-                                            Valley - 24300 Nandina Ave - 92551 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - MKE1 - KENOSHA -
-                                            3501 120TH AVE - 53144 - WI - US</option>
-                                        <option>Amazon.com Decd LLC - ONT9 - San
-                                            Bernardino - 2125 W. San Bernardino Ave. - 92551 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - FTW1 - Dallas -
-                                            33333 LBJ FWY - 75241-7203 - TX - US</option>
-                                        <option>Amazon.com Decd LLC - SNA4 - LOS
-                                            ANGELS - 2496 W Walnut Ave - 92376-3009 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - RNO4 - Reno -
-                                            8000 NARTH VIRGINIASTREET RENO - 89506 - NV - US</option>
-                                        <option>Amazon.com Decd LLC - SAT1 - San
-                                            Antonio - 6000 enterprise avenue,schertz - 78154-1461 - TX - US</option>
-                                        <option>Amazon.com Decd LLC - MKE5 - Kenosha -
-                                            11211 Burlington Road - 53144 - WI - US</option>
-                                        <option>Amazon.com Decd LLC - BFI3 - DuPont -
-                                            2700 Center Drive - 98327 - WA - US</option>
-                                        <option>Amazon.com Decd LLC - TFC1 - Phoenix -
-                                            5050 West Mohave Street - 85043 - AZ - US</option>
-                                        <option>Amazon.com Decd LLC - ONT5 - San
-                                            Bernardino - 2020 E. Central Ave. Southgate Building 4 - 92408-2606 - CA - US
-                                        </option>
-                                        <option>Amazon.com Decd LLC - RNO2 - Reno -
-                                            8000 North Virginia Street - 85906 - NV - US</option>
-                                        <option>Amazon.com Decd LLC - OAK3 - Patterson
-                                            - 255 Park Center Drive - 95363-8876 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - OAK5 - Newark -
-                                            3811 Cherry Street - 94560 - CA - US</option>
-                                        <option>Amazon.com Decd LLC - ABE5 -
-                                            Harrisburg - 6455 Allentown Boulevard - 17112 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - MDT1 - Carlisle
-                                            - 2 Ames Drive. Building #2 - 17015 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - PIT5 -
-                                            Pittsburgh - 2250 Roswell Drive - 15205 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - XUSC - Carlisle
-                                            - 40 Logistics Drive - 17013 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - BOS5 - Stoughton
-                                            - 1000 Tech Center Drive - 02072-4744 - MA - US</option>
-                                        <option>Amazon.com Decd LLC - EWR5 -
-                                            Woodbridge (Avenel) - 301 Blair Road #100 - 7001 - NJ - US</option>
-                                        <option>Amazon.com Decd LLC - EWR7 -
-                                            Woodbridge (Avenel) - 301 Blair Road #100 - 7001 - NJ - US</option>
-                                        <option>Amazon.com Decd LLC - EWR6 -
-                                            Swedesboro - 2277 Center Square Rd - 8085 - NJ - US</option>
-                                        <option>Amazon.com Decd LLC - DFW7 - Fort
-                                            Worth - 700 Westport Parkway - 76177-4513 - TX - US</option>
-                                        <option>Amazon.com Decd LLC - DFW8 - Dallas -
-                                            2700 Regent Blvd - 75261 - TX - US</option>
-                                        <option>Amazon.com Decd LLC - HOU1 - Humble -
-                                            8120 Humble Westfield Rd - 77338 - TX - US</option>
-                                        <option>Amazon.com Decd LLC - LAL1 - Lakeland
-                                            - 1760 County Line Rd. - 33811 - FL - US</option>
-                                        <option>Amazon.com Decd LLC - BWI2 - Baltimore
-                                            - 2010 Broening Hwy - 21224 - MD - US</option>
-                                        <option>Amazon.com Decd LLC - BWI1 - Baltimore
-                                            - 45121 Global Plaza, Sterling - 21224 - MD - US</option>
-                                        <option>Amazon.com Decd LLC - BWI5 - Baltimore
-                                            - 5501 Holabird Ave, Baltimore - 21224 - MD - US</option>
-                                        <option>Amazon.com Decd LLC - CMH1 - Etna -
-                                            11999 National Road SW - 43018 - OH - US</option>
-                                        <option>Amazon.com Decd LLC - BWI4 - Clear
-                                            Brook - 165 Business Blvd - 22624-1568 - VA - US</option>
-                                        <option>Amazon.com Decd LLC - MEM2 - Bayhalia
-                                            - 191 Norfolk Southern Way - 38611-2306 - MS - US</option>
-                                        <option>Amazon.com Decd LLC - MQJ1 -
-                                            GREENFIELD - 4412 W CR 300 N - 46140 - IN - US</option>
-                                        <option>Amazon.com Decd LLC - RDG1 - HAMBURG -
-                                            3563 Mountain Road - 19526-7947 - PA - US</option>
-                                        <option>Amazon.com Decd LLC - ICT2 - Park
-                                            City - 7130 N Broadway Ave - 67219-1410 - KS - US</option>
+                                        @foreach ($amazon_adresses as $address)
+                                            <option>
+                                                {{ $address->name }} -
+                                                {{ $address->city }} -
+                                                {{ $address->address }} -
+                                                {{ $address->zipcode }} -
+                                                {{ $address->state }} -
+                                                {{ $address->country }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </li>
                                 <li class="list-group-item mt-3">
@@ -332,7 +148,8 @@
                                         <div class="row">
                                             <div class="col-12 col-sm-6">
                                                 <h6 class="customerText">Country<span class="red">*</span></h6>
-                                                <input class="form-control mb-3 check-input" type="text" name="country"/>
+                                                <input class="form-control mb-3 check-input" type="text"
+                                                    name="country" />
                                                 <h6 class="customerText">City<span class="red">*</span></h6>
                                                 <input class="form-control mb-3 check-input" type="text"
                                                     placeholder="New York" aria-label="default input example" name="city"
@@ -453,6 +270,16 @@
                                         </div>
                                     </div>
                                 </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <span class="col-12">*I do according to the Amazon rules
+                                            <a class="rengliSoz"
+                                                href="https://sellercentral.amazon.com/help/hub/reference/external/G200141500">Rules</a>
+                                            <input type="checkbox">
+                                        </span>
+                                    </div>
+                                </li>
+
                                 <!-- Package -->
                                 <li class="list-group-item paketYaradilanYer">
                                     <button type="button" class="btn btn-warning my-3 text-white"
@@ -499,7 +326,7 @@
                                                 </div>
                                                 <div class="ms-2">
                                                     <h5>Total volume</h5>
-                                                    <span class="totalText totalVolume">0</span><span> m3</span>
+                                                    <span class="totalText totalVolume">0</span><span> m<sup>3</sup></span>
                                                     <input type="hidden" name="total_volume" value="">
                                                 </div>
                                             </div>
@@ -834,10 +661,6 @@
                                         <span class="rengliSoz">MSDS</span> certificate for your
                                         products that contain flammable, harmful, irritating
                                         chemicals that may harm nature.</span>
-                                    <span class="col-12">*I do according to the Amazon rules
-                                        <a class="rengliSoz" href="https://sellercentral.amazon.com/help/hub/reference/external/G200141500">Rules</a>
-                                        <input type="checkbox">
-                                    </span>
                                 </div>
                             </div>
                         </li>
@@ -973,23 +796,23 @@
     </script>
     {{-- User Address --}}
     <script>
-        document.querySelector('input[name="country"]').setAttribute('readonly' ,'');
-        document.querySelector('input[name="state"]').setAttribute('readonly' ,'');
-        document.querySelector('input[name="city"]').setAttribute('readonly' ,'');
-        document.querySelector('input[name="address"]').setAttribute('readonly' ,'');
-        document.querySelector('input[name="zipcode"]').setAttribute('readonly' ,'');
-        document.querySelector('input[name="name"]').setAttribute('readonly' ,'');
+        document.querySelector('input[name="country"]').setAttribute('readonly', '');
+        document.querySelector('input[name="state"]').setAttribute('readonly', '');
+        document.querySelector('input[name="city"]').setAttribute('readonly', '');
+        document.querySelector('input[name="address"]').setAttribute('readonly', '');
+        document.querySelector('input[name="zipcode"]').setAttribute('readonly', '');
+        document.querySelector('input[name="name"]').setAttribute('readonly', '');
 
         function changeUserAddress(select) {
             var options = select.options;
             var address_data = options[select.selectedIndex].text;
             address_data = address_data.split('-');
-            var address = address_data[3];
-            var country = "United States";
-            var city = address_data[2];
-            var state = address_data[5];
-            var zipcode = address_data[4];
-            var name = address_data[0] + " - " + address_data[1];
+            var address = address_data[2];
+            var country = address_data[5];
+            var city = address_data[1];
+            var state = address_data[4];
+            var zipcode = address_data[3];
+            var name = address_data[0];
 
             document.querySelector('input[name="country"]').value = country;
             document.querySelector('input[name="state"]').value = state;

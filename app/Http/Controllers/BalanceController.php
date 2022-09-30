@@ -21,16 +21,18 @@ class BalanceController extends Controller
     public function balance()
     {
         $transactions = Transaction::orderBy('created_at', 'desc')->get();
-        return view('backend.transactions', compact('transactions'));
+        $page_title = "Balance";
+
+        return view('backend.transactions', compact('transactions' , 'page_title'));
     }
 
     public function payments()
     {
         $payments = DB::table('payments')->orderBy('created_at', 'desc')->get();
-        // $kur = $this->getKur();
-        $kur = 18.00;
+        $kur = $this->getKur();
+        $page_title = "Payments";
 
-        return view('backend.payments', compact('payments' , 'kur'));
+        return view('backend.payments', compact('payments' , 'kur' , 'page_title'));
     }
 
     public function denyPayment(Request $request)
@@ -50,10 +52,10 @@ class BalanceController extends Controller
             $data->user_id = $user_payment->userID;
             $data->payment_id = $request->id;
             $data->old_balance = $user->balance;
-            $data->new_balance = $user->balance - $user_payment->comission;
+            $data->new_balance = $user->balance - $user_payment->result_price;
             $data->transfer_method = "Payment Deny";
 
-            $user->balance = $user->balance - $user_payment->comission;
+            $user->balance = $user->balance - $user_payment->result_price;
             $user->save();
 
             (new HelperController)->checkTransaction($data);
@@ -79,11 +81,11 @@ class BalanceController extends Controller
         $data->user_id = $user_payment->userID;
         $data->payment_id = $request->id;
         $data->old_balance = $user->balance;
-        $data->new_balance = $user->balance + $user_payment->comission;
+        $data->new_balance = $user->balance + $user_payment->result_price;
         $data->transfer_method = "Payment Approval";
 
         // Updating balance
-        $user->balance = $user->balance + $user_payment->comission;
+        $user->balance = $user->balance + $user_payment->result_price;
         $user->save();
 
 
@@ -107,7 +109,9 @@ class BalanceController extends Controller
     {
 
         $comissions = DB::table('comissions')->get();
-        return view('backend.comissions', compact('comissions'));
+        $page_title = "Comissions";
+
+        return view('backend.comissions', compact('comissions' , 'page_title'));
     }
 
     public function updatePayment(Request $request)
@@ -116,6 +120,7 @@ class BalanceController extends Controller
             'method' => $request->method,
             'amount' => $request->amount,
             'comission' => $request->comission,
+            'result_price' => $request->result_price,
             'money_type' => $request->money_type
         );
 
@@ -187,15 +192,23 @@ class BalanceController extends Controller
     {
 
         $moneyback_requests = MoneyBackRequest::get();
+        $page_title = "Money Back Requests";
 
-        return view('backend.moneyback')->with('requests', $moneyback_requests);
+        return view('backend.moneyback')->with([
+            'requests' => $moneyback_requests,
+            'page_title' => $page_title
+        ]);
     }
 
     public function transactions(){
 
         $transactions = Transaction::all();
+        $page_title = "Transactions";
 
-        return view('backend.transactions')->with('transactions' , $transactions);
+        return view('backend.transactions')->with([
+            'transactions' => $transactions,
+            'page_title' => $page_title
+        ]);
 
     }
 
@@ -213,6 +226,7 @@ class BalanceController extends Controller
             'method' => $request->method,
             'amount' => $request->amount,
             'comission' => $request->comission,
+            'result_price' => $request->result_price,
             'kur' => $request->kur,
             'money_type' => $request->money_type,
             'payment_comment' => json_encode($request->payment_comment),

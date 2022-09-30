@@ -96,25 +96,25 @@
                 <div class="col-lg-9">
                     <div class="row Jobs m-0 p-0 d-flex justify-content-center">
                         <div class="row search-box-holder">
-                            <label class="col-10 m-0 p-0">
+                            <label class="col-11 m-0 p-0">
                                 <span class="screen-reader-text">Search for...</span>
-                                <input type="search" class="search-field" placeholder="Enter Track ID"/>
+                                <input type="search" class="search-field" placeholder="Search job"/>
                             </label>
-                            <input type="button" class="search-submit button col-2" value="Search &#xf002" />
+                            <!--<input type="button" class="search-submit button col-1" value="&#xf002" />-->
                         </div>
-                        {{-- <div class="col-lg-12">
+                        <div class="col-lg-12">
                             <div class="tags">
                                 <button>Sales Manager</button>
                                 <button>Digital Manager</button>
                                 <button>Customer Service</button>
                             </div>
-                        </div> --}}
-                        <div class="col-lg-12">
+                        </div>
+                        <div class="col-lg-12 mt-3">
                             @if (count($careers) > 0)
                                 @foreach ($careers as $career)
                                     <div class="jobs-card" data-job-type="{{ $career->worktime }}">
                                         <div class="row align-items-center">
-                                            <div class="col-lg-8">
+                                            <div class="col-md-8">
                                                 <div class="nameJobs">
                                                     <h3><i class="fas fa-briefcase"></i> {{ $career->title }}</h2>
                                                         @php
@@ -126,7 +126,7 @@
                                                             {{ $location->name }}</span>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-md-4">
                                                 <div class="applyBtn">
                                                     <button type="button" data-id="{{ $career->id }}"
                                                         class="edit_btn">Apply Now</button>

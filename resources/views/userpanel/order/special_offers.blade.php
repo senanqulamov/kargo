@@ -14,6 +14,8 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>Details (View)</th>
+                                <th>Status</th>
                                 <th>Shipment type</th>
                                 <th>Ready date</th>
                                 <th>Cargo</th>
@@ -24,24 +26,36 @@
                                 <th>Insurance</th>
                                 <th>Additional Information</th>
                                 <th>Document (View)</th>
-                                <th>Container type</th>
                                 <th>Incoterm</th>
-                                <th>Cargo weight</th>
-                                <th>Length</th>
-                                <th>Width</th>
-                                <th>Height</th>
-                                <th>Weight</th>
-                                <th>Total Volume</th>
-                                <th>Total Weight</th>
                                 <th>Offer Price</th>
                                 <th>Comment</th>
                                 <th>Created at</th>
+                                <th>Accept / Deny</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($special_offers as $offer)
                                 <tr>
                                     <td>{{ $offer->id ? $offer->id : '---' }}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-outline-info" data-toggle="modal"
+                                            data-target="#view-modal-{{ $offer->id }}">
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    @php
+                                        $status = DB::table('package_statuses')
+                                            ->where('status', $offer->status)
+                                            ->get()
+                                            ->first();
+                                    @endphp
+                                    <td>
+                                        <div class="status_td">
+                                            <span class="status_style status_color_{{ $status->status }}">
+                                                {{ $status->status_name }}
+                                            </span>
+                                        </div>
+                                    </td>
                                     <td>
                                         <div class="orders-holder-hm">
                                             <span class="badge rounded-pill bg-info user_id_badge text-white">
@@ -103,16 +117,7 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td>{{ $offer->containeer_type ? $offer->containeer_type : '---' }}</td>
                                     <td>{{ $offer->incoterm ? $offer->incoterm : '---' }}</td>
-                                    <td>{{ $offer->cargo_weight_containeer ? $offer->cargo_weight_containeer : '---' }}
-                                    </td>
-                                    <td>{{ $offer->length ? $offer->length : '---' }}</td>
-                                    <td>{{ $offer->width ? $offer->width : '---' }}</td>
-                                    <td>{{ $offer->height ? $offer->height : '---' }}</td>
-                                    <td>{{ $offer->weight ? $offer->weight : '---' }}</td>
-                                    <td>{{ $offer->total_volume ? $offer->total_volume : '---' }}</td>
-                                    <td>{{ $offer->total_weight ? $offer->total_weight : '---' }}</td>
                                     <td style="background:#ffff004d;color:black;">
                                         {{ $offer->offer_price ? $offer->offer_price : '---' }}
                                     </td>
@@ -127,6 +132,59 @@
                                             </span>
                                         </div>
                                     </td>
+                                    <td>
+                                        <div style="display: flex;gap:10px;">
+                                            @if ($offer->status == 8)
+                                                <a href="{{ route('admin.cargo-requests.post_accept', ['id' => $offer->id]) }}"
+                                                    class="col form-control btn btn-success">Accept Offer</a>
+                                            @endif
+                                            @if ($offer->status != 5)
+                                                <a href="{{ route('admin.cargo-requests.post_decline', ['id' => $offer->id]) }}"
+                                                    class="col form-control btn btn-warning">Decline offer</a>
+                                            @endif
+                                        </div>
+                                    </td>
+
+                                    <div class="modal fade" id="view-modal-{{ $offer->id }}">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">
+                                                        View Details -
+                                                        <span class="badge rounded-pill bg-secondary">
+                                                            {{ $offer->cargo }}
+                                                        </span>
+                                                    </h4>
+                                                    <button type="button" data-dismiss="modal" aria-label="Close"
+                                                        class="btn btn-outline-secondary">
+                                                        <i class="fa fa-close" aria-hidden="true"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <ul class="list-group">
+                                                        @if ($offer->details)
+                                                            @foreach (json_decode($offer->details) as $key => $details)
+                                                                <li class="list-group-item d-flex justify-content-between">
+                                                                    <span class="badge bg-primary rounded-pill">
+                                                                        {{ $key + 1 }}
+                                                                    </span>
+                                                                    <div class="d-flex">
+                                                                        @foreach ($details as $detail)
+                                                                            <span class="badge rounded-pill bg-primary">
+                                                                                {{ $detail }}
+                                                                            </span>
+                                                                        @endforeach
+                                                                    </div>
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!-- /.modal-content -->
+                                        </div>
+                                        <!-- /.modal-dialog -->
+                                    </div>
                                 </tr>
                             @endforeach
                         </tbody>

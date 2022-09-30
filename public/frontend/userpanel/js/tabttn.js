@@ -38,7 +38,7 @@ balanceBoxs[1].addEventListener("click", function () {
     if (executed == false) {
         $("#payment_history")
             .DataTable({
-                order: [[0, 'desc']],
+                order: [[0, "desc"]],
                 responsive: false,
                 lengthChange: false,
                 autoWidth: true,
@@ -46,6 +46,15 @@ balanceBoxs[1].addEventListener("click", function () {
                 scrollCollapse: true,
                 paging: false,
                 scrollX: true,
+                dom: "Brftip",
+                buttons: [
+                    {
+                        extend: "excel",
+                        text: "Save as Excel",
+                        filename: "table_to_excel",
+                        extension: ".xlsx",
+                    },
+                ],
             })
             .buttons()
             .container()

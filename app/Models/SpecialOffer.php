@@ -12,6 +12,8 @@ class SpecialOffer extends Model
     public $timestamps = true;
 
     protected $fillable = [
+        'user_id',
+        'status',
         'shipment_type',
         'cargo',
         'address',
@@ -33,6 +35,7 @@ class SpecialOffer extends Model
         'additional',
         'document',
         'offer_price',
-        'comment'
+        'comment',
+        'details'
     ];
 }

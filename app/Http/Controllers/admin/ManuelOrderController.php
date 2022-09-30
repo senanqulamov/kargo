@@ -29,136 +29,172 @@ use stdClass;
 
 class ManuelOrderController extends Controller
 {
-    public function index()
-    {
-        return view('backend.manuel-order');
-    }
+    // public function index()
+    // {
+    //     return view('backend.manuel-order');
+    // }
     public function cargoRequests()
     {
-
-        $cargo_requests = DB::table('cargo_requests')->orderBy('created_at', 'desc')->get();
+        $cargo_requests = DB::table('cargo_requests')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         $packages = DB::table('packages')->get();
+        $page_title = 'Cargo Requests';
 
-        return view('backend.cargo-requests')->with(
-            [
-                'cargo_requests' => $cargo_requests,
-                'packages' => $packages
-            ]
-        );
+        return view('backend.cargo-requests')->with([
+            'cargo_requests' => $cargo_requests,
+            'packages' => $packages,
+            'page_title' => $page_title,
+        ]);
     }
 
     public function amazonOrders()
     {
-
         $amazon_orders = Amazon_order::all();
         $packages = DB::table('packages')->get();
+        $page_title = 'Amazon Orders';
 
-        return view('backend.orders.amazon_orders', compact('amazon_orders' ,'packages'));
+        return view(
+            'backend.orders.amazon_orders',
+            compact('amazon_orders', 'packages', 'page_title')
+        );
     }
 
     public function packages()
     {
-        $packages = DB::table('packages')->orderBy('created_at', 'desc')->get();
+        $packages = DB::table('packages')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $page_title = 'Packages';
 
-        return view('backend.cargo-packages')->with(
-            [
-                'packages' => $packages
-            ]
-        );
+        return view('backend.cargo-packages')->with([
+            'packages' => $packages,
+            'page_title' => $page_title,
+        ]);
     }
 
     public function facilityscan()
     {
+        $page_title = 'Facility Scan';
 
-        return view('backend.facilityscan');
+        return view('backend.facilityscan', compact('page_title'));
     }
 
     public function workerscan()
     {
+        $page_title = 'Courier Scan';
 
-        return view('backend.workerscan');
+        return view('backend.workerscan', compact('page_title'));
     }
 
     public function searchscan()
     {
+        $page_title = 'Search Scan';
 
-        return view('backend.searchscan');
+        return view('backend.searchscan', compact('page_title'));
     }
 
     public function measurement()
     {
+        $page_title = 'Measurement Scan';
 
-        return view('backend.measurement');
+        return view('backend.measurement', compact('page_title'));
     }
 
     public function scannedcode(Request $request)
     {
-
-        $package = Package::where('id', $request->package_id)->get()->first();
-        $cargo = Cargo_request::where('id', $package->cargo_id)->get()->first();
+        $package = Package::where('id', $request->package_id)
+            ->get()
+            ->first();
+        $cargo = Cargo_request::where('id', $package->cargo_id)
+            ->get()
+            ->first();
 
         $data = [
-            'status' => 2
+            'status' => 2,
         ];
         if ($cargo->status != 5) {
             Package::where('id', $request->package_id)->update($data);
         }
         $change_status = 0;
 
-
         $packages = Package::where('cargo_id', $package->cargo_id)->get();
         foreach ($packages as $package) {
             $change_status += $package->status;
         }
-        $user = DB::table('users')->where('id', $cargo->user_id)->get()->first();
+        $user = DB::table('users')
+            ->where('id', $cargo->user_id)
+            ->get()
+            ->first();
 
         if ($cargo->status != 5) {
             if ($change_status == 2 * count($packages)) {
                 Cargo_request::where('id', $package->cargo_id)->update([
-                    'status' => 2
+                    'status' => 2,
                 ]);
-                $email_data = array(
+                $email_data = [
                     'name' => $user->name,
                     'email' => $user->email,
-                );
+                ];
 
-                Mail::send('backend.mails.cargoatfacility', $email_data, function ($message) use ($email_data) {
-                    $message->to($email_data['email'], $email_data['name'])
-                        ->subject('Cargo Notification')
-                        ->from('noreply@shiplounge.co', 'ShipLounge');
-                });
+                Mail::send(
+                    'backend.mails.cargoatfacility',
+                    $email_data,
+                    function ($message) use ($email_data) {
+                        $message
+                            ->to($email_data['email'], $email_data['name'])
+                            ->subject('Cargo Notification')
+                            ->from('noreply@shiplounge.co', 'ShipLounge');
+                    }
+                );
             } else {
                 Cargo_request::where('id', $package->cargo_id)->update([
-                    'status' => 0
+                    'status' => 0,
                 ]);
             }
         }
 
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $cargo->id,
             'package_id' => $package->id,
             'user_id' => Auth::user()->id,
             'action' => 'Facility scan',
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
 
         Order_time::create($time_data);
 
-        $package = Package::where('id', $request->package_id)->get()->first();
-        $status = DB::table('package_statuses')->where('status', $package->status)->get()->first();
+        $package = Package::where('id', $request->package_id)
+            ->get()
+            ->first();
+        $status = DB::table('package_statuses')
+            ->where('status', $package->status)
+            ->get()
+            ->first();
 
-        return response()->json(array('package' => $package, 'cargo' => $cargo, 'status' => $status, 'user' => $user), 200);
+        return response()->json(
+            [
+                'package' => $package,
+                'cargo' => $cargo,
+                'status' => $status,
+                'user' => $user,
+            ],
+            200
+        );
     }
 
     public function workerscannedcode(Request $request)
     {
-
-        $package = Package::where('id', $request->package_id)->get()->first();
-        $cargo = Cargo_request::where('id', $package->cargo_id)->get()->first();
+        $package = Package::where('id', $request->package_id)
+            ->get()
+            ->first();
+        $cargo = Cargo_request::where('id', $package->cargo_id)
+            ->get()
+            ->first();
 
         $data = [
-            'status' => 1
+            'status' => 1,
         ];
         Package::where('id', $request->package_id)->update($data);
         $change_status = 0;
@@ -169,75 +205,118 @@ class ManuelOrderController extends Controller
         }
         if ($change_status == 1 * count($packages)) {
             Cargo_request::where('id', $package->cargo_id)->update([
-                'status' => 1
+                'status' => 1,
             ]);
 
             // Courier Request part
-            $courier_request = Courier_request::whereJsonContains('orders', $package->cargo_id)->get();
+            $courier_request = Courier_request::whereJsonContains(
+                'orders',
+                $package->cargo_id
+            )->get();
             foreach ($courier_request as $courier_request) {
                 $courier_change_status = 0;
                 foreach (json_decode($courier_request->orders) as $order) {
-                    $cargo_order_in_courier = Cargo_request::where('id', $order)->first();
+                    $cargo_order_in_courier = Cargo_request::where(
+                        'id',
+                        $order
+                    )->first();
                     if ($cargo_order_in_courier->status == 1) {
                         $courier_change_status += 1;
                     }
                 }
-                if ($courier_change_status == count(json_decode($courier_request->orders))) {
-                    $courier_request->status = "done";
+                if (
+                    $courier_change_status ==
+                    count(json_decode($courier_request->orders))
+                ) {
+                    $courier_request->status = 'done';
                     $courier_request->save();
                 }
             }
         } else {
             Cargo_request::where('id', $package->cargo_id)->update([
-                'status' => 0
+                'status' => 0,
             ]);
         }
 
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $cargo->id,
             'package_id' => $package->id,
             'user_id' => Auth::user()->id,
             'action' => 'Worker scan',
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
 
         Order_time::create($time_data);
 
-        $package = Package::where('id', $request->package_id)->get()->first();
-        $status = DB::table('package_statuses')->where('status', $package->status)->get()->first();
-        $user = DB::table('users')->where('id', $cargo->user_id)->get()->first();
+        $package = Package::where('id', $request->package_id)
+            ->get()
+            ->first();
+        $status = DB::table('package_statuses')
+            ->where('status', $package->status)
+            ->get()
+            ->first();
+        $user = DB::table('users')
+            ->where('id', $cargo->user_id)
+            ->get()
+            ->first();
 
-        return response()->json(array('package' => $package, 'cargo' => $cargo, 'status' => $status, 'user' => $user), 200);
+        return response()->json(
+            [
+                'package' => $package,
+                'cargo' => $cargo,
+                'status' => $status,
+                'user' => $user,
+            ],
+            200
+        );
     }
 
     public function searchscannedcode(Request $request)
     {
+        $package = Package::where('id', $request->package_id)
+            ->get()
+            ->first();
+        $cargo = Cargo_request::where('id', $package->cargo_id)
+            ->get()
+            ->first();
 
-        $package = Package::where('id', $request->package_id)->get()->first();
-        $cargo = Cargo_request::where('id', $package->cargo_id)->get()->first();
+        $status = DB::table('package_statuses')
+            ->where('status', $package->status)
+            ->get()
+            ->first();
+        $user = DB::table('users')
+            ->where('id', $cargo->user_id)
+            ->get()
+            ->first();
 
-        $status = DB::table('package_statuses')->where('status', $package->status)->get()->first();
-        $user = DB::table('users')->where('id', $cargo->user_id)->get()->first();
-
-        return response()->json(array('package' => $package, 'cargo' => $cargo, 'status' => $status, 'user' => $user), 200);
+        return response()->json(
+            [
+                'package' => $package,
+                'cargo' => $cargo,
+                'status' => $status,
+                'user' => $user,
+            ],
+            200
+        );
     }
 
     public function measurementUpdate(Request $request)
     {
-
-        $data = array(
+        $data = [
             'n_package_length' => $request->package_length,
             'n_package_width' => $request->package_width,
             'n_package_height' => $request->package_height,
             'n_package_weight' => $request->package_weight,
-            'status' => 3
-        );
+            'status' => 3,
+        ];
 
         Package::where('id', $request->id)->update($data);
 
         $change_status = 0;
         $message = 'Succesfully updated';
-        $package = Package::where('id', $request->id)->get()->first();
+        $package = Package::where('id', $request->id)
+            ->get()
+            ->first();
         $packages = Package::where('cargo_id', $package->cargo_id)->get();
 
         foreach ($packages as $package) {
@@ -245,76 +324,95 @@ class ManuelOrderController extends Controller
         }
         if ($change_status == 3 * count($packages)) {
             Cargo_request::where('id', $package->cargo_id)->update([
-                'status' => 3
+                'status' => 3,
             ]);
-            $message = 'Succesfully updated. All packages from this order measured , order is ready to delivery';
+            $message =
+                'Succesfully updated. All packages from this order measured , order is ready to delivery';
             $is_reeady = 1;
         } else {
             Cargo_request::where('id', $package->cargo_id)->update([
-                'status' => 0
+                'status' => 0,
             ]);
             $is_reeady = 0;
         }
 
-        $result = (new HelperController)->calculator($package->cargo_id);
+        $result = (new HelperController())->calculator($package->cargo_id);
 
         // dd($result);
 
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $result->cargo_id,
             'package_id' => $package->id,
             'user_id' => Auth::user()->id,
             'action' => 'Measurement scan',
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
 
         Order_time::create($time_data);
 
         return Redirect::back()->with([
             'message' => 'Package: ' . $request->id . ' ' . $message,
             'cargo_id' => $result->cargo_id,
-            'is_ready' => $is_reeady
+            'is_ready' => $is_reeady,
         ]);
     }
 
     public function cargo_details($id)
     {
-
         switch (substr($id, 0, 1)) {
             case 'A':
-                $cargo = Amazon_order::where('id', $id)->get()->first();
+                $cargo = Amazon_order::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
-            default :
-                $cargo = Cargo_request::where('id', $id)->get()->first();
+            default:
+                $cargo = Cargo_request::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
         }
+
         $packages = Package::where('cargo_id', $id)->get();
         $products = Product::where('cargo_id', $id)->get();
         $additional_services = AdditionalService::get();
         $currencies = DB::table('currencies')->get();
 
-        return view('backend.cargo_details')->with([
-            'cargo' => $cargo,
-            'cargo_id' => $id,
-            'packages' => $packages,
-            'products' => $products,
-            'additional_services' => $additional_services,
-            'currencies' => $currencies
-        ]);
+        $page_title = 'Cargo Details';
+
+        if ($cargo) {
+            return view('backend.cargo_details')->with([
+                'cargo' => $cargo,
+                'cargo_id' => $id,
+                'packages' => $packages,
+                'products' => $products,
+                'additional_services' => $additional_services,
+                'currencies' => $currencies,
+                'page_title' => $page_title,
+            ]);
+        } else {
+            return Redirect::back()->with(
+                'error',
+                'This cargo order is deleted'
+            );
+        }
     }
 
     public function submit_order($id)
     {
-        $cargo = Cargo_request::where('id', $id)->get()->first();
+        $cargo = Cargo_request::where('id', $id)
+            ->get()
+            ->first();
         $total_cargo_price = $cargo->total_cargo_price;
 
-        $user = User::where('id', $cargo->user_id)->get()->first();
+        $user = User::where('id', $cargo->user_id)
+            ->get()
+            ->first();
         $new_user_balance = $user->balance - $total_cargo_price;
         User::where('id', $cargo->user_id)->update([
-            'balance' => $new_user_balance
+            'balance' => $new_user_balance,
         ]);
         Cargo_request::where('id', $id)->update([
-            'submitted' => 1
+            'submitted' => 1,
         ]);
 
         $data = new stdClass();
@@ -322,11 +420,14 @@ class ManuelOrderController extends Controller
         $data->payment_id = null;
         $data->old_balance = $user->balance;
         $data->new_balance = $user->balance - $total_cargo_price;
-        $data->transfer_method = "Order Charged after Measurement";
+        $data->transfer_method = 'Order Charged after Measurement';
 
-        (new HelperController)->checkTransaction($data);
+        (new HelperController())->checkTransaction($data);
 
-        return Redirect::back()->with('message', 'Order Submited and balance of ' . $user->name . ' has been updated');
+        return Redirect::back()->with(
+            'message',
+            'Order Submited and balance of ' . $user->name . ' has been updated'
+        );
     }
 
     public function post_on_wait($id)
@@ -334,12 +435,12 @@ class ManuelOrderController extends Controller
         switch (substr($id, 0, 1)) {
             case 'A':
                 Amazon_order::where('id', $id)->update([
-                    'status' => 6
+                    'status' => 6,
                 ]);
                 break;
-            default :
+            default:
                 Cargo_request::where('id', $id)->update([
-                    'status' => 6
+                    'status' => 6,
                 ]);
                 break;
         }
@@ -348,16 +449,16 @@ class ManuelOrderController extends Controller
             case 'A':
                 $action = 'Amazon order paused';
                 break;
-            default :
+            default:
                 $action = 'Cargo Request paused';
                 break;
         }
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
             'action' => $action,
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
         Order_time::create($time_data);
 
         return Redirect::back()->with('message', 'Order Request is on wait');
@@ -365,16 +466,15 @@ class ManuelOrderController extends Controller
 
     public function remove_on_wait($id)
     {
-
         switch (substr($id, 0, 1)) {
             case 'A':
                 Amazon_order::where('id', $id)->update([
-                    'status' => 0
+                    'status' => 0,
                 ]);
                 break;
-            default :
+            default:
                 Cargo_request::where('id', $id)->update([
-                    'status' => 0
+                    'status' => 0,
                 ]);
                 break;
         }
@@ -383,16 +483,16 @@ class ManuelOrderController extends Controller
             case 'A':
                 $action = 'Amazon order pause removed';
                 break;
-            default :
+            default:
                 $action = 'Cargo Request pause removed';
                 break;
         }
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
             'action' => $action,
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
         Order_time::create($time_data);
 
         return Redirect::back()->with('message', 'Order Request is pending');
@@ -400,31 +500,36 @@ class ManuelOrderController extends Controller
 
     public function cancel_order(Request $request, $id)
     {
-
         switch (substr($id, 0, 1)) {
             case 'A':
                 Amazon_order::where('id', $id)->update([
                     'cancel_comment' => $request->cancel_comment,
-                    'status' => 5
+                    'status' => 5,
                 ]);
-                $cargo = Amazon_order::where('id', $id)->get()->first();
+                $cargo = Amazon_order::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
-            default :
+            default:
                 Cargo_request::where('id', $id)->update([
                     'cancel_comment' => $request->cancel_comment,
-                    'status' => 5
+                    'status' => 5,
                 ]);
-                $cargo = Cargo_request::where('id', $id)->get()->first();
+                $cargo = Cargo_request::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
         }
 
         $total_cargo_price = $cargo->total_cargo_price;
-        $user = User::where('id', $cargo->user_id)->get()->first();
+        $user = User::where('id', $cargo->user_id)
+            ->get()
+            ->first();
 
         if ($cargo->submitted == 1) {
             $new_user_balance = $user->balance + $total_cargo_price;
             User::where('id', $cargo->user_id)->update([
-                'balance' => $new_user_balance
+                'balance' => $new_user_balance,
             ]);
 
             $data = new stdClass();
@@ -434,53 +539,64 @@ class ManuelOrderController extends Controller
             $data->new_balance = $user->balance + $total_cargo_price;
             switch (substr($id, 0, 1)) {
                 case 'A':
-                    $data->transfer_method = "Amazon order payment returned for cancel";
+                    $data->transfer_method =
+                        'Amazon order payment returned for cancel';
                     break;
-                default :
-                    $data->transfer_method = "Cargo payment returned for cancel";
+                default:
+                    $data->transfer_method =
+                        'Cargo payment returned for cancel';
                     break;
             }
 
-            (new HelperController)->checkTransaction($data);
+            (new HelperController())->checkTransaction($data);
         }
 
         switch (substr($id, 0, 1)) {
             case 'A':
                 $action = 'Amazon order cancelled';
                 break;
-            default :
+            default:
                 $action = 'Cargo Request cancelled';
                 break;
         }
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
             'action' => $action,
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
         Order_time::create($time_data);
 
-        return Redirect::back()->with('message', 'Order Cancelled of ' . $user->name . ' has been updated');
+        return Redirect::back()->with(
+            'message',
+            'Order Cancelled of ' . $user->name . ' has been updated'
+        );
     }
 
     public function revert_order($id)
     {
         switch (substr($id, 0, 1)) {
             case 'A':
-                $cargo = Amazon_order::where('id', $id)->get()->first();
+                $cargo = Amazon_order::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
-            default :
-                $cargo = Cargo_request::where('id', $id)->get()->first();
+            default:
+                $cargo = Cargo_request::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
         }
         $total_cargo_price = $cargo->total_cargo_price;
 
-        $user = User::where('id', $cargo->user_id)->get()->first();
+        $user = User::where('id', $cargo->user_id)
+            ->get()
+            ->first();
 
         if ($cargo->submitted == 1) {
             $new_user_balance = $user->balance - $total_cargo_price;
             User::where('id', $cargo->user_id)->update([
-                'balance' => $new_user_balance
+                'balance' => $new_user_balance,
             ]);
 
             $data = new stdClass();
@@ -490,25 +606,27 @@ class ManuelOrderController extends Controller
             $data->new_balance = $user->balance - $total_cargo_price;
             switch (substr($id, 0, 1)) {
                 case 'A':
-                    $data->transfer_method = "Amazon order charged after revert";
+                    $data->transfer_method =
+                        'Amazon order charged after revert';
                     break;
-                default :
-                    $data->transfer_method = "Cargo payment charged after revert";
+                default:
+                    $data->transfer_method =
+                        'Cargo payment charged after revert';
                     break;
             }
 
-            (new HelperController)->checkTransaction($data);
+            (new HelperController())->checkTransaction($data);
         }
 
         switch (substr($id, 0, 1)) {
             case 'A':
                 Amazon_order::where('id', $id)->update([
-                    'status' => 0
+                    'status' => 0,
                 ]);
                 break;
-            default :
+            default:
                 Cargo_request::where('id', $id)->update([
-                    'status' => 0
+                    'status' => 0,
                 ]);
                 break;
         }
@@ -517,24 +635,26 @@ class ManuelOrderController extends Controller
             case 'A':
                 $action = 'Amazon order reverted';
                 break;
-            default :
+            default:
                 $action = 'Cargo Request reverted';
                 break;
         }
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
             'action' => $action,
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
         Order_time::create($time_data);
 
-        return Redirect::back()->with('message', 'Order Reverted and balance of ' . $user->name . ' has been updated');
+        return Redirect::back()->with(
+            'message',
+            'Order Reverted and balance of ' . $user->name . ' has been updated'
+        );
     }
 
     public function cargo_update(Request $request, $id)
     {
-
         // dd($request->all() , $id);
 
         if ($request->package_id) {
@@ -549,15 +669,18 @@ class ManuelOrderController extends Controller
                 $data[] = $document;
             }
             $data = array_unique($data);
-        }else{
+        } else {
             $data = [];
         }
 
-        $result = (new HelperController)->calculator($id);
+        $result = (new HelperController())->calculator($id);
         $additional_services = [];
 
         if ($request->additional_services) {
-            foreach ($request->additional_services as $req_additional => $req_add_value) {
+            foreach (
+                $request->additional_services
+                as $req_additional => $req_add_value
+            ) {
                 foreach ($result->services as $service_key => $service_value) {
                     if ($service_key == $req_additional) {
                         $additional_services[$service_key] = $service_value;
@@ -570,8 +693,10 @@ class ManuelOrderController extends Controller
 
         switch (substr($id, 0, 1)) {
             case 'A':
-                $order_request = array(
+                $order_request = [
                     'id' => $id,
+                    'email' => $request->email,
+                    'phone' => $request->phone,
                     'ioss_number' => $request->ioss_number,
                     'vat_number' => $request->vat_number,
                     'currency' => $request->currency,
@@ -587,12 +712,12 @@ class ManuelOrderController extends Controller
                     'liquid' => $request->liquid,
                     'food' => $request->food,
                     'dangerous' => $request->dangerous,
-                    'document' => json_encode($data)
-                );
+                    'document' => json_encode($data),
+                ];
                 Amazon_order::where('id', $id)->update($order_request);
                 break;
-            default :
-                $order_request = array(
+            default:
+                $order_request = [
                     'id' => $id,
                     'name' => $request->name,
                     'country' => $request->country,
@@ -616,14 +741,14 @@ class ManuelOrderController extends Controller
                     'liquid' => $request->liquid,
                     'food' => $request->food,
                     'dangerous' => $request->dangerous,
-                    'document' => json_encode($data)
-                );
+                    'document' => json_encode($data),
+                ];
                 Cargo_request::where('id', $id)->update($order_request);
                 break;
         }
 
         foreach ($request->package_id as $key => $value) {
-            $packagesS = array(
+            $packagesS = [
                 'id' => $value,
                 'cargo_id' => $id,
                 'package_count' => $request->package_count[$value],
@@ -632,32 +757,38 @@ class ManuelOrderController extends Controller
                 'package_width' => $request->package_width[$value],
                 'package_height' => $request->package_height[$value],
                 'package_weight' => $request->package_weight[$value],
-                'barcode' => $request->barcode[$value]
-            );
+                'barcode' => $request->barcode[$value],
+            ];
             Package::where('id', $value)->update($packagesS);
         }
 
-        $result = (new HelperController)->calculator($id);
+        $result = (new HelperController())->calculator($id);
 
         switch (substr($id, 0, 1)) {
             case 'A':
-                $cargo = Amazon_order::where('id', $id)->get()->first();
+                $cargo = Amazon_order::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
-            default :
-                $cargo = Cargo_request::where('id', $id)->get()->first();
+            default:
+                $cargo = Cargo_request::where('id', $id)
+                    ->get()
+                    ->first();
                 break;
         }
-        $total_cargo_price = (new HelperController)->calculateTotalCargoPrice($result);
+        $total_cargo_price = (new HelperController())->calculateTotalCargoPrice(
+            $result
+        );
         if ($cargo->total_cargo_price != $total_cargo_price) {
             switch (substr($id, 0, 1)) {
                 case 'A':
                     Amazon_order::where('id', $id)->update([
-                        'total_cargo_price' => $total_cargo_price
+                        'total_cargo_price' => $total_cargo_price,
                     ]);
                     break;
-                default :
+                default:
                     Cargo_request::where('id', $id)->update([
-                        'total_cargo_price' => $total_cargo_price
+                        'total_cargo_price' => $total_cargo_price,
                     ]);
                     break;
             }
@@ -667,69 +798,86 @@ class ManuelOrderController extends Controller
             case 'A':
                 $action = 'Amazon order updated';
                 break;
-            default :
+            default:
                 $action = 'Cargo Request updated';
                 break;
         }
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
             'action' => $action,
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
         Order_time::create($time_data);
 
-        return Redirect::back()->with('message', 'Order ' . $id . ' , Succesfully updated');
+        return Redirect::back()->with(
+            'message',
+            'Order ' . $id . ' , Succesfully updated'
+        );
     }
 
     public function cargo_logs()
     {
         $logs = Order_time::orderBy('id', 'DESC')->get();
+        $page_title = 'Cargo Logs';
 
-        return view('backend.logs.cargo_logs')->with('logs', $logs);
+        return view('backend.logs.cargo_logs')->with([
+            'logs' => $logs,
+            'page_title' => $page_title,
+        ]);
     }
 
     public function cargo_logs_with_id($id)
     {
-        $logs = Order_time::where('cargo_id', $id)->orderBy('id', 'DESC')->get();
+        $logs = Order_time::where('cargo_id', $id)
+            ->orderBy('id', 'DESC')
+            ->get();
+        $page_title = 'Cargo Logs';
 
-        return view('backend.logs.cargo_logs')->with('logs', $logs);
+        return view('backend.logs.cargo_logs')->with([
+            'logs' => $logs,
+            'page_title' => $page_title,
+        ]);
     }
 
     public function buyforme()
     {
-
         $orders = Forme_request::all();
+        $page_title = 'Buy for me Orders';
 
-        return view('backend.orders.buyforme', compact('orders'));
+        return view('backend.orders.buyforme', compact('orders', 'page_title'));
     }
 
     public function custom_order_details($id)
     {
-
-        $cargo = Forme_request::where('id', $id)->get()->first();
+        $cargo = Forme_request::where('id', $id)
+            ->get()
+            ->first();
+        $page_title = 'Cargo Details';
 
         return view('backend.orders.custom_order_details')->with([
-            'cargo' => $cargo
+            'cargo' => $cargo,
+            'page_title' => $page_title,
         ]);
     }
 
     public function order_update(Request $request, $id)
     {
-
         $request->request->remove('_token');
-        $data = collect(request()->all())->filter(function ($value) {
-            return null !== $value;
-        })->toArray();
+        $data = collect(request()->all())
+            ->filter(function ($value) {
+                return null !== $value;
+            })
+            ->toArray();
 
         Forme_request::where('id', $id)->update($data);
 
-        $time_data = array(
+        $time_data = [
             'cargo_id' => $id,
             'user_id' => Auth::user()->id,
             'action' => 'Order updated',
-            'time' => Carbon::now()
-        );
+            'time' => Carbon::now(),
+        ];
         Order_time::create($time_data);
 
         return Redirect::back()->with('message', 'Order succesfully updated');
@@ -737,31 +885,35 @@ class ManuelOrderController extends Controller
 
     public function order_action(Request $request)
     {
-
         $id = $request->id;
         $request->request->remove('id');
-        $data = collect(request()->all())->filter(function ($value) {
-            return null !== $value;
-        })->toArray();
+        $data = collect(request()->all())
+            ->filter(function ($value) {
+                return null !== $value;
+            })
+            ->toArray();
 
         Forme_request::where('id', $id)->update($data);
 
         if ($request->status == 'cancelled') {
             $message = 'Order cancelled';
-        } else if ($request->status == 'accepted') {
+        } elseif ($request->status == 'accepted') {
             $message = 'Order accepted';
         }
 
         $order = Forme_request::where('id', $id)->first();
         $user = User::where('id', $order->user_id)->first();
-        $email_data = array(
+        $email_data = [
             'name' => $user->name,
             'email' => $user->email,
             'mod_text' => $request->comment,
-            'status' => $request->status
-        );
-        Mail::send('backend.mails.ordermail', $email_data, function ($message) use ($email_data) {
-            $message->to($email_data['email'], $email_data['name'])
+            'status' => $request->status,
+        ];
+        Mail::send('backend.mails.ordermail', $email_data, function (
+            $message
+        ) use ($email_data) {
+            $message
+                ->to($email_data['email'], $email_data['name'])
                 ->subject('ShipLounge , Order notification')
                 ->from('noreply@shiplounge.co', 'ShipLounge');
         });
@@ -769,21 +921,69 @@ class ManuelOrderController extends Controller
         return response()->json($message);
     }
 
-    public function special_offers(){
+    public function special_offers()
+    {
         $special_offers = SpecialOffer::all();
+        $page_title = 'Special Offers';
 
-        return view('backend.orders.special_offers', compact('special_offers'));
+        return view(
+            'backend.orders.special_offers',
+            compact('special_offers', 'page_title')
+        );
     }
 
-    public function give_offer(Request $request , $id){
-
-        $data = array(
+    public function give_offer(Request $request, $id)
+    {
+        $data = [
+            'status' => '8',
             'offer_price' => $request->offer_price,
-            'comment' => $request->comment
+            'comment' => $request->comment,
+        ];
+
+        SpecialOffer::where('id', $id)->update($data);
+
+        $offer = SpecialOffer::where('id' , $id)->first();
+        $user = User::where('id' , $offer->user_id)->first();
+
+        $email_data = [
+            'name' => $user->name,
+            'email' => $user->email,
+            'mod_text' => 'Price offered by ShipLounge moderator for your Special Offer'
+        ];
+        $message = 'Price offer';
+
+        Mail::send('backend.mails.special_offer_mail', $email_data, function (
+            $message
+        ) use ($email_data) {
+            $message
+                ->to($email_data['email'], $email_data['name'])
+                ->subject('Cargo Notification')
+                ->from('noreply@shiplounge.co', 'ShipLounge');
+        });
+
+        return Redirect::back()->with(
+            'message',
+            'Offer price succesfully sent'
         );
+    }
 
-        SpecialOffer::where('id' , $id)->update($data);
+    public function post_accept($id)
+    {
+        $data = [
+            'status' => '9',
+        ];
+        SpecialOffer::where('id', $id)->update($data);
 
-        return Redirect::back()->with('message' , 'Offer price succesfully sent');
+        return Redirect::back()->with('message', 'Offer Accepted successfully');
+    }
+
+    public function post_decline($id)
+    {
+        $data = [
+            'status' => '5',
+        ];
+        SpecialOffer::where('id', $id)->update($data);
+
+        return Redirect::back()->with('message', 'Offer Declined successfully');
     }
 }

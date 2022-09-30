@@ -15,7 +15,9 @@ class DomesticCompanyController extends Controller
 {
     public function index(){
         $domestics=DomesticCompany::orderBy('created_at','desc')->get();
-        return view('backend.domestic-company', compact('domestics'));
+        $page_title = "Domestic Cargo";
+
+        return view('backend.domestic-company', compact('domestics' , 'page_title'));
     }
 
     public function create(Request $request)
@@ -39,13 +41,13 @@ class DomesticCompanyController extends Controller
                 $request->fileLogo->move(public_path('backend/assets/img/companies/domestic'), $image);
                 $domestic->logo=$image;
             }
-            
+
             $domestic->save();
 
             return response()->json(['status'=>1, 'msg'=>'Domestic company was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
-	
+
 	public function edit(Request $request)
     {
         $domestic=DomesticCompany::find($request->id);
@@ -79,12 +81,12 @@ class DomesticCompanyController extends Controller
                 $request->fileLogo2->move(public_path('backend/assets/img/companies/cargo'), $image);
                 $cargo->logo=$image;
             }
-            
+
             $domestic->customer_code=$request->inputCustomerCode2;
             $domestic->update();
 
             return response()->json(['status'=>1, 'msg'=>'Domestic company has been successfully updated', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 
     public function delete($id){
@@ -95,7 +97,7 @@ class DomesticCompanyController extends Controller
         $filename = public_path('backend/assets/img/companies/cargo').$file;
         if(file_exists($filename)){
             @unlink($filename);
-        }     
+        }
 
         DomesticCompany::where('id', $id)->delete();
         toastr()->success('Domestic company was successfully deleted', 'Congratulations!');
@@ -112,9 +114,9 @@ class DomesticCompanyController extends Controller
             return response()->json(['status'=>0, 'error'=>$validator->errors()->toArray()]);
         } else {
             $excel = time().'.'.$request->fileExcel->extension();
-            $request->fileExcel->move(public_path('backend/document/cargo'), $excel);            
+            $request->fileExcel->move(public_path('backend/document/cargo'), $excel);
 
             return response()->json(['status'=>1, 'msg'=>'Cargo company  was successfully registered', 'state'=>'Congratulations!']);
-        }         
+        }
     }
 }

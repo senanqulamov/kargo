@@ -80,12 +80,12 @@
                                                 <i class="fas fa-check"></i></a>
                                         @endif
                                     </td>
-                                    <td class="user_role_{{ $user->user_role }}">
-                                        @php
-                                            $user_role = DB::table('user_roles')
-                                                ->where('role_id', $user->user_role)
-                                                ->first();
-                                        @endphp
+                                    @php
+                                        $user_role = DB::table('user_roles')
+                                            ->where('id', $user->user_role)
+                                            ->first();
+                                    @endphp
+                                    <td style="background:{{ $user_role->background }};color:{{ $user_role->color }}">
                                         {{ $user_role->role_name }}
                                     </td>
                                     <td>
@@ -243,11 +243,13 @@
                                 <div class="row">
                                     <label for="membership1" class="btn btn-default radio-holder-label col">
                                         Personal
-                                        <input type="radio" id="membership1" name="membership" value="personal" required>
+                                        <input type="radio" id="membership1" name="membership" value="personal"
+                                            required>
                                     </label>
                                     <label for="membership2" class="btn btn-default radio-holder-label col">
                                         Company
-                                        <input type="radio" id="membership2" name="membership" value="company" required>
+                                        <input type="radio" id="membership2" name="membership" value="company"
+                                            required>
                                     </label>
                                 </div>
                             </div>
@@ -288,8 +290,8 @@
                                 <label for="user_role">User Role</label>
                                 <select name="user_role" id="user_role" class="form-control select-custom-hm">
                                     @foreach ($user_roles as $role)
-                                        <option value="{{ $role->role_id }}"
-                                            @if ($user->user_role == $role->role_id) selected @endif>
+                                        <option value="{{ $role->id }}"
+                                            @if ($user->user_role == $role->id) selected @endif>
                                             {{ $role->role_name }}
                                         </option>
                                     @endforeach

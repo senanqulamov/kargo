@@ -1,7 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-
     <section id="share">
         <div class="share">
             <div class="container">
@@ -12,11 +11,11 @@
                             <div class="row">
                                 <div class="d-flex row align-items-center">
                                     <div class="col-sm-9 col-12 d-flex align-items-center">
-
+                                        @php
+                                            $share_earn_url = Auth::user()->id . 'wa' . Auth::user()->id . '2' . Auth::user()->id . '04' . Auth::user()->id . '1';
+                                        @endphp
                                         <input class="form-control mt-sm-2" type="text" placeholder="Default input"
-                                            aria-label="default input example">
-
-
+                                            value="{{ route('userpanel.get_referance_url', ['url' => $share_earn_url]) }}">
                                     </div>
                                     <div class="col-sm-3 col-12  mt-3 mt-sm-2">
                                         <div class="d-flex justify-content-end justify-content-sm-center">

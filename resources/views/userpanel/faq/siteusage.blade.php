@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container p-4">
-            <div class="my-5 usage-div-cont">
+            <div class="usage-div-cont">
                 @foreach ($usages as $usage)
                     @if ($usage->status == 1)
                         <div class="usage-div-holder">
@@ -21,7 +21,7 @@
                                         {!! json_decode($usage->description) !!}
                                     </div>
                                 </div>
-                                <button class="my-3 btn btn-primary" onclick="window.open('{{ $usage->link }}')">
+                                <button class="btn" onclick="window.open('{{ $usage->link }}')">
                                     Watch
                                 </button>
                             </a>

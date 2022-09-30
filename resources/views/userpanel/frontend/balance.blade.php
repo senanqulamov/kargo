@@ -1,7 +1,6 @@
 @extends('userpanel.layout.layout')
 
 @section('content')
-
     <style>
         .approvel-td {
             display: flex;
@@ -27,11 +26,23 @@
         #upload {
             cursor: pointer;
         }
+
         .form-control[readonly] {
-        background-color: #D1E2FF !important;
-        opacity: 1;
+            background-color: #D1E2FF !important;
+            opacity: 1;
         }
 
+        .row-hm {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .row-hm .col-4 {
+            width: max-content;
+        }
     </style>
     <section id="balance" class="balance">
 
@@ -119,7 +130,7 @@
                             </div>
 
                             <div class="balance__download-info mt-5">
-                                <div class="row balance__download-info-row align-items-center">
+                                <div class="row-hm">
                                     <div class="col-4">
                                         <button type="button" class="balance__download-buttons">
                                             <div class="btn btn-light"><i class="far fa-plus plus"></i><i
@@ -135,13 +146,13 @@
                                             <span>Balans hesabina odeme </sp>
                                         </button>
                                     </div>
-                                    <div class="col-4">
+                                    {{-- <div class="col-4">
                                         <button type="button" class="balance__download-buttons">
                                             <div class="btn btn-light me-2"><i class="far fa-plus plus"></i><i
                                                     class="far fa-minus minus hide"></i></div>
                                             <span>Online odeme </span>
                                         </button>
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
 
@@ -188,7 +199,7 @@
                                 yükleyiniz.</p>
                         </div>
 
-                        <div class="balance__line ">
+                        {{-- <div class="balance__line ">
 
                             <ol class="steps">
                                 <li class=" step is-active" data-step="1">
@@ -202,7 +213,7 @@
                                 </li>
                             </ol>
 
-                        </div>
+                        </div> --}}
 
                         <div class="balance__customer-num mt-4">
                             <h4>Müşteri Numaranız: EB1Z</h4>
@@ -270,7 +281,7 @@
 
                         <!--</div>-->
                         <div class="balance__input newRow row ">
-                            <div class="col-lg-2  col-md-6 col-sm-12 col-12">
+                            <div class="col">
                                 <div class="balance__input-file">
                                     <div style="display:flex;" class="User_id_box">
                                         <label> Name/ID
@@ -281,28 +292,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="col">
                                 <div class="balance__input-file">
                                     <div style="display:flex;">
-                                        <label>Yüklenilen  tutar
+                                        <label>Yüklenilen tutar
 
-                                        <input type="text" class="form-control" placeholder="Örn:400" name="balance" id="balance_input"
-                                            onchange="checkComission()">
+                                            <input type="text" class="form-control" placeholder="Örn:400"
+                                                name="balance" id="balance_input" onchange="checkComission()" required>
                                         </label>
                                     </div>
                                     <input type="text" name="kur" hidden>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
+                            <div class="col">
                                 <div class="balance__input-file">
                                     <label>Para birimi
 
-                                    <select class="form-select" aria-label="Default select example" name="money_type"
-                                        id="money_type">
-                                        <option selected value="tl">Turk lirasi</option>
-                                        <option value="euro">Euro</option>
-                                        {{-- <option value="usd">USD</option> --}}
-                                    </select>
+                                        <select class="form-select" aria-label="Default select example" name="money_type"
+                                            id="money_type" onchange="checkComission()">
+                                            <option selected value="tl">Turk lirasi</option>
+                                            <option value="euro">Euro</option>
+                                            {{-- <option value="usd">USD</option> --}}
+                                        </select>
                                     </label>
                                 </div>
 
@@ -310,26 +321,31 @@
 
 
                             </div>
-                            <div class="col-lg-3 col-md-6 col-sm-12 col-12">
-
+                            <div class="col">
                                 <div class="balance__input-file">
-                                    <label>Komisyon hesaplama
+                                    <label>Komisyon (%)
                                         <input type="text" class="form-control" name="comission" readonly>
                                     </label>
                                 </div>
-
-
                             </div>
-
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="balance__input-file">
+                                    <label>Hesaba oturacak mikdar
+                                        <input type="text" class="form-control" name="result_price" readonly>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="balance__selectFiles">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form action="" class="form__file">
-                                        <p class="input__above-text">(PDF, Maks. 5.0. MB)</p>
-                                        <input type="file" name="document" id="upload"></input>
-                                    </form>
+                                    {{-- <form action="" class="form__file"> --}}
+                                    <p class="input__above-text">(PDF, Maks. 5.0. MB)</p>
+                                    <input type="file" name="document" id="upload"></input>
+                                    {{-- </form> --}}
                                 </div>
                             </div>
                         </div>
@@ -348,7 +364,7 @@
                                 </div>
 
                                 <div class="balance__textArea-btn">
-                                    <button class="btn btn-danger">İlərlə</button>
+                                    <button class="btn btn-danger">Submit</button>
                                 </div>
 
                             </div>
@@ -399,6 +415,7 @@
                                     <th>Money Type</th>
                                     <th>Amount</th>
                                     <th>Comission</th>
+                                    <th>Result value</th>
                                     <th>Kur</th>
                                     <th>Document</th>
                                     <th>Payment Comment</th>
@@ -442,7 +459,8 @@
                                             {{ $payment->money_type }}
                                         </td>
                                         <td>{{ $payment->amount }}</td>
-                                        <td>{{ $payment->comission }} €</td>
+                                        <td>{{ $payment->comission }} %</td>
+                                        <td>{{ $payment->result_price }} €</td>
                                         <td>{{ $payment->kur }}</td>
                                         <td>
                                             <div class="approvel-td">
@@ -587,7 +605,19 @@
     <script>
         var kur = 0;
 
-        $(document).ready(function() {
+        // $(document).ready(function() {});
+
+        var rad = document.querySelectorAll('.payment-radio');
+
+        for (var i = 0; i < rad.length; i++) {
+            rad[i].addEventListener('change', function() {
+
+                checkComission(this.value);
+            });
+        }
+
+        function checkComission(changed_method) {
+
             $.ajax({
                 type: 'GET',
                 url: '{{ route('userpanel.getKur') }}',
@@ -597,7 +627,7 @@
                 beforeSend: function() {
                     let timerInterval
                     Swal.fire({
-                        position: 'top-right',
+                        position: 'bottom-right',
                         title: 'Loading Euro selling rate',
                         backdrop: false,
                         timerProgressBar: true,
@@ -610,13 +640,15 @@
                     Swal.hideLoading();
                 },
                 success: function(data) {
+                    Swal.close();
+
                     Swal.fire({
-                        position: 'top-right',
+                        position: 'bottom-right',
                         title: 'Euro selling rate loaded succesfully',
                         backdrop: false,
                         showConfirmButton: false,
                         timerProgressBar: true,
-                        timer: 3000
+                        timer: 2000
                     });
 
                     console.log(data);
@@ -632,7 +664,7 @@
                 },
                 error: function(error) {
                     Swal.fire({
-                        position: 'top-right',
+                        position: 'bottom-right',
                         icon: 'error',
                         title: 'Couldnt load Euro selling rate',
                         backdrop: true,
@@ -643,24 +675,12 @@
                     });
                 }
             });
-        });
 
-        var rad = document.querySelectorAll('.payment-radio');
-
-        for (var i = 0; i < rad.length; i++) {
-            rad[i].addEventListener('change', function() {
-
-                checkComission(this.value);
-            });
-        }
-
-        function checkComission(changed_method) {
             var balance = parseFloat(document.querySelector("#balance_input").value);
             var money_type = document.querySelector("#money_type").value;
 
             if (money_type == "tl") {
                 balance = parseFloat(balance / kur).toFixed(2);
-                console.log(balance);
             }
 
             if (changed_method) {
@@ -680,8 +700,11 @@
                     balance: balance
                 },
                 success: function(data) {
-                    document.querySelector("input[name=comission]").value = parseFloat(data.comission).toFixed(
-                        2);
+                    console.log(data);
+                    document.querySelector("input[name=comission]").value = parseFloat(data.comission);
+                    document.querySelector("input[name=result_price]").value = parseFloat(data.result_price)
+                        .toFixed(
+                            2);
                 }
             });
         }
