@@ -122,7 +122,7 @@
         <div class="row mt-6 mb-5" style="text-align: center;">
             <div class="col-lg-12">
                 <div class="title">
-                    <h2>Frequently Asked Questions (FAQ)</h2>
+                    <h2>{{ __('homepage.FAQ') }}</h2>
                 </div>
             </div>
         </div>

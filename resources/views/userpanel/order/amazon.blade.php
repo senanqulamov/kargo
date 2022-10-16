@@ -121,7 +121,7 @@
                                                 fill="white" />
                                         </svg>
                                     </div>
-                                    <span class="amazonHeaderText ms-2 amazonIcon">Amazon Warehouses</span>
+                                    <span class="amazonHeaderText ms-2 amazonIcon">{{ __('userpanel.manual order.text 61') }}</span>
                                 </div>
                                 <li class="list-group-item pb-4">
                                     @php
@@ -147,24 +147,24 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-12 col-sm-6">
-                                                <h6 class="customerText">Country<span class="red">*</span></h6>
+                                                <h6 class="customerText">{{ __('userpanel.Country') }}<span class="red">*</span></h6>
                                                 <input class="form-control mb-3 check-input" type="text"
                                                     name="country" />
-                                                <h6 class="customerText">City<span class="red">*</span></h6>
+                                                <h6 class="customerText">{{ __('userpanel.City') }}<span class="red">*</span></h6>
                                                 <input class="form-control mb-3 check-input" type="text"
                                                     placeholder="New York" aria-label="default input example" name="city"
                                                     id="locality-input" />
-                                                <h6 class="customerText">State</h6>
+                                                <h6 class="customerText">{{ __('userpanel.State') }}</h6>
                                                 <input class="form-control mb-3 check-input" type="text"
                                                     placeholder="California" aria-label="default input example"
                                                     name="state" id="administrative_area_level_1-input" />
                                             </div>
                                             <div class="col-12 col-sm-6">
-                                                <h6 class="customerText">Name<span class="red">*</span></h6>
+                                                <h6 class="customerText">{{ __('userpanel.Name') }}<span class="red">*</span></h6>
                                                 <input class="form-control mb-3 check-input" type="text"
                                                     placeholder="Emma John" aria-label="default input example"
                                                     name="name" />
-                                                <h6 class="customerText">Adress<span class="red">*</span></h6>
+                                                <h6 class="customerText">{{ __('userpanel.Address') }}<span class="red">*</span></h6>
                                                 <input class="form-control mb-3 check-input" type="text"
                                                     placeholder="Bergen street 57" aria-label="default input example"
                                                     name="address" id="location-input" />
@@ -180,7 +180,7 @@
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
                             <button type="button" class="btn btn-primary next-button-hm"
-                                onclick="nextTo('common_info' , this)">Next</button>
+                                onclick="nextTo('common_info' , this)">{{ __('userpanel.manual order.text 14') }}</button>
                         </li>
                     </ul>
                     <!-- Common Information -->
@@ -213,24 +213,24 @@
                                             </defs>
                                         </svg>
                                     </div>
-                                    <span class="amazonHeaderText ms-2 amazonIcon ">Common Information</span>
+                                    <span class="amazonHeaderText ms-2 amazonIcon ">{{ __('userpanel.manual order.text 15') }}</span>
                                 </div>
                                 <li class="list-group-item">
                                     <div class="row">
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">IOSS Number</h6>
+                                            <h6 class="customerText">{{ __('userpanel.manual order.text 16') }}</h6>
                                             <input class="form-control check-input" type="text"
                                                 placeholder="498980948" aria-label="default input example"
                                                 name="ioss_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">Vat Number</h6>
+                                            <h6 class="customerText">{{ __('userpanel.manual order.text 17') }}</h6>
                                             <input class="form-control check-input" type="text"
                                                 placeholder="498980948" aria-label="default input example"
                                                 name="vat_number" />
                                         </div>
                                         <div class="col-12 col-sm-4 mb-3">
-                                            <h6 class="customerText">Currency unit<span class="red">*</span></h6>
+                                            <h6 class="customerText">{{ __('userpanel.manual order.text 18') }}<span class="red">*</span></h6>
                                             <select class="form-select check-input" name="currency_unit"
                                                 onchange="changeCurrency(this)" required>
                                                 <option value="EUR" data-currency="€" selected>EUR - Euro - €</option>
@@ -243,7 +243,7 @@
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
                             <button type="button" class="btn btn-primary next-button-hm"
-                                onclick="nextTo('order_info' , this)">Next</button>
+                                onclick="nextTo('order_info' , this)">{{ __('userpanel.manual order.text 14') }}</button>
                         </li>
                     </ul>
                     <!-- Order Information -->
@@ -260,7 +260,7 @@
                                                 fill="white" />
                                         </svg>
                                     </div>
-                                    <span class="amazonHeaderText ms-2 amazonIcon">Order Information</span>
+                                    <span class="amazonHeaderText ms-2 amazonIcon">{{ __('userpanel.manual order.text 19') }}</span>
                                 </div>
                                 <li class="list-group-item">
                                     <div class="row">
@@ -279,12 +279,11 @@
                                         </span>
                                     </div>
                                 </li>
-
                                 <!-- Package -->
                                 <li class="list-group-item paketYaradilanYer">
                                     <button type="button" class="btn btn-warning my-3 text-white"
                                         onclick="yeniPaketElaveEt()">
-                                        + Add package
+                                        + {{ __('userpanel.manual order.text 20') }}
                                     </button>
                                     <!-- 2ci paket -->
                                 </li>
@@ -306,7 +305,7 @@
 
                                                 </div>
                                                 <div class="ms-2">
-                                                    <h5>Total amount</h5>
+                                                    <h5>{{ __('userpanel.manual order.text 36') }}</h5>
                                                     <span class="totalText totalAmount">0</span>
                                                     <input type="hidden" name="total_count" value="">
                                                 </div>
@@ -325,7 +324,7 @@
 
                                                 </div>
                                                 <div class="ms-2">
-                                                    <h5>Total volume</h5>
+                                                    <h5>{{ __('userpanel.manual order.text 37') }}</h5>
                                                     <span class="totalText totalVolume">0</span><span> m<sup>3</sup></span>
                                                     <input type="hidden" name="total_volume" value="">
                                                 </div>
@@ -350,7 +349,7 @@
 
                                                 </div>
                                                 <div class="ms-2">
-                                                    <h5>Total weight</h5>
+                                                    <h5>{{ __('userpanel.manual order.text 38') }}</h5>
                                                     <span class="totalText totalWeight">0</span><span> kg</span>
                                                     <input type="hidden" name="total_weight" value="">
                                                 </div>
@@ -369,7 +368,7 @@
 
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h5>Pricing weight:</h5>
+                                                    <h5>{{ __('userpanel.manual order.text 39') }}:</h5>
                                                     <span class="totalText totalPricing">0</span> KGS
                                                     <input type="hidden" name="total_deci" value="">
                                                 </div>
@@ -394,7 +393,7 @@
 
                                                 </div>
                                                 <div class="ms-3">
-                                                    <h5>Total worth:</h5>
+                                                    <h5>{{ __('userpanel.manual order.text 40') }}:</h5>
                                                     <span class="totalText totalWorth">0</span><span
                                                         class="total-worth-currency"> €</span>
                                                     <input type="hidden" name="total_worth" value="">
@@ -413,11 +412,11 @@
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
                             <button type="button" class="btn btn-outline-primary next-button-with-quote next-button-hm"
-                                onclick="yekunHesabla('next')">Get Quote
+                                onclick="yekunHesabla('next')">{{ __('userpanel.manual order.text 41') }}
                             </button>
                             <button style="display: none" type="button"
                                 class="btn btn-outline-primary next-button-get-quote next-button-hm"
-                                onclick="yekunHesabla('quote')">Get Quote
+                                onclick="yekunHesabla('quote')">{{ __('userpanel.manual order.text 41') }}
                             </button>
                         </li>
                     </ul>
@@ -439,15 +438,14 @@
                                         </svg>
 
                                     </div>
-                                    <span class="amazonHeaderText ms-2 amazonIcon">Shipment
-                                        definition</span>
+                                    <span class="amazonHeaderText ms-2 amazonIcon">{{ __('userpanel.manual order.text 42') }}</span>
                                 </div>
                                 <li class="list-group-item">
-                                    <h5 class="textShipment">Select the cargo</h5>
+                                    <h5 class="textShipment">{{ __('userpanel.manual order.text 43') }}</h5>
                                     <div class="cargo-company-labels-holder">
                                         @foreach ($cargo_companies as $company)
                                             <label for="cargo_company_input_{{ $company->id }}"
-                                                class="cargo-company-label">
+                                                class="cargo-company-label ttp" data-ttp="{{ $company->description }}">
                                                 <div class="list-group list-group-horizontal">
                                                     <div
                                                         class="list-group-item w-25 text-center d-flex align-items-center">
@@ -457,15 +455,15 @@
                                                     <div class="list-group-item w-50 text-left d-flex align-items-center ">
                                                         {{ $company->name }}</div>
                                                     <div class="list-group-item d-flex d-flex align-items-center">
-                                                        <span class="me-2 textShipment"
+                                                        <span class="me-2 textShipment company_span_cls"
                                                             id="cargo_company_{{ $company->id }}">0
                                                             €</span>
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="radio"
-                                                                name="cargo_company"
+                                                            <input class="form-check-input company_radio_cls"
+                                                                type="radio" name="cargo_company"
                                                                 id="cargo_company_input_{{ $company->id }}"
                                                                 data-price="0" value="{{ $company->id }}" />
-                                                            <input type="hidden"
+                                                            <input type="hidden" class="company_hidden_cls"
                                                                 name="company_value[{{ $company->id }}]" value="0">
                                                         </div>
                                                     </div>
@@ -473,6 +471,8 @@
                                             </label>
                                         @endforeach
                                     </div>
+                                    <input type="text" hidden name="personal_cargo" value="false">
+                                    <input type="text" hidden name="selected_personal" id="selected_personal">
                                 </li>
                                 <!-- Footer -->
                                 <li class="list-group-item">
@@ -526,7 +526,7 @@
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
                             <button type="button" class="btn btn-primary next-button-hm"
-                                onclick="nextTo('product_content' , this)">Next</button>
+                                onclick="nextTo('product_content' , this)">{{ __('userpanel.manual order.text 14') }}</button>
                         </li>
                     </ul>
                     <!-- Product Content -->
@@ -549,124 +549,104 @@
 
 
                                 </div>
-                                <span class="amazonHeaderText ms-2 amazonIcon">Product Content</span>
+                                <span class="amazonHeaderText ms-2 amazonIcon">{{ __('userpanel.manual order.text 44') }}</span>
                             </div>
                             <div class="row">
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5 class="productText">Does the product contain a battery?</h5>
+                                        <h5 class="productText">{{ __('userpanel.manual order.text 45') }}</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="battery"
                                                 id="battery_yes" value="yes" />
                                             <label class="form-check-label" for="battery_yes">
-                                                Yes
+                                                {{ __('userpanel.manual order.text 46') }}
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="battery"
                                                 id="battery_no" value="no" checked />
                                             <label class="form-check-label" for="battery_no">
-                                                No
+                                                {{ __('userpanel.manual order.text 47') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5 class="productText">Does the product contain
-                                            cosmetics/liquids?</h5>
+                                        <h5 class="productText">{{ __('userpanel.manual order.text 48') }}</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="liquid"
                                                 id="liquid_yes" value="yes" />
                                             <label class="form-check-label" for="liquid_yes">
-                                                Yes
+                                                {{ __('userpanel.manual order.text 46') }}
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="liquid" id="liquid_no"
                                                 value="no" checked />
                                             <label class="form-check-label" for="liquid_no">
-                                                No
+                                                {{ __('userpanel.manual order.text 47') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5 class="productText">Does the product contain food?</h5>
+                                        <h5 class="productText">{{ __('userpanel.manual order.text 49') }}</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="food" id="food_yes"
                                                 value="yes" />
                                             <label class="form-check-label" for="food_yes">
-                                                Yes
+                                                {{ __('userpanel.manual order.text 46') }}
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="food" id="food_no"
                                                 checked value="no" />
                                             <label class="form-check-label" for="food_no">
-                                                No
+                                                {{ __('userpanel.manual order.text 47') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row col-12 col-md-3 mb-2">
                                     <div class="col-12 border-end">
-                                        <h5 class="productText">Does the product contain dangerous substances?</h5>
+                                        <h5 class="productText">{{ __('userpanel.manual order.text 50') }}</h5>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="dangerous"
                                                 id="dangerous_yes" value="yes" />
                                             <label class="form-check-label" for="dangerous_yes">
-                                                Yes
+                                                {{ __('userpanel.manual order.text 46') }}
                                             </label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="dangerous"
                                                 id="dangerous_no" value="no" checked />
                                             <label class="form-check-label" for="dangerous_no">
-                                                No
+                                                {{ __('userpanel.manual order.text 47') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col row productContentFooter m-2 rounded">
-                                    <span class="col-12">*If your cargo includes batteries and derivatives,
-                                        you
-                                        can
-                                        send it together with your
-                                        <span class="rengliSoz">MSDS</span> document.</span>
-                                    <span class="col-12">*When sending your cargo containing
-                                        cosmetics/liquid,
-                                        you
-                                        send it together with your
-                                        <span class="rengliSoz">MSDS</span> document.</span>
-                                    <span class="col-12">*If you are selling dietary supplements, food,
-                                        drugs,
-                                        blood
-                                        products, biological medical products, radiation-emitting
-                                        devices, medical devices, cosmetics and veterinary
-                                        equipment, you must obtain
-                                        <span class="rengliSoz">FDA</span> certification for
-                                        these.</span>
-                                    <span class="col-12">
-                                        *You must obtain an
-                                        <span class="rengliSoz">MSDS</span> certificate for your
-                                        products that contain flammable, harmful, irritating
-                                        chemicals that may harm nature.</span>
+                                    <span class="col-12">{{ __('userpanel.manual order.text 51') }}</span>
+                                    <span class="col-12">{{ __('userpanel.manual order.text 52') }}</span>
+                                    <span class="col-12">{{ __('userpanel.manual order.text 53') }}</span>
+                                    <span class="col-12">{{ __('userpanel.manual order.text 54') }}</span>
                                 </div>
                             </div>
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
                             <button type="button" class="btn btn-primary next-button-hm"
-                                onclick="nextTo('attachment' , this)">Next</button>
+                                onclick="nextTo('attachment' , this)">{{ __('userpanel.manual order.text 14') }}</button>
                         </li>
                     </ul>
                     <!-- Attachment of documents -->
@@ -688,7 +668,7 @@
 
 
                                     </div>
-                                    <span class="amazonHeaderText ms-2 amazonIcon">Attachment of documents</span>
+                                    <span class="amazonHeaderText ms-2 amazonIcon">{{ __('userpanel.manual order.text 55') }}</span>
                                 </div>
 
                                 <li class="list-group-item">
@@ -700,7 +680,7 @@
                                                     class="custom-file-upload label-for-hidden-input">
                                                     <input type="file" name="document[]" id="CustomFileUpload"
                                                         hidden />
-                                                    Custom Upload
+                                                    {{ __('userpanel.manual order.text 56') }}
                                                 </label>
                                                 <h6 class="ms-2" id="CustomFileUploadText">No file chosen, yet.
                                                 </h6>
@@ -715,18 +695,18 @@
                         </li>
                         <li class="list-group-item row next-button-holder-hm">
                             <button type="button" class="btn btn-primary next-button-hm"
-                                onclick="nextTo('submit_button_form' , this)">Ready ?</button>
+                                onclick="nextTo('submit_button_form' , this)">{{ __('userpanel.manual order.text 58') }} ?</button>
                         </li>
                     </ul>
                 </div>
                 <div class="total_cargo_price" onclick="ScrollToBottom()">
-                    <span>Total price: </span> <span id="total_cargo_price_span">0</span>
+                    <span>{{ __('userpanel.manual order.text 60') }}: </span> <span id="total_cargo_price_span">0</span>
                     <span>€</span>
                     <input type="hidden" name="total_cargo_price" id="total_cargo_price" value="0">
                 </div>
 
                 <div class="order-form-div next-button-holder-hm" id="submit_button_form">
-                    <button class="btn btn-success" type="submit">Submit order</button>
+                    <button class="btn btn-success" type="submit">{{ __('userpanel.manual order.text 59') }}</button>
                 </div>
             </form>
         </div>

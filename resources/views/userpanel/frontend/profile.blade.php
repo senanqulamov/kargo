@@ -71,10 +71,10 @@
                 <div class="list-group">
                     <a href="#" class="list-group-item tab-links-hm active-tab-link" onclick="changeTab(this)"
                         data-name="personal">
-                        <i class="fa-solid fa-user"></i> Personal Information
+                        <i class="fa-solid fa-user"></i> {{ __('userpanel.profile.text 14') }}
                     </a>
                     <a href="#" class="list-group-item tab-links-hm" onclick="changeTab(this)" data-name="account">
-                        <i class="fa-solid fa-lock"></i> Account Information
+                        <i class="fa-solid fa-lock"></i> {{ __('userpanel.profile.text 9') }}
                     </a>
                     <a href="#" class="list-group-item tab-links-hm" onclick="changeTab(this)" data-name="address">
                         <i class="fa-solid fa-location-pin"></i> Addresses
@@ -86,7 +86,7 @@
                     <section class="tab-header-hm">
                         <h2>
                             <i class="fa-solid fa-user"></i>
-                            Personal Information
+                            {{ __('userpanel.profile.text 14') }}
                             @if (Auth::user()->status == 0)
                                 <span style="color: red;">Inactive profile</span>
                             @endif
@@ -102,7 +102,7 @@
                             <li class="list-group-item row d-flex pt-3">
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-12 col-sm-6 text-md-end">
-                                        <h6>Name Surname</h6>
+                                        <h6>{{ __('userpanel.profile.text 1') }}</h6>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <input type="text" class="form-control w-100 my-profile-input-hm"
@@ -123,7 +123,7 @@
                                 </div> --}}
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-12 col-sm-6 text-md-end">
-                                        <h6><i class="fa-solid fa-location-pin me-1"></i>Adress:</h6>
+                                        <h6><i class="fa-solid fa-location-pin me-1"></i>{{ __('userpanel.Address') }}:</h6>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <input type="text" class="form-control w-100 my-profile-input-hm" name="address"
@@ -133,7 +133,7 @@
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-12 col-sm-6 text-md-end">
                                         <h6>
-                                            <i class="fa-solid fa-location-pin me-1"></i>Adress 2:
+                                            <i class="fa-solid fa-location-pin me-1"></i>{{ __('userpanel.Address') }} 2:
                                         </h6>
                                     </div>
                                     <div class="col-12 col-md-6">
@@ -144,7 +144,7 @@
                                 </div>
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-12 col-sm-6 text-md-end">
-                                        <h6><i class="fa-solid fa-location-pin me-1"></i>City:</h6>
+                                        <h6><i class="fa-solid fa-location-pin me-1"></i>{{ __('userpanel.City') }}:</h6>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <input type="text" class="form-control w-100 my-profile-input-hm"
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-12 col-sm-6 text-md-end">
-                                        <h6><i class="fa-solid fa-location-pin me-1"></i>Country:</h6>
+                                        <h6><i class="fa-solid fa-location-pin me-1"></i>{{ __('userpanel.Country') }}:</h6>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <input type="text" class="form-control w-100 my-profile-input-hm"
@@ -164,7 +164,7 @@
                                 </div>
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-12 col-md-6 text-md-end">
-                                        <h6>Post Code:</h6>
+                                        <h6>{{ __('userpanel.ZIP code') }}:</h6>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <input type="text" class="form-control w-100 my-profile-input-hm"
@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="mb-2 col-12 row align-items-center">
                                     <div class="col-6 text-md-end">
-                                        <h6>Membership Type:</h6>
+                                        <h6>{{ __('userpanel.profile.text 2') }}:</h6>
                                     </div>
                                     <div class="col-12 col-md-6 d-flex">
                                         <div class="form-check me-3">
@@ -182,7 +182,7 @@
                                                 id="membership1" value="personal"
                                                 @if (Auth::user()->membership == 'personal') checked @endif />
                                             <label class="form-check-label h6" for="membership1">
-                                                Personal
+                                                {{ __('userpanel.profile.text 3') }}
                                             </label>
                                         </div>
                                         <div class="form-check">
@@ -190,14 +190,14 @@
                                                 id="membership2" value="company"
                                                 @if (Auth::user()->membership == 'company') checked @endif />
                                             <label class="form-check-label h6" for="membership2">
-                                                Company
+                                                {{ __('userpanel.profile.text 4') }}
                                             </label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 mb-3 personal-member-hm"
                                     data-display="@if (Auth::user()->membership == 'personal') block @else none @endif">
-                                    <h6>TC Identification number</h6>
+                                    <h6>{{ __('userpanel.profile.text 5') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control my-profile-input-hm"
                                             name="indetification_number"
@@ -206,7 +206,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 mb-3 personal-member-hm"
                                     data-display="@if (Auth::user()->membership == 'personal') block @else none @endif">
-                                    <h6>Tax Administration</h6>
+                                    <h6>{{ __('userpanel.profile.text 6') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control my-profile-input-hm"
                                             name="tax_adminstration" value="{{ Auth::user()->tax_adminstration }}" />
@@ -214,7 +214,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 mb-3 company-member-hm"
                                     data-display="@if (Auth::user()->membership == 'company') block @else none @endif">
-                                    <h6>Company Name</h6>
+                                    <h6>{{ __('userpanel.profile.text 7') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control my-profile-input-hm"
                                             name="company_name" value="{{ Auth::user()->company_name }}" />
@@ -222,7 +222,7 @@
                                 </div>
                                 <div class="col-12 col-md-6 mb-3 company-member-hm"
                                     data-display="@if (Auth::user()->membership == 'company') block @else none @endif">
-                                    <h6>Tax Number</h6>
+                                    <h6>{{ __('userpanel.profile.text 8') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control my-profile-input-hm" name="tax_number"
                                             value="{{ Auth::user()->tax_number }}" />
@@ -231,7 +231,7 @@
                                 <div class="mb-5 col-12 col-md-12 d-flex align-items-center">
                                     <button type="submit"
                                         class="btn btn-warning mx-auto variable-container-inputs-button38">
-                                        Update
+                                        {{ __('userpanel.Update') }}
                                     </button>
                                 </div>
                             </li>
@@ -240,7 +240,7 @@
                 </div>
                 <div class="tab-col" id="account">
                     <section class="tab-header-hm">
-                        <h2><i class="fa-solid fa-lock"></i> Account Information</h2>
+                        <h2><i class="fa-solid fa-lock"></i> {{ __('userpanel.profile.text 9') }}</h2>
                     </section>
                     <hr>
                     <section>
@@ -248,7 +248,7 @@
                             @csrf
                             <li class="list-group-item row d-flex">
                                 <div class="col-12 col-md-6 mb-3">
-                                    <h6>Email</h6>
+                                    <h6>{{ __('userpanel.Email') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control" placeholder="deirvlon@gmail.com"
                                             aria-describedby="addon-wrapping" name="email"
@@ -256,7 +256,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
-                                    <h6>User name</h6>
+                                    <h6>{{ __('userpanel.profile.text 10') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control" placeholder="123456"
                                             aria-describedby="addon-wrapping" name="name"
@@ -264,7 +264,7 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
-                                    <h6>Phone</h6>
+                                    <h6>{{ __('userpanel.Phone') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input type="text" class="form-control" placeholder="123456"
                                             aria-describedby="addon-wrapping" name="phone"
@@ -272,14 +272,14 @@
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
-                                    <h6>New Password</h6>
+                                    <h6>{{ __('userpanel.profile.text 11') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input class="form-control" type="password" aria-describedby="addon-wrapping"
                                             name="password" placeholder="Your password" />
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-6 mb-3">
-                                    <h6>Balance Name</h6>
+                                    <h6>{{ __('userpanel.profile.text 12') }}</h6>
                                     <div class="input-group flex-nowrap">
                                         <input class="form-control" type="text" aria-describedby="addon-wrapping"
                                             name="balance_name" placeholder="Your IBAN number"
@@ -297,7 +297,7 @@
                                 <div class="col-12 col-md-12 d-flex align-items-center">
                                     <button type="submit"
                                         class="btn btn-warning ms-auto variable-container-inputs-button38">
-                                        Confirm
+                                        {{ __('userpanel.profile.text 13') }}
                                     </button>
                                 </div>
                             </li>
@@ -318,16 +318,16 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Created at</th>
-                                    <th>Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>State</th>
-                                    <th>City</th>
-                                    <th>Zipcode</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <th>{{ __('userpanel.Created at') }}</th>
+                                    <th>{{ __('userpanel.Name') }}</th>
+                                    <th>{{ __('userpanel.Phone') }}</th>
+                                    <th>{{ __('userpanel.Email') }}</th>
+                                    <th>{{ __('userpanel.Address') }}</th>
+                                    <th>{{ __('userpanel.State') }}</th>
+                                    <th>{{ __('userpanel.City') }}</th>
+                                    <th>{{ __('userpanel.ZIP code') }}</th>
+                                    <th>{{ __('userpanel.Edit') }}</th>
+                                    <th>{{ __('userpanel.Delete') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -346,11 +346,11 @@
                                             <button class="btn btn-info" type="button"
                                                 data-address-id="{{ $user_address->id }}"
                                                 onclick="putAddressValues('{{ $user_address->id }}')">
-                                                Edit
+                                                {{ __('userpanel.Edit') }}
                                             </button>
                                         </td>
                                         <td><button class="btn btn-danger" type="button" onclick="DeleteModal(this)"
-                                                data-address-id="{{ $user_address->id }}">Delete</button>
+                                                data-address-id="{{ $user_address->id }}">{{ __('userpanel.Delete') }}</button>
                                         </td>
                                     </tr>
                                 @endforeach

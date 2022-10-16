@@ -161,7 +161,7 @@
                         </div>
                         <div class="page__header">
                             <span class="heading">
-                                <p>Shipment inquirity</p>
+                                <p>{{ __('userpanel.main-page.text 1') }}</p>
                             </span>
                         </div>
                         <div class="page__input">
@@ -204,7 +204,7 @@
                         </div>
                         <div class="page__header">
                             <span class="heading"><span>{{ $pending }}</span>
-                                <p>Waiting</p>
+                                <p>{{ __('userpanel.main-page.text 3') }}</p>
                             </span>
                         </div>
                         <div class="page__text">
@@ -212,7 +212,7 @@
                         </div>
                         <div class="page__button ">
                             <button class="page__btn  page__btn-2" data-status="0"
-                                onclick="GetSortedCargoOrders(this)">Prepare post</button>
+                                onclick="GetSortedCargoOrders(this)">{{ __('userpanel.main-page.text 4') }}</button>
                         </div>
                     </div>
                 </div>
@@ -247,7 +247,7 @@
                         </div>
                         <div class="page__header">
                             <span class="heading"><span>{{ $at_facility }}</span>
-                                <p>Those at the facility</p>
+                                <p>{{ __('userpanel.main-page.text 5') }}</p>
                             </span>
                         </div>
                         <div class="page__text">
@@ -255,7 +255,7 @@
                         </div>
                         <div class="page__button ">
                             <button class="page__btn  page__btn-3" data-status="2"
-                                onclick="GetSortedCargoOrders(this)">Prepare post</button>
+                                onclick="GetSortedCargoOrders(this)">{{ __('userpanel.main-page.text 4') }}</button>
                         </div>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                         </div>
                         <div class="page__header">
                             <span class="heading"><span>{{ $on_the_way }}</span>
-                                <p>Sent</p>
+                                <p>{{ __('userpanel.main-page.text 6') }}</p>
                             </span>
                         </div>
                         <div class="page__text">
@@ -298,7 +298,7 @@
                         </div>
                         <div class="page__button ">
                             <button class="page__btn  page__btn-4" data-status="4"
-                                onclick="GetSortedCargoOrders(this)">Prepare post</button>
+                                onclick="GetSortedCargoOrders(this)">{{ __('userpanel.main-page.text 4') }}</button>
                         </div>
                     </div>
                 </div>
@@ -333,14 +333,14 @@
                         </div>
                         <div class="page__header">
                             <span class="heading"><span>0</span>
-                                <p>Reached</p>
+                                <p>{{ __('userpanel.main-page.text 7') }}</p>
                             </span>
                         </div>
                         <div class="page__text">
                             <p>Weakly meeting</p>
                         </div>
                         <div class="page__button ">
-                            <button class="page__btn  page__btn-5">Prepare post</button>
+                            <button class="page__btn  page__btn-5">{{ __('userpanel.main-page.text 4') }}</button>
                         </div>
                     </div>
                 </div>
@@ -376,15 +376,14 @@
                         </div>
                         <div class="page__header">
                             <span class="heading"><span>{{ $total_cargo }}</span>
-                                <p>Total shipment</p>
+                                <p>{{ __('userpanel.main-page.text 8') }}</p>
                             </span>
                         </div>
                         <div class="page__text">
                             <p>Weakly meeting</p>
                         </div>
                         <div class="page__button ">
-                            <a class="btn page__btn  page__btn-6" href="{{ route('userpanel.cargorequests') }}">Prepare
-                                post</a>
+                            <a class="btn page__btn  page__btn-6" href="{{ route('userpanel.cargorequests') }}">{{ __('userpanel.main-page.text 4') }}</a>
                         </div>
                     </div>
                 </div>
@@ -428,12 +427,12 @@
                                 </svg>
                             </div>
 
-                            <h2>Notifications</h2>
+                            <h2>{{ __('userpanel.main-page.text 9') }}</h2>
 
                         </div>
 
                         @if (count($notifications) == 0)
-                            <h3>No New Notifications</h3>
+                            <h3>No New {{ __('userpanel.main-page.text 9') }}</h3>
                         @endif
 
                         <div class="nots-cont">
@@ -531,7 +530,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <h2>Summary of 7 days</h2>
+                            <h2>{{ __('userpanel.main-page.text 10') }}</h2>
                         </div>
                         <div>
                             <canvas id="myChart" width="100%" height="60"></canvas>

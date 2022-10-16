@@ -14,9 +14,8 @@
             <div class="row my-5 mx-5" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="contact-title">
-                        <h2>Contact with us </h2>
-                        <span>There are more ways to get the support you need. You can contact us about any issue, we will
-                            be happy to assist you.</span>
+                        <h2>{{ __('homepage.contact.text 1') }}</h2>
+                        <span>{{ __('homepage.contact.text 2') }}</span>
                     </div>
                 </div>
             </div>
@@ -31,7 +30,7 @@
                         <div class="col-lg-9">
                             <div class="contact-text">
                                 <div class="contact-text">
-                                    <h5>Our Address:</h5>
+                                    <h5>{{ __('homepage.contact.text 3') }}</h5>
                                     <span>{{ $headOffice->address }}</span>
                                 </div>
                             </div>
@@ -47,7 +46,7 @@
                         </div>
                         <div class="col-lg-9">
                             <div class="contact-text">
-                                <h5>E-mail:</h5>
+                                <h5>{{ __('homepage.contact.text 4') }}</h5>
                                 <span>
                                     @php
                                         $setting = DB::table('settings')
@@ -71,7 +70,7 @@
                         </div>
                         <div class="col-lg-9">
                             <div class="contact-text">
-                                <h5>Phone:</h5>
+                                <h5>{{ __('homepage.contact.text 5') }}</h5>
                                 <span>
                                     @php
                                         $setting = DB::table('settings')
@@ -98,9 +97,8 @@
             <div class="row mt-6" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="contactFormsTitle">
-                        <h2>How can we help</h2>
-                        <span>You can send us your requests by filling out the contact form, calling or sending an
-                            e-mail.</span>
+                        <h2>{{ __('homepage.contact.text 6') }}</h2>
+                        <span>{{ __('homepage.contact.text 7') }}</span>
                     </div>
                 </div>
             </div>
@@ -110,36 +108,46 @@
                         @csrf
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="text" name="name" placeholder="Name" value="{{ old('name') }}">
+                                <input type="text" name="name" placeholder="{{ __('homepage.contact.text 8') }}" value="{{ old('name') }}">
                                 <span class="text-danger error-text name_error"></span>
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" name="surname" placeholder="Surname" value="{{ old('surname') }}">
+                                <input type="text" name="surname" placeholder="{{ __('homepage.contact.text 9') }}" value="{{ old('surname') }}">
                                 <span class="text-danger error-text surname_error"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                                <input type="email" name="email" placeholder="{{ __('homepage.contact.text 10') }}" value="{{ old('email') }}">
                                 <span class="text-danger error-text email_error"></span>
                             </div>
                             <div class="col-lg-6">
-                                <input type="number" name="phone" placeholder="Phone" value="{{ old('phone') }}">
+                                <input type="number" name="phone" placeholder="{{ __('homepage.contact.text 11') }}" value="{{ old('phone') }}">
                                 <span class="text-danger error-text phone_error"></span>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
                                 <select name="service">
-                                    <option value="">Choose a service</option>
-                                    @foreach ($services as $service)
-                                        <option value="{{ $service->id }}">{{ $service->title }}</option>
-                                    @endforeach
+                                    <option value="">{{ __('homepage.contact.text 12') }}</option>
+                                {{-- @foreach ($services as $service) --}}
+                                    {{-- <option value="{{ $service->id }}">{{ $service->title }}</option> --}}
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 13') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 14') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 15') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 16') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 17') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 18') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 19') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 20') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 21') }}</option>
+                                        <option value="{{ __('homepage.contact.text 13') }}">{{ __('homepage.contact.text 22') }}</option>
+                                {{-- @endforeach --}}
                                 </select>
                                 <span class="text-danger error-text service_error"></span>
                             </div>
                             <div class="col-lg-6">
-                                <input type="text" name="subject" placeholder="Subject heading">
+                                <input type="text" name="subject" placeholder="{{ __('homepage.contact.text 23') }}">
                                 <span class="text-danger error-text subject_error"></span>
                             </div>
                         </div>
@@ -150,7 +158,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="forms-send-button">
-                                    <button type="submit">Send</button>
+                                    <button type="submit">{{ __('homepage.contact.text 24') }}</button>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +186,7 @@
             <div class="row" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="ourlocation-title">
-                        <h2>Our location in abroad</h2>
+                        <h2>{{ __('homepage.contact.text 25') }}</h2>
                     </div>
                 </div>
             </div>
@@ -208,7 +216,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="show-map-button">
-                                    <button class="confirm" data-id="{{ $branch->id }}">Show on map</button>
+                                    <button class="confirm" data-id="{{ $branch->id }}">{{ __('homepage.contact.text 26') }}</button>
                                 </div>
                             </div>
                         </div>

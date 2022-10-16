@@ -34,10 +34,10 @@
         }
 
         /* input[type="range"]:focus,
-                            input[type="number"]:focus {
-                            box-shadow: 0 0 3px 1px #4b81dd;
-                            outline: none;
-                            } */
+                                input[type="number"]:focus {
+                                box-shadow: 0 0 3px 1px #4b81dd;
+                                outline: none;
+                                } */
 
         .services-select input[type="range"] {
             -webkit-appearance: none;
@@ -126,8 +126,8 @@
             <div class="row mt-6 mb-5" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="title">
-                        <h2>Service Fees</h2>
-                        <span>Are you ready to experience a 360 degree e-commerce experience with affordable prices?</span>
+                        <h2>{{ __('homepage.service-fee.text 1') }}</h2>
+                        <span>{{ __('homepage.service-fee.text 2') }}</span>
                     </div>
                 </div>
             </div>
@@ -138,21 +138,21 @@
                             <a class="nav-link link-contetn active" id="home-tab" data-bs-toggle="tab"
                                 data-bs-target="#home" href="#">
                                 <img src="{{ asset('/') }}frontend/img/fullfilmentServices1.svg" alt="">
-                                <span>Fulfillment Service</span>
+                                <span>{{ __('homepage.service-fee.text 3') }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link-contetn" id="about-tab" data-bs-toggle="tab" data-bs-target="#about"
                                 href="#">
                                 <img src="{{ asset('/') }}frontend/img/warehousing.svg" alt="">
-                                <span>Warehousing Service</span>
+                                <span>{{ __('homepage.service-fee.text 4') }}</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link link-contetn" id="album-tab" data-bs-toggle="tab" data-bs-target="#album"
                                 href="#">
                                 <img src="{{ asset('/') }}frontend/img/amazomFba.svg" alt="">
-                                <span>Amazon FBA Service</span>
+                                <span>{{ __('homepage.service-fee.text 5') }}</span>
                             </a>
                         </li>
                     </ul>
@@ -161,11 +161,8 @@
                             <div class="row mt-6 mb-5" style="text-align: center;">
                                 <div class="col-lg-12">
                                     <div class="title-fulment">
-                                        <h2>SEFF Fulfillment</h2>
-                                        <span>With our technological solutions, you can both facilitate the
-                                            operation of your orders and provide your customers with a
-                                            pleasant delivery experience thanks to our end-to-end logistics
-                                            service.</span>
+                                        <h2>{{ __('homepage.service-fee.text 6') }}</h2>
+                                        <span>{{ __('homepage.service-fee.text 7') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -174,7 +171,7 @@
                                     <thead>
                                         <tr>
                                             <th style="padding-bottom: 30px;" scope="col" class="tableBox">
-                                                <span>New Jersey - USA aktarma merkezi ve fullfilment hizmetlerimiz</span>
+                                                <span>{{ __('homepage.fullfilment.Fulfillment Fees text') }}</span>
                                             </th>
                                             <th scope="col" class="tableBox">
                                                 <div class="table-title">
@@ -210,7 +207,8 @@
                                                     ->orderBy('text')
                                                     ->get();
                                             @endphp
-                                            <th class="oneColumn" scope="col">Ücret</th>
+                                            <th class="oneColumn" scope="col">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -1') }}</th>
                                             @foreach ($settings as $setting)
                                                 <th scope="col">{!! json_decode($setting->details) !!}</th>
                                             @endforeach
@@ -218,100 +216,112 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Shiplounge Entegrasyonu</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -2') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Aktarma merkezi depo stok yonetimi</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -3') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Hasar kontrol tespiti</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -4') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Aynı gün işlem</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -5') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Takip numarası</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -6') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">E-posta Chat desteği</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -7') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Ambalaj malzemeleri</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -8') }}</th>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                             <td><img src="{{ asset('/') }}frontend/img/tic.svg" alt=""></td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Nakliye (450 gr-dan az gönderiler için)
-                                            </th>
-                                            <td>Fiyat Dahil</td>
-                                            <td>Fiyat Dahil</td>
-                                            <td>Fiyat Dahil</td>
-                                            <td>Fiyat Dahil</td>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -9') }}</th>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Ambalaj kutuları ve malzemeleri (450 gr
-                                                dan az gönderiler için)</th>
-                                            <td>Fiyat Dahil</td>
-                                            <td>Fiyat Dahil</td>
-                                            <td>Fiyat Dahil</td>
-                                            <td>Fiyat Dahil</td>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -10') }}</th>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
+                                            <td>{{ __('homepage.fullfilment.Included in the price') }}</td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Sipariş başına ek ürünler</th>
-                                            <td>0.49$</td>
-                                            <td>0.49$</td>
-                                            <td>0.49$</td>
-                                            <td>0.49$</td>
-                                        </tr>
-                                        <tr>
-                                            <th class="oneColumn" scope="row">Pazarlama ve promosyon ekleri</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -11') }}</th>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Dikkat ve uyarı etiketi </th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -12') }}</th>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Fotoğraf bildirimleri</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -13') }}</th>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                         </tr>
                                         <tr>
-                                            <th class="oneColumn" scope="row">Büyük boy Sipariş ücretleri</th>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -14') }}</th>
+                                            <td>0.49$</td>
+                                            <td>0.49$</td>
+                                            <td>0.49$</td>
+                                            <td>0.49$</td>
+                                        </tr>
+                                        <tr>
+                                            <th class="oneColumn" scope="row">
+                                                {{ __('homepage.fullfilment.Fulfillment Fees text -15') }}</th>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
                                             <td>0.49$</td>
@@ -325,10 +335,8 @@
                             <div class="row  mt-6 mb-5" style="text-align: center;">
                                 <div class="col-lg-12">
                                     <div class="storage-title">
-                                        <h2>ShipLounge Warehousing</h2>
-                                        <span>You can start the operational process of your orders on the s
-                                            ame day, while ensuring that your products are kept safely by
-                                            utilizing warehousing services.</span>
+                                        <h2>{{ __('homepage.service-fee.text 8') }}</h2>
+                                        <span>{{ __('homepage.service-fee.text 9') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -339,8 +347,8 @@
                                             <img src="{{ asset('/') }}frontend/img/box 1.svg" alt="">
                                         </div>
                                         <div class="storage-desc">
-                                            <h4>Kutu</h4>
-                                            <span>30 60 30cm ölçülerinde</span>
+                                            <h4>{{ __('homepage.service-fee.text 10') }}</h4>
+                                            <span>{{ __('homepage.service-fee.text 11') }}</span>
                                         </div>
                                         <div class="storage-price">
                                             <span>
@@ -362,8 +370,8 @@
                                             <img src="{{ asset('/') }}frontend/img/store 1.svg" alt="">
                                         </div>
                                         <div class="storage-desc">
-                                            <h4>Raf</h4>
-                                            <span>150 60 45cm ölçülerinde</span>
+                                            <h4>{{ __('homepage.service-fee.text 12') }}</h4>
+                                            <span>{{ __('homepage.service-fee.text 13') }}</span>
                                         </div>
                                         <div class="storage-price">
                                             <span>
@@ -385,8 +393,8 @@
                                             <img src="{{ asset('/') }}frontend/img/packages 1.svg" alt="">
                                         </div>
                                         <div class="storage-desc">
-                                            <h4>Palet</h4>
-                                            <span>100 120 140cm ölçülerinde</span>
+                                            <h4>{{ __('homepage.service-fee.text 14') }}</h4>
+                                            <span>{{ __('homepage.service-fee.text 15') }}</span>
                                         </div>
                                         <div class="storage-price">
                                             <span>
@@ -408,10 +416,8 @@
                             <div class="row mt-6 mb-5" style="text-align: center;">
                                 <div class="col-lg-12">
                                     <div class="title">
-                                        <h2>ShipLounge Amazon FBA</h2>
-                                        <span>We manage your Amazon FBA operation on your behalf. While
-                                            our experienced team is doing your product packaging and
-                                            labeling, you only have to do your FBA planning.</span>
+                                        <h2>{{ __('homepage.service-fee.text 16') }}</h2>
+                                        <span>{{ __('homepage.service-fee.text 17') }}</span>
                                     </div>
                                 </div>
                             </div>
@@ -419,12 +425,12 @@
                                 <div class="col-lg-8">
                                     <div class="left-bar">
                                         <div class="bar-title">
-                                            <h4>Amazon FBA Service Price Calculator</h4>
-                                            <span>FBA cost is determined based on the number of products.</span>
+                                            <h4>{{ __('homepage.service-fee.text 18') }}</h4>
+                                            <span>{{ __('homepage.service-fee.text 19') }}</span>
                                         </div>
                                         <div class="bar1">
-                                            <h4>1) How many products do you need to prepare?</h4>
-                                            <span>Please specify the number of products!</span>
+                                            <h4>{{ __('homepage.service-fee.text 20') }}</h4>
+                                            <span>{{ __('homepage.service-fee.text 21') }}</span>
                                         </div>
                                         <div class="services-select">
                                             <input type="range" value="0"min="0"max="100"
@@ -432,8 +438,8 @@
                                             <output id="rangevalue">0</output>
                                         </div>
                                         <div class="bar2">
-                                            <h4>2) Services You Want To Add</h4>
-                                            <span>You can purchase additional services by clicking</span>
+                                            <h4>{{ __('homepage.service-fee.text 22') }}</h4>
+                                            <span>{{ __('homepage.service-fee.text 23') }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -441,7 +447,7 @@
                                     <div class="right-bar">
                                         <div class="bar-card">
                                             <img src="{{ asset('/') }}frontend/img/Saving04.png" alt="">
-                                            <span>Average Cost</span>
+                                            <span>{{ __('homepage.service-fee.text 24') }}</span>
                                             <span>0.00 $</span>
                                         </div>
                                     </div>
@@ -474,7 +480,7 @@
                                                 </p>
                                             </div>
                                             <!-- <header class="card__body-header">
-                                                                        </header> -->
+                                                                            </header> -->
                                         </div>
                                     </label>
                                 </div>
@@ -571,13 +577,9 @@
             <div class="row  mFee py-5 align-items-center">
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="left-free">
-                        <h2>Want to try for free?</h2>
-                        <span>With our technological solutions, you can bot
-                            facilitate the operation of your
-                            orders and provide your customers with a
-                            pleasant delivery experience thanks to our
-                            end-to-end logistics service.</span>
-                        <button>Start now</button>
+                        <h2>{{ __('homepage.service-fee.text 25') }}</h2>
+                        <span>{{ __('homepage.service-fee.text 26') }}</span>
+                        <button>{{ __('homepage.service-fee.text 27') }}</button>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">

@@ -50,7 +50,7 @@
                                 fill="white" />
                         </svg>
                         <div class="balance__box-text ms-1">
-                            <p class="ms-3">List of Cargo requests</p>
+                            <p class="ms-3">{{ __('userpanel.order list.text 1') }}</p>
                         </div>
                     </button>
                 </div>
@@ -93,7 +93,7 @@
                                 fill="white" />
                         </svg>
                         <div class="balance__box-text ms-1">
-                            <p class="ms-3">List of Amazon orders</p>
+                            <p class="ms-3">{{ __('userpanel.order list.text 2') }}</p>
                         </div>
                     </button>
                 </div>
@@ -107,39 +107,39 @@
                         <table id="cargo-requests" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>View/Edit Details</th>
+                                    <th>{{ __('userpanel.order list.text 3') }}</th>
                                     <th>Download Label</th>
                                     <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Order Status</th>
-                                    <th>Order Type</th>
-                                    <th>Tracking Number</th>
-                                    <th>Customer name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Country</th>
-                                    <th>State</th>
-                                    <th>City</th>
-                                    <th>Address</th>
-                                    <th>ZipCode</th>
-                                    <th>Currency</th>
-                                    <th>Total Cargo Price</th>
-                                    <th>Total Volume</th>
-                                    <th>Total Weight</th>
-                                    <th>Total Pricing Weight</th>
-                                    <th>Total Count</th>
-                                    <th>Total Worth</th>
-                                    <th>IOSS number</th>
-                                    <th>VAT number</th>
-                                    <th>Order info</th>
-                                    <th class="additional_services_th">Additional Services</th>
-                                    <th>Cargo Company</th>
-                                    <th>Battery</th>
-                                    <th>Liquid</th>
-                                    <th>Food</th>
-                                    <th>Dangerous items</th>
-                                    <th>Pause Order</th>
-                                    <th>Cancel Order</th>
+                                    <th>{{ __('userpanel.transactions.text 1') }}</th>
+                                    <th>{{ __('userpanel.order list.text 4') }}</th>
+                                    <th>{{ __('userpanel.order list.text 5') }}</th>
+                                    <th>{{ __('userpanel.order list.text 6') }}</th>
+                                    <th>{{ __('userpanel.order list.text 7') }}</th>
+                                    <th>{{ __('userpanel.Phone') }}</th>
+                                    <th>{{ __('userpanel.Email') }}</th>
+                                    <th>{{ __('userpanel.Country') }}</th>
+                                    <th>{{ __('userpanel.State') }}</th>
+                                    <th>{{ __('userpanel.City') }}</th>
+                                    <th>{{ __('userpanel.Address') }}</th>
+                                    <th>{{ __('userpanel.ZIP code') }}</th>
+                                    <th>{{ __('userpanel.balance system.text 10') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 60') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 37') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 38') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 39') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 62') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 40') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 16') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 17') }}</th>
+                                    <th>{{ __('userpanel.order list.text 14') }}</th>
+                                    <th class="additional_services_th">{{ __('userpanel.order list.text 15') }}</th>
+                                    <th>{{ __('userpanel.order list.text 16') }}</th>
+                                    <th>{{ __('userpanel.order list.text 8') }}</th>
+                                    <th>{{ __('userpanel.order list.text 9') }}</th>
+                                    <th>{{ __('userpanel.order list.text 10') }}</th>
+                                    <th>{{ __('userpanel.order list.text 11') }}</th>
+                                    <th>{{ __('userpanel.order list.text 12') }}</th>
+                                    <th>{{ __('userpanel.order list.text 13') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -246,7 +246,7 @@
                                             <div style="display: flex;">
                                                 @if ($cargo->status != 4 && $cargo->status != 6 && $cargo->status != 5)
                                                     <a href="{{ route('admin.cargo-requests.post_on_wait', ['id' => $cargo->id]) }}"
-                                                        class="col form-control btn btn-info">Pause order</a>
+                                                        class="col form-control btn btn-info">{{ __('userpanel.order list.text 12') }}</a>
                                                 @endif
 
                                                 @if ($cargo->status == 6)
@@ -261,7 +261,7 @@
                                                     <a href="#" class="col form-control btn btn-danger"
                                                         data-toggle="modal"
                                                         data-target="#modal-cancel-order-{{ $cargo->id }}">
-                                                        Cancel Order
+                                                        {{ __('userpanel.order list.text 13') }}
                                                     </a>
                                                 @endif
                                             </div>
@@ -271,7 +271,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <div class="details-modal-header-flex">
-                                                            <h4 style="color: red">Cancel order: {{ $cargo->id }}</h4>
+                                                            <h4 style="color: red">{{ __('userpanel.order list.text 13') }}: {{ $cargo->id }}</h4>
                                                         </div>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
@@ -318,31 +318,31 @@
                         <table id="amazon-orders" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>View/Edit Details</th>
+                                    <th>{{ __('userpanel.order list.text 3') }}</th>
                                     <th>Download Label</th>
                                     <th>ID</th>
-                                    <th>Date</th>
-                                    <th>Order Status</th>
-                                    <th>Order Type</th>
-                                    <th>Tracking Number</th>
-                                    <th>Currency</th>
-                                    <th>Total Cargo Price</th>
-                                    <th>Total Volume</th>
-                                    <th>Total Weight</th>
-                                    <th>Total Pricing Weight</th>
-                                    <th>Total Count</th>
-                                    <th>Total Worth</th>
-                                    <th>IOSS number</th>
-                                    <th>VAT number</th>
-                                    <th>Order info</th>
-                                    <th class="additional_services_th">Additional Services</th>
-                                    <th>Cargo Company</th>
-                                    <th>Battery</th>
-                                    <th>Liquid</th>
-                                    <th>Food</th>
-                                    <th>Dangerous items</th>
-                                    <th>Pause Order</th>
-                                    <th>Cancel Order</th>
+                                    <th>{{ __('userpanel.transactions.text 1') }}</th>
+                                    <th>{{ __('userpanel.order list.text 4') }}</th>
+                                    <th>{{ __('userpanel.order list.text 5') }}</th>
+                                    <th>{{ __('userpanel.order list.text 6') }}</th>
+                                    <th>{{ __('userpanel.balance system.text 10') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 60') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 37') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 38') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 39') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 62') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 40') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 16') }}</th>
+                                    <th>{{ __('userpanel.manual order.text 17') }}</th>
+                                    <th>{{ __('userpanel.order list.text 14') }}</th>
+                                    <th class="additional_services_th">{{ __('userpanel.order list.text 15') }}</th>
+                                    <th>{{ __('userpanel.order list.text 16') }}</th>
+                                    <th>{{ __('userpanel.order list.text 8') }}</th>
+                                    <th>{{ __('userpanel.order list.text 9') }}</th>
+                                    <th>{{ __('userpanel.order list.text 10') }}</th>
+                                    <th>{{ __('userpanel.order list.text 11') }}</th>
+                                    <th>{{ __('userpanel.order list.text 12') }}</th>
+                                    <th>{{ __('userpanel.order list.text 13') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -439,7 +439,7 @@
                                             <div style="display: flex;">
                                                 @if ($cargo->status != 4 && $cargo->status != 6 && $cargo->status != 5)
                                                     <a href="{{ route('admin.cargo-requests.post_on_wait', ['id' => $cargo->id]) }}"
-                                                        class="col form-control btn btn-info">Pause order</a>
+                                                        class="col form-control btn btn-info">{{ __('userpanel.order list.text 12') }}</a>
                                                 @endif
 
                                                 @if ($cargo->status == 6)
@@ -454,7 +454,7 @@
                                                     <a href="#" class="col form-control btn btn-danger"
                                                         data-toggle="modal"
                                                         data-target="#modal-cancel-order-{{ $cargo->id }}">
-                                                        Cancel Order
+                                                        {{ __('userpanel.order list.text 13') }}
                                                     </a>
                                                 @endif
                                             </div>
@@ -464,7 +464,7 @@
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <div class="details-modal-header-flex">
-                                                            <h4 style="color: red">Cancel order: {{ $cargo->id }}</h4>
+                                                            <h4 style="color: red">{{ __('userpanel.order list.text 13') }}: {{ $cargo->id }}</h4>
                                                         </div>
                                                         <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">

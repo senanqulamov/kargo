@@ -35,9 +35,8 @@
             <div class="row mt-6" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="title">
-                        <h2>Global Cargo Tracking</h2>
-                        <span>Are you ready to ship from Turkey to the World with affordable logistics solutions with
-                            ShipLounge?</span>
+                        <h2>{{ __('homepage.cargo-track.text 2') }}</h2>
+                        <span>{{ __('homepage.cargo-track.text 3') }}</span>
                     </div>
                 </div>
             </div>
@@ -45,11 +44,11 @@
                 <div class="col-lg-12">
                     <form role="search" method="get" class="search-form form" action="">
                         <label>
-                            <span class="screen-reader-text">Search for...</span>
-                            <input type="search" class="search-field" placeholder="Enter Track ID" value=""
+                            <span class="screen-reader-text">{{ __('homepage.cargo-track.text 6') }}</span>
+                            <input type="search" class="search-field" placeholder="{{ __('homepage.cargo-track.text 7') }}" value=""
                                 name="s" title="" />
                         </label>
-                        <input type="submit" class="search-submit button" value="Search &#xf002" />
+                        <input type="submit" class="search-submit button" value="{{ __('homepage.cargo-track.text 6') }} &#xf002" />
                     </form>
                 </div>
             </div>
@@ -58,7 +57,7 @@
     <!-- Kargo Track Title Section End -->
 
     <!-- Kargo Tarck Start -->
-    <section id="KargoTrack">
+    {{-- <section id="KargoTrack">
         <div class="container">
             <div class="row Progr">
                 <div class="col-lg-12">
@@ -125,7 +124,7 @@
                 <!-- <div class="col-lg-8"></div> -->
             </div>
         </div>
-    </section>
+    </section> --}}
     <!-- Kargo Tarck End -->
 
     <!-- Firma Start -->
@@ -141,7 +140,7 @@
             <div class="url-input-hm not-active-element-hm element-w-transition">
                 <input class="form-control" type="text" name="url_input" placeholder="type value for search">
                 <button class="btn btn-primary" onclick="OpenLink()">
-                    Search
+                    {{ __('homepage.cargo-track.text 6') }}
                 </button>
                 <button class="btn btn-danger" onclick="removeIframe()">
                     <i class="fa fa-times" aria-hidden="true"></i>

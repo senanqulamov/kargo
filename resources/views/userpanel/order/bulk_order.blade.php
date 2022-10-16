@@ -67,22 +67,14 @@ ul.file-list li span i{
             <!-- Yuxarı hisse -->
             <div class="container rounded bg-white py-3 mb-5 shadowBox">
                 <div class="border rounded row m-2 px-3 py-4">
-                    <span class="col-12 bulkOrderText mb-4">Save the excel file that you will send in bulk from
-                        the
-                        Save As menu with the extension
-                        <a href="#" class="bulkOrderTextLink">.csv</a> and the column
-                        separator comma.</span>
+                    <span class="col-12 bulkOrderText mb-4">{{ __('userpanel.bulk order.text 1') }}</span>
 
-                    <span class="col-12 bulkOrderText mb-4">
-                        The size of the file you create must be less than 100 Kb. Do
-                        not use special characters in any of the fields</span>
-                    <span class="col-12 bulkOrderText mb-4">You can download the sample
-                        <a href="#" class="bulkOrderTextLink">CSV</a> file from the
-                        link below.</span>
+                    <span class="col-12 bulkOrderText mb-4">{{ __('userpanel.bulk order.text 2') }}</span>
+                    <span class="col-12 bulkOrderText mb-4">{{ __('userpanel.bulk order.text 3') }}</span>
                     <div class="col-12 my-4">
                         <a class="btn btn-info btn-file1" href="/files/examples/bulk_order_example.xlsx"
                             download="bulk_order_example.xlsx">
-                            Download sample file
+                            {{ __('userpanel.bulk order.text 4') }}
                         </a>
                     </div>
                 </div>
@@ -93,15 +85,15 @@ ul.file-list li span i{
                 @csrf
                 <div class="container rounded bg-white py-2 shadowBox">
                     <div class="row p-4">
-                        <span class="col-12 bulkOrderDownHeaderText mb-3 ms-3">Select the file</span>
+                        <span class="col-12 bulkOrderDownHeaderText mb-3 ms-3">{{ __('userpanel.bulk order.text 5') }}</span>
                             <div class="custom-file">
                                  <input type="file" name="order_file" class="custom-file-input" id="file" multiple onchange="javascript:updateList()">
                                 <label class="custom-file-label" for="file">
                                   <img src="/images/Group (10).png" />
 
                                   <div class="textFile mt-2">
-                                      <h1>Drop files here <br> or</h1>
-                                      <strong>select files from your computer</strong>
+                                      <h1>{{ __('userpanel.bulk order.text 6') }} <br>{{ __('userpanel.bulk order.text 7') }}</h1>
+                                      <strong>{{ __('userpanel.bulk order.text 8') }}</strong>
                                   </div>
                                  </label>
                             </div>
@@ -110,7 +102,7 @@ ul.file-list li span i{
                 </div>
                 <div class="container py-2 d-flex justify-content-center mt-4">
                     <button class="btn btn-lg btn-primary btnBulk shadowBox" type="submit">
-                        <i class="fa-solid fa-check text-white"></i> Confirm Order
+                        <i class="fa-solid fa-check text-white"></i> {{ __('userpanel.bulk order.text 9') }}
                     </button>
                 </div>
             </form>

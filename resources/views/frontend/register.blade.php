@@ -47,7 +47,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="login-title">
-                                    <h1>Register</h1>
+                                    <h1>{{__('homepage.login-register.text 8')}}</h1>
                                 </div>
                             </div>
                         </div>
@@ -56,12 +56,12 @@
                                 <div class="row login-forms">
                                     <div class="col-lg-12">
                                         <div class="forms-input">
-                                            <input name="name" type="text" placeholder="Name/Surname/Company name">
+                                            <input name="name" type="text" placeholder="{{__('homepage.login-register.text 11')}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="forms-input">
-                                            <input name="email" type="email" placeholder="Email">
+                                            <input name="email" type="email" placeholder="{{__('homepage.login-register.text 2')}}">
                                         </div>
                                     </div>
                                     <div class="col-lg-12 forms-input">
@@ -71,7 +71,7 @@
                                     <div class="col-lg-12">
                                         <div class="forms-input">
                                             <select name="country" onchange="selectCountry(this)">
-                                                <option value="0" disabled selected>Select Country</option>
+                                                <option value="0" disabled selected>{{__('homepage.login-register.text 12')}}</option>
                                                 @foreach ($countries as $country)
                                                     <option value="{{ $country->name }}">{{ $country->name }}</option>
                                                 @endforeach
@@ -169,7 +169,7 @@
                                     <div class="gender-div-hm col-lg-12">
                                         <div class="label-div-gender-hm">
                                             <label aria-pressed="true">
-                                                Gender:</label>
+                                                {{__('homepage.login-register.text 13')}}</label>
                                         </div>
                                         <div class="inputs-div-gender-hm">
                                             <label class="btn btn-default col">
@@ -188,19 +188,19 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="forms-input">
-                                    <input type="password" id="password" placeholder="Password">
+                                    <input type="password" id="password" placeholder="{{__('homepage.login-register.text 3')}}">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="forms-input">
                                     <input name="password" id="passwordcheck" type="password"
-                                        placeholder="Confirm Password">
+                                        placeholder="{{__('homepage.login-register.text 14')}}">
                                 </div>
                             </div>
                             <div class="col-lg-12" style="display:flex;justify-content:center;gap:10px">
                                 <div class="forms-input col">
                                     <select name="user_market">
-                                        <option value="0" selected disabled>Mağazanız -Seçilmedi</option>
+                                        <option value="0" selected disabled>{{__('homepage.login-register.text 15')}}</option>
                                         <option value="etsy">Etsy</option>
                                         <option value="amazon">Amazon</option>
                                         <option value="aliexpress">Aliexpress</option>
@@ -220,7 +220,7 @@
                                 </div>
                                 <div class="forms-input col">
                                     <select name="from_where">
-                                        <option value="0" selected disabled>ShipLounge'ı nerden duydunuz ?</option>
+                                        <option value="0" selected disabled>{{__('homepage.login-register.text 16')}}</option>
                                         <option value="google">Google</option>
                                         <option value="facebook">Facebook</option>
                                         <option value="instagram">Instagram</option>
@@ -233,21 +233,20 @@
                             <div class="col-lg-12">
                                 <div class="forms-input">
                                     <input name="promotion_code" id="promotion_code" type="text"
-                                        placeholder="Promotion Code">
+                                        placeholder="{{__('homepage.login-register.text 17')}}">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="forms-input">
                                     <input name="average_requests" id="average_reqeusts" type="number"
-                                        placeholder="Average monthly requests">
+                                        placeholder="{{__('homepage.login-register.text 18')}}">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="forms-input">
                                     <div class="label-check">
                                         <input id="terms_checkbox" type="checkbox">
-                                        <label for="terms_checkbox">I agree with all <a href="">Terms and
-                                                Conditions</a> and <a href="">Privacy and policy</a></label>
+                                        <label for="terms_checkbox">{{__('homepage.login-register.text 19')}}</a> , <a href="">{{__('homepage.login-register.text 21')}}</a></label>
                                     </div>
                                 </div>
                             </div>
@@ -255,7 +254,7 @@
                         <div class="row mt-3">
                             <div class="col-lg-12">
                                 <div class="login-button">
-                                    <button id="submit_button" type="submit">Register</button>
+                                    <button id="submit_button" type="submit">{{__('homepage.login-register.text 8')}}</button>
                                 </div>
                             </div>
                         </div>
@@ -270,15 +269,15 @@
             <div class="row mt-5">
                 <div class="col-lg-12">
                     <div class="footer-title">
-                        <h5>Already have account? <a href="{{ route('login') }}">Login</a></h5>
+                        <h5>{{__('homepage.login-register.text 20')}} <a href="{{ route('login') }}">{{__('homepage.login-register.text 1')}}</a></h5>
                     </div>
                 </div>
             </div>
             <div class="row my-4">
                 <div class="col-lg-12">
                     <div class="footer-end">
-                        <a href="">Terms of use</a>
-                        <a href="">Contact us</a>
+                        <a href="">{{__('homepage.login-register.text 9')}}</a>
+                        <a href="">{{__('homepage.login-register.text 10')}}</a>
                     </div>
                 </div>
             </div>

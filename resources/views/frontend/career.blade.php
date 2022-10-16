@@ -41,7 +41,7 @@
             <div class="row mt-6 mb-5" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="titleCareer">
-                        <h1 style="color: #324970;"><strong style="color: #FF8D47;"> Shiplounge.co </strong>Career</h1>
+                        <h1 style="color: #324970;"><strong style="color: #FF8D47;"> Shiplounge.co </strong>{{__('homepage.Career')}}</h1>
                     </div>
                 </div>
             </div>

@@ -177,9 +177,9 @@
             <div class="row first my-5 align-items-center">
                 <div class="col-lg-6">
                     <div class="left-content">
-                        <h1><strong>Shiplounge.co</strong> <br> Amazon FBA Service</h1>
-                        <p>You Just Focus On Your Sales. Your Packing and Shipping Processes are Entrusted to Us!</p>
-                        <a href="{{ route('login') }}">Start now</a>
+                        <h1><strong>Shiplounge.co</strong> <br> {{__('homepage.amazon-fba.Amazon FBA Service')}}</h1>
+                        <p>{{__('homepage.amazon-fba.Amazon FBA Service text')}}</p>
+                        <a href="{{ route('login') }}">{{__('homepage.homepage.Start now')}}</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -198,11 +198,8 @@
             <div class="row w-m my-5 mx-5" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="WhatFba">
-                        <h2>What is Amazon FBA?</h2>
-                        <span>An FBA seller is an ecommerce business that sells in Amazon's store and outsources inventory
-                            management to Amazon through the FBA program. The seller sends products to Amazon warehouses for
-                            order fulfillment. Amazon stores the inventory until a customer places an order. Then Amazon
-                            picks, packs, and ships the order.</span>
+                        <h2>{{__('homepage.amazon-fba.What is Amazon FBA?')}}</h2>
+                        <span>{{__('homepage.amazon-fba.What is Amazon FBA? text')}}</span>
                     </div>
                 </div>
             </div>
@@ -215,7 +212,7 @@
         <div class="container">
             <div class="row pt-4" style="text-align: center;">
                 <div class="FBA1-title">
-                    <h4>Amazon FBA Operation Made Easy with Shiplounge</h4>
+                    <h4>{{__('homepage.amazon-fba.Amazon FBA Operation Made Easy with ShipLounge')}}</h4>
                 </div>
             </div>
             <div class="row align-items-center   my-5 py-5">
@@ -226,9 +223,10 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="fba-content-right">
-                        <h2>Delivery and Inspection</h2>
-                        <span>After the products you have sent to the Shiplounge fulfillment center are received, they are
-                            checked for damage and counted. You will be informed about your pre-checked products.</span>
+                        <h2>{{__('homepage.amazon-fba.Delivery and Inspection')}}</h2>
+                        <span>
+                            {{__('homepage.amazon-fba.Delivery and Inspection text')}}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -242,10 +240,8 @@
             <div class="row f-m align-items-center   my-5 py-5">
                 <div class="col-lg-8">
                     <div class="fba-content-right">
-                        <h2>Preparing a Shipping Plan</h2>
-                        <span>Create your shipping schedule for the products you want to send to Amazon warehouses via
-                            Amazon's seller control panel. Upload this plan and labels you created to your panel with the
-                            add file section on the ShipLounge control panel</span>
+                        <h2>{{__('homepage.amazon-fba.Preparing a Shipment Plan')}}</h2>
+                        <span>{{__('homepage.amazon-fba.Preparing a Shipment Plan text')}}</span>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -269,9 +265,8 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="fba-content-right">
-                        <h2>Product Preparation</h2>
-                        <span>The products you send to ShipLounge are labeled and packaged in accordance with the packaging
-                            limitations specified by Amazon.</span>
+                        <h2>{{__('homepage.amazon-fba.Product Preparation')}}</h2>
+                        <span>{{__('homepage.amazon-fba.Product Preparation text')}}</span>
                     </div>
                 </div>
             </div>
@@ -285,9 +280,8 @@
             <div class="row f-m align-items-center   my-5 py-5">
                 <div class="col-lg-8">
                     <div class="fba-content-right">
-                        <h2>Shipping to Amazon</h2>
-                        <span>Your packaged products are sent to Amazon warehouses with the most suitable shipping solution
-                            through the ShipLounge panel and the tracking number is added to your panel.</span>
+                        <h2>{{__('homepage.amazon-fba.Shipping to Amazon')}}</h2>
+                        <span>{{__('homepage.amazon-fba.Shipping to Amazon text')}}</span>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -306,7 +300,7 @@
             <div class="row mt-5 mb-4" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="fbaServicesTitle">
-                        <h2>FBA Service Prices</h2>
+                        <h2>{{__('homepage.amazon-fba.Amazon FBA Service Prices')}}</h2>
                     </div>
                 </div>
             </div>
@@ -324,8 +318,8 @@
                     <div class="row mb-2 mt-4">
                         <div class="col-lg-12">
                             <div class="big-title">
-                                <h4>Kaç ürünün hazırlanmasına ihtiyacınız var </h4>
-                                <span>Ek hizmetleri işareliyerek satın alabilirsiniz</span>
+                                <h4>{{__('homepage.amazon-fba.Amazon FBA Service Prices -1')}}</h4>
+                                <span>{{__('homepage.amazon-fba.Amazon FBA Service Prices -2')}}</span>
                             </div>
                         </div>
                     </div>
@@ -337,7 +331,7 @@
                                     <label class="checkbox-alias fba-option" for="service-{{ $service->id }}"
                                         onclick="sumService(this)" data-clicked="false" data-price="{{ $service->price }}">
                                         <span>{{ $service->title }}</span>
-                                        <p>{{ $service->price }} $/adett</p>
+                                        <p>{{ $service->price }} $/{{__('homepage.amazon-fba.Number')}}</p>
                                     </label>
                                 </div>
                             </div>
@@ -351,10 +345,10 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="Total-Price">
-                        <h2>Ortalama Fiyat</h2>
+                        <h2>{{__('homepage.amazon-fba.Average price')}}</h2>
                         <span class="total-price-services-hm">0.00$</span>
                         <div class="total-contact">
-                            <button onclick="window.open('{{ route('contact') }}' , '_self')">Bize ulaşın</button>
+                            <button onclick="window.open('{{ route('contact') }}' , '_self')">{{__('homepage.amazon-fba.Contact Us')}}</button>
                         </div>
                     </div>
                 </div>

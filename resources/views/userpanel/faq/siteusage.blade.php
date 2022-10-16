@@ -22,7 +22,7 @@
                                     </div>
                                 </div>
                                 <button class="btn" onclick="window.open('{{ $usage->link }}')">
-                                    Watch
+                                    {{ __('userpanel.Watch') }}
                                 </button>
                             </a>
                         </div>

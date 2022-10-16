@@ -6,7 +6,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">List of Special Orders</h3>
+                    <h3 class="card-title">{{ __('userpanel.special offer.text 29') }}</h3>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
@@ -14,23 +14,23 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Details (View)</th>
-                                <th>Status</th>
-                                <th>Shipment type</th>
-                                <th>Ready date</th>
-                                <th>Cargo</th>
-                                <th>Shipping type</th>
-                                <th>Origin</th>
-                                <th>Destination</th>
-                                <th>Address</th>
-                                <th>Insurance</th>
-                                <th>Additional Information</th>
-                                <th>Document (View)</th>
-                                <th>Incoterm</th>
-                                <th>Offer Price</th>
-                                <th>Comment</th>
-                                <th>Created at</th>
-                                <th>Accept / Deny</th>
+                                <th>{{ __('userpanel.special offer.text 31') }}</th>
+                                <th>{{ __('userpanel.special offer.text 32') }}</th>
+                                <th>{{ __('userpanel.special offer.text 1') }}</th>
+                                <th>{{ __('userpanel.special offer.text 25') }}</th>
+                                <th>{{ __('userpanel.special offer.text 23') }}</th>
+                                <th>{{ __('userpanel.special offer.text 10') }}</th>
+                                <th>{{ __('userpanel.special offer.text 6') }}</th>
+                                <th>{{ __('userpanel.special offer.text 7') }}</th>
+                                <th>{{ __('userpanel.Address') }}</th>
+                                <th>{{ __('userpanel.special offer.text 33') }}</th>
+                                <th>{{ __('userpanel.special offer.text 37') }}</th>
+                                <th>{{ __('userpanel.Document') }}</th>
+                                <th>{{ __('userpanel.special offer.text 38') }}</th>
+                                <th>{{ __('userpanel.special offer.text 34') }}</th>
+                                <th>{{ __('userpanel.special offer.text 35') }}</th>
+                                <th>{{ __('userpanel.Created at') }}</th>
+                                <th>{{ __('userpanel.special offer.text 36') }}</th>
                             </tr>
                         </thead>
                         <tbody>

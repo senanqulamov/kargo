@@ -59,7 +59,7 @@
                                     fill="white" />
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">Support Demand</p>
+                                <p class="ms-3">{{ __('userpanel.support.text 1') }}</p>
                             </div>
                         </button>
                     </div>
@@ -84,7 +84,7 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">Create Support Demand</p>
+                                <p class="ms-3">{{ __('userpanel.support.text 2') }}</p>
                             </div>
                         </button>
                     </div>
@@ -113,7 +113,7 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">System Messages</p>
+                                <p class="ms-3">{{ __('userpanel.support.text 3') }}</p>
                             </div>
                         </button>
                     </div>
@@ -128,7 +128,7 @@
                             <div class="demand__box   me-3">
 
                             </div>
-                            <h2 class="demand__h2">Support Demand</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.support.text 1') }}</h2>
                         </div>
                         <div class="courier--table-1">
                             <div class="courier__table--1 mt-4">
@@ -136,13 +136,13 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>status</th>
-                                            <th>Orders</th>
-                                            <th>Cause</th>
-                                            <th>Title</th>
-                                            <th>Text</th>
-                                            <th>Document</th>
-                                            <th>Date</th>
+                                            <th>{{ __('userpanel.Status') }}</th>
+                                            <th>{{ __('userpanel.support.text 7') }}</th>
+                                            <th>{{ __('userpanel.support.text 5') }}</th>
+                                            <th>{{ __('userpanel.support.text 6') }}</th>
+                                            <th>{{ __('userpanel.support.text 4') }}</th>
+                                            <th>{{ __('userpanel.Document') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 8') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -203,14 +203,14 @@
                         <div class="courier__input">
                             <div class="page__not page__not--1">
                                 <div class="demand__box   me-3"></div>
-                                <h2 class="demand__h2">Create Support Demand</h2>
+                                <h2 class="demand__h2">{{ __('userpanel.support.text 2') }}</h2>
                             </div>
                             <hr class="hr">
                             <div class="courier__input-1">
                                 <div class="row">
                                     <div class="col-sm-4 col-12">
                                         <div class="courier__input-box">
-                                            <h6>Type of cause<span class="red-1">*</span></h6>
+                                            <h6>{{ __('userpanel.support.text 5') }}<span class="red-1">*</span></h6>
                                             <select class="form-select select-custom-hm" placeholder="Cargo tracking"
                                                 name="cause" required>
                                                 <option value="" selected disabled>Bir Hizmet Seçin</option>
@@ -230,14 +230,14 @@
                                     </div>
                                     <div class="col-sm-4 col-12">
                                         <div class="courier__input-box">
-                                            <h6>Topic title<span class="red-1">*</span></h6>
+                                            <h6>{{ __('userpanel.support.text 6') }}<span class="red-1">*</span></h6>
                                             <input type="text" class="form-control" placeholder="Cargo"
                                                 name="title" required>
                                         </div>
                                     </div>
                                     <div class="col-sm-4 col-12">
                                         <div class="courier__input-box">
-                                            <h6>Order ID<span class="red-1">*</span></h6>
+                                            <h6>{{ __('userpanel.courier request.text 13') }}<span class="red-1">*</span></h6>
                                             <div class="dropdown">
                                                 <select name="orders[]" class="select-custom-hm" multiple
                                                     title="Choose at least one of the following...">
@@ -282,7 +282,7 @@
                             </div>
                             <div class="courier__input-3">
                                 <div class="courier__input-textare">
-                                    <p class="input__below-text">Text</p>
+                                    <p class="input__below-text">{{ __('userpanel.support.text 4') }}</p>
                                     <textarea name="text" cols="30" rows="15" style="width: 100%;"></textarea>
                                 </div>
                             </div>
@@ -299,13 +299,13 @@
                     <div class="courier__input courier__table-box--2">
                         <div class="page__not page__not--1">
                             <div class="demand__box   me-3"></div>
-                            <h2 class="demand__h2">System Messages</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.support.text 3') }}</h2>
                         </div>
                         <div class="support__message ">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="support__message-box support__message-box--1">
-                                        <div class="balance__address-refund--btn-2">Support ID</div>
+                                        <div class="balance__address-refund--btn-2">{{ __('userpanel.support.text 1') }} ID</div>
                                     </div>
                                     <div class="nav flex-column nav-pills support__message-left">
                                         @php

@@ -64,7 +64,7 @@
                                 </svg>
                             </div>
                             <div class="balance__box-text  ms-4">
-                                <p>Bakiye yukle</p>
+                                <p>{{ __('userpanel.balance system.text 1') }}</p>
                             </div>
 
                         </button>
@@ -85,7 +85,7 @@
                                 </svg>
                             </div>
                             <div class="balance__box-text  ms-4">
-                                <p>Yukleme kecmisi</p>
+                                <p>{{ __('userpanel.balance system.text 15') }}</p>
                             </div>
 
                         </button>
@@ -122,10 +122,10 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-6">
-                                    <h6 class="balance__download-text--1">Bakiye yukle</h6>
+                                    <h6 class="balance__download-text--1">{{ __('userpanel.balance system.text 1') }}</h6>
                                 </div>
                                 <div class="col-6">
-                                    <h6 class="balance__download-text--2 kur-show-text">Euro Selling Rate : </h6>
+                                    <h6 class="balance__download-text--2 kur-show-text">{{ __('userpanel.balance system.text 2') }} : </h6>
                                 </div>
                             </div>
 
@@ -135,7 +135,7 @@
                                         <button type="button" class="balance__download-buttons">
                                             <div class="btn btn-light"><i class="far fa-plus plus"></i><i
                                                     class="far fa-minus minus hide"></i></div>
-                                            <span>Banka hesab bilgileri </span>
+                                            <span>{{ __('userpanel.balance system.text 3') }}</span>
 
                                         </button>
                                     </div>
@@ -143,7 +143,7 @@
                                         <button type="button" class="balance__download-buttons">
                                             <div class="btn btn-light"><i class="far fa-plus plus"></i><i
                                                     class="far fa-minus minus hide"></i></div>
-                                            <span>Balans hesabina odeme </sp>
+                                            <span>{{ __('userpanel.balance system.text 6') }}</sp>
                                         </button>
                                     </div>
                                     {{-- <div class="col-4">
@@ -166,11 +166,10 @@
                     <div class="balance__account customer__info-1 close open">
 
                         <div class="balance__transfer mt-5">
-                            <p>Bank hesabina odeme</p>
+                            <p>{{ __('userpanel.balance system.text 4') }}</p>
                         </div>
                         <div class="balance__rate mt-5">
-                            <p>Kur farklılıklarından etkilenmemek için lütfen ödeme yaptığınız vakitte dekont
-                                yükleyiniz.</p>
+                            <p>{{ __('userpanel.balance system.text 5') }}</p>
                         </div>
 
                         <div class='balance__customer-data'>
@@ -192,11 +191,10 @@
                     <div class="balance__account  customer__info-2 close ">
 
                         <div class="balance__transfer mt-5">
-                            <p>Bank hesabina odeme</p>
+                            <p>{{ __('userpanel.balance system.text 6') }}</p>
                         </div>
                         <div class="balance__rate mt-5">
-                            <p>Kur farklılıklarından etkilenmemek için lütfen ödeme yaptığınız vakitte dekont
-                                yükleyiniz.</p>
+                            <p>{{ __('userpanel.balance system.text 5') }}</p>
                         </div>
 
                         {{-- <div class="balance__line ">
@@ -216,7 +214,7 @@
                         </div> --}}
 
                         <div class="balance__customer-num mt-4">
-                            <h4>Müşteri Numaranız: EB1Z</h4>
+                            <h4>{{ __('userpanel.balance system.text 8') }}: EB1Z</h4>
                         </div>
 
 
@@ -284,7 +282,7 @@
                             <div class="col">
                                 <div class="balance__input-file">
                                     <div style="display:flex;" class="User_id_box">
-                                        <label> Name/ID
+                                        <label> {{ __('userpanel.Name') }}/ID
                                             <a class="btn btn-info ttp" data-ttp="User ID">
                                                 010{{ Auth::user()->id }}20
                                             </a>
@@ -295,8 +293,8 @@
                             <div class="col">
                                 <div class="balance__input-file">
                                     <div style="display:flex;">
-                                        <label>Yüklenilen tutar
-
+                                        <label>
+                                            {{ __('userpanel.balance system.text 9') }}
                                             <input type="text" class="form-control" placeholder="Örn:400"
                                                 name="balance" id="balance_input" onchange="checkComission()" required>
                                         </label>
@@ -306,8 +304,8 @@
                             </div>
                             <div class="col">
                                 <div class="balance__input-file">
-                                    <label>Para birimi
-
+                                    <label>
+                                        {{ __('userpanel.balance system.text 10') }}
                                         <select class="form-select" aria-label="Default select example" name="money_type"
                                             id="money_type" onchange="checkComission()">
                                             <option selected value="tl">Turk lirasi</option>
@@ -323,7 +321,7 @@
                             </div>
                             <div class="col">
                                 <div class="balance__input-file">
-                                    <label>Komisyon (%)
+                                    <label>{{ __('userpanel.balance system.text 11') }} (%)
                                         <input type="text" class="form-control" name="comission" readonly>
                                     </label>
                                 </div>
@@ -332,7 +330,7 @@
                         <div class="row">
                             <div class="col-3">
                                 <div class="balance__input-file">
-                                    <label>Hesaba oturacak mikdar
+                                    <label>{{ __('userpanel.balance system.text 12') }}
                                         <input type="text" class="form-control" name="result_price" readonly>
                                     </label>
                                 </div>
@@ -355,7 +353,7 @@
 
                         <div class="balance__textArea">
                             <div class="container">
-                                <p>Aciklama</p>
+                                <p>{{ __('userpanel.balance system.text 13') }}</p>
 
                                 <div class="form-floating mt-3 mb-3">
                                     <textarea class="form-control" placeholder="Leave a comment here" name="payment_comment" id="floatingTextarea2"
@@ -383,16 +381,16 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="balance__download-text--1">Yukleme kecmisi</h6>
+                                <h6 class="balance__download-text--1">{{ __('userpanel.balance system.text 15') }}</h6>
                             </div>
                             <div class="col-4">
                                 <div class="balance__box-rate">
-                                    <p class="balance__box-rate-p">Bakiyeniz <span>{{ Auth::user()->balance }}</span>€
+                                    <p class="balance__box-rate-p">{{ __('userpanel.balance system.text 16') }} <span>{{ Auth::user()->balance }}</span>€
                                     </p>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h6 class="balance__download-text--2 kur-show-text">Euro Selling Rate : </h6>
+                                <h6 class="balance__download-text--2 kur-show-text">{{ __('userpanel.balance system.text 2') }} : </h6>
                             </div>
                         </div>
                     </div>
@@ -400,25 +398,22 @@
                 </div>
 
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Payment History</h3>
-                    </div>
                     <div class="payments_table_div card-body">
                         <table id="payment_history" class="table table-bordered table-striped" style="width:100%;">
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Created at</th>
-                                    <th>Approval status</th>
-                                    <th>Deny Message</th>
+                                    <th>{{ __('userpanel.Created at') }}</th>
+                                    <th>{{ __('userpanel.Status') }}</th>
+                                    <th>{{ __('userpanel.balance system.text 18') }}</th>
                                     <th>Method</th>
-                                    <th>Money Type</th>
+                                    <th>{{ __('userpanel.balance system.text 19') }}</th>
                                     <th>Amount</th>
-                                    <th>Comission</th>
-                                    <th>Result value</th>
-                                    <th>Kur</th>
-                                    <th>Document</th>
-                                    <th>Payment Comment</th>
+                                    <th>{{ __('userpanel.balance system.text 11') }}</th>
+                                    <th>{{ __('userpanel.balance system.text 20') }}</th>
+                                    <th>{{ __('userpanel.balance system.text 2') }}</th>
+                                    <th>{{ __('userpanel.Document') }}</th>
+                                    <th>{{ __('userpanel.balance system.text 21') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -531,16 +526,16 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-4">
-                                <h6 class="balance__download-text--1">Para iadesi</h6>
+                                <h6 class="balance__download-text--1">{{ __('userpanel.balance system.text 22') }}</h6>
                             </div>
                             <div class="col-4">
                                 <div class="balance__box-rate">
-                                    <p class="balance__box-rate-p">Bakiyeniz <span>{{ Auth::user()->balance }}</span>€
+                                    <p class="balance__box-rate-p">{{ __('userpanel.balance system.text 16') }} <span>{{ Auth::user()->balance }}</span>€
                                     </p>
                                 </div>
                             </div>
                             <div class="col-4">
-                                <h6 class="balance__download-text--2 kur-show-text">Euro Selling Rate : </h6>
+                                <h6 class="balance__download-text--2 kur-show-text">{{ __('userpanel.balance system.text 2') }} : </h6>
                             </div>
                         </div>
 
@@ -563,13 +558,13 @@
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="balance__iban-input  balance__iban-input--1">
-                                            <h6>Hesab Sahibinin adi ve nomresi</h6>
+                                            <h6>{{ __('userpanel.balance system.text 23') }}</h6>
                                             <input type="text" name="balance_name">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="balance__iban-input  balance__iban-input--1">
-                                            <h6>Iban nomresi</h6>
+                                            <h6>{{ __('userpanel.balance system.text 24') }}</h6>
                                             <input type="text" name="Iban" placeholder="enter your IBAN number">
                                         </div>
                                     </div>
@@ -582,7 +577,7 @@
                                                 <a type="button" class="btn btn-primary ttp ttp-right f-s-1-6"
                                                     data-ttp="Request money refund at support page"
                                                     href="{{ route('userpanel.support') }}">
-                                                    Request refund
+                                                    {{ __('userpanel.balance system.text 25') }}
                                                 </a>
                                             </div>
                                         </div>
@@ -628,7 +623,7 @@
                     let timerInterval
                     Swal.fire({
                         position: 'bottom-right',
-                        title: 'Loading Euro selling rate',
+                        title: 'Loading {{ __('userpanel.balance system.text 2') }}',
                         backdrop: false,
                         timerProgressBar: true,
                         didOpen: () => {
@@ -644,7 +639,7 @@
 
                     Swal.fire({
                         position: 'bottom-right',
-                        title: 'Euro selling rate loaded succesfully',
+                        title: '{{ __('userpanel.balance system.text 2') }} loaded succesfully',
                         backdrop: false,
                         showConfirmButton: false,
                         timerProgressBar: true,
@@ -657,7 +652,7 @@
                     }
                     var kur_texts = document.querySelectorAll('.kur-show-text');
                     kur_texts.forEach(element => {
-                        element.innerHTML = "Euro Selling Rate : " + kur;
+                        element.innerHTML = "{{ __('userpanel.balance system.text 2') }} : " + kur;
                     });
                     document.querySelector('input[name="kur"]').value = kur;
                     console.log(document.querySelector('input[name="kur"]').value);
@@ -666,7 +661,7 @@
                     Swal.fire({
                         position: 'bottom-right',
                         icon: 'error',
-                        title: 'Couldnt load Euro selling rate',
+                        title: 'Couldnt load {{ __('userpanel.balance system.text 2') }}',
                         backdrop: true,
                         confirmButton: false,
                         html: `

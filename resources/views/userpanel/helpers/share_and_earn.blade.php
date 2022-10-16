@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="share__box">
-                            <h2>Reference Link</h2>
+                            <h2>{{ __('userpanel.share and earn.text 1') }}</h2>
                             <div class="row">
                                 <div class="d-flex row align-items-center">
                                     <div class="col-sm-9 col-12 d-flex align-items-center">
@@ -19,22 +19,20 @@
                                     </div>
                                     <div class="col-sm-3 col-12  mt-3 mt-sm-2">
                                         <div class="d-flex justify-content-end justify-content-sm-center">
-                                            <button class="share__url">Share and Copy URL </button>
+                                            <button class="share__url">{{ __('userpanel.share and earn.text 2') }}</button>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="col-12">
-                                    <p class="share__box-text  mt-4">*Balances you earn are only visible on
-                                        Fridays and can be transferred to your account on Fridays.</p>
+                                    <p class="share__box-text  mt-4">{{ __('userpanel.share and earn.text 3') }}</p>
                                 </div>
                                 <div class="col-sm-10 col-12">
-                                    <p class="share__box-text  mt-4">*Balances you earn are only visible on
-                                        Fridays and can be transferred to your account on Fridays.</p>
+                                    <p class="share__box-text  mt-4">{{ __('userpanel.share and earn.text 3') }}</p>
                                 </div>
                                 <div class="col-sm-2 col-12">
                                     <div class="d-flex justify-content-end justify-content-sm-center">
-                                        <button class="share__update mt-3 me-4">Verify my account</button>
+                                        <button class="share__update mt-3 me-4">{{ __('userpanel.share and earn.text 5') }}</button>
                                     </div>
                                 </div>
                             </div>
@@ -63,7 +61,7 @@
                                     </svg>
                                 </div>
 
-                                <h2 class="mt-4">Number of users you refer to: </h2>
+                                <h2 class="mt-4">{{ __('userpanel.share and earn.text 4') }}: </h2>
 
                                 <h2 class="share__number-zero mt-4">0</h2>
                             </div>
@@ -103,7 +101,7 @@
                                     </svg>
                                 </div>
 
-                                <h2 class="mt-4">Cargo balance earned to date:</h2>
+                                <h2 class="mt-4">{{ __('userpanel.share and earn.text 6') }}:</h2>
 
                                 <h2 class="share__number-zero  mt-4">0</h2>
 
@@ -119,7 +117,7 @@
                                             <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
                                         </div>
 
-                                        <span class="share__candition-text">Condition</span>
+                                        <span class="share__candition-text">{{ __('userpanel.share and earn.text 7') }}</span>
 
                                     </div>
                                 </div>
@@ -130,8 +128,7 @@
                                         <div class="col-6 ">
 
                                             <div class="share__half-mean share__half-meaned ">
-                                                <p class="share__half-mean-1">In the first post of a friend
-                                                    who signed up with a referral lin</p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 8') }}</p>
                                             </div>
 
                                         </div>
@@ -140,8 +137,7 @@
 
                                             <div class="share__half-mean">
 
-                                                <p class="share__half-mean-1">In every submission of a
-                                                    friend who is a member with a referral link </p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 9') }}</p>
 
                                             </div>
 
@@ -165,7 +161,7 @@
                                             <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
                                         </div>
 
-                                        <span class="share__candition-text">Condition</span>
+                                        <span class="share__candition-text">{{ __('userpanel.share and earn.text 7') }}</span>
 
                                     </div>
                                 </div>
@@ -176,8 +172,7 @@
                                         <div class="col-6 ">
 
                                             <div class="share__half-mean share__half-meaned ">
-                                                <p class="share__half-mean-1">In the first post of a friend
-                                                    who signed up with a referral lin</p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 8') }}</p>
                                             </div>
 
                                         </div>
@@ -186,8 +181,7 @@
 
                                             <div class="share__half-mean">
 
-                                                <p class="share__half-mean-1">In every submission of a
-                                                    friend who is a member with a referral link </p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 9') }}</p>
 
                                             </div>
 
@@ -211,7 +205,7 @@
                                             <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
                                         </div>
 
-                                        <span class="share__candition-text">Condition</span>
+                                        <span class="share__candition-text">{{ __('userpanel.share and earn.text 7') }}</span>
 
                                     </div>
                                 </div>
@@ -222,8 +216,7 @@
                                         <div class="col-6 ">
 
                                             <div class="share__half-mean share__half-meaned ">
-                                                <p class="share__half-mean-1">In the first post of a friend
-                                                    who signed up with a referral lin</p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 8') }}</p>
                                             </div>
 
                                         </div>
@@ -232,8 +225,7 @@
 
                                             <div class="share__half-mean">
 
-                                                <p class="share__half-mean-1">In every submission of a
-                                                    friend who is a member with a referral link </p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 9') }}</p>
 
                                             </div>
 
@@ -255,7 +247,7 @@
                                             <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
                                         </div>
 
-                                        <span class="share__candition-text">Condition</span>
+                                        <span class="share__candition-text">{{ __('userpanel.share and earn.text 7') }}</span>
 
                                     </div>
                                 </div>
@@ -266,15 +258,13 @@
                                         <div class="col-6 ">
 
                                             <div class="share__half-mean share__half-meaned ">
-                                                <p class="share__half-mean-1">In the first post of a friend
-                                                    who signed up with a referral lin</p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 8') }}</p>
                                             </div>
 
                                         </div>
                                         <div class="col-6">
                                             <div class="share__half-mean">
-                                                <p class="share__half-mean-1">In every submission of a
-                                                    friend who is a member with a referral link </p>
+                                                <p class="share__half-mean-1">{{ __('userpanel.share and earn.text 9') }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -283,14 +273,12 @@
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="share__box-candition  mt-5">
-                                <p class="share__half-text">5 USD cargo balance for both you and your friend
-                                    when your friend makes the first shipment.</p>
+                                <p class="share__half-text">{{ __('userpanel.share and earn.text 17') }}</p>
                             </div>
                         </div>
                         <div class="col-sm-6 col-12">
                             <div class="share__box-candition mt-5">
-                                <p class="share__half-text">A 2.5% cargo balance over the shipping cost from
-                                    your friend's postings after registration.</p>
+                                <p class="share__half-text">{{ __('userpanel.share and earn.text 18') }}</p>
                             </div>
                         </div>
                     </div>
@@ -302,73 +290,38 @@
                                 <img src="img/svg/Group (25).svg" style="width: 35%;" alt="">
                             </div>
 
-                            <span class="share__candition-text">Volunteering Program Terms and Conditions</span>
+                            <span class="share__candition-text">{{ __('userpanel.share and earn.text 19') }}</span>
 
                         </div>
                         <div>
-                            <p class="share__bottom-sec mt-4">1. Acceptance of Terms and
-                                Conditions The ShipEntegra
-                                E-export volunteers Program (the Program) is a program that aims to reward
-                                you
-                                and our new member for each eligible ShipEntegra member you refer to us. By
-                                participating in this Program, you undertake to comply with ShipEntegra's
-                                terms
-                                and agreements of carriage, user agreement, all applicable overarching laws
-                                and
-                                to accept any subsequent changes to its Terms and Conditions. ShipEntegra
-                                reserves the right to change the relevant Program and Program Terms and
-                                Conditions at any time and quality without prior notice.
+                            <p class="share__bottom-sec mt-4">{{ __('userpanel.share and earn.text 20') }}</p>
+                            <p class="share__bottom-sec mt-4">
+                                {{ __('userpanel.share and earn.text 21') }} <br>
+                                {{ __('userpanel.share and earn.text 22') }} <br>
+                                {{ __('userpanel.share and earn.text 23') }} <br>
+                                {{ __('userpanel.share and earn.text 24') }}
+                            </p>
+                            <p class="share__bottom-sec mt-4"> {{ __('userpanel.share and earn.text 25') }} <br>
+                                {{ __('userpanel.share and earn.text 26') }}<br>
+                                {{ __('userpanel.share and earn.text 27') }}<br>
+                                {{ __('userpanel.share and earn.text 28') }}<br>
+                                {{ __('userpanel.share and earn.text 29') }}<br>
+                                {{ __('userpanel.share and earn.text 30') }}
                             </p>
                             <p class="share__bottom-sec mt-4">
-                                2. What is a Verified Member? <br>
-                                a. Approved member must not be a previous ShipEntegra member or have not
-                                shipped with ShipEntegra. <br>
-                                b. The member must become a member using the promotional code of the person
-                                who referred him or the link sent to him. <br>
-                                c. A verified member must make a post.
-                            </p>
-                            <p class="share__bottom-sec mt-4"> 3. Earning and Redeeming Rewards <br> a. Our
-                                customers, who become members and recommend the member using a promotional
-                                code or link, will earn their balance of <br> 5 USD after the new member
-                                sends
-                                their first post. The terms of approval of membership are specified in
-                                Article 2. <br> b. Our E-Export Volunteer member will earn 2.5% cargo
-                                balance
-                                from the shipments that his account will make for 2 months. <br> c. The
-                                loading
-                                dates of the relevant balance will be on Friday every week. <br> D. In order
-                                to
-                                transfer the relevant balance to your account, you must click on the
-                                Transfer button, which will be activated on Fridays. to. Shipping balances
-                                can only be used to make new shipments.
-                            </p>
-                            <p class="share__bottom-sec mt-4">4. Fraudulent or Illegal Participation In case
-                                of detecting fraudulent or illegal participation in violation of ShipEntegra
-                                terms and conditions, it has the right to cancel, freeze and withdraw the
-                                rights won by our member who is a member and whose promotional code is used.
-                                Each user can create only one membership. If it is detected that the same
-                                user has more than one account, fraudulent participation rules will apply.
-                                If ShipEntegra detects the abuse of this campaign by the user or users, it
-                                will be able to use the above rights.
-                            </p>
-                            <p class="share__bottom-sec mt-4"> 5. Notice When your suggested members become
-                                members using your code or via a link, when the membership is approved and
-                                the reward balances are loaded, you will be informed via your panel.
+                                {{ __('userpanel.share and earn.text 31') }}
                             </p>
                             <p class="share__bottom-sec mt-4">
-                                6. Responsibility ShipIntegra; It is not responsible for any errors /
-                                damages that may occur during and / or before the membership.
+                                {{ __('userpanel.share and earn.text 32') }}
                             </p>
                             <p class="share__bottom-sec mt-4">
-                                7.Special Provisions Earned balances; It must be used within the first 2
-                                months from the date of acquisition. Unused balances will be reset. Earned
-                                balances cannot be transferred to a different user or account.
+                                {{ __('userpanel.share and earn.text 33') }}
                             </p>
                             <p class="share__bottom-sec mt-4">
-                                8. Program Changes As ShipEntegra, we reserve the right to stop the program
-                                and change its terms and conditions without prior notice. It reserves the
-                                right to suspend/cancel the membership of users if they do not comply with
-                                any rule written in the guide.
+                                {{ __('userpanel.share and earn.text 34') }}
+                            </p>
+                            <p class="share__bottom-sec mt-4">
+                                {{ __('userpanel.share and earn.text 35') }}
                             </p>
                         </div>
                     </div>

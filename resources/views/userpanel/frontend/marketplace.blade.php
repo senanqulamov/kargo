@@ -30,7 +30,7 @@
                         </defs>
                     </svg>
                 </div>
-                <span class="taxText">Marketplace Integration</span>
+                <span class="taxText">{{ __('userpanel.Marketplace Integration') }}</span>
             </div>
             <div class="row">
                 <div class="col-lg-3 col-sm-6 mb-5">

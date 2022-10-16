@@ -21,9 +21,8 @@
                 <div class="col-lg-12">
                     <div class="priceTitle">
                         <div class="Title-Text">
-                            <h1>Price Calculator</h1>
-                            <h5>Are you ready to ship Globally with affordable <br> logistics solutions with Shiplounge?
-                            </h5>
+                            <h1>{{ __('homepage.price calc.text 1') }}</h1>
+                            <h5>{{ __('homepage.price calc.text 2') }}</h5>
                         </div>
                         <img src="{{ asset('/') }}frontend/img/priceCalculator.png" alt="">
                     </div>
@@ -40,7 +39,7 @@
             <div class="row my-5" style="text-align: center;">
                 <div class="col-lg-12">
                     <div class="title">
-                        <h2>Sample Product Weights</h2>
+                        <h2>{{ __('homepage.price calc.text 3') }}</h2>
                     </div>
                 </div>
             </div>
@@ -49,7 +48,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/t-shirt.svg" alt="">
                         <div class="card-contetn">
-                            <span>T-shirt</span>
+                            <span>T-shirt{{ __('homepage.price calc.text 4') }}</span>
                             <span>0.5 Kg</span>
                         </div>
                     </div>
@@ -58,7 +57,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/sweater.svg" alt="">
                         <div class="card-contetn">
-                            <span>Sweater</span>
+                            <span>{{ __('homepage.price calc.text 5') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -67,7 +66,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/pans.svg" alt="">
                         <div class="card-contetn">
-                            <span>Pans</span>
+                            <span>{{ __('homepage.price calc.text 6') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -76,7 +75,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/jacket.svg" alt="">
                         <div class="card-contetn">
-                            <span>Jacket</span>
+                            <span>{{ __('homepage.price calc.text 7') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -85,7 +84,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/shoes.svg" alt="">
                         <div class="card-contetn">
-                            <span>Shoes</span>
+                            <span>{{ __('homepage.price calc.text 8') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -94,7 +93,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/bag.svg" alt="">
                         <div class="card-contetn">
-                            <span>Bag</span>
+                            <span>{{ __('homepage.price calc.text 9') }}</span>
                             <span>0.5 - 1.5 Kg</span>
                         </div>
                     </div>
@@ -103,7 +102,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/sunglasses.svg" alt="">
                         <div class="card-contetn">
-                            <span>Sunglasses</span>
+                            <span>{{ __('homepage.price calc.text 10') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -112,7 +111,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/acssesoaries.svg" alt="">
                         <div class="card-contetn">
-                            <span>Accessory</span>
+                            <span>{{ __('homepage.price calc.text 11') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -121,7 +120,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/book.svg" alt="">
                         <div class="card-contetn">
-                            <span>Book</span>
+                            <span>{{ __('homepage.price calc.text 12') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -130,7 +129,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/stationery.svg" alt="">
                         <div class="card-contetn">
-                            <span>Stationery</span>
+                            <span>{{ __('homepage.price calc.text 13') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -139,7 +138,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/headphone.svg" alt="">
                         <div class="card-contetn">
-                            <span>Headphone</span>
+                            <span>{{ __('homepage.price calc.text 14') }}</span>
                             <span>0.5 - 1.5Kg</span>
                         </div>
                     </div>
@@ -148,7 +147,7 @@
                     <div class="products-card">
                         <img src="{{ asset('/') }}frontend/img/make-up.svg" alt="">
                         <div class="card-contetn">
-                            <span>Make-up kit</span>
+                            <span>{{ __('homepage.price calc.text 15') }}</span>
                             <span>0.5 - 1 Kg</span>
                         </div>
                     </div>
@@ -167,7 +166,7 @@
                     <div class="imgTitle">
                         <img src="{{ asset('/') }}frontend/img/priceCalculatro.svg" alt="">
                     </div>
-                    <h3>Price Calculation</h3>
+                    <h3>{{ __('homepage.price calc.text 16') }}</h3>
                 </div>
             </div>
             <form action="{{ route('pricecalculator.calculation') }}" method="post" id="price_calc">
@@ -176,13 +175,14 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="country">
-                                <label for="selectCountry">Country: <div class="red-star">*</div></label>
+                                <label for="selectCountry">{{ __('homepage.price calc.text 17') }}: <div class="red-star">*</div></label>
                                 <select name="selectCountry" id="selectCountry">
-                                    <option value="">Select Country</option>
+                                    <option value="">{{ __('homepage.price calc.text 18') }}</option>
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->name }}"
                                             {{ old('selectCountry') == $country->code ? 'selected' : '' }}>
-                                            {{ $country->name }}</option>
+                                            {{ $country->name }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 <span class="text-danger error-text selectCountry_error"></span>
@@ -192,7 +192,7 @@
                     <div class="row my-5">
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <div class="country">
-                                <label for="inputCount">Count: <div class="red-star">*</div></label>
+                                <label for="inputCount">{{ __('homepage.price calc.text 19') }}: <div class="red-star">*</div></label>
                                 <input type="text" name="inputCount" id="inputCount" value="{{ old('inputCount') }}"
                                     onchange="Calculate('total' , this)">
                                 <span class="text-danger error-text inputCount_error"></span>
@@ -200,18 +200,18 @@
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <div class="country">
-                                <label for="selectType">Type: <div class="red-star">*</div></label>
+                                <label for="selectType">{{ __('homepage.price calc.text 20') }}: <div class="red-star">*</div></label>
                                 <select name="selectType" id="selectType">
-                                    <option value="box" {{ old('selectType') == 'box' ? 'selected' : '' }}>Box</option>
+                                    <option value="box" {{ old('selectType') == 'box' ? 'selected' : '' }}>{{ __('homepage.price calc.text 21') }}</option>
                                     <option value="envelope" {{ old('selectType') == 'envelope' ? 'selected' : '' }}>
-                                        Envelope</option>
+                                        {{ __('homepage.price calc.text 22') }}</option>
                                 </select>
                                 <span class="text-danger error-text selectType_error"></span>
                             </div>
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <div class="country">
-                                <label for="inputLength">Length: <div class="red-star">*</div></label>
+                                <label for="inputLength">{{ __('homepage.price calc.text 23') }}: <div class="red-star">*</div></label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" placeholder="15"
                                         onchange="Calculate('volume' , this)" id="inputLength" name="inputLength"
@@ -223,7 +223,7 @@
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <div class="country">
-                                <label for="inputWidth">Width: <div class="red-star">*</div></label>
+                                <label for="inputWidth">{{ __('homepage.price calc.text 24') }}: <div class="red-star">*</div></label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="inputWidth" id="inputWidth"
                                         onchange="Calculate('volume' , this)" value="{{ old('inputWidth') }}">
@@ -234,7 +234,7 @@
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12" id="heightArea">
                             <div class="country">
-                                <label for="inputHeight">Height: <div class="red-star">*</div></label>
+                                <label for="inputHeight">{{ __('homepage.price calc.text 25') }}: <div class="red-star">*</div></label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control" name="inputHeight" id="inputHeight"
                                         placeholder="15" onchange="Calculate('volume' , this)"
@@ -246,7 +246,7 @@
                         </div>
                         <div class="col-lg-2 col-md-12 col-sm-12">
                             <div class="country">
-                                <label for="inputWeight">Weight: <div class="red-star">*</div></label>
+                                <label for="inputWeight">{{ __('homepage.price calc.text 26') }}: <div class="red-star">*</div></label>
                                 <div class="input-group mb-3">
                                     <input type="text" name="inputWeight" id="inputWeight" class="form-control"
                                         placeholder="2" onchange="Calculate('desi' , this)"
@@ -265,7 +265,7 @@
                                     <img src="{{ asset('/') }}frontend/img/priceCalculatro.svg" alt="">
                                 </div>
                                 <div class="img-title-content">
-                                    <span>Total volume:</span>
+                                    <span>{{ __('homepage.price calc.text 27') }}:</span>
                                     <span class="total_volume_div">0 m <sup>3</sup></span>
                                 </div>
                             </div>
@@ -276,7 +276,7 @@
                                     <img src="{{ asset('/') }}frontend/img/priceCalculatro.svg" alt="">
                                 </div>
                                 <div class="img-title-content">
-                                    <span>Pricing weight:</span>
+                                    <span>{{ __('homepage.price calc.text 28') }}:</span>
                                     <span class="total_desi_div">0 KGS</span>
                                     <input type="text" name="total_desi" id="total_desi_input" hidden />
                                 </div>
@@ -285,7 +285,7 @@
                         <div class="col-lg-12 mt-3">
                             <div class="price-total">
                                 <div class="price-btn">
-                                    <button type="submit">Price Calculation</button>
+                                    <button type="submit">{{ __('homepage.price calc.text 29') }}</button>
                                 </div>
                             </div>
                         </div>

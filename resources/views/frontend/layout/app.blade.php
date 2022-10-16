@@ -239,17 +239,16 @@ $footer_logo = DB::table('configs')
                             Request::segment(1) == 'servicesFee') active-navbar-item-hm @endif">
                         <a class="nav-link dropdown-toggle" href="servicesFee.html" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            {{ __('homepage.navbar.services')}}
+                            {{ __('homepage.navbar.Services')}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('e-commerce') }}">{{ __('homepage.navbar.e-commerce services')}}</a>
+                            <li><a class="dropdown-item" href="{{ route('e-commerce') }}">{{ __('homepage.navbar.E-Commerce Logistics')}}</a>
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('fba') }}">{{ __('homepage.navbar.amazon-fba')}}</a></li>
-                            <li><a class="dropdown-item" href="{{ route('marketplace') }}">Marketplace
-                                    Integration</a>
+                            <li><a class="dropdown-item" href="{{ route('fba') }}">{{ __('homepage.navbar.Amazon FBA')}}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('marketplace') }}">{{ __('homepage.navbar.Marketplace Integration') }}</a>
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('export') }}">Fullfilment</a></li>
-                            <li><a class="dropdown-item" href="{{ route('servicesFee') }}">Purchasing Service</a>
+                            <li><a class="dropdown-item" href="{{ route('export') }}">{{ __('homepage.navbar.Fullfilment') }}</a></li>
+                            {{-- <li><a class="dropdown-item" href="{{ route('servicesFee') }}">Purchasing Service</a> --}}
                             </li>
                         </ul>
                     </li>
@@ -261,34 +260,51 @@ $footer_logo = DB::table('configs')
                             Request::segment(1) == 'membershifee') active-navbar-item-hm @endif">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Pricing
+                            {{__('homepage.navbar.Pricing')}}
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="{{ route('pricecalculator') }}">Price Calculation</a>
+                            <li><a class="dropdown-item" href="{{ route('pricecalculator') }}">{{__('homepage.navbar.Price Calculation')}}</a>
                             </li>
-                            <li><a class="dropdown-item" href="{{ route('getquote') }}">Get a Quote</a></li>
-                            <li><a class="dropdown-item" href="{{ route('servcice') }}">Service Fees</a></li>
-                            <li><a class="dropdown-item" href="{{ route('membershifee') }}">Membership Plans</a></li>
+                            <li><a class="dropdown-item" href="{{ route('getquote') }}">{{__('homepage.navbar.Get a Quote')}}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('servcice') }}">{{__('homepage.navbar.Service Fees')}}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('membershifee') }}">{{__('homepage.navbar.Membership Plans')}}</a></li>
                         </ul>
                     </li>
                     <li class="nav-item @if (Request::segment(1) == 'contact') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'contact') active @endif" aria-current="page"
-                            href="{{ route('contact') }}">Contact</a>
+                            href="{{ route('contact') }}">{{__('Contact')}}</a>
                     </li>
                     <li class="nav-item @if (Request::segment(1) == 'blogs') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'blogs') active @endif"
-                            href="{{ route('blogs.index') }}">Blog</a>
+                            href="{{ route('blogs.index') }}">{{__('homepage.navbar.Blog')}}</a>
                     </li>
                     <li class="nav-item @if (Request::segment(1) == 'faqs') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'faqs') active @endif"
-                            href="{{ route('faqs') }}">FAQ</a>
+                            href="{{ route('faqs') }}">{{__('homepage.navbar.FAQ')}}</a>
                     </li>
                     <li class="nav-item @if (Request::segment(1) == 'track') active-navbar-item-hm @endif">
-                        <a class="nav-link" href="{{ route('track') }}">Cargo Track</a>
+                        <a class="nav-link" href="{{ route('track') }}">{{__('homepage.navbar.Cargo Track')}}</a>
                     </li>
                     <li class="nav-item @if (Request::segment(1) == 'careers') active-navbar-item-hm @endif">
                         <a class="nav-link @if (Request::segment(1) == 'careers') active @endif"
-                            href="{{ route('careers.index') }}">Career</a>
+                            href="{{ route('careers.index') }}">{{__('homepage.navbar.Career')}}</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="flag-icon flag-icon-{{ Config::get('languages')[App::getLocale()]['flag-icon'] }}"></span>
+                            {{ Config::get('languages')[App::getLocale()]['display'] }}
+                        </a>
+                        <div class="dropdown-menu">
+                            @foreach (Config::get('languages') as $lang => $language)
+                                @if ($lang != App::getLocale())
+                                    <a class="dropdown-item" href="{{ route('switchLang' , ['lang' => $lang]) }}">
+                                        <span class="flag-icon flag-icon-{{ $language['flag-icon'] }}"></span>
+                                        {{ $language['display'] }}
+                                    </a>
+                                @endif
+                            @endforeach
+                        </div>
                     </li>
                     {{-- <select class="selectpicker" data-width="fit">
                         <option data-content='<span class="flag-icon flag-icon-gb"></span>'>
@@ -301,11 +317,11 @@ $footer_logo = DB::table('configs')
                     @if (!Auth::user())
                         <li
                             class="nav-item login-li-element @if (Request::segment(1) == 'login') active-navbar-item-hm @endif">
-                            <a class="nav-link" href="{{ route('login') }}">Login</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{__('homepage.navbar.Login')}}</a>
                         </li>
                         <li
                             class="nav-item register-li-element @if (Request::segment(1) == 'register') active-navbar-item-hm @endif">
-                            <a class="nav-link" href="{{ route('register') }}">Register</a>
+                            <a class="nav-link" href="{{ route('register') }}">{{__('homepage.navbar.Register')}}</a>
                         </li>
                     @else
                         <div class="nav-item d-flex profile-li-element">
@@ -332,23 +348,23 @@ $footer_logo = DB::table('configs')
                 <div class="col-lg-2">
                     <div class="footer-content">
                         <ul>
-                            About Us
-                            <li>{{ $data->description }}</li>
+                            {{__('homepage.navbar.About us')}}
+                            {{-- <li>{{ $data->description }}</li> --}}
                         </ul>
                     </div>
                     <div>
                         <div class="faq-item @if (Request::segment(1) == 'faqs')  @endif">
                             <a class=" @if (Request::segment(1) == 'faqs')  @endif"
-                                href="{{ route('faqs') }}">FAQ</a>
+                                href="{{ route('faqs') }}">{{__('homepage.navbar.FAQ')}}</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="footer-content">
                         <ul>
-                            LEGAL
-                            <li>Terms of use</li>
-                            <li>PDPL</li>
+                            {{__('homepage.navbar.Legal')}}
+                            <li>{{__('homepage.navbar.Terms of use')}}</li>
+                            <li>{{__('homepage.navbar.PDPL')}}</li>
                         </ul>
                     </div>
                 </div>
@@ -367,12 +383,11 @@ $footer_logo = DB::table('configs')
                 <div class="col-lg-2">
                     <div class="footer-content">
                         <ul>
-                            Prices
-                            <li><a class="footerLinkDesing" href="{{ route('pricecalculator') }}">Price
-                                    Calculation</a></li>
-                            <li><a class="footerLinkDesing" href="{{ route('getquote') }}">Get a Quote</a></li>
-                            <li><a class="footerLinkDesing" href="{{ route('servcice') }}">Service Fees</a></li>
-                            <li><a class="footerLinkDesing" href="{{ route('membershifee') }}">Membership Fee</a>
+                            {{__('homepage.navbar.Prices')}}
+                            <li><a class="footerLinkDesing" href="{{ route('pricecalculator') }}">{{__('homepage.navbar.Price Calculation')}}</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('getquote') }}">{{__('homepage.navbar.Get a Quote')}}</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('servcice') }}">{{__('homepage.navbar.Service Fees')}}</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('membershifee') }}">{{__('homepage.navbar.Membership Fee')}}</a>
                             </li>
                         </ul>
                     </div>
@@ -381,13 +396,12 @@ $footer_logo = DB::table('configs')
                     <div class="footer-content">
                         <ul>
                             Services
-                            <li><a class="footerLinkDesing" href="{{ route('e-commerce') }}">E-Commerce Logistics</a>
+                            <li><a class="footerLinkDesing" href="{{ route('e-commerce') }}">{{ __('homepage.navbar.E-Commerce Logistics')}}</a>
                             </li>
-                            <li><a class="footerLinkDesing" href="{{ route('fba') }}">Amazon FBA</a></li>
-                            <li><a class="footerLinkDesing" href="{{ route('marketplace') }}">Marketplace
-                                    Integration</a></li>
-                            <li><a class="footerLinkDesing" href="{{ route('export') }}">Fullfilment</a></li>
-                            <li><a class="footerLinkDesing" href="{{ route('servicesFee') }}">Purchasing Service</a>
+                            <li><a class="footerLinkDesing" href="{{ route('fba') }}">{{ __('homepage.navbar.Amazon FBA') }}</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('marketplace') }}">{{ __('homepage.navbar.Marketplace Integration') }}</a></li>
+                            <li><a class="footerLinkDesing" href="{{ route('export') }}">{{__('homepage.navbar.Fullfilment')}}</a></li>
+                            {{-- <li><a class="footerLinkDesing" href="{{ route('servicesFee') }}">Purchasing Service</a> --}}
                             </li>
                         </ul>
                     </div>

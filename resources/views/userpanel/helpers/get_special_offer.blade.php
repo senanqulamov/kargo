@@ -235,27 +235,27 @@
                 <div class="row my-5 getQuoteForm">
                     <!-- Shipment Mode -->
                     <div class="variable-shipmentMode mb-4">
-                        <h5 class="getSpecialText">Shipment Mode</h5>
+                        <h5 class="getSpecialText">{{ __('userpanel.special offer.text 1') }}</h5>
                         <div class="variable-radio-input d-flex align-items-center flex-wrap">
                             <label class="d-flex align-items-center mb-2" for="sea_radio"
                                 onclick="menuChange('normal_type')">
                                 <input name="shipment_type" id="sea_radio" type="radio" value="sea"
                                     class="form-check-input radioSize me-2" checked="checked" />
                                 <img src="{{ asset('/') }}images/special_offer/sea.svg" alt="" class="me-2" />
-                                <p class="getSpecialLabel me-4">Sea</p>
+                                <p class="getSpecialLabel me-4">{{ __('userpanel.special offer.text 2') }}</p>
                             </label>
                             <label class="d-flex align-items-center mb-2" for="rail_radio"
                                 onclick="menuChange('normal_type')">
                                 <input id="rail_radio" name="shipment_type" type="radio" value="rail"
                                     class="form-check-input radioSize me-2" />
                                 <img src="{{ asset('/') }}images/special_offer/rail.svg" alt="" class="me-2" />
-                                <p class="getSpecialLabel me-4">Rail</p>
+                                <p class="getSpecialLabel me-4">{{ __('userpanel.special offer.text 3') }}</p>
                             </label>
                             <label class="d-flex align-items-center mb-2" for="air_radio" onclick="menuChange('air_type')">
                                 <input id="air_radio" name="shipment_type" type="radio" value="air"
                                     class="form-check-input radioSize me-2" />
                                 <img src="{{ asset('/') }}images/special_offer/air.svg" alt="" class="me-2" />
-                                <p class="getSpecialLabel me-4">Air</p>
+                                <p class="getSpecialLabel me-4">{{ __('userpanel.special offer.text 4') }}</p>
                             </label>
                             <label class="d-flex align-items-center mb-2" for="truck_radio"
                                 onclick="menuChange('normal_type')">
@@ -263,18 +263,18 @@
                                     class="form-check-input radioSize me-2" />
                                 <img src="{{ asset('/') }}images/special_offer/truck.svg" alt=""
                                     class="me-2" />
-                                <p class="getSpecialLabel me-4">Truck</p>
+                                <p class="getSpecialLabel me-4">{{ __('userpanel.special offer.text 5') }}</p>
                             </label>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-title">
-                            <h5>Origin</h5>
+                            <h5>{{ __('userpanel.special offer.text 6') }}</h5>
                         </div>
                         <div class="select-box">
                             <select class="selectpicker show-tick form-control" name="origin"
                                 title="Choose one of the following..." data-size="6">
-                                <option disabled>Country</option>
+                                <option disabled selected>{{ __('userpanel.Country') }}</option>
                                 @foreach ($countries as $country)
                                     <option>{{ $country->name }}</option>
                                 @endforeach
@@ -283,12 +283,12 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="form-title">
-                            <h5>Destination</h5>
+                            <h5>{{ __('userpanel.special offer.text 7') }}</h5>
                         </div>
                         <div class="select-box">
                             <select class="selectpicker show-tick form-control" name="destination"
                                 title="Choose one of the following..." data-size="6">
-                                <option disabled>City, Country</option>
+                                <option disabled selected>{{ __('userpanel.Country') }}</option>
                                 @foreach ($countries as $country)
                                     <option>{{ $country->name }}</option>
                                 @endforeach
@@ -298,9 +298,9 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12">
-                                <label for="address">Delivery address</label>
+                                <label for="address">{{ __('userpanel.special offer.text 9') }}</label>
                                 <div class="select-box">
-                                    <input type="text" placeholder="Additional details or requests" name="address">
+                                    <input type="text" name="address">
                                 </div>
                             </div>
                         </div>
@@ -308,7 +308,7 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12">
-                                <label for="additional">Additional information</label>
+                                <label for="additional">{{ __('userpanel.special offer.text 37') }}</label>
                                 <div class="select-box">
                                     <input type="text" placeholder="Additional details or requests" name="additional">
                                 </div>
@@ -322,7 +322,7 @@
 
                     <div class="col-lg-12">
                         <div class="form-title">
-                            <h5>Shipping type</h5>
+                            <h5>{{ __('userpanel.special offer.text 10') }}</h5>
                         </div>
                         <div class="shipmentMode">
                             <div class="form__group">
@@ -375,7 +375,7 @@
                                                 d="M5.14286 12.8576H2.57143V10.2861H0V18.0004H7.71429V10.2861H5.14286V12.8576Z"
                                                 fill="#405982" />
                                         </svg>
-                                        Air Cargo
+                                        {{ __('userpanel.special offer.text 4') }} {{ __('userpanel.special offer.text 23') }}
                                     </label>
                                 </div>
                             </div>
@@ -389,10 +389,10 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12">
-                                <label for="cargo">Cargo</label>
+                                <label for="cargo">{{ __('userpanel.special offer.text 23') }}</label>
                                 <div class="select-box">
                                     <input type="text"
-                                        placeholder="Description + (HS/HTS Code of the product if available)"
+                                        placeholder=""
                                         name="cargo">
                                 </div>
                             </div>
@@ -401,19 +401,19 @@
                     <div class="col-lg-6">
                         <div class="row">
                             <div class="col-lg-12">
-                                <label for="date">Goods ready date</label>
+                                <label for="date">{{ __('userpanel.special offer.text 25') }}</label>
                                 <div class="select-box">
-                                    <input type="date" placeholder="Goods ready date" name="date">
+                                    <input type="date" placeholder="{{ __('userpanel.special offer.text 25') }}" name="date">
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-6 normal_type">
                         <div class="select-box">
-                            <label for="incoterm">Incoterms</label>
+                            <label for="incoterm">{{ __('userpanel.special offer.text 26') }}</label>
                             <select class="selectpicker show-tick form-control" name="incoterm"
                                 title="Choose one of the following..." data-size="6">
-                                <option disabled>Incoterm</option>
+                                <option disabled>{{ __('userpanel.special offer.text 26') }}</option>
                                 <option>FOB</option>
                                 <option>EXW</option>
                                 <option>CIF</option>
@@ -434,7 +434,7 @@
                                         d="M13.9983 3.25868C14.0123 3.14376 13.9395 3.03598 13.8277 3.00624C11.6026 2.02621 9.37797 1.03705 7.15418 0.0387222C7.05235 -0.0129074 6.93196 -0.0129074 6.83011 0.0387222C4.61193 1.03017 2.3932 2.01766 0.173672 3.00112C0.0557792 3.04181 -0.0160752 3.16101 0.00307765 3.28426V5.74526V7.71338V7.71326C-0.00620154 9.94287 0.745894 12.1091 2.13489 13.8529C3.27468 15.3591 4.86401 16.4635 6.67323 17.0061C6.88522 17.0736 7.11281 17.0736 7.3248 17.0061C9.28781 16.4161 10.8347 15.2479 12.0456 13.6175V13.6176C12.9941 12.3477 13.6197 10.8663 13.8687 9.30097C13.9456 8.80953 13.9855 8.313 13.9881 7.81561C14.0051 6.29599 13.9881 4.77647 13.9983 3.25871L13.9983 3.25868ZM13.1352 7.90269C13.1306 8.34096 13.093 8.77813 13.0225 9.21068C12.8047 10.5802 12.2582 11.8764 11.4297 12.9883C10.4143 14.4101 8.95637 15.4556 7.28366 15.9608C7.19348 15.9886 7.09998 16.0035 7.00564 16.0051V1.05167C7.04989 1.05346 7.09331 1.06393 7.13352 1.08236C9.08797 1.9533 11.0408 2.82138 12.9918 3.68659C13.0869 3.71502 13.1476 3.80805 13.1351 3.90656V7.90249L13.1352 7.90269Z"
                                         fill="#405982" />
                                 </svg>
-                                Do you need cargo insurance ?
+                                {{ __('userpanel.special offer.text 27') }}
                             </h5>
                         </div>
                         <div class="shipmentMode">
@@ -444,7 +444,7 @@
                                         value="yes">
                                     <label class="form__label-radio" for="insurance_yes">
                                         <span class="form__radio-button"></span>
-                                        Yes
+                                        {{ __('userpanel.manual order.text 46') }}
                                     </label>
                                 </div>
                                 <div class="form__radio-group">
@@ -452,7 +452,7 @@
                                         value="no">
                                     <label class="form__label-radio" for="insurance_no">
                                         <span class="form__radio-button"></span>
-                                        No
+                                        {{ __('userpanel.manual order.text 47') }}
                                     </label>
                                 </div>
                             </div>
@@ -460,7 +460,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="form-title">
-                            <h5>MSDS / Other Document / Photo</h5>
+                            <h5>{{ __('userpanel.special offer.text 28') }}</h5>
                         </div>
                         <div class="row fileInput">
                             <div class="col-lg-6">
@@ -470,7 +470,7 @@
                         </div>
                     </div>
                     <div class="row justify-content-center">
-                        <button class="btn btn-success" style="width: max-content;">Submit</button>
+                        <button class="btn btn-success" style="width: max-content;">{{ __('userpanel.manual order.text 59') }}</button>
                     </div>
                 </div>
             </form>
@@ -545,7 +545,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="select-box">
-                                    <label for="containeer_type">Type</label>
+                                    <label for="containeer_type">{{ __('userpanel.manual order.text 22') }}</label>
                                     <select class="form-control" name="containeer_type[]"
                                         title="Choose one of the following...">
                                         <option disabled>Containeer Type</option>
@@ -558,7 +558,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <label for="cargo_weight_containeer">Cargo weight (per containeer)</label>
+                                <label for="cargo_weight_containeer">{{ __('userpanel.special offer.text 13') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="number" class="form-control pad-block-10px" placeholder="0"
                                         name="cargo_weight_containeer[]">
@@ -569,7 +569,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="pm">
-                            <label for="">Quantity</label>
+                            <label for="">{{ __('userpanel.special offer.text 14') }}</label>
                             <div class="number">
                                 <span class="minus">-</span>
                                 <input type="text" value="1" name="quantity[]" />
@@ -597,7 +597,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-6">
-                                <label for="">Length</label>
+                                <label for="">{{ __('userpanel.special offer.text 17') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
                                         name="length[]">
@@ -605,7 +605,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <label for="">Width</label>
+                                <label for="">{{ __('userpanel.special offer.text 18') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="number" class="form-control pad-block-10px" placeholder="0"
                                         name="width[]">
@@ -617,7 +617,7 @@
                     <div class="col-lg-12">
                         <div class="row">
                             <div class="col-lg-6">
-                                <label for="">Height</label>
+                                <label for="">{{ __('userpanel.special offer.text 19') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
                                         name="height[]">
@@ -625,7 +625,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <label for="">Weight</label>
+                                <label for="">{{ __('userpanel.special offer.text 20') }}</label>
                                 <div class="input-group mb-3">
                                     <input type="number" class="form-control pad-block-10px" placeholder="0"
                                         name="weight[]">
@@ -636,7 +636,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="pm">
-                            <label for="">Quantity</label>
+                            <label for="">{{ __('userpanel.special offer.text 14') }}</label>
                             <div class="number">
                                 <span class="minus">-</span>
                                 <input type="text" value="1" name="quantity[]" />
@@ -653,7 +653,7 @@
                 <div class="col-lg-12 totals-row-hm">
                     <div class="row my-3">
                         <div class="col-lg-6">
-                            <label for="">Total Volume</label>
+                            <label for="">{{ __('userpanel.special offer.text 21') }}</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
                                     name="total_volume">
@@ -661,7 +661,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="">Total Weight</label>
+                            <label for="">{{ __('userpanel.special offer.text 22') }}</label>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control pad-block-10px" placeholder="0"
                                     name="total_weight">
@@ -684,7 +684,7 @@
                 <div class="add-button-row-helper"></div>
                 <button type="button" class="btn btn-outline-primary add-button-hm row"
                     onclick="add_new_row('` + shipping_type + `')">
-                    Add
+                    {{ __('userpanel.special offer.text 12') }}
                 </button>
             `;
             var add_button_helper = document.querySelector('.add-button-helper');
@@ -698,7 +698,7 @@
                     <div class="row">
                         <hr>
                         <div class="col-lg-6">
-                            <label for="">Length</label>
+                            <label for="">{{ __('userpanel.special offer.text 17') }}</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
                                     name="length[]">
@@ -706,7 +706,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="">Width</label>
+                            <label for="">{{ __('userpanel.special offer.text 18') }}</label>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control pad-block-10px" placeholder="0"
                                     name="width[]">
@@ -714,7 +714,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="">Height</label>
+                            <label for="">{{ __('userpanel.special offer.text 19') }}</label>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control pad-block-10px" placeholder="Pick type"
                                     name="height[]">
@@ -722,7 +722,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="">Weight</label>
+                            <label for="">{{ __('userpanel.special offer.text 20') }}</label>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control pad-block-10px" placeholder="0"
                                     name="weight[]">
@@ -731,7 +731,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="pm">
-                                <label for="">Quantity</label>
+                                <label for="">{{ __('userpanel.special offer.text 14') }}</label>
                                 <div class="number">
                                     <span class="minus">-</span>
                                     <input type="text" value="1" name="quantity[]" />
@@ -750,7 +750,7 @@
                         <hr>
                         <div class="col-lg-6">
                             <div class="select-box">
-                                <label for="containeer_type">Type</label>
+                                <label for="containeer_type">{{ __('userpanel.manual order.text 22') }}</label>
                                 <select class="form-control" name="containeer_type[]"
                                     title="Choose one of the following...">
                                     <option disabled>Containeer Type</option>
@@ -763,7 +763,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <label for="cargo_weight_containeer">Cargo weight (per containeer)</label>
+                            <label for="cargo_weight_containeer">{{ __('userpanel.special offer.text 13') }}</label>
                             <div class="input-group mb-3">
                                 <input type="number" class="form-control pad-block-10px" placeholder="0"
                                     name="cargo_weight_containeer[]">
@@ -772,7 +772,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="pm">
-                                <label for="">Quantity</label>
+                                <label for="">{{ __('userpanel.special offer.text 14') }}</label>
                                 <div class="number">
                                     <span class="minus">-</span>
                                     <input type="text" value="1" name="quantity[]" />

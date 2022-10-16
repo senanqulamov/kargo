@@ -24,17 +24,17 @@
                                 <img src="{{ asset('/') }}frontend/img/priceCalculatro.svg" alt="">
                             </div>
 
-                            <h3>Price Calculation</h3>
+                            <h3>{{ __('userpanel.calculator.text 3') }}</h3>
 
                         </div>
 
 
 
                         <div class="col-md-4 mt-4 mb-3">
-                            <p>Country:</p>
+                            <p>{{ __('userpanel.Country') }}:</p>
                             <div class="input-group mb-3">
                                 <select class="form-select select-custom-hm" name="selectCountry" id="selectCountry">
-                                    <option value="" selected disabled>Select Country</option>
+                                    <option value="" selected disabled>{{ __('userpanel.calculator.text 1') }}</option>
                                     @foreach ($countries as $country)
                                         <option value="{{ $country->name }}"
                                             {{ old('selectCountry') == $country->code ? 'selected' : '' }}>
@@ -54,7 +54,7 @@
 
                         <div class="col-lg-2  col-md-4 col-sm-6  mt-2">
                             <!--1ci input-->
-                            <p>Count:</p>
+                            <p>{{ __('userpanel.calculator.text 2') }}:</p>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="inputCount"
                                     onchange="Calculate('desi' , this)">
@@ -64,12 +64,12 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6  mt-2">
                             <!--1ci input-->
-                            <p>Type:</p>
+                            <p>{{ __('userpanel.manual order.text 22') }}:</p>
 
                             <div class="input-group mb-3">
                                 <select name="selectType" id="selectType" class="form-select">
-                                    <option value="box">Box</option>
-                                    <option value="envelope">Envelope</option>
+                                    <option value="box">{{ __('userpanel.manual order.text 23') }}</option>
+                                    <option value="envelope">{{ __('userpanel.manual order.text 24') }}</option>
                                 </select>
                                 <span class="text-danger error-text selectType_error"></span>
                             </div>
@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 mt-2">
                             <!--3ci input-->
-                            <p>Length:</p>
+                            <p>{{ __('userpanel.manual order.text 25') }}:</p>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="inputLength"
                                     onchange="Calculate('desi' , this)">
@@ -89,7 +89,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6 mt-2">
                             <!--4ci input-->
-                            <p>Width:</p>
+                            <p>{{ __('userpanel.manual order.text 26') }}:</p>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="inputWidth"
                                     onchange="Calculate('desi' , this)">
@@ -100,7 +100,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6  mt-2" id="heightArea">
                             <!--5ci input-->
-                            <p>Height:</p>
+                            <p>{{ __('userpanel.manual order.text 27') }}:</p>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="inputHeight"
                                     onchange="Calculate('desi' , this)">
@@ -111,7 +111,7 @@
                         </div>
                         <div class="col-lg-2 col-md-4 col-sm-6  mt-2">
                             <!--6ci input-->
-                            <p>Weight:</p>
+                            <p>{{ __('userpanel.manual order.text 28') }}:</p>
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="inputWeight"
                                     onchange="Calculate('desi' , this)">
@@ -152,7 +152,7 @@
 
 
                                     <div class="page__cacl-icon ">
-                                        <p class="calc__box-text">Total volume:</p>
+                                        <p class="calc__box-text">{{ __('userpanel.manual order.text 37') }}:</p>
                                         <p class="total_volume_div">0 m<sup>3</sup></p>
                                     </div>
 
@@ -178,7 +178,7 @@
 
 
                                     <div class="page__cacl-icon ">
-                                        <p class="calc__box-text">Pricing weight:</p>
+                                        <p class="calc__box-text">{{ __('userpanel.manual order.text 39') }}:</p>
                                         <p class="total_desi_div">0 KGS</p>
                                         <input type="text" name="total_desi" id="total_desi_input" hidden />
                                     </div>
@@ -193,7 +193,7 @@
 
                     <div class="page__price-buttons mt-4">
 
-                        <button type="submit" class="price__calcutaor ms-4">Price Calculation</button>
+                        <button type="submit" class="price__calcutaor ms-4">{{ __('userpanel.calculator.text 3') }}</button>
 
                     </div>
 

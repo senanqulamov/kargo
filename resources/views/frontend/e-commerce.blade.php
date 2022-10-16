@@ -10,11 +10,9 @@
         <div class="row first my-5 align-items-center">
             <div class="col-lg-6">
                 <div class="left-content">
-                    <h1>E-Commerse logistics and Logistics Solutions</h1>
-                    <p>ShipLounge We are aware of the importance of just-in-time shipment in terms of business efficiency and prestige of our valued customers, and we make our expertise in air transportation speak. Thanks to our wide agency network,
-                        we easily transport all your cargo to important commercial points in the world by air.
-                    </p>
-                    <button onclick="window.open('{{ route('login') }}' , '_self')">Start now</button>
+                    <h1>{{ __('homepage.e-commerce.1 title') }}</h1>
+                    <p>{{ __('homepage.e-commerce.1 text') }}</p>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">{{ __('homepage.homepage.Start now') }}</button>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -38,8 +36,8 @@
             </div>
             <div class="col-lg-6">
                 <div class="right-second">
-                    <h2>What is E-Commerce logistics</h2>
-                    <span>Ürün, sektör ve kapasitede herhangi bir sıralama olmaksızın, tüm kargolarınızı havaalanından havaalanına ya da kapıdan kapıya, en ekonomik ve rekabetçi fiyatlarla taşıyor, navlunlarımızı sizin ihtiyaçlarınız doğrultusunda belirliyoruz</span>
+                    <h2>{{ __('homepage.e-commerce.2 title') }}</h2>
+                    <span>{{ __('homepage.e-commerce.2 text') }}</span>
                 </div>
             </div>
         </div>
@@ -53,8 +51,8 @@
         <div class="row my-5 third align-items-center">
             <div class="col-lg-6">
                 <div class="left-thirds">
-                    <h2>Shipping Management</h2>
-                    <span>ShipLounge olarak, teknolojik altyapımız, eğitime verdiğimiz önem, müşteri odaklı yaklaşımımız, çözüm odaklı yapımız ve rekabetçi fiyatlarımızla tüm hava kargo firmaları arasında sizin için tercih edilebilir bir noktada durmaya özen gösteriyoruz.</span>
+                    <h2>{{ __('homepage.e-commerce.3 title') }}</h2>
+                    <span>{{ __('homepage.e-commerce.3 text') }}</span>
                 </div>
             </div>
             <div class="col-lg-6">

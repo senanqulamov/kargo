@@ -9,8 +9,8 @@
         <div class="row my-6" style="text-align: center;">
             <div class="col-lg-12">
                 <div class="title">
-                    <h1>Integration is just a click away!</h1>
-                    <span>With ShipEntegra's 20+ Marketplaces and 104+ logistics integrations, you can easily integrate your stores and carrier companies in related Marketplaces.</span>
+                    <h1>{{__('homepage.marketplace.Integration is just a click away!')}}</h1>
+                    <span>{{ __('homepage.marketplace.Integration is just a click away! text') }}</span>
                 </div>
             </div>
         </div>
@@ -24,7 +24,7 @@
         <div class="row my-3" style="text-align: center;">
             <div class="col-lg-12">
                 <div class="title">
-                    <h3>Sales Channels and Marketplaces</h3>
+                    <h3>{{__('homepage.marketplace.Sales Channels and Marketplaces')}}</h3>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
         <div class="row mt-6" style="text-align: center;">
             <div class="col-lg-12">
                 <div class="title">
-                    <h3>Logistics Companies</h3>
+                    <h3>{{__('homepage.marketplace.Logistics Companies')}}</h3>
                 </div>
             </div>
         </div>

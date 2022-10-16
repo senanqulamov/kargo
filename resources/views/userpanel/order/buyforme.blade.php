@@ -45,7 +45,7 @@
                                     fill="white" />
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">My Request</p>
+                                <p class="ms-3">{{ __('userpanel.buy for me.text 1') }}</p>
                             </div>
                         </button>
                     </div>
@@ -71,7 +71,7 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">Create Demand</p>
+                                <p class="ms-3">{{ __('userpanel.buy for me.text 2') }}</p>
                             </div>
                         </button>
                     </div>
@@ -100,7 +100,7 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">History</p>
+                                <p class="ms-3">{{ __('userpanel.buy for me.text 3') }}</p>
                             </div>
                         </button>
                     </div>
@@ -113,29 +113,29 @@
                     <div class="courier__input courier__table-box--1">
                         <div class="page__not page__not--1">
                             <div class="demand__box   me-3"></div>
-                            <h2 class="demand__h2">My Request</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.buy for me.text 1') }}</h2>
                         </div>
                         <div class="courier__table--1 mt-4">
                             <table id="buyformeTable" class="table table-bordered" style="with:100%;">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Tracking number</th>
-                                        <th>Status</th>
-                                        <th>Name</th>
-                                        <th>Country</th>
-                                        <th>City</th>
-                                        <th>State</th>
-                                        <th>Address</th>
-                                        <th>Zip Code</th>
-                                        <th>Phone</th>
-                                        <th>Email</th>
-                                        <th>Product Name</th>
-                                        <th>Product Count</th>
-                                        <th>Product Link</th>
-                                        <th>Note</th>
-                                        <th>Date</th>
-                                        <th>Actions</th>
+                                        <th>{{ __('userpanel.buy for me.text 6') }}</th>
+                                        <th>{{ __('userpanel.Status') }}</th>
+                                        <th>{{ __('userpanel.Name') }}</th>
+                                        <th>{{ __('userpanel.Country') }}</th>
+                                        <th>{{ __('userpanel.City') }}</th>
+                                        <th>{{ __('userpanel.State') }}</th>
+                                        <th>{{ __('userpanel.Address') }}</th>
+                                        <th>{{ __('userpanel.ZIP code') }}</th>
+                                        <th>{{ __('userpanel.Phone') }}</th>
+                                        <th>{{ __('userpanel.Email') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 7') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 8') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 9') }}</th>
+                                        <th>{{ __('userpanel.courier request.text 7') }}</th>
+                                        <th>{{ __('userpanel.courier request.text 8') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 10') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -215,7 +215,7 @@
                     <div class="courier__input courier__table-box--1">
                         <div class="page__not page__not--1">
                             <div class="demand__box   me-3"></div>
-                            <h2 class="demand__h2">Create Demand</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.buy for me.text 2') }}</h2>
                         </div>
                         <div class="courier--table-1">
                             <div class="courier__table--1 mt-4">
@@ -225,7 +225,7 @@
                                     <div class="create-demand-form-hm">
                                         <div class="create-demand-form-left-hm create-demand-part">
                                             <div>
-                                                <h2>Address information</h2>
+                                                <h2>{{ __('userpanel.buy for me.text 4') }}</h2>
                                             </div>
                                             <li class="list-group-item pb-4">
                                                 <select class="form-select border-primary select-custom-hm"
@@ -252,7 +252,7 @@
                                             <li class="list-group-item mt-3">
                                                 <div class="row">
                                                     <div class="col-12 col-sm-6">
-                                                        <h5 class="textShipment">Address Information</h5>
+                                                        <h5 class="textShipment">{{ __('userpanel.buy for me.text 4') }}</h5>
                                                         <h6 class="customerText">Country<span class="red">*</span></h6>
                                                         <select class="form-select mb-3 check-input" name="country">
                                                             <option value="" selected disabled>Select</option>
@@ -261,38 +261,38 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                        <h6 class="customerText">City<span class="red">*</span></h6>
+                                                        <h6 class="customerText">{{ __('userpanel.City') }}<span class="red">*</span></h6>
                                                         <input class="form-control mb-3 check-input" type="text"
                                                             placeholder="New York" aria-label="default input example"
                                                             name="city" id="locality-input" />
-                                                        <h6 class="customerText">State</h6>
+                                                        <h6 class="customerText">{{ __('userpanel.State') }}</h6>
                                                         <input class="form-control mb-3 check-input" type="text"
                                                             placeholder="California" aria-label="default input example"
                                                             name="state" id="administrative_area_level_1-input" />
-                                                        <h6 class="customerText">Adress<span class="red">*</span></h6>
+                                                        <h6 class="customerText">{{ __('userpanel.Address') }}<span class="red">*</span></h6>
                                                         <input class="form-control mb-3 check-input" type="text"
                                                             placeholder="Bergen street 57"
                                                             aria-label="default input example" name="address"
                                                             id="location-input" />
-                                                        <h6 class="customerText">ZIP Code<span class="red">*</span>
+                                                        <h6 class="customerText">{{ __('userpanel.ZIP code') }}<span class="red">*</span>
                                                         </h6>
                                                         <input class="form-control mb-3 check-input" type="text"
                                                             placeholder="745844" aria-label="default input example"
                                                             name="zipcode" id="postal_code-input" />
                                                     </div>
                                                     <div class="col-12 col-sm-6">
-                                                        <h5 class="textShipment">Contact Info</h5>
-                                                        <h6 class="customerText">Full Name<span class="red">*</span>
+                                                        <h5 class="textShipment">{{ __('userpanel.Contact Info') }}</h5>
+                                                        <h6 class="customerText">{{ __('userpanel.Full Name') }}<span class="red">*</span>
                                                         </h6>
                                                         <input class="form-control mb-3 check-input" type="text"
                                                             placeholder="Emma John" aria-label="default input example"
                                                             name="name" />
-                                                        <h6 class="customerText">Phone Number<span class="red">*</span>
+                                                        <h6 class="customerText">{{ __('userpanel.Phone Number') }}<span class="red">*</span>
                                                         </h6>
                                                         <input class="form-control mb-3 check-input" type="tel"
                                                             placeholder="+9383830834" aria-label="default input example"
                                                             name="phone" />
-                                                        <h6 class="customerText">Email<span class="red">*</span></h6>
+                                                        <h6 class="customerText">{{ __('userpanel.Email') }}<span class="red">*</span></h6>
                                                         <input class="form-control mb-3 check-input" type="email"
                                                             placeholder="john@examle.com"
                                                             aria-label="default input example" name="email" />
@@ -302,8 +302,7 @@
                                                                 style="width: max-content;">
                                                                 <input class="form-check-input" type="checkbox"
                                                                     id="save_address" name="save_address">
-                                                                <span class="ms-2">Save to the address
-                                                                    book
+                                                                <span class="ms-2">{{ __('userpanel.Save to the Address Book') }}
                                                                 </span>
                                                             </label>
                                                         </div>
@@ -317,12 +316,12 @@
                                             </div>
                                             <div class="create-demand-form-right-hm ">
                                                 <div class="form-group">
-                                                    <label class="form-label">Product<span class="red-1">*</span></label>
+                                                    <label class="form-label">{{ __('userpanel.manual order.text 32') }}<span class="red-1">*</span></label>
                                                     <input type="text" class="form-control" placeholder="Deirvlon"
                                                         name="product_name">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label">Count<span class="red-1">*</span></label>
+                                                    <label class="form-label">{{ __('userpanel.manual order.text 21') }}<span class="red-1">*</span></label>
                                                     <input class="form-control" type="text" name="product_count">
                                                 </div>
                                                 <div class="form-group">
@@ -330,7 +329,7 @@
                                                     <input class="form-control" type="text" name="product_link">
                                                 </div>
                                                 <div class="form-group">
-                                                    <label class="form-label">Note</label>
+                                                    <label class="form-label">{{ __('userpanel.courier request.text 7') }}</label>
                                                     <input class="form-control" type="text" name="product_note">
                                                 </div>
                                             </div>
@@ -338,7 +337,7 @@
                                         <div class="create-demand-part create-demand-form-bottom-hm">
                                             <button class="btn btn-primary balance__address-refund--btn" type="submit">
                                                 <i class="fa-solid fa-check me-2"></i>
-                                                Confirm Demand
+                                                {{ __('userpanel.courier request.text 10') }}
                                             </button>
                                         </div>
                                     </div>
@@ -354,24 +353,24 @@
                     <div class="courier__input courier__table-box--2">
                         <div class="page__not page__not--1">
                             <div class="demand__box   me-3"></div>
-                            <h2 class="demand__h2">Demand History</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.buy for me.text 11') }}</h2>
                         </div>
                         <div class="courier__table--1 mt-4">
                             <table id="example2" class="table table-bordered" style="with:100%;">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Status</th>
-                                        <th>Comment</th>
-                                        <th>Time limit</th>
-                                        <th>Product Name</th>
-                                        <th>Product Count</th>
-                                        <th>Product Link</th>
-                                        <th>Note</th>
-                                        <th>Product Price</th>
-                                        <th>Cargo Price</th>
+                                        <th>{{ __('userpanel.Status') }}</th>
+                                        <th>{{ __('userpanel.special offer.text 35') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 12') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 7') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 8') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 9') }}</th>
+                                        <th>{{ __('userpanel.courier request.text 7') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 13') }}</th>
+                                        <th>{{ __('userpanel.buy for me.text 14') }}</th>
                                         <th>Comission</th>
-                                        <th>Actions</th>
+                                        <th>{{ __('userpanel.buy for me.text 10') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>

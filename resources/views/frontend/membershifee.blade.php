@@ -10,19 +10,16 @@
         <div class="row my-6" style="text-align: center;">
             <div class="col-lg-12">
                 <div class="title">
-                    <h2>Membership Fees</h2>
-                    <span>Choose the most suitable package for you, easily manage all
-                        your orders from a single point.</span>
+                    <h2>{{ __('homepage.membership fees.text 1') }}</h2>
+                    <span>{{ __('homepage.membership fees.text 2') }}</span>
                 </div>
             </div>
         </div>
         <div class="row my-5" style="text-align: center;">
             <div class="col-lg-12">
                 <div class="title">
-                    <h2>Great Support for E-Export from ShipLounge!</h2>
-                    <span>In this difficult time we are in, you can use any of the ShipLounge software  packages free of
-                        charge until 30 June  2021 to encourage you, our valued sellers, to e-export, to
-                        enable you to manage your order from a single screen and to save a lot of time.</span>
+                    <h2>{{ __('homepage.membership fees.text 3') }}</h2>
+                    <span>{{ __('homepage.membership fees.text 4') }}</span>
                 </div>
             </div>
         </div>
@@ -34,7 +31,7 @@
                             <div class="row cardTitle">
                                 <div class="col-lg-6 col-sm-6 col-md-6 col-6">
                                     <div class="left-price">
-                                        <h3>Free</h3>
+                                        <h3>{{ __('homepage.membership fees.text 5') }}</h3>
                                         <span>0$</span>
                                     </div>
                                 </div>
@@ -47,34 +44,33 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">{{ __('homepage.membership fees.text 6') }}</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="row infoCardBox">
                                 <div class="col-lg-12">
                                     <div class="infoCard">
-                                        <p>100</p>
-                                        <span>Shipments per Month</span>
+                                        <span>{{ __('homepage.membership fees.text 7') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>0</p>
-                                        <span>Link Your Own Courier Accounts</span>
+                                        <span>{{ __('homepage.membership fees.text 13') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>1</p>
-                                        <span>Team Members</span>
+                                        <span>{{ __('homepage.membership fees.text 14') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="listCard">
-                                <span>Unlimited</span>
+                                <span>{{ __('homepage.membership fees.text 7') }}</span>
                                 <ul>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
@@ -102,7 +98,7 @@
                             <div class="row cardTitle">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="left-price">
-                                        <h3>Free</h3>
+                                        <h3>{{ __('homepage.membership fees.text 8') }}</h3>
                                         <span>0$</span>
                                     </div>
                                 </div>
@@ -115,7 +111,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">{{ __('homepage.membership fees.text 6') }}</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -123,26 +119,26 @@
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>100</p>
-                                        <span>Shipments per Month</span>
+                                        <span>{{ __('homepage.membership fees.text 12') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>0</p>
-                                        <span>Link Your Own Courier Accounts</span>
+                                        <span>{{ __('homepage.membership fees.text 13') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>1</p>
-                                        <span>Team Members</span>
+                                        <span>{{ __('homepage.membership fees.text 14') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="listCard">
-                                <span>Unlimited</span>
+                                <span>{{ __('homepage.membership fees.text 7') }}</span>
                                 <ul>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
@@ -169,7 +165,7 @@
                             <div class="row cardTitle">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="left-price">
-                                        <h3>Free</h3>
+                                        <h3>{{ __('homepage.membership fees.text 8') }}</h3>
                                         <span>0$</span>
                                     </div>
                                 </div>
@@ -182,7 +178,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">{{ __('homepage.membership fees.text 6') }}</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -190,26 +186,26 @@
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>100</p>
-                                        <span>Shipments per Month</span>
+                                        <span>{{ __('homepage.membership fees.text 12') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>0</p>
-                                        <span>Link Your Own Courier Accounts</span>
+                                        <span>{{ __('homepage.membership fees.text 13') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>1</p>
-                                        <span>Team Members</span>
+                                        <span>{{ __('homepage.membership fees.text 14') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="listCard">
-                                <span>Unlimited</span>
+                                <span>{{ __('homepage.membership fees.text 7') }}</span>
                                 <ul>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
@@ -236,7 +232,7 @@
                             <div class="row cardTitle">
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div class="left-price">
-                                        <h3>Free</h3>
+                                        <h3>{{ __('homepage.membership fees.text 8') }}</h3>
                                         <span>0$</span>
                                     </div>
                                 </div>
@@ -249,7 +245,7 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="startedButton">
-                                <button onclick="window.open('{{ route('login') }}' , '_self')">Get Started</button>
+                                <button onclick="window.open('{{ route('login') }}' , '_self')">{{ __('homepage.membership fees.text 6') }}</button>
                             </div>
                         </div>
                         <div class="col-lg-12">
@@ -257,26 +253,26 @@
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>100</p>
-                                        <span>Shipments per Month</span>
+                                        <span>{{ __('homepage.membership fees.text 12') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>0</p>
-                                        <span>Link Your Own Courier Accounts</span>
+                                        <span>{{ __('homepage.membership fees.text 13') }}</span>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="infoCard">
                                         <p>1</p>
-                                        <span>Team Members</span>
+                                        <span>{{ __('homepage.membership fees.text 14') }}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-12">
                             <div class="listCard">
-                                <span>Unlimited</span>
+                                <span>{{ __('homepage.membership fees.text 7') }}</span>
                                 <ul>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
                                     <li><img src="{{asset('/')}}frontend/img/tic.svg" alt="">Auto Order Sync</li>
@@ -302,30 +298,26 @@
 </section>
 <!-- MembershiFee end -->
 
-<!-- Free Section start -->
-<section id="Free">
+<!-- {{ __('homepage.membership fees.text 8') }} Section start -->
+<section id="{{ __('homepage.membership fees.text 8') }}">
     <div class="container">
         <div class="row  mFee py-5 align-items-center">
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="left-free">
-                    <h2>Want to try for free?</h2>
-                    <span>With our technological solutions, you can bot
-                        facilitate the operation of your
-                        orders and provide your customers with a
-                        pleasant delivery experience thanks to our
-                        end-to-end logistics service.</span>
-                    <button onclick="window.open('{{ route('login') }}' , '_self')">Start now</button>
+                <div class="left-{{ __('homepage.membership fees.text 8') }}">
+                    <h2>{{ __('homepage.membership fees.text 32') }}</h2>
+                    <span>{{ __('homepage.membership fees.text 33') }}</span>
+                    <button onclick="window.open('{{ route('login') }}' , '_self')">{{ __('homepage.membership fees.text 31') }}</button>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="right-free">
+                <div class="right-{{ __('homepage.membership fees.text 8') }}">
                     <img src="{{asset('/')}}frontend/img/traktor.png" alt="">
                 </div>
             </div>
         </div>
     </div>
 </section>
-<!-- Free Section end -->
+<!-- {{ __('homepage.membership fees.text 8') }} Section end -->
 
 <!-- Accordion Start -->
 <section id="Accordion">

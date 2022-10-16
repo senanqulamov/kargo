@@ -52,7 +52,7 @@
                                     fill="white" />
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">My Courier Request </p>
+                                <p class="ms-3">{{ __('userpanel.courier request.text 1') }}</p>
                             </div>
 
                         </button>
@@ -80,7 +80,7 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3"> Create Courier Demand</p>
+                                <p class="ms-3">{{ __('userpanel.courier request.text 2') }}</p>
                             </div>
 
                         </button>
@@ -112,7 +112,7 @@
                                 </defs>
                             </svg>
                             <div class="balance__box-text ms-1">
-                                <p class="ms-3">Courier Demand History </p>
+                                <p class="ms-3">{{ __('userpanel.courier request.text 3') }}</p>
                             </div>
 
                         </button>
@@ -147,7 +147,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <h2 class="demand__h2">My Courier Request</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.courier request.text 1') }}</h2>
                         </div>
                         <div class="courier--table-1">
                             <div class="courier__table--1 mt-4">
@@ -155,18 +155,18 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Status</th>
-                                            <th>Comment</th>
-                                            <th>Orders</th>
-                                            <th>Customer name</th>
-                                            <th>Phone</th>
-                                            <th>City</th>
-                                            <th>Country</th>
-                                            <th>Address</th>
-                                            <th>ZipCode</th>
-                                            <th>Note</th>
-                                            <th>Date</th>
-                                            <th>Cancel</th>
+                                            <th>{{ __('userpanel.Status') }}</th>
+                                            <th>{{ __('userpanel.special offer.text 35') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 5') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 6') }}</th>
+                                            <th>{{ __('userpanel.Phone') }}</th>
+                                            <th>{{ __('userpanel.City') }}</th>
+                                            <th>{{ __('userpanel.Country') }}</th>
+                                            <th>{{ __('userpanel.Address') }}</th>
+                                            <th>{{ __('userpanel.ZIP code') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 7') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 8') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 9') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -259,7 +259,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <h2 class="demand__h2">Create Demand</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.buy for me.text 2') }}</h2>
                         </div>
 
                         <hr class="hr">
@@ -269,7 +269,7 @@
                             <div class="row">
                                 <div class="col-sm-6 col-12">
                                     <div class="courier__input-box">
-                                        <h6>Order ID<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.courier request.text 13') }}<span class="red-1">*</span></h6>
                                         <div class="dropdown">
                                             <label class="dropdown-label">Select Options</label>
 
@@ -282,10 +282,10 @@
                                                             value="{{ $order->id }}" />
                                                         <label for="checkbox-custom_0{{ $key }}"
                                                             class="checkbox-custom-label ">
-                                                            Order ID: <b><span
+                                                            {{ __('userpanel.courier request.text 13') }}: <b><span
                                                                     class="select-text-form-hm">{{ $order->id }}</span></b>
                                                             <br><br>
-                                                            <span>Order Info: <b>{{ $order->order_info }}</b></span>
+                                                            <span>{{ __('userpanel.order list.text 14') }}: <b>{{ $order->order_info }}</b></span>
                                                         </label>
                                                     </div>
                                                 @endforeach
@@ -296,7 +296,7 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>Contact person name<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.courier request.text 14') }}<span class="red-1">*</span></h6>
                                         <input type="text" class="form-control" placeholder="Deirvlon"
                                             name="customer_name" required>
                                     </div>
@@ -304,7 +304,7 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>Country<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.Country') }}<span class="red-1">*</span></h6>
                                         @php
                                             $countries = DB::table('cargo_countries')->get();
                                         @endphp
@@ -319,7 +319,7 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>Phone Number<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.courier request.text 15') }}<span class="red-1">*</span></h6>
                                         <input class="form-control" type="tel" name="phone" id="telephone">
                                     </div>
 
@@ -327,20 +327,20 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>City<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.City') }}<span class="red-1">*</span></h6>
                                         <input type="text" class="form-control" name="city" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-12">
                                     <div class="courier__input-box">
-                                        <h6>Date<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.courier request.text 8') }}<span class="red-1">*</span></h6>
                                         <input type="date" class="form-control" name="date" required>
                                     </div>
                                 </div>
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>Address<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.Address') }}<span class="red-1">*</span></h6>
                                         <input type="address" class="form-control" name="address" required>
                                     </div>
 
@@ -348,7 +348,7 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>State<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.State') }}<span class="red-1">*</span></h6>
                                         <input type="text" class="form-control" name="state" required>
                                     </div>
 
@@ -356,7 +356,7 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>Note</h6>
+                                        <h6>{{ __('userpanel.courier request.text 7') }}</h6>
                                         <input class="form-control" type="text"
                                             placeholder="Your wishes will be taken into account" name="note">
                                     </div>
@@ -365,7 +365,7 @@
                                 <div class="col-sm-6 col-12">
 
                                     <div class="courier__input-box">
-                                        <h6>Zip Code<span class="red-1">*</span></h6>
+                                        <h6>{{ __('userpanel.ZIP code') }}<span class="red-1">*</span></h6>
                                         <input class="form-control" type="text" placeholder="216464"
                                             name="zipcode" required>
                                     </div>
@@ -374,7 +374,7 @@
                                 <div class="col-12">
                                     <div class="courier__input-box d-flex justify-content-end mt-4">
                                         <button class="balance__address-refund--btn pe-5 mt-5" type="submit">
-                                            <i class="fa-solid fa-check me-2"></i> Confirm Demand
+                                            <i class="fa-solid fa-check me-2"></i> {{ __('userpanel.courier request.text 10') }}
                                         </button>
                                     </div>
                                 </div>
@@ -412,7 +412,7 @@
                                     </defs>
                                 </svg>
                             </div>
-                            <h2 class="demand__h2">Demand Courier History</h2>
+                            <h2 class="demand__h2">{{ __('userpanel.courier request.text 3') }}</h2>
                         </div>
                         <div class="courier--table-2">
                             <div class="courier__table--2 mt-4">
@@ -420,17 +420,17 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Status</th>
-                                            <th>Comment</th>
-                                            <th>Orders</th>
-                                            <th>Customer name</th>
-                                            <th>Phone</th>
-                                            <th>City</th>
-                                            <th>Country</th>
-                                            <th>Address</th>
-                                            <th>ZipCode</th>
-                                            <th>Note</th>
-                                            <th>Date</th>
+                                            <th>{{ __('userpanel.special offer.text 32') }}</th>
+                                            <th>{{ __('userpanel.special offer.text 35') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 5') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 6') }}</th>
+                                            <th>{{ __('userpanel.Phone') }}</th>
+                                            <th>{{ __('userpanel.City') }}</th>
+                                            <th>{{ __('userpanel.Country') }}</th>
+                                            <th>{{ __('userpanel.Address') }}</th>
+                                            <th>{{ __('userpanel.ZIP code') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 7') }}</th>
+                                            <th>{{ __('userpanel.courier request.text 8') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>

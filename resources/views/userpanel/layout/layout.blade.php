@@ -187,7 +187,7 @@
                             <li class="navigation__item">
                                 <a class="navigation__link">
                                     <i class="fa-solid fa-house navigation__icon"></i>
-                                    <span class="navigation__span ">Main Page</span>
+                                    <span class="navigation__span ">{{ __('userpanel.navbar.text 1') }}</span>
                                 </a>
                             </li>
                         </button>
@@ -197,7 +197,7 @@
                             class="navigation__box @if (Request::segment(2) == 'balance') active-link-hm @endif">
                             <li class=" navigation__item">
                                 <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
-                                    <span class="navigation__span">Balance System</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 2') }}</span></a>
                             </li>
                         </button>
 
@@ -205,14 +205,14 @@
                             class="navigation__box @if (Request::segment(2) == 'transactions') active-link-hm @endif">
                             <li class=" navigation__item">
                                 <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
-                                    <span class="navigation__span">Transactions</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 3') }}</span></a>
                             </li>
                         </button>
 
                         <div class="">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link">
-                                    <span class="navigation__span">Orders</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 4') }}</span></a>
                             </li>
                         </div>
 
@@ -221,7 +221,7 @@
                             <li class=" navigation__item">
                                 <a class="navigation__link"><i
                                         class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
-                                    <span class="navigation__span">Manuel Order</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 5') }}</span></a>
                             </li>
                         </button>
 
@@ -230,7 +230,7 @@
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-brands fa-amazon navigation__icon"></i>
-                                    <span class="navigation__span">Amazon</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 6') }}</span></a>
                             </li>
                         </button>
                         <button class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
@@ -238,7 +238,7 @@
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                    <span class="navigation__span">Bulk Order</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 7') }}</span></a>
                             </li>
                         </button>
                         <button onclick="window.open('{{ route('userpanel.cargorequests') }}' , '_self')"
@@ -246,7 +246,7 @@
                             <li class="navigation__item">
                                 <a class="navigation__link"><i
                                         class="fa-solid fa-clipboard-list navigation__icon"></i>
-                                    <span class="navigation__span">Order List</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 8') }}</span></a>
                             </li>
                         </button>
 
@@ -255,7 +255,7 @@
                         <div class="">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link">
-                                    <span class="navigation__span">Special</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 9') }}</span></a>
                             </li>
                         </div>
 
@@ -264,7 +264,7 @@
                             <li class=" navigation__item">
                                 <a class="navigation__link"><i
                                         class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
-                                    <span class="navigation__span">Get Special Offer</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 10') }}</span></a>
                             </li>
                         </button>
 
@@ -273,7 +273,7 @@
                             <li class=" navigation__item">
                                 <a class="navigation__link"><i
                                         class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
-                                    <span class="navigation__span">Your special offers</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 11') }}</span></a>
                             </li>
                         </button>
 
@@ -283,7 +283,7 @@
                             class="navigation__box @if (Request::segment(2) == 'courier_request') active-link-hm @endif">
                             <li class="navigation__item">
                                 <a class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
-                                    <span class="navigation__span">Courier Request</span>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 12') }}</span>
                                 </a>
                             </li>
                         </button>
@@ -306,7 +306,7 @@
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-address-card navigation__icon"></i>
-                                    <span class="navigation__span">Site Usage</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 14') }}</span></a>
                             </li>
                         </button>
                         <button class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
@@ -314,14 +314,14 @@
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link"><i
                                         class="fa-solid fa-bag-shopping navigation__icon"></i>
-                                    <span class="navigation__span">Buy for me</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 15') }}</span></a>
                             </li>
                         </button>
                         <button onclick="window.open('{{ route('userpanel.share_and_earn') }}' , '_self')"
                             class="navigation__box @if (Request::segment(2) == 'share_and_earn') active-link-hm @endif">
                             <li class=" navigation__item">
                                 <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
-                                    <span class="navigation__span">Share and Earn</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 16') }}</span></a>
                             </li>
                         </button>
                         {{-- <button class="navigation__box btn disabled">
@@ -336,14 +336,14 @@
                             <li class="navigation__item">
                                 <a class="navigation__link"><i
                                         class="fa-solid fa-truck-ramp-box navigation__icon"></i>
-                                    <span class="navigation__span">Cargo Companies</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 20') }}</span></a>
                             </li>
                         </button>
 
                         <div class="">
                             <li class="navigation__item">
                                 <a href="#" class="navigation__link">
-                                    <span class="navigation__span">Integrations</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 18') }}</span></a>
                             </li>
                         </div>
 
@@ -359,7 +359,7 @@
                             <li class="navigation__item">
                                 <a class="navigation__link navigation__icon"><i
                                         class="fa-solid fa-store  navigation__icon"></i>
-                                    <span class="navigation__span">Marketplace</span></a>
+                                    <span class="navigation__span">{{ __('userpanel.navbar.text 19') }}</span></a>
                             </li>
                         </button>
                     </ul>
@@ -381,7 +381,7 @@
                             <li class="header__item-list">
                                 <div onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                                     class="balance_bar_in_header balance_bar_{{ Auth::user()->balance < 0 ? 'red' : 'green' }}">
-                                    Balance: {{ Auth::user()->balance }} €
+                                    {{ __('userpanel.navbar.text 0') }}: {{ Auth::user()->balance }} €
                                 </div>
                             </li>
                             <li class="header__item-list">
@@ -532,7 +532,7 @@
                                         <li class="navigation__item">
                                             <a class="navigation__link">
                                                 <i class="fa-solid fa-house navigation__icon"></i>
-                                                <span class="navigation__span ">Main Page</span>
+                                                <span class="navigation__span ">{{ __('userpanel.navbar.text 1') }}</span>
                                             </a>
                                         </li>
                                     </button>
@@ -541,25 +541,23 @@
                                     <button onclick="window.open('{{ route('userpanel.balance') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'balance') active-link-hm @endif">
                                         <li class=" navigation__item">
-                                            <a class="navigation__link"><i
-                                                    class="fa-solid fa-network-wired navigation__icon"></i>
-                                                <span class="navigation__span">Balance System</span></a>
+                                            <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 2') }}</span></a>
                                         </li>
                                     </button>
 
                                     <button onclick="window.open('{{ route('userpanel.transactions') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'transactions') active-link-hm @endif">
                                         <li class=" navigation__item">
-                                            <a class="navigation__link"><i
-                                                    class="fa-solid fa-network-wired navigation__icon"></i>
-                                                <span class="navigation__span">Transactions</span></a>
+                                            <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 3') }}</span></a>
                                         </li>
                                     </button>
 
                                     <div class="">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link">
-                                                <span class="navigation__span">Orders</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 4') }}</span></a>
                                         </li>
                                     </div>
 
@@ -568,26 +566,24 @@
                                         <li class=" navigation__item">
                                             <a class="navigation__link"><i
                                                     class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
-                                                <span class="navigation__span">Manuel Order</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 5') }}</span></a>
                                         </li>
                                     </button>
 
-                                    <button
-                                        class="navigation__box ps-2 @if (Request::segment(2) == 'amazon_order') active-link-hm @endif"
+                                    <button class="navigation__box ps-2 @if (Request::segment(2) == 'amazon_order') active-link-hm @endif"
                                         onclick="window.open('{{ route('userpanel.amazon_order') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-brands fa-amazon navigation__icon"></i>
-                                                <span class="navigation__span">Amazon</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 6') }}</span></a>
                                         </li>
                                     </button>
-                                    <button
-                                        class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
+                                    <button class="navigation__box ps-2 @if (Request::segment(2) == 'bulk_order') active-link-hm @endif"
                                         onclick="window.open('{{ route('userpanel.bulk_order') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-cart-shopping navigation__icon"></i>
-                                                <span class="navigation__span">Bulk Order</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 7') }}</span></a>
                                         </li>
                                     </button>
                                     <button onclick="window.open('{{ route('userpanel.cargorequests') }}' , '_self')"
@@ -595,7 +591,7 @@
                                         <li class="navigation__item">
                                             <a class="navigation__link"><i
                                                     class="fa-solid fa-clipboard-list navigation__icon"></i>
-                                                <span class="navigation__span">Order List</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 8') }}</span></a>
                                         </li>
                                     </button>
 
@@ -604,17 +600,16 @@
                                     <div class="">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link">
-                                                <span class="navigation__span">Special</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 9') }}</span></a>
                                         </li>
                                     </div>
 
-                                    <button
-                                        onclick="window.open('{{ route('userpanel.get_special_offer') }}' , '_self')"
+                                    <button onclick="window.open('{{ route('userpanel.get_special_offer') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'get_special_offer') active-link-hm @endif">
                                         <li class=" navigation__item">
                                             <a class="navigation__link"><i
                                                     class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
-                                                <span class="navigation__span">Get Special Offer</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 10') }}</span></a>
                                         </li>
                                     </button>
 
@@ -623,19 +618,17 @@
                                         <li class=" navigation__item">
                                             <a class="navigation__link"><i
                                                     class="fa-solid fa-hand-holding-dollar navigation__icon"></i>
-                                                <span class="navigation__span">Your special offers</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 11') }}</span></a>
                                         </li>
                                     </button>
 
                                     <hr class="hr">
 
-                                    <button
-                                        onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
+                                    <button onclick="window.open('{{ route('userpanel.courier_request') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'courier_request') active-link-hm @endif">
                                         <li class="navigation__item">
-                                            <a class="navigation__link"><i
-                                                    class="fa-solid fa-headset navigation__icon"></i>
-                                                <span class="navigation__span">Courier Request</span>
+                                            <a class="navigation__link"><i class="fa-solid fa-headset navigation__icon"></i>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 12') }}</span>
                                             </a>
                                         </li>
                                     </button>
@@ -653,30 +646,27 @@
                                                 <span class="navigation__span">Invoices</span></a>
                                         </li>
                                     </button> --}}
-                                    <button
-                                        class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
+                                    <button class="navigation__box @if (Request::segment(2) == 'siteusage') active-link-hm @endif"
                                         onclick="window.open('{{ route('userpanel.siteusage') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-address-card navigation__icon"></i>
-                                                <span class="navigation__span">Site Usage</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 14') }}</span></a>
                                         </li>
                                     </button>
-                                    <button
-                                        class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
+                                    <button class="navigation__box @if (Request::segment(2) == 'buyforme') active-link-hm @endif"
                                         onclick="window.open('{{ route('userpanel.buyforme') }}' , '_self')">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link"><i
                                                     class="fa-solid fa-bag-shopping navigation__icon"></i>
-                                                <span class="navigation__span">Buy for me</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 15') }}</span></a>
                                         </li>
                                     </button>
                                     <button onclick="window.open('{{ route('userpanel.share_and_earn') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'share_and_earn') active-link-hm @endif">
                                         <li class=" navigation__item">
-                                            <a class="navigation__link"><i
-                                                    class="fa-solid fa-network-wired navigation__icon"></i>
-                                                <span class="navigation__span">Share and Earn</span></a>
+                                            <a class="navigation__link"><i class="fa-solid fa-network-wired navigation__icon"></i>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 16') }}</span></a>
                                         </li>
                                     </button>
                                     {{-- <button class="navigation__box btn disabled">
@@ -686,20 +676,19 @@
                                                 <span class="navigation__span">Inventory</span></a>
                                         </li>
                                     </button> --}}
-                                    <button
-                                        onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
+                                    <button onclick="window.open('{{ route('userpanel.cargo_companies') }}' , '_self')"
                                         class="navigation__box @if (Request::segment(2) == 'cargo_companies') active-link-hm @endif">
                                         <li class="navigation__item">
                                             <a class="navigation__link"><i
                                                     class="fa-solid fa-truck-ramp-box navigation__icon"></i>
-                                                <span class="navigation__span">Cargo Companies</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 20') }}</span></a>
                                         </li>
                                     </button>
 
                                     <div class="">
                                         <li class="navigation__item">
                                             <a href="#" class="navigation__link">
-                                                <span class="navigation__span">Integrations</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 18') }}</span></a>
                                         </li>
                                     </div>
 
@@ -715,7 +704,7 @@
                                         <li class="navigation__item">
                                             <a class="navigation__link navigation__icon"><i
                                                     class="fa-solid fa-store  navigation__icon"></i>
-                                                <span class="navigation__span">Marketplace</span></a>
+                                                <span class="navigation__span">{{ __('userpanel.navbar.text 19') }}</span></a>
                                         </li>
                                     </button>
                                 </ul>

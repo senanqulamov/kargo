@@ -4,19 +4,19 @@
     <section>
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Money transactions History</h3>
+                <h3 class="card-title">{{ __('userpanel.transactions.text 1') }}</h3>
             </div>
             <div class="payments_table_div card-body">
                 <table id="transaction_history" class="table table-bordered table-striped" style="width:100%;">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Transaction</th>
-                            <th>Old Balance</th>
-                            <th>New Balance</th>
-                            <th>Transfer method</th>
+                            <th>{{ __('userpanel.transactions.text 3') }}</th>
+                            <th>{{ __('userpanel.transactions.text 4') }}</th>
+                            <th>{{ __('userpanel.transactions.text 5') }}</th>
+                            <th>{{ __('userpanel.transactions.text 6') }}</th>
                             <th>Payment ID</th>
-                            <th>Date</th>
+                            <th>{{ __('userpanel.transactions.text 7') }}</th>
                         </tr>
                     </thead>
                     <tbody>
